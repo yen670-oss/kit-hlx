@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDS Mastery Kit — Bộ Vũ Khí Bán Hàng Cho Môi Giới Hạ Long Xanh</title>
+  <meta name="description" content="Bộ kit hoàn chỉnh dành cho môi giới BDS: báo cáo thị trường 2026, checklist pháp lý, 30 posts FB/Zalo, 15 script xử lý objection và landing page deploy-ready — tiết kiệm 100 giờ, tư vấn chuyên nghiệp từ ngày mai.">
+  <meta property="og:title" content="BDS Mastery Kit — Bộ Vũ Khí Bán Hàng Vinhomes Hạ Long Xanh">
+  <meta property="og:description" content="Landing page live trong 3 phút · 30 bài viết HLX sẵn đăng · Nhận lead tự động 24/7. Không phải template chung. Tiết kiệm 100 giờ nghiên cứu.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zingy-fox-d95ab1.netlify.app/">
+  <meta property="og:image" content="https://zingy-fox-d95ab1.netlify.app/screenshot-1778819243026.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="BDS Mastery Kit — Kit bán hàng cho môi giới Vinhomes Hạ Long Xanh">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BDS Mastery Kit — Bộ Vũ Khí Bán Hàng Vinhomes Hạ Long Xanh">
+  <meta name="twitter:description" content="Landing page live trong 3 phút · 30 bài viết HLX sẵn đăng · Nhận lead tự động 24/7.">
+  <meta name="twitter:image" content="https://zingy-fox-d95ab1.netlify.app/screenshot-1778819243026.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:  { DEFAULT: '#1B3A6B', light: '#2A5298', dark: '#102340' },
+            gold:  { DEFAULT: '#C9A84C', light: '#E2C06A', dark: '#A8862E' },
+            brown: { DEFAULT: '#6B4226', light: '#8B5A3A', dark: '#4A2D18' },
+            cream: { DEFAULT: '#FAF8F3', dark: '#EDE8DC' },
+          },
+          fontFamily: {
+            heading: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"Be Vietnam Pro"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { font-family: 'Be Vietnam Pro', sans-serif; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; }
+
+    .gradient-gold { background: linear-gradient(135deg, #C9A84C 0%, #E2C06A 50%, #A8862E 100%); }
+    .gradient-navy { background: linear-gradient(135deg, #102340 0%, #1B3A6B 60%, #2A5298 100%); }
+    .gradient-hero { background: linear-gradient(160deg, #0e1f38 0%, #1B3A6B 55%, #3b1e08 100%); }
+
+    /* Gradient text — bright gold, readable on dark backgrounds */
+    .text-gradient-gold { color: #F0D080; }
+    @supports (-webkit-background-clip: text) {
+      .text-gradient-gold {
+        background: linear-gradient(135deg, #FFE066 0%, #F0D080 40%, #E2C06A 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+
+    .gold-border { border: 1px solid rgba(201,168,76,0.35); }
+
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 24px 48px rgba(27,58,107,0.14); }
+
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-content.open { max-height: 600px; }
+
+    .sticky-bar { position:fixed; bottom:0; left:0; right:0; z-index:50; transform:translateY(100%); transition:transform 0.4s ease; }
+    .sticky-bar.show { transform:translateY(0); }
+
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .float { animation: float 3.5s ease-in-out infinite; }
+
+    @keyframes pulse-ring {
+      0%,100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+      50%      { box-shadow: 0 0 0 14px rgba(201,168,76,0); }
+    }
+    .pulse-ring { animation: pulse-ring 2.8s ease-in-out infinite; }
+
+    /* dot-grid dùng ::before để không ghi đè background-image của gradient sections */
+    .dot-grid { position: relative; }
+    .dot-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 1.5px 1.5px, rgba(201,168,76,0.18) 1.5px, transparent 0);
+      background-size: 30px 30px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .dot-grid > * { position: relative; z-index: 1; }
+    .section-divider { height:1px; background: linear-gradient(90deg, transparent 0%, #C9A84C 50%, transparent 100%); }
+
+    /* ── Guaranteed color fallbacks (không phụ thuộc Tailwind CDN) ── */
+    .text-navy-dark { color: #102340 !important; }
+    .text-navy      { color: #1B3A6B !important; }
+    .text-gold      { color: #C9A84C !important; }
+    .text-white     { color: #ffffff; }
+
+    /* text-white với opacity — CSS escaped class names */
+    .text-white\/10 { color: rgba(255,255,255,0.10); }
+    .text-white\/20 { color: rgba(255,255,255,0.20); }
+    .text-white\/30 { color: rgba(255,255,255,0.30); }
+    .text-white\/40 { color: rgba(255,255,255,0.40); }
+    .text-white\/50 { color: rgba(255,255,255,0.50); }
+    .text-white\/60 { color: rgba(255,255,255,0.60); }
+    .text-white\/70 { color: rgba(255,255,255,0.70); }
+    .text-white\/75 { color: rgba(255,255,255,0.75); }
+    .text-white\/80 { color: rgba(255,255,255,0.80); }
+    .text-white\/85 { color: rgba(255,255,255,0.85); }
+    .text-white\/90 { color: rgba(255,255,255,0.90); }
+
+    /* text-gray fallbacks */
+    .text-gray-400 { color: #9ca3af; }
+    .text-gray-500 { color: #6b7280; }
+    .text-gray-600 { color: #4b5563; }
+    .text-gray-700 { color: #374151; }
+    .text-green-400 { color: #4ade80; }
+    .text-green-600 { color: #16a34a; }
+    .text-green-700 { color: #15803d; }
+    .text-red-400   { color: #f87171; }
+    .text-red-700   { color: #b91c1c; }
+
+    /* Background fallbacks */
+    .bg-navy      { background-color: #1B3A6B !important; }
+    .bg-white     { background-color: #ffffff; }
+    .bg-cream     { background-color: #FAF8F3; }
+    .bg-cream-dark{ background-color: #EDE8DC; }
+    .bg-red-50    { background-color: #fef2f2; }
+    .bg-green-50  { background-color: #f0fdf4; }
+
+    .tier-popular { position:relative; overflow: visible; }
+    .tier-popular::before { content:'⭐ PHỔ BIẾN NHẤT'; position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#C9A84C,#E2C06A); color:#102340; font-size:11px; font-weight:700; padding:3px 14px; border-radius:20px; white-space:nowrap; font-family:'Be Vietnam Pro',sans-serif; }
+
+    .strikethrough { text-decoration: line-through; color: #9CA3AF; }
+    .badge-tag { display:inline-block; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.4); color:#A8862E; font-size:12px; font-weight:600; padding:2px 10px; border-radius:20px; }
+
+    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    .shimmer-btn {
+      background: linear-gradient(90deg, #C9A84C 0%, #E2C06A 25%, #C9A84C 50%, #A8862E 75%, #C9A84C 100%);
+      background-size: 200% auto;
+      animation: shimmer 3s linear infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-gray-900 overflow-x-hidden">
+
+<!-- ═══ BROKER CARD (hiện khi có ?broker= trong URL) ═══ -->
+<div id="broker-card" style="display:none; background:#fff; border-bottom:2px solid #C9A84C; padding:10px 20px;">
+  <div style="max-width:640px; margin:0 auto; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+    <div id="broker-avatar" style="width:38px;height:38px;background:#1B3A6B;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#E2C06A;font-family:'Playfair Display',serif;font-weight:700;font-size:16px;flex-shrink:0;">B</div>
+    <div style="flex:1;min-width:0;">
+      <p style="font-size:11px;color:#9ca3af;margin:0;font-family:'Be Vietnam Pro',sans-serif;">Được giới thiệu bởi</p>
+      <p id="broker-name-display" style="font-size:14px;font-weight:700;color:#102340;margin:0;font-family:'Be Vietnam Pro',sans-serif;"></p>
+    </div>
+    <a id="broker-zalo-btn" href="https://zalo.me/0964827670" target="_blank"
+       style="background:#0068FF;color:#fff;padding:7px 16px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;font-family:'Be Vietnam Pro',sans-serif;white-space:nowrap;">
+      💬 Zalo tư vấn
+    </a>
+  </div>
+</div>
+
+<!-- ═══ PERSONAL BANNER (hiện khi có ?ten= trong URL) ═══ -->
+<div id="personal-banner" style="display:none; padding:10px 16px; text-align:center;">
+  <p style="font-family:'Be Vietnam Pro',sans-serif; font-size:14px; font-weight:600; margin:0;">
+    👋 Kính gửi <strong id="personal-name" style="font-size:15px;"></strong> — Trang này được chuẩn bị riêng cho anh/chị
+  </p>
+</div>
+
+<!-- ═══ PERSONALIZATION ENGINE ═══ -->
+<script>
+(function() {
+  /* ── 1. Đọc URL params ── */
+  const p = new URLSearchParams(window.location.search);
+  const ten    = (p.get('ten')    || '').trim();
+  const broker = (p.get('broker') || '').trim();
+  const sdt    = (p.get('sdt')    || '').trim();   // SĐT broker thay thế
+  const mau    = (p.get('mau')    || 'navy').toLowerCase();
+  const goi    = (p.get('goi')    || '').toLowerCase(); // bronze | silver | gold
+
+  /* ── 2. Bảng màu theme ── */
+  const themes = {
+    navy: null, // mặc định, không cần override
+    xanh: {
+      hero:    'linear-gradient(160deg,#022C22 0%,#065F46 55%,#1a3a2a 100%)',
+      nav:     'linear-gradient(135deg,#022C22 0%,#065F46 60%,#047857 100%)',
+      accent:  '#10B981', aLight: '#34D399', aDark: '#059669',
+      bgMain:  '#065F46', bannerText: '#022C22',
+    },
+    do: {
+      hero:    'linear-gradient(160deg,#3b0a0a 0%,#7f1d1d 55%,#431407 100%)',
+      nav:     'linear-gradient(135deg,#3b0a0a 0%,#7f1d1d 60%,#991b1b 100%)',
+      accent:  '#F59E0B', aLight: '#FCD34D', aDark: '#D97706',
+      bgMain:  '#7f1d1d', bannerText: '#3b0a0a',
+    },
+    tim: {
+      hero:    'linear-gradient(160deg,#1e0a45 0%,#4C1D95 55%,#2d1458 100%)',
+      nav:     'linear-gradient(135deg,#2E1065 0%,#4C1D95 60%,#6D28D9 100%)',
+      accent:  '#A78BFA', aLight: '#C4B5FD', aDark: '#7C3AED',
+      bgMain:  '#4C1D95', bannerText: '#1e0a45',
+    },
+    den: {
+      hero:    'linear-gradient(160deg,#0a0a0a 0%,#1a1a1a 55%,#111 100%)',
+      nav:     'linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 60%,#2a2a2a 100%)',
+      accent:  '#F59E0B', aLight: '#FCD34D', aDark: '#D97706',
+      bgMain:  '#1a1a1a', bannerText: '#0a0a0a',
+    },
+  };
+
+  /* ── 3. Áp dụng theme ── */
+  const t = themes[mau];
+  if (t) {
+    const css = `
+      .gradient-hero  { background: ${t.hero} !important; }
+      .gradient-navy  { background: ${t.nav}  !important; }
+      .gradient-gold, .shimmer-btn {
+        background: linear-gradient(90deg,${t.accent},${t.aLight},${t.accent},${t.aDark},${t.accent}) !important;
+        background-size: 200% auto !important;
+      }
+      .text-gold, .text-gradient-gold { color: ${t.accent} !important; -webkit-text-fill-color: ${t.accent} !important; background: none !important; }
+      .bg-navy        { background-color: ${t.bgMain} !important; }
+      .gold-border    { border-color: ${t.accent}55 !important; }
+      .badge-tag      { background:${t.accent}20 !important; border-color:${t.accent}60 !important; color:${t.aDark} !important; }
+      .section-divider{ background: linear-gradient(90deg,transparent,${t.accent},transparent) !important; }
+      .tier-popular::before { background: linear-gradient(135deg,${t.accent},${t.aLight}) !important; color: #fff !important; }
+      #personal-banner { background: linear-gradient(90deg,${t.accent},${t.aLight},${t.accent}) !important; }
+      #broker-card    { border-bottom-color: ${t.accent} !important; }
+      #broker-zalo-btn, .pulse-ring { box-shadow: 0 0 0 0 ${t.accent}80; }
+      @keyframes pulse-ring {
+        0%,100%{ box-shadow:0 0 0 0 ${t.accent}80; }
+        50%    { box-shadow:0 0 0 14px ${t.accent}00; }
+      }
+      .float-badge-recommended { border-color: ${t.accent} !important; color: ${t.aDark} !important; }
+    `;
+    const s = document.createElement('style');
+    s.id = 'theme-override';
+    s.textContent = css;
+    document.head.appendChild(s);
+    // Update broker card border
+    document.getElementById('broker-avatar').style.background = t.bgMain;
+    document.getElementById('broker-avatar').style.color = t.aLight;
+  }
+
+  /* ── 4. Banner tên khách ── */
+  if (ten) {
+    const banner = document.getElementById('personal-banner');
+    document.getElementById('personal-name').textContent = ten;
+    banner.style.display = 'block';
+    // màu banner theo theme
+    const bannerColor = t ? t.accent : '#C9A84C';
+    const bannerText  = t ? t.bannerText : '#102340';
+    banner.style.background = `linear-gradient(90deg,${bannerColor},${t ? t.aLight : '#E2C06A'},${bannerColor})`;
+    banner.querySelector('p').style.color = bannerText;
+  }
+
+  /* ── 5. Broker card ── */
+  if (broker) {
+    document.getElementById('broker-card').style.display = 'block';
+    document.getElementById('broker-name-display').textContent = broker;
+    // Initial của broker làm avatar
+    const initial = broker.split(' ').pop()[0].toUpperCase();
+    document.getElementById('broker-avatar').textContent = initial;
+    // Cập nhật link Zalo broker
+    const brokerSdt = sdt || '0964827670';
+    document.getElementById('broker-zalo-btn').href = `https://zalo.me/${brokerSdt.replace(/\s/g,'')}`;
+  }
+
+  /* ── 6. Thay SĐT/Zalo links nếu có ?sdt= ── */
+  if (sdt) {
+    const num = sdt.replace(/\s/g,'');
+    window.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a[href*="zalo.me/0964827670"]').forEach(function(a) {
+        a.href = a.href.replace('0964827670', num);
+      });
+      document.querySelectorAll('a[href*="tel:0964827670"]').forEach(function(a) {
+        a.href = `tel:${num}`;
+      });
+      document.querySelectorAll('[data-phone]').forEach(function(el) {
+        el.textContent = num;
+      });
+    });
+  }
+
+  /* ── 7. Highlight gói được đề xuất ── */
+  if (goi) {
+    window.addEventListener('DOMContentLoaded', function() {
+      const keywords = { bronze: 'Bronze Starter', silver: 'Silver Pro', gold: 'Gold' };
+      const keyword  = keywords[goi];
+      if (!keyword) return;
+      document.querySelectorAll('#offer .rounded-2xl').forEach(function(card) {
+        if (card.textContent.includes(keyword)) {
+          card.style.outline = `3px solid ${t ? t.accent : '#C9A84C'}`;
+          card.style.outlineOffset = '3px';
+          card.style.transform = 'scale(1.02)';
+          // Thêm badge "Phù hợp với anh/chị"
+          const badge = document.createElement('div');
+          badge.className = 'float-badge-recommended';
+          badge.style.cssText = `
+            text-align:center; margin-bottom:10px; padding:4px 14px;
+            border:1.5px solid ${t ? t.accent : '#C9A84C'};
+            border-radius:20px; font-size:11px; font-weight:700;
+            color:${t ? t.aDark : '#A8862E'}; background:${t ? t.accent+'18' : '#C9A84C18'};
+            font-family:'Be Vietnam Pro',sans-serif;
+          `;
+          badge.textContent = '⭐ Phù hợp với anh/chị';
+          card.insertBefore(badge, card.firstChild);
+        }
+      });
+    });
+  }
+
+  /* ── 8. Pre-fill form ── */
+  window.addEventListener('DOMContentLoaded', function() {
+    if (ten) {
+      const inp = document.querySelector('input[name="Ho_ten"]');
+      if (inp && !inp.value) inp.value = ten;
+    }
+  });
+
+})();
+</script>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="gradient-navy py-3 px-4 sticky top-0 z-40 shadow-lg">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 gradient-gold rounded-lg flex items-center justify-center text-navy-dark font-bold text-sm">BM</div>
+      <span class="text-white font-heading font-semibold text-lg hidden sm:block">BDS Mastery Kit</span>
+    </div>
+    <div class="hidden md:flex items-center gap-6 text-white/70 text-sm">
+      <a href="#offer" class="hover:text-gold transition-colors">Sản phẩm</a>
+      <a href="#how" class="hover:text-gold transition-colors">Cách dùng</a>
+      <a href="#testimonials" class="hover:text-gold transition-colors">Đánh giá</a>
+      <a href="#faq" class="hover:text-gold transition-colors">FAQ</a>
+    </div>
+    <a href="#offer" class="shimmer-btn text-navy-dark font-bold text-sm px-4 py-2 rounded-lg pulse-ring">
+      Mua Ngay →
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="gradient-hero dot-grid min-h-screen flex items-center relative overflow-hidden">
+  <!-- Decorative circles -->
+  <div class="absolute top-20 right-10 w-64 h-64 rounded-full bg-gold/5 blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-20 left-10 w-48 h-48 rounded-full bg-navy-light/30 blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto px-4 py-20 text-center">
+    <!-- Pre-headline badge -->
+    <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold text-sm font-semibold px-4 py-2 rounded-full mb-6">
+      <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
+      Dành cho Môi Giới BDS — Vinhomes Hạ Long Xanh
+    </div>
+
+    <!-- Main headline -->
+    <h1 class="text-4xl md:text-6xl font-heading font-bold text-white leading-tight mb-4">
+      Bộ Vũ Khí Bán Hàng<br>
+      <span class="text-gradient-gold">Hoàn Chỉnh Cho Môi Giới</span><br>
+      Hạ Long Xanh
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-3 font-light leading-relaxed">
+      Tiết kiệm <strong class="text-gold font-semibold">100 giờ</strong> nghiên cứu.
+      Chốt deal nhanh hơn <strong class="text-gold font-semibold">3x</strong>.
+      Bắt đầu tư vấn chuyên nghiệp <strong class="text-gold font-semibold">từ ngày mai</strong>.
+    </p>
+    <p class="text-white/50 text-base mb-10">Báo cáo thị trường · Checklist pháp lý · 30 posts FB/Zalo · 15 script objection · Landing page deploy-ready</p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+      <a href="#offer" class="shimmer-btn text-navy-dark font-bold text-lg px-8 py-4 rounded-xl shadow-2xl pulse-ring w-full sm:w-auto text-center">
+        Xem Bộ Kit Ngay →
+      </a>
+      <a href="#how" class="border border-white/30 text-white font-medium text-base px-8 py-4 rounded-xl hover:bg-white/10 transition-all w-full sm:w-auto text-center">
+        Trong Kit Có Gì?
+      </a>
+    </div>
+
+    <!-- Trust strip -->
+    <div class="flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+      <span class="flex items-center gap-1.5"><span class="text-green-400">✓</span> Nhận ngay sau thanh toán</span>
+      <span class="flex items-center gap-1.5"><span class="text-green-400">✓</span> Hoàn tiền 14 ngày</span>
+      <span class="flex items-center gap-1.5"><span class="text-green-400">✓</span> Dựa trên dữ liệu thực 2026</span>
+      <span class="flex items-center gap-1.5"><span class="text-green-400">✓</span> Không cần kỹ năng thiết kế</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COUNTDOWN BANNER ═══ -->
+<div class="gradient-gold py-3 px-4">
+  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 text-navy-dark text-sm font-semibold text-center">
+    <span>⚡ GIÁ EARLY LAUNCH kết thúc sau:</span>
+    <span id="countdown" class="font-bold text-lg font-mono bg-navy-dark/10 px-3 py-0.5 rounded-lg">07:23:45:12</span>
+    <span>— Sau đó tăng lên 1.997.000đ</span>
+  </div>
+</div>
+
+<!-- ═══ STATS BAR ═══ -->
+<section class="bg-white py-12 px-4 border-b border-gray-100">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div>
+      <div class="text-4xl font-heading font-bold text-navy">300K+</div>
+      <div class="text-gray-500 text-sm mt-1">Môi giới đang hoạt động tại Việt Nam</div>
+    </div>
+    <div>
+      <div class="text-4xl font-heading font-bold text-navy">$18B</div>
+      <div class="text-gray-500 text-sm mt-1">Tổng vốn đầu tư Vinhomes HLX</div>
+    </div>
+    <div>
+      <div class="text-4xl font-heading font-bold text-navy">100h</div>
+      <div class="text-gray-500 text-sm mt-1">Nghiên cứu được rút gọn vào 1 bộ kit</div>
+    </div>
+    <div>
+      <div class="text-4xl font-heading font-bold text-navy">94%</div>
+      <div class="text-gray-500 text-sm mt-1">Tiết kiệm so với giá trị thực của bộ kit</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PAIN SECTION ═══ -->
+<section class="py-20 px-4 bg-cream-dark">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="badge-tag">Anh/chị có đang gặp phải điều này?</span>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-navy mt-4 mb-4">
+        Vì Sao Hầu Hết Môi Giới<br>Mất Deal Vào Tay Đối Thủ?
+      </h2>
+      <p class="text-gray-600 text-lg">Không phải vì thiếu nỗ lực. Mà vì thiếu <strong>đúng công cụ</strong>.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <!-- Pain 1 -->
+      <div class="bg-white rounded-2xl p-6 border-l-4 border-red-400 shadow-sm">
+        <div class="text-2xl mb-3">😩</div>
+        <h3 class="font-bold text-navy text-lg mb-2">Mất 2–3 tuần chỉ để research</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Tự tìm hiểu pháp lý, so sánh đối thủ, nghiên cứu thị trường — trong khi khách hàng tiềm năng đã chốt với người khác rồi.</p>
+      </div>
+      <!-- Pain 2 -->
+      <div class="bg-white rounded-2xl p-6 border-l-4 border-red-400 shadow-sm">
+        <div class="text-2xl mb-3">🤯</div>
+        <h3 class="font-bold text-navy text-lg mb-2">Bị hỏi sâu về ROI, pháp lý — không trả lời được</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">"Tỷ suất sinh lời cụ thể bao nhiêu?", "Pháp lý condotel 2024 ra sao?" — những câu hỏi khiến anh/chị mất tự tin ngay trước mặt khách.</p>
+      </div>
+      <!-- Pain 3 -->
+      <div class="bg-white rounded-2xl p-6 border-l-4 border-red-400 shadow-sm">
+        <div class="text-2xl mb-3">📱</div>
+        <h3 class="font-bold text-navy text-lg mb-2">Đăng content mãi, không ai tương tác</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Copy-paste bảng hàng, đăng ảnh phối cảnh — không có chiến lược, không có hook, không có funnel. Lead không về.</p>
+      </div>
+      <!-- Pain 4 -->
+      <div class="bg-white rounded-2xl p-6 border-l-4 border-red-400 shadow-sm">
+        <div class="text-2xl mb-3">💸</div>
+        <h3 class="font-bold text-navy text-lg mb-2">Trông không chuyên bằng đối thủ</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Người ta có landing page đẹp, có slide thuyết trình, có script bài bản — khách chọn họ vì trông professional hơn, dù kiến thức ngang nhau.</p>
+      </div>
+    </div>
+
+    <!-- Agitation -->
+    <div class="mt-10 bg-navy rounded-2xl p-8 text-center">
+      <p class="text-white/90 text-lg leading-relaxed">
+        Trong khi anh/chị mất 3 tuần research, đối thủ đã tư vấn được <strong class="text-gold">7–10 khách</strong>.<br>
+        Mỗi ngày không có đúng tool = mỗi ngày <strong class="text-gold">mất cơ hội chốt deal</strong> cho người khác.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider max-w-4xl mx-auto"></div>
+
+<!-- ═══ SOLUTION ═══ -->
+<section class="py-20 px-4 bg-cream">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="badge-tag">Giải pháp</span>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-navy mt-4">
+        Đây Không Phải<br>
+        <span class="text-gradient-gold">Khóa Học Lý Thuyết Thông Thường</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- NOT -->
+      <div class="bg-red-50 rounded-2xl p-7 border border-red-200">
+        <h3 class="font-bold text-red-700 text-lg mb-5 flex items-center gap-2">
+          <span class="text-2xl">❌</span> Các giải pháp khác
+        </h3>
+        <ul class="space-y-3 text-gray-700 text-sm">
+          <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Khóa học chứng chỉ: 1.5M nhưng chỉ dạy pháp lý, không có tool bán hàng</li>
+          <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Template Canva generic: đẹp nhưng không theo dự án cụ thể</li>
+          <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Tự research: mất 2–3 tuần, không biết nguồn nào đáng tin</li>
+          <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Thuê freelancer làm content: 3–5M/tháng, không hiểu BDS</li>
+          <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">✗</span> Copy content đối thủ: không có USP, bị nhìn nhận là copycat</li>
+        </ul>
+      </div>
+
+      <!-- IS -->
+      <div class="bg-green-50 rounded-2xl p-7 border border-green-200">
+        <h3 class="font-bold text-green-700 text-lg mb-5 flex items-center gap-2">
+          <span class="text-2xl">✅</span> BDS Mastery Kit
+        </h3>
+        <ul class="space-y-3 text-gray-700 text-sm">
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Nghiên cứu thị trường thực chiến — HLX $18B, data 2026</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> 90 ngày content calendar — chỉ copy-paste, không cần sáng tạo</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> 15 script xử lý objection — trả lời được mọi câu hỏi khó</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Landing page HTML sẵn deploy — 10 phút có trang riêng</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Done-for-you: nhận hôm nay, dùng ngay ngày mai</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Positioning -->
+    <div class="gradient-navy rounded-2xl p-8 text-center dot-grid">
+      <p class="text-gold font-heading text-xl font-semibold mb-3">Định vị khác biệt</p>
+      <p class="text-white text-lg leading-relaxed max-w-2xl mx-auto">
+        "Trong khi các môi giới khác mất 2–3 tuần chuẩn bị tài liệu,<br>
+        anh/chị có thể bắt đầu tư vấn chuyên nghiệp <strong class="text-gold">từ ngày mai</strong><br>
+        — với bộ kit đã nghiên cứu và thực chiến sẵn cho Hạ Long Xanh."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how" class="py-20 px-4 bg-navy">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="badge-tag border-gold/40 text-gold bg-gold/10">3 bước đơn giản</span>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mt-4">
+        Từ Zero Đến<br>
+        <span class="text-gradient-gold">Môi Giới Chuyên Nghiệp</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="text-center">
+        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center text-2xl font-bold font-heading mx-auto mb-5 float" style="color:#102340">1</div>
+        <h3 class="font-heading font-bold text-white text-xl mb-3">Mua & Nhận Kit</h3>
+        <p class="text-white/70 text-sm leading-relaxed">Thanh toán qua SePay VietQR → nhận link download ngay trong vài phút. Toàn bộ file vào Google Drive cá nhân hóa cho anh/chị.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center text-2xl font-bold font-heading mx-auto mb-5 float" style="color:#102340; animation-delay:0.5s">2</div>
+        <h3 class="font-heading font-bold text-white text-xl mb-3">Customize & Deploy</h3>
+        <p class="text-white/70 text-sm leading-relaxed">Đổi tên, số điện thoại vào templates. Deploy landing page lên Netlify trong 10 phút (video hướng dẫn kèm theo). Không cần kỹ thuật.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center text-2xl font-bold font-heading mx-auto mb-5 float" style="color:#102340; animation-delay:1s">3</div>
+        <h3 class="font-heading font-bold text-white text-xl mb-3">Tư Vấn & Chốt Deal</h3>
+        <p class="text-white/70 text-sm leading-relaxed">Dùng báo cáo thị trường trả lời mọi câu hỏi khó. Script sẵn cho 15 objection phổ biến nhất. Content calendar tự động 90 ngày.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFITS ═══ -->
+<section class="py-20 px-4 bg-cream">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="badge-tag">Lợi ích cụ thể</span>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-navy mt-4">
+        Anh/Chị Đạt Được Gì<br>Sau Khi Có Kit Này?
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-7 gold-border card-hover">
+        <div class="w-12 h-12 bg-navy/10 rounded-xl flex items-center justify-center text-2xl mb-5">📊</div>
+        <h3 class="font-heading font-bold text-navy text-lg mb-3">Tự Tin Trả Lời Mọi Câu Hỏi</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Báo cáo thị trường 8 phần với data ROI thực tế, so sánh đối thủ, phân tích rủi ro — không còn bị hỏi lúng túng trước khách hàng.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 gold-border card-hover">
+        <div class="w-12 h-12 bg-navy/10 rounded-xl flex items-center justify-center text-2xl mb-5">⚖️</div>
+        <h3 class="font-heading font-bold text-navy text-lg mb-3">Tư Vấn Pháp Lý Không Sai Sót</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Checklist pháp lý cho Shophouse · Biệt thự · Condotel — tick từng điểm trước khi ký hợp đồng, bảo vệ khách và bảo vệ uy tín của mình.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 gold-border card-hover">
+        <div class="w-12 h-12 bg-navy/10 rounded-xl flex items-center justify-center text-2xl mb-5">💬</div>
+        <h3 class="font-heading font-bold text-navy text-lg mb-3">Xử Lý Objection Như Chuyên Gia</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">"Giá cao quá", "Hạ Long xa", "Sổ hồng 50 năm rủi ro không?" — 15 script chuẩn cho từng tình huống, dẫn khách đến quyết định mua.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 gold-border card-hover">
+        <div class="w-12 h-12 bg-navy/10 rounded-xl flex items-center justify-center text-2xl mb-5">📱</div>
+        <h3 class="font-heading font-bold text-navy text-lg mb-3">Tiết Kiệm 4–5h Content Mỗi Tuần</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">30 bài viết FB/Zalo phân loại rõ ràng — Edu, Story, Proof, CTA. Nút copy 1 chạm, đăng ngay, không cần nghĩ hay viết lại.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 gold-border card-hover">
+        <div class="w-12 h-12 bg-navy/10 rounded-xl flex items-center justify-center text-2xl mb-5">🌐</div>
+        <h3 class="font-heading font-bold text-navy text-lg mb-3">Có Trang Web Riêng Trong 10 Phút</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Landing page HTML chuyên nghiệp, mobile-first, đầy đủ 15 section. Deploy lên Netlify miễn phí — trông professional hơn đối thủ ngay lập tức.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 gold-border card-hover">
+        <div class="w-12 h-12 bg-navy/10 rounded-xl flex items-center justify-center text-2xl mb-5">🏆</div>
+        <h3 class="font-heading font-bold text-navy text-lg mb-3">Định Vị Khác Biệt Với Đối Thủ</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Trong khi 99% broker chỉ đăng bảng hàng, anh/chị có báo cáo thị trường, checklist pháp lý, script bài bản — khách nhìn vào biết ngay ai chuyên nghiệp hơn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LEAD MAGNET — CHECKLIST ═══ -->
+<section class="py-16 px-4 gradient-navy dot-grid">
+  <div class="max-w-3xl mx-auto text-center">
+    <span class="badge-tag mb-4 inline-block" style="background:rgba(201,168,76,0.2);border-color:rgba(201,168,76,0.5);color:#E2C06A;">Miễn Phí — Không Cần Thanh Toán</span>
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
+      Chưa chắc bộ kit có phù hợp không?
+    </h2>
+    <p class="text-white/70 text-lg mb-8 max-w-xl mx-auto">
+      Làm bài kiểm tra <strong class="text-gold">3 phút</strong> trước — biết ngay anh/chị đang thiếu gì trong 10 tiêu chí của môi giới chuyên nghiệp.
+    </p>
+
+    <!-- 3 preview items -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-left flex items-start gap-3">
+        <span class="text-gold text-xl mt-0.5">✓</span>
+        <div>
+          <p class="text-white font-semibold text-sm">Kiến thức dự án</p>
+          <p class="text-white/60 text-xs">4 câu hỏi ROI & pháp lý</p>
+        </div>
+      </div>
+      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-left flex items-start gap-3">
+        <span class="text-gold text-xl mt-0.5">✓</span>
+        <div>
+          <p class="text-white font-semibold text-sm">Công cụ bán hàng</p>
+          <p class="text-xs text-white/60">3 câu hỏi script & landing page</p>
+        </div>
+      </div>
+      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-left flex items-start gap-3">
+        <span class="text-gold text-xl mt-0.5">✓</span>
+        <div>
+          <p class="text-white font-semibold text-sm">Sự hiện diện online</p>
+          <p class="text-xs text-white/60">3 câu hỏi content & referral</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <a href="https://zalo.me/0964827670" target="_blank"
+       class="inline-flex items-center gap-3 shimmer-btn text-navy-dark font-bold text-lg px-8 py-4 rounded-xl shadow-2xl pulse-ring">
+      <span>Nhận Checklist Miễn Phí →</span>
+    </a>
+    <p class="text-white/50 text-sm mt-4">Nhắn <strong class="text-white/80">"CHECKLIST"</strong> qua Zalo · Nhận PDF ngay lập tức · Không cần đăng ký</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ OFFER STACK ═══ -->
+<section id="offer" class="py-20 px-4 bg-cream-dark">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="badge-tag">Lựa chọn của anh/chị</span>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-navy mt-4">
+        Chọn Gói Phù Hợp<br>
+        <span class="text-gradient-gold">Bắt Đầu Ngay Hôm Nay</span>
+      </h2>
+      <p class="text-gray-500 mt-3 text-sm">🛡️ Tất cả gói đều bảo đảm hoàn tiền 14 ngày nếu không hài lòng</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 items-stretch">
+
+      <!-- Bronze -->
+      <div class="bg-white rounded-2xl p-7 gold-border flex flex-col">
+        <div class="mb-6">
+          <div class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-1">🥉 Bronze Starter</div>
+          <div class="text-4xl font-heading font-bold text-navy">697<span class="text-xl">.000đ</span></div>
+          <div class="text-sm text-gray-400 mt-1"><span class="strikethrough">14.500.000đ</span> giá trị thực</div>
+          <div class="text-xs text-green-600 font-semibold mt-1">Tiết kiệm 95% — 6 tài liệu sẵn dùng</div>
+        </div>
+        <ul class="space-y-3 text-sm text-gray-700 flex-1 mb-8">
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong>Báo cáo thị trường HLX 2026</strong> — 8 phần, data thực</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong>Checklist pháp lý</strong> — Shophouse · Biệt thự · Condotel</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong>30 posts FB/Zalo</strong> — copy-paste, nút copy 1 chạm</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Bảng tính ROI tương tác — so sánh BDS vs tiết kiệm</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Checklist đăng bài — FB · Zalo · IG · TikTok</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Landing Page HTML cá nhân — deploy-ready</li>
+          <li class="flex items-start gap-2 text-gray-400 line-through decoration-gray-300"><span class="mt-0.5">—</span> 15 script xử lý objection</li>
+          <li class="flex items-start gap-2 text-gray-400 line-through decoration-gray-300"><span class="mt-0.5">—</span> Buổi review marketing 1-1</li>
+          <li class="flex items-start gap-2 text-gray-400 line-through decoration-gray-300"><span class="mt-0.5">—</span> Telegram Bot tự động + Team License</li>
+        </ul>
+        <a href="https://zalo.me/0964827670" target="_blank" class="block w-full text-center border-2 border-navy text-navy font-bold py-3 rounded-xl hover:bg-navy hover:text-white transition-all">
+          Chọn Bronze →
+        </a>
+      </div>
+
+      <!-- Silver — Popular -->
+      <div class="bg-navy rounded-2xl p-7 flex flex-col tier-popular mt-4 shadow-2xl shadow-navy/30">
+        <div class="mb-6">
+          <div class="text-sm font-semibold text-gold/80 uppercase tracking-wider mb-1">🥈 Silver Pro</div>
+          <div class="text-4xl font-heading font-bold text-white">1.497<span class="text-xl">.000đ</span></div>
+          <div class="text-sm text-white/40 mt-1"><span class="strikethrough">30.000.000đ</span> giá trị thực</div>
+          <div class="text-xs text-green-400 font-semibold mt-1">Tiết kiệm 95% — Được chọn nhiều nhất</div>
+        </div>
+        <ul class="space-y-3 text-sm flex-1 mb-8" style="color: rgba(255,255,255,0.9)">
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong style="color:#fff">Tất cả 6 tài liệu Bronze</strong></li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong style="color:#E2C06A">15 script xử lý objection</strong> — 5 nhóm đầy đủ</li>
+          <li class="flex items-start gap-2 text-xs pt-1" style="color:#E2C06A"><span class="mt-0.5">⚡</span> <strong>FAST-ACTION BONUS:</strong> Buổi review marketing 1-1 miễn phí (30 phút Zalo)</li>
+          <li class="flex items-start gap-2 text-gray-400 line-through decoration-gray-400/50 text-xs"><span class="mt-0.5">—</span> Telegram Bot + Team License</li>
+        </ul>
+        <a href="https://zalo.me/0964827670" target="_blank" class="block w-full text-center shimmer-btn text-navy-dark font-bold py-4 rounded-xl text-lg shadow-lg pulse-ring">
+          Chọn Silver Pro →
+        </a>
+        <p class="text-white/40 text-xs text-center mt-3">Thanh toán an toàn qua SePay / Bank Transfer</p>
+      </div>
+
+      <!-- Gold -->
+      <div class="bg-white rounded-2xl p-7 gold-border flex flex-col">
+        <div class="mb-6">
+          <div class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-1">🥇 Gold Team</div>
+          <div class="text-4xl font-heading font-bold text-navy">2.997<span class="text-xl">.000đ</span></div>
+          <div class="text-sm text-gray-400 mt-1"><span class="strikethrough">47.000.000đ</span> giá trị thực</div>
+          <div class="text-xs text-green-600 font-semibold mt-1">Tiết kiệm 93% — Dành cho team & sàn</div>
+        </div>
+        <ul class="space-y-3 text-sm text-gray-700 flex-1 mb-8">
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong>Tất cả 8 tài liệu Silver Pro</strong></li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong>Telegram Bot setup</strong> — nhận lead tự động qua Telegram</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> <strong>Team License 5 người</strong> — mỗi người dùng kit riêng</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Buổi review 1-1 ưu tiên cho team leader</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Hỗ trợ phản hồi trong 15 phút (giờ hành chính)</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Update kit miễn phí trong 3 tháng đầu</li>
+        </ul>
+        <a href="https://zalo.me/0964827670" target="_blank" class="block w-full text-center border-2 border-navy text-navy font-bold py-3 rounded-xl hover:bg-navy hover:text-white transition-all">
+          Chọn Gold Team →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Value stack visual for Silver -->
+    <div class="mt-14 bg-white rounded-2xl p-8 gold-border max-w-2xl mx-auto">
+      <h3 class="font-heading font-bold text-navy text-xl text-center mb-2">Tổng Giá Trị Gói Silver Pro</h3>
+      <p class="text-center text-gray-500 text-sm mb-6">8 tài liệu + 1 buổi review 1-1 — tất cả sẵn dùng ngay</p>
+      <div class="space-y-3 text-sm">
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">📊 Báo cáo thị trường HLX 2026 (8 phần)</span>
+          <span class="font-semibold text-navy">5.000.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">⚖️ Checklist pháp lý — 3 loại sản phẩm</span>
+          <span class="font-semibold text-navy">2.000.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">📱 30 posts FB/Zalo — nút copy 1 chạm</span>
+          <span class="font-semibold text-navy">3.000.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">🧮 Bảng tính ROI tương tác</span>
+          <span class="font-semibold text-navy">1.500.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">📋 Checklist đăng bài đa nền tảng</span>
+          <span class="font-semibold text-navy">500.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">🌐 Landing Page HTML cá nhân hoá</span>
+          <span class="font-semibold text-navy">5.000.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">💬 15 Script xử lý objection (5 nhóm)</span>
+          <span class="font-semibold text-navy">3.000.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+          <span class="text-gray-700">⚡ Buổi review marketing 1-1 (Fast-Action Bonus)</span>
+          <span class="font-semibold text-green-600">2.000.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-3 bg-navy/5 rounded-xl px-3 mt-2">
+          <span class="font-bold text-navy">Tổng giá trị</span>
+          <span class="font-bold text-navy text-lg strikethrough">22.000.000đ</span>
+        </div>
+        <div class="flex justify-between items-center py-3 gradient-gold rounded-xl px-3">
+          <span class="font-bold text-navy-dark text-lg">Giá hôm nay (Early Launch)</span>
+          <span class="font-bold text-navy-dark text-2xl font-heading">1.497.000đ</span>
+        </div>
+        <p class="text-center text-green-600 font-semibold text-sm pt-2">Anh/chị tiết kiệm 20.503.000đ — 93% OFF</p>
+      </div>
+
+      <a href="https://zalo.me/0964827670" target="_blank" class="mt-6 block w-full text-center shimmer-btn text-navy-dark font-bold py-4 rounded-xl text-lg shadow-lg">
+        Nhận Silver Pro Ngay — 1.497.000đ →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials" class="py-20 px-4 bg-navy">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="badge-tag border-gold/40 text-gold bg-gold/10">Đánh giá từ môi giới đã dùng</span>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mt-4">
+        Họ Nói Gì Về<br>
+        <span class="text-gradient-gold">BDS Mastery Kit?</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- T1 -->
+      <div class="bg-white/5 rounded-2xl p-7 gold-border">
+        <div class="flex gap-1 text-gold mb-4">★★★★★</div>
+        <p class="text-white/85 text-sm leading-relaxed mb-5">"Trước đây mất cả tuần research mới dám tư vấn khách. Sau khi có kit này, hôm nhận hàng buổi chiều, tối đó tôi đã dùng script xử lý được ngay objection 'pháp lý phức tạp' với một khách tiềm năng. Đang trong process chốt deal."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 gradient-gold rounded-full flex items-center justify-center text-navy-dark font-bold">TH</div>
+          <div>
+            <div class="text-white font-semibold text-sm">Nguyễn Thanh H.</div>
+            <div class="text-white/50 text-xs">Môi giới độc lập, Hà Nội</div>
+          </div>
+        </div>
+      </div>
+      <!-- T2 -->
+      <div class="bg-white/5 rounded-2xl p-7 gold-border">
+        <div class="flex gap-1 text-gold mb-4">★★★★★</div>
+        <p class="text-white/85 text-sm leading-relaxed mb-5">"Landing page deploy xong trong 12 phút theo video hướng dẫn. Khách hàng vào xem bảo 'anh này làm bài bản quá'. Content calendar thì quá tiện — lên lịch 1 lần cho cả tháng. Tiết kiệm được ít nhất 3–4 tiếng mỗi tuần."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 gradient-gold rounded-full flex items-center justify-center text-navy-dark font-bold">ML</div>
+          <div>
+            <div class="text-white font-semibold text-sm">Trần Minh L.</div>
+            <div class="text-white/50 text-xs">Team Leader, 8 thành viên</div>
+          </div>
+        </div>
+      </div>
+      <!-- T3 -->
+      <div class="bg-white/5 rounded-2xl p-7 gold-border">
+        <div class="flex gap-1 text-gold mb-4">★★★★★</div>
+        <p class="text-white/85 text-sm leading-relaxed mb-5">"Tôi mua Gold cho cả sàn 5 người. Onboard môi giới mới giờ chỉ cần share kit — họ có ngay đủ công cụ để tư vấn từ ngày đầu. ROI của khoản đầu tư này so với chi phí đào tạo truyền thống là không thể so sánh."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 gradient-gold rounded-full flex items-center justify-center text-navy-dark font-bold">PD</div>
+          <div>
+            <div class="text-white font-semibold text-sm">Lê Phương D.</div>
+            <div class="text-white/50 text-xs">Giám đốc sàn BDS, Hải Phòng</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GUARANTEE ═══ -->
+<section class="py-20 px-4 bg-cream">
+  <div class="max-w-3xl mx-auto text-center">
+    <div class="bg-white rounded-3xl p-10 gold-border shadow-xl">
+      <div class="text-6xl mb-6">🛡️</div>
+      <h2 class="text-3xl font-heading font-bold text-navy mb-4">Bảo Đảm Hoàn Tiền 14 Ngày</h2>
+      <p class="text-gray-600 text-lg leading-relaxed mb-6">
+        Nếu trong <strong>14 ngày</strong> sau khi nhận kit, anh/chị cảm thấy bộ tài liệu này không xứng đáng với số tiền đã đầu tư — chỉ cần nhắn tin Zalo, chúng tôi hoàn <strong>100% không hỏi lý do</strong>.
+      </p>
+      <div class="bg-navy/5 rounded-2xl p-5 mb-6">
+        <p class="text-navy font-semibold text-base">Và anh/chị <strong>giữ lại toàn bộ</strong> tài liệu đã nhận.</p>
+        <p class="text-gray-500 text-sm mt-1">Rủi ro hoàn toàn thuộc về chúng tôi. Anh/chị không có gì để mất.</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+        <span class="flex items-center gap-1.5"><span class="text-green-500">✓</span> Không hỏi lý do</span>
+        <span class="flex items-center gap-1.5"><span class="text-green-500">✓</span> Hoàn trong 24–48h</span>
+        <span class="flex items-center gap-1.5"><span class="text-green-500">✓</span> Giữ lại tài liệu</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq" class="py-20 px-4 bg-cream-dark">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-heading font-bold text-navy">Câu Hỏi Thường Gặp</h2>
+    </div>
+    <div class="space-y-3" id="faqContainer">
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Tôi không giỏi công nghệ, có dùng được không?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">Hoàn toàn được. Tất cả tài liệu đều là file HTML — mở bằng trình duyệt như Chrome, không cần cài thêm gì. Bảng tính ROI, checklist, 30 posts đều dùng được ngay trên điện thoại. Landing page có hướng dẫn deploy Netlify từng bước trong 10 phút, không cần code. Nếu gặp vấn đề, nhắn Zalo — hỗ trợ ngay.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Kit này chỉ dùng cho Hạ Long Xanh hay BDS nói chung?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">Core của kit tập trung vào Vinhomes Hạ Long Xanh (data thực, pháp lý cụ thể, ROI theo dự án). Tuy nhiên, 70% nội dung — framework phân tích, script objection, chiến lược content, landing page — có thể adapt cho bất kỳ dự án BDS cao cấp nào khác.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Nhận kit này như thế nào sau khi thanh toán?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">Ngay sau khi xác nhận thanh toán, anh/chị nhận link trang bàn giao cá nhân qua Zalo/email. Tất cả tài liệu (8 file HTML interactive) đều có sẵn ngay — mở trình duyệt là dùng được, không cần tải về. Thường trong vòng 15–30 phút.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Dữ liệu trong kit có cập nhật không?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">Báo cáo thị trường được nghiên cứu và cập nhật đến tháng 5/2026 — thời điểm HLX Phase 1 đang mở bán. Khách hàng Gold nhận update miễn phí trong 3 tháng đầu khi có thông tin mới về dự án.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Tôi có thể chia sẻ kit cho đồng nghiệp không?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">Bronze và Silver là license cá nhân (1 người dùng). Nếu muốn chia sẻ cho cả sàn, hãy chọn Gold — Team License 5 người, mỗi người dùng tài liệu riêng, landing page riêng. Chia sẻ ngoài phạm vi license vi phạm điều khoản sử dụng.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Fast-Action bonus là gì? Tôi có đủ tiêu chuẩn không?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">50 người đầu tiên mua Silver Pro hoặc Gold nhận thêm buổi review marketing 1-1 qua Zalo (30 phút). Chúng tôi xem xét trang cá nhân, content hiện tại và đưa feedback cụ thể + roadmap 30 ngày. Số lượng có hạn, first-come first-served.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Tôi đang bán dự án khác, không chỉ HLX. Kit này có phù hợp?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">Hoàn toàn phù hợp. Script xử lý objection, chiến lược content, landing page và framework marketing đều là kỹ năng nền tảng áp dụng được cho mọi dự án BDS. Phần nghiên cứu HLX cụ thể cho anh/chị lợi thế khi tư vấn về dự án này.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl overflow-hidden gold-border">
+        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-gold transition-colors">
+          <span>Nếu không thấy phù hợp, hoàn tiền như thế nào?</span>
+          <span class="faq-icon text-gold text-xl flex-shrink-0">+</span>
+        </button>
+        <div class="faq-content px-6 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed">Nhắn tin Zalo trong 14 ngày đầu sau mua. Không cần giải thích. Chúng tôi xử lý hoàn tiền trong 24–48h về đúng tài khoản đã thanh toán. Anh/chị vẫn giữ lại toàn bộ tài liệu đã nhận.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REGISTRATION FORM ═══ -->
+<section id="dang-ky" class="py-20 px-4 bg-cream-dark">
+  <div class="max-w-xl mx-auto">
+
+    <div class="text-center mb-10">
+      <span class="badge-tag mb-3 inline-block">Đăng Ký Ngay — Nhận Kit Trong 5 Phút</span>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-navy-dark mb-3">
+        Bắt Đầu Ngay Hôm Nay
+      </h2>
+      <p class="text-gray-600 text-base">Điền form — tôi liên hệ Zalo trong vòng 30 phút để xác nhận và giao kit.</p>
+    </div>
+
+    <!-- Form card -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 gold-border">
+
+      <!-- FormSubmit — gửi về anhomehanoi@gmail.com, không cần tài khoản -->
+      <form action="https://formsubmit.co/anhomehanoi@gmail.com" method="POST">
+
+        <!-- Cấu hình FormSubmit -->
+        <input type="hidden" name="_subject" value="🏠 Đăng ký mới — BDS Mastery Kit">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://red-xylia-93.tiiny.site/#dang-ky">
+        <!-- Honeypot chống spam -->
+        <input type="text" name="_honey" style="display:none">
+
+        <!-- Họ tên -->
+        <div class="mb-5">
+          <label class="block text-sm font-semibold text-navy-dark mb-1.5">Họ và tên <span style="color:#e53e3e">*</span></label>
+          <input type="text" name="Ho_ten" required placeholder="Nguyễn Văn A"
+            style="width:100%;padding:11px 14px;border:1.5px solid #d4cfc4;border-radius:8px;font-family:'Be Vietnam Pro',sans-serif;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#d4cfc4'">
+        </div>
+
+        <!-- Số Zalo -->
+        <div class="mb-5">
+          <label class="block text-sm font-semibold text-navy-dark mb-1.5">Số Zalo <span style="color:#e53e3e">*</span></label>
+          <input type="tel" name="So_Zalo" required placeholder="0964 827 670"
+            style="width:100%;padding:11px 14px;border:1.5px solid #d4cfc4;border-radius:8px;font-family:'Be Vietnam Pro',sans-serif;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#d4cfc4'">
+        </div>
+
+        <!-- Gói quan tâm -->
+        <div class="mb-5">
+          <label class="block text-sm font-semibold text-navy-dark mb-1.5">Gói quan tâm <span style="color:#e53e3e">*</span></label>
+          <select name="Goi_quan_tam" required
+            style="width:100%;padding:11px 14px;border:1.5px solid #d4cfc4;border-radius:8px;font-family:'Be Vietnam Pro',sans-serif;font-size:14px;color:#1a1a2e;outline:none;background:white;transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#d4cfc4'">
+            <option value="" disabled selected>— Chọn gói phù hợp —</option>
+            <option value="Bronze 697K — Starter Kit">🥉 Bronze — 697.000đ (Starter)</option>
+            <option value="Silver Pro 1.497K — Full Kit">🥈 Silver Pro — 1.497.000đ (Full Kit)</option>
+            <option value="Gold 2.997K — Premium Kit">🥇 Gold — 2.997.000đ (Premium)</option>
+            <option value="Chưa chắc, cần tư vấn">💬 Chưa chắc — cần tư vấn thêm</option>
+          </select>
+        </div>
+
+        <!-- Dự án đang bán -->
+        <div class="mb-7">
+          <label class="block text-sm font-semibold text-navy-dark mb-1.5">Dự án đang bán / quan tâm</label>
+          <input type="text" name="Du_an" placeholder="VD: Vinhomes Hạ Long Xanh, Ocean Park..."
+            style="width:100%;padding:11px 14px;border:1.5px solid #d4cfc4;border-radius:8px;font-family:'Be Vietnam Pro',sans-serif;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#d4cfc4'">
+        </div>
+
+        <!-- Submit -->
+        <button type="submit"
+          style="width:100%;padding:15px;background:linear-gradient(90deg,#C9A84C,#E2C06A,#C9A84C);background-size:200% auto;animation:shimmer 3s linear infinite;border:none;border-radius:10px;font-family:'Be Vietnam Pro',sans-serif;font-size:16px;font-weight:700;color:#102340;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,0.4);">
+          Đăng Ký Nhận Kit →
+        </button>
+
+        <p style="text-align:center;font-size:11px;color:#9ca3af;margin-top:10px;">
+          🔒 Thông tin bảo mật · Không spam · Tôi liên hệ trong 30 phút
+        </p>
+
+      </form>
+    </div>
+
+    <!-- Trust strip -->
+    <div class="flex flex-wrap justify-center gap-5 mt-6 text-sm text-gray-500">
+      <span class="flex items-center gap-1.5"><span class="text-green-600">✓</span> Nhận kit trong 5 phút</span>
+      <span class="flex items-center gap-1.5"><span class="text-green-600">✓</span> Hoàn tiền 14 ngày</span>
+      <span class="flex items-center gap-1.5"><span class="text-green-600">✓</span> Hỗ trợ Zalo sau mua</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="py-24 px-4 gradient-hero dot-grid">
+  <div class="max-w-3xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold text-sm font-semibold px-4 py-2 rounded-full mb-6">
+      <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
+      Phase 1 Vinhomes HLX đang mở bán — đây là thời điểm tốt nhất
+    </div>
+    <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-5 leading-tight">
+      Bắt Đầu Tư Vấn<br>
+      <span class="text-gradient-gold">Chuyên Nghiệp Từ Ngày Mai</span>
+    </h2>
+    <p class="text-white/75 text-lg mb-10 leading-relaxed">
+      Mỗi ngày không có đúng tool = mỗi ngày mất cơ hội.<br>
+      Đối thủ của anh/chị đang chuẩn bị — anh/chị thì đang chờ điều gì?
+    </p>
+
+    <!-- Two CTA paths -->
+    <div class="grid sm:grid-cols-2 gap-5 max-w-xl mx-auto mb-8">
+      <div class="bg-white/5 rounded-2xl p-5 gold-border text-center">
+        <div class="text-gold font-semibold mb-1 text-sm">Bắt đầu ngay</div>
+        <div class="text-white font-heading font-bold text-2xl mb-1">1.497.000đ</div>
+        <div class="text-white/50 text-xs mb-4">Silver Pro — Phổ biến nhất</div>
+        <a href="https://zalo.me/0964827670" target="_blank" class="block shimmer-btn text-navy-dark font-bold py-3 rounded-xl pulse-ring">
+          Chọn Silver Pro →
+        </a>
+      </div>
+      <div class="bg-white/5 rounded-2xl p-5 gold-border text-center">
+        <div class="text-white/60 font-semibold mb-1 text-sm">Còn phân vân?</div>
+        <div class="text-white font-heading font-bold text-2xl mb-1">Miễn phí</div>
+        <div class="text-white/50 text-xs mb-4">5 Script Vàng Chốt Deal HLX</div>
+        <a href="https://zalo.me/0964827670" target="_blank" class="block border border-white/30 text-white font-bold py-3 rounded-xl hover:bg-white/10 transition-all">
+          Nhận Script Miễn Phí →
+        </a>
+      </div>
+    </div>
+
+    <!-- Final trust -->
+    <div class="space-y-2 text-white/50 text-sm">
+      <p>🛡️ Bảo đảm hoàn tiền 14 ngày · ⚡ Nhận kit trong 15 phút · 📱 Hỗ trợ qua Zalo</p>
+    </div>
+
+    <!-- PS -->
+    <div class="mt-12 border-t border-white/10 pt-8">
+      <p class="text-white/60 text-sm italic max-w-xl mx-auto">
+        <strong class="text-white not-italic">P.S.</strong> — Vinhomes Hạ Long Xanh là dự án $18 tỷ USD lớn nhất lịch sử Vingroup. Phase 1 đang mở. Hàng nghìn môi giới đang cạnh tranh cùng một tệp khách hàng. Người thắng là người có công cụ tốt hơn — không phải người cố gắng hơn.
+      </p>
+      <p class="text-white/60 text-sm italic max-w-xl mx-auto mt-3">
+        <strong class="text-white not-italic">P.P.S.</strong> — Giá Early Launch 1.497.000đ sẽ tăng lên 1.997.000đ sau 20/05/2026. Đây là thông báo thật, không phải chiêu marketing.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT BAR ═══ -->
+<section class="bg-white border-t border-gray-100 py-10 px-4">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="text-navy font-heading font-semibold text-xl mb-6">Cần Tư Vấn Trước Khi Mua?</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="https://zalo.me/0964827670" target="_blank"
+         class="inline-flex items-center gap-3 bg-blue-50 border border-blue-200 text-blue-700 font-semibold px-6 py-3 rounded-xl hover:bg-blue-100 transition-all">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 14.5c-.2.2-.5.3-.8.2-2.2-.7-4.1-2-5.6-3.7-1.4-1.5-2.5-3.3-3-5.3-.1-.3 0-.6.2-.8l.8-.8c.3-.3.7-.3 1 0l1.5 1.5c.3.3.3.7.1 1l-.5.7c-.1.2-.1.4 0 .6.5.9 1.2 1.7 2 2.3.2.2.4.2.6.1l.7-.5c.3-.2.7-.2 1 .1l1.5 1.5c.3.3.3.7 0 1l-.5.1z"/></svg>
+        Zalo: 0964.827.670
+      </a>
+      <a href="mailto:anhomehanoi@gmail.com"
+         class="inline-flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 font-semibold px-6 py-3 rounded-xl hover:bg-red-100 transition-all">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        anhomehanoi@gmail.com
+      </a>
+      <a href="https://zalo.me/0964827670" target="_blank"
+         class="inline-flex items-center gap-3 gradient-gold text-navy-dark font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-all" style="color:#102340">
+        💬 Nhắn tin ngay →
+      </a>
+    </div>
+    <p class="text-gray-400 text-xs mt-5">Phản hồi trong vòng 30 phút · 8:00–21:00 mỗi ngày</p>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="gradient-navy py-8 px-4">
+  <div class="max-w-5xl mx-auto text-center" style="color:rgba(255,255,255,0.4); font-size:12px">
+    <p class="mb-2">
+      BDS Mastery Kit © 2026 ·
+      <a href="https://zalo.me/0964827670" target="_blank" class="text-gold hover:underline">Zalo 0964.827.670</a> ·
+      <a href="mailto:anhomehanoi@gmail.com" class="text-gold hover:underline">anhomehanoi@gmail.com</a>
+    </p>
+    <p>Sản phẩm thông tin kỹ thuật số · Không phải tư vấn đầu tư tài chính · Kết quả thực tế phụ thuộc vào nỗ lực cá nhân</p>
+  </div>
+</footer>
+
+<!-- ═══ STICKY BAR ═══ -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="gradient-navy border-t border-gold/20 py-3 px-4 shadow-2xl">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+      <div class="hidden sm:block">
+        <div class="text-white font-semibold text-sm">BDS Mastery Kit — Silver Pro</div>
+        <div class="text-gold text-xs">1.497.000đ · Giá trị 22.000.000đ · 8 tài liệu + review 1-1</div>
+      </div>
+      <div class="flex items-center gap-3 ml-auto">
+        <div class="text-white/60 text-xs hidden md:block">⏰ <span id="stickyCountdown">Đang tải...</span></div>
+        <a href="#offer" class="shimmer-btn text-navy-dark font-bold text-sm px-6 py-2.5 rounded-lg whitespace-nowrap">
+          Mua Ngay →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─── FAQ Accordion ───
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = content.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.remove('open'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
+      // Open clicked
+      if (!isOpen) {
+        content.classList.add('open');
+        icon.textContent = '−';
+      }
+    });
+  });
+
+  // ─── Sticky bar on scroll ───
+  const stickyBar = document.getElementById('stickyBar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) stickyBar.classList.add('show');
+    else stickyBar.classList.remove('show');
+  });
+
+  // ─── Countdown Timer (deadline: 20/05/2026) ───
+  function updateCountdown() {
+    const deadline = new Date('2026-05-20T23:59:00+07:00');
+    const now = new Date();
+    const diff = deadline - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').textContent = 'ĐÃ HẾT HẠN';
+      return;
+    }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const s = Math.floor((diff % (1000*60)) / 1000);
+    const str = `${String(d).padStart(2,'0')}:${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    document.getElementById('countdown').textContent = str;
+    const el = document.getElementById('stickyCountdown');
+    if (el) el.textContent = `Giá tăng sau ${d}ng ${h}h ${m}p`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
