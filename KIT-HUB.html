@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDS Mastery Kit — Tài Nguyên Của Bạn</title>
+  <meta name="description" content="Truy cập toàn bộ tài nguyên BDS Mastery Kit — Landing page · Content · Checklist · Seeding · Infographic">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1B3A6B; --nd: #102340; --nl: #2A5298;
+      --gold: #C9A84C; --gl: #E2C06A; --gd: #A8862E;
+      --green: #1a6b3c; --orange: #e87922;
+      --cream: #FAF8F3; --cd: #EDE8DC;
+      --text: #1a1a2e; --mid: #4a5568; --light: #718096;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(160deg, #0e1f38 0%, var(--navy) 55%, #2d1a06 100%);
+      padding: 52px 24px 44px; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 1.5px 1.5px, rgba(201,168,76,.12) 1.5px, transparent 0);
+      background-size: 28px 28px;
+    }
+    .hero-in { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.4);
+      color: var(--gl); font-size: 11px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; padding: 7px 16px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .dot { width: 6px; height: 6px; background: var(--gl); border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero h1 { font-size: clamp(26px,4vw,40px); color: #fff; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+    .hero h1 span { background: linear-gradient(135deg,#E2C06A,#C9A84C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,.7); margin-bottom: 28px; line-height: 1.7; }
+    .hero-chips { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .chip { background: rgba(255,255,255,.08); border: 1px solid rgba(201,168,76,.25); color: #e2e8f0; font-size: 12px; padding: 6px 14px; border-radius: 8px; }
+
+    /* ===== ACCESS NOTICE ===== */
+    .notice {
+      background: linear-gradient(135deg, rgba(26,107,60,.1), rgba(26,107,60,.05));
+      border: 1px solid rgba(26,107,60,.3); border-radius: 16px;
+      padding: 18px 24px; margin: 32px auto; max-width: 720px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .notice-icon { font-size: 28px; flex-shrink: 0; }
+    .notice-text { font-size: 14px; color: var(--mid); }
+    .notice-text strong { color: var(--green); }
+
+    /* ===== MAIN LAYOUT ===== */
+    main { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+
+    /* ===== KIT GRID ===== */
+    .kit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+    @media(max-width: 640px) { .kit-grid { grid-template-columns: 1fr; } }
+
+    .kit-card {
+      background: #fff; border-radius: 18px; overflow: hidden;
+      border: 1.5px solid var(--cd); box-shadow: 0 3px 16px rgba(27,58,107,.06);
+      transition: all .25s; display: flex; flex-direction: column;
+    }
+    .kit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(27,58,107,.14); border-color: var(--gold); }
+
+    .card-header {
+      padding: 20px 22px 16px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .card-num {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; font-weight: 800; color: #fff;
+      font-family: 'Playfair Display', serif;
+    }
+    .card-title { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.35; margin-bottom: 4px; font-family: 'Playfair Display', serif; }
+    .card-sub { font-size: 12px; color: var(--light); }
+
+    .card-body { padding: 0 22px 14px; flex: 1; }
+    .card-desc { font-size: 13px; color: var(--mid); line-height: 1.65; margin-bottom: 12px; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    .tag-green { background: rgba(26,107,60,.1); color: var(--green); }
+    .tag-gold { background: rgba(201,168,76,.12); color: var(--gd); }
+    .tag-navy { background: rgba(27,58,107,.08); color: var(--nl); }
+    .tag-orange { background: rgba(232,121,34,.1); color: var(--orange); }
+
+    .card-footer { padding: 14px 22px 20px; display: flex; gap: 8px; }
+
+    .btn-open {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+      background: linear-gradient(135deg, var(--navy), var(--nl));
+      color: #fff; padding: 11px 16px; border-radius: 10px;
+      font-size: 13px; font-weight: 700; font-family: 'Be Vietnam Pro', sans-serif;
+      border: none; cursor: pointer; transition: all .2s;
+    }
+    .btn-open:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-open.gold { background: linear-gradient(135deg, var(--gd), var(--gold)); }
+    .btn-open.green { background: linear-gradient(135deg, var(--green), #2d8a52); }
+    .btn-open.orange { background: linear-gradient(135deg, var(--orange), #f5a54a); }
+    .btn-open.disabled {
+      background: #e2e8f0; color: #a0aec0; cursor: not-allowed;
+      pointer-events: none;
+    }
+    .btn-copy {
+      width: 40px; height: 40px; border-radius: 10px; border: 1.5px solid var(--cd);
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 16px; cursor: pointer; transition: all .2s; flex-shrink: 0;
+    }
+    .btn-copy:hover { background: var(--cd); }
+    .btn-copy.copied { background: var(--green); border-color: var(--green); }
+
+    /* ===== FEATURED CARD (SALES PAGE) ===== */
+    .kit-card.featured { border-color: var(--gold); border-width: 2px; grid-column: span 2; }
+    @media(max-width: 640px) { .kit-card.featured { grid-column: span 1; } }
+    .featured-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    @media(max-width: 500px) { .featured-inner { grid-template-columns: 1fr; } }
+    .featured-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--gold), var(--gl));
+      color: var(--nd); font-size: 10px; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 8px;
+    }
+    .featured-stats { display: flex; flex-direction: column; gap: 10px; padding: 20px 22px 20px 0; border-left: 1px solid var(--cd); }
+    .fstat { display: flex; flex-direction: column; }
+    .fstat-num { font-size: 22px; font-weight: 800; color: var(--orange); font-family: 'Playfair Display', serif; }
+    .fstat-label { font-size: 11px; color: var(--light); }
+
+    /* ===== DOWNLOAD SECTION ===== */
+    .dl-section {
+      background: var(--nd); border-radius: 20px; padding: 30px 32px; margin-bottom: 48px;
+    }
+    .dl-title { font-size: 20px; color: #fff; margin-bottom: 6px; }
+    .dl-sub { font-size: 13px; color: rgba(255,255,255,.55); margin-bottom: 22px; }
+    .dl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 10px; }
+    .dl-item {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(201,168,76,.15);
+      border-radius: 12px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+      cursor: pointer; transition: background .2s;
+    }
+    .dl-item:hover { background: rgba(201,168,76,.12); }
+    .dl-icon { font-size: 20px; flex-shrink: 0; }
+    .dl-name { font-size: 12px; color: rgba(255,255,255,.8); font-weight: 600; line-height: 1.4; }
+    .dl-size { font-size: 11px; color: rgba(255,255,255,.4); margin-top: 2px; }
+
+    /* ===== PROGRESS ===== */
+    .progress-section {
+      background: #fff; border-radius: 18px; padding: 26px 28px;
+      border: 1.5px solid var(--cd); margin-bottom: 48px;
+    }
+    .progress-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+    .progress-steps { display: flex; flex-direction: column; gap: 12px; }
+    .pstep {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 16px; border-radius: 12px; border: 1.5px solid transparent;
+      cursor: pointer; transition: all .2s;
+    }
+    .pstep:hover { background: var(--cream); border-color: var(--cd); }
+    .pstep.done { background: rgba(26,107,60,.05); border-color: rgba(26,107,60,.2); }
+    .pstep-check {
+      width: 24px; height: 24px; border-radius: 7px; border: 2px solid #d1d5db;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; transition: all .2s;
+    }
+    .pstep.done .pstep-check { background: var(--green); border-color: var(--green); color: #fff; }
+    .pstep.done .pstep-check::after { content: '✓'; font-weight: 700; }
+    .pstep-text { font-size: 13px; color: var(--mid); }
+    .pstep-text strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 14px; }
+    .progress-bar-wrap { margin-top: 18px; }
+    .progress-bar-bg { background: var(--cd); border-radius: 50px; height: 8px; }
+    .progress-bar-fill { background: linear-gradient(135deg, var(--green), #4caf78); border-radius: 50px; height: 100%; transition: width .5s; }
+    .progress-pct { font-size: 12px; color: var(--light); margin-top: 6px; text-align: right; }
+
+    /* ===== SUPPORT ===== */
+    .support-section {
+      background: linear-gradient(135deg, #0e1f38, var(--navy));
+      border-radius: 20px; padding: 30px 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;
+    }
+    @media(max-width: 580px) { .support-section { grid-template-columns: 1fr; } }
+    .support-section h3 { font-size: 22px; color: #fff; margin-bottom: 8px; }
+    .support-section p { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.7; }
+    .support-btns { display: flex; flex-direction: column; gap: 10px; }
+    .sbtn {
+      display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px; color: #fff; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .sbtn:hover { background: rgba(201,168,76,.15); border-color: rgba(201,168,76,.35); }
+    .sbtn-icon { font-size: 20px; flex-shrink: 0; }
+
+    /* ===== FOOTER ===== */
+    .page-footer { text-align: center; padding: 24px 0 40px; color: var(--light); font-size: 12px; }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="badge"><span class="dot"></span> Tài Nguyên Đã Kích Hoạt</div>
+    <h1>BDS Mastery Kit<br><span>Vinhomes Hạ Long Xanh</span></h1>
+    <p class="hero-sub">Toàn bộ công cụ bán hàng của bạn đã sẵn sàng — Landing page live · 30 bài content · Script xử lý tình huống · Seeding chuyên gia</p>
+    <div class="hero-chips">
+      <span class="chip">🌐 9 công cụ</span>
+      <span class="chip">📱 Mobile-ready</span>
+      <span class="chip">✅ Dùng ngay không cần setup</span>
+      <span class="chip">🔄 Cập nhật liên tục</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NOTICE ===== -->
+<div style="max-width:960px;margin:0 auto;padding:0 20px;">
+  <div class="notice">
+    <span class="notice-icon">💡</span>
+    <div class="notice-text">
+      <strong>Mẹo sử dụng:</strong> Click "Mở ngay" để dùng trực tiếp trên trình duyệt. Click 📋 để copy link gửi cho khách. Tất cả link hoạt động 24/7 — không cần đăng nhập, không hết hạn.
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<main>
+  <p class="section-label">🗂️ Toàn Bộ Tài Nguyên Kit</p>
+
+  <div class="kit-grid">
+
+    <!-- FEATURED: SALES PAGE -->
+    <div class="kit-card featured">
+      <div class="featured-inner">
+        <div>
+          <div class="card-header">
+            <div class="card-num" style="background:linear-gradient(135deg,#102340,#1B3A6B);">01</div>
+            <div>
+              <div class="featured-badge">⭐ Quan Trọng Nhất</div>
+              <div class="card-title">Sales Page — Trang Bán Hàng Chính</div>
+              <div class="card-sub">Giao diện navy · gold · brown · Deploy sẵn GitHub Pages</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-desc">Landing page bán BDS Mastery Kit đã live trên internet. Copy link và chia sẻ ngay lên FB, Zalo, TikTok để khách đăng ký. OG tags đã cài — link hiện preview card đẹp trên feed.</div>
+            <div class="card-tags">
+              <span class="tag tag-green">🌐 Đang live</span>
+              <span class="tag tag-gold">📱 Mobile-first</span>
+              <span class="tag tag-navy">🔗 OG preview</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://yen670-oss.github.io/kit-hlx/" target="_blank" class="btn-open gold">🌐 Mở Sales Page</a>
+            <button class="btn-copy" onclick="copyLink('https://yen670-oss.github.io/kit-hlx/', this)" title="Copy link">📋</button>
+          </div>
+        </div>
+        <div class="featured-stats">
+          <div class="fstat"><span class="fstat-num">24/7</span><span class="fstat-label">Nhận lead tự động</span></div>
+          <div class="fstat"><span class="fstat-num">✅</span><span class="fstat-label">Pháp lý — link không hết hạn</span></div>
+          <div class="fstat"><span class="fstat-num">3s</span><span class="fstat-label">Thời gian load trung bình</span></div>
+          <div class="fstat"><span class="fstat-num">100%</span><span class="fstat-label">Responsive mobile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02: CHECKLIST -->
+    <div class="kit-card">
+      <div class="card-header">
+        <div class="card-num" style="background:linear-gradient(135deg,#1a5c38,#2d8a52);">02</div>
+        <div>
+          <div class="card-title">Checklist Đăng Bài</div>
+          <div class="card-sub">30 ngày · Giờ vàng · Platform</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-desc">Lịch đăng bài 30 ngày cho FB + Zalo + TikTok. Giờ vàng từng nền tảng, hashtag đã chọn sẵn, tick hoàn thành khi xong.</div>
+        <div class="card-tags">
+          <span class="tag tag-green">📅 30 ngày</span>
+          <span class="tag tag-navy">3 nền tảng</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="03-CHECKLIST-DANG-BAI.html" target="_blank" class="btn-open green">📅 Mở ngay</a>
+        <button class="btn-copy" onclick="copyLink(location.origin+location.pathname.replace('KIT-HUB.html','')+'03-CHECKLIST-DANG-BAI.html', this)" title="Copy link">📋</button>
+      </div>
+    </div>
+
+    <!-- 03: CONTENT FUNNEL -->
+    <div class="kit-card">
+      <div class="card-header">
+        <div class="card-num" style="background:linear-gradient(135deg,#102340,#2A5298);">03</div>
+        <div>
+          <div class="card-title">18 Bài Content Toàn Phần Funnel</div>
+          <div class="card-sub">TOFU · MOFU · BOFU · Upsell</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-desc">18 bài viết đầy đủ theo funnel bán kit. Copy 1 chạm, đã có hashtag, 2 phiên bản dài/ngắn, character counter.</div>
+        <div class="card-tags">
+          <span class="tag tag-gold">18 bài viết</span>
+          <span class="tag tag-navy">Copy 1 chạm</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="content-toan-phan-funnel.html" target="_blank" class="btn-open">📝 Mở ngay</a>
+        <button class="btn-copy" onclick="copyLink(location.origin+location.pathname.replace('KIT-HUB.html','')+'content-toan-phan-funnel.html', this)" title="Copy link">📋</button>
+      </div>
+    </div>
+
+    <!-- 04: LINK LIVE FEED -->
+    <div class="kit-card">
+      <div class="card-header">
+        <div class="card-num" style="background:linear-gradient(135deg,#1a5c38,#4caf78);">04</div>
+        <div>
+          <div class="card-title">Link Live Feed + Thumbnail</div>
+          <div class="card-sub">Tạo ảnh 1200×630 · OG tags · FB Debug</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-desc">Generator ảnh thumbnail tùy chỉnh, hướng dẫn cài OG tags và kỹ thuật đăng để link hiện preview card đẹp trên feed FB & Zalo.</div>
+        <div class="card-tags">
+          <span class="tag tag-green">🖼 Tạo thumbnail</span>
+          <span class="tag tag-navy">CTR 8–15%</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="06-HUONG-DAN-LINK-LIVE-FEED.html" target="_blank" class="btn-open green">🖼 Mở ngay</a>
+        <button class="btn-copy" onclick="copyLink(location.origin+location.pathname.replace('KIT-HUB.html','')+'06-HUONG-DAN-LINK-LIVE-FEED.html', this)" title="Copy link">📋</button>
+      </div>
+    </div>
+
+    <!-- 05: INFOGRAPHIC -->
+    <div class="kit-card">
+      <div class="card-header">
+        <div class="card-num" style="background:linear-gradient(135deg,#1a3a5c,#2563eb);">05</div>
+        <div>
+          <div class="card-title">Infographic Thị Trường QN 2026</div>
+          <div class="card-sub">6 vùng · Bảng giá · Hạ tầng · Rủi ro</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-desc">Toàn cảnh thị trường BDS Quảng Ninh 2026. Tải PNG 1080px về đăng ngay. GRDP +12% · 18M khách/năm · +35% giá kỳ vọng.</div>
+        <div class="card-tags">
+          <span class="tag tag-navy">📊 6 khu vực</span>
+          <span class="tag tag-gold">Tải PNG</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="infographic-thi-truong-qn-2026.html" target="_blank" class="btn-open" style="background:linear-gradient(135deg,#1a3a5c,#2563eb);">📊 Mở ngay</a>
+        <button class="btn-copy" onclick="copyLink(location.origin+location.pathname.replace('KIT-HUB.html','')+'infographic-thi-truong-qn-2026.html', this)" title="Copy link">📋</button>
+      </div>
+    </div>
+
+    <!-- 06: SEEDING -->
+    <div class="kit-card">
+      <div class="card-header">
+        <div class="card-num" style="background:linear-gradient(135deg,#7c3d12,#C9A84C);">06</div>
+        <div>
+          <div class="card-title">Seeding Chuyên Gia — 6 Bài</div>
+          <div class="card-sub">Bài mở màn + S1–S5 · Lịch 2 tuần</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-desc">6 bài seeding theo nỗi đau thực của môi giới HLX. Persona quan sát — không bán hàng lộ liễu. Lịch đăng + hashtag từng nền tảng.</div>
+        <div class="card-tags">
+          <span class="tag tag-orange">6 bài viết</span>
+          <span class="tag tag-gold">Lịch 2 tuần</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="08-SEEDING-CHUYEN-GIA.html" target="_blank" class="btn-open orange">✍️ Mở ngay</a>
+        <button class="btn-copy" onclick="copyLink(location.origin+location.pathname.replace('KIT-HUB.html','')+'08-SEEDING-CHUYEN-GIA.html', this)" title="Copy link">📋</button>
+      </div>
+    </div>
+
+    <!-- 07: LANDING PAGE HLX -->
+    <div class="kit-card">
+      <div class="card-header">
+        <div class="card-num" style="background:linear-gradient(135deg,#0f4c2a,#2d8a52);">07</div>
+        <div>
+          <div class="card-title">Landing Page Bán HLX</div>
+          <div class="card-sub">Tông xanh · cam · nâu · Full sections</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-desc">Landing page conversion cho môi giới bán Vinhomes Hạ Long Xanh. Hero · Vị trí · Tiện ích · Sản phẩm · Form đăng ký · FAQ. Deploy lên repo riêng.</div>
+        <div class="card-tags">
+          <span class="tag tag-green">🌿 HLX theme</span>
+          <span class="tag tag-navy">Form tích hợp</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="09-landing-hlx.html" target="_blank" class="btn-open green">🏠 Mở ngay</a>
+        <button class="btn-copy" onclick="copyLink(location.origin+location.pathname.replace('KIT-HUB.html','')+'09-landing-hlx.html', this)" title="Copy link">📋</button>
+      </div>
+    </div>
+
+    <!-- 08: INDEX FILE -->
+    <div class="kit-card">
+      <div class="card-header">
+        <div class="card-num" style="background:linear-gradient(135deg,#102340,#1B3A6B);">08</div>
+        <div>
+          <div class="card-title">Mở Đầu Tiên — Hướng Dẫn Kit</div>
+          <div class="card-sub">Tổng quan · Checklist bắt đầu · Quy trình</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-desc">Trang index đầy đủ tất cả tài nguyên kit, checklist 8 bước bắt đầu và quy trình bán + giao kit. Đọc trước khi dùng.</div>
+        <div class="card-tags">
+          <span class="tag tag-gold">📖 Đọc trước</span>
+          <span class="tag tag-navy">Tổng quan</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="MO-DAU-TIEN.html" target="_blank" class="btn-open">📖 Mở ngay</a>
+        <button class="btn-copy" onclick="copyLink(location.origin+location.pathname.replace('KIT-HUB.html','')+'MO-DAU-TIEN.html', this)" title="Copy link">📋</button>
+      </div>
+    </div>
+
+  </div><!-- /kit-grid -->
+
+  <!-- ===== DOWNLOAD TXT FILES ===== -->
+  <p class="section-label">📄 File Nội Dung (Text)</p>
+  <div class="dl-section">
+    <div class="dl-title">Nội Dung & Script Bổ Sung</div>
+    <div class="dl-sub">Mở bằng Notepad hoặc copy paste thẳng vào bài đăng</div>
+    <div class="dl-grid">
+      <div class="dl-item" onclick="copyLink('02-CONTENT-BAN-KIT/BAI-1-FB-cau-chuyen-ban-kit.txt', this)">
+        <span class="dl-icon">📝</span>
+        <div>
+          <div class="dl-name">Bài 1 — Câu chuyện bán kit</div>
+          <div class="dl-size">FB · Storytelling</div>
+        </div>
+      </div>
+      <div class="dl-item" onclick="copyLink('02-CONTENT-BAN-KIT/BAI-2-FB-van-de-broker.txt', this)">
+        <span class="dl-icon">📝</span>
+        <div>
+          <div class="dl-name">Bài 2 — Vấn đề broker</div>
+          <div class="dl-size">FB · Pain point</div>
+        </div>
+      </div>
+      <div class="dl-item" onclick="copyLink('02-CONTENT-BAN-KIT/BAI-3-FB-offer-stack.txt', this)">
+        <span class="dl-icon">📝</span>
+        <div>
+          <div class="dl-name">Bài 3 — Offer stack</div>
+          <div class="dl-size">FB · Value stack</div>
+        </div>
+      </div>
+      <div class="dl-item" onclick="copyLink('02-CONTENT-BAN-KIT/BAI-4-Zalo-5-tin-nhan-ban-kit.txt', this)">
+        <span class="dl-icon">💬</span>
+        <div>
+          <div class="dl-name">Bài 4 — 5 tin nhắn Zalo</div>
+          <div class="dl-size">Zalo · DM script</div>
+        </div>
+      </div>
+      <div class="dl-item" onclick="copyLink('02-CONTENT-BAN-KIT/BAI-5-TikTok-scripts-ban-kit.txt', this)">
+        <span class="dl-icon">🎬</span>
+        <div>
+          <div class="dl-name">Bài 5 — TikTok scripts</div>
+          <div class="dl-size">TikTok · Video script</div>
+        </div>
+      </div>
+      <div class="dl-item" onclick="copyLink('02-CONTENT-BAN-KIT/LICH-DANG-BAN-KIT-2-tuan.txt', this)">
+        <span class="dl-icon">📅</span>
+        <div>
+          <div class="dl-name">Lịch đăng 2 tuần</div>
+          <div class="dl-size">Tất cả nền tảng</div>
+        </div>
+      </div>
+      <div class="dl-item" onclick="copyLink('04-XU-LY-TINH-HUONG/xu-ly-tinh-huong-ban-kit.txt', this)">
+        <span class="dl-icon">💡</span>
+        <div>
+          <div class="dl-name">Xử lý tình huống bán kit</div>
+          <div class="dl-size">8 tình huống · Script mẫu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROGRESS TRACKER ===== -->
+  <p class="section-label">✅ Tiến Độ Triển Khai</p>
+  <div class="progress-section">
+    <div class="progress-title">📊 Checklist Bắt Đầu Bán Kit</div>
+    <div class="progress-steps" id="progressList">
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã mở Sales Page</strong>Click "Mở Sales Page" bên trên — kiểm tra trang hiển thị đúng</div>
+      </div>
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã thay thông tin liên hệ</strong>Tìm [SĐT CỦA ANH/CHỊ] trong sales page → điền số thật</div>
+      </div>
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã copy link sales page</strong>Dùng nút 📋 → paste lên FB/Zalo bio hoặc bài đầu tiên</div>
+      </div>
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã tạo thumbnail + cài OG tags</strong>Mở tab "Link Live Feed" → tải ảnh → cài OG → test FB Debug</div>
+      </div>
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã đăng bài mở màn</strong>Tab "Seeding Chuyên Gia" → Bài Mở Màn → copy → đăng FB + Zalo</div>
+      </div>
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã lên lịch S1–S5 seeding</strong>Tab "Lịch & Checklist" → đặt lịch 5 bài cho 2 tuần tới</div>
+      </div>
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã cài landing page HLX</strong>Tab "Landing Page HLX" → đổi tên index.html → deploy riêng</div>
+      </div>
+      <div class="pstep" onclick="toggleStep(this)">
+        <div class="pstep-check"></div>
+        <div class="pstep-text"><strong>Đã nhận lead đầu tiên 🎉</strong>Có người nhắn hỏi về kit → dùng script xử lý tình huống</div>
+      </div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="pBar" style="width:0%"></div></div>
+      <div class="progress-pct" id="pPct">0 / 8 bước hoàn thành</div>
+    </div>
+  </div>
+
+  <!-- ===== SUPPORT ===== -->
+  <div class="support-section">
+    <div>
+      <h3>Cần Hỗ Trợ?</h3>
+      <p>Liên hệ trực tiếp để được hỗ trợ cài đặt, tùy chỉnh nội dung hoặc deploy thêm trang mới. Phản hồi trong vòng 30 phút.</p>
+    </div>
+    <div class="support-btns">
+      <a href="https://zalo.me/[SĐT CỦA BẠN]" class="sbtn">
+        <span class="sbtn-icon">💬</span>
+        <span>Nhắn Zalo hỗ trợ</span>
+      </a>
+      <a href="https://m.me/[FACEBOOK CỦA BẠN]" class="sbtn">
+        <span class="sbtn-icon">📘</span>
+        <span>Nhắn Messenger</span>
+      </a>
+      <a href="tel:[SĐT CỦA BẠN]" class="sbtn">
+        <span class="sbtn-icon">📞</span>
+        <span>Gọi ngay — [SĐT]</span>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<div class="page-footer">
+  BDS Mastery Kit — Vinhomes Hạ Long Xanh · Được hỗ trợ bởi AI Agent Business Kit<br>
+  Link trang này không hết hạn · Bookmark để truy cập nhanh
+</div>
+
+<script>
+  // Copy link
+  function copyLink(url, btn) {
+    // Build absolute URL if relative
+    let fullUrl = url;
+    if (!url.startsWith('http')) {
+      const base = window.location.href.replace('KIT-HUB.html', '');
+      fullUrl = base + url;
+    }
+    navigator.clipboard.writeText(fullUrl).then(() => {
+      const orig = btn ? btn.textContent : '';
+      if (btn) { btn.textContent = '✅'; btn.classList.add('copied'); }
+      setTimeout(() => {
+        if (btn) { btn.textContent = orig || '📋'; btn.classList.remove('copied'); }
+      }, 1800);
+    });
+  }
+
+  // Progress tracker
+  function toggleStep(el) {
+    el.classList.toggle('done');
+    updateProgress();
+    // Save to localStorage
+    const steps = Array.from(document.querySelectorAll('.pstep'));
+    localStorage.setItem('kit_progress', JSON.stringify(steps.map(s => s.classList.contains('done'))));
+  }
+
+  function updateProgress() {
+    const steps = document.querySelectorAll('.pstep');
+    const done = document.querySelectorAll('.pstep.done').length;
+    const pct = Math.round(done / steps.length * 100);
+    document.getElementById('pBar').style.width = pct + '%';
+    document.getElementById('pPct').textContent = done + ' / ' + steps.length + ' bước hoàn thành' + (done === steps.length ? ' 🎉' : '');
+  }
+
+  // Restore progress from localStorage
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('kit_progress');
+    if (saved) {
+      const arr = JSON.parse(saved);
+      const steps = document.querySelectorAll('.pstep');
+      arr.forEach((done, i) => { if (done && steps[i]) steps[i].classList.add('done'); });
+      updateProgress();
+    }
+  });
+</script>
+
+</body>
+</html>
