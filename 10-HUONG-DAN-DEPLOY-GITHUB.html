@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Deploy GitHub Pages — BDS Mastery Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#1B3A6B;--nd:#102340;--nl:#2A5298;
+      --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+      --green:#1a6b3c;--green2:#2d8a52;--green-pale:#e8f5ee;
+      --orange:#e87922;--orange-pale:#fff3e8;
+      --cream:#FAF8F3;--cd:#EDE8DC;
+      --red:#ef4444;--red-pale:#fef2f2;
+      --text:#1a1a2e;--mid:#4a5568;--light:#718096;
+      --white:#ffffff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:var(--text);line-height:1.6;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+    code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+
+    /* ── NAV ── */
+    .topbar{background:var(--nd);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3);}
+    .topbar-brand{display:flex;align-items:center;gap:10px;}
+    .topbar-logo{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--nd);font-size:14px;}
+    .topbar-title{color:#fff;font-size:14px;font-weight:700;}
+    .topbar-sub{color:rgba(255,255,255,.5);font-size:11px;}
+    .topbar-status{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 14px;}
+    .status-dot{width:8px;height:8px;border-radius:50%;background:#ef4444;flex-shrink:0;}
+    .status-dot.live{background:#22c55e;animation:blink 1.5s infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+    .status-txt{font-size:12px;color:rgba(255,255,255,.8);font-weight:600;}
+
+    /* ── HERO ── */
+    .hero{background:linear-gradient(135deg,var(--nd) 0%,var(--navy) 60%,#1a4a2d 100%);padding:44px 24px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.1) 1.5px,transparent 0);background-size:28px 28px;}
+    .hero-in{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:18px;}
+    .hero h1{font-size:clamp(24px,4vw,38px);color:#fff;line-height:1.2;margin-bottom:12px;}
+    .hero h1 span{color:var(--gl);}
+    .hero-sub{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:24px;line-height:1.7;}
+    .hero-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .chip{background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.2);color:#e2e8f0;font-size:12px;padding:5px 12px;border-radius:7px;}
+
+    /* ── LAYOUT ── */
+    .wrap{max-width:900px;margin:0 auto;padding:36px 20px 80px;}
+
+    /* ── SECTION HEADERS ── */
+    .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;margin-top:40px;}
+    .sec-num{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--nl));color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Playfair Display',serif;}
+    .sec-num.green{background:linear-gradient(135deg,var(--green),var(--green2));}
+    .sec-num.gold{background:linear-gradient(135deg,var(--gd),var(--gold));}
+    .sec-num.orange{background:linear-gradient(135deg,#c45e10,var(--orange));}
+    .sec-title{font-size:20px;font-weight:700;color:var(--text);}
+    .sec-sub{font-size:13px;color:var(--light);margin-top:2px;}
+
+    /* ── INFO BOX ── */
+    .info-box{border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;}
+    .info-box.tip{background:var(--green-pale);border:1px solid rgba(26,107,60,.25);}
+    .info-box.warn{background:#fffbeb;border:1px solid rgba(245,158,11,.3);}
+    .info-box.danger{background:var(--red-pale);border:1px solid rgba(239,68,68,.25);}
+    .info-box.info{background:rgba(27,58,107,.06);border:1px solid rgba(27,58,107,.2);}
+    .ib-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+    .ib-text{font-size:13px;color:var(--mid);line-height:1.7;}
+    .ib-text strong{color:var(--text);}
+
+    /* ── STEP CARDS ── */
+    .steps{display:flex;flex-direction:column;gap:14px;}
+    .step{background:#fff;border-radius:16px;border:1.5px solid var(--cd);overflow:hidden;transition:border-color .2s,box-shadow .2s;}
+    .step.done{border-color:rgba(26,107,60,.35);background:rgba(26,107,60,.02);}
+    .step-header{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;}
+    .step-check{width:28px;height:28px;border-radius:8px;border:2px solid #d1d5db;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .step.done .step-check{background:var(--green);border-color:var(--green);}
+    .step.done .step-check::after{content:'✓';color:#fff;font-size:14px;font-weight:700;}
+    .step-label{flex:1;}
+    .step-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px;}
+    .step.done .step-title{color:var(--green);}
+    .step-hint{font-size:12px;color:var(--light);}
+    .step-body{padding:0 20px 20px;display:none;}
+    .step.open .step-body{display:block;}
+    .step-desc{font-size:14px;color:var(--mid);margin-bottom:14px;line-height:1.7;}
+
+    /* ── CODE BLOCKS ── */
+    .code-block{background:#0d1117;border-radius:12px;overflow:hidden;margin-bottom:12px;}
+    .code-header{background:rgba(255,255,255,.07);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;}
+    .code-lang{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;}
+    .code-copy{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;padding:4px 12px;border-radius:6px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s;}
+    .code-copy:hover{background:rgba(255,255,255,.2);}
+    .code-copy.copied{background:rgba(26,107,60,.4);border-color:rgba(26,107,60,.6);color:#6ee79a;}
+    pre{padding:16px;overflow-x:auto;font-size:13px;line-height:1.7;color:#e2e8f0;}
+    .hl-cmd{color:#79c0ff;}
+    .hl-str{color:#a5d6ff;}
+    .hl-cmt{color:#8b949e;font-style:italic;}
+    .hl-ok{color:#56d364;}
+    .hl-warn{color:#f0883e;}
+    .hl-url{color:#79c0ff;text-decoration:underline;}
+
+    /* ── INLINE CODE ── */
+    .ic{background:rgba(27,58,107,.08);border:1px solid rgba(27,58,107,.15);color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 8px;border-radius:5px;}
+
+    /* ── FILE TABLE ── */
+    .file-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid var(--cd);}
+    .file-table thead{background:var(--nd);}
+    .file-table thead th{padding:12px 16px;text-align:left;font-size:12px;color:rgba(255,255,255,.7);font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .file-table tbody tr{border-bottom:1px solid var(--cd);transition:background .15s;}
+    .file-table tbody tr:last-child{border-bottom:none;}
+    .file-table tbody tr:hover{background:rgba(27,58,107,.04);}
+    .file-table td{padding:12px 16px;font-size:13px;vertical-align:middle;}
+    .file-table td:first-child{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mid);}
+    .file-table td:nth-child(2){font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);font-weight:600;}
+    .badge-new{background:rgba(26,107,60,.12);color:var(--green);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+    .badge-exists{background:rgba(201,168,76,.12);color:var(--gd);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+    .badge-rename{background:rgba(232,121,34,.12);color:var(--orange);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+    .badge-skip{background:#f1f5f9;color:#94a3b8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+
+    /* ── PROGRESS BAR ── */
+    .prog-wrap{background:#fff;border-radius:16px;padding:24px 26px;border:1.5px solid var(--cd);margin-bottom:32px;position:sticky;top:68px;z-index:50;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+    .prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    .prog-label{font-size:14px;font-weight:700;color:var(--text);}
+    .prog-pct{font-size:14px;font-weight:800;color:var(--green);font-family:'Playfair Display',serif;}
+    .prog-bar-bg{background:var(--cd);border-radius:50px;height:10px;}
+    .prog-bar-fill{background:linear-gradient(135deg,var(--green),#4caf78);border-radius:50px;height:100%;transition:width .5s;}
+    .prog-steps-mini{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+    .psm{width:28px;height:28px;border-radius:7px;border:2px solid var(--cd);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--light);cursor:pointer;transition:all .2s;}
+    .psm.done{background:var(--green);border-color:var(--green);color:#fff;}
+    .psm:hover{border-color:var(--green);color:var(--green);}
+
+    /* ── URL CARDS ── */
+    .url-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:600px){.url-grid{grid-template-columns:1fr;}}
+    .url-card{background:#fff;border-radius:12px;padding:16px;border:1.5px solid var(--cd);}
+    .url-card-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--light);margin-bottom:8px;}
+    .url-card-url{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--nl);word-break:break-all;margin-bottom:10px;line-height:1.5;}
+    .url-card-actions{display:flex;gap:8px;}
+    .btn-sm{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s;}
+    .btn-sm.open{background:var(--navy);color:#fff;}
+    .btn-sm.open:hover{background:var(--nl);}
+    .btn-sm.copy{background:var(--cd);color:var(--text);}
+    .btn-sm.copy:hover{background:#d4c9b8;}
+    .btn-sm.copy.copied{background:var(--green);color:#fff;}
+
+    /* ── BOTTOM CTA ── */
+    .cta-box{background:linear-gradient(135deg,var(--nd) 0%,var(--navy) 60%,#1a4a2d 100%);border-radius:20px;padding:36px 32px;text-align:center;margin-top:48px;}
+    .cta-box h2{color:#fff;font-size:26px;margin-bottom:12px;}
+    .cta-box p{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:24px;line-height:1.7;}
+    .cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .btn-cta{display:flex;align-items:center;gap:8px;padding:13px 26px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:'Be Vietnam Pro',sans-serif;transition:all .25s;}
+    .btn-cta.primary{background:var(--gold);color:var(--nd);}
+    .btn-cta.primary:hover{background:var(--gl);transform:translateY(-2px);}
+    .btn-cta.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);}
+    .btn-cta.secondary:hover{background:rgba(255,255,255,.18);}
+
+    /* ── TOOLTIP ── */
+    .tooltip-wrap{position:relative;display:inline-block;}
+    .tooltip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;font-size:11px;padding:5px 10px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;}
+    .tooltip-wrap:hover .tooltip{opacity:1;}
+
+    /* ── ACCORDION ── */
+    .faq{margin-top:12px;display:flex;flex-direction:column;gap:8px;}
+    .faq-item{background:#fff;border-radius:12px;border:1.5px solid var(--cd);overflow:hidden;}
+    .faq-q{width:100%;text-align:left;padding:15px 18px;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;font-weight:600;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;}
+    .faq-icon{font-size:14px;color:var(--light);transition:transform .2s;flex-shrink:0;}
+    .faq-item.open .faq-icon{transform:rotate(180deg);color:var(--green);}
+    .faq-a{display:none;padding:0 18px 16px;font-size:13px;color:var(--mid);line-height:1.75;}
+    .faq-item.open .faq-a{display:block;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px){
+      .prog-wrap{position:static;}
+      .cta-box{padding:24px 20px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">10</div>
+    <div>
+      <div class="topbar-title">Deploy GitHub Pages</div>
+      <div class="topbar-sub">BDS Mastery Kit — Hướng Dẫn Step-by-Step</div>
+    </div>
+  </div>
+  <div class="topbar-status" id="liveStatus">
+    <div class="status-dot" id="statusDot"></div>
+    <span class="status-txt" id="statusTxt">Chưa kiểm tra</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-badge">🚀 Deploy miễn phí — không hết hạn</div>
+    <h1>Upload Kit Lên<br><span>GitHub Pages</span><br>Link Live Mãi Mãi</h1>
+    <p class="hero-sub">Upload 1 lần · 9 file live · Link không bao giờ chết · Không mất tiền · Không cần cài phần mềm</p>
+    <div class="hero-chips">
+      <span class="chip">⏱️ ~10 phút</span>
+      <span class="chip">🖱️ Chỉ cần trình duyệt</span>
+      <span class="chip">🆓 Miễn phí mãi mãi</span>
+      <span class="chip">🔄 Cập nhật dễ dàng</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- PROGRESS STICKY -->
+  <div class="prog-wrap">
+    <div class="prog-top">
+      <span class="prog-label">⚡ Tiến độ deploy</span>
+      <span class="prog-pct" id="progPct">0%</span>
+    </div>
+    <div class="prog-bar-bg"><div class="prog-bar-fill" id="progFill" style="width:0%"></div></div>
+    <div class="prog-steps-mini" id="progMini"></div>
+  </div>
+
+  <!-- WHY GITHUB PAGES -->
+  <div class="info-box tip">
+    <span class="ib-icon">✅</span>
+    <div class="ib-text">
+      <strong>Tại sao GitHub Pages tốt hơn Netlify?</strong><br>
+      Netlify Free bị giới hạn 100GB bandwidth/tháng → khi link được chia sẻ nhiều, trang tự động chết.
+      GitHub Pages <strong>không có giới hạn bandwidth</strong>, link không bao giờ hết hạn, miễn phí mãi mãi.
+    </div>
+  </div>
+
+  <div class="info-box danger">
+    <span class="ib-icon">⚠️</span>
+    <div class="ib-text">
+      <strong>Lưu ý trước khi bắt đầu:</strong> File <code class="ic">09-landing pages xanh lá cây ..html</code>
+      có tên chứa dấu và khoảng trắng → <strong>phải đổi tên thành <code class="ic">09-landing-hlx.html</code> trước khi upload</strong>.
+      GitHub Pages không hỗ trợ tên file tiếng Việt.
+    </div>
+  </div>
+
+  <!-- ═══ PHẦN 1: CHUẨN BỊ ═══ -->
+  <div class="sec-head">
+    <div class="sec-num">①</div>
+    <div>
+      <div class="sec-title">Chuẩn Bị File — Đổi Tên &amp; Kiểm Tra</div>
+      <div class="sec-sub">Làm trước khi upload — 2 phút</div>
+    </div>
+  </div>
+
+  <div class="info-box info">
+    <span class="ib-icon">📁</span>
+    <div class="ib-text">Repo GitHub hiện tại: <strong>yen670-oss/kit-hlx</strong> đã có 3 file (index.html, robots.txt, screenshot). Anh/chị chỉ cần upload thêm các file mới bên dưới.</div>
+  </div>
+
+  <table class="file-table" style="margin-bottom:20px;">
+    <thead>
+      <tr>
+        <th>Tên file hiện tại (trên máy)</th>
+        <th>Tên upload lên GitHub</th>
+        <th>Trạng thái</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01-SALES-PAGE/index.html</td><td>index.html</td><td><span class="badge-exists">✅ Đã có</span></td></tr>
+      <tr><td>KIT-HUB.html</td><td>KIT-HUB.html</td><td><span class="badge-new">🆕 Upload mới</span></td></tr>
+      <tr><td>MO-DAU-TIEN.html</td><td>MO-DAU-TIEN.html</td><td><span class="badge-new">🆕 Upload mới</span></td></tr>
+      <tr><td>03-CHECKLIST-DANG-BAI.html</td><td>03-CHECKLIST-DANG-BAI.html</td><td><span class="badge-new">🆕 Upload mới</span></td></tr>
+      <tr><td>content-toan-phan-funnel.html</td><td>content-toan-phan-funnel.html</td><td><span class="badge-new">🆕 Upload mới</span></td></tr>
+      <tr><td>06-HUONG-DAN-LINK-LIVE-FEED.html</td><td>06-HUONG-DAN-LINK-LIVE-FEED.html</td><td><span class="badge-new">🆕 Upload mới</span></td></tr>
+      <tr><td>infographic-thi-truong-qn-2026.html</td><td>infographic-thi-truong-qn-2026.html</td><td><span class="badge-new">🆕 Upload mới</span></td></tr>
+      <tr><td>08-SEEDING-CHUYEN-GIA.html</td><td>08-SEEDING-CHUYEN-GIA.html</td><td><span class="badge-new">🆕 Upload mới</span></td></tr>
+      <tr style="background:#fff8f0;"><td>09-landing pages xanh lá cây ..html</td><td style="color:var(--orange);font-weight:700;">09-landing-hlx.html</td><td><span class="badge-rename">⚠️ Đổi tên trước</span></td></tr>
+      <tr style="opacity:.5;"><td>thumbnail.png / *.docx / *.jpeg</td><td>—</td><td><span class="badge-skip">🚫 Bỏ qua</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══ PHẦN 2: STEP-BY-STEP UPLOAD ═══ -->
+  <div class="sec-head">
+    <div class="sec-num green">②</div>
+    <div>
+      <div class="sec-title">Upload Lên GitHub — Step by Step</div>
+      <div class="sec-sub">Chỉ cần trình duyệt · Không cài phần mềm</div>
+    </div>
+  </div>
+
+  <div class="steps" id="stepList">
+
+    <!-- STEP 1 -->
+    <div class="step open" data-step="1">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">Đổi tên file 09</div>
+          <div class="step-hint">Bước bắt buộc — file tên tiếng Việt sẽ lỗi trên GitHub</div>
+        </div>
+        <span style="color:var(--light);font-size:12px;">Click để mở ↕</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Tìm file <code class="ic">09-landing pages xanh lá cây ..html</code> trong thư mục <code class="ic">kit-ban-kit</code></p>
+        <div class="info-box warn" style="margin-bottom:12px;">
+          <span class="ib-icon">🖱️</span>
+          <div class="ib-text"><strong>Windows:</strong> Chuột phải vào file → <strong>Rename</strong> → Đổi thành: <code class="ic">09-landing-hlx.html</code> → Enter</div>
+        </div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Tên mới (copy để paste)</span>
+            <button class="code-copy" onclick="copyCode('09-landing-hlx.html', this)">📋 Copy tên</button>
+          </div>
+          <pre><span class="hl-ok">09-landing-hlx.html</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" data-step="2">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">Mở GitHub repo</div>
+          <div class="step-hint">Đăng nhập GitHub → vào repo kit-hlx</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Mở link bên dưới trong trình duyệt. Nếu chưa đăng nhập GitHub → đăng nhập trước.</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Link GitHub repo</span>
+            <button class="code-copy" onclick="copyCode('https://github.com/yen670-oss/kit-hlx', this)">📋 Copy link</button>
+          </div>
+          <pre><span class="hl-url">https://github.com/yen670-oss/kit-hlx</span></pre>
+        </div>
+        <a href="https://github.com/yen670-oss/kit-hlx" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;margin-top:4px;">
+          🐙 Mở GitHub Repo
+        </a>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" data-step="3">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">Upload tất cả file HTML (1 lần)</div>
+          <div class="step-hint">Kéo thả nhiều file cùng lúc · ~1 phút</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Trong repo GitHub, click nút <strong>"Add file"</strong> → chọn <strong>"Upload files"</strong></p>
+        <div class="info-box tip" style="margin-bottom:12px;">
+          <span class="ib-icon">💡</span>
+          <div class="ib-text">Mở thư mục <code class="ic">kit-ban-kit</code> trên máy → chọn tất cả 8 file HTML mới → kéo thả vào ô upload GitHub. Không upload file .docx, .jpeg, .png.</div>
+        </div>
+        <p class="step-desc"><strong>8 file cần upload (giữ Ctrl để chọn nhiều):</strong></p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Danh sách file cần upload</span>
+            <button class="code-copy" onclick="copyCode('KIT-HUB.html\nMO-DAU-TIEN.html\n03-CHECKLIST-DANG-BAI.html\ncontent-toan-phan-funnel.html\n06-HUONG-DAN-LINK-LIVE-FEED.html\ninfographic-thi-truong-qn-2026.html\n08-SEEDING-CHUYEN-GIA.html\n09-landing-hlx.html', this)">📋 Copy danh sách</button>
+          </div>
+          <pre><span class="hl-ok">KIT-HUB.html</span>
+<span class="hl-ok">MO-DAU-TIEN.html</span>
+<span class="hl-ok">03-CHECKLIST-DANG-BAI.html</span>
+<span class="hl-ok">content-toan-phan-funnel.html</span>
+<span class="hl-ok">06-HUONG-DAN-LINK-LIVE-FEED.html</span>
+<span class="hl-ok">infographic-thi-truong-qn-2026.html</span>
+<span class="hl-ok">08-SEEDING-CHUYEN-GIA.html</span>
+<span class="hl-ok">09-landing-hlx.html</span>          <span class="hl-cmt">← đã đổi tên ở Bước 1</span></pre>
+        </div>
+        <p class="step-desc">Scroll xuống → ô <strong>Commit changes</strong> → nhập message:</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Commit message</span>
+            <button class="code-copy" onclick="copyCode('upload full kit files: hub + seeding + infographic + landing', this)">📋 Copy</button>
+          </div>
+          <pre><span class="hl-str">upload full kit files: hub + seeding + infographic + landing</span></pre>
+        </div>
+        <p class="step-desc">Click <strong>"Commit changes"</strong> (màu xanh lá) → chờ 5–10 giây.</p>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step" data-step="4">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">Upload folder txt files (tùy chọn)</div>
+          <div class="step-hint">Bài content + lịch đăng + script xử lý tình huống</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Các file .txt không bắt buộc nhưng khuyến nghị để KIT-HUB.html hiển thị đủ tài nguyên. Làm từng file theo cách sau:</p>
+        <div class="info-box warn">
+          <span class="ib-icon">⚠️</span>
+          <div class="ib-text"><strong>GitHub web UI không upload được folder nguyên.</strong> Phải tạo từng file txt thủ công, hoặc dùng git command (xem Bước 5 thay thế).</div>
+        </div>
+        <p class="step-desc">Trong repo → <strong>"Add file"</strong> → <strong>"Create new file"</strong> → điền tên file dạng <code class="ic">02-CONTENT-BAN-KIT/BAI-1-FB-cau-chuyen-ban-kit.txt</code> → paste nội dung → Commit.</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Tên file cần tạo (copy từng dòng)</span>
+            <button class="code-copy" onclick="copyCode('02-CONTENT-BAN-KIT/BAI-1-FB-cau-chuyen-ban-kit.txt\n02-CONTENT-BAN-KIT/BAI-2-FB-van-de-broker.txt\n02-CONTENT-BAN-KIT/BAI-3-FB-offer-stack.txt\n02-CONTENT-BAN-KIT/BAI-4-Zalo-5-tin-nhan-ban-kit.txt\n02-CONTENT-BAN-KIT/BAI-5-TikTok-scripts-ban-kit.txt\n02-CONTENT-BAN-KIT/LICH-DANG-BAN-KIT-2-tuan.txt\n04-XU-LY-TINH-HUONG/xu-ly-tinh-huong-ban-kit.txt', this)">📋 Copy tất cả</button>
+          </div>
+          <pre><span class="hl-str">02-CONTENT-BAN-KIT/BAI-1-FB-cau-chuyen-ban-kit.txt</span>
+<span class="hl-str">02-CONTENT-BAN-KIT/BAI-2-FB-van-de-broker.txt</span>
+<span class="hl-str">02-CONTENT-BAN-KIT/BAI-3-FB-offer-stack.txt</span>
+<span class="hl-str">02-CONTENT-BAN-KIT/BAI-4-Zalo-5-tin-nhan-ban-kit.txt</span>
+<span class="hl-str">02-CONTENT-BAN-KIT/BAI-5-TikTok-scripts-ban-kit.txt</span>
+<span class="hl-str">02-CONTENT-BAN-KIT/LICH-DANG-BAN-KIT-2-tuan.txt</span>
+<span class="hl-str">04-XU-LY-TINH-HUONG/xu-ly-tinh-huong-ban-kit.txt</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 (GIT COMMAND - ALTERNATIVE) -->
+    <div class="step" data-step="5">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">⚡ Cách nhanh hơn: Git Command Line</div>
+          <div class="step-hint">Upload tất cả 1 lệnh — kể cả folder txt · Cần cài git trước</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Nếu đã cài git, đây là cách upload tất cả file (kể cả txt) chỉ bằng 4 lệnh:</p>
+        <div class="info-box tip" style="margin-bottom:12px;">
+          <span class="ib-icon">✅</span>
+          <div class="ib-text">Kiểm tra git: Mở CMD → gõ <code class="ic">git --version</code> → nếu thấy số version là OK. Chưa có → tải tại <strong>git-scm.com</strong></div>
+        </div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">CMD / Terminal — Chạy lần lượt</span>
+            <button class="code-copy" onclick="copyCode('cd \"C:\\Users\\ADMIN\\OneDrive\\LƯU TRỮ KÊNH\\AI Agent Business Kit\\kit-ban-kit\"\ngit init\ngit remote add origin https://github.com/yen670-oss/kit-hlx.git\ngit add *.html 02-CONTENT-BAN-KIT/ 04-XU-LY-TINH-HUONG/\ngit commit -m \"upload full kit\"\ngit branch -M main\ngit push -u origin main --force', this)">📋 Copy toàn bộ</button>
+          </div>
+          <pre><span class="hl-cmt"># Mở CMD, paste từng lệnh</span>
+
+<span class="hl-cmd">cd</span> <span class="hl-str">"C:\Users\ADMIN\OneDrive\LƯU TRỮ KÊNH\AI Agent Business Kit\kit-ban-kit"</span>
+
+<span class="hl-cmd">git init</span>
+
+<span class="hl-cmd">git remote add origin</span> <span class="hl-url">https://github.com/yen670-oss/kit-hlx.git</span>
+
+<span class="hl-cmd">git add</span> *.html 02-CONTENT-BAN-KIT/ 04-XU-LY-TINH-HUONG/
+
+<span class="hl-cmd">git commit</span> -m <span class="hl-str">"upload full kit"</span>
+
+<span class="hl-cmd">git branch</span> -M main
+
+<span class="hl-cmd">git push</span> -u origin main --force</pre>
+        </div>
+        <div class="info-box warn">
+          <span class="ib-icon">🔑</span>
+          <div class="ib-text">Git sẽ hỏi <strong>username</strong> (yen670-oss) và <strong>password</strong> → dùng <strong>Personal Access Token</strong> thay mật khẩu. Tạo token: GitHub → Settings → Developer settings → Personal access tokens → Generate new → chọn scope <code class="ic">repo</code> → Generate → Copy token.</div>
+        </div>
+        <div class="info-box tip">
+          <span class="ib-icon">🔄</span>
+          <div class="ib-text"><strong>Lần sau chỉ cần 3 lệnh</strong> khi muốn update:<br>
+          <code class="ic">git add .</code> → <code class="ic">git commit -m "update"</code> → <code class="ic">git push</code></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step" data-step="6">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">Kiểm tra GitHub Pages đã bật chưa</div>
+          <div class="step-hint">Settings → Pages → Branch: main / root</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">GitHub Pages cần được bật 1 lần. Nếu đã bật từ trước (link <code class="ic">yen670-oss.github.io/kit-hlx/</code> đang chạy) thì bỏ qua bước này.</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Link Settings → Pages</span>
+            <button class="code-copy" onclick="copyCode('https://github.com/yen670-oss/kit-hlx/settings/pages', this)">📋 Copy link</button>
+          </div>
+          <pre><span class="hl-url">https://github.com/yen670-oss/kit-hlx/settings/pages</span></pre>
+        </div>
+        <p class="step-desc">Kiểm tra: <strong>Source</strong> phải là <code class="ic">Deploy from a branch</code> · <strong>Branch</strong>: <code class="ic">main</code> · <strong>Folder</strong>: <code class="ic">/ (root)</code> · Nếu chưa → chọn và Save.</p>
+        <a href="https://github.com/yen670-oss/kit-hlx/settings/pages" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;margin-top:4px;">
+          ⚙️ Mở Pages Settings
+        </a>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="step" data-step="7">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">Chờ 2 phút → Test link</div>
+          <div class="step-hint">GitHub Pages cần ~1-3 phút để deploy xong</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Sau khi commit xong, GitHub tự deploy trong 1–3 phút. Click các link bên dưới để kiểm tra:</p>
+        <div class="url-grid">
+          <div class="url-card">
+            <div class="url-card-label">🏠 Trang giao hàng (chia sẻ cho khách)</div>
+            <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/KIT-HUB.html</div>
+            <div class="url-card-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/KIT-HUB.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+              <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/KIT-HUB.html', this)">📋 Copy</button>
+            </div>
+          </div>
+          <div class="url-card">
+            <div class="url-card-label">💰 Sales page bán kit</div>
+            <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/</div>
+            <div class="url-card-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/" target="_blank" class="btn-sm open">🌐 Mở</a>
+              <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/', this)">📋 Copy</button>
+            </div>
+          </div>
+          <div class="url-card">
+            <div class="url-card-label">✍️ Seeding chuyên gia</div>
+            <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html</div>
+            <div class="url-card-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+              <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html', this)">📋 Copy</button>
+            </div>
+          </div>
+          <div class="url-card">
+            <div class="url-card-label">🌿 Landing page HLX</div>
+            <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html</div>
+            <div class="url-card-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+              <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html', this)">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <button onclick="checkLive()" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;padding:11px 22px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;">
+            🔍 Kiểm Tra Link Có Live Chưa
+          </button>
+          <span id="checkResult" style="margin-left:12px;font-size:13px;color:var(--mid);display:none;"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 8 -->
+    <div class="step" data-step="8">
+      <div class="step-header" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-label">
+          <div class="step-title">Thay thông tin cá nhân trong KIT-HUB.html 🎉</div>
+          <div class="step-hint">Thay [SĐT] và [FACEBOOK] → re-upload là xong</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Trong file <code class="ic">KIT-HUB.html</code>, tìm và thay 3 chỗ placeholder:</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Tìm và thay (Ctrl+H trong Notepad)</span>
+            <button class="code-copy" onclick="copyCode('[SĐT CỦA BẠN]', this)">📋 Copy text tìm</button>
+          </div>
+          <pre><span class="hl-warn">[SĐT CỦA BẠN]</span>        → VD: 0964827670
+<span class="hl-warn">[FACEBOOK CỦA BẠN]</span>   → VD: ten.page.facebook
+<span class="hl-warn">[SĐT]</span>                 → VD: 0964.827.670</pre>
+        </div>
+        <div class="info-box tip">
+          <span class="ib-icon">🔄</span>
+          <div class="ib-text">Sau khi thay xong → upload lại file <code class="ic">KIT-HUB.html</code> vào GitHub (Add file → Upload → cùng tên → Commit) → GitHub tự ghi đè → 2 phút sau live!</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /steps -->
+
+  <!-- ═══ PHẦN 3: FAQ ═══ -->
+  <div class="sec-head" style="margin-top:48px;">
+    <div class="sec-num gold">③</div>
+    <div>
+      <div class="sec-title">Câu Hỏi Thường Gặp</div>
+      <div class="sec-sub">Xử lý nhanh khi gặp lỗi</div>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        GitHub báo lỗi "File already exists" khi upload
+        <span class="faq-icon">▾</span>
+      </button>
+      <div class="faq-a">Bình thường — GitHub tự hỏi có muốn ghi đè không. Click <strong>"Commit changes"</strong> bình thường. File cũ sẽ bị thay thế bởi file mới.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Upload xong nhưng link vẫn lỗi 404
+        <span class="faq-icon">▾</span>
+      </button>
+      <div class="faq-a">Cần đợi <strong>2–5 phút</strong> sau khi commit. GitHub Pages cần thời gian build. Nếu sau 5 phút vẫn 404 → vào Settings → Pages → kiểm tra branch đang là <code class="ic">main</code> và folder là <code class="ic">/ (root)</code>.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Link ra nhưng hiện lỗi "Cannot GET /" hoặc file trống
+        <span class="faq-icon">▾</span>
+      </button>
+      <div class="faq-a">File <code class="ic">index.html</code> là file mặc định cho đường dẫn gốc. Kiểm tra repo có file <code class="ic">index.html</code> ở root (không nằm trong subfolder). Sales page hiện tại đang đúng vị trí.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Git báo "remote origin already exists" khi chạy lệnh
+        <span class="faq-icon">▾</span>
+      </button>
+      <div class="faq-a">Chạy lệnh này thay thế: <code class="ic">git remote set-url origin https://github.com/yen670-oss/kit-hlx.git</code> rồi tiếp tục với <code class="ic">git push -u origin main --force</code>.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Git hỏi username/password, nhập mật khẩu GitHub nhưng bị từ chối
+        <span class="faq-icon">▾</span>
+      </button>
+      <div class="faq-a">GitHub đã tắt xác thực bằng mật khẩu thường. Cần dùng <strong>Personal Access Token</strong>. Tạo tại: <code class="ic">github.com → Settings → Developer settings → Personal access tokens → Generate new token → scope: repo → Generate → Copy token</code>. Khi git hỏi password → paste token này (không thấy ký tự nhưng đã nhập).</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Tôi update file — làm sao để cập nhật link live?
+        <span class="faq-icon">▾</span>
+      </button>
+      <div class="faq-a"><strong>Cách web UI:</strong> GitHub → repo → click file cần update → Edit (bút chì) → paste nội dung mới → Commit.<br><br><strong>Cách git:</strong> Sửa file → <code class="ic">git add ten-file.html</code> → <code class="ic">git commit -m "update"</code> → <code class="ic">git push</code>. Link live tự cập nhật sau ~2 phút.</div>
+    </div>
+  </div>
+
+  <!-- ═══ LINK TỔNG HỢP ═══ -->
+  <div class="sec-head" style="margin-top:48px;">
+    <div class="sec-num orange">④</div>
+    <div>
+      <div class="sec-title">Tất Cả Link Sau Khi Deploy</div>
+      <div class="sec-sub">Bookmark trang này để tra cứu nhanh</div>
+    </div>
+  </div>
+
+  <div class="url-grid" style="margin-bottom:24px;">
+    <div class="url-card" style="border-color:var(--gold);border-width:2px;">
+      <div class="url-card-label">⭐ Giao hàng cho khách mua kit</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/KIT-HUB.html</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/KIT-HUB.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/KIT-HUB.html', this)">📋 Copy</button>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">💰 Sales page bán kit</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/', this)">📋 Copy</button>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">📅 Checklist đăng bài</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/03-CHECKLIST-DANG-BAI.html</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/03-CHECKLIST-DANG-BAI.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/03-CHECKLIST-DANG-BAI.html', this)">📋 Copy</button>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">📝 18 bài content funnel</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/content-toan-phan-funnel.html</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/content-toan-phan-funnel.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/content-toan-phan-funnel.html', this)">📋 Copy</button>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">🖼 Link live feed + thumbnail</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/06-HUONG-DAN-LINK-LIVE-FEED.html</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/06-HUONG-DAN-LINK-LIVE-FEED.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/06-HUONG-DAN-LINK-LIVE-FEED.html', this)">📋 Copy</button>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">📊 Infographic QN 2026</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/infographic-thi-truong-qn-2026.html</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/infographic-thi-truong-qn-2026.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/infographic-thi-truong-qn-2026.html', this)">📋 Copy</button>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">✍️ Seeding chuyên gia</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html', this)">📋 Copy</button>
+      </div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">🌿 Landing page bán HLX</div>
+      <div class="url-card-url">https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html</div>
+      <div class="url-card-actions">
+        <a href="https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html" target="_blank" class="btn-sm open">🌐 Mở</a>
+        <button class="btn-sm copy" onclick="copyBtnLink('https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html', this)">📋 Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="cta-box">
+    <h2>Xong! Kit Live Mãi Mãi 🎉</h2>
+    <p>Link GitHub Pages không bao giờ hết hạn, không tốn băng thông, không cần gia hạn.<br>Chỉ cần upload 1 lần — sau đó chỉ cần 3 lệnh git để cập nhật.</p>
+    <div class="cta-btns">
+      <a href="https://github.com/yen670-oss/kit-hlx" target="_blank" class="btn-cta primary">
+        🐙 Mở GitHub Repo
+      </a>
+      <a href="KIT-HUB.html" target="_blank" class="btn-cta secondary">
+        📦 Xem Kit Hub
+      </a>
+      <a href="MO-DAU-TIEN.html" target="_blank" class="btn-cta secondary">
+        📖 Mở Đầu Tiên
+      </a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+  /* ── STEPS ── */
+  const STEPS_KEY = 'deploy_steps_v1';
+  const stepEls = document.querySelectorAll('.step[data-step]');
+
+  function toggleStep(headerEl) {
+    const step = headerEl.parentElement;
+    const isOpen = step.classList.contains('open');
+    // close all
+    stepEls.forEach(s => s.classList.remove('open'));
+    if (!isOpen) step.classList.add('open');
+  }
+
+  function markDone(stepEl) {
+    stepEl.classList.toggle('done');
+    saveProgress();
+    updateProgress();
+  }
+
+  // Click check box → mark done
+  stepEls.forEach(step => {
+    const check = step.querySelector('.step-check');
+    check.addEventListener('click', e => {
+      e.stopPropagation();
+      markDone(step);
+    });
+  });
+
+  /* ── PROGRESS ── */
+  function buildMini() {
+    const mini = document.getElementById('progMini');
+    stepEls.forEach((s, i) => {
+      const m = document.createElement('div');
+      m.className = 'psm';
+      m.textContent = i + 1;
+      m.title = 'Bước ' + (i + 1);
+      m.onclick = () => { s.scrollIntoView({behavior:'smooth'}); toggleStep(s.querySelector('.step-header')); };
+      mini.appendChild(m);
+    });
+  }
+
+  function updateProgress() {
+    const done = document.querySelectorAll('.step.done').length;
+    const total = stepEls.length;
+    const pct = Math.round(done / total * 100);
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('progPct').textContent = pct + '%';
+    // mini dots
+    const minis = document.querySelectorAll('.psm');
+    stepEls.forEach((s, i) => {
+      if (minis[i]) minis[i].classList.toggle('done', s.classList.contains('done'));
+    });
+    // topbar status
+    if (done === total) {
+      document.getElementById('statusDot').classList.add('live');
+      document.getElementById('statusTxt').textContent = 'Deploy hoàn thành!';
+    }
+  }
+
+  function saveProgress() {
+    const state = Array.from(stepEls).map(s => s.classList.contains('done'));
+    localStorage.setItem(STEPS_KEY, JSON.stringify(state));
+  }
+
+  function loadProgress() {
+    const saved = localStorage.getItem(STEPS_KEY);
+    if (saved) {
+      JSON.parse(saved).forEach((done, i) => {
+        if (done && stepEls[i]) stepEls[i].classList.add('done');
+      });
+    }
+    updateProgress();
+  }
+
+  /* ── FAQ ── */
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── COPY ── */
+  function copyCode(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyBtnLink(url, btn) {
+    navigator.clipboard.writeText(url).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✅';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  /* ── CHECK LIVE ── */
+  function checkLive() {
+    const result = document.getElementById('checkResult');
+    result.style.display = 'inline';
+    result.textContent = '⏳ Đang kiểm tra...';
+    // Try to load an image from the live site
+    const img = new Image();
+    img.onload = () => {
+      result.textContent = '✅ Site đang live! Mở link để xem.';
+      result.style.color = '#1a6b3c';
+      document.getElementById('statusDot').classList.add('live');
+      document.getElementById('statusTxt').textContent = 'Site đang live!';
+    };
+    img.onerror = () => {
+      result.textContent = '⚠️ Chưa thấy — đợi thêm 1-2 phút rồi thử lại.';
+      result.style.color = '#e87922';
+    };
+    img.src = 'https://yen670-oss.github.io/kit-hlx/screenshot-1778819243026.png?t=' + Date.now();
+  }
+
+  /* ── INIT ── */
+  buildMini();
+  loadProgress();
+</script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚙️ Hệ Thống Phân Phối Tự Động — BDS Mastery Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;--cd:#EDE8DC;--green:#16a34a;--red:#dc2626;--blue:#3b82f6;--purple:#8b5cf6;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;font-size:13px;line-height:1.6;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+    .hero{background:linear-gradient(160deg,#0e1f38,#1B3A6B 55%,#1a3a1a);padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.15) 1.5px,transparent 0);background-size:30px 30px;}
+    .hero-in{position:relative;z-index:1;}
+    .badge{display:inline-block;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.5);color:#E2C06A;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px;border-radius:99px;margin-bottom:14px;}
+    .hero h1{font-size:clamp(22px,4vw,32px);color:#fff;margin-bottom:8px;}
+    .hero p{color:#aab8d0;font-size:13px;max-width:520px;margin:0 auto;}
+    main{max-width:860px;margin:0 auto;padding:36px 20px 70px;}
+
+    /* PHASE TABS */
+    .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;justify-content:center;}
+    .nav a{display:inline-block;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.08);color:var(--gold);}
+
+    /* OVERVIEW */
+    .overview{background:var(--nd);border-radius:16px;padding:26px 28px;margin-bottom:24px;border:1px solid rgba(201,168,76,.3);}
+    .overview h2{color:var(--gl);font-size:17px;margin-bottom:16px;}
+
+    /* FLOW DIAGRAM */
+    .flow{display:flex;flex-direction:column;gap:0;}
+    .flow-row{display:flex;align-items:stretch;gap:0;margin-bottom:0;}
+    .flow-step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 16px;flex:1;min-width:0;}
+    .flow-step-num{font-size:10px;font-weight:700;color:var(--gold);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
+    .flow-step-name{font-size:12.5px;font-weight:700;color:#fff;margin-bottom:2px;}
+    .flow-step-tool{font-size:10.5px;color:#8da4c4;}
+    .flow-arrow-down{text-align:center;color:#4b5563;font-size:20px;line-height:1.2;padding:4px 0;}
+    .flow-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    @media(max-width:560px){.flow-cols{grid-template-columns:1fr;}}
+
+    /* PHASE SECTIONS */
+    .phase{background:#fff;border-radius:16px;padding:26px;margin-bottom:20px;border-left:4px solid;box-shadow:0 3px 16px rgba(27,58,107,.06);}
+    .phase.p1{border-color:var(--blue);}
+    .phase.p2{border-color:var(--purple);}
+    .phase.p3{border-color:var(--green);}
+    .phase.p4{border-color:var(--gold);}
+    .phase-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+    .phase-num{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;font-family:'Playfair Display',serif;flex-shrink:0;}
+    .p1 .phase-num{background:rgba(59,130,246,.12);color:var(--blue);}
+    .p2 .phase-num{background:rgba(139,92,246,.12);color:var(--purple);}
+    .p3 .phase-num{background:rgba(22,163,74,.12);color:var(--green);}
+    .p4 .phase-num{background:rgba(201,168,76,.12);color:var(--gold);}
+    .phase h2{font-size:16px;color:var(--nd);}
+    .phase-sub{font-size:12px;color:#6b7280;margin-top:1px;}
+
+    /* STEPS */
+    .steps{display:flex;flex-direction:column;gap:12px;}
+    .step{background:var(--cream);border-radius:10px;padding:14px 16px;border:1px solid var(--cd);}
+    .step-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;}
+    .step-n{width:22px;height:22px;border-radius:50%;background:var(--nd);color:var(--gl);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .step-title{font-weight:700;font-size:13px;color:var(--nd);}
+    .step-body{font-size:12px;color:#4b5568;line-height:1.6;padding-left:32px;}
+    .step-body ul{list-style:none;display:flex;flex-direction:column;gap:4px;}
+    .step-body li::before{content:'→ ';color:var(--gold);}
+    .code-block{background:#102340;border-radius:8px;padding:12px 14px;font-family:'Courier New',monospace;font-size:11.5px;color:#E2C06A;margin-top:8px;line-height:1.7;overflow-x:auto;}
+    .code-comment{color:#4a6a8a;}
+    .code-green{color:#86efac;}
+    .code-blue{color:#93c5fd;}
+
+    /* TOOL BADGE */
+    .tool-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(27,58,107,.08);border:1px solid rgba(27,58,107,.15);border-radius:6px;font-size:10.5px;font-weight:600;padding:2px 8px;color:var(--navy);margin:2px;}
+    .tool-free{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.2);color:var(--green);}
+
+    /* DELIVERY MATRIX */
+    .delivery-matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+    @media(max-width:560px){.delivery-matrix{grid-template-columns:1fr;}}
+    .pkg-card{border-radius:12px;padding:16px;border:2px solid;}
+    .pkg-card.bronze{border-color:rgba(180,120,60,.4);background:linear-gradient(135deg,rgba(180,120,60,.04),#fff);}
+    .pkg-card.silver{border-color:rgba(139,92,246,.3);background:linear-gradient(135deg,rgba(139,92,246,.03),#fff);}
+    .pkg-card.gold{border-color:rgba(201,168,76,.5);background:linear-gradient(135deg,rgba(201,168,76,.06),#fff);}
+    .pkg-name{font-size:13px;font-weight:700;color:var(--nd);margin-bottom:6px;}
+    .pkg-price{font-size:11px;color:#6b7280;margin-bottom:10px;}
+    .pkg-items{list-style:none;display:flex;flex-direction:column;gap:5px;}
+    .pkg-items li{font-size:11.5px;color:#4b5568;display:flex;gap:6px;align-items:flex-start;}
+    .auto{color:var(--green);font-weight:700;flex-shrink:0;}
+    .manual{color:#d97706;font-weight:700;flex-shrink:0;}
+
+    /* TIMELINE */
+    .tl{display:flex;flex-direction:column;gap:0;}
+    .tl-row{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--cd);}
+    .tl-row:last-child{border-bottom:none;}
+    .tl-day{min-width:56px;font-size:11px;font-weight:700;color:var(--gold);margin-top:1px;}
+    .tl-body{}
+    .tl-title{font-weight:700;font-size:12.5px;color:var(--nd);margin-bottom:3px;}
+    .tl-desc{font-size:12px;color:#5a6680;}
+    .tl-auto{display:inline-block;font-size:9.5px;font-weight:700;background:rgba(22,163,74,.1);color:var(--green);padding:1px 6px;border-radius:99px;margin-left:6px;}
+    .tl-manual{display:inline-block;font-size:9.5px;font-weight:700;background:rgba(217,119,6,.1);color:#d97706;padding:1px 6px;border-radius:99px;margin-left:6px;}
+
+    /* CHECKLIST */
+    .checklist{display:flex;flex-direction:column;gap:6px;}
+    .cl-item{display:flex;gap:10px;padding:8px 12px;border-radius:8px;background:var(--cream);border:1px solid var(--cd);cursor:pointer;}
+    .cl-item:hover{background:#f0f4ff;}
+    .cl-item.done{background:#f0fdf4;border-color:#bbf7d0;}
+    .cl-item.done .cl-text{text-decoration:line-through;color:#9ca3af;}
+    .cl-cb{width:18px;height:18px;border-radius:4px;border:2px solid #d1d5db;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+    .cl-item.done .cl-cb{background:var(--green);border-color:var(--green);color:#fff;}
+    .cl-text{font-size:12px;color:#374151;flex:1;}
+    .cl-tag{font-size:10px;font-weight:700;padding:1px 7px;border-radius:99px;flex-shrink:0;margin-top:2px;}
+    .tag-setup{background:#ede9fe;color:#5b21b6;}
+    .tag-auto{background:#d1fae5;color:#065f46;}
+    .tag-test{background:#fef3c7;color:#92400e;}
+
+    /* MESSAGE TEMPLATES */
+    .msg-box{background:var(--nd);border-radius:12px;padding:16px;margin-top:12px;}
+    .msg-box h4{color:var(--gl);font-size:12px;font-weight:700;margin-bottom:10px;font-family:'Be Vietnam Pro',sans-serif;}
+    .msg{background:rgba(255,255,255,.06);border-radius:8px;padding:12px 14px;margin-bottom:8px;font-size:12px;color:#e2e8f0;line-height:1.7;font-style:italic;}
+    .msg:last-child{margin-bottom:0;}
+    .msg-label{font-size:10px;color:var(--gold);font-weight:700;margin-bottom:4px;font-style:normal;display:block;}
+
+    /* COMPARISON TABLE */
+    table{width:100%;border-collapse:collapse;font-size:12px;}
+    th{background:var(--nd);color:var(--gl);padding:10px 12px;text-align:left;font-size:11px;font-weight:700;}
+    td{padding:9px 12px;border-bottom:1px solid var(--cd);color:#374151;}
+    tr:last-child td{border-bottom:none;}
+    tr:nth-child(even) td{background:#f9fafb;}
+    .rec{color:var(--green);font-weight:700;}
+
+    /* PROGRESS */
+    .progress-wrap{margin-bottom:16px;}
+    .progress-bar{background:#e5e7eb;border-radius:99px;height:6px;margin-top:6px;}
+    .progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gl));width:0%;transition:width .3s;}
+
+    footer{background:#0a1520;color:#556;text-align:center;padding:20px;font-size:11px;}
+    footer span{color:var(--gold);}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="badge">⚙️ SIPD Framework — Setup · Integrate · Process · Deliver</div>
+    <h1>Hệ Thống Phân Phối<br>Tự Động BDS Mastery Kit</h1>
+    <p>Khách thanh toán → Tự động nhận kit trong 60 giây · Không cần thủ công · Hoạt động 24/7</p>
+  </div>
+</div>
+
+<main>
+
+  <div class="nav">
+    <a href="#overview">📊 Tổng Quan</a>
+    <a href="#phase1">1️⃣ Thanh Toán</a>
+    <a href="#phase2">2️⃣ Kết Nối</a>
+    <a href="#phase3">3️⃣ Phân Phối</a>
+    <a href="#phase4">4️⃣ Hậu Mãi</a>
+    <a href="#checklist">✅ Checklist</a>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="overview" id="overview">
+    <h2>📊 Kiến Trúc Hệ Thống — Tổng Quan</h2>
+
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-step-num">Bước 1</div>
+          <div class="flow-step-name">💳 Khách Thanh Toán</div>
+          <div class="flow-step-tool">SePay VietQR · Bank transfer · Nội dung: BRONZE/SILVER/GOLD + SĐT</div>
+        </div>
+      </div>
+      <div class="flow-arrow-down">↓</div>
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-step-num">Bước 2</div>
+          <div class="flow-step-name">🔔 Anh/Chị Nhận Thông Báo</div>
+          <div class="flow-step-tool">Telegram Bot → điện thoại trong 5 giây · Tên + SĐT + Gói + Số tiền</div>
+        </div>
+      </div>
+      <div class="flow-arrow-down">↓</div>
+      <div class="flow-row" style="gap:10px;">
+        <div class="flow-cols" style="flex:1;">
+          <div class="flow-step">
+            <div class="flow-step-num">🥉 Bronze</div>
+            <div class="flow-step-name">Auto 100%</div>
+            <div class="flow-step-tool">Make.com → Email tự động link Drive ZIP</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">🥈 Silver</div>
+            <div class="flow-step-name">Auto + 1 bước</div>
+            <div class="flow-step-tool">Auto email + link đặt lịch Calendly (30 phút review)</div>
+          </div>
+          <div class="flow-step" style="border-color:rgba(201,168,76,.3);">
+            <div class="flow-step-num">🥇 Gold</div>
+            <div class="flow-step-name">Semi-auto</div>
+            <div class="flow-step-tool">Notify Telegram → Nhận SĐT 5 thành viên → Gửi kit riêng</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow-down">↓</div>
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-step-num">Bước 4</div>
+          <div class="flow-step-name">🔄 Hậu Mãi Tự Động</div>
+          <div class="flow-step-tool">Ngày 1 → 3 → 7 → 14: Tip · Check-in · Testimonial · Upsell</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+      <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,.08);">
+        <div style="font-size:22px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;">0đ</div>
+        <div style="font-size:11px;color:#8da4c4;margin-top:3px;">Chi phí khởi động<br>(dùng toàn bộ free tier)</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,.08);">
+        <div style="font-size:22px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;">&lt;60s</div>
+        <div style="font-size:11px;color:#8da4c4;margin-top:3px;">Thời gian khách<br>nhận kit sau thanh toán</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,.08);">
+        <div style="font-size:22px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;">24/7</div>
+        <div style="font-size:11px;color:#8da4c4;margin-top:3px;">Hệ thống hoạt động<br>không cần anh/chị online</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT GOES AUTOMATIC vs MANUAL -->
+  <div style="background:#fff;border-radius:16px;padding:26px;margin-bottom:20px;border:1px solid rgba(201,168,76,.18);box-shadow:0 3px 16px rgba(27,58,107,.06);">
+    <h2 style="font-size:17px;color:var(--navy);margin-bottom:16px;">📦 Phân Công: Tự Động vs Thủ Công Theo Gói</h2>
+    <div class="delivery-matrix">
+      <div class="pkg-card bronze">
+        <div class="pkg-name">🥉 Bronze — 1.990.000đ</div>
+        <div class="pkg-price">Khách tự cá nhân hóa</div>
+        <ul class="pkg-items">
+          <li><span class="auto">AUTO</span> Nhận thanh toán (SePay)</li>
+          <li><span class="auto">AUTO</span> Telegram notify anh/chị</li>
+          <li><span class="auto">AUTO</span> Email + link Drive ZIP Bronze</li>
+          <li><span class="auto">AUTO</span> Email ngày 3: tip đầu tiên</li>
+          <li><span class="auto">AUTO</span> Email ngày 7: hỏi thăm</li>
+        </ul>
+      </div>
+      <div class="pkg-card silver">
+        <div class="pkg-name">🥈 Silver — 2.990.000đ</div>
+        <div class="pkg-price">Bronze + 1 bước thủ công</div>
+        <ul class="pkg-items">
+          <li><span class="auto">AUTO</span> Nhận thanh toán</li>
+          <li><span class="auto">AUTO</span> Telegram notify anh/chị</li>
+          <li><span class="auto">AUTO</span> Email + link Drive ZIP Silver</li>
+          <li><span class="auto">AUTO</span> Email + link Calendly đặt lịch</li>
+          <li><span class="manual">THỦ</span> Thực hiện buổi review 1-1</li>
+          <li><span class="auto">AUTO</span> Email hậu mãi ngày 3, 7, 14</li>
+        </ul>
+      </div>
+      <div class="pkg-card gold">
+        <div class="pkg-name">🥇 Gold — 4.990.000đ</div>
+        <div class="pkg-price">Cần nhận SĐT 5 thành viên</div>
+        <ul class="pkg-items">
+          <li><span class="auto">AUTO</span> Nhận thanh toán</li>
+          <li><span class="auto">AUTO</span> Telegram notify ưu tiên Gold</li>
+          <li><span class="auto">AUTO</span> Email yêu cầu thông tin team</li>
+          <li><span class="manual">THỦ</span> Nhận SĐT 5 thành viên qua Zalo</li>
+          <li><span class="manual">THỦ</span> Cá nhân hóa 5 bản kit</li>
+          <li><span class="manual">THỦ</span> Gửi 5 link Drive riêng</li>
+          <li><span class="manual">THỦ</span> Review 1-1 team leader (45 phút)</li>
+          <li><span class="auto">AUTO</span> Email hậu mãi định kỳ</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:11.5px;color:#6b7280;text-align:center;">💡 Bronze hoàn toàn tự động · Silver 95% tự động · Gold ~60% tự động</p>
+  </div>
+
+  <!-- PHASE 1: PAYMENT -->
+  <div class="phase p1" id="phase1">
+    <div class="phase-head">
+      <div class="phase-num">1</div>
+      <div>
+        <h2>💳 Thiết Lập Thanh Toán — SePay VietQR</h2>
+        <div class="phase-sub">Mục tiêu: Phát hiện thanh toán tự động và biết khách mua gói nào</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-head"><div class="step-n">1</div><div class="step-title">Đăng ký SePay & lấy API</div></div>
+        <div class="step-body">
+          <ul>
+            <li>Vào <strong>sepay.vn</strong> → Đăng ký tài khoản → Xác minh CMND</li>
+            <li>Dashboard → API → Copy <strong>API Token</strong></li>
+            <li>Thêm tài khoản ngân hàng → Bật "Nhận webhook thanh toán"</li>
+          </ul>
+          <div class="code-block">
+<span class="code-comment"># Cấu hình webhook URL (điền sau khi setup Make.com)</span>
+Webhook URL: https://hook.make.com/YOUR_HOOK_ID
+Sự kiện: Nhận tiền thành công
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><div class="step-n">2</div><div class="step-title">Quy ước nội dung chuyển khoản</div></div>
+        <div class="step-body">
+          Khách phải ghi đúng nội dung CK — đây là cách hệ thống nhận biết gói nào:
+          <div class="code-block">
+<span class="code-green">BRONZE</span> [SĐT khách]    <span class="code-comment">→ VD: BRONZE 0901234567</span>
+<span class="code-green">SILVER</span> [SĐT khách]    <span class="code-comment">→ VD: SILVER 0901234567</span>
+<span class="code-green">GOLD</span> [SĐT khách]      <span class="code-comment">→ VD: GOLD 0901234567</span>
+          </div>
+          💡 Hướng dẫn rõ trên sales page — "Ghi đúng nội dung để nhận kit tự động"
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><div class="step-n">3</div><div class="step-title">Chuẩn bị 3 link Google Drive ZIP</div></div>
+        <div class="step-body">
+          <ul>
+            <li>Nén folder <strong>goi-bronze/</strong> → <strong>BDS-Kit-Bronze.zip</strong> → Upload Drive → Lấy link "Anyone with link"</li>
+            <li>Nén folder <strong>goi-silver/</strong> → <strong>BDS-Kit-Silver.zip</strong> → Upload Drive → Lấy link</li>
+            <li>Nén folder <strong>goi-gold/</strong> (template, chưa cá nhân hóa) → Upload Drive → Dùng để tham khảo</li>
+          </ul>
+          <div class="code-block">
+<span class="code-comment"># Lưu 3 link này để điền vào Make.com</span>
+BRONZE_LINK = <span class="code-blue">https://drive.google.com/file/d/XXX</span>
+SILVER_LINK = <span class="code-blue">https://drive.google.com/file/d/YYY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(59,130,246,.06);border-radius:8px;border-left:3px solid var(--blue);font-size:12px;color:#374151;">
+      🛠️ <strong>Công cụ dùng:</strong>
+      <span class="tool-badge tool-free">✓ SePay — miễn phí</span>
+      <span class="tool-badge tool-free">✓ Google Drive — miễn phí 15GB</span>
+    </div>
+  </div>
+
+  <!-- PHASE 2: INTEGRATION -->
+  <div class="phase p2" id="phase2">
+    <div class="phase-head">
+      <div class="phase-num">2</div>
+      <div>
+        <h2>🔗 Kết Nối Tự Động — Make.com (Miễn Phí)</h2>
+        <div class="phase-sub">Make.com nhận webhook từ SePay → tự động gửi email + Telegram cho anh/chị</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-head"><div class="step-n">1</div><div class="step-title">Tạo tài khoản Make.com</div></div>
+        <div class="step-body">
+          <ul>
+            <li>Vào <strong>make.com</strong> → Sign up miễn phí</li>
+            <li>Free tier: 1.000 operations/tháng — đủ cho ~200 đơn/tháng</li>
+            <li>Tạo Scenario mới → chọn trigger: <strong>Webhooks → Custom Webhook</strong></li>
+            <li>Copy URL webhook → Dán vào SePay dashboard</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><div class="step-n">2</div><div class="step-title">Cấu hình Scenario — Logic phân gói</div></div>
+        <div class="step-body">
+          Luồng Make.com (kéo thả, không cần code):
+          <div class="code-block">
+<span class="code-comment">── TRIGGER ──────────────────────────────</span>
+Webhook nhận từ SePay
+  └─ content: "BRONZE 0901234567"
+  └─ amount: 1990000
+  └─ bankAccountName: "NGUYEN VAN A"
+
+<span class="code-comment">── ROUTER (phân loại) ───────────────────</span>
+If content CHỨA "BRONZE" → Route 1 (Bronze)
+If content CHỨA "SILVER" → Route 2 (Silver)
+If content CHỨA "GOLD"   → Route 3 (Gold)
+
+<span class="code-comment">── ROUTE 1: BRONZE ──────────────────────</span>
+1. Gmail → Gửi email (template Bronze)
+2. Telegram → Thông báo anh/chị
+
+<span class="code-comment">── ROUTE 2: SILVER ──────────────────────</span>
+1. Gmail → Gửi email (template Silver + Calendly)
+2. Telegram → Thông báo anh/chị
+
+<span class="code-comment">── ROUTE 3: GOLD ────────────────────────</span>
+1. Gmail → Gửi email yêu cầu thông tin team
+2. Telegram → Thông báo GOLD ưu tiên
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><div class="step-n">3</div><div class="step-title">Kết nối Gmail trong Make.com</div></div>
+        <div class="step-body">
+          <ul>
+            <li>Trong Make.com → Add module: <strong>Gmail → Send an Email</strong></li>
+            <li>Connect Gmail account → Cho phép quyền truy cập</li>
+            <li>Để gửi từ tên cửa hàng: Dùng <strong>Brevo</strong> (cũ là Sendinblue) — miễn phí 300 email/ngày, gửi từ tên miền riêng</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head"><div class="step-n">4</div><div class="step-title">Kết nối Telegram Bot</div></div>
+        <div class="step-body">
+          <ul>
+            <li>Trong Make.com → Add module: <strong>Telegram Bot → Send a Message</strong></li>
+            <li>Nhập Token Bot (đã tạo theo goi-gold/telegram-bot-tu-dong.html)</li>
+            <li>Chat ID: ID Telegram cá nhân của anh/chị</li>
+          </ul>
+          <div class="code-block">
+<span class="code-comment"># Template thông báo Gold (ưu tiên)</span>
+🏆 ĐƠN GOLD — XỬ LÝ NGAY
+
+👤 Khách: {{bankAccountName}}
+📞 SĐT: {{extractedPhone}}
+💰 Số tiền: {{amount}}đ
+🕐 Lúc: {{transactionDate}}
+
+⚡ Cần nhận thông tin 5 thành viên → Zalo khách ngay
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(139,92,246,.06);border-radius:8px;border-left:3px solid var(--purple);font-size:12px;color:#374151;">
+      🛠️ <strong>Công cụ dùng:</strong>
+      <span class="tool-badge tool-free">✓ Make.com — miễn phí 1000 ops/tháng</span>
+      <span class="tool-badge tool-free">✓ Gmail — miễn phí</span>
+      <span class="tool-badge tool-free">✓ Brevo — miễn phí 300 email/ngày</span>
+      <span class="tool-badge tool-free">✓ Telegram Bot — miễn phí</span>
+    </div>
+  </div>
+
+  <!-- PHASE 3: DELIVERY TEMPLATES -->
+  <div class="phase p3" id="phase3">
+    <div class="phase-head">
+      <div class="phase-num">3</div>
+      <div>
+        <h2>📧 Template Email Giao Hàng — 3 Gói</h2>
+        <div class="phase-sub">Copy và dùng ngay trong Make.com → Gmail</div>
+      </div>
+    </div>
+
+    <div class="msg-box">
+      <h4>🥉 Email Giao Hàng Bronze — Gửi tự động trong 60 giây</h4>
+
+      <div class="msg">
+        <span class="msg-label">Tiêu đề: ✅ [BDS Kit Bronze] Anh/Chị đã có kit — tải xuống ngay</span>
+        Chào Anh/Chị {{tên}},
+
+Cảm ơn Anh/Chị đã tin tưởng BDS Mastery Kit! 🎉
+
+📦 GÓI BRONZE — Link tải xuống:
+👉 {{BRONZE_DRIVE_LINK}}
+
+⏳ Link có hiệu lực trong 30 ngày.
+
+🚀 LÀM NGAY SAU KHI TẢI:
+① Giải nén → Mở file MO-DAU-TIEN.html bằng Chrome
+② Làm theo hướng dẫn Bước 1: Thay SĐT + email
+③ Deploy lên Netlify — có link live trong 3 phút
+
+💬 Hỗ trợ: Zalo 0964.827.670
+— BDS Mastery Kit
+      </div>
+
+      <div class="msg">
+        <span class="msg-label">🥈 Email Giao Hàng Silver — Thêm link Calendly đặt lịch review</span>
+        Chào Anh/Chị {{tên}},
+
+🎉 Gói Silver đã sẵn sàng — Anh/Chị được 2 thứ:
+
+📦 1. KIT SILVER — Tải ngay:
+👉 {{SILVER_DRIVE_LINK}}
+
+⚡ 2. FAST-ACTION BONUS — Buổi review 1-1 miễn phí:
+👉 Đặt lịch tại: {{CALENDLY_LINK}}
+(Ghi: "SILVER BONUS — [Tên anh/chị]")
+
+📌 Nên làm trước buổi review:
+① Deploy landing page lên Netlify và có link live
+② Đọc qua ít nhất 5 posts trong 30-POSTS-FB-ZALO.html
+③ Chuẩn bị câu hỏi cho buổi call
+
+Bonus có hiệu lực 30 ngày — đặt lịch sớm nhé!
+
+💬 Zalo: 0964.827.670 — BDS Mastery Kit
+      </div>
+
+      <div class="msg">
+        <span class="msg-label">🥇 Email Gold — Yêu cầu thông tin team (gửi ngay sau thanh toán)</span>
+        Chào Anh/Chị {{tên}},
+
+🏆 Gói GOLD đã được xác nhận — Anh/Chị được kit cá nhân cho cả team!
+
+Để em chuẩn bị 5 bộ kit riêng trong 24h, Anh/Chị vui lòng nhắn qua Zalo 0964.827.670 thông tin của từng thành viên theo mẫu:
+
+Thành viên 1 (Team Leader — Anh/Chị):
+Tên: ___
+SĐT: ___
+Email: ___
+
+Thành viên 2:
+Tên: ___
+SĐT: ___
+Email: ___
+
+[tiếp tục đến thành viên 5]
+
+📌 Khi nhận đủ thông tin, em sẽ:
+✓ Gửi 5 link kit riêng trong 24h
+✓ Liên hệ đặt lịch buổi review ưu tiên 45 phút
+✓ Thêm anh/chị vào danh sách nhận update 3 tháng
+
+💬 Zalo: 0964.827.670 — BDS Mastery Kit
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: POST-PURCHASE -->
+  <div class="phase p4" id="phase4">
+    <div class="phase-head">
+      <div class="phase-num">4</div>
+      <div>
+        <h2>🔄 Hậu Mãi Tự Động — 14 Ngày Sau Mua</h2>
+        <div class="phase-sub">Mục tiêu: Giảm refund · Tăng engagement · Kích upsell Bronze→Silver</div>
+      </div>
+    </div>
+
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-day">Ngay lập tức</div>
+        <div class="tl-body">
+          <div class="tl-title">Email giao hàng + thông báo Telegram <span class="tl-auto">AUTO</span></div>
+          <div class="tl-desc">Như các template trên · Khách nhận trong &lt;60 giây</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Ngày 1</div>
+        <div class="tl-body">
+          <div class="tl-title">Email "Quick Win" — Tip deploy nhanh <span class="tl-auto">AUTO</span></div>
+          <div class="tl-desc">"Anh/chị đã deploy chưa? Đây là cách Netlify nhận diện đúng thư mục — tránh lỗi phổ biến nhất"</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Ngày 3</div>
+        <div class="tl-body">
+          <div class="tl-title">Email "Tip đăng bài đầu tiên" <span class="tl-auto">AUTO</span></div>
+          <div class="tl-desc">"Bài nào trong 30 posts nên đăng đầu tiên — và đăng lúc mấy giờ để reach cao nhất"</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Ngày 5</div>
+        <div class="tl-body">
+          <div class="tl-title">Check-in cá nhân <span class="tl-manual">THỦ CÔNG</span></div>
+          <div class="tl-desc">Nhắn Zalo ngắn: "Anh/chị dùng kit thấy thế nào? Landing page đã live chưa?" — 1 phút/người</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Ngày 7</div>
+        <div class="tl-body">
+          <div class="tl-title">Email xin testimonial <span class="tl-auto">AUTO</span></div>
+          <div class="tl-desc">"1 tuần dùng kit — anh/chị thấy tool nào hữu ích nhất? Cho em xin 1 dòng feedback nhé"</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Ngày 14</div>
+        <div class="tl-body">
+          <div class="tl-title">Email upsell Bronze → Silver <span class="tl-auto">AUTO</span></div>
+          <div class="tl-desc">"Anh/chị đã có landing page và đang đăng bài rồi — thêm 15 scripts xử lý phản đối để tỉ lệ chốt cao hơn không?"</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <h3 style="font-size:13px;font-weight:700;color:var(--nd);margin-bottom:10px;">⚙️ Setup Sequence trong Make.com</h3>
+      <div class="code-block">
+<span class="code-comment"># Trong Make.com — sau khi gửi email giao hàng:</span>
+Add Module: <span class="code-green">Tools → Set Variable</span> (lưu email + ngày mua)
+Add Module: <span class="code-green">Sleep → 24h</span>
+Add Module: <span class="code-green">Gmail → Send Email</span> (template Ngày 1)
+Add Module: <span class="code-green">Sleep → 48h</span>
+Add Module: <span class="code-green">Gmail → Send Email</span> (template Ngày 3)
+<span class="code-comment">... và tiếp tục đến ngày 14</span>
+
+<span class="code-comment"># Hoặc dùng Brevo Automation (đơn giản hơn):</span>
+Tạo "Automation Flow" trong Brevo → Add contact → Email theo ngày
+      </div>
+    </div>
+  </div>
+
+  <!-- STACK SO SÁNH -->
+  <div style="background:#fff;border-radius:16px;padding:26px;margin-bottom:20px;border:1px solid rgba(201,168,76,.18);box-shadow:0 3px 16px rgba(27,58,107,.06);">
+    <h2 style="font-size:17px;color:var(--navy);margin-bottom:16px;">🛠️ Stack Công Cụ — Tất Cả Miễn Phí</h2>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Công cụ</th>
+            <th>Dùng để làm gì</th>
+            <th>Chi phí</th>
+            <th>Giới hạn free</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SePay</strong></td>
+            <td>Nhận thanh toán VietQR, phát hiện CK tự động</td>
+            <td class="rec">Miễn phí</td>
+            <td>Không giới hạn</td>
+          </tr>
+          <tr>
+            <td><strong>Make.com</strong></td>
+            <td>Tự động hóa: webhook → email → Telegram</td>
+            <td class="rec">Miễn phí</td>
+            <td>1.000 ops/tháng (~200 đơn)</td>
+          </tr>
+          <tr>
+            <td><strong>Brevo (Sendinblue)</strong></td>
+            <td>Gửi email giao hàng + sequence hậu mãi</td>
+            <td class="rec">Miễn phí</td>
+            <td>300 email/ngày, automation không giới hạn</td>
+          </tr>
+          <tr>
+            <td><strong>Telegram Bot</strong></td>
+            <td>Nhận thông báo đơn hàng real-time</td>
+            <td class="rec">Miễn phí</td>
+            <td>Không giới hạn</td>
+          </tr>
+          <tr>
+            <td><strong>Google Drive</strong></td>
+            <td>Lưu trữ ZIP kit, chia sẻ link download</td>
+            <td class="rec">Miễn phí</td>
+            <td>15GB (đủ dùng)</td>
+          </tr>
+          <tr>
+            <td><strong>Calendly</strong></td>
+            <td>Đặt lịch review 1-1 Silver/Gold</td>
+            <td class="rec">Miễn phí</td>
+            <td>1 loại event, không giới hạn lịch</td>
+          </tr>
+          <tr>
+            <td><strong>Netlify</strong></td>
+            <td>Host kit sales page của anh/chị</td>
+            <td class="rec">Miễn phí</td>
+            <td>100GB bandwidth/tháng</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11.5px;color:#6b7280;margin-top:12px;text-align:center;">💡 Khi đơn hàng >200/tháng: Nâng Make.com lên $9/tháng — vẫn rất rẻ so với doanh thu</p>
+  </div>
+
+  <!-- SETUP CHECKLIST -->
+  <div style="background:#fff;border-radius:16px;padding:26px;margin-bottom:20px;border:1px solid rgba(201,168,76,.18);box-shadow:0 3px 16px rgba(27,58,107,.06);" id="checklist">
+    <h2 style="font-size:17px;color:var(--navy);margin-bottom:6px;">✅ Checklist Setup Hệ Thống</h2>
+    <p style="font-size:12px;color:#6b7280;margin-bottom:16px;">Ước tính thời gian: <strong>3–4 giờ</strong> để setup toàn bộ</p>
+
+    <div class="progress-wrap">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#6b7280;margin-bottom:4px;">
+        <span>Tiến độ setup</span><span id="ptxt">0 / 20 bước</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="pfill"></div></div>
+    </div>
+
+    <div style="font-weight:700;font-size:12px;color:var(--nd);margin:14px 0 8px;">⚙️ Bước 1: Chuẩn bị tài sản (30 phút)</div>
+    <div class="checklist">
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Nén goi-bronze/ → BDS-Kit-Bronze.zip → Upload Google Drive → Lấy link share</div><span class="cl-tag tag-setup">Setup</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Nén goi-silver/ → BDS-Kit-Silver.zip → Upload Google Drive → Lấy link share</div><span class="cl-tag tag-setup">Setup</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Tạo tài khoản Calendly miễn phí → Tạo event "Review 1-1 Silver" 30 phút → Lấy link</div><span class="cl-tag tag-setup">Setup</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Tạo tài khoản Calendly → Tạo event "Review Team Leader Gold" 45 phút → Lấy link</div><span class="cl-tag tag-setup">Setup</span></div>
+    </div>
+
+    <div style="font-weight:700;font-size:12px;color:var(--nd);margin:14px 0 8px;">💳 Bước 2: Thanh toán SePay (30 phút)</div>
+    <div class="checklist">
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Đăng ký SePay.vn → Xác minh tài khoản → Thêm ngân hàng</div><span class="cl-tag tag-setup">SePay</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Copy API Token từ SePay dashboard</div><span class="cl-tag tag-setup">SePay</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Cập nhật hướng dẫn nội dung CK trên sales page: "Ghi BRONZE/SILVER/GOLD + SĐT"</div><span class="cl-tag tag-setup">Sales Page</span></div>
+    </div>
+
+    <div style="font-weight:700;font-size:12px;color:var(--nd);margin:14px 0 8px;">🔗 Bước 3: Kết nối Make.com (60 phút)</div>
+    <div class="checklist">
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Đăng ký Make.com → Tạo Scenario mới → Add Webhook trigger → Copy URL webhook</div><span class="cl-tag tag-auto">Make.com</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Dán Webhook URL vào SePay dashboard</div><span class="cl-tag tag-auto">Make.com</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Add Router module → Tạo 3 route: BRONZE / SILVER / GOLD</div><span class="cl-tag tag-auto">Make.com</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Add Gmail/Brevo module vào mỗi route → Điền template email tương ứng</div><span class="cl-tag tag-auto">Make.com</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Add Telegram Bot module → Điền template notify cho mỗi gói</div><span class="cl-tag tag-auto">Make.com</span></div>
+    </div>
+
+    <div style="font-weight:700;font-size:12px;color:var(--nd);margin:14px 0 8px;">📧 Bước 4: Email hậu mãi (45 phút)</div>
+    <div class="checklist">
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Đăng ký Brevo.com miễn phí → Xác minh email gửi</div><span class="cl-tag tag-setup">Brevo</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Tạo Automation "Bronze sequence": Day 1 → Day 3 → Day 7 → Day 14</div><span class="cl-tag tag-auto">Brevo</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Viết 4 email hậu mãi và lưu vào Brevo templates</div><span class="cl-tag tag-auto">Brevo</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Kết nối Brevo với Make.com: Sau gửi email giao hàng → Add contact vào Brevo sequence</div><span class="cl-tag tag-auto">Make.com</span></div>
+    </div>
+
+    <div style="font-weight:700;font-size:12px;color:var(--nd);margin:14px 0 8px;">🧪 Bước 5: Kiểm tra đầy đủ (30 phút)</div>
+    <div class="checklist">
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Test Bronze: Chuyển khoản "BRONZE 0964827670" → Kiểm tra email + Telegram notify</div><span class="cl-tag tag-test">Test</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Test Silver: Chuyển khoản "SILVER 0964827670" → Kiểm tra email có link Drive + Calendly</div><span class="cl-tag tag-test">Test</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Test Gold: Chuyển khoản "GOLD 0964827670" → Kiểm tra email yêu cầu thông tin team</div><span class="cl-tag tag-test">Test</span></div>
+      <div class="cl-item" onclick="clk(this)"><div class="cl-cb"></div><div class="cl-text">Mở link Drive Bronze/Silver → Tải thử → Giải nén → Mở MO-DAU-TIEN.html — xác nhận OK</div><span class="cl-tag tag-test">Test</span></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>⚙️ Hệ Thống Phân Phối Tự Động · <span>BDS Mastery Kit</span> · Hỗ trợ: 0964.827.670</footer>
+
+<script>
+  function clk(el){el.classList.toggle('done');upd();}
+  function upd(){
+    const all=document.querySelectorAll('.cl-item');
+    const done=document.querySelectorAll('.cl-item.done');
+    document.getElementById('pfill').style.width=Math.round(done.length/all.length*100)+'%';
+    document.getElementById('ptxt').textContent=done.length+' / '+all.length+' bước';
+  }
+</script>
+</body>
+</html>

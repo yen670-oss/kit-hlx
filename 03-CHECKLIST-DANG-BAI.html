@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Đăng Bài — BDS Mastery Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1B3A6B;
+      --navy-dark: #102340;
+      --gold: #C9A84C;
+      --gold-light: #E2C06A;
+      --cream: #FAF8F3;
+      --cream-dark: #EDE8DC;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--cream);
+      color: #1a1a2e;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; }
+      .no-print { display: none !important; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      @page { margin: 12mm; size: A4; }
+    }
+
+    /* ── LAYOUT ── */
+    .wrapper { max-width: 794px; margin: 0 auto; padding: 20px; }
+
+    .page {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(27,58,107,0.1);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #2A5298 100%);
+      padding: 28px 32px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 1.5px 1.5px, rgba(201,168,76,0.15) 1.5px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .header-inner { position: relative; z-index: 1; }
+    .header-badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.2);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+    .header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      color: white;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .header h1 span { color: var(--gold-light); }
+    .header p { color: rgba(255,255,255,0.65); font-size: 12px; }
+    .header-contact {
+      margin-top: 12px;
+      display: flex;
+      gap: 16px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── CONTENT ── */
+    .content { padding: 24px 32px 28px; }
+
+    /* ── PLATFORM BLOCK ── */
+    .platform {
+      margin-bottom: 22px;
+      border: 1px solid #e8e4d8;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .platform:last-child { margin-bottom: 0; }
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 13px;
+      color: white;
+    }
+    .platform-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      background: rgba(255,255,255,0.2);
+      flex-shrink: 0;
+    }
+    .platform-meta {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 500;
+      opacity: 0.8;
+      background: rgba(0,0,0,0.15);
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .fb-header    { background: #1877F2; }
+    .zalo-header  { background: #0068FF; }
+    .ig-header    { background: linear-gradient(135deg, #833AB4, #E1306C, #F77737); }
+    .tiktok-header{ background: #010101; }
+
+    .platform-body { padding: 12px 16px 14px; background: white; }
+
+    /* ── CHECKLIST ITEMS ── */
+    .check-group { margin-bottom: 12px; }
+    .check-group:last-child { margin-bottom: 0; }
+
+    .check-group-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .check-box {
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid #c0bbb0;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check-text { font-size: 12px; color: #2d2d2d; line-height: 1.45; }
+    .check-text strong { color: var(--navy-dark); font-weight: 600; }
+    .check-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+    .tag-must { background: #fef3cd; color: #92650a; }
+    .tag-tip  { background: #d4edda; color: #155724; }
+    .tag-time { background: #e8eaf6; color: #3949AB; }
+
+    /* ── TIMING ROW ── */
+    .timing-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .timing-box {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: 6px;
+      padding: 7px 10px;
+    }
+    .timing-label { font-size: 10px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .timing-value { font-size: 11px; color: #555; }
+
+    /* ── QUICK TIPS ── */
+    .tips-bar {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .tip-item { text-align: center; }
+    .tip-num { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold-light); font-weight: 700; }
+    .tip-desc { font-size: 10px; color: rgba(255,255,255,0.65); margin-top: 2px; line-height: 1.3; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--navy-dark);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-brand { color: var(--gold-light); font-weight: 700; font-size: 13px; }
+    .footer-contact { color: rgba(255,255,255,0.5); font-size: 11px; }
+    .footer-cta {
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-weight: 700;
+      font-size: 11px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* ── PRINT BUTTON ── */
+    .print-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0 auto 20px;
+    }
+    .print-btn:hover { background: var(--navy-dark); }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Print Button -->
+  <div class="no-print" style="text-align:center;margin-bottom:16px;">
+    <button class="print-btn" onclick="window.print()">
+      🖨️ In / Xuất PDF (Ctrl+P)
+    </button>
+  </div>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-inner">
+        <div class="header-badge">BDS Mastery Kit — Checklist Đăng Bài</div>
+        <h1>Checklist Đăng Bài<br><span>Trên Từng Nền Tảng</span></h1>
+        <p>Tick đủ trước khi bấm Đăng — tránh lãng phí reach, tối đa hóa tương tác</p>
+        <div class="header-contact">
+          <span>anhomehanoi@gmail.com</span>
+          <span>·</span>
+          <span>0964.827.670</span>
+          <span>·</span>
+          <span>red-xylia-93.tiiny.site</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- FACEBOOK -->
+      <div class="platform">
+        <div class="platform-header fb-header">
+          <div class="platform-icon">📘</div>
+          <span>Facebook — Cá nhân & Group BDS</span>
+          <span class="platform-meta">Kênh chính · Ưu tiên cao nhất</span>
+        </div>
+        <div class="platform-body">
+
+          <div class="check-group">
+            <div class="check-group-title">Trước khi đăng</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Hook dòng đầu</strong> — 1–2 dòng đầu phải đủ mạnh để dừng scroll (câu hỏi, số liệu, hoặc tuyên bố gây tò mò) <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Ảnh hoặc video đính kèm</strong> — bài có ảnh tăng reach 2–3x so với bài chỉ chữ</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Ngắt dòng sau mỗi 2–3 câu</strong> — dễ đọc trên mobile, không bị cắt bởi nút "Xem thêm"</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>CTA rõ ràng cuối bài</strong> — "Comment X", "Nhắn inbox", hoặc "Link trong comment" <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Đặt link ở comment đầu</strong> — không để link trong thân bài (FB giảm reach bài có link ngoài)</span></div>
+          </div>
+
+          <div class="check-group">
+            <div class="check-group-title">Sau khi đăng (30 phút đầu)</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Reply <strong>mọi comment</strong> trong 30 phút đầu — thuật toán ưu tiên bài có tương tác sớm <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Share vào <strong>2–3 group BDS phù hợp</strong> — không share quá 5 group/ngày (bị giới hạn)</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Ghim comment chứa link vào đầu nếu bài đăng group</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Tag tên 1–2 người <strong>thực sự liên quan</strong> — không tag spam</span></div>
+          </div>
+
+          <div class="timing-row">
+            <div class="timing-box">
+              <div class="timing-label">⏰ Giờ vàng</div>
+              <div class="timing-value">7:30–8:00 sáng · 12:00–12:30 trưa · 20:00–21:00 tối</div>
+            </div>
+            <div class="timing-box">
+              <div class="timing-label">📋 Tần suất</div>
+              <div class="timing-value">1 bài/ngày cá nhân · 3–5 bài/tuần group · Không đăng cùng lúc</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ZALO -->
+      <div class="platform">
+        <div class="platform-header zalo-header">
+          <div class="platform-icon">💬</div>
+          <span>Zalo — Cá nhân & Zalo OA</span>
+          <span class="platform-meta">Tỉ lệ đọc cao nhất · 80%+ open rate</span>
+        </div>
+        <div class="platform-body">
+
+          <div class="check-group">
+            <div class="check-group-title">Zalo cá nhân — Story & Feed</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Story ảnh/video</strong> mỗi ngày — story Zalo hiển thị đầu feed, được xem nhiều nhất</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Caption ngắn ≤ 3 dòng</strong> — Zalo feed không hiện "Xem thêm", quá dài bị cắt</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Gắn sticker hoặc emoji</strong> — tăng cảm xúc, phù hợp văn hóa chat VN</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">CTA = <strong>nhắn tin trực tiếp</strong> ("Nhắn mình nhé", "Reply story này") — không dùng link ngoài</span></div>
+          </div>
+
+          <div class="check-group">
+            <div class="check-group-title">Broadcast / Nhóm Zalo</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Tin nhắn ≤ 200 chữ</strong> — broadcast dài bị bỏ qua, ngắn gọn = đọc hết <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Mở đầu bằng <strong>tên/xưng hô</strong> — "Anh/chị ơi," tạo cảm giác cá nhân</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">1 CTA duy nhất — "Nhắn CHECKLIST" hoặc "Reply TƯ VẤN" <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Không broadcast quá <strong>1 lần/ngày</strong> — dễ bị block hoặc rời nhóm</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Đính kèm <strong>1 ảnh hoặc PDF</strong> khi có nội dung giá trị (báo cáo, checklist)</span></div>
+          </div>
+
+          <div class="timing-row">
+            <div class="timing-box">
+              <div class="timing-label">⏰ Giờ vàng</div>
+              <div class="timing-value">8:00–8:30 sáng · 12:00–12:30 trưa · 20:30–21:30 tối</div>
+            </div>
+            <div class="timing-box">
+              <div class="timing-label">📋 Tần suất</div>
+              <div class="timing-value">Story: hàng ngày · Broadcast: 3–4 lần/tuần · Nhóm: 1 lần/ngày</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- INSTAGRAM -->
+      <div class="platform">
+        <div class="platform-header ig-header">
+          <div class="platform-icon">📸</div>
+          <span>Instagram — Feed & Reels</span>
+          <span class="platform-meta">Reach khách trẻ & investor lifestyle</span>
+        </div>
+        <div class="platform-body">
+
+          <div class="check-group">
+            <div class="check-group-title">Feed Post (ảnh đơn / carousel)</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Ảnh chất lượng cao</strong> — tỉ lệ 1:1 hoặc 4:5 (portrait cho mobile) <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Caption dòng đầu</strong> đủ mạnh — chỉ 1–2 dòng hiện trước "more", đây là hook</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>3–5 hashtag</strong> liên quan — mix: 1 broad (#bds), 2 niche (#vinhomeshalongxanh), 1 local (#halongbay) <span class="check-tag tag-tip">Quan trọng</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Carousel: slide 1 = hook, slide cuối = CTA "Link in bio" — slide 2–N là giá trị</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Cập nhật <strong>Link in Bio</strong> trỏ đến sales page hoặc checklist link</span></div>
+          </div>
+
+          <div class="check-group">
+            <div class="check-group-title">Reels (video ngắn)</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>3 giây đầu</strong> phải hook — câu hỏi, số liệu sốc, hoặc hình ảnh đẹp <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Thêm <strong>text overlay</strong> — 80% người xem Reels không bật tiếng</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Độ dài <strong>15–30 giây</strong> — tối ưu cho thuật toán Reels VN hiện tại</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Chọn <strong>nhạc trending</strong> — dùng audio đang hot tăng reach tự nhiên</span></div>
+          </div>
+
+          <div class="timing-row">
+            <div class="timing-box">
+              <div class="timing-label">⏰ Giờ vàng</div>
+              <div class="timing-value">7:00–9:00 sáng · 11:00–13:00 · 19:00–21:00 tối</div>
+            </div>
+            <div class="timing-box">
+              <div class="timing-label">📋 Tần suất</div>
+              <div class="timing-value">Feed: 4–5 lần/tuần · Reels: 3–4 lần/tuần · Story: hàng ngày</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TIKTOK -->
+      <div class="platform">
+        <div class="platform-header tiktok-header">
+          <div class="platform-icon">🎵</div>
+          <span>TikTok — Video ngắn</span>
+          <span class="platform-meta">Reach lạnh tốt nhất · Viral potential cao</span>
+        </div>
+        <div class="platform-body">
+
+          <div class="check-group">
+            <div class="check-group-title">Trước khi quay</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>Hook 1–2 giây đầu</strong> bằng lời nói hoặc text — "Bí mật mà môi giới không chia sẻ..." <span class="check-tag tag-must">Bắt buộc</span></span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Script <strong>≤ 60 giây</strong> — video 15–45 giây có completion rate cao nhất</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Quay <strong>dọc 9:16</strong> — fullscreen mobile <span class="check-tag tag-must">Bắt buộc</span></span></div>
+          </div>
+
+          <div class="check-group">
+            <div class="check-group-title">Khi đăng lên TikTok</div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Caption <strong>1–2 câu + câu hỏi</strong> — câu hỏi kích comment, comment tăng phân phối</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text"><strong>3–5 hashtag</strong> — 1 trending (#xuhuong), 2–3 niche (#moigioidautu #halongxanh), 1 branded</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Thêm <strong>text sticker</strong> highlight từ khóa chính trong video</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Đặt <strong>Cover frame</strong> đẹp — thumbnail quyết định 40% click</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Chọn nhạc <strong>đang trending</strong> trong "Sounds recommended" — không dùng nhạc bản quyền</span></div>
+            <div class="check-item"><div class="check-box"></div><span class="check-text">Ghim <strong>comment đầu</strong> = CTA ("Link bio để nhận checklist") trong 10 phút đầu sau đăng <span class="check-tag tag-tip">Pro tip</span></span></div>
+          </div>
+
+          <div class="timing-row">
+            <div class="timing-box">
+              <div class="timing-label">⏰ Giờ vàng</div>
+              <div class="timing-value">6:00–7:00 sáng · 12:00–13:00 · 19:00–22:00 tối</div>
+            </div>
+            <div class="timing-box">
+              <div class="timing-label">📋 Tần suất</div>
+              <div class="timing-value">1–2 video/ngày trong 30 ngày đầu để build thuật toán</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STATS BAR -->
+      <div class="tips-bar">
+        <div class="tip-item">
+          <div class="tip-num">30 phút</div>
+          <div class="tip-desc">Đầu tiên sau đăng quan trọng nhất — reply mọi comment</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">70 / 20 / 10</div>
+          <div class="tip-desc">Tỉ lệ content: Giáo dục · Tương tác · CTA bán hàng</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">1 CTA</div>
+          <div class="tip-desc">Mỗi bài chỉ 1 hành động — đừng để khách phân vân</div>
+        </div>
+      </div>
+
+    </div><!-- end content -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer-brand">BDS Mastery Kit</span>
+      <span class="footer-contact">anhomehanoi@gmail.com · 0964.827.670</span>
+      <a href="https://red-xylia-93.tiiny.site" class="footer-cta">Xem Bộ Kit Đầy Đủ →</a>
+    </div>
+
+  </div><!-- end page -->
+
+</div><!-- end wrapper -->
+
+</body>
+</html>

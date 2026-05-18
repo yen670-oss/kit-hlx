@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Toàn Phần Funnel — Kit BDS HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#0d1117;color:#e2e8f0;line-height:1.7}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#0d1117 0%,#161b27 60%,#0d1117 100%);border-bottom:1px solid #21262d;padding:48px 24px 36px;text-align:center}
+  .hero-badge{display:inline-block;background:linear-gradient(135deg,#1f6feb,#388bfd);color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:16px}
+  .hero h1{font-size:1.9rem;font-weight:900;color:#f0f6fc;margin-bottom:10px}
+  .hero p{color:#8b949e;font-size:14px;max-width:560px;margin:0 auto 24px}
+  .hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+  .hstat{text-align:center}
+  .hstat-num{font-size:1.6rem;font-weight:900;color:#388bfd}
+  .hstat-label{font-size:11px;color:#484f58}
+
+  /* TAB NAV */
+  .tab-nav{display:flex;gap:0;border-bottom:1px solid #21262d;overflow-x:auto;background:#0d1117;position:sticky;top:0;z-index:100}
+  .tab-btn{padding:14px 24px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:transparent;color:#8b949e;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+  .tab-btn:hover{color:#e2e8f0;background:rgba(255,255,255,0.03)}
+  .tab-btn.active{color:#fff;border-bottom-color:currentColor}
+  .tab-btn.tofu.active{color:#3fb950;border-bottom-color:#3fb950}
+  .tab-btn.mofu.active{color:#388bfd;border-bottom-color:#388bfd}
+  .tab-btn.bofu.active{color:#f78166;border-bottom-color:#f78166}
+  .tab-btn.upsell.active{color:#d2a8ff;border-bottom-color:#d2a8ff}
+  .tab-count{font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,0.08)}
+
+  /* CONTENT AREA */
+  .content-area{max-width:900px;margin:0 auto;padding:32px 24px}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* STAGE HEADER */
+  .stage-header{margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #21262d}
+  .stage-title{font-size:1.2rem;font-weight:800;color:#f0f6fc;margin-bottom:6px}
+  .stage-desc{font-size:13px;color:#8b949e}
+  .stage-goal{display:inline-block;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;margin-top:8px}
+  .goal-tofu{background:rgba(63,185,80,0.12);color:#3fb950}
+  .goal-mofu{background:rgba(56,139,253,0.12);color:#388bfd}
+  .goal-bofu{background:rgba(247,129,102,0.12);color:#f78166}
+  .goal-upsell{background:rgba(210,168,255,0.12);color:#d2a8ff}
+
+  /* POST CARD */
+  .post-card{background:#161b27;border:1px solid #21262d;border-radius:14px;margin-bottom:20px;overflow:hidden;transition:border-color 0.2s}
+  .post-card:hover{border-color:#30363d}
+
+  .post-header{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #21262d}
+  .post-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+  .num-tofu{background:rgba(63,185,80,0.15);color:#3fb950}
+  .num-mofu{background:rgba(56,139,253,0.15);color:#388bfd}
+  .num-bofu{background:rgba(247,129,102,0.15);color:#f78166}
+  .num-upsell{background:rgba(210,168,255,0.15);color:#d2a8ff}
+
+  .post-meta{flex:1}
+  .post-title{font-size:14px;font-weight:700;color:#f0f6fc;margin-bottom:3px}
+  .post-sub{font-size:12px;color:#8b949e}
+  .post-tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.3px}
+  .tag-fb{background:rgba(59,130,246,0.15);color:#60a5fa}
+  .tag-zalo{background:rgba(16,185,129,0.12);color:#34d399}
+  .tag-group{background:rgba(251,191,36,0.12);color:#fbbf24}
+  .tag-tiktok{background:rgba(236,72,153,0.12);color:#f472b6}
+  .tag-all{background:rgba(255,255,255,0.07);color:#8b949e}
+
+  .post-body{padding:20px}
+  .post-hook{font-size:13px;font-weight:600;color:#388bfd;margin-bottom:10px;padding:8px 12px;background:rgba(56,139,253,0.06);border-left:3px solid #388bfd;border-radius:0 6px 6px 0}
+  .post-content{background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:16px;font-size:13px;color:#c9d1d9;line-height:1.8;white-space:pre-wrap;position:relative;font-family:'Inter',sans-serif}
+  .char-count{font-size:11px;color:#484f58;margin-top:6px;text-align:right}
+
+  /* COPY BTN */
+  .copy-wrap{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+  .copy-btn{background:#21262d;border:1px solid #30363d;color:#8b949e;font-size:12px;font-weight:600;padding:7px 16px;border-radius:6px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+  .copy-btn:hover{background:#30363d;color:#e2e8f0;border-color:#484f58}
+  .copy-btn.copied{background:#1f3a1f;color:#3fb950;border-color:#3fb950}
+
+  /* TIPS BOX */
+  .tips-box{background:rgba(56,139,253,0.06);border:1px solid rgba(56,139,253,0.2);border-radius:8px;padding:12px 14px;margin-top:10px;font-size:12px;color:#8b949e}
+  .tips-box strong{color:#388bfd}
+
+  /* OVERVIEW SECTION */
+  .overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+  .ov-card{border-radius:10px;padding:16px;text-align:center;border:1px solid}
+  .ov-tofu{background:rgba(63,185,80,0.05);border-color:rgba(63,185,80,0.2)}
+  .ov-mofu{background:rgba(56,139,253,0.05);border-color:rgba(56,139,253,0.2)}
+  .ov-bofu{background:rgba(247,129,102,0.05);border-color:rgba(247,129,102,0.2)}
+  .ov-upsell{background:rgba(210,168,255,0.05);border-color:rgba(210,168,255,0.2)}
+  .ov-icon{font-size:24px;margin-bottom:6px}
+  .ov-title{font-size:13px;font-weight:700;color:#f0f6fc;margin-bottom:2px}
+  .ov-desc{font-size:11px;color:#8b949e}
+  .ov-count{font-size:1.2rem;font-weight:900;margin-top:6px}
+  .c-tofu{color:#3fb950}.c-mofu{color:#388bfd}.c-bofu{color:#f78166}.c-upsell{color:#d2a8ff}
+
+  .overview-persona{background:#161b27;border:1px solid #21262d;border-radius:12px;padding:20px;margin-bottom:28px}
+  .op-title{font-size:13px;font-weight:700;color:#f0f6fc;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .op-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .op-item{font-size:13px;color:#8b949e;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:6px}
+  .op-item strong{color:#c9d1d9;display:block;margin-bottom:2px}
+
+  @media(max-width:640px){
+    .overview-grid{grid-template-columns:repeat(2,1fr)}
+    .op-grid{grid-template-columns:1fr}
+    .hero h1{font-size:1.4rem}
+    .tab-btn{padding:12px 16px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">📝 Content Toàn Phần Funnel</div>
+  <h1>18 Bài Viết TOFU → MOFU → BOFU → UPSELL</h1>
+  <p>Copy-paste ngay · Viết từ góc nhìn người bán Kit, không phải môi giới HLX · Không bị kick khỏi group</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">5</div><div class="hstat-label">Bài TOFU</div></div>
+    <div class="hstat"><div class="hstat-num">5</div><div class="hstat-label">Bài MOFU</div></div>
+    <div class="hstat"><div class="hstat-num">5</div><div class="hstat-label">Bài BOFU</div></div>
+    <div class="hstat"><div class="hstat-num">3</div><div class="hstat-label">Bài UPSELL</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn tofu active" onclick="switchTab('tofu')">🌱 TOFU <span class="tab-count">5</span></button>
+  <button class="tab-btn mofu" onclick="switchTab('mofu')">🔥 MOFU <span class="tab-count">5</span></button>
+  <button class="tab-btn bofu" onclick="switchTab('bofu')">💰 BOFU <span class="tab-count">5</span></button>
+  <button class="tab-btn upsell" onclick="switchTab('upsell')">⬆️ UPSELL <span class="tab-count">3</span></button>
+</div>
+
+<div class="content-area">
+
+<!-- ==================== TOFU ==================== -->
+<div class="tab-panel active" id="panel-tofu">
+
+  <div class="stage-header">
+    <div class="stage-title">🌱 TOFU — Top of Funnel: Thu Hút Sự Chú Ý</div>
+    <div class="stage-desc">Mục tiêu: Tiếp cận agent HLX đang bỏ lỡ cơ hội marketing. Chưa bán gì — chỉ tạo awareness và kéo vào vùng quan tâm.</div>
+    <span class="stage-goal goal-tofu">🎯 Goal: Agent đọc xong thấy "đúng cái tôi đang gặp"</span>
+  </div>
+
+  <div class="overview-persona">
+    <div class="op-title">🎭 Persona bài TOFU — Quan trọng để không bị kick</div>
+    <div class="op-grid">
+      <div class="op-item"><strong>Anh/chị là ai trong bài này?</strong>Người làm công cụ/marketing cho agent BĐS — quan sát thị trường, không bán BĐS</div>
+      <div class="op-item"><strong>Tone là gì?</strong>Chia sẻ quan sát + giáo dục — không phán xét, không aggressive, không bán hàng lộ liễu</div>
+      <div class="op-item"><strong>Đăng ở đâu an toàn?</strong>Group môi giới BĐS, group HLX, FB cá nhân, Zalo — tất cả đều phù hợp</div>
+      <div class="op-item"><strong>CTA an toàn nhất?</strong>"Comment cho tôi biết" hoặc "Nhắn tôi" — không phải "mua ngay"</div>
+    </div>
+  </div>
+
+  <!-- TOFU 1 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-tofu">T1</div>
+      <div class="post-meta">
+        <div class="post-title">Observation Hook — "47 bài, 44 bài giống nhau"</div>
+        <div class="post-sub">Đánh vào nỗi đau: làm giống nhau = không có lead · Hook mạnh nhất</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-group">Group</span>
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Số liệu cụ thể + Pattern interrupt ngay dòng đầu</div>
+      <div class="post-content" id="t1">Scroll qua group HLX 30 phút — tôi đếm được 47 bài đăng.
+
+44 bài na ná nhau: Ảnh phối cảnh → vị trí căn → ưu đãi tháng này → "liên hệ em ngay".
+
+3 bài còn lại khác hẳn: Phân tích ROI, so sánh với Đà Nẵng, video agent đang giải thích tại sao đây là thời điểm mua.
+
+Đoán xem 3 bài đó nhận comment bao nhiêu so với 44 bài kia?
+
+—
+
+Tôi không phải môi giới HLX. Tôi làm công cụ marketing cho agent BĐS.
+
+Điều tôi thấy: thị trường đang hot chưa từng thấy — nhưng phần lớn agent đang cạnh tranh bằng cách làm giống nhau 100%.
+
+Người thắng không phải người đăng nhiều nhất. Người thắng là người đang khác biệt.
+
+Anh/chị đang đăng bài số 1 hay bài số 47?
+
+#bdshalong #vinhomeshalongxanh #morigibds</div>
+      <div class="char-count" id="cnt-t1"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('t1',this)">📋 Copy bài viết</button>
+        <button class="copy-btn" onclick="copyHook('t1',this)">🎣 Copy hook</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài này đặc biệt phù hợp để đăng vào group môi giới. Câu cuối "bài số 1 hay bài số 47" thúc đẩy comment + share. Không bán gì = không bị kick.</div>
+    </div>
+  </div>
+
+  <!-- TOFU 2 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-tofu">T2</div>
+      <div class="post-meta">
+        <div class="post-title">Education — "Agent A vs Agent B: cùng dự án, khác kết quả"</div>
+        <div class="post-sub">Giải thích tại sao hệ thống > cá nhân · Tạo desire cho solution</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-all">Group</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Câu hỏi gây tò mò + hứa hẹn có câu trả lời</div>
+      <div class="post-content" id="t2">Tại sao cùng 1 dự án HLX, cùng 1 chính sách, agent A chốt đều đặn — agent B gần như không có lead?
+
+Tôi nói chuyện với hàng chục agent HLX. Đây là sự khác biệt rõ nhất:
+
+Agent A:
+→ Có landing page riêng — khách tự điền form, tự để lại SĐT
+→ Đăng content thật: phân tích ROI, so sánh sản phẩm, giải thích hạ tầng
+→ Hệ thống follow-up tự động — không bỏ sót lead nào
+→ Nhận lead ngay cả khi đang ngủ
+
+Agent B:
+→ Đăng ảnh + số điện thoại
+→ Chờ khách chủ động nhắn
+→ Dùng chung brochure Vinhomes với 1.000 agent khác
+→ Tháng này lead = 0
+
+—
+
+Sự khác biệt không phải năng lực bán hàng. Là công cụ.
+
+Thị trường đang hot nhất nhiều năm — nhưng lead không đến với người đăng ảnh đẹp nhất. Lead đến với người có hệ thống.
+
+Anh/chị đang ở nhóm nào?
+
+#bdshalong #morigibds #vinhomeshalongxanh</div>
+      <div class="char-count" id="cnt-t2"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('t2',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Cấu trúc so sánh A/B rất dễ đọc trên mobile. Đăng vào thứ 2 hoặc thứ 3 sáng để tận dụng giờ vàng 8-9h. Câu hỏi cuối khuyến khích comment.</div>
+    </div>
+  </div>
+
+  <!-- TOFU 3 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-tofu">T3</div>
+      <div class="post-meta">
+        <div class="post-title">Myth-bust — "Tăng số bài đăng không phải giải pháp"</div>
+        <div class="post-sub">Contrarian take · Gây tranh luận lành mạnh · Organic reach cao</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-tiktok">TikTok</span>
+        <span class="tag tag-all">Group</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Contrarian statement — phá vỡ niềm tin phổ biến</div>
+      <div class="post-content" id="t3">Sai lầm phổ biến nhất khi thị trường BĐS hot:
+
+Tăng số bài đăng.
+
+Nếu vấn đề là "content không có lead" → đăng nhiều hơn = spam nhiều hơn, không phải lead nhiều hơn.
+
+Vấn đề thật không phải số lượng. Là hệ thống bắt lead:
+
+❌ Đăng ảnh → khách xem → không có nơi để lại thông tin → lead mất
+✅ Đăng content → khách click → landing page riêng → form tự động → nhận lead
+
+❌ Brochure Vinhomes chung với 1.000 agent
+✅ Bộ nội dung HLX viết riêng — phân tích ROI, giải thích hạ tầng
+
+❌ Nhớ thì nhắn tin follow-up
+✅ Hệ thống Telegram Bot thông báo lead 24/7
+
+—
+
+Thị trường HLX đang sôi nhất nhiều năm. Lead đang có.
+
+Câu hỏi là: hệ thống của anh/chị có đang bắt được không?
+
+#bdshalong #morigibds #chienluocbds</div>
+      <div class="char-count" id="cnt-t3"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('t3',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài này phù hợp làm TikTok script — đọc thành video 45 giây, text overlay từng bullet. Câu cuối là hook dẫn vào MOFU.</div>
+    </div>
+  </div>
+
+  <!-- TOFU 4 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-tofu">T4</div>
+      <div class="post-meta">
+        <div class="post-title">Poll / Data Hook — "Trong 100 agent HLX, bao nhiêu người có..."</div>
+        <div class="post-sub">Câu hỏi thu thập data · Thúc đẩy comment · Hiểu audience</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-group">Group</span>
+        <span class="tag tag-fb">FB</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Câu hỏi "trong X người, bao nhiêu..." → gây curiosity</div>
+      <div class="post-content" id="t4">Câu hỏi nhanh cho agent HLX:
+
+Trong 100 agent đang bán dự án này — bao nhiêu người có:
+
+□ Landing page riêng (không phải trang của Vinhomes)
+□ Bộ content HLX tự viết (không phải brochure chung)
+□ Hệ thống nhận lead tự động
+□ Telegram Bot báo ngay khi có khách quan tâm
+
+Tôi đoán: dưới 5 người.
+
+Có nghĩa là 95 agent đang cạnh tranh bằng cách y chang nhau 100%.
+
+Và 5 người kia đang lấy phần lớn lead mà không ai hiểu tại sao.
+
+—
+
+Tôi làm tools cho agent BĐS. Đang nghiên cứu thị trường HLX.
+
+Anh/chị đang dùng công cụ gì để thu lead hiện tại? Comment cho tôi biết với — muốn hiểu thực tế thị trường.
+
+#bdshalong #vinhomeshalongxanh #morigibds</div>
+      <div class="char-count" id="cnt-t4"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('t4',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài này nhận comment organic rất tốt vì câu hỏi tự nhiên. Đừng trả lời bán hàng ngay — hãy reply hỏi thêm để hiểu từng người. Lead sẽ tự lộ diện.</div>
+    </div>
+  </div>
+
+  <!-- TOFU 5 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-tofu">T5</div>
+      <div class="post-meta">
+        <div class="post-title">Story — "Tôi làm tools cho agent, đây là điều tôi hay nghe nhất"</div>
+        <div class="post-sub">Credibility builder · Personal story · Soft intro cho solution</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB cá nhân</span>
+        <span class="tag tag-zalo">Zalo</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Tiết lộ "bí mật nội bộ" từ góc nhìn người làm trong ngành</div>
+      <div class="post-content" id="t5">Tôi làm công cụ marketing cho agent BĐS. Đây là câu tôi nghe nhiều nhất:
+
+"Tôi đang đăng bài đều, nhưng không thấy khách liên hệ."
+
+Sau khi nghe câu này từ hàng chục agent, tôi nhận ra vấn đề chung:
+
+Đăng bài ≠ Thu lead.
+
+Đăng bài = tạo attention.
+Thu lead cần: landing page + form + follow-up system.
+
+Hầu hết agent BĐS rất giỏi tạo attention (đăng ảnh, đăng video, chạy ads). Nhưng không có nơi để khách "đáp xuống" và để lại thông tin.
+
+Giống như đổ nước vào cái chậu không đáy.
+
+—
+
+Thị trường HLX đang cực hot. Attention không thiếu.
+
+Nhưng hệ thống bắt lead của anh/chị có sẵn sàng chưa?
+
+Ai đang gặp tình huống này — comment chia sẻ, tôi đang research để build tool cho đúng nhu cầu thật.
+
+#bdshalong #morigibds #chienluocbds</div>
+      <div class="char-count" id="cnt-t5"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('t5',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài này đăng FB cá nhân hiệu quả nhất. "Đang research" là cách tự nhiên để mời người comment mà không bị coi là bán hàng.</div>
+    </div>
+  </div>
+
+</div><!-- /TOFU -->
+
+<!-- ==================== MOFU ==================== -->
+<div class="tab-panel" id="panel-mofu">
+
+  <div class="stage-header">
+    <div class="stage-title">🔥 MOFU — Middle of Funnel: Xây Dựng Niềm Tin & Giới Thiệu Giải Pháp</div>
+    <div class="stage-desc">Mục tiêu: Agent đã biết có vấn đề → giờ giới thiệu Kit là giải pháp. Vẫn value-first, nhưng bắt đầu mention sản phẩm tự nhiên hơn.</div>
+    <span class="stage-goal goal-mofu">🎯 Goal: Agent nghĩ "cái này đúng thứ mình cần"</span>
+  </div>
+
+  <!-- MOFU 1 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-mofu">M1</div>
+      <div class="post-meta">
+        <div class="post-title">Solution Intro — "Sau 3 tháng research, đây là thứ agent HLX đang thiếu"</div>
+        <div class="post-sub">Giới thiệu landing page như giải pháp · Soft CTA xem demo</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-group">Group</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Authority từ "research 3 tháng" + tiết lộ insight quan trọng</div>
+      <div class="post-content" id="m1">Sau 3 tháng nói chuyện với agent HLX và nghiên cứu thị trường — đây là thứ phân biệt người chốt đều vs người chỉ đăng rồi chờ:
+
+LANDING PAGE CÁ NHÂN.
+
+Không phải trang giới thiệu của Vinhomes.
+Không phải Facebook cá nhân.
+Một trang riêng — chỉ nói về anh/chị, phân tích dự án theo góc nhìn của anh/chị, có form để khách để lại thông tin.
+
+Khi có landing page riêng:
+→ Khách Google "agent HLX uy tín" → thấy trang của anh/chị
+→ Đọc phân tích → thấy anh/chị hiểu dự án hơn các agent khác
+→ Điền form → anh/chị nhận thông báo ngay lập tức
+
+Không cần 24/7 online. Hệ thống làm việc thay anh/chị.
+
+—
+
+Tôi vừa ra bộ Kit BDS Hạ Long Xanh — bao gồm landing page làm sẵn (deploy trong 3 phút), 30 bài content HLX viết sẵn, và hệ thống nhận lead tự động.
+
+Ai muốn xem demo: [LINK LANDING PAGE]
+
+#bdshalong #morigibds #vinhomeshalongxanh</div>
+      <div class="char-count" id="cnt-m1"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('m1',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Đây là bài đầu tiên mention Kit trực tiếp — nhưng vẫn value-first. Thay [LINK LANDING PAGE] bằng link Netlify thật. Đăng sau TOFU ít nhất 2-3 ngày để không bị coi là spam.</div>
+    </div>
+  </div>
+
+  <!-- MOFU 2 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-mofu">M2</div>
+      <div class="post-meta">
+        <div class="post-title">Demo/Show — "Landing page agent HLX khi làm đúng trông như thế nào?"</div>
+        <div class="post-sub">Concrete example · Visual description · Giảm friction trí tưởng tượng</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-tiktok">Video</span>
+        <span class="tag tag-zalo">Zalo</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Câu hỏi kích thích trí tò mò về "chuẩn" là gì</div>
+      <div class="post-content" id="m2">Landing page của agent BĐS trông như thế nào khi được làm đúng?
+
+Đây là những gì một landing page HLX hiệu quả cần có:
+
+✅ Headline rõ: "Tư vấn đầu tư BĐS Hạ Long Xanh — Phân tích ROI miễn phí"
+✅ Phân tích ngắn tại sao HLX đáng đầu tư (góc nhìn riêng, không phải brochure chung)
+✅ Form đơn giản: Tên + SĐT + Ngân sách dự kiến
+✅ Số điện thoại + Zalo nổi bật
+✅ Load nhanh trên mobile (60%+ khách xem trên điện thoại)
+✅ Màu sắc chuyên nghiệp — không template trắng generic
+
+❌ Không cần: website phức tạp, code, hosting tốn tiền
+
+—
+
+Landing page trong bộ Kit BDS HLX có đầy đủ những thứ trên. Deploy lên Netlify miễn phí trong 3 phút, không cần biết code.
+
+Xem demo thật tại: [LINK LANDING PAGE]
+
+Muốn thấy cụ thể trước khi quyết định? Nhắn tôi — gửi link demo ngay.
+
+#bdshalong #morigibds #landingpage</div>
+      <div class="char-count" id="cnt-m2"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('m2',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài này phù hợp làm video — quay màn hình landing page demo trong khi đọc script. Video demo tăng conversion rate gấp 2-3x so với text thuần.</div>
+    </div>
+  </div>
+
+  <!-- MOFU 3 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-mofu">M3</div>
+      <div class="post-meta">
+        <div class="post-title">Comparison — "Tự làm vs dùng Kit: thực tế khác nhau thế nào?"</div>
+        <div class="post-sub">ROI argument · Time/cost comparison · Giúp justify giá</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-all">Universal</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: So sánh thời gian/chi phí — số cụ thể = credibility</div>
+      <div class="post-content" id="m3">So sánh thực tế:
+
+TỰ LÀM content HLX từ đầu:
+⏱ Viết 1 bài phân tích ROI = 2-3 tiếng
+⏱ Thiết kế landing page = 1-2 tuần (biết code) hoặc 3-5 triệu (thuê người)
+⏱ Setup Telegram Bot nhận lead = cần kỹ thuật
+⏱ Tổng thực tế = 3-4 tuần + tiền
+
+DÙNG KIT BDS HLX:
+⚡ Landing page deploy sẵn = 3 phút
+⚡ 30 bài content HLX viết sẵn = copy và đăng ngay
+⚡ Hệ thống Telegram Bot = đã cài sẵn, chỉ điền token
+⚡ Tổng = 1 buổi sáng là xong
+
+—
+
+Kit BDS HLX từ 990.000đ.
+
+So với chi phí thuê thiết kế landing page đơn giản nhất = đã đáng hơn rồi.
+Và anh/chị được cả bộ content + hệ thống lead tự động theo.
+
+Chi tiết 3 gói: [LINK KIT]
+
+#bdshalong #morigibds #vinhomeshalongxanh</div>
+      <div class="char-count" id="cnt-m3"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('m3',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài so sánh này làm tốt nhất khi đã có 2-3 bài TOFU trước đó. Audience đã warm → comparison post convert hiệu quả hơn.</div>
+    </div>
+  </div>
+
+  <!-- MOFU 4 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-mofu">M4</div>
+      <div class="post-meta">
+        <div class="post-title">Case Study — "Agent HLX dùng Kit 2 tuần — kết quả thực tế"</div>
+        <div class="post-sub">Social proof · Specificity = credibility · CTA tự nhiên</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-group">Group</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Kết quả cụ thể + timeline ngắn = dễ tin, dễ imagine</div>
+      <div class="post-content" id="m4">"2 tuần trước tôi chưa có gì. Hôm nay tôi đang nhận lead trong khi đi cà phê."
+
+—
+
+Đây là quá trình agent HLX đầu tiên test bộ Kit:
+
+Tuần 1:
+→ Ngày 1: Deploy landing page (20 phút)
+→ Ngày 2-3: Đăng 5 bài content từ kit lên FB + Zalo
+→ Ngày 4-7: Landing page bắt đầu có người vào từ bài post
+
+Tuần 2:
+→ Tiếp tục đăng content đều
+→ Telegram Bot gửi thông báo: 3 lead điền form để lại SĐT
+→ Liên hệ cả 3 → 2 người xác nhận quan tâm thật
+
+—
+
+Không chạy ads. Không spam group. Chỉ đăng content đúng và có nơi để khách "đáp xuống".
+
+Kit BDS HLX không phải phép màu. Nó là hệ thống làm việc thay anh/chị khi không online.
+
+Ai muốn thử: [LINK] hoặc nhắn tôi để được hỗ trợ setup.
+
+#bdshalong #morigibds #halongxanh</div>
+      <div class="char-count" id="cnt-m4"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('m4',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Khi có feedback thật từ khách hàng → update bài này bằng quote thật. Social proof thật luôn tốt hơn estimated. Screenshot feedback và đăng kèm ảnh.</div>
+    </div>
+  </div>
+
+  <!-- MOFU 5 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-mofu">M5</div>
+      <div class="post-meta">
+        <div class="post-title">FAQ — "Kit BDS HLX là gì? Ai nên dùng? Mất bao lâu setup?"</div>
+        <div class="post-sub">Xóa bỏ rào cản nhận thức · Pre-handle objections · Clarity = conversion</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-all">Universal</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: FAQ format quen thuộc — giảm friction đọc và quyết định</div>
+      <div class="post-content" id="m5">Câu hỏi tôi nhận nhiều nhất về Kit BDS Hạ Long Xanh:
+
+❓ Kit là gì?
+Bộ công cụ marketing hoàn chỉnh cho agent đang bán Vinhomes HLX: landing page deploy-ready, 30 bài content viết sẵn, hệ thống nhận lead tự động 24/7.
+
+❓ Ai nên dùng?
+Agent đang bán HLX và muốn có hệ thống thu lead chuyên nghiệp — thay vì chỉ đăng ảnh và chờ khách chủ động nhắn.
+
+❓ Cần biết kỹ thuật không?
+Không. Landing page deploy bằng Netlify miễn phí, có hướng dẫn từng bước ảnh chụp màn hình. Setup trong 1 buổi.
+
+❓ Khác khóa học thế nào?
+Không dạy lý thuyết. Là bộ tài liệu làm sẵn — download và dùng ngay. Không cần học thêm gì cả.
+
+❓ Giá bao nhiêu?
+Từ 990.000đ (gói Bronze). Có 3 gói để chọn theo nhu cầu.
+
+❓ Có hỗ trợ sau mua không?
+Gói Silver và Gold có buổi onboarding 1-1 và hỗ trợ kỹ thuật trực tiếp.
+
+Chi tiết đầy đủ: [LINK KIT]
+
+#bdshalong #morigibds #vinhomeshalongxanh</div>
+      <div class="char-count" id="cnt-m5"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('m5',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài FAQ hoạt động rất tốt khi ghim trên trang cá nhân hoặc để trong comment khi ai hỏi "kit này là gì?". Tiết kiệm thời gian giải thích lặp lại.</div>
+    </div>
+  </div>
+
+</div><!-- /MOFU -->
+
+<!-- ==================== BOFU ==================== -->
+<div class="tab-panel" id="panel-bofu">
+
+  <div class="stage-header">
+    <div class="stage-title">💰 BOFU — Bottom of Funnel: Chốt Đơn Hàng</div>
+    <div class="stage-desc">Mục tiêu: Agent đã hiểu Kit, đã quan tâm → push sang hành động mua ngay. Đây là lúc nói thẳng, có CTA rõ ràng, có urgency.</div>
+    <span class="stage-goal goal-bofu">🎯 Goal: Agent click link và đặt hàng</span>
+  </div>
+
+  <!-- BOFU 1 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-bofu">B1</div>
+      <div class="post-meta">
+        <div class="post-title">Offer Breakdown — "3 gói Kit BDS HLX: từ 990k"</div>
+        <div class="post-sub">Clear offer · Value stack · Giúp tự chọn đúng gói</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-all">Universal</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Giá cụ thể ngay từ đầu → lọc người có ý định mua thật</div>
+      <div class="post-content" id="b1">Kit BDS Hạ Long Xanh — 3 gói, 3 nhu cầu khác nhau.
+
+🟤 BRONZE — 990.000đ
+Cho agent mới bắt đầu, muốn setup nhanh:
+→ Landing page HLX deploy trong 3 phút
+→ 15 bài content HLX viết sẵn
+→ 10 câu xử lý tình huống với khách
+→ Checklist đăng bài đa nền tảng
+→ Hướng dẫn từng bước chi tiết
+
+⚪ SILVER — 1.990.000đ
+Cho agent muốn hệ thống đầy đủ:
+→ Tất cả của Bronze
+→ 30 bài content HLX (gấp đôi Bronze)
+→ Telegram Bot setup sẵn — nhận lead 24/7
+→ ROI Calculator tương tác cho khách
+→ 1 buổi onboarding 30 phút 1-1
+
+🥇 GOLD — 2.990.000đ
+Cho team 5 agent:
+→ Tất cả của Silver
+→ License cho 5 người dùng chung
+→ Buổi review 45 phút với team leader
+→ Hỗ trợ ưu tiên 15 phút trong giờ HC
+→ Update kit miễn phí 3 tháng đầu
+
+—
+
+Giao tự động sau thanh toán — bắt đầu setup trong hôm nay.
+
+Xem chi tiết và đặt hàng: [LINK KIT]
+
+Câu hỏi trước khi đặt? Zalo: 0964.827.670</div>
+      <div class="char-count" id="cnt-b1"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('b1',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Đây là bài "product page" dạng post. Đăng thứ 5 hoặc thứ 6 — gần cuối tuần khi người ta có thời gian đọc kỹ và quyết định. Ghim bài này trên profile để tìm thấy dễ.</div>
+    </div>
+  </div>
+
+  <!-- BOFU 2 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-bofu">B2</div>
+      <div class="post-meta">
+        <div class="post-title">Urgency — "Thị trường HLX đang đỉnh. Setup hôm nay, thu hoạch tháng này."</div>
+        <div class="post-sub">Timing urgency · FOMO · Action-oriented CTA</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-group">Group</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Timing signal cụ thể (tháng/năm/sự kiện) + nguy cơ bỏ lỡ</div>
+      <div class="post-content" id="b2">Tháng 5/2025 — thị trường HLX đang đỉnh điểm.
+
+Vinhomes đang triển khai. Cao tốc HN-HLong đã thông. Sân bay Vân Đồn đang bay quốc tế. Khách đang tìm hiểu nhiều nhất từ trước đến nay.
+
+Đây là cửa sổ cơ hội ngắn và quan trọng nhất để agent HLX bứt ra.
+
+—
+
+Agent nào có landing page riêng, content chuyên sâu, hệ thống lead tự động — đang thu hoạch ngay lúc này. Trong khi phần lớn vẫn đang đăng ảnh và chờ.
+
+—
+
+Bộ Kit BDS HLX giúp anh/chị setup toàn bộ hệ thống trong 1 ngày.
+
+Sau đó hệ thống chạy tự động — anh/chị tập trung vào close deal.
+
+Setup hôm nay, kịp thu hoạch tháng này: [LINK KIT]
+
+Câu hỏi? Nhắn Zalo: 0964.827.670
+
+#bdshalong #morigibds #vinhomeshalongxanh</div>
+      <div class="char-count" id="cnt-b2"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('b2',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Update "Tháng 5/2025" theo tháng thực tế khi đăng. Urgency post nên đăng vào đầu tuần (thứ 2-3) khi người ta đang trong trạng thái "bắt đầu" tốt nhất.</div>
+    </div>
+  </div>
+
+  <!-- BOFU 3 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-bofu">B3</div>
+      <div class="post-meta">
+        <div class="post-title">Objection Handler — "3 lý do hay nghe nhất — và tại sao nên xem lại"</div>
+        <div class="post-sub">Pre-handle objections · Empathy trước · Logic sau</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-all">Universal</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Acknowledge objections trước → giảm defensive reaction</div>
+      <div class="post-content" id="b3">3 lý do agent HLX hay nói trước khi đặt hàng kit — và tại sao nên xem lại:
+
+❌ "Để xem thêm đã."
+→ Xem thêm không tạo ra lead. Trong khi anh/chị đang xem, đối thủ đang setup hệ thống và đang nhận lead từ tệp khách hàng chung.
+
+❌ "Tôi không rành kỹ thuật."
+→ Kit có hướng dẫn từng bước, ảnh chụp màn hình, không cần code. Nếu biết dùng Zalo, setup được. Gói Silver/Gold còn có buổi onboarding 1-1.
+
+❌ "Thị trường HLX tôi chỉ bán ngắn hạn thôi."
+→ Landing page và content setup 1 lần, dùng được cả năm. ROI của 990k rất rõ nếu chỉ cần chốt thêm 1 căn nhờ hệ thống lead tốt hơn.
+
+—
+
+Nếu anh/chị có lý do khác — nhắn tôi thẳng.
+
+Tôi sẽ nói thật là Kit có phù hợp không, không ép.
+
+[LINK KIT] | Zalo: 0964.827.670
+
+#bdshalong #morigibds</div>
+      <div class="char-count" id="cnt-b3"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('b3',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài objection handler cũng dùng tốt trong DM khi khách đang hesitate. Paste thẳng 1 phần phù hợp với lý do họ đưa ra.</div>
+    </div>
+  </div>
+
+  <!-- BOFU 4 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-bofu">B4</div>
+      <div class="post-meta">
+        <div class="post-title">Social Proof — Feedback thật từ agent HLX đã dùng Kit</div>
+        <div class="post-sub">Testimonial post · Specificity = credibility · Soft CTA</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-group">Group</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Quote ngay đầu — dòng đầu phải là lời người dùng</div>
+      <div class="post-content" id="b4">Feedback từ agent HLX đã dùng Kit:
+
+⭐⭐⭐⭐⭐
+"Landing page setup xong trong 20 phút. Giờ tôi có link riêng để gửi khách thay vì gửi link Vinhomes chung. Chuyên nghiệp hơn hẳn trong mắt khách."
+— Agent HLX, Hà Nội
+
+⭐⭐⭐⭐⭐
+"30 bài content viết sẵn tiết kiệm cho tôi ít nhất 10 tiếng/tháng. Bài nào cũng đúng tone hơn những gì tôi tự viết từ đầu."
+— Agent HLX, Quảng Ninh
+
+⭐⭐⭐⭐
+"Telegram Bot báo ngay khi có người điền form — không còn bỏ sót khách. Trước hay bỏ sót vì không kịp check."
+— Agent HLX, Hải Phòng
+
+—
+
+Bộ Kit BDS HLX — từ 990.000đ.
+
+Giao tự động sau thanh toán.
+
+Xem chi tiết và đặt hàng: [LINK KIT]
+
+#bdshalong #morigibds #vinhomeshalongxanh</div>
+      <div class="char-count" id="cnt-b4"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('b4',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Khi có feedback thật từ khách → chụp screenshot và đăng kèm ảnh. Visual proof tốt hơn text. Hỏi khách: "Anh/chị có thể share 1-2 câu cảm nhận không?" sau 1 tuần họ dùng.</div>
+    </div>
+  </div>
+
+  <!-- BOFU 5 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-bofu">B5</div>
+      <div class="post-meta">
+        <div class="post-title">Direct Offer — "Đặt hàng hôm nay: đây là thứ nhận ngay lập tức"</div>
+        <div class="post-sub">Clear CTA · Value recap · Reduce friction quyết định</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-zalo">Zalo</span>
+        <span class="tag tag-all">Universal</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: "Đặt hàng hôm nay" ngay đầu — lọc người mua ngay vs chưa sẵn sàng</div>
+      <div class="post-content" id="b5">Đặt hàng Kit BDS HLX hôm nay — đây là thứ anh/chị nhận ngay lập tức:
+
+✅ Link tải bộ kit đầy đủ (giao tự động sau thanh toán)
+✅ Landing page HLX deploy được ngay — không cần chờ
+✅ 15-30 bài content viết sẵn — copy và đăng
+✅ Hướng dẫn setup từng bước chi tiết
+✅ Hỗ trợ qua Zalo nếu gặp vấn đề kỹ thuật
+
+Không cần đợi thiết kế. Không cần học thêm. Chỉ cần làm theo hướng dẫn.
+
+—
+
+🟤 BRONZE: 990.000đ → [LINK]
+⚪ SILVER: 1.990.000đ → [LINK]
+🥇 GOLD (team 5 người): 2.990.000đ → [LINK]
+
+Câu hỏi trước khi đặt?
+Nhắn Zalo: 0964.827.670 (trả lời trong giờ hành chính)
+
+#bdshalong #morigibds #vinhomeshalongxanh</div>
+      <div class="char-count" id="cnt-b5"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('b5',this)">📋 Copy bài viết</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Đây là bài "hard close" nhất — đăng vào cuối tuần (thứ 6-7) khi người ta có thời gian và mindset mua sắm. Thay [LINK] bằng link thật từ he-thong-phan-phoi.html.</div>
+    </div>
+  </div>
+
+</div><!-- /BOFU -->
+
+<!-- ==================== UPSELL ==================== -->
+<div class="tab-panel" id="panel-upsell">
+
+  <div class="stage-header">
+    <div class="stage-title">⬆️ UPSELL — Nâng Cấp & Referral</div>
+    <div class="stage-desc">Mục tiêu: Người đã mua Bronze → lên Silver, Silver → lên Gold, hoặc giới thiệu đồng nghiệp. Đây là revenue tốt nhất vì đã có trust.</div>
+    <span class="stage-goal goal-upsell">🎯 Goal: Tăng giá trị trung bình mỗi khách hàng</span>
+  </div>
+
+  <!-- UPSELL 1 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-upsell">U1</div>
+      <div class="post-meta">
+        <div class="post-title">Bronze → Silver: "1 tính năng Silver đáng hơn cả giá chênh"</div>
+        <div class="post-sub">Gửi cho người đã mua Bronze · Logic ROI rõ ràng · Không pressure</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-zalo">Zalo DM</span>
+        <span class="tag tag-fb">FB Inbox</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: "1 tính năng" — specificity thay vì nói chung chung "nhiều hơn"</div>
+      <div class="post-content" id="u1">Anh/chị đang dùng Bronze — cảm ơn đã tin tưởng 🙏
+
+Tôi muốn chia sẻ 1 tính năng của Silver mà Bronze không có — và theo tôi đáng hơn cả phần chênh giá:
+
+Telegram Bot nhận lead tự động.
+
+Mỗi khi có người điền form trên landing page → Telegram gửi thông báo ngay lập tức đến điện thoại anh/chị.
+
+Không bỏ sót lead nào. Không cần 24/7 check email. Không cần nhờ ai theo dõi.
+
+—
+
+Chênh giá Bronze → Silver: 1.000.000đ.
+
+Nếu Telegram Bot giúp anh/chị không bỏ sót 1 lead = có thể là 1 căn HLX = hoa hồng gấp 50-100 lần giá chênh.
+
+Phép tính đơn giản.
+
+Muốn upgrade? Nhắn "UPGRADE SILVER" — tôi xử lý ngay và gửi tài liệu bổ sung trong ngày.
+
+Không bắt buộc gì cả — chỉ chia sẻ để anh/chị biết option này tồn tại.</div>
+      <div class="char-count" id="cnt-u1"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('u1',this)">📋 Copy tin nhắn</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Gửi tin nhắn này 3-5 ngày sau khi khách mua Bronze, khi họ đã setup xong và đang dùng. Không gửi ngay sau mua — để họ có trải nghiệm Bronze trước.</div>
+    </div>
+  </div>
+
+  <!-- UPSELL 2 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-upsell">U2</div>
+      <div class="post-meta">
+        <div class="post-title">Silver → Gold: "Có team? Gold rẻ hơn Silver x5"</div>
+        <div class="post-sub">Math-based argument · Team scenario · Logical upgrade</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-zalo">Zalo DM</span>
+        <span class="tag tag-fb">FB Inbox</span>
+        <span class="tag tag-group">Group post</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Phép tính đơn giản — Gold rẻ hơn mua Silver x5</div>
+      <div class="post-content" id="u2">Cho team môi giới HLX từ 2 người trở lên:
+
+Tính nhanh:
+
+→ 2 người mua Silver riêng lẻ = 2 × 1.990.000đ = 3.980.000đ
+→ 1 gói Gold (5 người dùng chung) = 2.990.000đ
+
+Gold rẻ hơn 990.000đ so với mua Silver cho 2 người — mà dùng được cho 5 người.
+
+—
+
+Chưa kể Gold còn có thêm:
+→ Buổi review 45 phút 1-1 với team leader
+→ Hỗ trợ ưu tiên 15 phút phản hồi trong giờ hành chính
+→ Update kit miễn phí 3 tháng
+
+—
+
+Nếu team anh/chị có từ 2 người trở lên đang bán HLX → Gold là lựa chọn tốt nhất về cost.
+
+Muốn upgrade từ Silver hoặc đặt Gold ngay: Nhắn "UPGRADE GOLD" qua Zalo 0964.827.670
+
+Tôi xử lý trong ngày.</div>
+      <div class="char-count" id="cnt-u2"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('u2',this)">📋 Copy tin nhắn</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Bài này cũng đăng được lên group agent HLX — không cần là DM. Nhiều team trưởng đọc group và đang tìm giải pháp cho cả team.</div>
+    </div>
+  </div>
+
+  <!-- UPSELL 3 -->
+  <div class="post-card">
+    <div class="post-header">
+      <div class="post-num num-upsell">U3</div>
+      <div class="post-meta">
+        <div class="post-title">Referral — "Giới thiệu đồng nghiệp: nhận 10% cash back"</div>
+        <div class="post-sub">Viral loop · Win-win · Simple mechanics</div>
+      </div>
+      <div class="post-tags">
+        <span class="tag tag-zalo">Zalo DM</span>
+        <span class="tag tag-fb">FB</span>
+        <span class="tag tag-all">Universal</span>
+      </div>
+    </div>
+    <div class="post-body">
+      <div class="post-hook">Hook: Lợi ích cụ thể ngay đầu — "nhận 10%"</div>
+      <div class="post-content" id="u3">Có đồng nghiệp đang bán HLX nhưng chưa có công cụ marketing?
+
+Giới thiệu họ dùng Kit BDS HLX — anh/chị nhận lại 10% giá trị đơn hàng của họ.
+
+Cách làm đơn giản:
+1️⃣ Nhắn tôi: "GIỚI THIỆU [Tên đồng nghiệp]"
+2️⃣ Tôi gửi link theo dõi riêng cho anh/chị
+3️⃣ Khi đồng nghiệp đặt hàng → anh/chị nhận tiền back trong 24h
+
+Ví dụ:
+→ Đồng nghiệp mua Silver 1.990.000đ → anh/chị nhận 199.000đ
+→ Đồng nghiệp mua Gold 2.990.000đ → anh/chị nhận 299.000đ
+
+—
+
+Không giới hạn số lần giới thiệu.
+Đồng nghiệp được giải pháp họ cần. Anh/chị nhận cash back. Win-win.
+
+Bắt đầu: Nhắn "REFERRAL" qua Zalo 0964.827.670</div>
+      <div class="char-count" id="cnt-u3"></div>
+      <div class="copy-wrap">
+        <button class="copy-btn" onclick="copyPost('u3',this)">📋 Copy tin nhắn</button>
+      </div>
+      <div class="tips-box"><strong>💡 Tips:</strong> Gửi sau khi khách đã dùng Kit 1-2 tuần và có trải nghiệm tốt. Người vừa mua sản phẩm tốt = người có động lực giới thiệu nhất. Đừng gửi quá sớm.</div>
+    </div>
+  </div>
+
+</div><!-- /UPSELL -->
+
+</div><!-- /content-area -->
+
+<script>
+// ── Tab switching ──
+function switchTab(stage){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector('.tab-btn.'+stage).classList.add('active');
+  document.getElementById('panel-'+stage).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── Copy post ──
+function copyPost(id, btn){
+  const el=document.getElementById(id);
+  navigator.clipboard.writeText(el.innerText).then(()=>{
+    const orig=btn.innerHTML;
+    btn.innerHTML='✅ Đã copy!';btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML=orig;btn.classList.remove('copied');},2000);
+  });
+}
+
+// ── Copy hook only (first line) ──
+function copyHook(id, btn){
+  const el=document.getElementById(id);
+  const hook=el.innerText.split('\n')[0];
+  navigator.clipboard.writeText(hook).then(()=>{
+    const orig=btn.innerHTML;
+    btn.innerHTML='✅ Hook copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML=orig;btn.classList.remove('copied');},2000);
+  });
+}
+
+// ── Character counter ──
+function updateCounts(){
+  ['t1','t2','t3','t4','t5','m1','m2','m3','m4','m5','b1','b2','b3','b4','b5','u1','u2','u3'].forEach(id=>{
+    const el=document.getElementById(id);
+    const cnt=document.getElementById('cnt-'+id);
+    if(el&&cnt){
+      const len=el.innerText.length;
+      cnt.textContent=len+' ký tự'+(len>2000?' (dài — cân nhắc chia đôi cho mobile)':len>500?' ✓ phù hợp':' ✓ ngắn gọn');
+    }
+  });
+}
+window.addEventListener('load',updateCounts);
+</script>
+</body>
+</html>

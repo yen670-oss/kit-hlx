@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seeding Chuyên Gia — Kit BDS HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B3A6B;--nd:#102340;--nl:#2A5298;
+    --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+    --brown:#6B4226;--cream:#FAF8F3;--cd:#EDE8DC;
+    --bg:#0d1117;--bg2:#161b27;--border:#21262d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:#e2e8f0;line-height:1.7;}
+  h1,h2,h3{font-family:'Playfair Display',serif;}
+
+  /* HERO */
+  .hero{background:linear-gradient(160deg,#0e1f38,#1B3A6B 55%,#3b1e08);padding:48px 24px 38px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+  .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.12) 1.5px,transparent 0);background-size:28px 28px;}
+  .hero-in{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+  .badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 18px;border-radius:99px;margin-bottom:18px;}
+  .hero h1{font-size:clamp(22px,4vw,34px);color:#fff;line-height:1.25;margin-bottom:10px;}
+  .tg{background:linear-gradient(135deg,#E2C06A,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .hero p{color:#aab8d0;font-size:13.5px;max-width:580px;margin:0 auto 22px;}
+  .hero-stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+  .hstat{text-align:center;}
+  .hstat-n{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:var(--gl);}
+  .hstat-l{font-size:11px;color:#6b7280;}
+
+  /* TAB NAV */
+  .tab-nav{display:flex;background:var(--bg);border-bottom:1px solid var(--border);overflow-x:auto;position:sticky;top:0;z-index:100;}
+  .tab-btn{padding:13px 18px;font-size:12.5px;font-weight:700;cursor:pointer;border:none;background:transparent;color:#6b7280;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;font-family:'Be Vietnam Pro',sans-serif;}
+  .tab-btn:hover{color:#e2e8f0;background:rgba(255,255,255,.03);}
+  .tab-btn.active{color:#E2C06A;border-bottom-color:#E2C06A;}
+  .tab-btn.mo-man.active{color:#f472b6;border-bottom-color:#f472b6;}
+  .tab-btn.s1.active{color:#f97316;border-bottom-color:#f97316;}
+  .tab-btn.s2.active{color:#3b82f6;border-bottom-color:#3b82f6;}
+  .tab-btn.s3.active{color:#10b981;border-bottom-color:#10b981;}
+  .tab-btn.s4.active{color:#8b5cf6;border-bottom-color:#8b5cf6;}
+  .tab-btn.s5.active{color:#E2C06A;border-bottom-color:#E2C06A;}
+  .tab-btn.checklist.active{color:#34d399;border-bottom-color:#34d399;}
+
+  .tab-panel{display:none;max-width:860px;margin:0 auto;padding:36px 20px 80px;}
+  .tab-panel.active{display:block;}
+
+  /* POST CARD */
+  .post-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:24px;}
+  .post-head{padding:20px 24px 0;border-bottom:1px solid var(--border);padding-bottom:16px;}
+  .post-num{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;margin-bottom:10px;}
+  .pn-pink{background:rgba(244,114,182,.15);color:#f9a8d4;}
+  .pn-orange{background:rgba(249,115,22,.15);color:#fdba74;}
+  .pn-blue{background:rgba(59,130,246,.15);color:#93c5fd;}
+  .pn-green{background:rgba(16,185,129,.15);color:#6ee7b7;}
+  .pn-purple{background:rgba(139,92,246,.15);color:#c4b5fd;}
+  .pn-gold{background:rgba(201,168,76,.15);color:#E2C06A;}
+  .post-title{font-size:17px;font-weight:700;color:#f0f6fc;margin-bottom:6px;}
+  .post-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .plat-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px;}
+  .pt-fb{background:rgba(59,130,246,.12);color:#93c5fd;border:1px solid rgba(59,130,246,.2);}
+  .pt-zalo{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.2);}
+  .pt-group{background:rgba(249,115,22,.12);color:#fdba74;border:1px solid rgba(249,115,22,.2);}
+  .pt-tiktok{background:rgba(244,114,182,.12);color:#f9a8d4;border:1px solid rgba(244,114,182,.2);}
+  .hook-label{font-size:11px;color:#6b7280;margin-left:auto;font-style:italic;}
+
+  /* VERSIONS */
+  .version-tabs{display:flex;gap:8px;padding:16px 24px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+  .ver-btn{padding:7px 14px;font-size:12px;font-weight:600;border-radius:8px;border:1px solid var(--border);background:transparent;color:#6b7280;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s;}
+  .ver-btn.active{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.3);color:var(--gl);}
+  .ver-panel{display:none;padding:20px 24px;}
+  .ver-panel.active{display:block;}
+
+  /* POST BODY */
+  .post-body{background:rgba(0,0,0,.2);border-radius:10px;padding:18px;font-size:13.5px;color:#cbd5e1;line-height:1.8;white-space:pre-wrap;word-break:break-word;margin-bottom:14px;border:1px solid rgba(255,255,255,.04);}
+  .char-count{font-size:11px;color:#4b5563;margin-bottom:10px;}
+  .char-count span{font-weight:600;}
+  .char-ok{color:#34d399;}
+  .char-warn{color:#fbbf24;}
+
+  /* HASHTAG */
+  .hashtag-box{background:rgba(0,0,0,.15);border-radius:10px;padding:14px 18px;margin-bottom:14px;border:1px solid rgba(255,255,255,.04);}
+  .hashtag-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4b5563;margin-bottom:8px;}
+  .hashtag-text{font-size:12.5px;color:#8b949e;line-height:1.8;}
+
+  /* COPY BTN */
+  .copy-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .copy-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s;}
+  .copy-main{background:linear-gradient(135deg,var(--gd),var(--gold));color:#0d1117;}
+  .copy-main:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(201,168,76,.3);}
+  .copy-tag{background:rgba(255,255,255,.06);border:1px solid var(--border);color:#8b949e;}
+  .copy-tag:hover{background:rgba(255,255,255,.1);color:#e2e8f0;}
+
+  /* TIPS */
+  .tips-box{background:linear-gradient(135deg,rgba(75,30,10,.3),rgba(107,66,38,.2));border-radius:10px;padding:14px 18px;margin-top:14px;border:1px solid rgba(201,168,76,.15);}
+  .tips-box h4{font-size:12px;font-weight:700;color:var(--gl);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;}
+  .tips-box ul{padding-left:16px;}
+  .tips-box li{font-size:12.5px;color:#a07040;line-height:1.7;}
+
+  /* ALERT */
+  .alert{border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+  .alert-warn{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);}
+  .alert-info{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);}
+  .alert-ok{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);}
+  .alert-icon{font-size:18px;flex-shrink:0;}
+  .alert-body strong{display:block;font-size:13px;font-weight:700;margin-bottom:3px;color:#f0f6fc;}
+  .alert-body p,.alert-body li{font-size:12.5px;color:#8b949e;line-height:1.6;}
+  .alert-body ul{padding-left:16px;}
+
+  /* CHECKLIST TABLE */
+  .cl-section{margin-bottom:32px;}
+  .cl-title{font-size:16px;font-weight:700;color:#f0f6fc;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+  .cl-title .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .cl-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;}
+  .cl-table th{background:rgba(201,168,76,.08);color:var(--gl);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(201,168,76,.15);}
+  .cl-table td{padding:11px 14px;font-size:12.5px;color:#94a3b8;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
+  .cl-table tr:last-child td{border-bottom:none;}
+  .cl-table tr:hover td{background:rgba(255,255,255,.02);}
+  .time-badge{display:inline-block;background:rgba(201,168,76,.1);color:var(--gl);font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;}
+  .platform-list{display:flex;flex-direction:column;gap:4px;}
+  .pl-item{font-size:12px;color:#6b7280;display:flex;align-items:flex-start;gap:6px;}
+  .pl-item.ok::before{content:'✅';flex-shrink:0;}
+  .pl-item.warn::before{content:'⚠️';flex-shrink:0;}
+
+  /* CHECKLIST TICK */
+  .tick-list{display:flex;flex-direction:column;gap:8px;}
+  .tick-item{display:flex;gap:12px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:background .2s;}
+  .tick-item:hover{background:rgba(255,255,255,.05);}
+  .tick-item.done{background:rgba(52,211,153,.04);border-color:rgba(52,211,153,.2);}
+  .tick-box{width:22px;height:22px;border-radius:6px;border:2px solid rgba(201,168,76,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px;transition:all .2s;}
+  .tick-item.done .tick-box{background:linear-gradient(135deg,var(--gd),var(--gold));border-color:var(--gold);}
+  .tick-text{font-size:13px;color:#94a3b8;line-height:1.5;}
+  .tick-text strong{color:#e2e8f0;display:block;margin-bottom:2px;}
+
+  /* PROGRESS */
+  .progress-bar-wrap{background:rgba(255,255,255,.06);border-radius:99px;height:6px;margin-bottom:20px;overflow:hidden;}
+  .progress-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gd),var(--gl));transition:width .4s ease;}
+
+  /* DIVIDER */
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);margin:28px 0;}
+
+  /* LỊCH ĐĂNG */
+  .schedule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+  .sched-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+  .sched-week{font-size:10px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;}
+  .sched-day{font-size:14px;font-weight:700;color:#f0f6fc;margin-bottom:2px;}
+  .sched-time{font-size:12px;color:var(--gl);margin-bottom:10px;}
+  .sched-title{font-size:13px;color:#94a3b8;line-height:1.5;}
+  .sched-plat{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="badge">✍️ Content Chuyên Gia · Seeding BDS HLX</div>
+    <h1>Bộ Nội Dung Seeding<br><span class="tg">Định Vị Chuyên Gia Thị Trường HLX</span></h1>
+    <p>1 bài mở màn + 5 seeding posts được phân tích từ nỗi đau thực tế của môi giới HLX · Góc nhìn chuyên gia · Anti-kick · Copy 1 chạm</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Bài viết</div></div>
+      <div class="hstat"><div class="hstat-n">2</div><div class="hstat-l">Tuần lịch đăng</div></div>
+      <div class="hstat"><div class="hstat-n">10</div><div class="hstat-l">Nỗi đau được khai thác</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn mo-man active" onclick="switchTab('mo-man',this)">🎬 Bài Mở Màn</button>
+  <button class="tab-btn s1" onclick="switchTab('s1',this)">🥊 S1 · Cạnh Tranh</button>
+  <button class="tab-btn s2" onclick="switchTab('s2',this)">💸 S2 · Chi Phí</button>
+  <button class="tab-btn s3" onclick="switchTab('s3',this)">🐢 S3 · Khách Chậm</button>
+  <button class="tab-btn s4" onclick="switchTab('s4',this)">🧠 S4 · Tài Chính</button>
+  <button class="tab-btn s5" onclick="switchTab('s5',this)">⭐ S5 · Personal Brand</button>
+  <button class="tab-btn checklist" onclick="switchTab('checklist',this)">✅ Lịch & Checklist</button>
+</div>
+
+<!-- ═══════════════════════ BÀI MỞ MÀN ═══════════════════════ -->
+<div class="tab-panel active" id="panel-mo-man">
+
+  <div class="alert alert-info">
+    <div class="alert-icon">💡</div>
+    <div class="alert-body">
+      <strong>Mục đích bài này</strong>
+      <p>Bài mở màn đặt anh/chị vào vị trí <strong>chuyên gia quan sát thị trường</strong> — không phải môi giới bán hàng. Tạo credibility trước khi vào các seeding posts tiếp theo.</p>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head">
+      <div class="post-num pn-pink">🎬 BÀI MỞ MÀN</div>
+      <div class="post-title">Thực Trạng Thị Trường: 47 Group, 2.300 Bài, 84% Giống Nhau</div>
+      <div class="post-meta">
+        <span class="plat-tag pt-fb">📘 FB Nhật ký</span>
+        <span class="plat-tag pt-group">👥 FB Group</span>
+        <span class="plat-tag pt-zalo">💬 Zalo</span>
+        <span class="hook-label">Hook: Số liệu gây sốc</span>
+      </div>
+    </div>
+
+    <div class="version-tabs">
+      <button class="ver-btn active" onclick="switchVer('mm','full',this)">Bản đầy đủ (FB)</button>
+      <button class="ver-btn" onclick="switchVer('mm','short',this)">Bản ngắn (Zalo)</button>
+    </div>
+
+    <div class="ver-panel active" id="mm-full">
+      <div class="post-body" id="body-mm-full">Tôi dành 3 tuần scroll 47 group môi giới BĐS.
+
+Kết quả khiến tôi phải ngồi lại suy nghĩ khá lâu.
+
+Trong hơn 2.300 bài đăng tôi đọc qua — 84% có nội dung gần như giống hệt nhau:
+
+"Vị trí đắc địa. Pháp lý minh bạch. Lợi nhuận hấp dẫn. Liên hệ ngay."
+
+Không phải môi giới Việt Nam thiếu chuyên môn.
+Không phải họ lười.
+
+Mà là cả ngành đang dùng chung một bộ công cụ — tài liệu từ chủ đầu tư, ảnh từ sàn, content từ... không rõ ai soạn.
+
+---
+
+Riêng với Vinhomes Hạ Long Xanh — dự án đang nóng nhất khu vực phía Bắc quý này — tôi nhìn thấy một nghịch lý:
+
+Dự án càng hot → càng nhiều môi giới tham gia → content càng giống nhau → khách hàng càng confused → tỷ lệ chốt càng thấp.
+
+Tôi nói chuyện với hơn 20 agent đang bán HLX trong tháng vừa rồi.
+
+Câu hỏi tôi hỏi mỗi người: "Điều gì khiến anh/chị khó nhất khi bán dự án này?"
+
+Top 5 câu trả lời — không ai dàn xếp trước:
+
+① "Khách vào hỏi xong bảo để suy nghĩ, rồi mất luôn"
+→ Không có hệ thống follow-up. Lead rơi mà không biết.
+
+② "Tôi đăng bài mỗi ngày nhưng engagement cứ thấp dần"
+→ Nội dung đúng nhưng không khác biệt. FB algorithm không ưu tiên content giống nhau.
+
+③ "Khách hỏi tôi mà hỏi 5 agent khác — họ không biết chọn ai"
+→ Không có personal brand. Không có lý do để chọn mình thay vì người khác.
+
+④ "Tôi mất 2–3 tiếng mỗi ngày chỉ để soạn bài đăng"
+→ Không có hệ thống content. Làm thủ công từ đầu mỗi ngày.
+
+⑤ "Tôi không biết trong 100 người xem bài của tôi, ai đang thực sự quan tâm"
+→ Không có landing page riêng. Không track được hành vi khách.
+
+---
+
+Không phải vấn đề của riêng ai.
+
+Đây là cấu trúc vấn đề của cả ngành — khi công cụ marketing của môi giới BĐS Việt Nam vẫn đang ở thế hệ 2015 trong khi thị trường đã chuyển sang 2025.
+
+Thị trường HLX đang ở đỉnh chu kỳ.
+Window cơ hội không mở mãi.
+
+Câu hỏi không phải "có nên bán HLX không" —
+mà là "agent nào chuẩn bị đúng công cụ sẽ thắng."
+
+---
+
+Tôi đang tổng hợp những gì quan sát được thành một bộ phân tích.
+Sẽ chia sẻ dần trong các bài tiếp theo.
+
+Anh/chị đang bán HLX hoặc đang tìm hiểu dự án này — comment "HLX" bên dưới, tôi sẽ gửi thêm data thực tế.
+
+📊 Nghiên cứu độc lập — không đại diện cho CĐT hay sàn nào.</div>
+      <div class="char-count" id="cc-mm-full"></div>
+      <div class="hashtag-box">
+        <div class="hashtag-label">Hashtag FB</div>
+        <div class="hashtag-text" id="ht-mm-fb">#moigioiHLX #VinhomesHaLongXanh #batdongsan #thitruongbds #moigioi_chuyen_nghiep #HaLongXanh #nghiencuuthi truong</div>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn copy-main" onclick="copyEl('body-mm-full',this)">📋 Copy bài viết</button>
+        <button class="copy-btn copy-tag" onclick="copyEl('ht-mm-fb',this)">🏷 Copy hashtag</button>
+      </div>
+    </div>
+
+    <div class="ver-panel" id="mm-short">
+      <div class="post-body" id="body-mm-short">3 tuần, 47 group môi giới, 2.300+ bài đăng.
+
+84% nội dung gần như giống hệt nhau.
+
+Riêng Vinhomes Hạ Long Xanh — dự án đang nóng nhất — tôi nhận ra một nghịch lý:
+
+Càng nhiều agent bán → content càng giống nhau → khách càng confused → tỷ lệ chốt càng thấp.
+
+Tôi hỏi 20 agent đang bán HLX: "Khó nhất là gì?"
+
+Câu trả lời lặp đi lặp lại:
+→ Lead vào hỏi rồi mất, không có hệ thống follow-up
+→ Đăng bài mỗi ngày nhưng không ai tương tác
+→ Khách hỏi 5 agent cùng lúc, không biết chọn ai
+→ Mất 2–3 tiếng/ngày chỉ để soạn content
+→ Không biết ai trong 100 người xem bài đang thực sự quan tâm
+
+Đây không phải lỗi của agent.
+Đây là cấu trúc vấn đề của cả ngành.
+
+Tôi sẽ chia sẻ thêm phân tích và hướng giải quyết trong các bài tiếp theo.
+
+Ai đang quan tâm HLX — nhắn tin hoặc comment "HLX", tôi gửi thêm data thực tế.</div>
+      <div class="char-count" id="cc-mm-short"></div>
+      <div class="hashtag-box">
+        <div class="hashtag-label">Hashtag Zalo</div>
+        <div class="hashtag-text" id="ht-mm-zalo">#HaLongXanh #moigioi #batdongsan2026 #VinhomesHaLongXanh</div>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn copy-main" onclick="copyEl('body-mm-short',this)">📋 Copy bài viết</button>
+        <button class="copy-btn copy-tag" onclick="copyEl('ht-mm-zalo',this)">🏷 Copy hashtag</button>
+      </div>
+    </div>
+
+    <div style="padding:0 24px 20px;">
+      <div class="tips-box">
+        <h4>💡 Tips đăng bài này</h4>
+        <ul>
+          <li>Kèm ảnh: chụp màn hình feed FB nhiều agent đăng bài giống nhau → minh chứng trực quan</li>
+          <li>KHÔNG có link, KHÔNG có SĐT trong bài → thuần value, không bị kick group</li>
+          <li>Trả lời comment trong 30 phút đầu → boost reach FB algorithm</li>
+          <li>Ai comment "HLX" → nhắn tin riêng, giới thiệu landing page kit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SEEDING 1 ═══════════════════════ -->
+<div class="tab-panel" id="panel-s1">
+  <div class="alert alert-warn">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <strong>Nỗi đau khai thác: Cạnh tranh nội bộ — Cắt máu — Không có personal brand</strong>
+      <p>Pain #3, #7, #10 từ khảo sát thực tế môi giới HLX. Đây là nỗi đau số 1 về cảm xúc.</p>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="post-head">
+      <div class="post-num pn-orange">🥊 SEEDING 1 — Tuần 1 · Thứ Hai</div>
+      <div class="post-title">Hàng Trăm Agent. Một Sản Phẩm. Ai Thắng?</div>
+      <div class="post-meta">
+        <span class="plat-tag pt-fb">📘 FB Nhật ký</span>
+        <span class="plat-tag pt-group">👥 3 Groups</span>
+        <span class="plat-tag pt-zalo">💬 Zalo</span>
+        <span class="hook-label">⏰ 8:00 sáng</span>
+      </div>
+    </div>
+    <div class="ver-panel active" style="display:block;">
+      <div class="post-body" id="body-s1">Hàng trăm agent. Một sản phẩm. Ai thắng?
+
+Tôi hỏi một môi giới HLX kỳ cựu tuần trước:
+
+"Điều khó nhất khi bán Vinhomes Hạ Long Xanh là gì?"
+
+Anh ấy không do dự: "Cạnh tranh với chính đồng nghiệp."
+
+Cùng một căn shophouse. Cùng một mức giá CĐT.
+Nhưng khách nhận tin nhắn từ 7–10 agent khác nhau trong cùng một ngày.
+
+Kết quả: Không phải agent giỏi nhất thắng.
+Mà là agent được nhớ đến đầu tiên thắng.
+
+Trong thị trường mà ai cũng đăng ảnh phối cảnh + "liên hệ ngay" —
+người đứng ra giải thích được tại sao HLX, tại sao lúc này, tại sao với họ mới là người chốt deal.
+
+Anh/chị đang bán HLX — câu khác biệt của anh/chị với 300 agent kia là gì?
+
+(Câu trả lời thật sự của anh/chị — tôi muốn nghe)</div>
+      <div class="char-count" id="cc-s1"></div>
+      <div class="hashtag-box">
+        <div class="hashtag-label">Hashtag</div>
+        <div class="hashtag-text" id="ht-s1">#moigioiHLX #VinhomesHaLongXanh #batdongsan #canh_tranh_bds #moigioi_chuyen_nghiep #personalbranding</div>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn copy-main" onclick="copyEl('body-s1',this)">📋 Copy bài viết</button>
+        <button class="copy-btn copy-tag" onclick="copyEl('ht-s1',this)">🏷 Copy hashtag</button>
+      </div>
+      <div class="tips-box" style="margin-top:14px;">
+        <h4>💡 Tips</h4>
+        <ul>
+          <li>Kèm ảnh: Chụp màn hình Zalo/Messenger đầy tin nhắn từ nhiều agent — khách dễ đồng cảm</li>
+          <li>Câu hỏi cuối bài rất quan trọng → kéo comment → boost organic reach</li>
+          <li>Groups nên đăng: Hội MG BDS VN Chuyên Nghiệp · MG BDS Quảng Ninh · MG VIN HLX</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SEEDING 2 ═══════════════════════ -->
+<div class="tab-panel" id="panel-s2">
+  <div class="alert alert-info">
+    <div class="alert-icon">💸</div>
+    <div class="alert-body">
+      <strong>Nỗi đau khai thác: Chi phí marketing cao — Chu kỳ bán dài — ROI không rõ ràng</strong>
+      <p>Pain #1, #8 — Nỗi đau về tài chính, dễ resonate với agent đang đốt tiền ads không hiệu quả.</p>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="post-head">
+      <div class="post-num pn-blue">💸 SEEDING 2 — Tuần 1 · Thứ Năm</div>
+      <div class="post-title">Bài Toán Chi Phí Mà Ít Agent HLX Dám Nói Thật</div>
+      <div class="post-meta">
+        <span class="plat-tag pt-fb">📘 FB Nhật ký</span>
+        <span class="plat-tag pt-group">👥 Group</span>
+        <span class="plat-tag pt-zalo">💬 Zalo</span>
+        <span class="hook-label">⏰ 11:30 trưa</span>
+      </div>
+    </div>
+    <div class="ver-panel active" style="display:block;">
+      <div class="post-body" id="body-s2">Bài toán chi phí mà ít agent HLX dám nói thật.
+
+Tôi ngồi tính thử với một agent bán HLX:
+
+Data khách: 500K–2M/tháng
+Chạy ads FB: 3–10M/tháng
+Đi lại Hà Nội ↔ Hạ Long: 2–5M/tháng
+Tiếp khách, café: 1–3M/tháng
+─────────────────────────────
+Tổng: 6–20M/tháng
+
+Chu kỳ bán trung bình: 3–6 tháng
+Chi phí trước khi có deal đầu tiên: 18–120M
+
+Không phải con số để nản lòng.
+Mà là con số để đặt câu hỏi đúng:
+
+Chi phí nào đang sinh ra lead? Chi phí nào đang đốt mà không ra gì?
+
+Agent chuyên nghiệp không cắt chi phí marketing —
+họ tối ưu từng đồng để biết chính xác kênh nào đang làm việc.
+
+Anh/chị đang track chi phí marketing theo kênh chưa?
+Hay đang đổ vào một chỗ và hi vọng?</div>
+      <div class="char-count" id="cc-s2"></div>
+      <div class="hashtag-box">
+        <div class="hashtag-label">Hashtag</div>
+        <div class="hashtag-text" id="ht-s2">#chiPhiMarketing #moigioidatdai #ROIbatdongsan #VinhomesHaLongXanh #marketingbds #dautu_thongminh</div>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn copy-main" onclick="copyEl('body-s2',this)">📋 Copy bài viết</button>
+        <button class="copy-btn copy-tag" onclick="copyEl('ht-s2',this)">🏷 Copy hashtag</button>
+      </div>
+      <div class="tips-box" style="margin-top:14px;">
+        <h4>💡 Tips</h4>
+        <ul>
+          <li>Kèm ảnh: Tạo bảng số liệu đơn giản trên Canva — bài có ảnh tăng reach 3–5x</li>
+          <li>Bài này hợp đăng giờ trưa — agent xem điện thoại lúc ăn trưa</li>
+          <li>Số liệu cụ thể → tạo credibility mạnh hơn lời nói chung chung</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SEEDING 3 ═══════════════════════ -->
+<div class="tab-panel" id="panel-s3">
+  <div class="alert alert-ok">
+    <div class="alert-icon">🐢</div>
+    <div class="alert-body">
+      <strong>Nỗi đau khai thác: Khách so giá — Quyết định chậm — Lead không chất lượng</strong>
+      <p>Pain #2, #5, #6 — Phân loại 3 nhóm khách cụ thể. Bài này rất dễ viral vì agent nào cũng gặp.</p>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="post-head">
+      <div class="post-num pn-green">🐢 SEEDING 3 — Tuần 2 · Thứ Hai</div>
+      <div class="post-title">"Khách Xem Xong Bảo Để Suy Nghĩ. 3 Tháng Sau Vẫn... Suy Nghĩ."</div>
+      <div class="post-meta">
+        <span class="plat-tag pt-fb">📘 FB Nhật ký</span>
+        <span class="plat-tag pt-group">👥 3 Groups</span>
+        <span class="plat-tag pt-zalo">💬 Zalo</span>
+        <span class="hook-label">⏰ 8:00 sáng</span>
+      </div>
+    </div>
+    <div class="ver-panel active" style="display:block;">
+      <div class="post-body" id="body-s3">"Khách xem xong bảo để suy nghĩ. 3 tháng sau vẫn... suy nghĩ."
+
+Câu này tôi nghe từ gần như mọi agent HLX tôi tiếp xúc.
+
+Có 3 nhóm khách đang làm chậm thị trường HLX:
+
+NHÓM 1 — Người so giá:
+Vào hỏi, so sánh với Đà Nẵng, Phú Quốc, Hòa Bình.
+Không phải không có tiền — mà chưa có lý do đủ thuyết phục để chọn HLX thay vì nơi khác.
+
+NHÓM 2 — Người chờ thanh lý đất cũ:
+Có mảnh đất Tuần Châu, Bãi Cháy chưa bán được.
+Muốn mua HLX nhưng kẹt thanh khoản.
+Đây không phải lead xấu — chỉ cần thêm thời gian và đúng kịch bản follow-up.
+
+NHÓM 3 — Người giàu thật sự:
+Họ không FOMO.
+Họ không bị thuyết phục bởi "cơ hội không thể bỏ lỡ."
+Họ ra quyết định khi tin vào con người đứng trước mặt họ, không phải vào sản phẩm.
+
+Vấn đề không phải thị trường chậm.
+Vấn đề là đang dùng cùng một kịch bản cho 3 nhóm khách hoàn toàn khác nhau.
+
+Anh/chị đang phân loại khách theo nhóm nào chưa?</div>
+      <div class="char-count" id="cc-s3"></div>
+      <div class="hashtag-box">
+        <div class="hashtag-label">Hashtag</div>
+        <div class="hashtag-text" id="ht-s3">#khachhangbds #HaLongXanh #dautu_bds #VinhomesHaLong #tamlykhachhang #moigioi #phanloaikhach</div>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn copy-main" onclick="copyEl('body-s3',this)">📋 Copy bài viết</button>
+        <button class="copy-btn copy-tag" onclick="copyEl('ht-s3',this)">🏷 Copy hashtag</button>
+      </div>
+      <div class="tips-box" style="margin-top:14px;">
+        <h4>💡 Tips</h4>
+        <ul>
+          <li>Bài này dễ viral — agent nào đọc cũng gật đầu và muốn share</li>
+          <li>Kèm ảnh: Infographic 3 nhóm khách (tạo Canva, nền xanh navy)</li>
+          <li>Câu hỏi cuối rất mở → nhiều loại comment → FB boost mạnh</li>
+          <li>Groups phù hợp: Hội MG BDS VN · Đầu Tư BDS Việt Nam · BDS Quảng Ninh</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SEEDING 4 ═══════════════════════ -->
+<div class="tab-panel" id="panel-s4">
+  <div class="alert alert-info">
+    <div class="alert-icon">🧠</div>
+    <div class="alert-body">
+      <strong>Nỗi đau khai thác: Thiếu kiến thức tài chính — Biến động chính sách tín dụng</strong>
+      <p>Pain #4, #9 — Nỗi đau về năng lực chuyên môn. Bài này thu hút agent muốn nâng cấp bản thân.</p>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="post-head">
+      <div class="post-num pn-purple">🧠 SEEDING 4 — Tuần 2 · Thứ Tư</div>
+      <div class="post-title">Câu Hỏi Mà Nhiều NĐT HLX Hỏi Agent — Và Agent Lúng Túng</div>
+      <div class="post-meta">
+        <span class="plat-tag pt-fb">📘 FB Nhật ký</span>
+        <span class="plat-tag pt-group">👥 Group</span>
+        <span class="plat-tag pt-zalo">💬 Zalo</span>
+        <span class="hook-label">⏰ 7:30 sáng</span>
+      </div>
+    </div>
+    <div class="ver-panel active" style="display:block;">
+      <div class="post-body" id="body-s4">Câu hỏi mà nhiều NĐT HLX hỏi agent — và agent lúng túng:
+
+"Với lãi suất hiện tại, nếu tôi vay 50% để mua shophouse 8 tỷ, dòng tiền cho thuê có đủ cover lãi không?"
+
+Không phải khách khó tính.
+Đây là câu hỏi cơ bản của bất kỳ nhà đầu tư chuyên nghiệp nào.
+
+Nhưng sau nhiều biến động BĐS 2022–2024 —
+room tín dụng thắt, lãi suất biến động, Luật Đất Đai mới —
+khách thận trọng hơn và hỏi sâu hơn nhiều.
+
+Agent nào trả lời được câu hỏi tài chính này → khách tin → deal nhanh hơn.
+Agent nào không trả lời được → khách tự đi tìm người khác.
+
+Khoảng cách giữa agent bình thường và agent chuyên nghiệp ở HLX hiện tại không còn là "ai biết dự án hơn" —
+mà là "ai hiểu bài toán tài chính của khách hơn."
+
+Anh/chị có sẵn bộ tính toán dòng tiền cho khách không?</div>
+      <div class="char-count" id="cc-s4"></div>
+      <div class="hashtag-box">
+        <div class="hashtag-label">Hashtag</div>
+        <div class="hashtag-text" id="ht-s4">#kienthuctaichinh #dautubatdongsan #dongtienbds #VinhomesHaLongXanh #luatdatdai #moigioi_chuyen_nghiep #laisuat</div>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn copy-main" onclick="copyEl('body-s4',this)">📋 Copy bài viết</button>
+        <button class="copy-btn copy-tag" onclick="copyEl('ht-s4',this)">🏷 Copy hashtag</button>
+      </div>
+      <div class="tips-box" style="margin-top:14px;">
+        <h4>💡 Tips</h4>
+        <ul>
+          <li>Kèm ảnh: Screenshot ROI calculator từ file bao-cao-thi-truong.html trong lead-magnets</li>
+          <li>Bài này thu hút agent muốn học thêm → comment hỏi → cơ hội DM giới thiệu kit</li>
+          <li>Groups phù hợp: Hội MG BDS Chuyên Nghiệp · Đầu Tư Tài Chính BDS</li>
+          <li>Đăng 7:30 sáng → người đọc tin tức buổi sáng, tỉnh táo, dễ tiếp thu nội dung nghiêm túc</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SEEDING 5 ═══════════════════════ -->
+<div class="tab-panel" id="panel-s5">
+  <div class="alert alert-ok">
+    <div class="alert-icon">⭐</div>
+    <div class="alert-body">
+      <strong>Nỗi đau khai thác: Thương hiệu cá nhân yếu — Khách không tự tìm đến</strong>
+      <p>Pain #7, #10 — Nỗi đau về định vị bản thân. Đây là bài chốt seeding cycle — bridge tự nhiên đến giải pháp kit.</p>
+    </div>
+  </div>
+  <div class="post-card">
+    <div class="post-head">
+      <div class="post-num pn-gold">⭐ SEEDING 5 — Tuần 2 · Thứ Sáu</div>
+      <div class="post-title">Khi Nào Thì Khách BĐS Tự Tìm Đến Agent?</div>
+      <div class="post-meta">
+        <span class="plat-tag pt-fb">📘 FB Nhật ký</span>
+        <span class="plat-tag pt-group">👥 Group PB</span>
+        <span class="plat-tag pt-zalo">💬 Zalo</span>
+        <span class="hook-label">⏰ 9:00 sáng</span>
+      </div>
+    </div>
+    <div class="ver-panel active" style="display:block;">
+      <div class="post-body" id="body-s5">Khi nào thì khách BĐS tự tìm đến agent — thay vì agent phải chạy theo khách?
+
+Tôi quan sát 3 agent HLX đang làm tốt nhất hiện tại.
+Điểm chung không phải họ chạy ads nhiều hơn hay có data xịn hơn.
+
+Điểm chung là: Khách chủ động nhắn tin cho họ.
+
+Họ làm được điều đó vì đã xây được một thứ:
+
+Người ta nhắc đến HLX → nhớ ngay đến tên họ.
+
+Không phải thương hiệu công ty. Không phải logo đẹp.
+Mà là sự xuất hiện nhất quán với góc nhìn riêng về thị trường Hạ Long — tuần này qua tuần khác.
+
+Thương hiệu cá nhân trong BĐS không build được trong 1 tháng.
+Nhưng nếu bắt đầu hôm nay — 3 tháng nữa anh/chị đang ở đâu so với đối thủ?
+
+Câu hỏi cho anh/chị: Nếu ai đó Google tên anh/chị kèm "HLX" — họ thấy gì?</div>
+      <div class="char-count" id="cc-s5"></div>
+      <div class="hashtag-box">
+        <div class="hashtag-label">Hashtag</div>
+        <div class="hashtag-text" id="ht-s5">#thuonghieucaNhan #personalbranding #moigioi_chuyen_nghiep #batdongsan #HaLongXanh #marketingcaNhan #xaydungthuonghieu</div>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn copy-main" onclick="copyEl('body-s5',this)">📋 Copy bài viết</button>
+        <button class="copy-btn copy-tag" onclick="copyEl('ht-s5',this)">🏷 Copy hashtag</button>
+      </div>
+      <div class="tips-box" style="margin-top:14px;">
+        <h4>💡 Tips</h4>
+        <ul>
+          <li>Kèm ảnh: Ảnh chân dung chuyên nghiệp của anh/chị + quote ngắn overlay</li>
+          <li>Bài này là bridge tự nhiên nhất để DM giới thiệu kit — "bộ công cụ xây personal brand cho agent HLX"</li>
+          <li>Tag 2–3 người bạn đồng nghiệp → kéo thêm reach từ mạng lưới</li>
+          <li>Groups: Personal Branding VN · Hội MG BDS Chuyên Nghiệp</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CHECKLIST ═══════════════════════ -->
+<div class="tab-panel" id="panel-checklist">
+
+  <!-- LỊCH ĐĂNG -->
+  <div class="cl-section">
+    <div class="cl-title">
+      <div class="dot" style="background:#E2C06A;"></div>
+      📅 Lịch Đăng 2 Tuần
+    </div>
+    <div class="schedule-grid">
+      <div class="sched-card">
+        <div class="sched-week">Tuần 1</div>
+        <div class="sched-day">Thứ Hai</div>
+        <div class="sched-time">⏰ 8:00 – 8:30 sáng</div>
+        <div class="sched-title">🎬 Bài Mở Màn — 47 group, 2300 bài</div>
+        <div class="sched-plat">
+          <span class="plat-tag pt-fb">FB Nhật ký</span>
+          <span class="plat-tag pt-group">3 Groups</span>
+          <span class="plat-tag pt-zalo">Zalo</span>
+        </div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-week">Tuần 1</div>
+        <div class="sched-day">Thứ Năm</div>
+        <div class="sched-time">⏰ 11:30 – 12:00 trưa</div>
+        <div class="sched-title">💸 S2 — Bài toán chi phí marketing</div>
+        <div class="sched-plat">
+          <span class="plat-tag pt-fb">FB Nhật ký</span>
+          <span class="plat-tag pt-group">Group</span>
+          <span class="plat-tag pt-zalo">Zalo</span>
+        </div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-week">Tuần 1</div>
+        <div class="sched-day">Thứ Bảy</div>
+        <div class="sched-time">⏰ 9:00 – 10:00 sáng</div>
+        <div class="sched-title">🥊 S1 — Hàng trăm agent, một sản phẩm</div>
+        <div class="sched-plat">
+          <span class="plat-tag pt-fb">FB Nhật ký</span>
+          <span class="plat-tag pt-group">3 Groups</span>
+        </div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-week">Tuần 2</div>
+        <div class="sched-day">Thứ Hai</div>
+        <div class="sched-time">⏰ 8:00 – 8:30 sáng</div>
+        <div class="sched-title">🐢 S3 — Khách xem xong bảo để suy nghĩ</div>
+        <div class="sched-plat">
+          <span class="plat-tag pt-fb">FB Nhật ký</span>
+          <span class="plat-tag pt-group">3 Groups</span>
+          <span class="plat-tag pt-zalo">Zalo</span>
+        </div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-week">Tuần 2</div>
+        <div class="sched-day">Thứ Tư</div>
+        <div class="sched-time">⏰ 7:30 – 8:00 sáng</div>
+        <div class="sched-title">🧠 S4 — Kiến thức tài chính & dòng tiền</div>
+        <div class="sched-plat">
+          <span class="plat-tag pt-fb">FB Nhật ký</span>
+          <span class="plat-tag pt-group">Group TC</span>
+          <span class="plat-tag pt-zalo">Zalo</span>
+        </div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-week">Tuần 2</div>
+        <div class="sched-day">Thứ Sáu</div>
+        <div class="sched-time">⏰ 9:00 – 9:30 sáng</div>
+        <div class="sched-title">⭐ S5 — Thương hiệu cá nhân</div>
+        <div class="sched-plat">
+          <span class="plat-tag pt-fb">FB Nhật ký</span>
+          <span class="plat-tag pt-group">Group PB</span>
+          <span class="plat-tag pt-zalo">Zalo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BẢNG CHI TIẾT -->
+  <div class="cl-section">
+    <div class="cl-title">
+      <div class="dot" style="background:#3b82f6;"></div>
+      📊 Bảng Chi Tiết Từng Bài
+    </div>
+    <table class="cl-table">
+      <thead>
+        <tr>
+          <th>Bài</th>
+          <th>Nền tảng</th>
+          <th>Giờ tốt nhất</th>
+          <th>Hashtag chính</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#f9a8d4">🎬 Mở Màn</strong></td>
+          <td>
+            <div class="platform-list">
+              <div class="pl-item ok">FB Nhật ký — bản dài</div>
+              <div class="pl-item ok">3 FB Groups môi giới</div>
+              <div class="pl-item ok">Zalo Nhật ký — bản ngắn</div>
+            </div>
+          </td>
+          <td><span class="time-badge">Thứ 2 · 8:00</span></td>
+          <td style="font-size:11.5px;color:#6b7280;">#moigioiHLX #VinhomesHaLongXanh #batdongsan</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#fdba74">🥊 S1 Cạnh tranh</strong></td>
+          <td>
+            <div class="platform-list">
+              <div class="pl-item ok">FB Nhật ký</div>
+              <div class="pl-item ok">Group MG BDS VN · MG Quảng Ninh · MG HLX</div>
+              <div class="pl-item ok">Zalo Nhật ký</div>
+            </div>
+          </td>
+          <td><span class="time-badge">Thứ 7 · 9:00</span></td>
+          <td style="font-size:11.5px;color:#6b7280;">#canh_tranh_bds #moigioi_chuyen_nghiep #personalbranding</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#93c5fd">💸 S2 Chi phí</strong></td>
+          <td>
+            <div class="platform-list">
+              <div class="pl-item ok">FB Nhật ký + Zalo (bài này hợp cả 2)</div>
+              <div class="pl-item ok">Group Kinh Doanh BDS · Chia sẻ KN</div>
+              <div class="pl-item warn">Group môi giới — cẩn thận nếu group có admin nghiêm</div>
+            </div>
+          </td>
+          <td><span class="time-badge">Thứ 5 · 11:30</span></td>
+          <td style="font-size:11.5px;color:#6b7280;">#chiPhiMarketing #ROIbatdongsan #marketingbds</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#6ee7b7">🐢 S3 Khách chậm</strong></td>
+          <td>
+            <div class="platform-list">
+              <div class="pl-item ok">FB Nhật ký — bài dài nhất, hợp FB</div>
+              <div class="pl-item ok">Group MG BDS VN · Đầu Tư BDS · BDS Quảng Ninh</div>
+              <div class="pl-item ok">Zalo Nhật ký</div>
+            </div>
+          </td>
+          <td><span class="time-badge">Thứ 2 · 8:00</span></td>
+          <td style="font-size:11.5px;color:#6b7280;">#khachhangbds #tamlykhachhang #phanloaikhach</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#c4b5fd">🧠 S4 Tài chính</strong></td>
+          <td>
+            <div class="platform-list">
+              <div class="pl-item ok">FB Nhật ký + Zalo (bài này rất hợp Zalo)</div>
+              <div class="pl-item ok">Group Đầu Tư TC·BDS·CK · Group MG Chuyên Nghiệp</div>
+              <div class="pl-item ok">Zalo group đầu tư / tài chính cá nhân</div>
+            </div>
+          </td>
+          <td><span class="time-badge">Thứ 4 · 7:30</span></td>
+          <td style="font-size:11.5px;color:#6b7280;">#kienthuctaichinh #dongtienbds #laisuat #luatdatdai</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#E2C06A">⭐ S5 Personal Brand</strong></td>
+          <td>
+            <div class="platform-list">
+              <div class="pl-item ok">FB Nhật ký — bài này rất hợp FB cá nhân</div>
+              <div class="pl-item ok">Group Personal Branding VN · Group MG Chuyên Nghiệp</div>
+              <div class="pl-item ok">Zalo Nhật ký — bản rút gọn</div>
+            </div>
+          </td>
+          <td><span class="time-badge">Thứ 6 · 9:00</span></td>
+          <td style="font-size:11.5px;color:#6b7280;">#thuonghieucaNhan #personalbranding #marketingcaNhan</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CHECKLIST TRƯỚC KHI ĐĂNG -->
+  <div class="cl-section">
+    <div class="cl-title">
+      <div class="dot" style="background:#34d399;"></div>
+      ✅ Checklist Trước Khi Đăng Mỗi Bài
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="prog-bar" style="width:0%"></div></div>
+    <div class="tick-list" id="tick-list">
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Không có link bán hàng trong bài</strong>Link đặt trong comment sau khi có người hỏi, không trong post body</div>
+      </div>
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Không có SĐT trong bài</strong>Để comment hoặc nhắn tin riêng — tạo tương tác tự nhiên hơn</div>
+      </div>
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Có câu hỏi mở ở cuối bài</strong>Câu hỏi dễ trả lời → kéo comment → FB/Zalo boost organic reach</div>
+      </div>
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Đã chuẩn bị ảnh kèm theo</strong>Bài có ảnh reach cao hơn bài chữ thuần 3–5x trên FB</div>
+      </div>
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Hashtag đã copy theo bảng trên</strong>Dán hashtag vào comment đầu tiên thay vì cuối bài — reach tốt hơn</div>
+      </div>
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Đăng FB Nhật ký trước → Group sau 5 phút</strong>Thứ tự đăng ảnh hưởng đến cách FB phân phối nội dung</div>
+      </div>
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Sẵn sàng trả lời comment trong 30 phút đầu</strong>30 phút đầu là "golden window" — tương tác nhiều → FB boost mạnh</div>
+      </div>
+      <div class="tick-item" onclick="toggleTick(this)">
+        <div class="tick-box"></div>
+        <div class="tick-text"><strong>Ai comment sâu → lưu lại để DM sau</strong>Comment sâu = quan tâm thật = lead tiềm năng mua kit</div>
+      </div>
+    </div>
+    <div id="tick-result" style="margin-top:16px;display:none;"></div>
+  </div>
+
+</div><!-- end checklist panel -->
+
+<script>
+// ── TAB SWITCHING ──
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── VERSION SWITCHING ──
+function switchVer(prefix, id, btn){
+  btn.closest('.post-card').querySelectorAll('.ver-panel').forEach(p=>p.classList.remove('active'));
+  btn.closest('.post-card').querySelectorAll('.ver-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(prefix+'-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── COPY ──
+function copyEl(id, btn){
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const old = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    setTimeout(()=>btn.textContent=old, 1800);
+  });
+}
+
+// ── CHAR COUNT ──
+function countChars(bodyId, countId){
+  const body = document.getElementById(bodyId);
+  const count = document.getElementById(countId);
+  if(!body||!count) return;
+  const len = body.innerText.length;
+  const cls = len > 2000 ? 'char-warn' : 'char-ok';
+  const note = len > 2000 ? ' — dài, cân nhắc chia đôi cho mobile' : ' — độ dài lý tưởng';
+  count.innerHTML = `Độ dài: <span class="${cls}">${len.toLocaleString()} ký tự</span>${note}`;
+}
+
+// ── TICK LIST ──
+function toggleTick(item){
+  item.classList.toggle('done');
+  const box = item.querySelector('.tick-box');
+  if(item.classList.contains('done')){
+    box.innerHTML = '<span style="color:#0d1117;font-weight:700;">✓</span>';
+  } else {
+    box.innerHTML = '';
+  }
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = document.querySelectorAll('.tick-item').length;
+  const done = document.querySelectorAll('.tick-item.done').length;
+  const pct = Math.round(done/total*100);
+  document.getElementById('prog-bar').style.width = pct+'%';
+  const res = document.getElementById('tick-result');
+  if(done === total){
+    res.style.display = 'block';
+    res.innerHTML = `<div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:10px;padding:16px 20px;text-align:center;"><div style="font-size:28px;margin-bottom:6px;">🎯</div><div style="font-size:15px;font-weight:700;color:#34d399;">Đã sẵn sàng đăng bài!</div><div style="font-size:12.5px;color:#6ee7b7;margin-top:4px;">Checklist đầy đủ — bắt đầu đăng ngay hôm nay.</div></div>`;
+  } else if(pct >= 60){
+    res.style.display = 'block';
+    res.innerHTML = `<div style="font-size:12.5px;color:#E2C06A;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:8px;padding:10px 14px;">${done}/${total} mục — còn ${total-done} bước nữa là đủ điều kiện đăng.</div>`;
+  } else {
+    res.style.display = 'none';
+  }
+}
+
+// ── INIT ──
+window.onload = ()=>{
+  const pairs = [
+    ['body-mm-full','cc-mm-full'],['body-mm-short','cc-mm-short'],
+    ['body-s1','cc-s1'],['body-s2','cc-s2'],['body-s3','cc-s3'],
+    ['body-s4','cc-s4'],['body-s5','cc-s5']
+  ];
+  pairs.forEach(([b,c])=>countChars(b,c));
+};
+</script>
+</body>
+</html>

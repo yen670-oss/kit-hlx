@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 Chiến Dịch Funnel — BDS Mastery Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;--cd:#EDE8DC;--tofu:#3b82f6;--mofu:#8b5cf6;--bofu:#16a34a;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;font-size:13px;line-height:1.6;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+    .hero{background:linear-gradient(160deg,#0e1f38,#1B3A6B 55%,#3b1e08);padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.15) 1.5px,transparent 0);background-size:30px 30px;}
+    .hero-in{position:relative;z-index:1;}
+    .badge{display:inline-block;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.5);color:#E2C06A;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px;border-radius:99px;margin-bottom:14px;}
+    .hero h1{font-size:clamp(22px,4vw,34px);color:#fff;margin-bottom:8px;}
+    .hero p{color:#aab8d0;font-size:13px;max-width:500px;margin:0 auto;}
+    main{max-width:860px;margin:0 auto;padding:36px 20px 70px;}
+
+    /* NAV */
+    .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;justify-content:center;}
+    .nav a{display:inline-block;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid;transition:all .15s;}
+    .nav a.tofu{background:rgba(59,130,246,.1);color:#3b82f6;border-color:rgba(59,130,246,.3);}
+    .nav a.mofu{background:rgba(139,92,246,.1);color:#8b5cf6;border-color:rgba(139,92,246,.3);}
+    .nav a.bofu{background:rgba(22,163,74,.1);color:#16a34a;border-color:rgba(22,163,74,.3);}
+    .nav a.action{background:rgba(201,168,76,.15);color:var(--gold);border-color:rgba(201,168,76,.4);}
+
+    /* OVERVIEW */
+    .overview{background:var(--nd);border-radius:16px;padding:28px;margin-bottom:28px;border:1px solid rgba(201,168,76,.3);}
+    .overview h2{color:var(--gl);font-size:18px;margin-bottom:18px;}
+    .flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+    .flow-box{text-align:center;padding:12px 16px;border-radius:10px;min-width:110px;}
+    .flow-box.tofu{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);}
+    .flow-box.mofu{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);}
+    .flow-box.bofu{background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.3);}
+    .flow-box.post{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);}
+    .flow-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;}
+    .flow-box.tofu .flow-label{color:#93c5fd;}
+    .flow-box.mofu .flow-label{color:#c4b5fd;}
+    .flow-box.bofu .flow-label{color:#86efac;}
+    .flow-box.post .flow-label{color:var(--gl);}
+    .flow-name{font-size:12px;font-weight:700;color:#fff;}
+    .flow-sub{font-size:10px;color:#8da4c4;margin-top:2px;}
+    .flow-arrow{color:#4b5563;font-size:18px;padding:0 4px;flex-shrink:0;}
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;}
+    @media(max-width:560px){.kpi-row{grid-template-columns:repeat(2,1fr);}.flow{gap:4px;}}
+    .kpi{background:rgba(255,255,255,.05);border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,.08);}
+    .kpi-val{font-size:20px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;}
+    .kpi-lbl{font-size:10px;color:#8da4c4;margin-top:2px;}
+
+    /* SECTIONS */
+    .stage{border-radius:16px;padding:26px;margin-bottom:20px;border:2px solid;}
+    .stage.tofu{background:linear-gradient(135deg,rgba(59,130,246,.05),#fff);border-color:rgba(59,130,246,.3);}
+    .stage.mofu{background:linear-gradient(135deg,rgba(139,92,246,.05),#fff);border-color:rgba(139,92,246,.3);}
+    .stage.bofu{background:linear-gradient(135deg,rgba(22,163,74,.05),#fff);border-color:rgba(22,163,74,.3);}
+    .stage-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+    .stage-badge{padding:4px 12px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .tofu .stage-badge{background:rgba(59,130,246,.15);color:#3b82f6;}
+    .mofu .stage-badge{background:rgba(139,92,246,.15);color:#8b5cf6;}
+    .bofu .stage-badge{background:rgba(22,163,74,.15);color:#16a34a;}
+    .stage h2{font-size:17px;color:var(--nd);}
+    .stage-sub{font-size:12px;color:#6b7280;margin-top:2px;}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+    @media(max-width:560px){.cols{grid-template-columns:1fr;}}
+    .col-box{background:var(--cream);border-radius:10px;padding:14px;border:1px solid var(--cd);}
+    .col-box h4{font-size:12px;font-weight:700;color:var(--nd);margin-bottom:10px;font-family:'Be Vietnam Pro',sans-serif;}
+    .col-box ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+    .col-box li{font-size:12px;color:#4b5568;display:flex;gap:6px;}
+    .col-box li::before{content:'→';color:var(--gold);flex-shrink:0;}
+    .content-ex{background:var(--nd);border-radius:10px;padding:14px 16px;margin-top:12px;}
+    .content-ex h4{color:var(--gl);font-size:12px;font-weight:700;margin-bottom:10px;font-family:'Be Vietnam Pro',sans-serif;}
+    .post-ex{background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;margin-bottom:8px;border-left:3px solid var(--gold);}
+    .post-ex:last-child{margin-bottom:0;}
+    .post-platform{font-size:9px;font-weight:700;color:var(--gl);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+    .post-hook{font-size:12px;color:#e2e8f0;font-style:italic;}
+    .post-type{font-size:10px;color:#8da4c4;margin-top:3px;}
+    .metric-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+    .metric{background:rgba(255,255,255,.06);border-radius:8px;padding:8px 12px;font-size:11px;color:#aab8d0;}
+    .metric strong{color:#fff;}
+    .tofu .metric{border-left:3px solid #3b82f6;}
+    .mofu .metric{border-left:3px solid #8b5cf6;}
+    .bofu .metric{border-left:3px solid #16a34a;}
+
+    /* LEAD MAGNET */
+    .lm-box{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(59,130,246,.05));border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:16px;margin-top:14px;}
+    .lm-box h4{font-size:13px;font-weight:700;color:#5b21b6;margin-bottom:10px;}
+    .lm-items{display:flex;flex-direction:column;gap:8px;}
+    .lm-item{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:#4b5568;}
+    .lm-icon{font-size:16px;flex-shrink:0;}
+
+    /* UPSELL LADDER */
+    .ladder{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+    .rung{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;background:var(--cream);border:1px solid var(--cd);}
+    .rung-price{font-weight:700;font-size:13px;color:var(--nd);min-width:90px;}
+    .rung-name{font-size:12px;color:#4b5568;flex:1;}
+    .rung-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;}
+    .entry{background:#dbeafe;color:#1e40af;}
+    .mid{background:#ede9fe;color:#5b21b6;}
+    .top{background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#102340;}
+
+    /* CHECKLIST */
+    .checklist-section{background:#fff;border-radius:16px;padding:26px;margin-bottom:20px;border:1px solid rgba(201,168,76,.2);box-shadow:0 3px 16px rgba(27,58,107,.06);}
+    .checklist-section h2{font-size:17px;color:var(--navy);margin-bottom:18px;}
+    .week{margin-bottom:20px;}
+    .week h3{font-size:13px;font-weight:700;color:var(--nd);margin-bottom:10px;padding:6px 12px;background:var(--cream);border-radius:8px;border-left:3px solid var(--gold);font-family:'Be Vietnam Pro',sans-serif;}
+    .tasks{display:flex;flex-direction:column;gap:6px;}
+    .task{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border-radius:8px;border:1px solid var(--cd);background:var(--cream);cursor:pointer;}
+    .task:hover{background:#f0f4ff;}
+    .task.done{background:#f0fdf4;border-color:#bbf7d0;}
+    .task.done .task-text{text-decoration:line-through;color:#9ca3af;}
+    .cb{width:18px;height:18px;border-radius:4px;border:2px solid #d1d5db;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+    .task.done .cb{background:#16a34a;border-color:#16a34a;color:#fff;}
+    .task-text{font-size:12px;color:#374151;flex:1;}
+    .task-tag{font-size:10px;font-weight:700;padding:1px 7px;border-radius:99px;flex-shrink:0;margin-top:2px;}
+    .tag-fb{background:#dbeafe;color:#1e40af;}
+    .tag-zalo{background:#d1fae5;color:#065f46;}
+    .tag-tiktok{background:#fce7f3;color:#9d174d;}
+    .tag-content{background:#fef3c7;color:#92400e;}
+    .tag-setup{background:#ede9fe;color:#5b21b6;}
+    .tag-kpi{background:#f1f5f9;color:#475569;}
+
+    /* PROGRESS */
+    .progress-bar{background:#e5e7eb;border-radius:99px;height:6px;margin-top:10px;}
+    .progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gl));width:0%;transition:width .3s;}
+
+    /* SCRIPT EXAMPLES */
+    .script-box{background:var(--nd);border-radius:12px;padding:16px;margin-top:14px;}
+    .script-box h4{color:var(--gl);font-size:12px;font-weight:700;margin-bottom:10px;font-family:'Be Vietnam Pro',sans-serif;}
+    .script{background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:12px;color:#e2e8f0;line-height:1.6;font-style:italic;}
+    .script:last-child{margin-bottom:0;}
+    .script-label{font-size:10px;color:var(--gold);font-weight:700;margin-bottom:4px;font-style:normal;}
+
+    /* TIMELINE */
+    .timeline{display:flex;flex-direction:column;gap:0;}
+    .tl-row{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--cd);}
+    .tl-row:last-child{border-bottom:none;}
+    .tl-week{min-width:70px;font-size:11px;font-weight:700;color:var(--gold);}
+    .tl-content{flex:1;}
+    .tl-title{font-weight:700;font-size:12.5px;color:var(--nd);margin-bottom:3px;}
+    .tl-desc{font-size:12px;color:#5a6680;}
+    .tl-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+
+    footer{background:#0a1520;color:#556;text-align:center;padding:20px;font-size:11px;}
+    footer span{color:var(--gold);}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="badge">🎯 Funnel Blueprint — BDS Mastery Kit</div>
+    <h1>Chiến Dịch Funnel<br>Từ Tổng Thể Đến Chi Tiết</h1>
+    <p>TOFU → MOFU → BOFU · 3 gói sản phẩm · Đa nền tảng · Checklist hành động 30 ngày</p>
+  </div>
+</div>
+
+<main>
+
+  <div class="nav">
+    <a href="#overview" class="action">📊 Tổng Quan</a>
+    <a href="#tofu" class="tofu">🔵 TOFU — Nhận Diện</a>
+    <a href="#mofu" class="mofu">🟣 MOFU — Nuôi Dưỡng</a>
+    <a href="#bofu" class="bofu">🟢 BOFU — Chốt Sale</a>
+    <a href="#checklist" class="action">✅ Checklist 30 Ngày</a>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="overview" id="overview">
+    <h2>📊 Tổng Quan Chiến Dịch</h2>
+
+    <div class="flow">
+      <div class="flow-box tofu">
+        <div class="flow-label">TOFU</div>
+        <div class="flow-name">Content Organic</div>
+        <div class="flow-sub">FB · Zalo · TikTok</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box mofu">
+        <div class="flow-label">MOFU</div>
+        <div class="flow-name">Lead Magnet</div>
+        <div class="flow-sub">Landing Page + DM</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box bofu">
+        <div class="flow-label">BOFU</div>
+        <div class="flow-name">Sales Page</div>
+        <div class="flow-sub">Bronze → Silver → Gold</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box post">
+        <div class="flow-label">POST-PURCHASE</div>
+        <div class="flow-name">Upsell + Referral</div>
+        <div class="flow-sub">Ascension + WOM</div>
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-val">30</div><div class="kpi-lbl">Ngày để có đơn đầu tiên</div></div>
+      <div class="kpi"><div class="kpi-val">3–5%</div><div class="kpi-lbl">Target: Người xem → Mua</div></div>
+      <div class="kpi"><div class="kpi-val">3</div><div class="kpi-lbl">Gói sản phẩm theo giá trị thang</div></div>
+      <div class="kpi"><div class="kpi-val">5</div><div class="kpi-lbl">Nền tảng · FB · Zalo · TikTok · Group · DM</div></div>
+    </div>
+  </div>
+
+  <!-- TOFU -->
+  <div class="stage tofu" id="tofu">
+    <div class="stage-head">
+      <span class="stage-badge">TOFU</span>
+      <div>
+        <h2>🔵 Giai Đoạn 1: Nhận Diện & Thu Hút</h2>
+        <div class="stage-sub">Mục tiêu: Môi giới BĐS biết đến anh/chị là người có tools đỉnh cho agent Vinhomes HLX</div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="col-box">
+        <h4>🎯 Đối Tượng Mục Tiêu</h4>
+        <ul>
+          <li>Môi giới BĐS đang bán HLX hoặc các dự án Vinhomes</li>
+          <li>Agent mới vào nghề — chưa có landing page, content</li>
+          <li>Team leader muốn chuẩn hóa công cụ cho cả team</li>
+          <li>Môi giới freelance muốn chuyên nghiệp hóa hình ảnh</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>😤 Pain Points Khai Thác</h4>
+        <ul>
+          <li>Không có landing page — gửi brochure PDF trông nghiệp dư</li>
+          <li>Viết content từ đầu mất 2-3 giờ/bài, không có thời gian</li>
+          <li>Bị khách phản đối "đắt quá / chưa cần" mà không biết xử lý</li>
+          <li>Team dùng chung 1 SĐT trên landing page — khách không biết liên hệ ai</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="col-box">
+        <h4>📣 Kênh & Format</h4>
+        <ul>
+          <li>Facebook cá nhân: Text dài + ảnh dự án (T2, T4, T6)</li>
+          <li>Group BĐS: Phân tích thị trường + tool demo</li>
+          <li>Zalo cá nhân: Tin nhắn ngắn + 1 ảnh (hàng ngày)</li>
+          <li>TikTok: Video 45-60s "Môi giới chuyên nghiệp làm gì?"</li>
+          <li>Facebook Group riêng: Tạo community agent HLX</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>📐 Content Pillars (70-20-10)</h4>
+        <ul>
+          <li><strong>70% Value:</strong> Dữ liệu thị trường HLX, tips bán hàng, tool review</li>
+          <li><strong>20% Tương tác:</strong> Poll "Bạn đang dùng tool gì?", Q&A</li>
+          <li><strong>10% Promotion:</strong> Giới thiệu kit, testimonial, CTA</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-ex">
+      <h4>💡 5 Hook Content TOFU — Copy & Đăng Ngay</h4>
+
+      <div class="post-ex">
+        <div class="post-platform">📘 Facebook cá nhân — Thứ 2</div>
+        <div class="post-hook">"Môi giới Hạ Long Xanh: Tôi thấy 3 lỗi này ở 90% agent — và 1 cái đang khiến anh/chị mất khách mỗi ngày mà không biết."</div>
+        <div class="post-type">Format: Text dài · Pillar: Giáo dục · CTA: Comment "MUỐN BIẾT"</div>
+      </div>
+
+      <div class="post-ex">
+        <div class="post-platform">💚 Zalo cá nhân — Hàng ngày</div>
+        <div class="post-hook">"Sáng nay mình vừa xong landing page riêng cho 1 bạn agent HLX — từ lúc nhận thông tin đến khi có link live mất đúng 23 phút. [ảnh trước-sau]"</div>
+        <div class="post-type">Format: Ngắn + 1 ảnh · Pillar: Social proof · CTA: Inbox hỏi thêm</div>
+      </div>
+
+      <div class="post-ex">
+        <div class="post-platform">🎵 TikTok — Thứ 3</div>
+        <div class="post-hook">"Tôi so sánh 2 môi giới gửi cùng 1 khách: người gửi PDF brochure vs người gửi link landing page cá nhân. Kết quả?"</div>
+        <div class="post-type">Format: Video 45s talking head · Pillar: Myth-busting · CTA: Zalo để xem demo</div>
+      </div>
+
+      <div class="post-ex">
+        <div class="post-platform">👥 Group BĐS Hạ Long</div>
+        <div class="post-hook">"Share miễn phí: Bảng tính ROI so sánh BĐS HLX vs tiết kiệm ngân hàng — nhập ngân sách vào, kết quả ra ngay. [link demo]"</div>
+        <div class="post-type">Format: Link + mô tả · Pillar: Free tool · CTA: Dùng thử → DM hỏi kit đầy đủ</div>
+      </div>
+
+      <div class="post-ex">
+        <div class="post-platform">📘 Facebook — Thứ 6</div>
+        <div class="post-hook">"Tháng trước tôi giúp 1 team 5 người agent HLX có: 5 landing page riêng + 150 posts sẵn đăng + 75 scripts xử lý phản đối — trong 24h. Đây là cách làm."</div>
+        <div class="post-type">Format: Text dài + kết quả · Pillar: Case study · CTA: Xem chi tiết qua Zalo</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric tofu"><strong>Mục tiêu:</strong> 500 profile visits/tuần</div>
+      <div class="metric tofu"><strong>KPI:</strong> 50+ comment/post giá trị</div>
+      <div class="metric tofu"><strong>Chuyển đổi:</strong> 2–5% click vào link landing page</div>
+    </div>
+  </div>
+
+  <!-- MOFU -->
+  <div class="stage mofu" id="mofu">
+    <div class="stage-head">
+      <span class="stage-badge">MOFU</span>
+      <div>
+        <h2>🟣 Giai Đoạn 2: Nuôi Dưỡng & Xây Tin Tưởng</h2>
+        <div class="stage-sub">Mục tiêu: Chuyển người quan tâm thành lead nóng — sẵn sàng nghe pitch sản phẩm</div>
+      </div>
+    </div>
+
+    <div class="lm-box">
+      <h4>🎁 Lead Magnet — Mồi Thu Hút (Miễn Phí)</h4>
+      <div class="lm-items">
+        <div class="lm-item">
+          <span class="lm-icon">📊</span>
+          <div><strong>Tặng: Demo ROI Calculator</strong> — Gửi link roi-calculator.html cho người hỏi, cho họ dùng thử miễn phí → khi hỏi "cái này mua ở đâu?" → pitch kit Bronze</div>
+        </div>
+        <div class="lm-item">
+          <span class="lm-icon">📝</span>
+          <div><strong>Tặng: 3 posts mẫu FB/Zalo</strong> — Chọn 3 bài hay nhất trong 30-POSTS → gửi file text → "đây là 3/30 bài trong kit, thích thì có full bộ"</div>
+        </div>
+        <div class="lm-item">
+          <span class="lm-icon">📋</span>
+          <div><strong>Tặng: Checklist 5 bước cá nhân hóa landing page</strong> — Tạo 1 PDF/ảnh đơn giản 5 bước → ai tải về → tiếp tục DM nurture → pitch kit Bronze</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="col-box">
+        <h4>📱 Kênh Nurture Chính: DM Zalo</h4>
+        <ul>
+          <li>Ai comment/react bài TOFU → DM tặng lead magnet</li>
+          <li>Gửi thêm 1 tip hữu ích sau 2 ngày</li>
+          <li>Hỏi: "Anh/chị đang gặp khó nhất ở bước nào?"</li>
+          <li>Ngày 5-7: giới thiệu sales page nhẹ nhàng</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>🗓️ Trình Tự DM 7 Ngày</h4>
+        <ul>
+          <li><strong>Ngày 0:</strong> Gửi lead magnet + welcome</li>
+          <li><strong>Ngày 2:</strong> Tip thêm + hỏi pain point</li>
+          <li><strong>Ngày 4:</strong> Social proof (1 kết quả thực tế)</li>
+          <li><strong>Ngày 6:</strong> Xử lý objection phổ biến nhất</li>
+          <li><strong>Ngày 7:</strong> Soft pitch: "Có muốn xem demo đầy đủ?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="script-box">
+      <h4>💬 Script DM Nurture — Copy & Dùng Ngay</h4>
+      <div class="script">
+        <div class="script-label">Ngày 0 — Sau khi tặng lead magnet:</div>
+        "Chào [Tên] ạ. Đây là 3 posts mẫu em nhắc đến. Anh/chị cứ dùng thử, thay SĐT của mình vào là đăng được ngay. Nếu thích thì em có full bộ 30 posts + landing page cá nhân + thêm 12 công cụ nữa — anh/chị muốn em giới thiệu sơ qua không ạ?"
+      </div>
+      <div class="script">
+        <div class="script-label">Ngày 4 — Social proof:</div>
+        "Hôm qua em vừa bàn giao kit cho 1 chị agent ở Hải Phòng. Chị ấy deploy landing page xong trong 3 phút, sáng hôm sau đã có khách hỏi qua link đó rồi 😄 Anh/chị đang ở bước nào trong quy trình tư vấn, em xem có tool nào phù hợp không ạ?"
+      </div>
+      <div class="script">
+        <div class="script-label">Ngày 7 — Soft pitch:</div>
+        "Em có thể share màn hình demo nhanh 10 phút qua Zalo Call để anh/chị thấy kit trông thế nào không ạ? Không cần cam kết gì — chỉ xem thử, nếu phù hợp mình nói chuyện tiếp."
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric mofu"><strong>Mục tiêu:</strong> 20 DM conversation/tuần</div>
+      <div class="metric mofu"><strong>KPI:</strong> 40% người nhận lead magnet → reply lại</div>
+      <div class="metric mofu"><strong>Chuyển đổi:</strong> 30% DM conversation → click sales page</div>
+    </div>
+  </div>
+
+  <!-- BOFU -->
+  <div class="stage bofu" id="bofu">
+    <div class="stage-head">
+      <span class="stage-badge">BOFU</span>
+      <div>
+        <h2>🟢 Giai Đoạn 3: Chốt Sale & Tối Đa Giá Trị</h2>
+        <div class="stage-sub">Mục tiêu: Chuyển lead nóng thành khách hàng — ưu tiên upsell từ Bronze lên Silver/Gold</div>
+      </div>
+    </div>
+
+    <div class="col-box" style="margin-bottom:14px;">
+      <h4>🪜 Value Ladder — Thang Giá Trị</h4>
+      <div class="ladder">
+        <div class="rung">
+          <div class="rung-price">Miễn phí</div>
+          <div class="rung-name">Lead Magnet: ROI Calculator + 3 posts mẫu + checklist 5 bước</div>
+          <span class="rung-badge entry">Entry</span>
+        </div>
+        <div class="rung">
+          <div class="rung-price">1.990.000đ</div>
+          <div class="rung-name">🥉 Bronze — Landing page + 6 tools · Tự triển khai</div>
+          <span class="rung-badge entry">Starter</span>
+        </div>
+        <div class="rung">
+          <div class="rung-price">2.990.000đ</div>
+          <div class="rung-name">🥈 Silver — Bronze + 15 scripts + Review 1-1 (30 phút)</div>
+          <span class="rung-badge mid">Popular ⭐</span>
+        </div>
+        <div class="rung">
+          <div class="rung-price">4.990.000đ</div>
+          <div class="rung-name">🥇 Gold — Silver + Telegram Bot + Team 5 người + Support 90 ngày</div>
+          <span class="rung-badge top">★ GOLD</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="col-box">
+        <h4>🚀 Kích Hoạt BOFU</h4>
+        <ul>
+          <li>Gửi link sales page sau buổi demo Zalo Call</li>
+          <li>Đăng "testimonial post" trên FB sau mỗi bàn giao</li>
+          <li>Tạo urgency: "Fast-Action Bonus còn X ngày"</li>
+          <li>Offer Bronze trước → upsell Silver trong 48h</li>
+          <li>Gold pitch cho team leader: "5 người dùng = mỗi người ~1 triệu"</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>🛡️ Xử Lý Objection Chính</h4>
+        <ul>
+          <li><strong>"Đắt quá"</strong> → "Bộ kit giúp anh/chị tiết kiệm 40h viết content — tính ra 50.000đ/giờ"</li>
+          <li><strong>"Để tôi nghĩ"</strong> → "Fast-Action Bonus hết hạn sau X ngày — anh/chị cần thêm thông tin gì?"</li>
+          <li><strong>"Tôi tự làm được"</strong> → "Đúng — nhưng mất bao lâu? Kit này sẵn đăng ngay hôm nay."</li>
+          <li><strong>"Chưa cần"</strong> → "Khách của anh/chị đang so sánh anh/chị với 10 agent khác — ai có landing page đẹp hơn?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-ex">
+      <h4>📢 3 Loại Content BOFU — Đăng Khi Có Đơn</h4>
+      <div class="post-ex">
+        <div class="post-platform">📘 Facebook — Testimonial post (sau mỗi bàn giao)</div>
+        <div class="post-hook">"Vừa bàn giao kit cho [Chị X / Anh Y] — giờ chị ấy đã có landing page riêng với SĐT của mình. Bạn nào đang cần, DM mình."</div>
+        <div class="post-type">Đăng ngay sau khi khách confirm · Kèm ảnh landing page (che thông tin cá nhân)</div>
+      </div>
+      <div class="post-ex">
+        <div class="post-platform">💚 Zalo — Urgency close</div>
+        <div class="post-hook">"Tháng này còn 3 suất Silver với Fast-Action Bonus. Ai inbox sớm thì được đặt lịch review 1-1 tuần tới — sau đó phải chờ sang tháng."</div>
+        <div class="post-type">Tạo scarcity thực — chỉ dùng khi đúng sự thật</div>
+      </div>
+      <div class="post-ex">
+        <div class="post-platform">📘 Facebook — Gold pitch cho team</div>
+        <div class="post-hook">"Nếu anh/chị đang dẫn đầu 1 team 5 agent HLX: Gold cho cả team = 4.990.000đ = mỗi người chưa tới 1 triệu. Mỗi người có landing page riêng, content riêng, SĐT riêng."</div>
+        <div class="post-type">Target: Team leader · Anchor giá theo đầu người</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric bofu"><strong>Mục tiêu:</strong> 5-10 đơn/tháng</div>
+      <div class="metric bofu"><strong>KPI:</strong> 20-30% DM conversation → mua</div>
+      <div class="metric bofu"><strong>AOV target:</strong> 2.5–3 triệu đồng (mix Bronze/Silver)</div>
+    </div>
+  </div>
+
+  <!-- POST-PURCHASE -->
+  <div class="checklist-section">
+    <h2>🔄 Post-Purchase: Upsell & Referral</h2>
+    <div class="cols">
+      <div class="col-box">
+        <h4>⬆️ Ascension (Bronze → Silver → Gold)</h4>
+        <ul>
+          <li>Sau 7 ngày Bronze: "Anh/chị đã đăng bài chưa? Thấy hiệu quả không? Em có thể review 1-1 nếu nâng Silver."</li>
+          <li>Sau 14 ngày: Gửi 1 script mẫu miễn phí → "Đây là 1/15 script trong Silver, muốn có đủ bộ?"</li>
+          <li>Gold upsell: "Anh/chị có thể giới thiệu kit cho cả team — giá Gold tính theo đầu người rẻ hơn Bronze"</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>🗣️ Referral (Word of Mouth)</h4>
+        <ul>
+          <li>Sau khi khách deploy xong: "Nếu anh/chị giới thiệu 1 bạn agent mua Bronze, mình tặng thêm 5 posts mẫu mới"</li>
+          <li>Chụp ảnh landing page của khách → đăng testimonial (xin phép trước)</li>
+          <li>Tạo group "Agent HLX dùng kit" → mọi người share kết quả → social proof tự nhiên</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST 30 NGÀY -->
+  <div class="checklist-section" id="checklist">
+    <h2>✅ Checklist Hành Động 30 Ngày</h2>
+    <p style="font-size:12px;color:#6b7280;margin-bottom:18px;">Click vào từng task để đánh dấu hoàn thành</p>
+
+    <div id="progress-wrap" style="margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#6b7280;margin-bottom:4px;">
+        <span>Tiến độ tổng thể</span>
+        <span id="progress-txt">0 / 32 tasks</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <!-- TUẦN 0 -->
+    <div class="week">
+      <h3>⚙️ TUẦN 0 — THIẾT LẬP (Trước ngày 1)</h3>
+      <div class="tasks">
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Upload sales page (kit-ban-kit/index.html) lên Netlify → lấy link</div><span class="task-tag tag-setup">Setup</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Cập nhật bio Facebook: Thêm link sales page + "Tư vấn kit cho agent BĐS HLX"</div><span class="task-tag tag-fb">FB</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Cập nhật bio Zalo: Link sales page + mô tả ngắn</div><span class="task-tag tag-zalo">Zalo</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Chuẩn bị 3 posts mẫu miễn phí để tặng lead (chọn bài hay nhất từ 30-POSTS)</div><span class="task-tag tag-content">Content</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Lập danh sách 20 agent BĐS HLX trong mạng lưới Zalo/FB để approach đầu tiên</div><span class="task-tag tag-setup">Setup</span></div>
+      </div>
+    </div>
+
+    <!-- TUẦN 1 -->
+    <div class="week">
+      <h3>🔵 TUẦN 1 — TOFU: Ra Mắt & Thu Hút (Ngày 1–7)</h3>
+      <div class="tasks">
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">📘 FB cá nhân — Đăng bài "Tôi làm gì với agent BĐS HLX" (câu chuyện định vị)</div><span class="task-tag tag-fb">FB</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">💚 Zalo — Đăng tin nhắn ra mắt + 1 ảnh landing page demo</div><span class="task-tag tag-zalo">Zalo</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">🎵 TikTok — Quay video "3 thứ môi giới BĐS cần có nhưng 90% chưa có" (45s)</div><span class="task-tag tag-tiktok">TikTok</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">👥 Group BĐS — Share link ROI Calculator miễn phí + caption ngắn</div><span class="task-tag tag-content">Content</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">DM 10 agent trong danh sách → tặng 3 posts mẫu miễn phí → bắt đầu DM sequence</div><span class="task-tag tag-zalo">Zalo DM</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">📘 FB — Đăng poll "Agent HLX đang dùng tool gì để đăng content?" (tạo engagement)</div><span class="task-tag tag-fb">FB</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Track KPI: Đếm số người comment/react/DM → ghi vào note</div><span class="task-tag tag-kpi">KPI</span></div>
+      </div>
+    </div>
+
+    <!-- TUẦN 2 -->
+    <div class="week">
+      <h3>🟣 TUẦN 2 — MOFU: Nuôi Dưỡng & Xây Tin (Ngày 8–14)</h3>
+      <div class="tasks">
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">📘 FB — Đăng "5 sai lầm khi agent BĐS không có landing page riêng" (authority)</div><span class="task-tag tag-fb">FB</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">DM follow-up ngày 2 với 10 người tuần trước: gửi tip thêm + hỏi pain point</div><span class="task-tag tag-zalo">Zalo DM</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">🎵 TikTok — Video "Demo: Môi giới gửi PDF vs gửi landing page — khách chọn ai?"</div><span class="task-tag tag-tiktok">TikTok</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">DM 10 agent mới → tặng lead magnet → bắt đầu DM sequence</div><span class="task-tag tag-zalo">Zalo DM</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">💚 Zalo — Đăng case study ngắn: "Hôm qua bàn giao kit cho 1 bạn agent…" (nếu có)</div><span class="task-tag tag-zalo">Zalo</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Offer demo Zalo Call 10 phút cho 3-5 lead nóng nhất (người reply nhiều nhất)</div><span class="task-tag tag-setup">Demo</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Track KPI: Số DM conversation / số người xem sales page</div><span class="task-tag tag-kpi">KPI</span></div>
+      </div>
+    </div>
+
+    <!-- TUẦN 3 -->
+    <div class="week">
+      <h3>🟢 TUẦN 3 — BOFU: Pitch & Chốt Đơn Đầu (Ngày 15–21)</h3>
+      <div class="tasks">
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">📘 FB — Đăng "Paint the dream": Agent có đủ kit trông thế nào sau 30 ngày</div><span class="task-tag tag-fb">FB</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">DM soft pitch với lead nóng nhất: "Anh/chị muốn em gửi link xem chi tiết không?"</div><span class="task-tag tag-zalo">Zalo DM</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">🎵 TikTok — Video "Bộ kit môi giới BĐS gồm những gì?" (demo ngắn gọn)</div><span class="task-tag tag-tiktok">TikTok</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Gửi link sales page cho 5-10 lead nóng kèm script: "Em gửi link anh/chị xem qua nhé"</div><span class="task-tag tag-zalo">Zalo DM</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Đăng urgency content: "Fast-Action Bonus Silver còn [X] suất trong tháng này"</div><span class="task-tag tag-content">Content</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Chốt ít nhất 1-2 đơn Bronze/Silver → bàn giao → chụp ảnh landing page khách</div><span class="task-tag tag-setup">BOFU</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Track KPI: Số đơn / doanh thu / gói nào bán nhiều nhất</div><span class="task-tag tag-kpi">KPI</span></div>
+      </div>
+    </div>
+
+    <!-- TUẦN 4 -->
+    <div class="week">
+      <h3>🔄 TUẦN 4 — SCALE & REFERRAL (Ngày 22–30)</h3>
+      <div class="tasks">
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">📘 FB — Đăng testimonial của khách đầu tiên (xin phép) + CTA "3 suất cuối tháng"</div><span class="task-tag tag-fb">FB</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">DM upsell Bronze → Silver với khách đã mua: "Anh/chị dùng 1 tuần rồi, thấy bài nào hiệu quả nhất?"</div><span class="task-tag tag-zalo">Upsell</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Pitch Gold cho team leader trong mạng lưới: "5 người = mỗi người ~1 triệu"</div><span class="task-tag tag-zalo">Gold Pitch</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Nhờ khách đã mua giới thiệu 1-2 agent khác → tặng thêm posts mới</div><span class="task-tag tag-setup">Referral</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Review tổng kết: Post nào hiệu quả nhất? Lead từ đâu nhiều nhất? Gói nào bán tốt nhất?</div><span class="task-tag tag-kpi">KPI</span></div>
+        <div class="task" onclick="toggle(this)"><div class="cb"></div><div class="task-text">Lên kế hoạch tháng 2: Scale những gì đã work, bỏ những gì không hiệu quả</div><span class="task-tag tag-setup">Planning</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE TỔNG QUAN -->
+  <div class="checklist-section">
+    <h2>📅 Timeline Tổng Quan — 30 Ngày</h2>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-week">Tuần 0</div>
+        <div class="tl-content">
+          <div class="tl-title">Thiết Lập Nền Tảng</div>
+          <div class="tl-desc">Upload sales page · Cập nhật bio · Chuẩn bị lead magnet · Danh sách 20 target leads</div>
+          <div class="tl-tags"><span class="task-tag tag-setup">Setup</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week">Tuần 1</div>
+        <div class="tl-content">
+          <div class="tl-title">TOFU — Ra Mắt & Thu Hút</div>
+          <div class="tl-desc">5 bài TOFU trên FB/Zalo/TikTok/Group · DM 10 người đầu tiên · Bắt đầu DM sequence</div>
+          <div class="tl-tags"><span class="task-tag tag-fb">FB</span><span class="task-tag tag-zalo">Zalo</span><span class="task-tag tag-tiktok">TikTok</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week">Tuần 2</div>
+        <div class="tl-content">
+          <div class="tl-title">MOFU — Nuôi Dưỡng & Demo</div>
+          <div class="tl-desc">Follow-up DM sequence · Đăng authority content · Demo Zalo Call 10 phút với lead nóng</div>
+          <div class="tl-tags"><span class="task-tag tag-zalo">DM</span><span class="task-tag tag-content">Content</span><span class="task-tag tag-setup">Demo</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week">Tuần 3</div>
+        <div class="tl-content">
+          <div class="tl-title">BOFU — Pitch & Đơn Đầu Tiên</div>
+          <div class="tl-desc">Gửi link sales page · Soft pitch → hard pitch · Chốt 1-2 đơn Bronze/Silver · Bàn giao</div>
+          <div class="tl-tags"><span class="task-tag tag-zalo">DM Pitch</span><span class="task-tag tag-fb">FB Urgency</span></div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week">Tuần 4</div>
+        <div class="tl-content">
+          <div class="tl-title">Scale & Referral</div>
+          <div class="tl-desc">Testimonial post · Upsell Bronze→Silver · Gold pitch cho team leader · Nhờ referral</div>
+          <div class="tl-tags"><span class="task-tag tag-fb">Social Proof</span><span class="task-tag tag-setup">Upsell</span><span class="task-tag tag-setup">Referral</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>🎯 Funnel Blueprint · <span>BDS Mastery Kit — Chiến Dịch 30 Ngày</span> · Hỗ trợ: 0964.827.670</footer>
+
+<script>
+  function toggle(el){
+    el.classList.toggle('done');
+    updateProgress();
+  }
+  function updateProgress(){
+    const all = document.querySelectorAll('.task');
+    const done = document.querySelectorAll('.task.done');
+    const pct = Math.round((done.length / all.length) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-txt').textContent = done.length + ' / ' + all.length + ' tasks';
+  }
+  updateProgress();
+</script>
+</body>
+</html>

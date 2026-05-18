@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hướng Dẫn Link Live Feed — Kit BDS HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B3A6B;--nd:#102340;--nl:#2A5298;
+    --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+    --brown:#6B4226;--cream:#FAF8F3;--cd:#EDE8DC;
+    --green:#16a34a;--red:#dc2626;--blue:#2563eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;line-height:1.7;}
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+
+  /* HERO */
+  .hero{background:linear-gradient(160deg,#0e1f38,#1B3A6B 55%,#3b1e08);padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.15) 1.5px,transparent 0);background-size:28px 28px;}
+  .hero-in{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+  .badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 18px;border-radius:99px;margin-bottom:20px;}
+  .hero h1{font-size:clamp(22px,4vw,36px);font-weight:800;color:#fff;line-height:1.25;margin-bottom:12px;}
+  .tg{background:linear-gradient(135deg,#E2C06A,#C9A84C,#A8862E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .hero p{color:#aab8d0;font-size:14px;max-width:520px;margin:0 auto 24px;}
+  .hero-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .chip{background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.25);color:#e2e8f0;font-size:12px;padding:6px 14px;border-radius:8px;}
+
+  /* LAYOUT */
+  main{max-width:900px;margin:0 auto;padding:44px 20px 80px;}
+  .slabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+
+  /* SECTION BLOCK */
+  .sec{margin-bottom:48px;}
+
+  /* STEP CARD */
+  .steps{display:flex;flex-direction:column;gap:0;}
+  .step{display:flex;gap:20px;padding:24px 28px;background:#fff;border:1px solid rgba(201,168,76,.18);border-bottom:none;position:relative;}
+  .step:first-child{border-radius:16px 16px 0 0;}
+  .step:last-child{border-radius:0 0 16px 16px;border-bottom:1px solid rgba(201,168,76,.18);}
+  .step:only-child{border-radius:16px;}
+  .snum{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--nd),var(--navy));color:var(--gl);font-family:'Playfair Display',serif;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .snum.gold{background:linear-gradient(135deg,var(--gd),var(--gold));}
+  .snum.green{background:linear-gradient(135deg,#15803d,#16a34a);}
+  .snum.brown{background:linear-gradient(135deg,var(--brown),#8B5A3A);}
+  .sbody{}
+  .sbody h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+  .sbody p{font-size:13.5px;color:#4a5568;margin-bottom:10px;}
+  .sbody p:last-child{margin-bottom:0;}
+  .tag-ok{display:inline-block;background:#d1fae5;color:#065f46;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;margin-left:6px;}
+  .tag-req{display:inline-block;background:#fef3c7;color:#92400e;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;margin-left:6px;}
+  .tag-new{display:inline-block;background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;margin-left:6px;}
+
+  /* CODE BOX */
+  .codebox{background:#0d1117;border-radius:10px;padding:16px 20px;margin:12px 0;position:relative;}
+  .codebox pre{color:#e2e8f0;font-size:12.5px;font-family:'Courier New',monospace;white-space:pre-wrap;word-break:break-all;line-height:1.7;}
+  .codebox .hl{color:var(--gl);}
+  .codebox .cm{color:#6b7280;}
+  .copy-btn{position:absolute;top:10px;right:10px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .2s;}
+  .copy-btn:hover{background:rgba(201,168,76,.3);}
+
+  /* TABLE */
+  .tbl{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(27,58,107,.07);}
+  .tbl th{background:var(--nd);color:var(--gl);font-size:12px;font-weight:600;padding:11px 16px;text-align:left;letter-spacing:.05em;}
+  .tbl td{padding:11px 16px;font-size:13px;color:#374151;border-bottom:1px solid var(--cd);background:#fff;}
+  .tbl tr:last-child td{border-bottom:none;}
+  .tbl tr:hover td{background:#fffbef;}
+
+  /* ALERT */
+  .alert{border-radius:12px;padding:18px 22px;margin:16px 0;display:flex;gap:14px;align-items:flex-start;}
+  .alert-warn{background:#fffbeb;border:1px solid #fcd34d;}
+  .alert-info{background:#eff6ff;border:1px solid #bfdbfe;}
+  .alert-ok{background:#f0fdf4;border:1px solid #bbf7d0;}
+  .alert-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+  .alert-body{}
+  .alert-body strong{display:block;font-size:13.5px;font-weight:700;margin-bottom:4px;}
+  .alert-body p,.alert-body li{font-size:13px;color:#4b5563;line-height:1.65;}
+  .alert-body ul{padding-left:18px;}
+
+  /* PLATFORM CARDS */
+  .platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.platform-grid{grid-template-columns:1fr;}}
+  .pcard{background:#fff;border-radius:16px;padding:24px;border:1px solid rgba(201,168,76,.18);box-shadow:0 4px 18px rgba(27,58,107,.06);}
+  .pcard-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .pcard-icon{font-size:28px;}
+  .pcard-title{font-size:16px;font-weight:700;color:var(--navy);}
+  .pcard-sub{font-size:12px;color:#6b7280;}
+  .steps-mini{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .steps-mini li{display:flex;gap:10px;font-size:13px;color:#374151;align-items:flex-start;}
+  .steps-mini li .n{width:22px;height:22px;border-radius:6px;background:var(--nd);color:var(--gl);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .tip-box{background:var(--cd);border-radius:10px;padding:11px 14px;font-size:12.5px;color:#4a3010;margin-top:14px;display:flex;gap:8px;align-items:flex-start;}
+  .tip-box::before{content:'💡';flex-shrink:0;}
+
+  /* THUMBNAIL SECTION */
+  .thumb-wrap{background:#fff;border-radius:20px;padding:32px;border:1px solid rgba(201,168,76,.25);box-shadow:0 4px 22px rgba(27,58,107,.08);}
+  .canvas-container{position:relative;width:100%;max-width:720px;margin:0 auto 20px;}
+  canvas{width:100%;height:auto;border-radius:10px;display:block;box-shadow:0 8px 32px rgba(0,0,0,.2);}
+  .thumb-controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;}
+  .btn-primary{background:linear-gradient(135deg,var(--gd),var(--gold));color:#0d1117;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.4);}
+  .btn-secondary{background:var(--nd);color:var(--gl);border:1px solid rgba(201,168,76,.3);}
+  .btn-secondary:hover{background:var(--navy);}
+
+  /* CUSTOMIZE */
+  .customize{background:var(--cream);border:1px solid var(--cd);border-radius:14px;padding:22px 24px;margin-top:20px;}
+  .customize h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:14px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+  @media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+  .form-group{display:flex;flex-direction:column;gap:5px;}
+  .form-group label{font-size:11.5px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;}
+  .form-group input,.form-group select{padding:9px 12px;border:1px solid var(--cd);border-radius:8px;font-size:13.5px;background:#fff;color:#1a1a2e;font-family:'Be Vietnam Pro',sans-serif;}
+  .form-group input:focus,.form-group select:focus{outline:none;border-color:var(--gold);}
+  .regen-btn{width:100%;padding:10px;background:var(--nd);color:var(--gl);border:none;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;margin-top:4px;transition:background .2s;}
+  .regen-btn:hover{background:var(--navy);}
+
+  /* DIVIDER */
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:40px 0;}
+
+  /* SUMMARY */
+  .summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+  .sum-item{background:#fff;border-radius:14px;padding:18px 20px;border:1px solid rgba(201,168,76,.18);box-shadow:0 4px 14px rgba(27,58,107,.06);text-align:center;}
+  .sum-icon{font-size:28px;margin-bottom:8px;}
+  .sum-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+  .sum-desc{font-size:11.5px;color:#6b7280;line-height:1.5;}
+
+  footer{background:#0a1520;color:#556;text-align:center;padding:22px;font-size:12px;}
+  footer span{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="badge">📱 Hướng Dẫn Kỹ Thuật · Bước 6</div>
+    <h1>Link Live Trên Feed<br><span class="tg">FB & Zalo — Từng Bước Chi Tiết</span></h1>
+    <p>Tạo thumbnail 1200×630, cài OG tags, cách đăng bài để link hiện preview card clickable ngay trên bảng feed — không cần chạy quảng cáo.</p>
+    <div class="hero-chips">
+      <div class="chip">⏱ Hoàn thành trong 20 phút</div>
+      <div class="chip">🖼 Thumbnail tải về ngay</div>
+      <div class="chip">📋 Copy-paste ready</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PHẦN 1: THUMBNAIL GENERATOR -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sec">
+  <p class="slabel">🖼 Bước 1 — Tạo Thumbnail OG Image (1200×630px)</p>
+
+  <div class="thumb-wrap">
+    <div class="canvas-container">
+      <canvas id="ogCanvas" width="1200" height="630"></canvas>
+    </div>
+
+    <div class="thumb-controls">
+      <button class="btn btn-primary" onclick="downloadCanvas()">⬇️ Tải PNG về máy</button>
+      <button class="btn btn-secondary" onclick="copyInstructions()">📋 Copy tên file</button>
+    </div>
+
+    <div class="customize">
+      <h4>✏️ Tùy chỉnh thumbnail</h4>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tên / SĐT của anh/chị</label>
+          <input type="text" id="inp-name" placeholder="VD: Nguyễn Thị Yến · 0964.827.670" value="Agent BDS · Kit HLX">
+        </div>
+        <div class="form-group">
+          <label>Dòng hook chính</label>
+          <input type="text" id="inp-hook" placeholder="Dòng hook" value="Kit duy nhất thiết kế riêng cho agent HLX">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Bullet 1</label>
+          <input type="text" id="inp-b1" value="✓ Landing page live trong 3 phút">
+        </div>
+        <div class="form-group">
+          <label>Bullet 2</label>
+          <input type="text" id="inp-b2" value="✓ 30 bài viết HLX sẵn đăng">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Bullet 3</label>
+          <input type="text" id="inp-b3" value="✓ Nhận lead tự động 24/7">
+        </div>
+        <div class="form-group">
+          <label>Màu nền</label>
+          <select id="inp-theme" onchange="renderCanvas()">
+            <option value="navy">Navy + Gold (mặc định)</option>
+            <option value="dark">Dark Premium</option>
+            <option value="brown">Brown + Gold</option>
+          </select>
+        </div>
+      </div>
+      <button class="regen-btn" onclick="renderCanvas()">🔄 Cập nhật thumbnail</button>
+    </div>
+  </div>
+
+  <div class="alert alert-warn" style="margin-top:16px;">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <strong>Sau khi tải thumbnail về</strong>
+      <p>Đổi tên file thành <code style="background:#fde68a;padding:2px 5px;border-radius:4px;font-size:12px;">og-image.png</code> → bỏ vào thư mục <code style="background:#fde68a;padding:2px 5px;border-radius:4px;font-size:12px;">01-SALES-PAGE/</code> → deploy lại Netlify.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PHẦN 2: CẬP NHẬT OG TAGS -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sec">
+  <p class="slabel">🏷 Bước 2 — Cập Nhật OG Tags Trong Sales Page</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="snum">1</div>
+      <div class="sbody">
+        <h3>Mở file <code style="font-size:13px;background:#f1f5f9;padding:2px 6px;border-radius:4px;">01-SALES-PAGE/index.html</code> bằng Notepad / VS Code</h3>
+        <p>Nhấn <strong>Ctrl+H</strong> (Find & Replace) → tìm đoạn <code style="font-size:12px;">THAY-LINK-NETLIFY-CUA-ANH-CHI</code></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">2</div>
+      <div class="sbody">
+        <h3>Thay bằng link Netlify thật của anh/chị</h3>
+        <p>Ví dụ link sau khi deploy là <strong>https://kit-hlx.netlify.app</strong> thì thay tất cả chỗ đó.</p>
+        <p>Sau khi thay, 3 dòng OG quan trọng sẽ trông như này:</p>
+        <div class="codebox" id="code-og">
+          <button class="copy-btn" onclick="copyCode('code-og')">Copy</button>
+          <pre><span class="cm">&lt;!-- Thay TOÀN BỘ "THAY-LINK..." bằng link Netlify thật --&gt;</span>
+
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:url"</span>
+      content=<span style="color:#a5f3fc">"https://kit-hlx.netlify.app"</span><span class="hl">&gt;</span>
+
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:image"</span>
+      content=<span style="color:#a5f3fc">"https://kit-hlx.netlify.app/og-image.png"</span><span class="hl">&gt;</span>
+
+<span class="hl">&lt;meta</span> name=<span style="color:#a5f3fc">"twitter:image"</span>
+      content=<span style="color:#a5f3fc">"https://kit-hlx.netlify.app/og-image.png"</span><span class="hl">&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum green">3</div>
+      <div class="sbody">
+        <h3>Bỏ file <code style="font-size:13px;background:#f1f5f9;padding:2px 6px;border-radius:4px;">og-image.png</code> vào thư mục <code style="font-size:13px;background:#f1f5f9;padding:2px 6px;border-radius:4px;">01-SALES-PAGE/</code></h3>
+        <p>Thumbnail vừa tải về ở Bước 1 → đổi tên thành <strong>og-image.png</strong> → copy vào cùng thư mục với index.html.</p>
+        <p>Cấu trúc thư mục sau khi xong:</p>
+        <div class="codebox">
+          <pre><span class="cm">01-SALES-PAGE/</span>
+├── <span class="hl">index.html</span>         ← Sales page chính
+└── <span class="hl">og-image.png</span>       ← Thumbnail vừa tạo ✅</pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum gold">4</div>
+      <div class="sbody">
+        <h3>Re-deploy lên Netlify <span class="tag-req">Bắt buộc</span></h3>
+        <p>Vào <strong>app.netlify.com</strong> → chọn site → tab <strong>Deploys</strong> → kéo thả lại thư mục <code style="font-size:12px;">01-SALES-PAGE/</code> → chờ 30 giây.</p>
+        <p>URL không thay đổi — Netlify tự cập nhật nội dung mới.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PHẦN 3: RESET CACHE FB -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sec">
+  <p class="slabel">🔄 Bước 3 — Reset Cache Facebook <span style="color:#dc2626;font-weight:700;">(Không Bỏ Qua)</span></p>
+
+  <div class="alert alert-warn" style="margin-bottom:20px;">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <strong>Vì sao phải reset cache?</strong>
+      <p>Facebook lưu cache thông tin link trong nhiều ngày. Nếu bỏ qua bước này, khi đăng bài link vẫn hiện ảnh cũ / không có ảnh dù anh/chị đã cập nhật og:image.</p>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="snum">1</div>
+      <div class="sbody">
+        <h3>Vào Facebook Sharing Debugger</h3>
+        <p>Truy cập: <a href="https://developers.facebook.com/tools/debug/" target="_blank" style="color:var(--nl);font-weight:600;">developers.facebook.com/tools/debug/</a></p>
+        <p>Đăng nhập bằng tài khoản Facebook cá nhân (không cần tài khoản developer).</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">2</div>
+      <div class="sbody">
+        <h3>Dán link Netlify → Bấm "Debug"</h3>
+        <p>Dán đường link đầy đủ của sales page vào ô trắng → bấm nút <strong style="color:#1877f2">Debug</strong>.</p>
+        <p>FB sẽ đọc OG tags của trang và hiển thị preview.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum green">3</div>
+      <div class="sbody">
+        <h3>Bấm "Scrape Again" 1–2 lần</h3>
+        <p>Sau khi kết quả hiện ra → bấm nút <strong style="color:#16a34a">"Scrape Again"</strong> (nút màu xanh lá ở cuối trang).</p>
+        <p>Làm 1–2 lần cho chắc. FB sẽ cập nhật ảnh thumbnail mới nhất.</p>
+        <div class="alert alert-ok" style="margin-top:12px;margin-bottom:0;">
+          <div class="alert-icon">✅</div>
+          <div class="alert-body">
+            <strong>Dấu hiệu thành công</strong>
+            <p>Ở phần "Link Preview" cuối trang thấy ảnh og-image.png hiện đúng + tiêu đề + mô tả → done!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PHẦN 4: KỸ THUẬT ĐĂNG BÀI -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sec">
+  <p class="slabel">📢 Bước 4 — Kỹ Thuật Đăng Bài Để Link Hiện Live</p>
+
+  <div class="platform-grid">
+
+    <!-- FACEBOOK -->
+    <div class="pcard">
+      <div class="pcard-head">
+        <div class="pcard-icon">📘</div>
+        <div>
+          <div class="pcard-title">Facebook</div>
+          <div class="pcard-sub">Cá nhân · Fanpage · Group</div>
+        </div>
+      </div>
+      <ul class="steps-mini">
+        <li><span class="n">1</span>Tạo bài mới → click vào ô "Bạn đang nghĩ gì?"</li>
+        <li><span class="n">2</span>Dán link Netlify vào ô soạn bài</li>
+        <li><span class="n">3</span>Chờ <strong>3–5 giây</strong> → preview card tự hiện (ảnh + tiêu đề)</li>
+        <li><span class="n">4</span><strong>Xóa URL khỏi phần text</strong> — card vẫn giữ nguyên</li>
+        <li><span class="n">5</span>Gõ nội dung bài viết bên trên card</li>
+        <li><span class="n">6</span>Đăng bình thường</li>
+      </ul>
+      <div class="tip-box">Xóa URL text → feed trông chuyên nghiệp hơn. Khách thấy card ảnh đẹp → bấm thẳng vào trang.</div>
+    </div>
+
+    <!-- ZALO -->
+    <div class="pcard">
+      <div class="pcard-head">
+        <div class="pcard-icon">💬</div>
+        <div>
+          <div class="pcard-title">Zalo</div>
+          <div class="pcard-sub">Cá nhân · OA · Group</div>
+        </div>
+      </div>
+      <ul class="steps-mini">
+        <li><span class="n">1</span><strong>Zalo cá nhân:</strong> Dán link vào nhật ký / tin nhắn → Zalo tự show preview → gửi bình thường</li>
+        <li><span class="n">2</span><strong>Zalo OA:</strong> Vào trang OA → Tạo "Bài viết" → Paste link → chọn dạng Article → thêm nút CTA "Đăng ký ngay"</li>
+        <li><span class="n">3</span><strong>Group Zalo:</strong> Dán link vào ô chat nhóm → Zalo preview tự hiện → gửi</li>
+      </ul>
+      <div class="tip-box">Zalo OA có nút CTA tích hợp (Đăng ký · Mua ngay · Tìm hiểu thêm) — conversion rate cao hơn 40% so với link thuần.</div>
+    </div>
+
+  </div>
+
+  <!-- SO SÁNH HIỆU QUẢ -->
+  <div style="margin-top:20px;">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Cách đăng</th>
+          <th>Feed hiện gì</th>
+          <th>Click-through</th>
+          <th>Nên dùng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>❌ Chỉ dán URL text</td>
+          <td>Link màu xanh thuần</td>
+          <td>Thấp — 1–2%</td>
+          <td>Không</td>
+        </tr>
+        <tr>
+          <td>⚠️ Paste link + không xóa text</td>
+          <td>Card + URL text lộ dài</td>
+          <td>Trung bình — 3–5%</td>
+          <td>Được, không tối ưu</td>
+        </tr>
+        <tr>
+          <td>✅ Paste link → xóa text → đăng</td>
+          <td>Card đẹp: ảnh + tiêu đề + nút</td>
+          <td>Cao — 8–15%</td>
+          <td>✅ Khuyến nghị</td>
+        </tr>
+        <tr>
+          <td>🚀 FB Ads với link preview</td>
+          <td>Card + sponsored badge</td>
+          <td>Rất cao — 15–25%</td>
+          <td>Khi có ngân sách</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PHẦN 5: OG TAGS COPY-PASTE -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sec">
+  <p class="slabel">📋 Bước 5 — OG Tags Đầy Đủ Để Copy Vào &lt;head&gt;</p>
+
+  <div class="alert alert-info" style="margin-bottom:16px;">
+    <div class="alert-icon">ℹ️</div>
+    <div class="alert-body">
+      <strong>Khi nào cần dùng đoạn này?</strong>
+      <p>Nếu anh/chị có landing page khác (không phải file kit cung cấp), copy đoạn dưới đây vào bên trong thẻ <code style="font-size:12px;">&lt;head&gt;...&lt;/head&gt;</code> của trang đó.</p>
+    </div>
+  </div>
+
+  <div class="codebox" id="code-full-og">
+    <button class="copy-btn" onclick="copyCode('code-full-og')">Copy</button>
+    <pre><span class="cm">&lt;!-- ═══ OG TAGS — dán vào trong &lt;head&gt; ═══ --&gt;</span>
+
+<span class="cm">&lt;!-- Cơ bản --&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:type"</span>       content=<span style="color:#a5f3fc">"website"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:locale"</span>     content=<span style="color:#a5f3fc">"vi_VN"</span><span class="hl">&gt;</span>
+
+<span class="cm">&lt;!-- Thay 3 chỗ dưới bằng thông tin thật --&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:url"</span>        content=<span style="color:#a5f3fc">"https://zingy-fox-d95ab1.netlify.app/"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:title"</span>      content=<span style="color:#a5f3fc">"BDS Mastery Kit — Bộ Vũ Khí Bán Hàng Vinhomes HLX"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:description"</span> content=<span style="color:#a5f3fc">"Landing page live 3 phút · 30 bài viết sẵn đăng · Lead tự động 24/7."</span><span class="hl">&gt;</span>
+
+<span class="cm">&lt;!-- Ảnh thumbnail (1200×630px) --&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:image"</span>       content=<span style="color:#a5f3fc">"https://zingy-fox-d95ab1.netlify.app/og-image.png"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:image:width"</span>  content=<span style="color:#a5f3fc">"1200"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:image:height"</span> content=<span style="color:#a5f3fc">"630"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> property=<span style="color:#a5f3fc">"og:image:alt"</span>    content=<span style="color:#a5f3fc">"BDS Mastery Kit — Kit bán hàng HLX"</span><span class="hl">&gt;</span>
+
+<span class="cm">&lt;!-- Twitter/X card --&gt;</span>
+<span class="hl">&lt;meta</span> name=<span style="color:#a5f3fc">"twitter:card"</span>        value=<span style="color:#a5f3fc">"summary_large_image"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> name=<span style="color:#a5f3fc">"twitter:title"</span>       content=<span style="color:#a5f3fc">"BDS Mastery Kit — Bộ Vũ Khí Bán Hàng HLX"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> name=<span style="color:#a5f3fc">"twitter:description"</span>  content=<span style="color:#a5f3fc">"Landing page · 30 bài viết · Lead tự động 24/7"</span><span class="hl">&gt;</span>
+<span class="hl">&lt;meta</span> name=<span style="color:#a5f3fc">"twitter:image"</span>       content=<span style="color:#a5f3fc">"https://[LINK-NETLIFY-CUA-ANH].netlify.app/og-image.png"</span><span class="hl">&gt;</span>
+
+<span class="cm">&lt;!-- ═══════════════════════════════════════ --&gt;</span></pre>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PHẦN 6: CHECKLIST TỔNG KẾT -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sec">
+  <p class="slabel">✅ Checklist Hoàn Thành — Tick Trước Khi Đăng Bài Đầu Tiên</p>
+
+  <div style="background:#fff;border-radius:16px;padding:28px 32px;border:1px solid rgba(201,168,76,.2);box-shadow:0 4px 18px rgba(27,58,107,.06);">
+    <div id="checklist" style="display:flex;flex-direction:column;gap:10px;"></div>
+    <div id="cl-result" style="margin-top:20px;display:none;"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TỔNG KẾT -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sec">
+  <p class="slabel">🗺 Tóm Tắt Toàn Bộ Quy Trình</p>
+  <div class="summary-grid">
+    <div class="sum-item">
+      <div class="sum-icon">🖼</div>
+      <div class="sum-title">Tạo thumbnail</div>
+      <div class="sum-desc">Tải PNG từ bước 1 → đổi tên og-image.png</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-icon">🏷</div>
+      <div class="sum-title">Cập nhật OG tags</div>
+      <div class="sum-desc">Thay link Netlify vào index.html</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-icon">🚀</div>
+      <div class="sum-title">Re-deploy</div>
+      <div class="sum-desc">Kéo thả lại 01-SALES-PAGE/ lên Netlify</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-icon">🔄</div>
+      <div class="sum-title">Reset FB cache</div>
+      <div class="sum-desc">FB Debug Tool → Scrape Again</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-icon">📢</div>
+      <div class="sum-title">Đăng bài đúng cách</div>
+      <div class="sum-desc">Paste link → xóa text → viết nội dung → đăng</div>
+    </div>
+    <div class="sum-item" style="border-color:rgba(201,168,76,.5);background:linear-gradient(135deg,#fffbef,#fff);">
+      <div class="sum-icon">🎯</div>
+      <div class="sum-title">Kết quả</div>
+      <div class="sum-desc">Feed hiện card đẹp, clickable, CTR 8–15%</div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p>Kit Bán Kit · BDS Mastery Kit · Hướng Dẫn Số 06<br>
+  <span>Lưu file này · Dùng lại mỗi khi cập nhật landing page mới</span></p>
+</footer>
+
+<script>
+/* ─── CANVAS RENDERER ─── */
+function renderCanvas(){
+  const canvas = document.getElementById('ogCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = 1200, H = 630;
+  canvas.width = W; canvas.height = H;
+
+  const theme = document.getElementById('inp-theme').value;
+  const name  = document.getElementById('inp-name').value  || 'BDS Mastery Kit';
+  const hook  = document.getElementById('inp-hook').value  || 'Kit duy nhất thiết kế riêng cho agent HLX';
+  const b1    = document.getElementById('inp-b1').value    || '✓ Landing page live trong 3 phút';
+  const b2    = document.getElementById('inp-b2').value    || '✓ 30 bài viết HLX sẵn đăng';
+  const b3    = document.getElementById('inp-b3').value    || '✓ Nhận lead tự động 24/7';
+
+  // THEME COLORS
+  let bg1,bg2,accent,textMain,textSub,dotColor;
+  if(theme === 'dark'){
+    bg1='#0d1117'; bg2='#1a1f2e'; accent='#C9A84C'; textMain='#f0f6fc'; textSub='#8b949e'; dotColor='rgba(201,168,76,0.12)';
+  } else if(theme === 'brown'){
+    bg1='#3b1e08'; bg2='#1a0a00'; accent='#E2C06A'; textMain='#fff8f0'; textSub='#c8a87a'; dotColor='rgba(226,192,106,0.1)';
+  } else {
+    bg1='#102340'; bg2='#1B3A6B'; accent='#C9A84C'; textMain='#ffffff'; textSub='#aab8d0'; dotColor='rgba(201,168,76,0.12)';
+  }
+
+  // BG GRADIENT
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0, bg1);
+  grad.addColorStop(0.6, bg2);
+  grad.addColorStop(1, bg1);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,W,H);
+
+  // DOT PATTERN
+  ctx.fillStyle = dotColor;
+  for(let x=0; x<W; x+=30){
+    for(let y=0; y<H; y+=30){
+      ctx.beginPath();
+      ctx.arc(x,y,2,0,Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  // LEFT ACCENT BAR
+  const barGrad = ctx.createLinearGradient(0,0,0,H);
+  barGrad.addColorStop(0, accent);
+  barGrad.addColorStop(1, '#A8862E');
+  ctx.fillStyle = barGrad;
+  ctx.fillRect(0,0,8,H);
+
+  // TOP RIGHT DECORATIVE CIRCLE
+  ctx.beginPath();
+  ctx.arc(W-80, -60, 200, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,255,255,0.03)';
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(W-60, -40, 140, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(201,168,76,0.06)';
+  ctx.fill();
+
+  // BADGE / PILL
+  const badgeText = 'KIT BÁN HÀNG BDS';
+  ctx.font = 'bold 22px "Be Vietnam Pro", Arial, sans-serif';
+  const bw = ctx.measureText(badgeText).width + 40;
+  const bx = 70, by = 70, bh = 44;
+  ctx.fillStyle = 'rgba(201,168,76,0.15)';
+  roundRect(ctx, bx, by-bh/2, bw, bh, 22);
+  ctx.strokeStyle = 'rgba(201,168,76,0.4)';
+  ctx.lineWidth = 1.5;
+  roundRectStroke(ctx, bx, by-bh/2, bw, bh, 22);
+  ctx.fillStyle = accent;
+  ctx.textBaseline = 'middle';
+  ctx.fillText(badgeText, bx+20, by);
+
+  // MAIN TITLE "BDS MASTERY KIT"
+  ctx.font = 'bold 78px Georgia, serif';
+  ctx.fillStyle = textMain;
+  ctx.textBaseline = 'top';
+  ctx.fillText('BDS MASTERY KIT', 70, 130);
+
+  // GOLD UNDERLINE
+  const titleW = ctx.measureText('BDS MASTERY KIT').width;
+  const uGrad = ctx.createLinearGradient(70, 0, 70+Math.min(titleW,800), 0);
+  uGrad.addColorStop(0, accent);
+  uGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = uGrad;
+  ctx.fillRect(70, 220, Math.min(titleW, 850), 4);
+
+  // HOOK LINE
+  ctx.font = '600 32px "Be Vietnam Pro", Arial, sans-serif';
+  ctx.fillStyle = accent;
+  ctx.textBaseline = 'top';
+  const hookLines = wrapText(ctx, hook, 850);
+  hookLines.forEach((line, i) => {
+    ctx.fillText(line, 70, 245 + i * 44);
+  });
+  const hookH = hookLines.length * 44;
+
+  // DIVIDER LINE
+  const divY = 250 + hookH + 24;
+  ctx.strokeStyle = 'rgba(201,168,76,0.2)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(70, divY);
+  ctx.lineTo(W-80, divY);
+  ctx.stroke();
+
+  // BULLETS
+  const bullets = [b1, b2, b3];
+  const bulletStartY = divY + 30;
+  ctx.font = '500 28px "Be Vietnam Pro", Arial, sans-serif';
+  ctx.fillStyle = textMain;
+  ctx.textBaseline = 'top';
+  bullets.forEach((b, i) => {
+    ctx.fillText(b, 70, bulletStartY + i * 52);
+  });
+
+  // BOTTOM NAME / SIGNATURE
+  ctx.font = '500 22px "Be Vietnam Pro", Arial, sans-serif';
+  ctx.fillStyle = textSub;
+  ctx.textBaseline = 'bottom';
+  ctx.fillText(name, 70, H - 36);
+
+  // BOTTOM RIGHT — KIT BADGE
+  const kitText = '🏆 AI Agent Business Kit';
+  ctx.font = 'bold 24px "Be Vietnam Pro", Arial, sans-serif';
+  const ktW = ctx.measureText(kitText).width;
+  ctx.fillStyle = accent;
+  ctx.textAlign = 'right';
+  ctx.fillText(kitText, W - 70, H - 36);
+  ctx.textAlign = 'left';
+}
+
+function wrapText(ctx, text, maxW){
+  const words = text.split(' ');
+  const lines = [];
+  let cur = '';
+  words.forEach(w => {
+    const test = cur ? cur + ' ' + w : w;
+    if(ctx.measureText(test).width > maxW && cur){
+      lines.push(cur);
+      cur = w;
+    } else { cur = test; }
+  });
+  if(cur) lines.push(cur);
+  return lines;
+}
+
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+  ctx.fill();
+}
+function roundRectStroke(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+  ctx.stroke();
+}
+
+function downloadCanvas(){
+  renderCanvas();
+  const canvas = document.getElementById('ogCanvas');
+  const a = document.createElement('a');
+  a.download = 'og-image.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+
+function copyInstructions(){
+  navigator.clipboard.writeText('og-image.png').then(()=>{
+    const btn = event.target;
+    const old = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    setTimeout(()=>btn.textContent=old, 1800);
+  });
+}
+
+/* ─── COPY CODE ─── */
+function copyCode(id){
+  const el = document.getElementById(id);
+  const text = el.querySelector('pre').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = el.querySelector('.copy-btn');
+    const old = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    setTimeout(()=>btn.textContent=old, 1800);
+  });
+}
+
+/* ─── CHECKLIST ─── */
+const CHECKS = [
+  'Thumbnail og-image.png đã tạo từ Bước 1 và tải về',
+  'Đổi tên file thành og-image.png',
+  'Copy og-image.png vào thư mục 01-SALES-PAGE/',
+  'Mở index.html → thay THAY-LINK-NETLIFY bằng link thật',
+  'Re-deploy lên Netlify (kéo thả lại thư mục)',
+  'Vào FB Debug Tool → dán link → bấm Scrape Again',
+  'Thấy preview card đúng ảnh trong FB Debugger',
+  'Test đăng bài: paste link → xóa text → đăng → kiểm tra feed',
+  'Kiểm tra trên điện thoại — card hiện đúng, có thể bấm',
+  'Thử đăng vào Zalo — preview hiện bình thường',
+];
+
+function buildChecklist(){
+  const div = document.getElementById('checklist');
+  CHECKS.forEach((text, i) => {
+    const item = document.createElement('div');
+    item.className = 'cl-item';
+    item.style.cssText = 'display:flex;gap:12px;align-items:flex-start;padding:12px 14px;background:#faf8f3;border:1px solid #ede8dc;border-radius:10px;cursor:pointer;transition:background .2s;';
+    item.innerHTML = `
+      <div class="cl-box" style="width:22px;height:22px;border-radius:6px;border:2px solid rgba(201,168,76,0.4);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px;transition:all .2s;"></div>
+      <div style="font-size:13.5px;color:#374151;">${text}</div>`;
+    item.onclick = () => toggleCheck(item);
+    div.appendChild(item);
+  });
+}
+
+function toggleCheck(item){
+  const box = item.querySelector('.cl-box');
+  const done = item.classList.toggle('done');
+  if(done){
+    box.style.background = 'linear-gradient(135deg,#C9A84C,#E2C06A)';
+    box.style.borderColor = '#C9A84C';
+    box.innerHTML = '<span style="color:#102340;font-weight:700;">✓</span>';
+    item.style.background = '#fffbef';
+  } else {
+    box.style.background = '';
+    box.style.borderColor = 'rgba(201,168,76,0.4)';
+    box.innerHTML = '';
+    item.style.background = '#faf8f3';
+  }
+  checkProgress();
+}
+
+function checkProgress(){
+  const total = CHECKS.length;
+  const done = document.querySelectorAll('.cl-item.done').length;
+  const res = document.getElementById('cl-result');
+  if(done === total){
+    res.style.display = 'block';
+    res.innerHTML = `<div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:12px;padding:20px 24px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:8px;">🎉</div>
+      <div style="font-size:16px;font-weight:700;color:#166534;margin-bottom:6px;">Hoàn thành toàn bộ!</div>
+      <div style="font-size:13.5px;color:#15803d;">Link sales page đã live, hiện preview card trên FB & Zalo.<br>Bắt đầu đăng bài và thu lead ngay hôm nay!</div>
+    </div>`;
+  } else if(done >= 7){
+    res.style.display = 'block';
+    res.innerHTML = `<div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:14px 20px;font-size:13px;color:#92400e;">⚡ ${done}/${total} — Gần xong rồi! Hoàn thành ${total-done} bước còn lại.</div>`;
+  } else {
+    res.style.display = 'none';
+  }
+}
+
+/* ─── INIT ─── */
+window.onload = () => {
+  renderCanvas();
+  buildChecklist();
+
+  // Re-render on input change
+  ['inp-name','inp-hook','inp-b1','inp-b2','inp-b3'].forEach(id => {
+    document.getElementById(id).addEventListener('input', ()=>{
+      clearTimeout(window._rt);
+      window._rt = setTimeout(renderCanvas, 400);
+    });
+  });
+};
+</script>
+</body>
+</html>
