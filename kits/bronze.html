@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🥉 Bronze Kit — BDS Mastery Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1B3A6B;--navy-dark:#102340;--gold:#C9A84C;--gold-light:#E2C06A;--cream:#FAF8F3;--cream-dark:#EDE8DC;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;min-height:100vh;}
+    /* Header */
+    .hero{background:linear-gradient(135deg,var(--navy-dark),var(--navy),#2A5298);padding:40px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+    .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,0.15) 1.5px,transparent 0);background-size:24px 24px;}
+    .hero-inner{position:relative;z-index:1;max-width:600px;margin:0 auto;}
+    .tier-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.45);color:var(--gold-light);font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:0.5px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:32px;color:white;margin-bottom:8px;line-height:1.2;}
+    .hero h1 span{color:var(--gold-light);}
+    .hero-welcome{color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:20px;}
+    .hero-name{color:var(--gold-light);font-weight:700;}
+    .progress-bar{background:rgba(255,255,255,0.15);border-radius:20px;height:6px;max-width:300px;margin:0 auto;}
+    .progress-fill{background:var(--gold);height:100%;border-radius:20px;width:100%;}
+    .progress-label{color:rgba(255,255,255,0.5);font-size:11px;margin-top:6px;}
+    /* Content */
+    .content{max-width:680px;margin:0 auto;padding:28px 20px;}
+    .section-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy-dark);margin:28px 0 14px;display:flex;align-items:center;gap:8px;}
+    .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+    /* File cards */
+    .file-card{background:white;border-radius:12px;border:1px solid #e8e4d8;margin-bottom:12px;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s;}
+    .file-card:hover{box-shadow:0 8px 24px rgba(27,58,107,0.1);transform:translateY(-2px);}
+    .file-card a{display:flex;align-items:center;gap:14px;padding:16px 18px;text-decoration:none;color:inherit;}
+    .file-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+    .icon-pdf{background:#fef2f2;}
+    .icon-html{background:#eff6ff;}
+    .icon-calc{background:#f0fdf4;}
+    .icon-doc{background:#fff7ed;}
+    .file-info{flex:1;min-width:0;}
+    .file-name{font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:2px;}
+    .file-desc{font-size:12px;color:#6b7280;line-height:1.4;}
+    .file-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:4px;}
+    .tag-core{background:#dbeafe;color:#1e40af;}
+    .tag-bonus{background:#dcfce7;color:#166534;}
+    .tag-tool{background:#fef9c3;color:#854d0e;}
+    .file-arrow{color:#9ca3af;font-size:18px;flex-shrink:0;}
+    /* Checklist */
+    .checklist{background:white;border-radius:12px;border:1px solid #e8e4d8;padding:18px 20px;margin-bottom:24px;}
+    .check-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f3f0e8;}
+    .check-item:last-child{border-bottom:none;}
+    .check-box{width:18px;height:18px;border:2px solid #c9a84c;border-radius:4px;flex-shrink:0;margin-top:1px;cursor:pointer;transition:background 0.2s;}
+    .check-box.checked{background:var(--gold);border-color:var(--gold);}
+    .check-box.checked::after{content:'✓';color:white;font-size:12px;display:flex;align-items:center;justify-content:center;height:100%;}
+    .check-label{font-size:13px;color:#374151;}
+    /* Support box */
+    .support-box{background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:12px;padding:20px 22px;color:white;margin-bottom:24px;}
+    .support-box h3{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px;color:var(--gold-light);}
+    .support-box p{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:12px;}
+    .support-btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy-dark);font-weight:700;font-size:13px;padding:8px 18px;border-radius:8px;text-decoration:none;}
+    /* Upsell */
+    .upsell-box{background:#f0f7ff;border:2px solid #bfd7f5;border-radius:12px;padding:18px 20px;margin-bottom:24px;}
+    .upsell-box h3{font-size:14px;font-weight:700;color:var(--navy-dark);margin-bottom:6px;}
+    .upsell-box p{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px;}
+    .upsell-btn{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:white;font-weight:700;font-size:13px;padding:8px 18px;border-radius:8px;text-decoration:none;}
+    /* Footer */
+    footer{background:var(--navy-dark);padding:16px 24px;text-align:center;}
+    footer p{color:rgba(255,255,255,0.5);font-size:12px;}
+    footer strong{color:var(--gold-light);}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tier-badge">🥉 BRONZE STARTER — 697.000đ</div>
+    <h1>Chào Mừng <span id="welcome-name">Anh/Chị</span><br>Đến Với BDS Mastery Kit!</h1>
+    <p class="hero-welcome">Bộ kit của anh/chị đã sẵn sàng. Dưới đây là tất cả tài liệu trong gói Bronze.</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <p class="progress-label">6 tài liệu · Báo cáo thị trường + Pháp lý + 30 Posts · Bắt đầu ngay hôm nay</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section-title">📦 Tài Liệu Của Anh/Chị</div>
+
+  <!-- File 1 -->
+  <div class="file-card">
+    <a href="shared/bang-tinh-roi.html" target="_blank">
+      <div class="file-icon icon-calc">🧮</div>
+      <div class="file-info">
+        <div class="file-name">Bảng Tính ROI Tương Tác</div>
+        <div class="file-desc">Nhập ngân sách → kết quả hiện ngay. So sánh BDS vs tiết kiệm theo năm.</div>
+        <span class="file-tag tag-tool">🔧 Công cụ</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- File 2 -->
+  <div class="file-card">
+    <a href="../03-CHECKLIST-DANG-BAI.html" target="_blank">
+      <div class="file-icon icon-html">📋</div>
+      <div class="file-info">
+        <div class="file-name">Checklist Đăng Bài Trên Từng Nền Tảng</div>
+        <div class="file-desc">FB · Zalo · Instagram · TikTok — tick trước khi đăng bài mỗi ngày.</div>
+        <span class="file-tag tag-core">⭐ Core</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- File 3 -->
+  <div class="file-card">
+    <a href="../09-landing-vu-thanh-tu.html" target="_blank">
+      <div class="file-icon icon-html">🌐</div>
+      <div class="file-info">
+        <div class="file-name">Landing Page Cá Nhân (HTML)</div>
+        <div class="file-desc">Trang giới thiệu dự án HLX deploy-ready. Đổi SĐT → upload Netlify → dùng ngay.</div>
+        <span class="file-tag tag-bonus">🎁 Bonus</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- File 4 -->
+  <div class="file-card">
+    <a href="shared/bao-cao-thi-truong.html" target="_blank">
+      <div class="file-icon icon-doc">📊</div>
+      <div class="file-info">
+        <div class="file-name">Báo Cáo Nghiên Cứu Thị Trường HLX</div>
+        <div class="file-desc">8 phần: Tổng quan · Hạ tầng · Du lịch · Giá · Đối thủ · ROI · Timeline · Rủi ro.</div>
+        <span class="file-tag tag-core">⭐ Core</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- File 5 -->
+  <div class="file-card">
+    <a href="shared/checklist-phap-ly.html" target="_blank">
+      <div class="file-icon icon-doc">⚖️</div>
+      <div class="file-info">
+        <div class="file-name">Checklist Pháp Lý Trước Khi Ký HĐ</div>
+        <div class="file-desc">3 loại sản phẩm: Shophouse · Biệt thự · Condotel — kiểm tra từng điểm pháp lý quan trọng.</div>
+        <span class="file-tag tag-core">⭐ Core</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- File 6 -->
+  <div class="file-card">
+    <a href="shared/30-posts-fb-zalo.html" target="_blank">
+      <div class="file-icon icon-html">📱</div>
+      <div class="file-info">
+        <div class="file-name">30 Bài Viết FB/Zalo Copy-Paste</div>
+        <div class="file-desc">30 ngày content sẵn sàng — Edu · Story · Proof · CTA. Có nút copy 1 chạm.</div>
+        <span class="file-tag tag-bonus">🎁 Bonus</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- Checklist sử dụng -->
+  <div class="section-title">✅ Checklist Bắt Đầu</div>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label">Đọc Báo Cáo Thị Trường — nắm vững 5 số liệu quan trọng nhất</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label">Mở Checklist Pháp Lý — lưu lại tab, dùng trước mỗi buổi tư vấn ký HĐ</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label">Mở 30 Posts FB/Zalo — lên kế hoạch đăng ngày nào, bài nào</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label">Mở Bảng Tính ROI, test với ngân sách khách đang có</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label">In checklist đăng bài, đặt cạnh bàn làm việc</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label">Mở landing page HTML, đổi SĐT thành số của mình → deploy lên Netlify</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label">Đăng bài đầu tiên trong 30 posts — bắt đầu hôm nay</span></div>
+  </div>
+
+  <!-- Support -->
+  <div class="support-box">
+    <h3>💬 Hỗ Trợ Sau Mua</h3>
+    <p>Anh/chị cần hướng dẫn deploy landing page, hoặc có câu hỏi về bộ kit? Nhắn Zalo — tôi phản hồi trong 30 phút.</p>
+    <a href="https://zalo.me/0964827670" target="_blank" class="support-btn">Nhắn Zalo Ngay →</a>
+  </div>
+
+  <!-- Upsell -->
+  <div class="upsell-box">
+    <h3>🥈 Nâng Cấp Lên Silver Pro — Chỉ Thêm 800.000đ</h3>
+    <p>Silver Pro có thêm: 15 script xử lý objection, content calendar 90 ngày, chiến lược FB Ads, và buổi review 1-1 miễn phí.</p>
+    <a href="https://zalo.me/0964827670" target="_blank" class="upsell-btn">Nâng Cấp Ngay →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>BDS Mastery Kit</strong> · anhomehanoi@gmail.com · 0964.827.670</p>
+  <p style="margin-top:4px;">© 2026 · Tất cả tài liệu chỉ dùng cho cá nhân — không chia sẻ lại</p>
+</footer>
+
+<script>
+  const p = new URLSearchParams(window.location.search);
+  const ten = (p.get('ten') || '').trim();
+  if (ten) document.getElementById('welcome-name').textContent = ten;
+</script>
+</body>
+</html>

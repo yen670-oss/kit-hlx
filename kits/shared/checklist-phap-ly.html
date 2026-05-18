@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✅ Checklist Pháp Lý — Vinhomes Hạ Long Xanh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1B3A6B;--navy-dark:#102340;--gold:#C9A84C;--gold-light:#E2C06A;--cream:#FAF8F3;--green:#065F46;--green-light:#10B981;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;min-height:100vh;}
+    .hero{background:linear-gradient(135deg,#0e1425,var(--navy-dark),var(--navy));padding:36px 24px 30px;text-align:center;position:relative;overflow:hidden;}
+    .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,0.18) 1.5px,transparent 0);background-size:24px 24px;pointer-events:none;}
+    .hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.45);color:var(--gold-light);font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:12px;letter-spacing:0.5px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:28px;color:white;margin-bottom:8px;line-height:1.25;}
+    .hero h1 span{color:var(--gold-light);}
+    .hero p{color:rgba(255,255,255,0.7);font-size:14px;max-width:520px;margin:0 auto;}
+    .disclaimer{background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 14px;margin-top:14px;color:rgba(255,255,255,0.6);font-size:11px;}
+
+    .content{max-width:760px;margin:0 auto;padding:28px 20px 40px;}
+    .section-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy-dark);margin:32px 0 14px;display:flex;align-items:center;gap:10px;}
+    .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+    .section-desc{font-size:13px;color:#6b7280;margin:-8px 0 16px;padding-left:2px;}
+
+    .product-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+    .tab-btn{padding:8px 18px;border-radius:20px;border:2px solid #e8e4d8;background:white;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;transition:all 0.2s;}
+    .tab-btn.active{border-color:var(--navy);background:var(--navy);color:white;}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+
+    .check-group{background:white;border-radius:14px;border:1px solid #e8e4d8;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+    .check-group-header{background:var(--navy-dark);padding:12px 18px;display:flex;align-items:center;gap:10px;}
+    .check-group-header h3{color:white;font-size:14px;font-weight:700;flex:1;}
+    .check-group-header .badge{background:var(--gold);color:var(--navy-dark);font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;}
+    .check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 18px;border-bottom:1px solid #f5f0e8;cursor:pointer;transition:background 0.15s;}
+    .check-item:last-child{border-bottom:none;}
+    .check-item:hover{background:#faf8f0;}
+    .check-box{width:20px;height:20px;border:2px solid var(--gold);border-radius:5px;flex-shrink:0;margin-top:1px;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+    .check-box.checked{background:var(--gold);border-color:var(--gold);}
+    .check-box.checked::after{content:'✓';color:white;font-size:12px;font-weight:700;}
+    .check-text{flex:1;}
+    .check-label{font-size:13px;font-weight:600;color:#1f2937;margin-bottom:2px;}
+    .check-note{font-size:11px;color:#9ca3af;line-height:1.4;}
+    .check-status{flex-shrink:0;}
+    .status-must{background:#fee2e2;color:#b91c1c;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
+    .status-should{background:#fef9c3;color:#92400e;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
+    .status-nice{background:#dcfce7;color:#166534;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
+
+    .alert-box{border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;gap:12px;}
+    .alert-box.red{background:#fee2e2;border:1px solid #fca5a5;}
+    .alert-box.yellow{background:#fffbeb;border:1px solid #fde68a;}
+    .alert-box.green{background:#dcfce7;border:1px solid #86efac;}
+    .alert-box .icon{font-size:20px;flex-shrink:0;}
+    .alert-box .body h4{font-size:13px;font-weight:700;margin-bottom:4px;}
+    .alert-box.red .body h4{color:#b91c1c;}
+    .alert-box.yellow .body h4{color:#92400e;}
+    .alert-box.green .body h4{color:#166534;}
+    .alert-box .body p{font-size:12px;color:#374151;line-height:1.5;}
+
+    .compare-table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:20px;}
+    .compare-table th{background:var(--navy-dark);color:white;padding:10px 14px;font-size:12px;font-weight:700;text-align:left;}
+    .compare-table td{padding:10px 14px;font-size:12px;border-bottom:1px solid #f0ede4;}
+    .compare-table tr:last-child td{border-bottom:none;}
+    .compare-table tr:nth-child(even) td{background:#fafaf7;}
+    .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;}
+    .tag-good{background:#dcfce7;color:#166534;}
+    .tag-warn{background:#fef9c3;color:#92400e;}
+    .tag-bad{background:#fee2e2;color:#b91c1c;}
+
+    .progress-summary{background:white;border-radius:12px;border:2px solid var(--gold);padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;}
+    .progress-ring{width:56px;height:56px;flex-shrink:0;position:relative;}
+    .progress-ring svg{transform:rotate(-90deg);}
+    .progress-ring .bg{fill:none;stroke:#e8e4d8;stroke-width:5;}
+    .progress-ring .fill{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;stroke-dasharray:138;stroke-dashoffset:138;transition:stroke-dashoffset 0.5s;}
+    .progress-ring .label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--navy-dark);}
+    .progress-text h4{font-size:14px;font-weight:700;color:var(--navy-dark);margin-bottom:2px;}
+    .progress-text p{font-size:12px;color:#6b7280;}
+
+    .print-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:white;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;cursor:pointer;border:none;width:100%;margin-bottom:12px;}
+    .zalo-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--navy-dark);font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;cursor:pointer;border:none;width:100%;}
+
+    @media print{
+      .hero{background:var(--navy-dark)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+      .print-btn,.zalo-btn,.product-tabs{display:none!important;}
+      .tab-content{display:block!important;}
+      .check-group{break-inside:avoid;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">⚖️ CHECKLIST PHÁP LÝ — VINHOMES HẠ LONG XANH</div>
+    <h1>Kiểm Tra Pháp Lý <span>Trước Khi Ký Hợp Đồng</span></h1>
+    <p>Danh sách kiểm tra đầy đủ cho từng loại sản phẩm — bảo vệ khách hàng và uy tín của anh/chị.</p>
+    <div class="disclaimer">⚠️ Tài liệu này mang tính tham khảo — không thay thế tư vấn pháp lý chuyên nghiệp. Cập nhật tháng 5/2026.</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Progress tracker -->
+  <div class="progress-summary" id="progress-summary">
+    <div class="progress-ring">
+      <svg width="56" height="56" viewBox="0 0 56 56">
+        <circle class="bg" cx="28" cy="28" r="22"/>
+        <circle class="fill" id="progress-ring-fill" cx="28" cy="28" r="22"/>
+      </svg>
+      <div class="label" id="progress-label">0%</div>
+    </div>
+    <div class="progress-text">
+      <h4 id="progress-title">Chưa bắt đầu kiểm tra</h4>
+      <p id="progress-sub">Tick từng mục khi đã xác nhận với khách hàng</p>
+    </div>
+  </div>
+
+  <!-- Alert: Key points -->
+  <div class="alert-box red">
+    <div class="icon">🚨</div>
+    <div class="body">
+      <h4>Lưu ý quan trọng về HLX</h4>
+      <p>Vinhomes Hạ Long Xanh (Hạ Long Bay Villas) là dự án đang triển khai — một số sản phẩm chưa có sổ tại thời điểm ký HĐMB. Cần giải thích rõ cho khách hàng về lộ trình pháp lý.</p>
+    </div>
+  </div>
+
+  <div class="alert-box yellow">
+    <div class="icon">📌</div>
+    <div class="body">
+      <h4>3 loại sổ tại HLX</h4>
+      <p><strong>Shophouse thương mại:</strong> Sổ đỏ (sở hữu lâu dài) | <strong>Biệt thự:</strong> Sổ đỏ lâu dài | <strong>Condotel/Căn hộ nghỉ dưỡng:</strong> Sổ hồng 50 năm (có thể gia hạn theo luật)</p>
+    </div>
+  </div>
+
+  <!-- Product tabs -->
+  <div class="section-title">📋 Checklist Theo Loại Sản Phẩm</div>
+  <div class="product-tabs">
+    <button class="tab-btn active" onclick="switchTab('shophouse')">🏪 Shophouse</button>
+    <button class="tab-btn" onclick="switchTab('biet-thu')">🏡 Biệt Thự</button>
+    <button class="tab-btn" onclick="switchTab('condotel')">🏨 Condotel</button>
+    <button class="tab-btn" onclick="switchTab('chung')">📌 Chung Cho Tất Cả</button>
+  </div>
+
+  <!-- SHOPHOUSE -->
+  <div class="tab-content active" id="tab-shophouse">
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>1. Pháp Lý Dự Án</h3>
+        <span class="badge">Bắt Buộc</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Quyết định phê duyệt quy hoạch 1/500</div>
+          <div class="check-note">Xác nhận shophouse được quy hoạch là đất thương mại dịch vụ (đất OTM)</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Giấy phép xây dựng (GPXD) còn hiệu lực</div>
+          <div class="check-note">Kiểm tra số GPXD và ngày cấp — đã được UBND tỉnh Quảng Ninh cấp</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Văn bản chấp thuận đầu tư từ UBND tỉnh Quảng Ninh</div>
+          <div class="check-note">Dự án Vinhomes Hạ Long Xanh — số văn bản chấp thuận chủ trương đầu tư</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Thông báo đủ điều kiện bán nhà ở hình thành trong tương lai</div>
+          <div class="check-note">Sở Xây dựng Quảng Ninh ban hành — bắt buộc trước khi mở bán</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>2. Hợp Đồng Mua Bán</h3>
+        <span class="badge">Quan Trọng</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Hợp đồng ghi rõ "sở hữu lâu dài" cho đất thương mại</div>
+          <div class="check-note">Shophouse sổ đỏ = sở hữu lâu dài theo Luật Đất đai 2024</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Điều khoản bàn giao nhà (ngày dự kiến, tiêu chuẩn bàn giao)</div>
+          <div class="check-note">Kiểm tra penalty nếu chủ đầu tư chậm bàn giao</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Tiến độ thanh toán và lãi suất phạt trả chậm</div>
+          <div class="check-note">Xác nhận đúng với CĐT Vinhomes — không bị đại lý tự sửa hợp đồng</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Điều khoản cấp sổ đỏ (thời hạn, cơ quan có thẩm quyền)</div>
+          <div class="check-note">Thông thường 12-24 tháng sau bàn giao — ghi rõ trong hợp đồng</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Mã căn, diện tích tim tường và thông thủy ghi đúng hợp đồng</div>
+          <div class="check-note">Khớp với bản vẽ thiết kế — kiểm tra trước khi ký</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>3. Tài Chính & Vay Vốn</h3>
+        <span class="badge">Quan Trọng</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Ngân hàng bảo lãnh dự án (theo Luật Kinh doanh BDS)</div>
+          <div class="check-note">HLX thường có VCB, Techcombank, MB — xác nhận ngân hàng bảo lãnh cụ thể</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Chính sách vay ngân hàng (LTV, thời gian ân hạn, lãi suất)</div>
+          <div class="check-note">Tư vấn khách rõ: ân hạn 24-36 tháng, lãi suất sau ân hạn</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Chứng minh nguồn tài chính khách hàng (KYC cơ bản)</div>
+          <div class="check-note">Bảo vệ khách, tránh ký hợp đồng khi chưa đủ tài chính</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BIET THU -->
+  <div class="tab-content" id="tab-biet-thu">
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>1. Pháp Lý Dự Án Biệt Thự</h3>
+        <span class="badge">Bắt Buộc</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Quy hoạch đất ở đô thị hoặc đất ở nông thôn lâu dài</div>
+          <div class="check-note">Biệt thự sổ đỏ = đất ở — xác nhận không phải đất nông nghiệp chuyển đổi</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Ranh giới lô đất khớp với bản đồ địa chính</div>
+          <div class="check-note">Yêu cầu CĐT cung cấp tọa độ lô đất — kiểm tra không chồng lấn</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Chứng nhận không vướng quy hoạch treo, không bị giải tỏa</div>
+          <div class="check-note">Tra cứu tại Sở TN&MT Quảng Ninh hoặc cổng thông tin quy hoạch tỉnh</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Xác nhận đường tiếp cận, vỉa hè, điện nước đã có trong quy hoạch</div>
+          <div class="check-note">Biệt thự ven biển cần kiểm tra đường vào không bị chặn bởi lô khác</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>2. Hợp Đồng & Bàn Giao</h3>
+        <span class="badge">Quan Trọng</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Diện tích sử dụng đất, diện tích xây dựng ghi đúng hợp đồng</div>
+          <div class="check-note">Biệt thự HLX thường 300-800m² đất — kiểm tra khớp bản vẽ mặt bằng</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Tiêu chuẩn hoàn thiện bàn giao (nội thất, vật liệu xây dựng)</div>
+          <div class="check-note">Full-furnished hay rough — ảnh hưởng lớn đến giá trị cho thuê</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Phí dịch vụ / quản lý hàng năm (đã xác định chưa)</div>
+          <div class="check-note">Vinhomes thường 40-60k/m²/tháng — ảnh hưởng chi phí vận hành</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Cam kết cho thuê / vận hành (nếu có từ CĐT hoặc đơn vị vận hành)</div>
+          <div class="check-note">Kiểm tra tính ràng buộc pháp lý — cam kết miệng không có giá trị</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>3. Kiểm Tra Trước Khi Khách Ký</h3>
+        <span class="badge">Thực Tế</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Khách đã tham quan thực địa hoặc xem mô hình căn tương đương</div>
+          <div class="check-note">Không để khách ký lần đầu chỉ qua ảnh/video — giảm rủi ro khiếu nại</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Đọc kỹ hợp đồng (khuyến khích nhờ luật sư review)</div>
+          <div class="check-note">Đặc biệt điều khoản phạt vi phạm, điều kiện hủy hợp đồng</div>
+        </div>
+        <span class="status-nice">NÊN LÀM</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONDOTEL -->
+  <div class="tab-content" id="tab-condotel">
+
+    <div class="alert-box red">
+      <div class="icon">⚠️</div>
+      <div class="body">
+        <h4>Condotel: Điểm đặc biệt cần lưu ý</h4>
+        <p>Condotel/căn hộ nghỉ dưỡng có <strong>sổ hồng 50 năm</strong> (không phải sở hữu vĩnh viễn). Đây là điểm khách hàng hay lo ngại nhất — cần giải thích rõ ràng và chủ động.</p>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>1. Pháp Lý Đặc Thù Condotel</h3>
+        <span class="badge">Bắt Buộc</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Xác nhận loại đất: Đất thương mại dịch vụ (không phải đất ở)</div>
+          <div class="check-note">Condotel xây trên đất TM-DV = sổ hồng 50 năm theo Luật Đất đai 2013/2024</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Giải thích rõ với khách: sổ hồng 50 năm là gì, quyền gia hạn</div>
+          <div class="check-note">Theo Luật Đất đai 2024: có thể gia hạn nếu nhu cầu sử dụng vẫn còn phù hợp quy hoạch</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Condotel có được đăng ký hộ khẩu thường trú không?</div>
+          <div class="check-note">Câu trả lời: KHÔNG — condotel không cho đăng ký KT thường trú. Phải nói thật với khách</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Điều khoản chia sẻ lợi nhuận cho thuê (nếu có cam kết thuê lại)</div>
+          <div class="check-note">Kiểm tra %/năm, thời hạn cam kết, điều kiện thanh lý cam kết</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>2. Đơn Vị Vận Hành & Quản Lý</h3>
+        <span class="badge">Quan Trọng</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Đơn vị vận hành (hotel operator) là ai? Uy tín ra sao?</div>
+          <div class="check-note">HLX: Marriott / Hilton / đơn vị khác — ảnh hưởng trực tiếp đến công suất khai thác</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Phí quản lý hàng năm (management fee)</div>
+          <div class="check-note">Thường 8-15% doanh thu phòng — ảnh hưởng ROI thực tế</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Công suất khai thác cam kết và thực tế lịch sử khu vực</div>
+          <div class="check-note">Hạ Long: avg occupancy 65-75% theo Sở Du lịch QN — so sánh với cam kết CĐT</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>3. Script Trả Lời Objection Condotel</h3>
+        <span class="badge">Thực Chiến</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Đã có câu trả lời chuẩn cho "Sổ hồng 50 năm có rủi ro không?"</div>
+          <div class="check-note">Script: "Đúng là 50 năm, nhưng theo Luật Đất đai 2024 được gia hạn. Kỳ vọng ROI 15-20%/năm đã bao gồm rủi ro này..."</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Đã so sánh với condotel khác trong khu vực (Sun Group, BIM)</div>
+          <div class="check-note">HLX có lợi thế: thương hiệu Vinhomes + vị trí 6.206ha + quy hoạch đồng bộ</div>
+        </div>
+        <span class="status-nice">NÊN LÀM</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHUNG CHO TẤT CA -->
+  <div class="tab-content" id="tab-chung">
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>1. Kiểm Tra Chủ Đầu Tư (CĐT)</h3>
+        <span class="badge">Nền Tảng</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Vinhomes JSC — mã CK VHM — xem báo cáo tài chính mới nhất</div>
+          <div class="check-note">Vốn điều lệ, nợ vay, dòng tiền hoạt động — kiểm tra không bị nợ xấu</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Tra lịch sử giao sổ các dự án Vinhomes trước đó</div>
+          <div class="check-note">Vinhomes Ocean Park, Vinhomes Smart City — track record bàn giao đúng hẹn</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Không có tranh chấp pháp lý lớn liên quan đến dự án HLX</div>
+          <div class="check-note">Google: "Vinhomes Hạ Long Xanh tranh chấp" — kiểm tra tin tức 6 tháng gần nhất</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>2. Kiểm Tra Khách Hàng (KYC)</h3>
+        <span class="badge">Bảo Vệ Mình</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">CMND/CCCD còn hiệu lực, tên khớp với hợp đồng</div>
+          <div class="check-note">Bắt buộc theo quy trình Vinhomes — ảnh hưởng đến việc cấp sổ sau này</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Nếu mua chung/góp vốn: xác nhận tỷ lệ góp vốn và văn bản thỏa thuận</div>
+          <div class="check-note">Tránh tranh chấp sau này — tư vấn làm hợp đồng góp vốn riêng</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Khách đã đọc và hiểu điều khoản phạt hủy cọc / hủy hợp đồng</div>
+          <div class="check-note">Thường 2-5% giá trị hợp đồng — nêu rõ trước khi ký để tránh khiếu nại</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+    </div>
+
+    <div class="check-group">
+      <div class="check-group-header">
+        <h3>3. Sau Khi Ký Hợp Đồng</h3>
+        <span class="badge">Chăm Sóc Sau Bán</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Lưu bản sao hợp đồng và lịch thanh toán cho khách</div>
+          <div class="check-note">Gửi qua Zalo/email — khách hay quên lịch thanh toán, ảnh hưởng uy tín môi giới</div>
+        </div>
+        <span class="status-must">BẮT BUỘC</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Nhắc lịch thanh toán định kỳ (2-3 ngày trước deadline)</div>
+          <div class="check-note">Thiết lập reminder trong phone hoặc dùng app CRM đơn giản</div>
+        </div>
+        <span class="status-should">NÊN CÓ</span>
+      </div>
+      <div class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Theo dõi tiến độ dự án và cập nhật cho khách 1-2 tháng/lần</div>
+          <div class="check-note">Giữ kết nối → khách hài lòng → giới thiệu thêm người mua mới</div>
+        </div>
+        <span class="status-nice">NÊN LÀM</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- So sánh loại sổ -->
+  <div class="section-title">📊 So Sánh 3 Loại Giấy Tờ</div>
+  <table class="compare-table">
+    <tr>
+      <th>Loại sổ</th>
+      <th>Thời hạn</th>
+      <th>Đăng ký HK</th>
+      <th>Vay ngân hàng</th>
+      <th>Thanh khoản</th>
+    </tr>
+    <tr>
+      <td><strong>Sổ đỏ</strong><br><small>(Shophouse, Biệt thự)</small></td>
+      <td><span class="tag tag-good">Vĩnh viễn</span></td>
+      <td><span class="tag tag-good">Được</span></td>
+      <td><span class="tag tag-good">Dễ vay</span></td>
+      <td><span class="tag tag-good">Cao nhất</span></td>
+    </tr>
+    <tr>
+      <td><strong>Sổ hồng 50 năm</strong><br><small>(Condotel, TM-DV)</small></td>
+      <td><span class="tag tag-warn">50 năm (+gia hạn)</span></td>
+      <td><span class="tag tag-bad">Không</span></td>
+      <td><span class="tag tag-warn">Một số NH</span></td>
+      <td><span class="tag tag-warn">Trung bình</span></td>
+    </tr>
+    <tr>
+      <td><strong>Chưa có sổ</strong><br><small>(Hình thành TL)</small></td>
+      <td><span class="tag tag-warn">Chờ CĐT cấp</span></td>
+      <td><span class="tag tag-bad">Không</span></td>
+      <td><span class="tag tag-warn">Khó hơn</span></td>
+      <td><span class="tag tag-bad">Thấp tạm thời</span></td>
+    </tr>
+  </table>
+
+  <!-- CTA -->
+  <button onclick="window.print()" class="print-btn">🖨️ In / Xuất PDF — Checklist Pháp Lý</button>
+  <a href="https://zalo.me/0964827670" target="_blank" class="zalo-btn">💬 Hỏi Về Pháp Lý Dự Án →</a>
+
+</div>
+
+<footer style="background:#102340;padding:16px 24px;text-align:center;">
+  <p style="color:rgba(255,255,255,0.5);font-size:12px;"><strong style="color:#E2C06A;">BDS Mastery Kit</strong> · Checklist Pháp Lý · Vinhomes Hạ Long Xanh</p>
+  <p style="color:rgba(255,255,255,0.35);font-size:11px;margin-top:4px;">Tài liệu tham khảo — không thay thế tư vấn pháp lý chuyên nghiệp · © 2026</p>
+</footer>
+
+<script>
+  function toggle(item) {
+    const box = item.querySelector('.check-box');
+    box.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const allBoxes = document.querySelectorAll('.check-box');
+    const checkedBoxes = document.querySelectorAll('.check-box.checked');
+    const total = allBoxes.length;
+    const done = checkedBoxes.length;
+    const pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+    document.getElementById('progress-label').textContent = pct + '%';
+    const dashOffset = 138 - (138 * pct / 100);
+    document.getElementById('progress-ring-fill').style.strokeDashoffset = dashOffset;
+
+    if (pct === 0) {
+      document.getElementById('progress-title').textContent = 'Chưa bắt đầu kiểm tra';
+      document.getElementById('progress-sub').textContent = 'Tick từng mục khi đã xác nhận với khách hàng';
+    } else if (pct < 50) {
+      document.getElementById('progress-title').textContent = `Đã kiểm tra ${done}/${total} mục`;
+      document.getElementById('progress-sub').textContent = 'Tiếp tục — cần hoàn thành trước khi khách ký';
+    } else if (pct < 100) {
+      document.getElementById('progress-title').textContent = `Gần xong — còn ${total - done} mục`;
+      document.getElementById('progress-sub').textContent = 'Kiểm tra các mục còn lại để đảm bảo an toàn pháp lý';
+    } else {
+      document.getElementById('progress-title').textContent = '✅ Hoàn thành — Sẵn sàng tư vấn ký hợp đồng!';
+      document.getElementById('progress-sub').textContent = 'Tất cả điểm pháp lý đã được xác nhận';
+    }
+  }
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+    updateProgress();
+  }
+</script>
+
+</body>
+</html>

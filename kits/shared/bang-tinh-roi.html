@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Tính ROI — Vinhomes Hạ Long Xanh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1B3A6B;--navy-dark:#102340;--gold:#C9A84C;--gold-light:#E2C06A;--cream:#FAF8F3;--cream-dark:#EDE8DC;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;font-size:14px;}
+    .wrapper{max-width:780px;margin:0 auto;padding:20px;}
+    .header{background:linear-gradient(135deg,var(--navy-dark),var(--navy),#2A5298);padding:28px 32px;border-radius:12px 12px 0 0;position:relative;overflow:hidden;}
+    .header::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,0.15) 1.5px,transparent 0);background-size:24px 24px;}
+    .header-inner{position:relative;z-index:1;}
+    .badge{display:inline-block;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);color:var(--gold-light);font-size:11px;font-weight:600;padding:3px 12px;border-radius:20px;margin-bottom:10px;}
+    .header h1{font-family:'Playfair Display',serif;font-size:24px;color:white;margin-bottom:4px;}
+    .header h1 span{color:var(--gold-light);}
+    .header p{color:rgba(255,255,255,0.6);font-size:13px;}
+    .card{background:white;border-radius:0 0 12px 12px;box-shadow:0 4px 24px rgba(27,58,107,0.1);padding:28px 32px;}
+    /* Input section */
+    .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+    @media(max-width:600px){.input-grid{grid-template-columns:1fr;}}
+    .input-group label{display:block;font-size:12px;font-weight:700;color:var(--navy-dark);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
+    .input-group input,.input-group select{width:100%;padding:10px 14px;border:1.5px solid #d4cfc4;border-radius:8px;font-family:'Be Vietnam Pro',sans-serif;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;}
+    .input-group input:focus,.input-group select:focus{border-color:var(--gold);}
+    .calc-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--navy-dark),var(--navy));border:none;border-radius:8px;color:white;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:24px;transition:opacity 0.2s;}
+    .calc-btn:hover{opacity:0.9;}
+    /* Results */
+    .results{display:none;}
+    .results.show{display:block;}
+    .results-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy-dark);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--gold);}
+    .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+    @media(max-width:600px){.kpi-grid{grid-template-columns:1fr 1fr;}}
+    .kpi-card{background:var(--cream);border:1px solid var(--cream-dark);border-radius:10px;padding:14px;text-align:center;}
+    .kpi-label{font-size:11px;font-weight:600;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;}
+    .kpi-value{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy-dark);}
+    .kpi-value.positive{color:#059669;}
+    .kpi-value.highlight{color:var(--gold);}
+    .kpi-sub{font-size:11px;color:#9ca3af;margin-top:2px;}
+    /* Year table */
+    table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13px;}
+    th{background:var(--navy-dark);color:white;padding:10px 12px;text-align:left;font-weight:600;}
+    th:first-child{border-radius:8px 0 0 0;}
+    th:last-child{border-radius:0 8px 0 0;}
+    td{padding:9px 12px;border-bottom:1px solid #e8e4d8;}
+    tr:nth-child(even) td{background:#f9f8f4;}
+    tr:last-child td{background:linear-gradient(135deg,#f0f4ff,#e8f0fe);font-weight:700;color:var(--navy-dark);}
+    .vs-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+    .vs-card{border-radius:10px;padding:14px;}
+    .vs-card.bds{background:#e8f0fe;border:1px solid #bfd7f5;}
+    .vs-card.bank{background:#fef3cd;border:1px solid #f0d060;}
+    .vs-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+    .vs-card.bds .vs-label{color:#1e4f91;}
+    .vs-card.bank .vs-label{color:#92650a;}
+    .vs-value{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+    .vs-card.bds .vs-value{color:#1B3A6B;}
+    .vs-card.bank .vs-value{color:#856404;}
+    .vs-sub{font-size:12px;color:#6b7280;margin-top:3px;}
+    .conclusion-box{background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:10px;padding:16px 20px;color:white;}
+    .conclusion-box p{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.85);}
+    .conclusion-box strong{color:var(--gold-light);}
+    .footer{background:var(--navy-dark);padding:14px 32px;border-radius:0 0 12px 12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0;}
+    .footer-brand{color:var(--gold-light);font-weight:700;font-size:13px;}
+    .footer-note{color:rgba(255,255,255,0.4);font-size:11px;}
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <div class="header-inner">
+      <div class="badge">BDS Mastery Kit — Công Cụ Tư Vấn</div>
+      <h1>Bảng Tính <span>ROI Đầu Tư</span></h1>
+      <p>Nhập ngân sách của anh/chị — kết quả hiện ngay, so sánh với gửi tiết kiệm</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <!-- INPUTS -->
+    <div class="input-grid">
+      <div class="input-group">
+        <label>Giá trị BDS muốn mua (tỷ đồng)</label>
+        <input type="number" id="gia" value="2" min="0.5" max="50" step="0.5">
+      </div>
+      <div class="input-group">
+        <label>Vốn tự có (%)</label>
+        <select id="von">
+          <option value="30">30% — Vay 70%</option>
+          <option value="40">40% — Vay 60%</option>
+          <option value="50" selected>50% — Vay 50%</option>
+          <option value="70">70% — Vay 30%</option>
+          <option value="100">100% — Không vay</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Lãi suất vay (%/năm)</label>
+        <input type="number" id="laisuat" value="8" min="5" max="15" step="0.5">
+      </div>
+      <div class="input-group">
+        <label>Tăng trưởng BDS dự kiến (%/năm)</label>
+        <select id="tangtruong">
+          <option value="10">10% — Bảo thủ</option>
+          <option value="15" selected>15% — Trung bình (HLX historical)</option>
+          <option value="20">20% — Lạc quan</option>
+          <option value="25">25% — Tốt nhất</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Lãi suất tiết kiệm so sánh (%/năm)</label>
+        <input type="number" id="tietkiem" value="5.5" min="3" max="10" step="0.5">
+      </div>
+      <div class="input-group">
+        <label>Thời gian đầu tư (năm)</label>
+        <select id="thoigian">
+          <option value="3">3 năm</option>
+          <option value="5" selected>5 năm</option>
+          <option value="7">7 năm</option>
+          <option value="10">10 năm</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">📊 Tính ROI Ngay →</button>
+
+    <!-- RESULTS -->
+    <div class="results" id="results">
+      <div class="results-title">📈 Kết Quả Phân Tích ROI</div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Vốn thực bỏ ra</div>
+          <div class="kpi-value" id="r-von"></div>
+          <div class="kpi-sub" id="r-von-sub"></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Giá trị BDS sau <span id="r-nam1"></span> năm</div>
+          <div class="kpi-value positive" id="r-giasau"></div>
+          <div class="kpi-sub">Tăng trưởng thuần</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Lợi nhuận ròng</div>
+          <div class="kpi-value highlight" id="r-loinhuan"></div>
+          <div class="kpi-sub" id="r-roi">ROI trên vốn tự có</div>
+        </div>
+      </div>
+
+      <!-- Year by year table -->
+      <table id="year-table">
+        <thead>
+          <tr>
+            <th>Năm</th>
+            <th>Giá trị BDS</th>
+            <th>Dư nợ vay</th>
+            <th>Lãi vay/năm</th>
+            <th>Tài sản ròng</th>
+            <th>Lợi nhuận tích lũy</th>
+          </tr>
+        </thead>
+        <tbody id="year-body"></tbody>
+      </table>
+
+      <!-- VS tiết kiệm -->
+      <div class="results-title" style="font-size:15px;margin-bottom:12px;">So sánh với Gửi Tiết Kiệm</div>
+      <div class="vs-box">
+        <div class="vs-card bds">
+          <div class="vs-label">🏠 Đầu tư BDS HLX</div>
+          <div class="vs-value" id="r-bds-final"></div>
+          <div class="vs-sub" id="r-bds-sub">Giá trị tài sản sau X năm</div>
+        </div>
+        <div class="vs-card bank">
+          <div class="vs-label">🏦 Gửi Tiết Kiệm</div>
+          <div class="vs-value" id="r-bank-final"></div>
+          <div class="vs-sub" id="r-bank-sub">Cùng số tiền gửi ngân hàng</div>
+        </div>
+      </div>
+
+      <div class="conclusion-box">
+        <p id="r-conclusion"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-brand">BDS Mastery Kit</span>
+    <span class="footer-note">* Số liệu mang tính tham khảo. Không phải tư vấn tài chính chính thức. Lãi suất và tăng trưởng thực tế có thể khác.</span>
+  </div>
+</div>
+
+<script>
+function fmt(n) {
+  if (n >= 1e9) return (n/1e9).toFixed(2) + ' tỷ';
+  if (n >= 1e6) return Math.round(n/1e6) + ' triệu';
+  return Math.round(n).toLocaleString('vi');
+}
+function fmtShort(n) {
+  if (n >= 1e9) return (n/1e9).toFixed(2) + ' tỷ';
+  return Math.round(n/1e6) + 'M';
+}
+
+function calculate() {
+  const gia      = parseFloat(document.getElementById('gia').value) * 1e9;
+  const vonPct   = parseFloat(document.getElementById('von').value) / 100;
+  const laisuat  = parseFloat(document.getElementById('laisuat').value) / 100;
+  const tang     = parseFloat(document.getElementById('tangtruong').value) / 100;
+  const tkPct    = parseFloat(document.getElementById('tietkiem').value) / 100;
+  const years    = parseInt(document.getElementById('thoigian').value);
+
+  const vonThuc  = gia * vonPct;
+  const vayBanDau = gia * (1 - vonPct);
+
+  // BDS simulation (giả sử trả hết gốc đều hàng năm)
+  let bdsCurrent = gia;
+  let duNo = vayBanDau;
+  let tbody = '';
+  let totalLai = 0;
+  const gocPerYear = vayBanDau / years;
+
+  for (let y = 1; y <= years; y++) {
+    bdsCurrent *= (1 + tang);
+    const laiNam = duNo * laisuat;
+    totalLai += laiNam;
+    duNo = Math.max(0, duNo - gocPerYear);
+    const taiSanRong = bdsCurrent - duNo;
+    const loiNhuan = taiSanRong - vonThuc;
+    tbody += `<tr>
+      <td>Năm ${y}</td>
+      <td>${fmt(bdsCurrent)}</td>
+      <td>${fmt(duNo)}</td>
+      <td>${fmt(laiNam)}/năm</td>
+      <td>${fmt(taiSanRong)}</td>
+      <td style="color:${loiNhuan>0?'#059669':'#dc2626'};font-weight:600;">${loiNhuan>0?'+':''}${fmt(loiNhuan)}</td>
+    </tr>`;
+  }
+
+  const bdsFinalAsset = bdsCurrent - Math.max(0, duNo);
+  const bdsLoiNhuan   = bdsFinalAsset - vonThuc - totalLai;
+  const bdsROI        = (bdsLoiNhuan / vonThuc * 100).toFixed(0);
+
+  // Tiết kiệm
+  const bankFinal = vonThuc * Math.pow(1 + tkPct, years);
+  const bankLoiNhuan = bankFinal - vonThuc;
+
+  const diff = bdsFinalAsset - bankFinal;
+
+  // Update DOM
+  document.getElementById('r-von').textContent = fmt(vonThuc);
+  document.getElementById('r-von-sub').textContent = `Vay thêm ${fmt(vayBanDau)}`;
+  document.getElementById('r-giasau').textContent = fmt(bdsCurrent);
+  document.getElementById('r-nam1').textContent = years;
+  document.getElementById('r-loinhuan').textContent = '+' + fmt(bdsLoiNhuan);
+  document.getElementById('r-roi').textContent = `ROI ${bdsROI}% trên vốn tự có`;
+  document.getElementById('year-body').innerHTML = tbody;
+  document.getElementById('r-bds-final').textContent = fmt(bdsFinalAsset);
+  document.getElementById('r-bds-sub').textContent = `Tài sản ròng sau ${years} năm`;
+  document.getElementById('r-bank-final').textContent = fmt(bankFinal);
+  document.getElementById('r-bank-sub').textContent = `Gửi ${fmt(vonThuc)} × ${years} năm`;
+  document.getElementById('r-conclusion').innerHTML =
+    `Đầu tư BDS HLX với ngân sách <strong>${fmt(vonThuc)}</strong> (vay thêm ${fmt(vayBanDau)}), sau <strong>${years} năm</strong> anh/chị có tài sản ròng <strong>${fmt(bdsFinalAsset)}</strong>, lợi nhuận ước tính <strong>+${fmt(bdsLoiNhuan)}</strong> — so với gửi tiết kiệm cùng số tiền chỉ được <strong>+${fmt(bankLoiNhuan)}</strong>.<br><br>` +
+    `Chênh lệch: <strong>+${fmt(diff)}</strong> so với gửi ngân hàng. ROI trên vốn thực tế: <strong>${bdsROI}%</strong>.`;
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+</body>
+</html>

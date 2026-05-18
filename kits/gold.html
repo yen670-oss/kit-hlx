@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🥇 Gold Kit — BDS Mastery Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1B3A6B;--navy-dark:#102340;--gold:#C9A84C;--gold-light:#E2C06A;--cream:#FAF8F3;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;min-height:100vh;}
+    .hero{background:linear-gradient(135deg,#1a0e00,#3d2800,#6b4400);padding:44px 24px 40px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.08),transparent);pointer-events:none;}
+    .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,0.2) 1.5px,transparent 0);background-size:24px 24px;}
+    .hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;}
+    .tier-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.3);border:1px solid rgba(201,168,76,0.6);color:var(--gold-light);font-size:13px;font-weight:800;padding:6px 18px;border-radius:20px;margin-bottom:16px;letter-spacing:1px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:34px;color:white;margin-bottom:10px;line-height:1.2;}
+    .hero h1 span{color:var(--gold-light);}
+    .hero p{color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:22px;}
+    .value-strip{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+    .value-item{text-align:center;}
+    .value-num{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold-light);font-weight:700;}
+    .value-label{font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px;}
+    .content{max-width:760px;margin:0 auto;padding:28px 20px;}
+    .section-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy-dark);margin:28px 0 14px;display:flex;align-items:center;gap:10px;}
+    .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+    .file-card{background:white;border-radius:12px;border:1px solid #e8e4d8;margin-bottom:12px;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s;}
+    .file-card:hover{box-shadow:0 8px 24px rgba(201,168,76,0.15);transform:translateY(-2px);}
+    .file-card.featured{border:2px solid var(--gold);background:linear-gradient(135deg,#fffef5,white);}
+    .file-card a{display:flex;align-items:center;gap:14px;padding:16px 18px;text-decoration:none;color:inherit;}
+    .file-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+    .icon-html{background:#eff6ff;}.icon-calc{background:#f0fdf4;}.icon-script{background:#fdf4ff;}.icon-bot{background:#f0fdf4;}.icon-slide{background:#fff7ed;}
+    .file-info{flex:1;}
+    .file-name{font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:2px;}
+    .file-desc{font-size:12px;color:#6b7280;line-height:1.4;}
+    .file-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:4px;}
+    .tag-core{background:#dbeafe;color:#1e40af;}.tag-bonus{background:#dcfce7;color:#166534;}.tag-gold{background:#fef3cd;color:#92650a;font-weight:800;}.tag-tool{background:#fef9c3;color:#854d0e;}
+    .file-arrow{color:#9ca3af;font-size:18px;flex-shrink:0;}
+    .included-note{background:#f8f6f0;border-radius:10px;border:1px solid #e8e0c8;padding:12px 16px;margin-bottom:10px;}
+    .included-note p{font-size:12px;color:#856404;font-weight:600;}
+    .checklist{background:white;border-radius:12px;border:1px solid #e8e4d8;padding:18px 20px;margin-bottom:24px;}
+    .check-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f3f0e8;}
+    .check-item:last-child{border-bottom:none;}
+    .check-box{width:18px;height:18px;border:2px solid var(--gold);border-radius:4px;flex-shrink:0;margin-top:1px;cursor:pointer;}
+    .check-box.checked{background:var(--gold);}
+    .check-box.checked::after{content:'✓';color:white;font-size:12px;display:flex;align-items:center;justify-content:center;height:100%;}
+    .check-label{font-size:13px;color:#374151;}
+    .team-box{background:linear-gradient(135deg,#1a0e00,#3d2800);border-radius:12px;padding:20px 22px;color:white;margin-bottom:20px;}
+    .team-box h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:8px;}
+    .team-box p{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:14px;}
+    .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;}
+    .team-slot{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:10px 6px;text-align:center;}
+    .team-slot span{display:block;font-size:20px;margin-bottom:4px;}
+    .team-slot p{font-size:10px;color:rgba(255,255,255,0.5);}
+    .team-btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy-dark);font-weight:700;font-size:13px;padding:8px 18px;border-radius:8px;text-decoration:none;}
+    .support-box{background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:12px;padding:20px 22px;color:white;margin-bottom:24px;}
+    .support-box h3{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px;color:var(--gold-light);}
+    .support-box p{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:12px;}
+    .support-btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy-dark);font-weight:700;font-size:13px;padding:8px 18px;border-radius:8px;text-decoration:none;margin-right:8px;}
+    footer{background:#1a0e00;padding:16px 24px;text-align:center;}
+    footer p{color:rgba(255,255,255,0.5);font-size:12px;}
+    footer strong{color:var(--gold-light);}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tier-badge">🥇 GOLD PREMIUM — 2.997.000đ</div>
+    <h1>Xin Chào <span id="welcome-name">Anh/Chị</span> —<br><span>Bộ Vũ Khí Đầy Đủ Nhất</span> Đã Sẵn Sàng!</h1>
+    <p>Anh/chị đang có bộ kit hoàn chỉnh nhất — đủ dùng cho cả team môi giới trong 6 tháng.</p>
+    <div class="value-strip">
+      <div class="value-item"><div class="value-num">7</div><div class="value-label">Tài liệu</div></div>
+      <div class="value-item"><div class="value-num">15</div><div class="value-label">Script objection</div></div>
+      <div class="value-item"><div class="value-num">180+</div><div class="value-label">Posts content</div></div>
+      <div class="value-item"><div class="value-num">5</div><div class="value-label">Team license</div></div>
+      <div class="value-item"><div class="value-num">47M</div><div class="value-label">Giá trị kit</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section-title">🥇 Tài Liệu Gold Exclusive</div>
+
+  <div class="file-card featured">
+    <a href="shared/15-script-objection.html" target="_blank">
+      <div class="file-icon icon-script">💬</div>
+      <div class="file-info">
+        <div class="file-name">15 Script Xử Lý Objection</div>
+        <div class="file-desc">5 nhóm đầy đủ. In ra + đưa cho toàn bộ team — mỗi thành viên đều xử lý được như chuyên gia.</div>
+        <span class="file-tag tag-gold">👑 Gold + Team</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="file-card featured">
+    <a href="shared/bang-tinh-roi.html" target="_blank">
+      <div class="file-icon icon-calc">🧮</div>
+      <div class="file-info">
+        <div class="file-name">Bảng Tính ROI Tương Tác</div>
+        <div class="file-desc">Chia sẻ link cho cả team — mỗi thành viên tư vấn ROI chuyên nghiệp như nhau.</div>
+        <span class="file-tag tag-tool">🔧 Team Tool</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="file-card featured">
+    <a href="#telegram" onclick="alert('Tài liệu Telegram Bot Setup: Nhắn Zalo 0964.827.670 để nhận hướng dẫn video step-by-step 20 phút')">
+      <div class="file-icon icon-bot">🤖</div>
+      <div class="file-info">
+        <div class="file-name">Telegram Bot Setup — Nhận Lead Tự Động</div>
+        <div class="file-desc">Form → Bot Telegram → Zalo notification. Video tutorial 20 phút step-by-step. Nhắn Zalo để nhận.</div>
+        <span class="file-tag tag-gold">👑 Gold Exclusive</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="section-title">📦 Silver Pro (Đã Bao Gồm)</div>
+  <div class="included-note"><p>✅ Toàn bộ tài liệu Silver Pro đã được bao gồm — bao gồm cả buổi review 1-1 miễn phí.</p></div>
+
+  <div class="file-card">
+    <a href="shared/bao-cao-thi-truong.html" target="_blank">
+      <div class="file-icon icon-calc">📊</div>
+      <div class="file-info">
+        <div class="file-name">Báo Cáo Nghiên Cứu Thị Trường HLX</div>
+        <div class="file-desc">8 phần đầy đủ — phát cho cả team đọc trước khi gặp khách. Dữ liệu thị trường, ROI 4 kịch bản, rủi ro.</div>
+        <span class="file-tag tag-core">⭐ Core</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="file-card">
+    <a href="shared/checklist-phap-ly.html" target="_blank">
+      <div class="file-icon icon-script">⚖️</div>
+      <div class="file-info">
+        <div class="file-name">Checklist Pháp Lý — 3 Loại Sản Phẩm</div>
+        <div class="file-desc">Mỗi thành viên team dùng trước khi tư vấn ký HĐ — tránh sai sót pháp lý cho toàn sàn.</div>
+        <span class="file-tag tag-core">⭐ Core</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="file-card">
+    <a href="shared/30-posts-fb-zalo.html" target="_blank">
+      <div class="file-icon icon-html">📱</div>
+      <div class="file-info">
+        <div class="file-name">30 Bài Viết FB/Zalo — Copy-Paste Ngay</div>
+        <div class="file-desc">Phân công cho cả team — mỗi người 1 bài/ngày, không ai viết trùng. Lọc theo loại, copy 1 chạm.</div>
+        <span class="file-tag tag-core">⭐ Core</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="file-card">
+    <a href="../landing-bds-halong.html" target="_blank">
+      <div class="file-icon icon-html">🌐</div>
+      <div class="file-info">
+        <div class="file-name">Landing Page HTML Deploy-Ready</div>
+        <div class="file-desc">Dùng được cho cả team — mỗi thành viên customize SĐT riêng, deploy trang riêng.</div>
+        <span class="file-tag tag-bonus">🎁 Bonus</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="file-card">
+    <a href="../checklist-dang-bai.html" target="_blank">
+      <div class="file-icon icon-html">📋</div>
+      <div class="file-info">
+        <div class="file-name">Checklist Đăng Bài Trên Từng Nền Tảng</div>
+        <div class="file-desc">In nhiều bản phát cho cả team — chuẩn quy trình đăng bài chung cho sàn.</div>
+        <span class="file-tag tag-core">⭐ Core</span>
+      </div>
+      <div class="file-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- Team section -->
+  <div class="section-title">👥 Team License — 5 Thành Viên</div>
+  <div class="team-box">
+    <h3>Chia Sẻ Kit Cho Team</h3>
+    <p>Anh/chị được phép chia sẻ toàn bộ tài liệu cho tối đa 5 thành viên trong team. Mỗi người dùng landing page + script riêng.</p>
+    <div class="team-grid">
+      <div class="team-slot"><span>👤</span><p>Thành viên 1</p></div>
+      <div class="team-slot"><span>👤</span><p>Thành viên 2</p></div>
+      <div class="team-slot"><span>👤</span><p>Thành viên 3</p></div>
+      <div class="team-slot"><span>👤</span><p>Thành viên 4</p></div>
+      <div class="team-slot"><span>👤</span><p>Thành viên 5</p></div>
+    </div>
+    <a href="https://zalo.me/0964827670" target="_blank" class="team-btn">Đăng Ký Team Members →</a>
+  </div>
+
+  <div class="section-title">✅ Checklist Triển Khai Team</div>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Ngày 1:</strong> Team leader đọc Báo Cáo Thị Trường — tóm tắt 5 điểm chính cho team trong 30 phút</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Ngày 1:</strong> Phát Checklist Pháp Lý cho toàn team — bắt buộc dùng trước mỗi buổi ký HĐ</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Ngày 2:</strong> Phân công 30 posts FB/Zalo cho từng thành viên — tránh trùng bài, cùng lịch</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Ngày 2:</strong> Tổ chức buổi training 1 giờ — roleplay 15 script objection với từng cặp</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Ngày 3:</strong> Mỗi thành viên deploy landing page riêng với SĐT cá nhân</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Tuần 1:</strong> Setup Telegram Bot (nhắn Zalo để nhận video hướng dẫn 20 phút)</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Tuần 1:</strong> Mỗi thành viên dùng Bảng Tính ROI trong ít nhất 2 buổi tư vấn</span></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><span class="check-label"><strong>Tuần 2:</strong> Đặt lịch buổi review 1-1 ưu tiên cho team leader qua Zalo 0964.827.670</span></div>
+  </div>
+
+  <div class="support-box">
+    <h3>🎓 Hỗ Trợ Ưu Tiên Cho Gold</h3>
+    <p>Anh/chị được ưu tiên hỗ trợ — phản hồi trong 15 phút (giờ hành chính). Bao gồm buổi review 1-1 cho team leader và setup Telegram Bot.</p>
+    <a href="https://zalo.me/0964827670" target="_blank" class="support-btn">Zalo Hỗ Trợ →</a>
+    <a href="mailto:anhomehanoi@gmail.com" class="support-btn" style="background:rgba(255,255,255,0.15);color:white;">Email →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>BDS Mastery Kit — Gold Premium</strong> · anhomehanoi@gmail.com · 0964.827.670</p>
+  <p style="margin-top:4px;">© 2026 · Team license: 5 thành viên · Không chia sẻ ra ngoài team</p>
+</footer>
+
+<script>
+  const p = new URLSearchParams(window.location.search);
+  const ten = (p.get('ten') || '').trim();
+  if (ten) document.getElementById('welcome-name').textContent = ten;
+</script>
+</body>
+</html>
