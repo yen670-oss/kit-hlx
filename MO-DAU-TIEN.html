@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kit Bán Kit — Bắt Đầu Tại Đây</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#1B3A6B;--nd:#102340;--nl:#2A5298;
+      --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+      --brown:#6B4226;--cream:#FAF8F3;--cd:#EDE8DC;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+
+    .grad-navy{background:linear-gradient(135deg,#102340,#1B3A6B 60%,#2A5298);}
+    .grad-gold{background:linear-gradient(135deg,#C9A84C,#E2C06A 50%,#A8862E);}
+    .tg{background:linear-gradient(135deg,#E2C06A,#C9A84C,#A8862E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    .hero{background:linear-gradient(160deg,#0e1f38,#1B3A6B 55%,#3b1e08);padding:60px 24px 52px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.15) 1.5px,transparent 0);background-size:30px 30px;}
+    .hero-in{position:relative;z-index:1;max-width:680px;margin:0 auto;}
+    .badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:99px;margin-bottom:20px;}
+    .hero h1{font-size:clamp(24px,4vw,38px);font-weight:800;color:#fff;line-height:1.25;margin-bottom:12px;}
+    .hero p{color:#aab8d0;font-size:14px;line-height:1.7;max-width:500px;margin:0 auto 26px;}
+    .chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .chip{background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.25);color:#e2e8f0;font-size:12px;padding:6px 13px;border-radius:8px;}
+
+    main{max-width:840px;margin:0 auto;padding:44px 20px 80px;}
+    .slabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+
+    /* QS */
+    .qs{background:var(--nd);border-radius:20px;padding:30px 32px;margin-bottom:44px;}
+    .qs h2{font-size:21px;color:#fff;margin-bottom:4px;}
+    .qs .sub{color:#8da4c4;font-size:13px;margin-bottom:22px;}
+    .qs-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    @media(max-width:520px){.qs-grid{grid-template-columns:1fr;}}
+    .qi{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.06);border-radius:12px;padding:14px 15px;border:1px solid rgba(201,168,76,.15);cursor:pointer;transition:background .2s;}
+    .qi:hover{background:rgba(201,168,76,.1);}
+    .qc{width:22px;height:22px;border-radius:6px;border:2px solid rgba(201,168,76,.5);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px;transition:all .2s;}
+    .qi.done .qc{background:var(--gold);border-color:var(--gold);}
+    .qi.done .qc::after{content:'✓';color:#102340;font-weight:700;}
+    .qt{font-size:13px;color:#cbd5e1;line-height:1.5;}
+    .qt strong{color:#fff;display:block;margin-bottom:2px;}
+
+    /* CARDS */
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:16px;margin-bottom:44px;}
+    @media(max-width:480px){.cards{grid-template-columns:1fr;}}
+    .card{background:#fff;border-radius:18px;padding:24px 26px;box-shadow:0 4px 22px rgba(27,58,107,.07);border:1px solid rgba(201,168,76,.18);transition:transform .25s,box-shadow .25s;}
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(27,58,107,.13);}
+    .cnum{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:#fff;margin-bottom:13px;}
+    .cn{background:linear-gradient(135deg,#102340,#1B3A6B);}
+    .cg{background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#102340!important;}
+    .cb{background:linear-gradient(135deg,#4A2D18,#6B4226);}
+    .cv{background:linear-gradient(135deg,#1a5c38,#2d9d5c);}
+    .card h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:7px;}
+    .card p{font-size:12.5px;color:#5a6680;line-height:1.6;margin-bottom:14px;}
+    .fl{list-style:none;display:flex;flex-direction:column;gap:5px;}
+    .fl li{font-size:12px;color:#4a5568;display:flex;align-items:center;gap:7px;padding:7px 11px;background:var(--cream);border-radius:8px;border:1px solid var(--cd);}
+    .fl li .ic{font-size:14px;flex-shrink:0;}
+    .fl li a{color:var(--nl);text-decoration:none;font-weight:500;}
+    .fl li a:hover{color:var(--gd);text-decoration:underline;}
+    .bt{margin-left:auto;font-size:10px;font-weight:600;padding:2px 7px;border-radius:99px;flex-shrink:0;}
+    .bh{background:#dbeafe;color:#1e40af;}
+    .bt2{background:#fef3c7;color:#92400e;}
+    .bf{background:#d1fae5;color:#065f46;}
+
+    /* TIP */
+    .tip{background:linear-gradient(135deg,#4A2D18,#6B4226);border-radius:16px;padding:22px 26px;color:#fff;margin-bottom:30px;border:1px solid rgba(201,168,76,.3);}
+    .tip h4{font-size:14px;color:var(--gl);margin-bottom:9px;}
+    .tip li{font-size:12.5px;color:#e8d5c0;line-height:1.8;padding-left:4px;}
+    .tip ul{padding-left:18px;}
+
+    /* PRICING */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px;}
+    @media(max-width:560px){.pricing{grid-template-columns:1fr;}}
+    .pcard{background:#fff;border-radius:16px;padding:22px 20px;border:1px solid rgba(201,168,76,.2);box-shadow:0 4px 18px rgba(27,58,107,.07);text-align:center;position:relative;}
+    .pcard.featured{background:var(--nd);border-color:rgba(201,168,76,.4);}
+    .pcard.featured h4,.pcard.featured .price,.pcard.featured li{color:#fff!important;}
+    .pcard.featured li{color:#aab8d0!important;}
+    .ptag{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#102340;font-size:10px;font-weight:700;padding:3px 12px;border-radius:99px;white-space:nowrap;}
+    .pcard h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+    .price{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);margin-bottom:12px;}
+    .pcard ul{list-style:none;text-align:left;display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+    .pcard li{font-size:11.5px;color:#5a6680;display:flex;gap:6px;line-height:1.5;}
+    .pcard li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;}
+
+    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:32px 0;}
+    footer{background:#0a1520;color:#556;text-align:center;padding:22px;font-size:12px;}
+    footer span{color:var(--gold);}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="badge">💼 Kit Bán Sản Phẩm Cho Broker · B2B System</div>
+    <h1>Mở File Này Đầu Tiên<br><span class="tg">Mọi Thứ Để Bán Kit Đều Ở Đây</span></h1>
+    <p>Sales page · Content đăng mạng xã hội · Lịch 2 tuần · Câu mẫu xử lý tình huống — sẵn sàng đăng ngay hôm nay</p>
+    <div class="chips">
+      <div class="chip">Bước 1 → Deploy sales page</div>
+      <div class="chip">Bước 2 → Đăng content thu hút broker</div>
+      <div class="chip">Bước 3 → Chốt và giao kit trong 24h</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- QUICK START -->
+  <div class="qs">
+    <h2>⚡ Checklist Khởi Động Bán Kit</h2>
+    <p class="sub">Làm xong 8 mục này trước khi đăng bài đầu tiên</p>
+    <div class="qs-grid">
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Deploy sales page lên Netlify</strong>Vào app.netlify.com/drop → kéo thả thư mục 01-SALES-PAGE/ → nhận link live</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Cập nhật SĐT & Zalo trong sales page</strong>Mở 01-SALES-PAGE/index.html → Ctrl+H → thay SĐT gốc bằng SĐT của anh/chị</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Thay placeholder trong file content</strong>Tìm [SĐT CỦA ANH/CHỊ], [LINK SALES PAGE] trong các file .txt → thay hết</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Chuẩn bị screenshot landing page mẫu</strong>Chụp screenshot trang moonlit-taffy-c8c634.netlify.app → dùng làm ảnh minh họa</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Đăng bài 1 (FB + Zalo cùng ngày)</strong>BAI-1-FB-cau-chuyen-ban-kit.txt + Tin nhắn Zalo 1 → đăng thứ Hai 8:00 sáng</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Đăng vào 3–5 group môi giới</strong>Bài 2 (BAI-2-FB-van-de-broker.txt) → đăng group thứ Năm</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Quay 3 video TikTok/Reels</strong>Dùng script trong BAI-5-TikTok-scripts-ban-kit.txt → quay 1 buổi, đăng dần</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Đọc 8 tình huống xử lý</strong>04-XU-LY-TINH-HUONG/xu-ly-tinh-huong-ban-kit.txt → hiểu trước khi có người hỏi</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Lên lịch 18 bài content funnel</strong>Mở content-toan-phan-funnel.html → chọn bài TOFU đầu tiên → copy → đăng thứ Hai</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Tạo thumbnail và cài link live feed</strong>Mở 06-HUONG-DAN-LINK-LIVE-FEED.html → tải og-image.png → cập nhật OG tags → reset FB cache</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Chạy chiến dịch seeding chuyên gia</strong>Mở 08-SEEDING-CHUYEN-GIA.html → đăng bài mở màn → lên lịch S1–S5 theo tab Lịch & Checklist</div>
+      </div>
+      <div class="qi" onclick="toggle(this)">
+        <div class="qc"></div>
+        <div class="qt"><strong>Deploy toàn bộ kit lên GitHub Pages</strong>Mở 10-HUONG-DAN-DEPLOY-GITHUB.html → làm theo 8 bước → link live mãi mãi không hết hạn</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIP -->
+  <div class="tip">
+    <h4>⚠️ Thay những chỗ này trước khi đăng bất kỳ bài nào</h4>
+    <ul>
+      <li><strong style="color:#E2C06A">[SĐT CỦA ANH/CHỊ]</strong> → VD: 0964.827.670</li>
+      <li><strong style="color:#E2C06A">[LINK SALES PAGE]</strong> → Link Netlify sau khi deploy 01-SALES-PAGE/</li>
+      <li><strong style="color:#E2C06A">[X] suất</strong> → Số suất kit còn lại tháng này (anh/chị tự quyết)</li>
+      <li><strong style="color:#E2C06A">[Tên]</strong> → Tên của broker đang nhắn (trong tin nhắn cá nhân)</li>
+    </ul>
+  </div>
+
+  <!-- PRICING -->
+  <p class="slabel">💰 3 Gói Kit Đang Bán</p>
+  <div class="pricing">
+
+    <div class="pcard">
+      <h4>🥉 Bronze Starter</h4>
+      <div class="price">1.990.000đ</div>
+      <ul>
+        <li>Landing Page HTML cá nhân — deploy-ready</li>
+        <li>Báo cáo thị trường HLX 2026 — 8 phần, data thực</li>
+        <li>Checklist pháp lý — Shophouse · Biệt thự · Condotel</li>
+        <li>30 posts FB/Zalo — nút copy 1 chạm</li>
+        <li>Bảng tính ROI tương tác — BĐS vs tiết kiệm</li>
+        <li>Checklist đăng bài — FB · Zalo · IG · TikTok</li>
+      </ul>
+    </div>
+
+    <div class="pcard featured">
+      <div class="ptag">⭐ Phổ biến nhất</div>
+      <h4>🥈 Silver Pro</h4>
+      <div class="price" style="color:var(--gl)">2.990.000đ</div>
+      <ul>
+        <li>Tất cả 6 tài liệu Bronze</li>
+        <li>15 script xử lý objection — 5 nhóm đầy đủ</li>
+        <li style="color:#E2C06A!important;font-weight:600">⚡ FAST-ACTION BONUS: Review marketing 1-1 miễn phí (30 phút Zalo)</li>
+      </ul>
+    </div>
+
+    <div class="pcard">
+      <h4>🥇 Gold Team</h4>
+      <div class="price">4.990.000đ</div>
+      <ul>
+        <li>Tất cả Silver Pro</li>
+        <li>Telegram Bot tự động nhận lead 24/7</li>
+        <li>Team License — dùng cho 5 người</li>
+        <li>Priority Support 90 ngày</li>
+        <li>Update 3 tháng</li>
+        <li>Call bàn giao 30 phút 1-1</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FILES -->
+  <p class="slabel">📦 Nội dung trong folder này</p>
+  <div class="cards">
+
+    <div class="card">
+      <div class="cnum cn">01</div>
+      <h3>Sales Page</h3>
+      <p>Trang bán kit cho broker — deploy lên Netlify, cập nhật SĐT/Zalo trước khi deploy.</p>
+      <ul class="fl">
+        <li><span class="ic">🌐</span><a href="01-SALES-PAGE/index.html" target="_blank">index.html — Mở xem preview</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">📁</span><span>Thư mục 01-SALES-PAGE/ → kéo lên Netlify</span><span class="bt bf">FOLDER</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="cnum cg">02</div>
+      <h3>Content Bán Kit (B2B)</h3>
+      <p>5 bài FB + 5 tin Zalo + 3 script TikTok + lịch 2 tuần — tất cả nhắm vào broker muốn mua kit.</p>
+      <ul class="fl">
+        <li><span class="ic">📅</span><span>LICH-DANG-BAN-KIT-2-tuan.txt — Lịch đăng đầy đủ</span><span class="bt bt2">TXT</span></li>
+        <li><span class="ic">📄</span><span>BAI-1-FB-cau-chuyen-ban-kit.txt</span><span class="bt bt2">TXT</span></li>
+        <li><span class="ic">📄</span><span>BAI-2-FB-van-de-broker.txt</span><span class="bt bt2">TXT</span></li>
+        <li><span class="ic">📄</span><span>BAI-3-FB-offer-stack.txt</span><span class="bt bt2">TXT</span></li>
+        <li><span class="ic">📄</span><span>BAI-4-Zalo-5-tin-nhan-ban-kit.txt</span><span class="bt bt2">TXT</span></li>
+        <li><span class="ic">🎬</span><span>BAI-5-TikTok-scripts-ban-kit.txt (3 video)</span><span class="bt bt2">TXT</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="cnum cb">03</div>
+      <h3>Checklist Đăng Bài</h3>
+      <p>Interactive checklist — tick trước khi đăng. Không bỏ sót bước nào.</p>
+      <ul class="fl">
+        <li><span class="ic">✅</span><a href="03-CHECKLIST-DANG-BAI.html" target="_blank">03-CHECKLIST-DANG-BAI.html — Mở và dùng</a><span class="bt bh">HTML</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="cnum cv">04</div>
+      <h3>Xử Lý Tình Huống</h3>
+      <p>8 tình huống broker mua hay hỏi nhất — giá, đắt, suy nghĩ, không rành kỹ thuật, tự làm được... + mẫu tin nhắn mở đầu.</p>
+      <ul class="fl">
+        <li><span class="ic">💬</span><span>xu-ly-tinh-huong-ban-kit.txt</span><span class="bt bt2">TXT</span></li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(201,168,76,.4);background:linear-gradient(135deg,#fff 80%,#fffbef);">
+      <div class="cnum" style="background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#102340;">05</div>
+      <h3>18 Bài Content Toàn Phần Funnel</h3>
+      <p>TOFU → MOFU → BOFU → UPSELL — 18 bài viết đầy đủ cho HLX. Viết từ góc độ người bán kit, không phải môi giới. Copy 1 chạm.</p>
+      <ul class="fl">
+        <li><span class="ic">📊</span><a href="content-toan-phan-funnel.html" target="_blank">content-toan-phan-funnel.html — Mở và dùng ngay</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">🟢</span><span>TOFU (5 bài) — Awareness: hook, poll, myth bust</span></li>
+        <li><span class="ic">🔵</span><span>MOFU (5 bài) — Consideration: demo, case study, FAQ</span></li>
+        <li><span class="ic">🔴</span><span>BOFU (5 bài) — Conversion: offer, urgency, proof, CTA</span></li>
+        <li><span class="ic">🟣</span><span>UPSELL (3 bài) — Bronze→Silver, Silver→Gold, Referral</span></li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(52,211,153,.3);">
+      <div class="cnum" style="background:linear-gradient(135deg,#1a3a5c,#2563eb);color:#fff;">07</div>
+      <h3>Infographic Toàn Cảnh BDS Quảng Ninh 2026</h3>
+      <p>6 khu vực · Bảng giá · Hạ tầng timeline · Ma trận rủi ro · Nhận định thị trường. Tải PNG 1080px về đăng ngay.</p>
+      <ul class="fl">
+        <li><span class="ic">📊</span><a href="infographic-thi-truong-qn-2026.html" target="_blank">infographic-thi-truong-qn-2026.html — Mở và tải PNG</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">🗺</span><span>6 vùng BDS: HLX · Bãi Cháy · Vân Đồn · Móng Cái · Cẩm Phả · Uông Bí</span></li>
+        <li><span class="ic">📈</span><span>Biểu đồ giá · Timeline hạ tầng · Điểm đầu tư · Rủi ro</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="cnum" style="background:linear-gradient(135deg,#1a5c38,#2d9d5c);">06</div>
+      <h3>Link Live Feed — Thumbnail + Hướng Dẫn</h3>
+      <p>Tạo ảnh thumbnail 1200×630 (tải về ngay), cài OG tags, kỹ thuật đăng bài để link hiện preview card có thể bấm trên feed FB & Zalo.</p>
+      <ul class="fl">
+        <li><span class="ic">🖼</span><a href="06-HUONG-DAN-LINK-LIVE-FEED.html" target="_blank">06-HUONG-DAN-LINK-LIVE-FEED.html — Mở và làm theo</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">🎨</span><span>Thumbnail generator — tùy chỉnh text & tải PNG</span></li>
+        <li><span class="ic">🔄</span><span>Hướng dẫn reset FB cache (Debug Tool)</span></li>
+        <li><span class="ic">📱</span><span>Kỹ thuật đăng bài FB + Zalo — CTR 8–15%</span></li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(201,168,76,.4);">
+      <div class="cnum" style="background:linear-gradient(135deg,#7c3d12,#C9A84C);color:#fff;">08</div>
+      <h3>Seeding Chuyên Gia — 6 Bài Viết + Lịch Đăng</h3>
+      <p>Bài mở màn + 5 bài seeding theo nỗi đau thực của môi giới HLX. Persona quan sát, không bán hàng lộ liễu. Lịch 2 tuần + checklist đăng bài.</p>
+      <ul class="fl">
+        <li><span class="ic">✍️</span><a href="08-SEEDING-CHUYEN-GIA.html" target="_blank">08-SEEDING-CHUYEN-GIA.html — Mở và copy bài</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">🎯</span><span>Bài mở màn + S1 Cạnh Tranh · S2 Chi Phí · S3 Khách Chậm</span></li>
+        <li><span class="ic">💡</span><span>S4 Tài Chính · S5 Personal Brand — full & short version</span></li>
+        <li><span class="ic">📅</span><span>Lịch 2 tuần · Giờ vàng đăng · Hashtag theo từng nền tảng</span></li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(76,175,80,.5);">
+      <div class="cnum" style="background:linear-gradient(135deg,#0f4c2a,#2d8a52);color:#fff;">09</div>
+      <h3>Landing Page Bán HLX — Tông Xanh · Cam · Nâu</h3>
+      <p>Landing page conversion-focused dành cho môi giới bán Vinhomes Hạ Long Xanh. Full sections: Hero · Vị trí · Tiện ích · Sản phẩm · Chính sách · Form đăng ký · FAQ.</p>
+      <ul class="fl">
+        <li><span class="ic">🌿</span><a href="09-landing-hlx.html" target="_blank">09-landing-hlx.html — Mở và deploy</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">🎨</span><span>Tông màu xanh lá · cam · nâu nhẹ — thiên nhiên đẳng cấp</span></li>
+        <li><span class="ic">📱</span><span>Responsive mobile-first · Sticky nav · Floating call button</span></li>
+        <li><span class="ic">📋</span><span>Form đăng ký tích hợp · FAQ accordion · Scroll reveal animation</span></li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(27,58,107,.4);">
+      <div class="cnum" style="background:linear-gradient(135deg,#102340,#2A5298);color:#fff;">10</div>
+      <h3>Deploy GitHub Pages — Hướng Dẫn 8 Bước</h3>
+      <p>Upload toàn bộ kit lên GitHub Pages — link không bao giờ hết hạn. Step-by-step tương tác, copy lệnh 1 chạm, checklist tick, kiểm tra live ngay trong trang.</p>
+      <ul class="fl">
+        <li><span class="ic">🚀</span><a href="10-HUONG-DAN-DEPLOY-GITHUB.html" target="_blank">10-HUONG-DAN-DEPLOY-GITHUB.html — Mở và làm theo</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">📋</span><span>Bảng file cần upload + tên chuẩn không dấu</span></li>
+        <li><span class="ic">⚡</span><span>Lệnh git copy 1 chạm · FAQ xử lý lỗi thường gặp</span></li>
+        <li><span class="ic">🔗</span><span>Tất cả link live sau deploy — copy & share ngay</span></li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(26,107,60,.4);">
+      <div class="cnum" style="background:linear-gradient(135deg,#0f4c2a,#1a6b3c);color:#fff;">📦</div>
+      <h3>Kit Hub — Trang Giao Hàng Cho Khách</h3>
+      <p>Trang index đẹp dành cho người mua kit. Mở link → xem tất cả tài nguyên → copy link từng file. Progress tracker tick tiến độ. Gửi link này cho khách sau khi họ mua.</p>
+      <ul class="fl">
+        <li><span class="ic">🏠</span><a href="KIT-HUB.html" target="_blank">KIT-HUB.html — Mở xem thử</a><span class="bt bh">HTML</span></li>
+        <li><span class="ic">🔗</span><span>Link live: yen670-oss.github.io/kit-hlx/KIT-HUB.html</span></li>
+        <li><span class="ic">✅</span><span>Progress tracker 8 bước · Lưu tự động · Không cần đăng nhập</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FLOW -->
+  <p class="slabel">🔄 Quy trình bán và giao kit</p>
+  <div style="background:#fff;border-radius:16px;padding:26px 30px;border:1px solid rgba(201,168,76,.2);box-shadow:0 4px 18px rgba(27,58,107,.06);">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;">
+      <div style="text-align:center;padding:14px;background:var(--cream);border-radius:11px;">
+        <div style="font-size:26px;margin-bottom:7px;">📢</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:3px;">Đăng bài</div>
+        <div style="font-size:11px;color:#6b7280;line-height:1.5">FB + Zalo + TikTok<br>theo lịch 2 tuần</div>
+      </div>
+      <div style="text-align:center;padding:14px;background:var(--cream);border-radius:11px;">
+        <div style="font-size:26px;margin-bottom:7px;">💬</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:3px;">Broker hỏi</div>
+        <div style="font-size:11px;color:#6b7280;line-height:1.5">Dùng script<br>xử lý tình huống</div>
+      </div>
+      <div style="text-align:center;padding:14px;background:var(--cream);border-radius:11px;">
+        <div style="font-size:26px;margin-bottom:7px;">💳</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:3px;">Chuyển tiền</div>
+        <div style="font-size:11px;color:#6b7280;line-height:1.5">Broker điền form<br>tên + SĐT + email</div>
+      </div>
+      <div style="text-align:center;padding:14px;background:var(--cream);border-radius:11px;">
+        <div style="font-size:26px;margin-bottom:7px;">⚙️</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:3px;">Chạy script</div>
+        <div style="font-size:11px;color:#6b7280;line-height:1.5">tools/personalize.ps1<br>→ 30 giây xong</div>
+      </div>
+      <div style="text-align:center;padding:14px;background:var(--cream);border-radius:11px;">
+        <div style="font-size:26px;margin-bottom:7px;">🚀</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:3px;">Deploy Netlify</div>
+        <div style="font-size:11px;color:#6b7280;line-height:1.5">Kéo thả folder<br>→ link live 2 phút</div>
+      </div>
+      <div style="text-align:center;padding:14px;background:var(--cream);border-radius:11px;">
+        <div style="font-size:26px;margin-bottom:7px;">✅</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:3px;">Bàn giao</div>
+        <div style="font-size:11px;color:#6b7280;line-height:1.5">Gửi link + file gốc<br>+ call 30 phút</div>
+      </div>
+    </div>
+    <p style="margin-top:18px;font-size:12.5px;color:#6b7280;text-align:center;">⏱️ Tổng thời gian phục vụ 1 khách: <strong style="color:var(--navy)">5–10 phút kỹ thuật + 30 phút call</strong></p>
+  </div>
+
+</main>
+
+<footer>
+  <p>Kit Bán Kit — B2B System · <span>Vinhomes Hạ Long Xanh</span> · Hỗ trợ: <span>0964.827.670</span></p>
+</footer>
+
+<script>
+  function toggle(el){
+    el.classList.toggle('done');
+    const items=document.querySelectorAll('.qi');
+    const done=document.querySelectorAll('.qi.done').length;
+    if(done===items.length) setTimeout(()=>alert('🎉 Xong! Anh/chị sẵn sàng bán kit rồi.'),200);
+  }
+</script>
+</body>
+</html>
