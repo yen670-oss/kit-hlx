@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chiến Dịch Xâm Nhập Thị Trường Môi Giới HLX — BDS Mastery Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1B3A6B; --nd: #102340; --nl: #2A5298;
+      --gold: #C9A84C; --gl: #E2C06A; --gd: #A8862E;
+      --green: #1a6b3c; --orange: #e87922;
+      --red: #dc2626; --blue: #2563eb;
+      --cream: #FAF8F3; --cd: #EDE8DC;
+      --text: #1a1a2e; --mid: #4a5568; --light: #718096;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--cream); color: var(--text); line-height: 1.65; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(160deg, #060f1a 0%, #0e1f38 35%, #0a2015 70%, #1a0e05 100%);
+      padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 1.5px 1.5px, rgba(201,168,76,.1) 1.5px, transparent 0);
+      background-size: 28px 28px;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      top: -120px; right: -120px; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(26,107,60,.2) 0%, transparent 70%);
+    }
+    .hero-in { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.35);
+      color: var(--gl); font-size: 11px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; padding: 7px 18px; border-radius: 50px; margin-bottom: 22px;
+    }
+    .pulse { width: 6px; height: 6px; background: var(--gl); border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+    .hero h1 { font-size: clamp(28px,4.5vw,48px); color: #fff; font-weight: 800; line-height: 1.15; margin-bottom: 14px; }
+    .hero h1 span { background: linear-gradient(135deg,#E2C06A,#C9A84C); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.75; margin-bottom: 32px; }
+    .hero-chips { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .chip {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.8); font-size: 12px; font-weight: 600;
+      padding: 7px 16px; border-radius: 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .chip.green { border-color: rgba(26,107,60,.5); color: #6dca95; background: rgba(26,107,60,.15); }
+    .chip.gold  { border-color: rgba(201,168,76,.5); color: var(--gl); background: rgba(201,168,76,.12); }
+    .chip.orange{ border-color: rgba(232,121,34,.5); color: #f5a54a; background: rgba(232,121,34,.12); }
+
+    /* ===== LAYOUT ===== */
+    .main { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    /* ===== SECTION HEADER ===== */
+    .sec-header { margin: 48px 0 22px; display: flex; align-items: center; gap: 14px; }
+    .sec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .ic-navy { background: linear-gradient(135deg,var(--navy),var(--nl)); }
+    .ic-green { background: linear-gradient(135deg,#0f4c2a,var(--green)); }
+    .ic-gold  { background: linear-gradient(135deg,var(--gd),var(--gold)); }
+    .ic-orange{ background: linear-gradient(135deg,#b05a10,var(--orange)); }
+    .ic-red   { background: linear-gradient(135deg,#991b1b,var(--red)); }
+    .sec-title-wrap h2 { font-size: 22px; font-weight: 700; color: var(--nd); line-height: 1.2; }
+    .sec-title-wrap p  { font-size: 13px; color: var(--light); margin-top: 3px; }
+
+    /* ===== BIG NUMBER CARDS ===== */
+    .big-numbers { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 14px; margin-bottom: 24px; }
+    .bn-card {
+      background: #fff; border: 1.5px solid #e8e4d8; border-radius: 16px; padding: 22px 18px;
+      text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .bn-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
+    .bn-val { font-size: 30px; font-weight: 800; line-height: 1; margin-bottom: 6px; font-family: 'Playfair Display', serif; }
+    .bn-label { font-size: 12px; color: var(--light); line-height: 1.4; }
+    .bn-sub { font-size: 10px; color: #a0aec0; margin-top: 4px; font-style: italic; }
+    .c-green { color: var(--green); }
+    .c-gold  { color: var(--gd); }
+    .c-navy  { color: var(--navy); }
+    .c-orange{ color: var(--orange); }
+    .c-red   { color: var(--red); }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+    .timeline::before { content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--gold),rgba(201,168,76,.1)); border-radius:2px; }
+    .tl-item { position: relative; margin-bottom: 20px; }
+    .tl-dot {
+      position: absolute; left: -23px; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--gold);
+      background: var(--cream); flex-shrink: 0;
+    }
+    .tl-dot.active { background: var(--gold); box-shadow: 0 0 0 4px rgba(201,168,76,.2); }
+    .tl-date { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+    .tl-title { font-size: 15px; font-weight: 700; color: var(--nd); margin-bottom: 4px; }
+    .tl-desc { font-size: 13px; color: var(--mid); line-height: 1.5; }
+    .tl-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
+    .badge-now { background: rgba(232,121,34,.15); color: var(--orange); border: 1px solid rgba(232,121,34,.4); }
+    .badge-next { background: rgba(26,107,60,.12); color: var(--green); border: 1px solid rgba(26,107,60,.3); }
+
+    /* ===== INFO CARD ===== */
+    .info-card {
+      background: #fff; border: 1.5px solid #e8e4d8; border-radius: 16px;
+      padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .info-card h3 { font-size: 16px; font-weight: 700; color: var(--nd); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+
+    /* ===== TABLE ===== */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .data-table th { background: var(--nd); color: var(--gl); font-weight: 700; padding: 10px 14px; text-align: left; font-family: 'Be Vietnam Pro', sans-serif; }
+    .data-table th:first-child { border-radius: 8px 0 0 0; }
+    .data-table th:last-child  { border-radius: 0 8px 0 0; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid #f0ece4; color: var(--text); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:nth-child(even) td { background: #faf8f3; }
+    .data-table tr:hover td { background: #f5f0e8; }
+    .td-big { font-weight: 800; font-size: 15px; }
+
+    /* ===== SCENARIO CARDS ===== */
+    .scenarios { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 14px; margin: 16px 0; }
+    .sc-card {
+      border-radius: 14px; padding: 22px; border: 2px solid;
+      position: relative; overflow: hidden;
+    }
+    .sc-card::before { content: attr(data-emoji); position: absolute; right: 14px; top: 10px; font-size: 28px; opacity: .3; }
+    .sc-card.slow   { background: #f0fdf4; border-color: rgba(26,107,60,.3); }
+    .sc-card.real   { background: linear-gradient(135deg,#fffbeb,#fef9f0); border-color: rgba(201,168,76,.5); box-shadow: 0 4px 20px rgba(201,168,76,.15); }
+    .sc-card.fast   { background: linear-gradient(135deg,#eff6ff,#f0f9ff); border-color: rgba(37,99,235,.3); }
+    .sc-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+    .sc-card.slow .sc-label { color: var(--green); }
+    .sc-card.real .sc-label { color: var(--gd); }
+    .sc-card.fast .sc-label { color: var(--blue); }
+    .sc-rev { font-size: 28px; font-weight: 800; margin-bottom: 4px; font-family: 'Playfair Display', serif; }
+    .sc-card.slow .sc-rev { color: var(--green); }
+    .sc-card.real .sc-rev { color: var(--gd); }
+    .sc-card.fast .sc-rev { color: var(--blue); }
+    .sc-period { font-size: 12px; color: var(--light); margin-bottom: 14px; }
+    .sc-detail { font-size: 12px; color: var(--mid); line-height: 1.7; }
+    .sc-detail span { font-weight: 700; color: var(--text); }
+
+    /* ===== PHASE CARDS ===== */
+    .phases { display: flex; flex-direction: column; gap: 16px; }
+    .phase-card {
+      background: #fff; border: 1.5px solid #e8e4d8; border-radius: 14px;
+      overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .phase-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; cursor: pointer; user-select: none;
+      transition: background .2s;
+    }
+    .phase-header:hover { background: #faf8f3; }
+    .phase-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .phase-meta { flex: 1; }
+    .phase-meta h3 { font-size: 15px; font-weight: 700; color: var(--nd); margin-bottom: 2px; }
+    .phase-meta .phase-sub { font-size: 12px; color: var(--light); }
+    .phase-budget {
+      font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .phase-arrow { color: var(--light); transition: transform .3s; font-size: 18px; }
+    .phase-body { display: none; padding: 0 20px 20px; border-top: 1px solid #f0ece4; }
+    .phase-body.open { display: block; }
+    .phase-arrow.open { transform: rotate(180deg); }
+
+    /* ===== FUNNEL ===== */
+    .funnel { display: flex; flex-direction: column; align-items: center; gap: 2px; margin: 16px 0; }
+    .funnel-step {
+      border-radius: 8px; padding: 12px 20px; text-align: center; width: 100%;
+      transition: transform .2s;
+    }
+    .funnel-step:hover { transform: scale(1.02); }
+    .funnel-step:nth-child(1) { background: linear-gradient(90deg,#1B3A6B,#2A5298); max-width: 100%; }
+    .funnel-step:nth-child(2) { background: linear-gradient(90deg,#1a4d8c,#1e6db5); max-width: 88%; }
+    .funnel-step:nth-child(3) { background: linear-gradient(90deg,#1a6b3c,#2d8a52); max-width: 72%; }
+    .funnel-step:nth-child(4) { background: linear-gradient(90deg,#a8862e,#C9A84C); max-width: 55%; }
+    .funnel-step:nth-child(5) { background: linear-gradient(90deg,#b05a10,#e87922); max-width: 38%; }
+    .funnel-label { font-size: 13px; font-weight: 700; color: #fff; }
+    .funnel-num   { font-size: 11px; color: rgba(255,255,255,.7); margin-top: 2px; }
+    .funnel-arrow { font-size: 20px; color: #cbd5e0; }
+
+    /* ===== ACTION CHECKLIST ===== */
+    .action-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+    .action-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: #fff; border: 1.5px solid #e8e4d8; border-radius: 12px; padding: 14px 18px;
+      cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .action-item:hover { border-color: var(--gold); background: #fffdf5; }
+    .action-item.done { background: #f0fdf4; border-color: rgba(26,107,60,.3); }
+    .action-cb {
+      width: 22px; height: 22px; border: 2px solid #d1d5db; border-radius: 6px; flex-shrink: 0;
+      margin-top: 1px; transition: all .2s; display: flex; align-items: center; justify-content: center;
+    }
+    .action-item.done .action-cb { background: var(--green); border-color: var(--green); }
+    .action-item.done .action-cb::after { content: '✓'; color: #fff; font-size: 13px; font-weight: 700; }
+    .action-num { font-size: 11px; font-weight: 800; color: var(--gold); min-width: 20px; margin-top: 3px; }
+    .action-text strong { display: block; font-size: 14px; color: var(--nd); margin-bottom: 3px; }
+    .action-text span { font-size: 12px; color: var(--mid); line-height: 1.5; }
+    .action-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 5px; }
+    .ab-now    { background: rgba(232,121,34,.12); color: var(--orange); }
+    .ab-week   { background: rgba(201,168,76,.12); color: var(--gd); }
+    .ab-month  { background: rgba(37,99,235,.1); color: var(--blue); }
+
+    /* ===== HIGHLIGHT BOX ===== */
+    .hl-box {
+      border-radius: 14px; padding: 20px 24px; margin: 20px 0;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .hl-box.gold   { background: linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.05)); border: 1.5px solid rgba(201,168,76,.3); }
+    .hl-box.green  { background: linear-gradient(135deg,rgba(26,107,60,.08),rgba(26,107,60,.04)); border: 1.5px solid rgba(26,107,60,.25); }
+    .hl-box.orange { background: linear-gradient(135deg,rgba(232,121,34,.08),rgba(232,121,34,.03)); border: 1.5px solid rgba(232,121,34,.3); }
+    .hl-icon { font-size: 24px; flex-shrink: 0; }
+    .hl-content strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .hl-content.gold strong { color: var(--gd); }
+    .hl-content.green strong { color: var(--green); }
+    .hl-content.orange strong { color: var(--orange); }
+    .hl-content p { font-size: 13px; color: var(--mid); line-height: 1.65; }
+
+    /* ===== CONTENT TYPES ===== */
+    .content-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 14px; margin: 16px 0; }
+    .ct-card {
+      background: #fff; border: 1.5px solid #e8e4d8; border-radius: 14px; padding: 18px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .ct-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .ct-card h4 { font-size: 14px; font-weight: 700; color: var(--nd); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .ct-metric { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+    .ct-metric.shares { color: var(--blue); }
+    .ct-metric.comments { color: var(--orange); }
+    .ct-metric.views { color: var(--green); }
+    .ct-metric.follow { color: var(--navy); }
+    .ct-hooks { display: flex; flex-direction: column; gap: 6px; }
+    .hook-line {
+      background: #f8f7f2; border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0;
+      padding: 7px 12px; font-size: 12px; color: var(--mid); font-style: italic; line-height: 1.4;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--nd); padding: 28px 24px; text-align: center; margin-top: 60px;
+    }
+    .footer p { color: rgba(255,255,255,.45); font-size: 12px; line-height: 1.8; }
+    .footer strong { color: var(--gl); }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-wrap { position: sticky; top: 0; z-index: 100; height: 4px; background: rgba(0,0,0,.1); }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg,var(--green),var(--gold)); width: 0%; transition: width .1s; }
+
+    @media(max-width:600px) {
+      .scenarios { grid-template-columns: 1fr; }
+      .big-numbers { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-eyebrow"><span class="pulse"></span> Market Intelligence Report · 2026</div>
+    <h1>Chiến Dịch Xâm Nhập<br><span>Thị Trường Môi Giới HLX</span></h1>
+    <p class="hero-sub">
+      Nghiên cứu thực địa · Ước lượng 12.000–15.000 môi giới active · Dự trù doanh số &amp; ngân sách ads<br>
+      Dùng ngay để lên kế hoạch bán kit — không cần research lại từ đầu
+    </p>
+    <div class="hero-chips">
+      <div class="chip green">🏠 55.000+ sản phẩm HLX</div>
+      <div class="chip gold">💰 18 tỷ USD dự án</div>
+      <div class="chip orange">⚡ Cửa sổ vàng 18 tháng</div>
+      <div class="chip">📊 300.000 môi giới VN</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ===== SECTION 1: QUY MÔ DỰ ÁN ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-navy">🏙️</div>
+    <div class="sec-title-wrap">
+      <h2>Quy Mô Dự Án &amp; Bối Cảnh Thị Trường</h2>
+      <p>Vinhomes Global Gate Hạ Long — dự án lớn nhất lịch sử Vingroup</p>
+    </div>
+  </div>
+
+  <div class="big-numbers">
+    <div class="bn-card">
+      <div class="bn-val c-navy">6.206</div>
+      <div class="bn-label">Hecta tổng diện tích</div>
+      <div class="bn-sub">Lớn hơn quận Hoàn Kiếm × 5</div>
+    </div>
+    <div class="bn-card">
+      <div class="bn-val c-green">55.000+</div>
+      <div class="bn-label">Sản phẩm bất động sản</div>
+      <div class="bn-sub">Căn hộ · Biệt thự · Shophouse · Condotel</div>
+    </div>
+    <div class="bn-card">
+      <div class="bn-val c-gold">18 tỷ</div>
+      <div class="bn-label">USD vốn đầu tư</div>
+      <div class="bn-sub">~456.600 tỷ VND — kỷ lục mọi thời đại</div>
+    </div>
+    <div class="bn-card">
+      <div class="bn-val c-orange">11.000 tỷ</div>
+      <div class="bn-label">VND giao dịch trong 9 ngày</div>
+      <div class="bn-sub">Kể từ mở bán Q2/2026</div>
+    </div>
+    <div class="bn-card">
+      <div class="bn-val c-navy">23 phút</div>
+      <div class="bn-label">Hà Nội → Hạ Long (tàu cao tốc)</div>
+      <div class="bn-sub">Đang triển khai hạ tầng</div>
+    </div>
+    <div class="bn-card">
+      <div class="bn-val c-green">244.000</div>
+      <div class="bn-label">Dân số dự kiến khi hoàn thành</div>
+      <div class="bn-sub">Đô thị biển đẳng cấp quốc tế</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: THỊ TRƯỜNG MÔI GIỚI ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-green">👥</div>
+    <div class="sec-title-wrap">
+      <h2>Ước Lượng Thị Trường Môi Giới HLX</h2>
+      <p>TAM / SAM / SOM — cơ sở để tính doanh số kit</p>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <h3>📐 Phương Pháp Ước Lượng</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Cấp độ</th><th>Nhóm khách</th><th>Ước lượng</th><th>Cơ sở</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>TAM</strong><br><span style="font-size:11px;color:#a0aec0">Total Market</span></td>
+          <td>Toàn bộ môi giới BĐS Việt Nam</td>
+          <td class="td-big c-navy">300.000 người</td>
+          <td>Nguồn: VARS 2025 — ~2.000 sàn giao dịch</td>
+        </tr>
+        <tr>
+          <td><strong>SAM</strong><br><span style="font-size:11px;color:#a0aec0">Serviceable</span></td>
+          <td>Môi giới khu vực HN + HP + QN đang làm HLX</td>
+          <td class="td-big c-green">12.000–15.000 người</td>
+          <td>132.000 môi giới vùng × 10-15% chọn HLX</td>
+        </tr>
+        <tr>
+          <td><strong>SOM</strong><br><span style="font-size:11px;color:#a0aec0">Obtainable</span></td>
+          <td>Môi giới có thể mua kit trong 12 tháng</td>
+          <td class="td-big c-orange">600–750 người/năm</td>
+          <td>5% conversion rate từ SAM — thực tế khả thi</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="hl-box gold">
+    <span class="hl-icon">💡</span>
+    <div class="hl-content gold">
+      <strong>Phát Hiện Quan Trọng — Khoảng Trắng Thị Trường</strong>
+      <p>Hầu như <strong>không có đối thủ trực tiếp</strong> bán "kit bán hàng BĐS" dạng đóng gói sẵn. Thị trường chỉ có 2 nhóm: (1) Môi giới dùng MXH bán BĐS, (2) Khóa học kỹ năng giá cao 3–20 triệu. <strong>Anh/chị đang khai thác khoảng trắng thực sự với price point 697k–1,997k.</strong></p>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: TIMELINE ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-gold">⏳</div>
+    <div class="sec-title-wrap">
+      <h2>Timeline Cơ Hội — Chiến Dịch Kéo Dài Bao Lâu</h2>
+      <p>Cửa sổ vàng 18 tháng — hành động ngay trước khi thị trường bão hòa</p>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot active"></div>
+        <div class="tl-date">Tháng 5–8/2026 <span class="tl-badge badge-now">ĐANG ĐÂY ⚡</span></div>
+        <div class="tl-title">🔥 Đỉnh Sóng Đợt 1 — Thời điểm vàng nhất</div>
+        <div class="tl-desc">Môi giới đổ về HLX nhiều nhất. Nhu cầu công cụ bán hàng cao nhất. Cạnh tranh thấp nhất. Đây là thời điểm seeding organic + bắt đầu paid ads.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Tháng 9–12/2026 <span class="tl-badge badge-next">SẮP TỚI</span></div>
+        <div class="tl-title">📈 Sóng 2 — Mở Bán Đợt Tiếp Theo</div>
+        <div class="tl-desc">HLX mở phase tiếp theo → làn sóng môi giới mới đổ về. Lúc này đã có testimonial thật → chạy paid ads mạnh hơn.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Tháng 1–6/2027</div>
+        <div class="tl-title">🏗️ Sóng 3 — Sản Phẩm Mid-Range Mở Rộng</div>
+        <div class="tl-desc">Phân khúc căn hộ mid-range mở rộng thêm. Tệp môi giới mới gia nhập thị trường. Cần update kit theo sản phẩm mới.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Tháng 7/2027 trở đi</div>
+        <div class="tl-title">📊 Ổn Định — Cạnh Tranh Tăng</div>
+        <div class="tl-desc">Thị trường ổn định, có thể xuất hiện đối thủ bán kit tương tự. Cần nâng cấp kit, thêm tính năng, giữ brand sớm.</div>
+      </div>
+    </div>
+    <div class="hl-box orange" style="margin-top:16px;">
+      <span class="hl-icon">⚡</span>
+      <div class="hl-content orange">
+        <strong>Kết Luận Timeline</strong>
+        <p>Dự án HLX kéo dài 10–15 năm → làn sóng môi giới liên tục. Nhưng <strong>intensity cao nhất là 18 tháng đầu (Q2/2026 – Q4/2027)</strong>. Bắt đầu ngay = lợi thế first-mover, testimonial nhiều, brand được nhớ trước đối thủ.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 4: DOANH SỐ ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-gold">💰</div>
+    <div class="sec-title-wrap">
+      <h2>Dự Trù Doanh Số — 3 Kịch Bản</h2>
+      <p>Dựa trên SOM 600–750 khách/năm và mix gói Bronze/Silver/Gold</p>
+    </div>
+  </div>
+
+  <div class="info-card" style="margin-bottom:14px;">
+    <h3>🧮 Công Thức Tính</h3>
+    <table class="data-table">
+      <thead><tr><th>Gói</th><th>Giá</th><th>Mix khách</th><th>Đóng góp/khách avg</th></tr></thead>
+      <tbody>
+        <tr><td>🥉 Bronze</td><td>697.000đ</td><td>60%</td><td>418.200đ</td></tr>
+        <tr><td>🥈 Silver</td><td>1.297.000đ</td><td>30%</td><td>389.100đ</td></tr>
+        <tr><td>🥇 Gold</td><td>1.997.000đ</td><td>10%</td><td>199.700đ</td></tr>
+        <tr style="background:#fffbeb;"><td colspan="3"><strong>Giá trị trung bình/khách</strong></td><td class="td-big c-gold"><strong>~1.007.000đ</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="scenarios">
+    <div class="sc-card slow" data-emoji="🐌">
+      <div class="sc-label">🐌 Thận Trọng</div>
+      <div class="sc-rev">190 triệu</div>
+      <div class="sc-period">doanh thu / năm đầu</div>
+      <div class="sc-detail">
+        <span>20 khách/tháng</span><br>
+        70% Bronze, 25% Silver<br>
+        Ngân sách ads: <span>0–5tr/tháng</span><br>
+        Chủ yếu organic seeding<br>
+        <br>→ Phù hợp khi bắt đầu, chưa có ads budget
+      </div>
+    </div>
+    <div class="sc-card real" data-emoji="🚀">
+      <div class="sc-label">🚀 Thực Tế Nhất</div>
+      <div class="sc-rev">600 triệu</div>
+      <div class="sc-period">doanh thu / năm đầu</div>
+      <div class="sc-detail">
+        <span>50 khách/tháng</span><br>
+        60B · 30S · 10G mix<br>
+        Ngân sách ads: <span>9–15tr/tháng</span><br>
+        Organic + FB/TikTok Ads<br>
+        <br>→ Khả thi sau tháng 2–3 khi có proof
+      </div>
+    </div>
+    <div class="sc-card fast" data-emoji="⚡">
+      <div class="sc-label">⚡ Tốt Nhất</div>
+      <div class="sc-rev">1,2 tỷ</div>
+      <div class="sc-period">doanh thu / năm đầu</div>
+      <div class="sc-detail">
+        <span>100 khách/tháng</span><br>
+        50B · 35S · 15G mix<br>
+        Ngân sách ads: <span>20–40tr/tháng</span><br>
+        Multi-channel + affiliate<br>
+        <br>→ Khi scale up sau tháng 6–7
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 5: NGÂN SÁCH ADS ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-orange">📣</div>
+    <div class="sec-title-wrap">
+      <h2>Kế Hoạch Quảng Cáo — 3 Giai Đoạn</h2>
+      <p>Từ 0 đồng organic đến paid scale-up — roadmap chi tiết theo tháng</p>
+    </div>
+  </div>
+
+  <div class="phases">
+    <!-- Phase 1 -->
+    <div class="phase-card">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-num" style="background:var(--green);">1</div>
+        <div class="phase-meta">
+          <h3>Seeding Organic — Bắt Đầu Ngay Hôm Nay</h3>
+          <div class="phase-sub">Tháng 1–2 · Không cần ngân sách ads</div>
+        </div>
+        <div class="phase-budget" style="background:rgba(26,107,60,.1);color:var(--green);">0 đồng/tháng</div>
+        <div class="phase-arrow">▾</div>
+      </div>
+      <div class="phase-body">
+        <table class="data-table" style="margin-top:12px;">
+          <thead><tr><th>Việc làm</th><th>Kênh</th><th>Tần suất</th><th>Mục tiêu</th></tr></thead>
+          <tbody>
+            <tr><td>Đăng bài seeding (dùng file 08-SEEDING)</td><td>FB cá nhân</td><td>5 bài/tuần</td><td>Trust + reach</td></tr>
+            <tr><td>Seeding vào group FB BĐS lớn</td><td>20 groups</td><td>3 lần/tuần</td><td>Leads organic</td></tr>
+            <tr><td>Video checklist "free value" + pitch kit</td><td>TikTok</td><td>3 video/tuần</td><td>Follow + click</td></tr>
+            <tr><td>DM trực tiếp môi giới đang đăng HLX</td><td>Zalo/FB</td><td>10 người/ngày</td><td>10–20 khách đầu</td></tr>
+          </tbody>
+        </table>
+        <div class="hl-box green" style="margin-top:14px;">
+          <span class="hl-icon">🎯</span>
+          <div class="hl-content green"><strong>Mục tiêu giai đoạn này</strong><p>10–20 khách đầu tiên → thu thập testimonial thật → có social proof để bước vào paid ads.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-card">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-num" style="background:var(--gold);">2</div>
+        <div class="phase-meta">
+          <h3>Paid Ads Nhỏ — Kiểm Tra &amp; Tối Ưu</h3>
+          <div class="phase-sub">Tháng 3–6 · Bắt đầu khi đã có testimonial</div>
+        </div>
+        <div class="phase-budget" style="background:rgba(201,168,76,.1);color:var(--gd);">9–15tr/tháng</div>
+        <div class="phase-arrow">▾</div>
+      </div>
+      <div class="phase-body">
+        <table class="data-table" style="margin-top:12px;">
+          <thead><tr><th>Kênh</th><th>Ngân sách/tháng</th><th>Target</th><th>KPI</th></tr></thead>
+          <tbody>
+            <tr><td>Facebook Ads</td><td>5–8 triệu</td><td>Môi giới BĐS HN + QN, 25–45 tuổi</td><td>50–100 leads</td></tr>
+            <tr><td>TikTok Ads</td><td>2–3 triệu</td><td>Boost video checklist viral nhất</td><td>30–60 leads</td></tr>
+            <tr><td>Zalo Ads</td><td>2–4 triệu</td><td>Nhóm BĐS, từ khóa HLX</td><td>30–50 leads</td></tr>
+            <tr style="background:#fffbeb;"><td><strong>Tổng</strong></td><td><strong>9–15 triệu</strong></td><td></td><td><strong>110–210 leads/tháng</strong></td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--mid);margin-top:12px;">Conversion 20% → <strong>22–42 khách/tháng</strong> → 22–42 triệu doanh thu/tháng. CPL mục tiêu: 50.000–100.000đ/lead.</p>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-card">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-num" style="background:var(--navy);">3</div>
+        <div class="phase-meta">
+          <h3>Scale Up — Nhân × 3 Khi Đã Có Công Thức</h3>
+          <div class="phase-sub">Tháng 7–12 · Khi biết rõ ad nào, kênh nào convert tốt nhất</div>
+        </div>
+        <div class="phase-budget" style="background:rgba(27,58,107,.1);color:var(--navy);">20–40tr/tháng</div>
+        <div class="phase-arrow">▾</div>
+      </div>
+      <div class="phase-body">
+        <div style="font-size:13px;color:var(--mid);line-height:1.8;margin-top:12px;">
+          ✅ Tăng ngân sách × 3 vào kênh đã convert tốt nhất<br>
+          ✅ Mở thêm kênh: YouTube Shorts, Instagram Reels<br>
+          ✅ Chương trình affiliate: môi giới giới thiệu đồng nghiệp → hoa hồng 10–15%<br>
+          ✅ Email / Zalo OA retargeting: nhắm lại lead đã vào landing nhưng chưa mua<br>
+          ✅ Upsell từ Bronze → Silver/Gold: tỷ lệ upgrade target 25–30%
+        </div>
+        <div class="hl-box gold" style="margin-top:14px;">
+          <span class="hl-icon">🚀</span>
+          <div class="hl-content gold"><strong>Mục tiêu giai đoạn này</strong><p>80–120 khách/tháng. Tổng năm đầu: <strong>500–700 khách → 500 triệu – 1,2 tỷ doanh thu.</strong></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 6: NỘI DUNG VIRAL ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-navy">🔥</div>
+    <div class="sec-title-wrap">
+      <h2>Dạng Nội Dung Viral Nhất — Dùng Ngay</h2>
+      <p>5 loại content đã được kiểm chứng trong thị trường BĐS TikTok/Facebook 2025–2026</p>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="ct-card">
+      <h4>🏠 Tour Thực Địa</h4>
+      <div class="ct-metric views">📹 NHIỀU VIEW NHẤT</div>
+      <div class="ct-hooks">
+        <div class="hook-line">"Lần đầu tiên dám quay thật cái giá ẩn của khu này..."</div>
+        <div class="hook-line">"Đây là lý do TẠI SAO khách tôi mua xong không tiếc"</div>
+      </div>
+    </div>
+    <div class="ct-card">
+      <h4>📋 Checklist / Kiến Thức</h4>
+      <div class="ct-metric shares">🔁 SHARE NHIỀU NHẤT</div>
+      <div class="ct-hooks">
+        <div class="hook-line">"3 điều kiểm tra TRƯỚC khi ký HĐ mua căn hộ"</div>
+        <div class="hook-line">"Câu hỏi môi giới sợ nhất khi khách hỏi về dự án"</div>
+      </div>
+    </div>
+    <div class="ct-card">
+      <h4>🤔 Tranh Luận</h4>
+      <div class="ct-metric comments">💬 COMMENT NHIỀU NHẤT</div>
+      <div class="ct-hooks">
+        <div class="hook-line">"Với 2 tỷ: mua đất Hạ Long hay chung cư Hà Nội?"</div>
+        <div class="hook-line">"Tại sao TÔI không mua căn hộ dù có tiền"</div>
+      </div>
+    </div>
+    <div class="ct-card">
+      <h4>🎭 Behind The Scenes</h4>
+      <div class="ct-metric follow">👥 FOLLOW NHIỀU NHẤT</div>
+      <div class="ct-hooks">
+        <div class="hook-line">"5h sáng thức dậy để chuẩn bị chốt deal 10 tỷ..."</div>
+        <div class="hook-line">"Ngày môi giới kiếm 0 đồng trông như thế này"</div>
+      </div>
+    </div>
+    <div class="ct-card">
+      <h4>📈 Phân Tích Thị Trường</h4>
+      <div class="ct-metric shares">🔁 ĐƯỢC SHARE VÀO GROUP</div>
+      <div class="ct-hooks">
+        <div class="hook-line">"Hạ Long Xanh 2026: Mua bây giờ hay đợi?"</div>
+        <div class="hook-line">"Tại sao giá đất QN tăng 40% mà dân HN đổ về"</div>
+      </div>
+    </div>
+    <div class="ct-card">
+      <h4>🎯 Pitch Kit Trực Tiếp</h4>
+      <div class="ct-metric comments">💰 CONVERT CAO NHẤT</div>
+      <div class="ct-hooks">
+        <div class="hook-line">"Tôi chốt 3 deal trong 7 ngày nhờ bộ script này"</div>
+        <div class="hook-line">"Tại sao 80% môi giới đăng bài mà không có khách?"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 7: PHỄU ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-green">🔽</div>
+    <div class="sec-title-wrap">
+      <h2>Phễu Khách Hàng Thực Tế</h2>
+      <p>Từ content → leads → mua kit — tỷ lệ chuyển đổi từng bước</p>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-label">📱 TikTok / FB Content (free value)</div>
+        <div class="funnel-num">1.000 người xem / tuần</div>
+      </div>
+      <div class="funnel-arrow">▼</div>
+      <div class="funnel-step">
+        <div class="funnel-label">🌐 Xem Landing Page / Sales Page</div>
+        <div class="funnel-num">200 người (20% click)</div>
+      </div>
+      <div class="funnel-arrow">▼</div>
+      <div class="funnel-step">
+        <div class="funnel-label">💬 Nhắn Zalo / Hỏi thêm</div>
+        <div class="funnel-num">80 người (40% của landing)</div>
+      </div>
+      <div class="funnel-arrow">▼</div>
+      <div class="funnel-step">
+        <div class="funnel-label">🎁 Xem Demo Kit / Free Sample</div>
+        <div class="funnel-num">40 người (50% của leads)</div>
+      </div>
+      <div class="funnel-arrow">▼</div>
+      <div class="funnel-step">
+        <div class="funnel-label">💰 Mua Kit → Upsell Silver/Gold</div>
+        <div class="funnel-num">20–30 khách/tuần (50–75% conversion)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 8: ACTION PLAN ===== -->
+  <div class="sec-header">
+    <div class="sec-icon ic-orange">✅</div>
+    <div class="sec-title-wrap">
+      <h2>Kế Hoạch Hành Động — Làm Ngay</h2>
+      <p>Click vào từng việc để đánh dấu hoàn thành</p>
+    </div>
+  </div>
+
+  <div class="action-list" id="actionList">
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">01</div>
+      <div class="action-text">
+        <strong>Quay 1 video TikTok: "3 điều môi giới HLX cần chuẩn bị ngay"</strong>
+        <span>Dùng nội dung trong kit làm free value. Cuối video pitch kit 697k. Đăng lúc 19:00–21:00.</span>
+        <span class="action-badge ab-now">⚡ Hôm nay</span>
+      </div>
+    </div>
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">02</div>
+      <div class="action-text">
+        <strong>Seeding vào 10 group Facebook BĐS lớn nhất (HLX, QN, HN)</strong>
+        <span>Đăng bài dạng câu chuyện thành công của khách đã mua kit. Không spam, mỗi group 1 bài/tuần.</span>
+        <span class="action-badge ab-now">⚡ Hôm nay</span>
+      </div>
+    </div>
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">03</div>
+      <div class="action-text">
+        <strong>DM 10–20 môi giới đang đăng bài HLX trên Facebook/Zalo</strong>
+        <span>Tìm người đang đăng tin HLX trong group → nhắn tin riêng → offer xem demo kit miễn phí.</span>
+        <span class="action-badge ab-now">⚡ Hôm nay</span>
+      </div>
+    </div>
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">04</div>
+      <div class="action-text">
+        <strong>Tạo 2–3 testimonial từ khách đã mua (Vũ Thanh Tú, Tô Thị Thúy Hà)</strong>
+        <span>Xin feedback thật → đăng FB cá nhân dạng "kết quả sau khi dùng kit". Ảnh chụp màn hình tin nhắn.</span>
+        <span class="action-badge ab-week">📅 Tuần này</span>
+      </div>
+    </div>
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">05</div>
+      <div class="action-text">
+        <strong>Chạy test Facebook Ads 500k/ngày × 7 ngày</strong>
+        <span>Target: "môi giới BĐS" HN + QN + HP, 25–42 tuổi. Creative: video checklist viral nhất. Đo CPL thực tế.</span>
+        <span class="action-badge ab-week">📅 Tuần này</span>
+      </div>
+    </div>
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">06</div>
+      <div class="action-text">
+        <strong>Đăng 5 bài seeding FB cá nhân theo lịch tuần</strong>
+        <span>T2: Kiến thức · T3: Câu chuyện · T4: Tranh luận · T5: Offer kit · T7: Infographic HLX</span>
+        <span class="action-badge ab-week">📅 Tuần này</span>
+      </div>
+    </div>
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">07</div>
+      <div class="action-text">
+        <strong>Tạo chương trình affiliate cho môi giới giới thiệu đồng nghiệp</strong>
+        <span>Hoa hồng 10–15% cho mỗi kit bán thành công qua link giới thiệu. Tạo thêm kênh phân phối.</span>
+        <span class="action-badge ab-month">🗓️ Tháng tới</span>
+      </div>
+    </div>
+    <div class="action-item" onclick="toggleAction(this)">
+      <div class="action-cb"></div>
+      <div class="action-num">08</div>
+      <div class="action-text">
+        <strong>Scale paid ads × 3 sau khi có công thức convert rõ ràng</strong>
+        <span>Khi CPL < 80k và conversion > 15% → tăng budget từ 15tr lên 40tr/tháng. Mở thêm TikTok Ads.</span>
+        <span class="action-badge ab-month">🗓️ Tháng 3–4</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="info-card" style="text-align:center;margin-top:20px;">
+    <p style="font-size:13px;color:var(--mid);margin-bottom:10px;">Tiến độ thực thi kế hoạch</p>
+    <div style="background:#e8e4d8;border-radius:20px;height:10px;overflow:hidden;">
+      <div id="actionProgress" style="height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:20px;width:0%;transition:width .5s;"></div>
+    </div>
+    <p id="actionProgressText" style="font-size:12px;color:var(--light);margin-top:8px;">0 / 8 việc hoàn thành</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>
+    <strong>BDS Mastery Kit · Chiến Dịch Xâm Nhập Thị Trường Môi Giới HLX</strong><br>
+    Nghiên cứu thực địa tháng 5/2026 · Nguồn: VARS · CafeF · Dân Việt · Houze Blog<br>
+    Dữ liệu ước lượng — cập nhật lại mỗi 3 tháng khi có số liệu mới
+  </p>
+</div>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  // Toggle phase
+  function togglePhase(header) {
+    const body  = header.nextElementSibling;
+    const arrow = header.querySelector('.phase-arrow');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // Action checklist
+  function toggleAction(item) {
+    item.classList.toggle('done');
+    updateActionProgress();
+  }
+
+  function updateActionProgress() {
+    const items = document.querySelectorAll('.action-item');
+    const done  = document.querySelectorAll('.action-item.done').length;
+    const pct   = (done / items.length) * 100;
+    document.getElementById('actionProgress').style.width = pct + '%';
+    document.getElementById('actionProgressText').textContent = `${done} / ${items.length} việc hoàn thành`;
+  }
+
+  // Open phase 1 by default
+  document.querySelector('.phase-body').classList.add('open');
+  document.querySelector('.phase-arrow').classList.add('open');
+</script>
+</body>
+</html>
