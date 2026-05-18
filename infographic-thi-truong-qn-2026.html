@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infographic — Toàn Cảnh BDS Quảng Ninh 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#1a1a2e;font-family:'Be Vietnam Pro',sans-serif;display:flex;flex-direction:column;align-items:center;padding:30px 20px;min-height:100vh;}
+
+  /* CONTROLS */
+  .controls{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;justify-content:center;}
+  .ctrl-btn{padding:10px 22px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s;}
+  .ctrl-primary{background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#0d1117;}
+  .ctrl-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.4);}
+  .ctrl-secondary{background:rgba(255,255,255,.1);color:#e2e8f0;border:1px solid rgba(255,255,255,.2);}
+  .ctrl-secondary:hover{background:rgba(255,255,255,.15);}
+
+  /* INFOGRAPHIC WRAPPER */
+  #infographic{
+    width:1080px;
+    background:linear-gradient(175deg,#0d1117 0%,#0f1923 30%,#0d1a2e 60%,#0a1520 100%);
+    position:relative;overflow:hidden;
+  }
+
+  /* BG PATTERN */
+  #infographic::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(circle at 2px 2px,rgba(201,168,76,.06) 2px,transparent 0);
+    background-size:40px 40px;pointer-events:none;
+  }
+
+  /* HEADER */
+  .ig-header{
+    background:linear-gradient(135deg,#0a1520 0%,#102340 50%,#1B3A6B 100%);
+    padding:52px 60px 44px;text-align:center;position:relative;
+    border-bottom:3px solid #C9A84C;
+  }
+  .ig-header::after{content:'';position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);
+    width:200px;height:3px;background:linear-gradient(90deg,transparent,#E2C06A,transparent);}
+  .ig-eyebrow{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);
+    color:#E2C06A;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    padding:6px 20px;border-radius:99px;margin-bottom:18px;}
+  .ig-title{font-family:'Playfair Display',serif;font-size:46px;font-weight:900;
+    background:linear-gradient(135deg,#fff 40%,#E2C06A 70%,#C9A84C);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.15;margin-bottom:10px;}
+  .ig-sub{color:#8da4c4;font-size:15px;font-weight:400;letter-spacing:.04em;}
+
+  /* KPI ROW */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid rgba(201,168,76,.15);}
+  .kpi{padding:28px 20px;text-align:center;border-right:1px solid rgba(201,168,76,.1);}
+  .kpi:last-child{border-right:none;}
+  .kpi-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;
+    background:linear-gradient(135deg,#E2C06A,#C9A84C);-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+  .kpi-unit{font-size:13px;font-weight:600;color:#C9A84C;margin-left:3px;}
+  .kpi-label{font-size:11.5px;color:#8da4c4;margin-top:6px;line-height:1.4;}
+
+  /* SECTION */
+  .ig-section{padding:36px 60px;}
+  .ig-section + .ig-section{border-top:1px solid rgba(201,168,76,.08);}
+  .sec-title{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .sec-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    font-size:18px;background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.1));
+    border:1px solid rgba(201,168,76,.3);flex-shrink:0;}
+  .sec-label{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;}
+  .sec-sub{font-size:12px;color:#8da4c4;margin-left:auto;font-style:italic;}
+
+  /* REGION GRID */
+  .region-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .region-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);
+    border-radius:14px;padding:20px;position:relative;overflow:hidden;}
+  .region-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+  .region-card.hot::before{background:linear-gradient(90deg,#ef4444,#f97316);}
+  .region-card.warm::before{background:linear-gradient(90deg,#C9A84C,#E2C06A);}
+  .region-card.cool::before{background:linear-gradient(90deg,#3b82f6,#60a5fa);}
+  .region-card.mild::before{background:linear-gradient(90deg,#10b981,#34d399);}
+  .region-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+  .region-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;margin-bottom:10px;}
+  .tag-hot{background:rgba(239,68,68,.15);color:#fca5a5;}
+  .tag-warm{background:rgba(201,168,76,.15);color:#E2C06A;}
+  .tag-cool{background:rgba(59,130,246,.15);color:#93c5fd;}
+  .tag-mild{background:rgba(16,185,129,.15);color:#6ee7b7;}
+  .region-price{font-size:13px;color:#cbd5e1;margin-bottom:8px;}
+  .region-price strong{color:#E2C06A;}
+  .region-highlights{list-style:none;}
+  .region-highlights li{font-size:11.5px;color:#8da4c4;padding:3px 0;display:flex;gap:6px;align-items:flex-start;}
+  .region-highlights li::before{content:'›';color:#C9A84C;font-weight:700;flex-shrink:0;}
+
+  /* PRICE BAR CHART */
+  .price-chart{display:flex;flex-direction:column;gap:12px;}
+  .price-row{display:flex;align-items:center;gap:14px;}
+  .price-name{width:180px;font-size:13px;color:#cbd5e1;flex-shrink:0;text-align:right;}
+  .price-bar-wrap{flex:1;background:rgba(255,255,255,.05);border-radius:6px;height:32px;position:relative;overflow:hidden;}
+  .price-bar{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:12px;
+    font-size:12px;font-weight:700;color:#0d1117;transition:width .8s ease;}
+  .price-bar.b1{background:linear-gradient(90deg,#ef4444,#f97316);width:95%;}
+  .price-bar.b2{background:linear-gradient(90deg,#f97316,#fbbf24);width:82%;}
+  .price-bar.b3{background:linear-gradient(90deg,#C9A84C,#E2C06A);width:70%;}
+  .price-bar.b4{background:linear-gradient(90deg,#3b82f6,#60a5fa);width:45%;}
+  .price-bar.b5{background:linear-gradient(90deg,#10b981,#34d399);width:35%;}
+  .price-bar.b6{background:linear-gradient(90deg,#8b5cf6,#a78bfa);width:28%;}
+  .price-note{font-size:10px;color:#4a5568;margin-top:8px;font-style:italic;}
+
+  /* INFRA TIMELINE */
+  .timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+  .timeline::before{content:'';position:absolute;left:119px;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,#C9A84C,rgba(201,168,76,.1));}
+  .tl-item{display:flex;gap:0;align-items:flex-start;padding:14px 0;}
+  .tl-year{width:100px;text-align:right;font-family:'Playfair Display',serif;font-size:18px;
+    font-weight:700;color:#C9A84C;flex-shrink:0;padding-top:2px;}
+  .tl-dot{width:40px;display:flex;justify-content:center;flex-shrink:0;margin-top:6px;}
+  .tl-dot span{width:12px;height:12px;border-radius:50%;background:#C9A84C;border:2px solid #E2C06A;
+    box-shadow:0 0 0 4px rgba(201,168,76,.15);display:block;}
+  .tl-content{flex:1;padding-left:8px;}
+  .tl-title{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:3px;}
+  .tl-desc{font-size:12px;color:#8da4c4;line-height:1.5;}
+  .tl-impact{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;
+    margin-top:5px;background:rgba(201,168,76,.1);color:#E2C06A;border:1px solid rgba(201,168,76,.2);}
+
+  /* INVESTMENT RADAR */
+  .invest-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .invest-card{background:rgba(255,255,255,.04);border-radius:14px;padding:22px;
+    border:1px solid rgba(201,168,76,.12);}
+  .invest-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .invest-icon{font-size:22px;}
+  .invest-title{font-size:14px;font-weight:700;color:#fff;}
+  .invest-score{margin-left:auto;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+  .score-high{color:#34d399;}
+  .score-mid{color:#E2C06A;}
+  .score-low{color:#f87171;}
+  .invest-bar{height:6px;background:rgba(255,255,255,.08);border-radius:99px;margin-bottom:12px;overflow:hidden;}
+  .invest-fill{height:100%;border-radius:99px;}
+  .fill-high{background:linear-gradient(90deg,#10b981,#34d399);}
+  .fill-mid{background:linear-gradient(90deg,#C9A84C,#E2C06A);}
+  .invest-items{list-style:none;}
+  .invest-items li{font-size:12px;color:#94a3b8;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);
+    display:flex;gap:6px;}
+  .invest-items li:last-child{border:none;}
+  .invest-items li::before{content:'✓';color:#C9A84C;font-weight:700;flex-shrink:0;}
+
+  /* RISK TABLE */
+  .risk-table{width:100%;border-collapse:collapse;}
+  .risk-table th{background:rgba(201,168,76,.08);color:#E2C06A;font-size:11px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.1em;padding:10px 16px;text-align:left;
+    border-bottom:1px solid rgba(201,168,76,.15);}
+  .risk-table td{padding:11px 16px;font-size:13px;color:#94a3b8;border-bottom:1px solid rgba(255,255,255,.04);}
+  .risk-table tr:last-child td{border-bottom:none;}
+  .risk-table tr:hover td{background:rgba(255,255,255,.02);}
+  .risk-pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;}
+  .rp-low{background:rgba(16,185,129,.15);color:#6ee7b7;}
+  .rp-mid{background:rgba(251,191,36,.15);color:#fcd34d;}
+  .rp-high{background:rgba(239,68,68,.15);color:#fca5a5;}
+
+  /* OUTLOOK */
+  .outlook-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .outlook-card{background:rgba(255,255,255,.04);border-radius:14px;padding:22px;text-align:center;
+    border:1px solid rgba(255,255,255,.06);}
+  .outlook-icon{font-size:32px;margin-bottom:10px;}
+  .outlook-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;}
+  .outlook-text{font-size:12px;color:#8da4c4;line-height:1.6;}
+  .outlook-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;}
+  .ob-bull{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);}
+  .ob-neu{background:rgba(201,168,76,.15);color:#E2C06A;border:1px solid rgba(201,168,76,.3);}
+  .ob-caut{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+
+  /* FOOTER */
+  .ig-footer{background:rgba(0,0,0,.3);padding:20px 60px;display:flex;align-items:center;
+    justify-content:space-between;border-top:1px solid rgba(201,168,76,.15);}
+  .ig-footer-left{font-size:11px;color:#4a5568;}
+  .ig-footer-left strong{color:#C9A84C;}
+  .ig-footer-right{font-size:11px;color:#4a5568;text-align:right;}
+  .watermark{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;
+    background:linear-gradient(135deg,#C9A84C,#E2C06A);-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* DIVIDER */
+  .gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);margin:0 60px;}
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn ctrl-primary" onclick="downloadIG()">⬇️ Tải ảnh PNG (1080px)</button>
+  <button class="ctrl-btn ctrl-secondary" onclick="window.print()">🖨 In / Export PDF</button>
+  <button class="ctrl-btn ctrl-secondary" onclick="copyLink()">🔗 Copy link chia sẻ</button>
+</div>
+
+<div id="infographic">
+
+  <!-- HEADER -->
+  <div class="ig-header">
+    <div class="ig-eyebrow">📊 Báo Cáo Chuyên Sâu · Cập Nhật Q2/2026</div>
+    <div class="ig-title">Toàn Cảnh Thị Trường BĐS<br>Quảng Ninh 2026</div>
+    <div class="ig-sub">Phân tích độc lập · Dữ liệu thực · Dành cho nhà đầu tư & môi giới chuyên nghiệp</div>
+  </div>
+
+  <!-- KPI -->
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-num">+12<span class="kpi-unit">%</span></div>
+      <div class="kpi-label">Tăng trưởng GRDP<br>Quảng Ninh 2025</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-num">18<span class="kpi-unit">tr</span></div>
+      <div class="kpi-label">Lượt khách du lịch<br>dự kiến 2026</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-num">+35<span class="kpi-unit">%</span></div>
+      <div class="kpi-label">Giá BĐS HLX tăng<br>so với 2023</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-num">4<span class="kpi-unit">tỷ$</span></div>
+      <div class="kpi-label">FDI thu hút<br>2024–2026</div>
+    </div>
+  </div>
+
+  <div class="gold-divider"></div>
+
+  <!-- REGION MAP -->
+  <div class="ig-section">
+    <div class="sec-title">
+      <div class="sec-icon">🗺</div>
+      <div class="sec-label">Bản Đồ Phân Vùng BĐS Quảng Ninh</div>
+      <div class="sec-sub">6 khu vực · 3 mức độ nhiệt</div>
+    </div>
+    <div class="region-grid">
+      <div class="region-card hot">
+        <div class="region-name">🏙 Hạ Long — Vinhomes HLX</div>
+        <span class="region-tag tag-hot">🔴 NÓNG NHẤT</span>
+        <div class="region-price">Căn hộ: <strong>60–120tr/m²</strong></div>
+        <div class="region-price">Shophouse: <strong>80–200tr/m²</strong></div>
+        <ul class="region-highlights">
+          <li>Flagship của Vinhomes tại miền Bắc</li>
+          <li>View vịnh UNESCO trực diện</li>
+          <li>Hạ tầng hoàn thiện — cao tốc 2h30 từ HN</li>
+          <li>Tỷ lệ hấp thụ Q1/2026 đạt 78%</li>
+        </ul>
+      </div>
+      <div class="region-card hot">
+        <div class="region-name">🌊 Bãi Cháy — Tuần Châu</div>
+        <span class="region-tag tag-hot">🟠 RẤT NÓNG</span>
+        <div class="region-price">Đất nền: <strong>40–90tr/m²</strong></div>
+        <div class="region-price">Biệt thự ven biển: <strong>12–35 tỷ</strong></div>
+        <ul class="region-highlights">
+          <li>Khu du lịch lâu đời, thương hiệu mạnh</li>
+          <li>Nguồn cung hạn chế — giá ổn định</li>
+          <li>Cảng du thuyền Tuần Châu mở rộng</li>
+          <li>Thanh khoản tốt — dễ cho thuê</li>
+        </ul>
+      </div>
+      <div class="region-card warm">
+        <div class="region-name">✈️ Vân Đồn — Đặc Khu KT</div>
+        <span class="region-tag tag-warm">🟡 TIỀM NĂNG</span>
+        <div class="region-price">Đất nền: <strong>15–50tr/m²</strong></div>
+        <div class="region-price">Resort nghỉ dưỡng: <strong>5–20 tỷ</strong></div>
+        <ul class="region-highlights">
+          <li>Sân bay quốc tế Vân Đồn hoạt động</li>
+          <li>Cao tốc Vân Đồn – Móng Cái hoàn thành</li>
+          <li>Quy hoạch đặc khu kinh tế chờ phê duyệt</li>
+          <li>Giá còn thấp — dư địa tăng lớn</li>
+        </ul>
+      </div>
+      <div class="region-card cool">
+        <div class="region-name">🚢 Móng Cái — Cửa Khẩu</div>
+        <span class="region-tag tag-cool">🔵 THƯƠNG MẠI</span>
+        <div class="region-price">Nhà phố thương mại: <strong>8–25 tỷ</strong></div>
+        <div class="region-price">Đất KCN: <strong>5–15tr/m²</strong></div>
+        <ul class="region-highlights">
+          <li>Cửa khẩu lớn nhất biên giới Việt–Trung</li>
+          <li>Hưởng lợi từ chính sách thương mại xuyên biên</li>
+          <li>Khu kinh tế cửa khẩu Móng Cái mở rộng</li>
+          <li>Phù hợp đầu tư dài hạn & thương mại</li>
+        </ul>
+      </div>
+      <div class="region-card mild">
+        <div class="region-name">⛏ Cẩm Phả — Công Nghiệp</div>
+        <span class="region-tag tag-mild">🟢 ỔN ĐỊNH</span>
+        <div class="region-price">Nhà đất dân cư: <strong>3–12 tỷ</strong></div>
+        <div class="region-price">Đất công nghiệp: <strong>3–8tr/m²</strong></div>
+        <ul class="region-highlights">
+          <li>Trung tâm công nghiệp than & năng lượng</li>
+          <li>Giá ổn định, ít biến động</li>
+          <li>Phù hợp đầu tư ở thực / cho thuê công nhân</li>
+          <li>Chuyển đổi cơ cấu kinh tế đang diễn ra</li>
+        </ul>
+      </div>
+      <div class="region-card cool">
+        <div class="region-name">🏔 Uông Bí — Yên Tử</div>
+        <span class="region-tag tag-cool">🔵 TÂM LINH</span>
+        <div class="region-price">BĐS nghỉ dưỡng tâm linh: <strong>2–8 tỷ</strong></div>
+        <div class="region-price">Đất nền: <strong>5–20tr/m²</strong></div>
+        <ul class="region-highlights">
+          <li>Trung tâm Phật giáo — Di sản Yên Tử</li>
+          <li>Du khách tâm linh 2–3 triệu lượt/năm</li>
+          <li>Phát triển du lịch sinh thái</li>
+          <li>Giá mềm, tiềm năng trung hạn</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="gold-divider"></div>
+
+  <!-- PRICE CHART -->
+  <div class="ig-section">
+    <div class="sec-title">
+      <div class="sec-icon">💰</div>
+      <div class="sec-label">So Sánh Giá BĐS — Phân Khúc Cao Cấp</div>
+      <div class="sec-sub">Triệu đồng/m² · Q2/2026</div>
+    </div>
+    <div class="price-chart">
+      <div class="price-row">
+        <div class="price-name">Shophouse HLX</div>
+        <div class="price-bar-wrap"><div class="price-bar b1">80–200 tr/m²</div></div>
+      </div>
+      <div class="price-row">
+        <div class="price-name">Căn hộ HLX view vịnh</div>
+        <div class="price-bar-wrap"><div class="price-bar b2">60–120 tr/m²</div></div>
+      </div>
+      <div class="price-row">
+        <div class="price-name">Biệt thự Bãi Cháy</div>
+        <div class="price-bar-wrap"><div class="price-bar b3">50–100 tr/m²</div></div>
+      </div>
+      <div class="price-row">
+        <div class="price-name">Đất nền Vân Đồn</div>
+        <div class="price-bar-wrap"><div class="price-bar b4">15–50 tr/m²</div></div>
+      </div>
+      <div class="price-row">
+        <div class="price-name">Nhà phố Móng Cái</div>
+        <div class="price-bar-wrap"><div class="price-bar b5">10–30 tr/m²</div></div>
+      </div>
+      <div class="price-row">
+        <div class="price-name">Đất nền Uông Bí</div>
+        <div class="price-bar-wrap"><div class="price-bar b6">5–20 tr/m²</div></div>
+      </div>
+    </div>
+    <div class="price-note">* So sánh: BĐS cao cấp ven biển Đà Nẵng hiện ở mức 150–300tr/m² — HLX đang thấp hơn 30–40%</div>
+  </div>
+
+  <div class="gold-divider"></div>
+
+  <!-- INFRASTRUCTURE TIMELINE -->
+  <div class="ig-section">
+    <div class="sec-title">
+      <div class="sec-icon">🏗</div>
+      <div class="sec-label">Hạ Tầng Dẫn Dắt Giá BĐS</div>
+      <div class="sec-sub">Timeline 2022–2027</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2022</div>
+        <div class="tl-dot"><span></span></div>
+        <div class="tl-content">
+          <div class="tl-title">Cao tốc Vân Đồn – Móng Cái hoàn thành</div>
+          <div class="tl-desc">560km đường cao tốc ven biển, kết nối toàn bộ Quảng Ninh từ HN đến biên giới Trung Quốc.</div>
+          <span class="tl-impact">+20–30% giá đất dọc tuyến</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2023</div>
+        <div class="tl-dot"><span></span></div>
+        <div class="tl-content">
+          <div class="tl-title">Cao tốc Hà Nội – Hạ Long rút ngắn còn 2h30</div>
+          <div class="tl-desc">Kết nối Hà Nội – Hạ Long nhanh hơn bao giờ hết. Weekend resort thành xu hướng mới.</div>
+          <span class="tl-impact">Bùng nổ nhu cầu BĐS nghỉ dưỡng</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-dot"><span></span></div>
+        <div class="tl-content">
+          <div class="tl-title">Luật Đất Đai 2024 & Luật Nhà Ở mới có hiệu lực</div>
+          <div class="tl-desc">Siết chặt pháp lý condotel/officetel, tăng minh bạch thị trường, BĐS có sổ được hưởng lợi.</div>
+          <span class="tl-impact">Dự án có pháp lý rõ ràng tăng giá trị</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025</div>
+        <div class="tl-dot"><span></span></div>
+        <div class="tl-content">
+          <div class="tl-title">Vinhomes Hạ Long Xanh ra hàng đại trà — thị trường sôi động</div>
+          <div class="tl-desc">Flagship project của Vinhomes tại Hạ Long chính thức mở bán rộng rãi, hút hàng nghìn môi giới.</div>
+          <span class="tl-impact">Thanh khoản khu vực tăng mạnh</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year" style="color:#34d399">2026</div>
+        <div class="tl-dot"><span style="background:#34d399;border-color:#6ee7b7;box-shadow:0 0 0 4px rgba(52,211,153,.2)"></span></div>
+        <div class="tl-content">
+          <div class="tl-title" style="color:#6ee7b7">▶ Hiện tại: Đường sắt đô thị & Hầm vượt vịnh được phê duyệt quy hoạch</div>
+          <div class="tl-desc">Metro Hạ Long + hầm vượt biển Hòn Gai – Bãi Cháy đưa vào quy hoạch 2030. Kỳ vọng lớn từ thị trường.</div>
+          <span class="tl-impact" style="background:rgba(52,211,153,.15);color:#34d399;border-color:rgba(52,211,153,.3)">Dư địa tăng giá 2026–2030 rất lớn</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year" style="color:#4a5568">2027</div>
+        <div class="tl-dot"><span style="background:#374151;border-color:#4b5563;box-shadow:none"></span></div>
+        <div class="tl-content">
+          <div class="tl-title" style="color:#6b7280">Dự kiến: Cao tốc Hạ Long – Hải Phòng mở rộng 6 làn</div>
+          <div class="tl-desc">Tăng kết nối cảng Hải Phòng – Hạ Long, thúc đẩy logistics và bất động sản công nghiệp.</div>
+          <span class="tl-impact" style="color:#4b5563;background:rgba(75,85,99,.15);border-color:rgba(75,85,99,.3)">Kỳ vọng — chưa chính thức</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gold-divider"></div>
+
+  <!-- INVESTMENT SCORE -->
+  <div class="ig-section">
+    <div class="sec-title">
+      <div class="sec-icon">🎯</div>
+      <div class="sec-label">Điểm Đầu Tư Theo Phân Khúc — HLX</div>
+      <div class="sec-sub">Thang điểm 10 · Đánh giá Q2/2026</div>
+    </div>
+    <div class="invest-grid">
+      <div class="invest-card">
+        <div class="invest-head">
+          <div class="invest-icon">🏪</div>
+          <div class="invest-title">Shophouse mặt phố HLX</div>
+          <div class="invest-score score-high">8.5</div>
+        </div>
+        <div class="invest-bar"><div class="invest-fill fill-high" style="width:85%"></div></div>
+        <ul class="invest-items">
+          <li>Cho thuê kinh doanh: 15–25tr/tháng</li>
+          <li>Tỷ suất thuê: 5–6%/năm</li>
+          <li>Thanh khoản tốt khi thị trường sôi động</li>
+          <li>Rủi ro: Cạnh tranh nội bộ cao</li>
+        </ul>
+      </div>
+      <div class="invest-card">
+        <div class="invest-head">
+          <div class="invest-icon">🏢</div>
+          <div class="invest-title">Căn hộ cao cấp view vịnh</div>
+          <div class="invest-score score-high">8.0</div>
+        </div>
+        <div class="invest-bar"><div class="invest-fill fill-high" style="width:80%"></div></div>
+        <ul class="invest-items">
+          <li>Cho thuê ngắn hạn: 2–5tr/đêm cao điểm</li>
+          <li>Tỷ suất thuê: 4–6%/năm</li>
+          <li>Hưởng lợi trực tiếp từ du lịch phục hồi</li>
+          <li>Rủi ro: Phụ thuộc mùa vụ du lịch</li>
+        </ul>
+      </div>
+      <div class="invest-card">
+        <div class="invest-head">
+          <div class="invest-icon">🏡</div>
+          <div class="invest-title">Biệt thự nghỉ dưỡng HLX</div>
+          <div class="invest-score score-mid">7.5</div>
+        </div>
+        <div class="invest-bar"><div class="invest-fill fill-mid" style="width:75%"></div></div>
+        <ul class="invest-items">
+          <li>Tăng giá kỳ vọng: 15–25%/năm</li>
+          <li>Cho thuê: 8–15tr/đêm</li>
+          <li>Vốn lớn — từ 15–50 tỷ</li>
+          <li>Rủi ro: Thanh khoản chậm hơn căn hộ</li>
+        </ul>
+      </div>
+      <div class="invest-card">
+        <div class="invest-head">
+          <div class="invest-icon">🌿</div>
+          <div class="invest-title">Đất nền Vân Đồn (dài hạn)</div>
+          <div class="invest-score score-mid">7.0</div>
+        </div>
+        <div class="invest-bar"><div class="invest-fill fill-mid" style="width:70%"></div></div>
+        <ul class="invest-items">
+          <li>Giá còn thấp — tiềm năng x2–x3</li>
+          <li>Phụ thuộc chính sách đặc khu</li>
+          <li>Không có dòng tiền trong thời gian chờ</li>
+          <li>Phù hợp vốn nhàn rỗi 5–10 năm</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="gold-divider"></div>
+
+  <!-- RISK TABLE -->
+  <div class="ig-section">
+    <div class="sec-title">
+      <div class="sec-icon">⚠️</div>
+      <div class="sec-label">Ma Trận Rủi Ro — Cần Biết Trước Khi Đầu Tư</div>
+    </div>
+    <table class="risk-table">
+      <thead>
+        <tr>
+          <th>Rủi ro</th>
+          <th>Mô tả</th>
+          <th>Mức độ</th>
+          <th>Cách giảm thiểu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#e2e8f0">Pháp lý condotel</strong></td>
+          <td>Một số sản phẩm nghỉ dưỡng chưa có sổ đỏ riêng</td>
+          <td><span class="risk-pill rp-high">Cao</span></td>
+          <td>Ưu tiên sản phẩm có sổ đỏ lâu dài</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#e2e8f0">Lãi suất biến động</strong></td>
+          <td>Vay 50%+ với lãi suất thả nổi sau ưu đãi</td>
+          <td><span class="risk-pill rp-mid">Trung bình</span></td>
+          <td>Tính dòng tiền với lãi suất 10–12%/năm</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#e2e8f0">Cạnh tranh nguồn cung</strong></td>
+          <td>Nhiều dự án mở bán cùng lúc — thanh khoản phân tán</td>
+          <td><span class="risk-pill rp-mid">Trung bình</span></td>
+          <td>Chọn sản phẩm có vị trí độc nhất</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#e2e8f0">Phụ thuộc du lịch</strong></td>
+          <td>Dòng tiền từ cho thuê phụ thuộc mùa vụ</td>
+          <td><span class="risk-pill rp-mid">Trung bình</span></td>
+          <td>Tính toán với công suất thấp 50–60%</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#e2e8f0">Chính sách đặc khu</strong></td>
+          <td>Vân Đồn chờ phê duyệt — tiến độ không chắc chắn</td>
+          <td><span class="risk-pill rp-low">Thấp–Trung</span></td>
+          <td>Không dùng vốn cần thiết cho Vân Đồn</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="gold-divider"></div>
+
+  <!-- OUTLOOK -->
+  <div class="ig-section">
+    <div class="sec-title">
+      <div class="sec-icon">🔮</div>
+      <div class="sec-label">Nhận Định Thị Trường 12–18 Tháng Tới</div>
+    </div>
+    <div class="outlook-grid">
+      <div class="outlook-card">
+        <div class="outlook-icon">📈</div>
+        <div class="outlook-title">Giá BĐS HLX</div>
+        <div class="outlook-text">Kỳ vọng tăng 15–25% trong 12 tháng. Hạ tầng hoàn thiện + du lịch phục hồi là 2 động lực chính.</div>
+        <span class="outlook-badge ob-bull">🟢 Tích cực</span>
+      </div>
+      <div class="outlook-card">
+        <div class="outlook-icon">🏊</div>
+        <div class="outlook-title">Thanh Khoản Thị Trường</div>
+        <div class="outlook-text">Giao dịch thực tế tăng Q1/2026. Nhóm khách Hà Nội mua nghỉ dưỡng là động lực chính. Thanh khoản tốt hơn 2024.</div>
+        <span class="outlook-badge ob-bull">🟢 Cải thiện</span>
+      </div>
+      <div class="outlook-card">
+        <div class="outlook-icon">🏦</div>
+        <div class="outlook-title">Tín Dụng & Lãi Suất</div>
+        <div class="outlook-text">Lãi suất ổn định quanh 7–9%. Room tín dụng nới lỏng hơn 2023. Ngân hàng tích cực cho vay BĐS có pháp lý tốt.</div>
+        <span class="outlook-badge ob-neu">🟡 Ổn định</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="ig-footer">
+    <div class="ig-footer-left">
+      📊 Dữ liệu tổng hợp từ nhiều nguồn thị trường · Q2/2026<br>
+      <strong>Không phải khuyến nghị đầu tư cụ thể</strong> · Tham khảo chuyên gia trước khi quyết định
+    </div>
+    <div class="ig-footer-right">
+      <div class="watermark">BDS Mastery Kit</div>
+      <div style="font-size:11px;color:#374151;margin-top:3px;">Công cụ marketing độc quyền cho agent HLX</div>
+    </div>
+  </div>
+
+</div><!-- end infographic -->
+
+<script>
+async function downloadIG(){
+  const btn = document.querySelector('.ctrl-primary');
+  btn.textContent = '⏳ Đang xử lý...';
+  btn.disabled = true;
+
+  // Load html2canvas
+  if(!window.html2canvas){
+    await new Promise((resolve,reject)=>{
+      const s = document.createElement('script');
+      s.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+      s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  try {
+    const el = document.getElementById('infographic');
+    const canvas = await html2canvas(el, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#0d1117',
+      width: 1080,
+      scrollX: 0, scrollY: 0
+    });
+    const a = document.createElement('a');
+    a.download = 'infographic-thi-truong-qn-2026.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+    btn.textContent = '✅ Đã tải xuống!';
+    setTimeout(()=>{btn.textContent='⬇️ Tải ảnh PNG (1080px)';btn.disabled=false;},2500);
+  } catch(e) {
+    btn.textContent = '❌ Lỗi — thử Print PDF';
+    btn.disabled = false;
+  }
+}
+
+function copyLink(){
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(()=>{
+    const btn = document.querySelectorAll('.ctrl-secondary')[1];
+    const old = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    setTimeout(()=>btn.textContent=old, 1800);
+  });
+}
+</script>
+</body>
+</html>
