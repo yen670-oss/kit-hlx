@@ -64,9 +64,8 @@
     .hero {
       min-height: 100vh;
       background:
-        linear-gradient(160deg, rgba(16,35,64,.72) 0%, rgba(42,82,152,.38) 50%, rgba(201,168,76,.18) 100%),
-        radial-gradient(ellipse at 70% 30%, rgba(201,168,76,.12) 0%, transparent 60%),
-        linear-gradient(135deg, #0d1e3a 0%, #1b3a6b 40%, #2a5298 70%, #1e4a2e 100%);
+        linear-gradient(160deg, rgba(8,20,40,.78) 0%, rgba(20,50,90,.60) 45%, rgba(12,35,22,.70) 100%),
+        url('https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-hoang-hon.jpg') center/cover no-repeat;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       text-align: center;
       padding: 120px 24px 80px;
@@ -198,23 +197,60 @@
 
     /* ── WHY HLX ─────────────────────────────────────────────── */
     .why { background: var(--ivory-2); }
-    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px; margin-top: 40px;
+    }
     .why-card {
-      background: #fff; border: 1px solid var(--warm-line);
-      border-radius: 16px; padding: 28px 24px;
-      display: flex; gap: 18px;
-      box-shadow: 0 4px 20px rgba(44,36,22,.05);
-      transition: transform .2s, box-shadow .2s;
+      border-radius: 18px; overflow: hidden;
+      position: relative; aspect-ratio: 4/3;
+      box-shadow: 0 6px 28px rgba(44,36,22,.12);
+      cursor: default;
+      transition: transform .3s, box-shadow .3s;
     }
-    .why-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(44,36,22,.1); }
-    .why-icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--ivory-2), var(--ivory-3));
+    .why-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(44,36,22,.2); }
+    .why-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s;
+    }
+    .why-card:hover img { transform: scale(1.07); }
+    .why-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,20,40,.88) 0%, rgba(10,20,40,.4) 55%, rgba(10,20,40,.15) 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px 18px;
+      transition: background .3s;
+    }
+    .why-card:hover .why-card-overlay {
+      background: linear-gradient(to top, rgba(10,20,40,.92) 0%, rgba(10,20,40,.55) 60%, rgba(10,20,40,.2) 100%);
+    }
+    .why-card-icon {
+      font-size: 22px; margin-bottom: 8px;
+      display: inline-block;
+    }
+    .why-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; color: #fff; font-weight: 600;
+      margin-bottom: 6px; line-height: 1.2;
+    }
+    .why-card p {
+      font-size: 12px; color: rgba(255,255,255,.72);
+      line-height: 1.6;
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease, opacity .3s;
+      opacity: 0;
+    }
+    .why-card:hover p { max-height: 80px; opacity: 1; }
+    .why-card-num {
+      position: absolute; top: 14px; right: 14px;
+      background: rgba(201,168,76,.85); color: #fff;
+      font-size: 11px; font-weight: 800;
+      width: 26px; height: 26px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 24px; flex-shrink: 0;
     }
-    .why-body h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--navy-d); margin-bottom: 6px; }
-    .why-body p { font-size: 13px; color: var(--gray); line-height: 1.7; }
+    @media(max-width:768px){ .why-grid { grid-template-columns: 1fr 1fr; } }
 
     /* ── PRODUCTS ─────────────────────────────────────────────── */
     .products { background: var(--ivory); }
@@ -611,7 +647,7 @@
         </div>
       </div>
       <div class="about-visual">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:80px;opacity:.15;">🌊</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-ban-ngay.jpg" alt="Toàn cảnh Vinhomes Hạ Long Xanh ban ngày" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
         <div class="about-visual-inner">
           <div class="about-badge">Di sản Thiên nhiên Thế giới UNESCO</div>
           <h3>Hạ Long Xanh</h3>
@@ -660,62 +696,77 @@
       <div class="divider" style="margin:16px auto;"></div>
     </div>
     <div class="why-grid">
+
       <div class="why-card">
-        <div class="why-icon">🌊</div>
-        <div class="why-body">
-          <h4>Vị trí Di sản Thế giới</h4>
-          <p>Vịnh Hạ Long đón 5–7 triệu khách/năm. Bất động sản ven vịnh UNESCO là tài sản cực kỳ khan hiếm, không thể nhân rộng.</p>
+        <div class="why-card-num">1</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-hoang-hon.jpg" alt="Vị trí Di sản UNESCO">
+        <div class="why-card-overlay">
+          <div class="why-card-icon">🌊</div>
+          <h4>Vị Trí Di Sản Thế Giới</h4>
+          <p>Vịnh Hạ Long đón 5–7 triệu khách/năm. BĐS ven vịnh UNESCO — khan hiếm, không thể nhân rộng.</p>
         </div>
       </div>
+
       <div class="why-card">
-        <div class="why-icon">🏗️</div>
-        <div class="why-body">
-          <h4>Chủ đầu tư Vinhomes</h4>
-          <p>Vinhomes là thương hiệu BĐS #1 Việt Nam — uy tín pháp lý, tiến độ xây dựng và dịch vụ quản lý sau bàn giao đều vượt trội.</p>
+        <div class="why-card-num">2</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-ban-ngay.jpg" alt="Chủ đầu tư Vinhomes">
+        <div class="why-card-overlay">
+          <div class="why-card-icon">🏆</div>
+          <h4>Chủ Đầu Tư Vinhomes #1</h4>
+          <p>Thương hiệu BĐS số 1 Việt Nam — uy tín pháp lý, tiến độ và quản lý sau bàn giao đều vượt trội.</p>
         </div>
       </div>
+
       <div class="why-card">
-        <div class="why-icon">🛣️</div>
-        <div class="why-body">
-          <h4>Hạ tầng bùng nổ 2025–2027</h4>
-          <p>Cao tốc Hải Phòng – Hạ Long hoàn thành, sân bay Vân Đồn mở rộng, cáp treo Hòn Gai — hạ tầng chín muồi, bất động sản tăng giá theo.</p>
+        <div class="why-card-num">3</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/04/vi-tri-vinhomes-global-gate-ha-long.jpg" alt="Hạ tầng chiến lược">
+        <div class="why-card-overlay">
+          <div class="why-card-icon">🛣️</div>
+          <h4>Hạ Tầng Bùng Nổ 2025–2027</h4>
+          <p>Cao tốc HN–Hạ Long, sân bay Vân Đồn, cáp treo Hòn Gai — hạ tầng chín, giá BĐS tăng theo.</p>
         </div>
       </div>
+
       <div class="why-card">
-        <div class="why-icon">🏨</div>
-        <div class="why-body">
-          <h4>Tiện ích 5 sao nội khu</h4>
-          <p>Bể bơi vô cực, clubhouse, resort spa, trường học quốc tế — sống trong khu nghỉ dưỡng 5 sao, không cần ra ngoài.</p>
+        <div class="why-card-num">4</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/04/tien-ich-vinhomes-global-gate-ha-long.jpg" alt="Tiện ích 5 sao nội khu">
+        <div class="why-card-overlay">
+          <div class="why-card-icon">🏨</div>
+          <h4>Tiện Ích 5 Sao Nội Khu</h4>
+          <p>40+ tiện ích — golf, resort spa, công viên rừng, clubhouse, trường quốc tế trong bán kính 500m.</p>
         </div>
       </div>
+
       <div class="why-card">
-        <div class="why-icon">📈</div>
-        <div class="why-body">
-          <h4>Tiềm năng tăng giá cao</h4>
-          <p>Biệt thự ven vịnh HLX đã tăng 22% trong 18 tháng. Shophouse thương mại dự kiến tăng thêm 30–40% khi dự án đi vào vận hành đầy đủ.</p>
+        <div class="why-card-num">5</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/04/biet-thu-bien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg" alt="Tiềm năng tăng giá biệt thự biển">
+        <div class="why-card-overlay">
+          <div class="why-card-icon">📈</div>
+          <h4>Tăng Giá 18–25%/Năm</h4>
+          <p>Biệt thự ven vịnh HLX đã tăng 22% trong 18 tháng. Shophouse dự kiến tăng thêm 30–40% khi vận hành đầy đủ.</p>
         </div>
       </div>
+
       <div class="why-card">
-        <div class="why-icon">💰</div>
-        <div class="why-body">
-          <h4>Dòng tiền cho thuê ổn định</h4>
-          <p>Condotel khai thác qua Vinhomes Management — chính sách thuê lại cam kết dòng thu nhập thụ động hàng năm, không cần tự vận hành.</p>
+        <div class="why-card-num">6</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/04/phan-khu-vinh-thien-duong-vinhomes-global-gate-ha-long-banner.jpg" alt="Dòng tiền condotel cho thuê">
+        <div class="why-card-overlay">
+          <div class="why-card-icon">💰</div>
+          <h4>Dòng Tiền Cho Thuê 8–12%</h4>
+          <p>Condotel qua Vinhomes Management — thu nhập thụ động hàng năm, không tự vận hành.</p>
         </div>
       </div>
+
       <div class="why-card">
-        <div class="why-icon">🌿</div>
-        <div class="why-body">
-          <h4>Sống xanh, sống chất</h4>
-          <p>70% diện tích dành cho cây xanh và mặt nước. Hạ Long Xanh là nơi anh/chị thực sự nghỉ ngơi — không chỉ là địa chỉ trên sổ đỏ.</p>
+        <div class="why-card-num">7</div>
+        <img src="https://vinhomesland.vn/wp-content/uploads/2026/05/cam-trai-rung-ngap-man-vinhomes-global-gate-ha-long.jpg" alt="Sống xanh rừng ngập mặn">
+        <div class="why-card-overlay">
+          <div class="why-card-icon">🌿</div>
+          <h4>Sống Xanh Giữa Rừng Ngập Mặn</h4>
+          <p>800ha rừng ngập mặn Wonder Mangrove — 70% diện tích cây xanh và mặt nước. Nghỉ ngơi thật sự mỗi ngày.</p>
         </div>
       </div>
-      <div class="why-card">
-        <div class="why-icon">🔐</div>
-        <div class="why-body">
-          <h4>Pháp lý minh bạch 100%</h4>
-          <p>Đất ở đô thị, sổ đỏ lâu dài cho biệt thự và shophouse. Condotel có chứng nhận quyền sở hữu 50 năm gia hạn — không mập mờ.</p>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
