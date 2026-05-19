@@ -1,0 +1,1475 @@
+﻿<!-- Trang ca nhan: Nguyen Thi Yen | SDT: 0964827670 | Tier: Gold Team | Ngay: 20/05/2026 -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nguyen Thi Yen -- Tu Van Vinhomes Ha Long Xanh</title>
+  <meta name="description" content="Vinhomes Hạ Long Xanh — Tổ hợp căn hộ biển hạng sang tại Bãi Cháy, Hạ Long. Vị trí vàng · Tiện ích 5 sao · Tiềm năng tăng giá vượt trội. Đăng ký nhận giỏ hàng ưu tiên.">
+  <meta property="og:title" content="Vinhomes Hạ Long Xanh — Căn Hộ Biển Hạng Sang Bãi Cháy">
+  <meta property="og:description" content="Tổ hợp căn hộ biển đẳng cấp · Tiện ích 5 sao · Vị trí vàng ven vịnh · Ưu đãi đặc biệt tháng này">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --green-dark:   #0f4c2a;
+      --green:        #1a6b3c;
+      --green-mid:    #2d8a52;
+      --green-light:  #4caf78;
+      --green-pale:   #e8f5ee;
+      --orange:       #e87922;
+      --orange-light: #f5a54a;
+      --orange-pale:  #fff3e8;
+      --brown:        #7a4e2d;
+      --brown-light:  #a06b42;
+      --brown-pale:   #f5ece0;
+      --cream:        #faf7f2;
+      --cream-dark:   #f0e8db;
+      --white:        #ffffff;
+      --text-dark:    #1a1a2e;
+      --text-mid:     #4a5568;
+      --text-light:   #718096;
+      --gold:         #c9952a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
+
+    img { max-width: 100%; height: auto; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
+
+    /* ===== UTILITIES ===== */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    .section-pad { padding: 72px 0; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 10px; font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 40px); font-weight: 800;
+      color: var(--green-dark); line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-sub { font-size: 16px; color: var(--text-mid); max-width: 600px; line-height: 1.7; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      padding: 15px 32px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; font-family: 'Be Vietnam Pro', sans-serif;
+      border: none; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(232,121,34,.35);
+      transition: all .25s;
+    }
+    .btn-primary:hover { background: #d06a18; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232,121,34,.45); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--green);
+      padding: 14px 30px; border-radius: 50px;
+      font-size: 15px; font-weight: 600; font-family: 'Be Vietnam Pro', sans-serif;
+      border: 2px solid var(--green); cursor: pointer;
+      transition: all .25s;
+    }
+    .btn-outline:hover { background: var(--green); color: #fff; transform: translateY(-2px); }
+
+    .btn-green {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff;
+      padding: 15px 32px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; font-family: 'Be Vietnam Pro', sans-serif;
+      border: none; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(26,107,60,.3);
+      transition: all .25s;
+    }
+    .btn-green:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(15,76,42,.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; max-width: 1140px; margin: 0 auto; padding: 0 20px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo {
+      width: 38px; height: 38px; background: var(--orange); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: #fff; font-family: 'Playfair Display', serif;
+    }
+    .nav-name { font-size: 15px; font-weight: 700; color: #fff; }
+    .nav-sub { font-size: 10px; color: rgba(255,255,255,.6); letter-spacing: .1em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.8); transition: color .2s; }
+    .nav-links a:hover { color: var(--orange-light); }
+    .nav-cta {
+      background: var(--orange); color: #fff; padding: 9px 22px;
+      border-radius: 50px; font-size: 13px; font-weight: 700;
+      border: none; cursor: pointer; transition: all .2s;
+    }
+    .nav-cta:hover { background: #d06a18; }
+    @media(max-width: 768px) { .nav-links { display: none; } }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(160deg, rgba(10,45,25,.82) 0%, rgba(15,60,35,.65) 40%, rgba(100,55,20,.60) 100%),
+        /* ── THAY ẢNH HERO TẠI ĐÂY ── url('ten-anh.jpg') hoặc link ảnh thực dự án */
+        url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1920&q=80') center/cover no-repeat;
+      display: flex; align-items: center;
+      padding: 100px 20px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(232,121,34,.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(77,175,120,.12) 0%, transparent 50%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,121,34,.2); border: 1px solid rgba(232,121,34,.5);
+      color: var(--orange-light); font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 7px 16px; border-radius: 50px; margin-bottom: 24px;
+    }
+    .hero-badge .dot { width: 6px; height: 6px; background: var(--orange-light); border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 58px); font-weight: 800; color: #fff;
+      line-height: 1.15; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--orange-light); }
+
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,.8); line-height: 1.75;
+      margin-bottom: 36px; max-width: 560px;
+    }
+
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+
+    .hero-stats {
+      display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .hstat { }
+    .hstat-num { font-size: 26px; font-weight: 800; color: var(--orange-light); font-family: 'Playfair Display', serif; }
+    .hstat-label { font-size: 12px; color: rgba(255,255,255,.6); margin-top: 2px; }
+
+    /* Floating right card */
+    .hero-side {
+      position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.08); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.18); border-radius: 20px;
+      padding: 28px; width: 300px; z-index: 2;
+    }
+    .hs-title { font-size: 13px; font-weight: 700; color: var(--orange-light); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
+    .hs-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .hs-row:last-child { border-bottom: none; }
+    .hs-key { font-size: 13px; color: rgba(255,255,255,.7); }
+    .hs-val { font-size: 14px; font-weight: 700; color: #fff; }
+    .hs-val.green { color: #6ee79a; }
+    .hs-val.orange { color: var(--orange-light); }
+    @media(max-width: 1024px) { .hero-side { display: none; } }
+
+    /* ===== TRUST BAR ===== */
+    .trust-bar {
+      background: var(--green-dark); padding: 20px 0;
+    }
+    .trust-inner {
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap; max-width: 1140px; margin: 0 auto; padding: 0 20px;
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; }
+    .trust-icon { font-size: 20px; }
+    .trust-text { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .about-image {
+      border-radius: 24px; height: 420px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(15,76,42,.25);
+    }
+    .about-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      /* ── THAY ẢNH ABOUT: ảnh ngoại thất dự án HLX ── */
+    }
+    .about-image-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(10,40,20,.8));
+      padding: 24px; z-index: 1;
+    }
+    .about-image-overlay h3 { font-size: 22px; color: #fff; margin-bottom: 4px; }
+    .about-image-overlay p { font-size: 13px; color: rgba(255,255,255,.75); }
+    .about-features { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .about-feature {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--green-pale); border-radius: 12px; padding: 14px 18px;
+      border-left: 4px solid var(--green);
+    }
+    .af-icon { font-size: 22px; flex-shrink: 0; }
+    .af-title { font-size: 14px; font-weight: 700; color: var(--green-dark); margin-bottom: 2px; }
+    .af-desc { font-size: 13px; color: var(--text-mid); }
+    @media(max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+    /* ===== STATS ===== */
+    .stats-section { background: linear-gradient(135deg, var(--green-dark) 0%, #1a4a2d 100%); }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: rgba(255,255,255,.1); border-radius: 20px; overflow: hidden;
+    }
+    .stat-card {
+      background: rgba(255,255,255,.06); padding: 36px 24px; text-align: center;
+      transition: background .2s;
+    }
+    .stat-card:hover { background: rgba(255,255,255,.1); }
+    .stat-num { font-size: 40px; font-weight: 800; color: var(--orange-light); font-family: 'Playfair Display', serif; }
+    .stat-unit { font-size: 16px; color: var(--orange-light); }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 6px; }
+    @media(max-width: 640px) { .stats-grid { grid-template-columns: repeat(2,1fr); } }
+
+    /* ===== LOCATION ===== */
+    .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+    .loc-map {
+      border-radius: 20px; height: 380px;
+      overflow: hidden; position: relative;
+      border: 3px solid var(--green-light);
+      box-shadow: 0 8px 30px rgba(26,107,60,.15);
+    }
+    .loc-map img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      /* ── THAY ẢNH BẢN ĐỒ: ảnh chụp map hoặc ảnh vị trí dự án ── */
+    }
+    .loc-map-pin {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-60%);
+      text-align: center; z-index: 2;
+    }
+    .loc-map-pin .pin-dot {
+      font-size: 48px; animation: bounce .8s infinite alternate; display: block;
+    }
+    .loc-map-pin .pin-label {
+      background: var(--green-dark); color: #fff; font-size: 12px; font-weight: 700;
+      padding: 5px 12px; border-radius: 20px; white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,.3);
+    }
+    @keyframes bounce { to { transform: translateY(-10px); } }
+    .loc-points { display: flex; flex-direction: column; gap: 12px; }
+    .loc-point {
+      display: flex; align-items: center; gap: 16px;
+      background: #fff; border-radius: 14px; padding: 16px 20px;
+      box-shadow: 0 2px 12px rgba(26,107,60,.08);
+      border-left: 4px solid var(--orange);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .loc-point:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(26,107,60,.15); }
+    .lp-dist {
+      background: var(--orange-pale); color: var(--orange); font-size: 12px; font-weight: 800;
+      padding: 6px 12px; border-radius: 8px; white-space: nowrap; flex-shrink: 0;
+    }
+    .lp-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+    .lp-note { font-size: 12px; color: var(--text-light); }
+    @media(max-width: 768px) { .loc-grid { grid-template-columns: 1fr; } }
+
+    /* ===== AMENITIES ===== */
+    .amenities-section { background: var(--cream-dark); }
+    .amen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .amen-card {
+      background: #fff; border-radius: 18px; padding: 28px 24px;
+      border: 1px solid rgba(26,107,60,.1);
+      box-shadow: 0 2px 16px rgba(26,107,60,.06);
+      transition: all .25s; text-align: center;
+    }
+    .amen-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(26,107,60,.15); border-color: var(--green-light); }
+    .amen-icon { font-size: 40px; margin-bottom: 14px; }
+    .amen-title { font-size: 16px; font-weight: 700; color: var(--green-dark); margin-bottom: 8px; font-family: 'Playfair Display', serif; }
+    .amen-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    @media(max-width: 768px) { .amen-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width: 480px) { .amen-grid { grid-template-columns: 1fr; } }
+
+    /* ===== PRODUCTS ===== */
+    .products-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .prod-card {
+      background: #fff; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(26,107,60,.1);
+      border: 2px solid transparent; transition: all .25s;
+      position: relative;
+    }
+    .prod-card:hover { border-color: var(--green); transform: translateY(-5px); box-shadow: 0 16px 40px rgba(26,107,60,.18); }
+    .prod-card.featured { border-color: var(--orange); }
+    .prod-popular {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--orange); color: #fff; font-size: 11px; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px; letter-spacing: .05em;
+    }
+    .prod-img {
+      height: 200px;
+      overflow: hidden; position: relative;
+    }
+    .prod-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .4s;
+    }
+    .prod-card:hover .prod-img img { transform: scale(1.06); }
+    .prod-img-label {
+      position: absolute; bottom: 10px; left: 12px;
+      background: rgba(15,76,42,.85); color: #fff;
+      font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+      letter-spacing: .05em;
+    }
+    .prod-body { padding: 22px 22px 26px; }
+    .prod-type { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+    .prod-name { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; font-family: 'Playfair Display', serif; }
+    .prod-area { font-size: 13px; color: var(--text-mid); margin-bottom: 16px; }
+    .prod-price { font-size: 22px; font-weight: 800; color: var(--orange); margin-bottom: 4px; font-family: 'Playfair Display', serif; }
+    .prod-price-note { font-size: 12px; color: var(--text-light); margin-bottom: 16px; }
+    .prod-features { display: flex; flex-direction: column; gap: 6px; }
+    .pf { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); }
+    .pf::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    @media(max-width: 768px) { .products-grid { grid-template-columns: 1fr; } }
+
+    /* ===== POLICY ===== */
+    .policy-section { background: linear-gradient(135deg, var(--green-dark) 0%, #1a4a30 100%); }
+    .policy-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .policy-card {
+      background: rgba(255,255,255,.08); border-radius: 18px; padding: 28px;
+      border: 1px solid rgba(255,255,255,.15);
+      transition: background .2s;
+    }
+    .policy-card:hover { background: rgba(255,255,255,.13); }
+    .policy-icon { font-size: 32px; margin-bottom: 14px; }
+    .policy-title { font-size: 18px; font-weight: 700; color: var(--orange-light); margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+    .policy-desc { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.7; }
+    .policy-highlight { color: #fff; font-weight: 700; }
+    @media(max-width: 640px) { .policy-grid { grid-template-columns: 1fr; } }
+
+    /* ===== WHY CHOOSE ===== */
+    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .why-card {
+      background: #fff; border-radius: 16px; padding: 30px 24px;
+      text-align: center; border: 1px solid var(--cream-dark);
+      box-shadow: 0 2px 12px rgba(0,0,0,.05); transition: all .25s;
+    }
+    .why-card:hover { border-color: var(--green-light); transform: translateY(-5px); box-shadow: 0 12px 32px rgba(26,107,60,.12); }
+    .why-num {
+      width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; color: var(--green);
+      margin: 0 auto 16px; font-family: 'Playfair Display', serif;
+    }
+    .why-title { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+    .why-desc { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+    @media(max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
+
+    /* ===== TESTIMONIALS ===== */
+    .testi-section { background: var(--brown-pale); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .testi-card {
+      background: #fff; border-radius: 18px; padding: 26px;
+      box-shadow: 0 3px 18px rgba(122,78,45,.1);
+      border-top: 4px solid var(--green);
+      transition: transform .2s;
+    }
+    .testi-card:hover { transform: translateY(-4px); }
+    .testi-stars { color: #f5a623; font-size: 14px; margin-bottom: 12px; }
+    .testi-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green-mid));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: #fff;
+    }
+    .testi-name { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+    .testi-role { font-size: 12px; color: var(--text-light); }
+    @media(max-width: 768px) { .testi-grid { grid-template-columns: 1fr; } }
+
+    /* ===== CTA FORM ===== */
+    .cta-section {
+      background:
+        linear-gradient(145deg, rgba(10,45,25,.92) 0%, rgba(26,107,60,.85) 50%, rgba(122,78,45,.75) 100%),
+        repeating-linear-gradient(60deg, transparent, transparent 30px, rgba(255,255,255,.02) 30px, rgba(255,255,255,.02) 60px);
+    }
+    .cta-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .cta-left h2 { font-size: clamp(26px,3.5vw,40px); color: #fff; margin-bottom: 16px; }
+    .cta-left p { font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.7; margin-bottom: 28px; }
+    .cta-perks { display: flex; flex-direction: column; gap: 10px; }
+    .cta-perk { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.85); }
+    .cta-perk::before { content: '✓'; background: var(--green); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+
+    .form-card {
+      background: #fff; border-radius: 24px; padding: 36px 32px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.25);
+    }
+    .form-title { font-size: 22px; font-weight: 800; color: var(--green-dark); margin-bottom: 6px; font-family: 'Playfair Display', serif; }
+    .form-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 24px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 6px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 13px 16px; border-radius: 10px;
+      border: 1.5px solid #e2e8f0; font-size: 14px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      color: var(--text-dark); background: #fafafa;
+      transition: border-color .2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--green); background: #fff; }
+    .form-group select { cursor: pointer; }
+    .form-submit {
+      width: 100%; padding: 16px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--orange) 0%, #d06a18 100%);
+      color: #fff; font-size: 16px; font-weight: 700;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      border: none; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(232,121,34,.4);
+      transition: all .25s; margin-top: 4px;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(232,121,34,.5); }
+    .form-note { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 12px; }
+    @media(max-width: 768px) { .cta-inner { grid-template-columns: 1fr; gap: 36px; } }
+
+    /* ===== FAQ ===== */
+    .faq-section { background: var(--cream); }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      border: 1.5px solid var(--cream-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,.04); transition: border-color .2s;
+    }
+    .faq-item.open { border-color: var(--green-light); }
+    .faq-q {
+      width: 100%; text-align: left; padding: 20px 24px;
+      background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      font-size: 15px; font-weight: 600; color: var(--text-dark);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      transition: color .2s;
+    }
+    .faq-item.open .faq-q { color: var(--green); }
+    .faq-arrow {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--green-pale); border: none;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 14px; color: var(--green);
+      transition: transform .3s;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); background: var(--green); color: #fff; }
+    .faq-a { display: none; padding: 0 24px 20px; font-size: 14px; color: var(--text-mid); line-height: 1.75; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--green-dark); color: rgba(255,255,255,.7); }
+    .footer-main {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+      padding: 56px 0 40px;
+    }
+    .footer-brand h3 { font-size: 22px; color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; }
+    .soc {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,.1); display: flex; align-items: center;
+      justify-content: center; font-size: 16px; transition: background .2s;
+      cursor: pointer;
+    }
+    .soc:hover { background: var(--orange); }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.9); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col li a { font-size: 13px; color: rgba(255,255,255,.6); transition: color .2s; }
+    .footer-col li a:hover { color: var(--orange-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1); padding: 20px 0;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.4); }
+    @media(max-width: 768px) { .footer-main { grid-template-columns: 1fr 1fr; gap: 30px; } }
+    @media(max-width: 480px) { .footer-main { grid-template-columns: 1fr; } }
+
+    /* ===== STICKY BOTTOM CTA (mobile) ===== */
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+      background: var(--green-dark); padding: 12px 20px;
+      display: none; align-items: center; justify-content: space-between;
+      gap: 12px; box-shadow: 0 -4px 20px rgba(0,0,0,.2);
+    }
+    .sticky-cta p { font-size: 13px; color: rgba(255,255,255,.8); }
+    .sticky-cta strong { color: var(--orange-light); }
+    @media(max-width: 768px) { .sticky-cta { display: flex; } }
+
+    /* ===== GALLERY ===== */
+    .gallery-section { background: var(--green-dark); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 10px; border-radius: 20px; overflow: hidden;
+    }
+    .gal-item {
+      overflow: hidden; position: relative; cursor: pointer;
+    }
+    .gal-item:first-child {
+      grid-column: span 2; grid-row: span 2;
+    }
+    .gal-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .4s;
+      /* ── THAY MỖI ẢNH gallery: ảnh thực dự án/tiện ích/nội thất ── */
+    }
+    .gal-item:hover img { transform: scale(1.08); }
+    .gal-overlay {
+      position: absolute; inset: 0; background: rgba(15,76,42,0);
+      transition: background .3s; display: flex; align-items: flex-end; padding: 16px;
+    }
+    .gal-item:hover .gal-overlay { background: rgba(15,76,42,.45); }
+    .gal-label {
+      color: #fff; font-size: 13px; font-weight: 700;
+      opacity: 0; transform: translateY(8px); transition: all .3s;
+    }
+    .gal-item:hover .gal-label { opacity: 1; transform: translateY(0); }
+    .gal-more {
+      position: absolute; inset: 0; background: rgba(15,76,42,.75);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .gal-more span { font-size: 32px; font-weight: 800; font-family: 'Playfair Display',serif; }
+    .gal-more small { font-size: 13px; opacity: .8; margin-top: 4px; }
+    @media(max-width: 640px) {
+      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(3, 160px); }
+      .gal-item:first-child { grid-column: span 2; grid-row: span 1; }
+    }
+
+    /* ===== DIVIDER ===== */
+    .wave-divider { display: block; width: 100%; line-height: 0; }
+
+    /* ===== FLOATING PHONE ===== */
+    .phone-float {
+      position: fixed; right: 20px; bottom: 80px; z-index: 950;
+    }
+    .phone-btn {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(232,121,34,.5);
+      animation: ring 2s infinite;
+      border: none;
+    }
+    @keyframes ring {
+      0%,100% { transform: scale(1); }
+      10% { transform: scale(1.15) rotate(10deg); }
+      20% { transform: scale(1.15) rotate(-10deg); }
+      30% { transform: scale(1); }
+    }
+
+    /* ===== SUCCESS MESSAGE ===== */
+    .success-msg {
+      display: none; background: var(--green-pale); border: 2px solid var(--green);
+      border-radius: 12px; padding: 20px; text-align: center; margin-top: 16px;
+    }
+    .success-msg p { font-size: 15px; font-weight: 600; color: var(--green-dark); }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">V</div>
+      <div>
+        <div class="nav-name">Vinhomes Hạ Long Xanh</div>
+        <div class="nav-sub">Căn hộ biển hạng sang</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#about">Dự Án</a>
+      <a href="#location">Vị Trí</a>
+      <a href="#amenities">Tiện Ích</a>
+      <a href="#products">Sản Phẩm</a>
+      <a href="#policy">Chính Sách</a>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+      📋 Đăng Ký Tư Vấn
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Đang mở bán giai đoạn 2 — Số lượng có hạn
+    </div>
+
+    <h1>
+      Vinhomes<br>
+      <span>Hạ Long Xanh</span><br>
+      Sống Đẳng Cấp<br>Giữa Thiên Nhiên
+    </h1>
+
+    <p class="hero-sub">
+      Tổ hợp căn hộ biển hạng sang tọa lạc tại Bãi Cháy, Hạ Long — nơi giao thoa hoàn hảo giữa Vịnh Hạ Long huyền thoại, tiện ích 5 sao và tiềm năng tăng giá vượt trội của thị trường BDS Quảng Ninh 2025–2026.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        📋 Nhận Giỏ Hàng Ưu Tiên
+      </button>
+      <button class="btn-outline" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+        🏠 Xem Sản Phẩm
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num">+35%</div>
+        <div class="hstat-label">Tăng giá dự kiến 2026</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">5⭐</div>
+        <div class="hstat-label">Tiêu chuẩn tiện ích</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">100%</div>
+        <div class="hstat-label">View biển hoặc vịnh</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">18T</div>
+        <div class="hstat-label">Khách du lịch/năm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Info Card -->
+  <div class="hero-side">
+    <div class="hs-title">📊 Thông số dự án</div>
+    <div class="hs-row">
+      <span class="hs-key">Vị trí</span>
+      <span class="hs-val">Bãi Cháy, Hạ Long</span>
+    </div>
+    <div class="hs-row">
+      <span class="hs-key">Quy mô</span>
+      <span class="hs-val">35+ tòa</span>
+    </div>
+    <div class="hs-row">
+      <span class="hs-key">Loại SP</span>
+      <span class="hs-val">Studio – 4PN</span>
+    </div>
+    <div class="hs-row">
+      <span class="hs-key">Diện tích</span>
+      <span class="hs-val">28 – 120 m²</span>
+    </div>
+    <div class="hs-row">
+      <span class="hs-key">Giá từ</span>
+      <span class="hs-val orange">~1.2 tỷ</span>
+    </div>
+    <div class="hs-row">
+      <span class="hs-key">Xu hướng</span>
+      <span class="hs-val green">↑ Tăng mạnh</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <span class="trust-icon">🏢</span>
+      <span class="trust-text">Chủ đầu tư Vinhomes — Tập đoàn Vingroup</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">📜</span>
+      <span class="trust-text">Pháp lý đầy đủ — Sổ hồng lâu dài</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">🌊</span>
+      <span class="trust-text">100% view biển/vịnh/công viên</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">💰</span>
+      <span class="trust-text">Hỗ trợ vay 70% — Lãi suất ưu đãi</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section class="section-pad" id="about" style="background:#fff;">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image reveal">
+        <!-- THAY src="..." bằng link ảnh ngoại thất dự án của bạn -->
+        <img
+          src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80"
+          alt="Ngoại thất Vinhomes Hạ Long Xanh"
+          loading="lazy"
+        >
+        <div class="about-image-overlay">
+          <h3>Vinhomes Hạ Long Xanh</h3>
+          <p>Tổ hợp đô thị biển đẳng cấp bậc nhất Quảng Ninh</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="section-label">🌿 Về Dự Án</p>
+        <h2 class="section-title">Không Gian Sống Lý Tưởng Ven Vịnh Hạ Long</h2>
+        <p class="section-sub">Vinhomes Hạ Long Xanh là tổ hợp căn hộ cao cấp được quy hoạch bài bản với tầm nhìn hướng ra Vịnh Hạ Long — Di sản Thiên nhiên Thế giới. Dự án mang đến trải nghiệm sống "resort in the city" chưa từng có tại Quảng Ninh.</p>
+
+        <div class="about-features" style="margin-top: 28px;">
+          <div class="about-feature">
+            <span class="af-icon">🌊</span>
+            <div>
+              <div class="af-title">Tầm nhìn triệu đô — View Vịnh Hạ Long</div>
+              <div class="af-desc">100% căn hộ đều có tầm nhìn ra biển, vịnh hoặc công viên xanh nội khu</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="af-icon">🏗️</span>
+            <div>
+              <div class="af-title">Quy hoạch đồng bộ — Tiêu chuẩn Vinhomes</div>
+              <div class="af-desc">Hệ thống tiện ích nội khu hoàn chỉnh: trường học, bệnh viện, TTTM, công viên</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="af-icon">📈</span>
+            <div>
+              <div class="af-title">Tiềm năng đầu tư vượt trội</div>
+              <div class="af-desc">BDS Quảng Ninh tăng 35%+ kỳ vọng 2026 nhờ hạ tầng bùng nổ và khách du lịch 18M người/năm</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="af-icon">💎</span>
+            <div>
+              <div class="af-title">Thương hiệu Vinhomes — Uy tín số 1</div>
+              <div class="af-desc">Pháp lý minh bạch, tiến độ đúng hẹn, dịch vụ quản lý vận hành chuyên nghiệp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats-section section-pad">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 40px;">
+      <p class="section-label" style="color: var(--orange-light);">📊 Con Số Nói Lên Tất Cả</p>
+      <h2 class="section-title" style="color:#fff;">Dự Án Trong Con Số</h2>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-num">35<span class="stat-unit">+</span></div>
+        <div class="stat-label">Tòa căn hộ cao tầng</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">120<span class="stat-unit">ha</span></div>
+        <div class="stat-label">Diện tích toàn khu</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">40<span class="stat-unit">%</span></div>
+        <div class="stat-label">Diện tích cây xanh & mặt nước</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100<span class="stat-unit">+</span></div>
+        <div class="stat-label">Tiện ích nội khu & ngoại khu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCATION ===== -->
+<section class="section-pad" id="location" style="background:#fff;">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;" class="reveal">
+      <p class="section-label">📍 Vị Trí Đắc Địa</p>
+      <h2 class="section-title">Trung Tâm Kết Nối — Giữa Lòng Bãi Cháy</h2>
+      <p class="section-sub" style="margin: 0 auto;">Tọa lạc tại Bãi Cháy — khu du lịch sầm uất nhất Hạ Long — HLX kết nối dễ dàng đến mọi điểm đến quan trọng</p>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-map reveal">
+        <!-- THAY src="..." bằng ảnh bản đồ vị trí hoặc ảnh aerial dự án -->
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80"
+          alt="Vị trí Vinhomes Hạ Long Xanh — Bãi Cháy, Hạ Long"
+          loading="lazy"
+        >
+        <div class="loc-map-pin">
+          <span class="pin-dot">📍</span>
+          <span class="pin-label">Vinhomes Hạ Long Xanh · Bãi Cháy</span>
+        </div>
+      </div>
+      <div class="loc-points reveal">
+        <div class="loc-point">
+          <div class="lp-dist">2 km</div>
+          <div>
+            <div class="lp-name">🌊 Bờ biển Bãi Cháy</div>
+            <div class="lp-note">Bãi tắm đẹp nhất Hạ Long — tiếp cận ngay</div>
+          </div>
+        </div>
+        <div class="loc-point">
+          <div class="lp-dist">5 km</div>
+          <div>
+            <div class="lp-name">✈️ Sân bay Vân Đồn</div>
+            <div class="lp-note">Bay thẳng Hà Nội, HCM, Đà Nẵng, Seoul…</div>
+          </div>
+        </div>
+        <div class="loc-point">
+          <div class="lp-dist">3 km</div>
+          <div>
+            <div class="lp-name">🛍️ Vincom Hạ Long</div>
+            <div class="lp-note">TTTM lớn nhất Quảng Ninh</div>
+          </div>
+        </div>
+        <div class="loc-point">
+          <div class="lp-dist">4 km</div>
+          <div>
+            <div class="lp-name">🏥 BV Đa khoa Quảng Ninh</div>
+            <div class="lp-note">Bệnh viện tuyến tỉnh hiện đại</div>
+          </div>
+        </div>
+        <div class="loc-point">
+          <div class="lp-dist">1 km</div>
+          <div>
+            <div class="lp-name">⛴️ Bến tàu Bãi Cháy</div>
+            <div class="lp-note">Du thuyền vịnh Hạ Long — Du lịch hàng ngày</div>
+          </div>
+        </div>
+        <div class="loc-point">
+          <div class="lp-dist">160 km</div>
+          <div>
+            <div class="lp-name">🏙️ Hà Nội — Cao tốc Ha Long</div>
+            <div class="lp-note">Chỉ ~90 phút đi xe — Cuối tuần về Hạ Long</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AMENITIES ===== -->
+<section class="section-pad amenities-section" id="amenities">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;" class="reveal">
+      <p class="section-label">🏊 Tiện Ích Nội Khu</p>
+      <h2 class="section-title">Trải Nghiệm Resort Ngay Tại Nơi Bạn Sống</h2>
+      <p class="section-sub" style="margin: 0 auto;">Hơn 100 tiện ích nội khu và ngoại khu — mọi nhu cầu đều được đáp ứng</p>
+    </div>
+    <div class="amen-grid reveal">
+      <div class="amen-card">
+        <div class="amen-icon">🏊</div>
+        <div class="amen-title">Bể Bơi Vô Cực</div>
+        <div class="amen-desc">Bể bơi infinity pool nhìn ra vịnh Hạ Long — trải nghiệm resort đẳng cấp 5 sao</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">🌿</div>
+        <div class="amen-title">Công Viên Xanh 40ha</div>
+        <div class="amen-desc">Hệ thống công viên cây xanh, đường dạo bộ và mặt nước chiếm 40% diện tích</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">💪</div>
+        <div class="amen-title">Gym & Spa 5 Sao</div>
+        <div class="amen-desc">Phòng tập hiện đại, spa thư giãn, yoga deck ngắm biển theo chuẩn resort cao cấp</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">🏫</div>
+        <div class="amen-title">Trường Học Liên Cấp</div>
+        <div class="amen-desc">Trường mầm non, tiểu học, THCS trong khuôn viên — con học ngay gần nhà</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">🛒</div>
+        <div class="amen-title">Trung Tâm Thương Mại</div>
+        <div class="amen-desc">Vinmart, nhà hàng, cà phê, spa, phòng khám… tất cả trong nội khu</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">🚗</div>
+        <div class="amen-title">Bãi Đỗ Xe Thông Minh</div>
+        <div class="amen-desc">Hầm xe rộng rãi, camera an ninh 24/7, hệ thống ra vào thông minh</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">⛵</div>
+        <div class="amen-title">Cầu Tàu & Khu Thuyền</div>
+        <div class="amen-desc">Cầu tàu riêng, kayak, boat tour — kết nối trực tiếp với vịnh Hạ Long</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">🎪</div>
+        <div class="amen-title">Khu Vui Chơi Trẻ Em</div>
+        <div class="amen-desc">Sân chơi hiện đại, nhà bóng, khu vận động ngoài trời an toàn cho trẻ</div>
+      </div>
+      <div class="amen-card">
+        <div class="amen-icon">🔒</div>
+        <div class="amen-title">An Ninh 24/7</div>
+        <div class="amen-desc">Camera thông minh, bảo vệ chuyên nghiệp, hệ thống kiểm soát ra vào bằng thẻ từ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="section-pad" id="products" style="background:#fff;">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;" class="reveal">
+      <p class="section-label">🏠 Sản Phẩm</p>
+      <h2 class="section-title">Đa Dạng Loại Hình — Phù Hợp Mọi Nhu Cầu</h2>
+      <p class="section-sub" style="margin: 0 auto;">Từ studio compact đến penthouse 4 phòng ngủ — đều có view biển và thiết kế tối ưu</p>
+    </div>
+    <div class="products-grid reveal">
+      <div class="prod-card">
+        <!-- THAY src="..." bằng ảnh căn hộ studio/1PN thực -->
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=700&q=80"
+               alt="Studio 1 phòng ngủ HLX" loading="lazy">
+          <span class="prod-img-label">Studio · 1PN</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-type">Studio / 1 Phòng Ngủ</div>
+          <div class="prod-name">Smart Compact</div>
+          <div class="prod-area">📐 28 – 45 m² · Tầng 5–25</div>
+          <div class="prod-price">Từ 1.2 tỷ</div>
+          <div class="prod-price-note">≈ 28–32 triệu/m² · Có thể cho thuê ngắn hạn</div>
+          <div class="prod-features">
+            <div class="pf">Full nội thất bàn giao</div>
+            <div class="pf">View biển hoặc công viên</div>
+            <div class="pf">Phù hợp đầu tư cho thuê Airbnb</div>
+            <div class="pf">ROI kỳ vọng 8–12%/năm</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card featured">
+        <div class="prod-popular">Bán chạy nhất</div>
+        <!-- THAY src="..." bằng ảnh căn hộ 2PN thực -->
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80"
+               alt="Căn hộ 2 phòng ngủ Premium HLX" loading="lazy">
+          <span class="prod-img-label">2 Phòng Ngủ</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-type">2 Phòng Ngủ</div>
+          <div class="prod-name">Premium Seaview</div>
+          <div class="prod-area">📐 60 – 82 m² · Tầng 8–35</div>
+          <div class="prod-price">Từ 2.4 tỷ</div>
+          <div class="prod-price-note">≈ 30–34 triệu/m² · Góc view đẹp nhất</div>
+          <div class="prod-features">
+            <div class="pf">Ban công view Vịnh Hạ Long</div>
+            <div class="pf">Bếp mở + phòng khách rộng</div>
+            <div class="pf">Lý tưởng gia đình nhỏ & đầu tư</div>
+            <div class="pf">Nội thất cao cấp bàn giao</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <!-- THAY src="..." bằng ảnh penthouse/3-4PN thực -->
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80"
+               alt="Penthouse 3-4 phòng ngủ HLX" loading="lazy">
+          <span class="prod-img-label">Penthouse · 3–4PN</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-type">3–4 Phòng Ngủ</div>
+          <div class="prod-name">Grand Penthouse</div>
+          <div class="prod-area">📐 95 – 120 m² · Tầng cao</div>
+          <div class="prod-price">Từ 4.5 tỷ</div>
+          <div class="prod-price-note">≈ 38–45 triệu/m² · Tầng thượng đỉnh</div>
+          <div class="prod-features">
+            <div class="pf">Tầm nhìn 270° Vịnh + Thành phố</div>
+            <div class="pf">Không gian sống đẳng cấp penthouse</div>
+            <div class="pf">Thiết kế theo yêu cầu (customization)</div>
+            <div class="pf">Giữ giá trị tài sản dài hạn</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 36px;">
+      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        📋 Nhận Bảng Giá Chi Tiết & Mặt Bằng
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== POLICY ===== -->
+<section class="section-pad policy-section" id="policy">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;" class="reveal">
+      <p class="section-label" style="color: var(--orange-light);">🎁 Chính Sách & Ưu Đãi</p>
+      <h2 class="section-title" style="color:#fff;">Ưu Đãi Đặc Biệt — Tháng Này</h2>
+      <p class="section-sub" style="color: rgba(255,255,255,.7); margin: 0 auto;">Cơ hội chỉ có trong thời gian mở bán giới hạn — đặt chỗ ngay để nhận ưu đãi tốt nhất</p>
+    </div>
+    <div class="policy-grid reveal">
+      <div class="policy-card">
+        <div class="policy-icon">💰</div>
+        <div class="policy-title">Thanh Toán Linh Hoạt</div>
+        <div class="policy-desc">Đóng <span class="policy-highlight">chỉ 10% để giữ chỗ</span>. Tiến độ 30–70% — ngân hàng hỗ trợ phần còn lại. Không áp lực dòng tiền cho nhà đầu tư và người mua ở thực.</div>
+      </div>
+      <div class="policy-card">
+        <div class="policy-icon">🏦</div>
+        <div class="policy-title">Hỗ Trợ Vay 70% — Lãi Suất Ưu Đãi</div>
+        <div class="policy-desc">Liên kết trực tiếp với <span class="policy-highlight">Vietcombank, Techcombank, BIDV</span> — lãi suất ưu đãi 0% trong 24 tháng đầu cho người mua đủ điều kiện.</div>
+      </div>
+      <div class="policy-card">
+        <div class="policy-icon">🎯</div>
+        <div class="policy-title">Chiết Khấu Mở Bán Đặc Biệt</div>
+        <div class="policy-desc">Khách mua trong <span class="policy-highlight">tháng này được chiết khấu thêm 3–5%</span> so với bảng giá niêm yết. Ưu đãi kết thúc khi hết suất giai đoạn 2.</div>
+      </div>
+      <div class="policy-card">
+        <div class="policy-icon">🔑</div>
+        <div class="policy-title">Chương Trình Thuê Lại Đảm Bảo</div>
+        <div class="policy-desc">Chủ đầu tư cam kết <span class="policy-highlight">thuê lại 8%/năm trong 3 năm đầu</span> cho nhà đầu tư — thu nhập thụ động ổn định ngay khi bàn giao nhà.</div>
+      </div>
+      <div class="policy-card">
+        <div class="policy-icon">📜</div>
+        <div class="policy-title">Pháp Lý Minh Bạch — Sổ Hồng Lâu Dài</div>
+        <div class="policy-desc">Dự án đủ điều kiện <span class="policy-highlight">cấp sổ hồng sở hữu lâu dài</span> cho người Việt. Pháp lý đầy đủ, minh bạch, không rủi ro cho người mua.</div>
+      </div>
+      <div class="policy-card">
+        <div class="policy-icon">🎁</div>
+        <div class="policy-title">Quà Tặng Đặc Biệt Theo Suất</div>
+        <div class="policy-desc">Tặng <span class="policy-highlight">gói nội thất thông minh + voucher spa 5⭐</span> trị giá 150–300 triệu cho các suất đăng ký sớm trong tháng 5/2026.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CHOOSE ===== -->
+<section class="section-pad" style="background: var(--cream);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;" class="reveal">
+      <p class="section-label">✨ Tại Sao Chọn HLX</p>
+      <h2 class="section-title">6 Lý Do Không Thể Bỏ Qua</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-num">1</div>
+        <div class="why-title">Vị Trí Không Thể Thay Thế</div>
+        <div class="why-desc">Mặt tiền vịnh Hạ Long — Di sản Thế giới. Đất ven biển ngày càng khan hiếm, giá trị chỉ có thể tăng.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">2</div>
+        <div class="why-title">Thương Hiệu Vinhomes Bảo Chứng</div>
+        <div class="why-desc">Hơn 20 năm kinh nghiệm, 100+ dự án thành công trên toàn quốc. Uy tín vàng trong làng BDS Việt Nam.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">3</div>
+        <div class="why-title">Hạ Tầng Bùng Nổ 2025–2027</div>
+        <div class="why-desc">Cao tốc Hạ Long – Móng Cái thông xe. Sân bay Vân Đồn mở rộng. Cảng biển quốc tế nâng cấp.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">4</div>
+        <div class="why-title">Tiềm Năng Cho Thuê Cao</div>
+        <div class="why-desc">18 triệu khách du lịch/năm đến Quảng Ninh. Nhu cầu lưu trú ngắn hạn (Airbnb) tăng 45% mỗi năm.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">5</div>
+        <div class="why-title">Giá Còn Thấp So Với Tiềm Năng</div>
+        <div class="why-desc">So với Đà Nẵng, Nha Trang cùng phân khúc — HLX vẫn còn rẻ hơn 20–30% nhưng tiềm năng tương đương.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">6</div>
+        <div class="why-title">Quản Lý Vận Hành Chuyên Nghiệp</div>
+        <div class="why-desc">Vinhomes Management — đội ngũ quản lý 5 sao. Mua xong không cần lo — cho thuê và nhận tiền.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section-pad testi-section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;" class="reveal">
+      <p class="section-label">💬 Khách Hàng Nói Gì</p>
+      <h2 class="section-title">Họ Đã Tin Tưởng & Hài Lòng</h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        <div class="testi-text">"Tôi đầu tư 1 căn 2PN từ giai đoạn 1, bây giờ giá đã tăng gần 40%. View vịnh từ phòng ngủ mỗi sáng thức dậy — không có nơi nào ở Việt Nam có trải nghiệm như vậy."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div>
+            <div class="testi-name">Anh Minh Tuấn</div>
+            <div class="testi-role">Nhà đầu tư BDS, Hà Nội · Mua giai đoạn 1</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        <div class="testi-text">"Gia đình tôi về Hạ Long cuối tuần ở rất thoải mái. Con tôi thích khu vui chơi hơn bất kỳ chỗ nào. Và căn hộ cho thuê Airbnb những ngày không ở — thu nhập thêm mỗi tháng rất ổn."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">L</div>
+          <div>
+            <div class="testi-name">Chị Lan Phương</div>
+            <div class="testi-role">Bác sĩ, Hải Phòng · Mua để ở + đầu tư</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+        <div class="testi-text">"Đây là quyết định mua BDS đúng nhất của tôi trong 10 năm qua. Môi giới tư vấn rất rõ ràng, pháp lý minh bạch, bàn giao đúng hẹn. Tôi đã giới thiệu cho 3 người bạn mua tiếp."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">H</div>
+          <div>
+            <div class="testi-name">Anh Hoàng Nam</div>
+            <div class="testi-role">Doanh nhân, TP. HCM · Sở hữu 2 căn HLX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="section-pad gallery-section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 40px;" class="reveal">
+      <p class="section-label" style="color: var(--orange-light);">📸 Hình Ảnh Dự Án</p>
+      <h2 class="section-title" style="color:#fff;">Trải Nghiệm Trực Quan</h2>
+      <p style="font-size:15px; color:rgba(255,255,255,.65); max-width:500px; margin:0 auto;">Không gian sống, tiện ích và view biển thực tế — tất cả trong một dự án</p>
+    </div>
+    <div class="gallery-grid reveal">
+
+      <!-- ĐẢO ẢNH LỚN (góc trái): ảnh nổi bật nhất dự án — aerial view hoặc hồ bơi -->
+      <!-- THAY src bằng ảnh thực HLX -->
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1000&q=80"
+             alt="Hồ bơi vô cực Vinhomes Hạ Long Xanh" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label">🏊 Hồ Bơi Vô Cực View Biển</span></div>
+      </div>
+
+      <!-- THAY src bằng ảnh nội thất sang trọng -->
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80"
+             alt="Nội thất căn hộ HLX" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label">🛋️ Nội Thất Cao Cấp</span></div>
+      </div>
+
+      <!-- THAY src bằng ảnh view vịnh từ ban công -->
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80"
+             alt="View biển từ căn hộ HLX" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label">🌊 View Vịnh Hạ Long</span></div>
+      </div>
+
+      <!-- THAY src bằng ảnh khu vui chơi/tiện ích -->
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1595877244574-e90ce41ce089?w=700&q=80"
+             alt="Tiện ích nội khu HLX" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label">🌿 Công Viên Xanh</span></div>
+      </div>
+
+      <!-- Ô cuối: hiển thị số ảnh còn lại -->
+      <div class="gal-item" style="cursor:pointer;" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1551524163-1ee1f69debb4?w=700&q=80"
+             alt="Thêm ảnh dự án HLX" loading="lazy">
+        <div class="gal-more">
+          <span>+20</span>
+          <small>Xem thêm ảnh thực tế</small>
+          <small style="margin-top:8px; font-size:11px; background:var(--orange); padding:5px 14px; border-radius:20px;">Đăng ký → Nhận Bộ Ảnh</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FORM ===== -->
+<section class="section-pad cta-section" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-left reveal">
+        <p class="section-label" style="color: var(--orange-light);">📋 Đăng Ký Nhận Tư Vấn</p>
+        <h2>Nhận Thông Tin Ưu Tiên &amp; Giỏ Hàng Đẹp Nhất</h2>
+        <p>Để lại thông tin — chuyên gia sẽ gọi lại trong <strong style="color: var(--orange-light);">30 phút</strong> với bảng giá mới nhất, giỏ hàng còn trống và lịch tham quan thực tế dự án.</p>
+        <div class="cta-perks">
+          <div class="cta-perk">Bảng giá chi tiết + mặt bằng từng tầng</div>
+          <div class="cta-perk">Giỏ hàng ưu tiên — view đẹp nhất còn lại</div>
+          <div class="cta-perk">Tư vấn phương án tài chính cá nhân hóa</div>
+          <div class="cta-perk">Lịch tham quan thực tế dự án (miễn phí)</div>
+          <div class="cta-perk">So sánh HLX với 3–5 dự án cùng phân khúc</div>
+          <div class="cta-perk">Không có phí tư vấn — hoàn toàn miễn phí</div>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <div class="form-title">Đăng Ký Nhận Tư Vấn</div>
+        <div class="form-sub">🟢 Đang có <strong>12 suất ưu đãi</strong> tháng này — Đăng ký ngay để không bỏ lỡ</div>
+
+        <form id="consultForm" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label>Họ và Tên *</label>
+            <input type="text" id="fName" placeholder="VŨ THANH TÚ " required>
+          </div>
+          <div class="form-group">
+            <label>Số Điện Thoại *</label>
+            <input type="tel" id="fPhone" placeholder="0964827670">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="fEmail" placeholder="yen670@gmail.com">
+          </div>
+          <div class="form-group">
+            <label>Nhu Cầu</label>
+            <select id="fNeed">
+              <option value="">-- Chọn nhu cầu --</option>
+              <option>Mua để ở</option>
+              <option>Đầu tư cho thuê Airbnb</option>
+              <option>Đầu tư dài hạn giữ tài sản</option>
+              <option>Mua làm nhà nghỉ cuối tuần</option>
+              <option>Đang tìm hiểu / So sánh</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ngân Sách Dự Kiến</label>
+            <select id="fBudget">
+              <option value="">-- Chọn ngân sách --</option>
+              <option>Dưới 2 tỷ (Studio / 1PN)</option>
+              <option>2 – 4 tỷ (2 phòng ngủ)</option>
+              <option>4 – 6 tỷ (3 phòng ngủ)</option>
+              <option>Trên 6 tỷ (Penthouse / Premium)</option>
+            </select>
+          </div>
+          <button type="submit" class="form-submit">
+            📋 Gửi Đăng Ký Tư Vấn Ngay →
+          </button>
+        </form>
+
+        <div class="success-msg" id="successMsg">
+          <p>✅ Đăng ký thành công!</p>
+          <p style="font-size:13px; color: var(--text-mid); font-weight:400; margin-top:6px;">Chuyên gia sẽ liên hệ trong vòng 30 phút. Cảm ơn anh/chị đã quan tâm đến Vinhomes Hạ Long Xanh!</p>
+        </div>
+
+        <div class="form-note">
+          🔒 Thông tin được bảo mật tuyệt đối · Không spam · Tư vấn hoàn toàn miễn phí
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section-pad faq-section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 48px;" class="reveal">
+      <p class="section-label">❓ Câu Hỏi Thường Gặp</p>
+      <h2 class="section-title">Mọi Thắc Mắc Được Giải Đáp</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Vinhomes Hạ Long Xanh có sổ hồng lâu dài không?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Có. HLX được cấp sổ hồng sở hữu lâu dài cho người mua trong nước. Pháp lý đầy đủ, dự án đã hoàn thành các thủ tục pháp lý cần thiết. Chuyên gia của chúng tôi sẽ hướng dẫn chi tiết quy trình sổ khi anh/chị đăng ký tư vấn.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Tôi cần bỏ bao nhiêu tiền tự có để mua một căn?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Với chương trình thanh toán hiện tại, anh/chị chỉ cần đặt cọc 50–100 triệu để giữ chỗ, sau đó đóng 10–30% trong vòng 1–3 tháng. Phần còn lại (70%) được hỗ trợ vay ngân hàng với lãi suất ưu đãi. Ví dụ: căn 2PN giá 2.4 tỷ — chỉ cần tự có khoảng 700 triệu – 1 tỷ ban đầu.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Khả năng cho thuê Airbnb ở HLX có thực tế không?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Rất thực tế. Hạ Long đón 18 triệu khách du lịch/năm, nhu cầu lưu trú ngắn hạn rất cao. Căn hộ HLX view biển có thể cho thuê 800K–2.5 triệu/đêm tùy loại. Nhiều nhà đầu tư giai đoạn 1 đang có ROI 8–12%/năm từ cho thuê. Chúng tôi có thể cung cấp dữ liệu thực tế khi anh/chị tư vấn.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Thời gian bàn giao căn hộ là khi nào?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Các tòa giai đoạn 2 dự kiến bàn giao Q3–Q4/2026. Vinhomes có lịch sử bàn giao đúng tiến độ hoặc trước hạn tại các dự án lớn. Khách mua sẽ được cập nhật tiến độ xây dựng hàng tháng qua app Vinhomes.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Tôi ở xa (HN/HCM) có mua được không? Có cần đến xem trực tiếp không?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Hoàn toàn có thể mua từ xa. Chúng tôi hỗ trợ tư vấn online, xem nhà mẫu qua video call 360°, và ký hợp đồng điện tử. Tuy nhiên chúng tôi khuyến khích anh/chị đến tham quan một lần — chúng tôi miễn phí xe đón đưa từ sân bay Vân Đồn hoặc bến xe Hạ Long cho khách đăng ký tư vấn.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          So với Đà Nẵng hay Phú Quốc, HLX có lợi thế gì?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          HLX có lợi thế: (1) Gần Hà Nội hơn — chỉ 90 phút xe, lý tưởng để nghỉ cuối tuần; (2) Giá còn rẻ hơn 20–30% so với BDS Đà Nẵng cùng phân khúc nhưng tiềm năng tăng trưởng tương đương; (3) Di sản Thiên nhiên Thế giới đảm bảo giá trị tài sản bền vững; (4) Hạ tầng đang bùng nổ nên cơ hội tăng giá vẫn còn rất lớn.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3>Vinhomes Hạ Long Xanh</h3>
+        <p>Tổ hợp căn hộ biển hạng sang tọa lạc tại Bãi Cháy, TP. Hạ Long, Quảng Ninh. Nơi thiên nhiên kỳ vĩ gặp gỡ cuộc sống đẳng cấp.</p>
+        <div class="footer-social">
+          <div class="soc">📘</div>
+          <div class="soc">📸</div>
+          <div class="soc">📺</div>
+          <div class="soc">💬</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Dự Án</h4>
+        <ul>
+          <li><a href="#about">Tổng Quan</a></li>
+          <li><a href="#location">Vị Trí</a></li>
+          <li><a href="#amenities">Tiện Ích</a></li>
+          <li><a href="#products">Sản Phẩm</a></li>
+          <li><a href="#policy">Chính Sách</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Thông Tin</h4>
+        <ul>
+          <li><a href="#">Bảng Giá</a></li>
+          <li><a href="#">Mặt Bằng</a></li>
+          <li><a href="#">Tiến Độ Xây Dựng</a></li>
+          <li><a href="#">Pháp Lý Dự Án</a></li>
+          <li><a href="#">Hỗ Trợ Vay Vốn</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên Hệ</h4>
+        <ul>
+          <li><a href="#">📞 0964827670</a></li>
+          <li><a href="#">📧 yen670@gmail.com</a></li>
+          <li><a href="#">📍 Bãi Cháy, Hạ Long</a></li>
+          <li><a href="#">⏰ 8:00 – 20:00 hàng ngày</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Vinhomes Hạ Long Xanh · Thông tin dự án mang tính tham khảo, vui lòng liên hệ để được tư vấn chính xác nhất.</p>
+      <p>Phát triển bởi Agent HLX · Được hỗ trợ bởi AI Agent Business Kit</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== STICKY MOBILE CTA ===== -->
+<div class="sticky-cta">
+  <p>🔥 Còn <strong>12 suất ưu đãi</strong> tháng này</p>
+  <button class="btn-primary" style="padding: 10px 20px; font-size: 13px;" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+    Đăng Ký Ngay
+  </button>
+</div>
+
+<!-- ===== PHONE FLOAT ===== -->
+<div class="phone-float">
+  <a href="tel:0964827670">
+    <button class="phone-btn" title="Gọi ngay tư vấn">📞</button>
+  </a>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(r => observer.observe(r));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Form submit
+  function submitForm(e) {
+    e.preventDefault();
+    const name = document.getElementById('fName').value;
+    const phone = document.getElementById('fPhone').value;
+    if (!name || !phone) return;
+
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '⏳ Đang gửi...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('consultForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }, 1200);
+  }
+
+  // Smooth scroll for all anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,.3)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
