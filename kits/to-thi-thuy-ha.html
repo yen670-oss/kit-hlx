@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ðŸ¥‰ Bronze Starter — Bo Kit Cua To Thi Thuy Ha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;}
+    .hero{background:linear-gradient(135deg,var(--nd),var(--navy),#2A5298);padding:40px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+    .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.15) 1.5px,transparent 0);background-size:24px 24px;}
+    .hero-in{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+    .tier-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.45);color:var(--gl);font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;margin-bottom:14px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,32px);color:#fff;margin-bottom:8px;line-height:1.25;}
+    .hero h1 span{color:var(--gl);}
+    .hero p{color:rgba(255,255,255,.7);font-size:14px;margin-bottom:6px;}
+    .hero .date{color:rgba(255,255,255,.4);font-size:12px;}
+    .content{max-width:680px;margin:0 auto;padding:28px 20px 60px;}
+    .lp-box{background:linear-gradient(135deg,#0f4c2a,#1a6b3c);border-radius:16px;padding:24px;margin-bottom:28px;position:relative;overflow:hidden;}
+    .lp-box::before{content:'🌐';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:64px;opacity:.12;}
+    .lp-badge{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px;}
+    .lp-box h2{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:6px;}
+    .lp-box p{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:16px;line-height:1.6;}
+    .lp-url{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:12px;color:#fff;word-break:break-all;margin-bottom:14px;}
+    .lp-btns{display:flex;gap:10px;flex-wrap:wrap;}
+    .btn-open{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#0f4c2a;font-weight:800;font-size:13px;padding:10px 22px;border-radius:9px;text-decoration:none;}
+    .btn-copy-url{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:9px;cursor:pointer;font-family:inherit;}
+    .btn-copy-url.copied{background:rgba(201,168,76,.25);}
+    .sec-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--nd);margin:0 0 14px;display:flex;align-items:center;gap:8px;}
+    .sec-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+    .res-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+    .res-item{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #e8e4d8;border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;transition:.15s;}
+    .res-item:hover{box-shadow:0 6px 20px rgba(27,58,107,.1);transform:translateY(-1px);}
+    .ri-icon{width:42px;height:42px;background:#eff6ff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .ri-body{flex:1;}
+    .ri-name{font-weight:700;font-size:13.5px;color:var(--nd);margin-bottom:2px;}
+    .ri-desc{font-size:11.5px;color:#6b7280;}
+    .ri-arr{color:#9ca3af;font-size:16px;}
+    .chk-list{background:#fff;border-radius:12px;border:1px solid #e8e4d8;padding:18px 20px;margin-bottom:24px;}
+    .chk-item{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #f3f0e8;font-size:13px;color:#374151;cursor:pointer;}
+    .chk-item:last-child{border:none;}
+    .chk-box{width:18px;height:18px;border:2px solid var(--gold);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+    .chk-item.done .chk-box{background:var(--gold);border-color:var(--gold);color:#fff;}
+    .chk-item.done .chk-box::after{content:'✓';}
+    .support{background:linear-gradient(135deg,var(--nd),var(--navy));border-radius:12px;padding:20px 22px;color:#fff;margin-bottom:24px;}
+    .support h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gl);margin-bottom:8px;}
+    .support p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:12px;}
+    .support-btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--nd);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;}
+    footer{background:var(--nd);padding:16px 24px;text-align:center;}
+    footer p{color:rgba(255,255,255,.4);font-size:11.5px;}
+    footer strong{color:var(--gl);}
+  </style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-in">
+    <div class="tier-badge">ðŸ¥‰ BRONZE STARTER &mdash; 697.000d</div>
+    <h1>Chào Mừng <span>To Thi Thuy Ha</span><br>Đến Với BDS Mastery Kit!</h1>
+    <p>Tất cả tài liệu đã sẵn sàng. Landing page của anh/chị đã live — không cần làm gì thêm.</p>
+    <div class="date">Ngày bàn giao: 19/05/2026 · Gói: Bronze Starter (6 tài liệu)</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="lp-box">
+    <div class="lp-badge">✅ LANDING PAGE CÁ NHÂN — ĐÃ LIVE 24/7</div>
+    <h2>Trang Tư Vấn Của Anh/Chị</h2>
+    <p>Đây là trang web cá nhân hóa với số điện thoại <strong style="color:#fff">0876118668</strong> đã được gắn sẵn. Khách hàng mở link → điền form → gọi thẳng cho anh/chị.</p>
+    <div class="lp-url" id="lp-url-text">https://yen670-oss.github.io/kit-hlx/kits/landing-to-thi-thuy-ha.html</div>
+    <div class="lp-btns">
+      <a href="https://yen670-oss.github.io/kit-hlx/kits/landing-to-thi-thuy-ha.html" target="_blank" class="btn-open">🌐 Mở Landing Page →</a>
+      <button class="btn-copy-url" onclick="copyUrl(this)">📋 Copy Link</button>
+    </div>
+  </div>
+
+  <div class="sec-title">📦 Tài Liệu Của Anh/Chị (6 tài liệu)</div>
+  <div class="res-list">
+    <a class="res-item" href="../kits/shared/bang-tinh-roi.html" target="_blank"><div class="ri-icon">ðŸ§®</div><div class="ri-body"><div class="ri-name">Bang Tinh ROI Tuong Tac</div><div class="ri-desc">Nhap ngan sach -- ket qua hien ngay</div></div><div class="ri-arr">â†’</div></a>
+    <a class="res-item" href="../03-CHECKLIST-DANG-BAI.html" target="_blank"><div class="ri-icon">ðŸ“‹</div><div class="ri-body"><div class="ri-name">Checklist Dang Bai Tung Nen Tang</div><div class="ri-desc">FB Â· Zalo Â· Instagram Â· TikTok</div></div><div class="ri-arr">â†’</div></a>
+    <a class="res-item" href="../kits/shared/bao-cao-thi-truong.html" target="_blank"><div class="ri-icon">ðŸ“Š</div><div class="ri-body"><div class="ri-name">Bao Cao Nghien Cuu Thi Truong HLX</div><div class="ri-desc">8 phan phan tich chuyen sau</div></div><div class="ri-arr">â†’</div></a>
+    <a class="res-item" href="../kits/shared/checklist-phap-ly.html" target="_blank"><div class="ri-icon">âš–ï¸</div><div class="ri-body"><div class="ri-name">Checklist Phap Ly Truoc Khi Ky HD</div><div class="ri-desc">Shophouse Â· Biet thu Â· Condotel</div></div><div class="ri-arr">â†’</div></a>
+    <a class="res-item" href="../kits/shared/30-posts-fb-zalo.html" target="_blank"><div class="ri-icon">ðŸ“±</div><div class="ri-body"><div class="ri-name">30 Bai Viet FB/Zalo Copy-Paste</div><div class="ri-desc">30 ngay content san sang dang</div></div><div class="ri-arr">â†’</div></a>
+    <a class="res-item" href="../ANH-HLX-GALLERY.html" target="_blank"><div class="ri-icon">ðŸ“¸</div><div class="ri-body"><div class="ri-name">Gallery 45 Anh HLX Chinh Thuc</div><div class="ri-desc">7 danh muc Â· Copy link ngay</div></div><div class="ri-arr">â†’</div></a>  </div>
+
+  <div class="sec-title">✅ Checklist Bắt Đầu</div>
+  <div class="chk-list">
+    <div class="chk-item" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Mở Landing Page — copy link — share lên FB/Zalo story ngay hôm nay</span></div>
+    <div class="chk-item" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Đọc Báo Cáo Thị Trường — ghi nhớ 5 con số quan trọng nhất để tư vấn khách</span></div>
+    <div class="chk-item" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Mở 30 Bài Viết FB/Zalo — lên kế hoạch đăng ngày nào, bài nào</span></div>
+    <div class="chk-item" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Test Bảng Tính ROI — nhập ngân sách khách đang có vào xem kết quả</span></div>
+    <div class="chk-item" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Xem Checklist Pháp Lý — lưu tab, mở mỗi lần tư vấn ký hợp đồng</span></div>
+    <div class="chk-item" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Đăng bài đầu tiên trong vòng 24h sau khi nhận kit — không đợi hoàn hảo</span></div>
+  </div>
+
+  <div class="support">
+    <h3>💬 Hỗ Trợ Sau Mua</h3>
+    <p>Anh/chị có câu hỏi về bộ kit hoặc cần hỗ trợ thêm? Nhắn Zalo — phản hồi trong 30 phút.</p>
+    <a href="https://zalo.me/0964827670" target="_blank" class="support-btn">💬 Nhắn Zalo Ngay →</a>
+  </div>
+</div>
+
+<footer><p>BDS Mastery Kit · <strong>To Thi Thuy Ha</strong> · Bronze Starter · 19/05/2026 · Copyright 2026</p></footer>
+
+<script>
+function copyUrl(btn) {
+  const url = document.getElementById('lp-url-text').textContent.trim();
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = '✅ Da copy!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Link'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+</script>
+</body>
+</html>
