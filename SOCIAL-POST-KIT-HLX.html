@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Post Kit — HLX Ready to Post</title>
+  <style>
+    :root {
+      --bg:#0c1520;--bg2:#111d2e;--bg3:#162035;
+      --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+      --navy:#1B3A6B;--blue:#2563eb;
+      --green:#22c55e;--teal:#14b8a6;--purple:#8b5cf6;
+      --red:#ef4444;--orange:#f97316;
+      --text:#e2e8f0;--muted:#8da4c4;
+      --card:#1a2d45;--border:rgba(201,168,76,.18);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+    /* HEADER */
+    .hdr{background:linear-gradient(160deg,#0e1a2e,#1B3A6B 50%,#3b1e08);padding:36px 24px 28px;text-align:center;position:relative;overflow:hidden;}
+    .hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.12) 1.5px,transparent 0);background-size:28px 28px;}
+    .hdr-in{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:14px;}
+    .hdr h1{font-size:clamp(20px,4vw,32px);font-weight:800;color:#fff;margin-bottom:8px;}
+    .tg{background:linear-gradient(135deg,#E2C06A,#C9A84C,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hdr p{color:#aab8d0;font-size:13px;line-height:1.7;}
+    .stats{display:flex;justify-content:center;gap:28px;margin-top:18px;flex-wrap:wrap;}
+    .stat-n{font-size:22px;font-weight:800;color:var(--gold);}
+    .stat-l{font-size:11px;color:var(--muted);margin-top:1px;}
+
+    /* HOW TO */
+    .howto{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:16px 20px;max-width:900px;margin:16px auto 0;display:flex;gap:20px;flex-wrap:wrap;justify-content:center;}
+    .step{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#94a3b8;}
+    .step-n{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#A8862E,#C9A84C);color:#0c1520;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+    /* FILTERS */
+    .filters{background:var(--bg2);padding:14px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;}
+    .filter-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:900px;margin:0 auto;}
+    .fbtn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:8px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .fbtn:hover{border-color:rgba(201,168,76,.4);color:var(--gl);}
+    .fbtn.active{background:linear-gradient(135deg,#A8862E,#C9A84C);color:#0c1520;border-color:transparent;}
+    .plat-fb.active{background:linear-gradient(135deg,#1877f2,#42a5f5);color:#fff;}
+    .plat-zalo.active{background:linear-gradient(135deg,#0068ff,#00aaff);color:#fff;}
+    .plat-tiktok.active{background:linear-gradient(135deg,#010101,#ff0050);color:#fff;}
+    .plat-ig.active{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;}
+
+    /* MAIN */
+    main{max-width:960px;margin:0 auto;padding:24px 16px 80px;}
+
+    /* POST CARD */
+    .post-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px;transition:box-shadow .2s;}
+    .post-card:hover{box-shadow:0 6px 32px rgba(0,0,0,.4);}
+    .post-card.hidden{display:none;}
+
+    .pc-top{display:grid;grid-template-columns:240px 1fr;gap:0;}
+    @media(max-width:640px){.pc-top{grid-template-columns:1fr;}}
+
+    /* IMAGE SIDE */
+    .pc-img{position:relative;background:#0e1a2e;cursor:pointer;min-height:180px;}
+    .pc-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s;}
+    .pc-img img.loaded{opacity:1;}
+    .pc-img .skeleton{position:absolute;inset:0;background:linear-gradient(90deg,#1a2d45 25%,#1f3652 50%,#1a2d45 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .img-zoom{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;padding:4px 9px;border-radius:6px;cursor:pointer;}
+
+    /* CONTENT SIDE */
+    .pc-content{padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
+
+    /* PLATFORMS */
+    .plat-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+    .plat-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.05em;}
+    .plat-fb{background:rgba(24,119,242,.2);color:#93c5fd;border:1px solid rgba(24,119,242,.3);}
+    .plat-zalo{background:rgba(0,104,255,.2);color:#93c5fd;border:1px solid rgba(0,104,255,.3);}
+    .plat-tiktok{background:rgba(255,0,80,.15);color:#fca5a5;border:1px solid rgba(255,0,80,.25);}
+    .plat-ig{background:rgba(131,58,180,.2);color:#d8b4fe;border:1px solid rgba(131,58,180,.3);}
+    .cat-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;margin-left:4px;}
+    .cat-insider{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.25);}
+    .cat-lifestyle{background:rgba(20,184,166,.15);color:#5eead4;border:1px solid rgba(20,184,166,.25);}
+    .cat-sanpham{background:rgba(201,168,76,.15);color:#E2C06A;border:1px solid rgba(201,168,76,.25);}
+    .cat-fomo{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.25);}
+    .cat-tiendo{background:rgba(249,115,22,.15);color:#fdba74;border:1px solid rgba(249,115,22,.25);}
+
+    /* POST TEXT */
+    .post-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);}
+    .post-text{background:#0e1a2e;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;color:#cbd5e1;white-space:pre-wrap;word-break:break-word;max-height:200px;overflow-y:auto;flex:1;}
+    .post-text::-webkit-scrollbar{width:4px;}
+    .post-text::-webkit-scrollbar-track{background:transparent;}
+    .post-text::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:4px;}
+
+    /* HASHTAGS */
+    .hashtags{font-size:11.5px;color:#4a90d9;line-height:1.7;}
+
+    /* ACTIONS */
+    .pc-actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.06);padding:12px 20px;background:rgba(0,0,0,.15);}
+    .ac-btn{font-size:12px;font-weight:600;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s;border:none;display:flex;align-items:center;gap:5px;}
+    .btn-copy-all{background:linear-gradient(135deg,#A8862E,#C9A84C);color:#0c1520;flex:1;}
+    .btn-copy-all:hover{filter:brightness(1.1);}
+    .btn-copy-all.copied{background:linear-gradient(135deg,#15803d,#22c55e);color:#fff;}
+    .btn-copy-text{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#94a3b8;}
+    .btn-copy-text:hover{background:rgba(255,255,255,.14);color:#fff;}
+    .btn-copy-text.copied{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3);color:#86efac;}
+    .btn-open-img{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#94a3b8;text-decoration:none;}
+    .btn-open-img:hover{background:rgba(255,255,255,.14);color:#fff;}
+
+    /* SECTION LABEL */
+    .sec-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:28px 0 12px;display:flex;align-items:center;gap:8px;}
+    .sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+
+    /* COUNT */
+    .result-count{font-size:12px;color:var(--muted);margin-bottom:16px;}
+
+    /* LIGHTBOX */
+    .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:1000;align-items:center;justify-content:center;padding:16px;}
+    .lb.open{display:flex;}
+    .lb img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;}
+    .lb-close{position:fixed;top:16px;right:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:18px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+    /* TIPS */
+    .tips-box{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-top:24px;}
+    .tips-box h3{font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+    .tips-box ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+    .tips-box li{font-size:12.5px;color:#94a3b8;display:flex;gap:8px;line-height:1.5;}
+    .tips-box li::before{content:'→';color:var(--gold);flex-shrink:0;}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-in">
+    <div class="badge">📱 Social Post Kit — Copy & Paste</div>
+    <h1><span class="tg">Đăng ngay</span> — Ảnh + Caption HLX</h1>
+    <p>Mỗi bài = Ảnh thật + Caption tiếng Việt viết sẵn + Hashtag<br>Chọn bài → Copy toàn bộ → Paste lên FB / Zalo / TikTok / Instagram</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-n" id="shown-count">30</div><div class="stat-l">Bài sẵn sàng đăng</div></div>
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">Nền tảng</div></div>
+      <div class="stat"><div class="stat-n">5</div><div class="stat-l">Loại content</div></div>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:900px;margin:14px auto 0;padding:0 16px;">
+  <div class="howto">
+    <div class="step"><div class="step-n">1</div><span>Lọc theo <strong>nền tảng</strong> hoặc <strong>loại content</strong></span></div>
+    <div class="step"><div class="step-n">2</div><span>Tải ảnh về máy (nút <strong>Mở ảnh</strong>)</span></div>
+    <div class="step"><div class="step-n">3</div><span>Nhấn <strong>Copy caption + #tag</strong></span></div>
+    <div class="step"><div class="step-n">4</div><span>Paste vào FB/Zalo/TikTok và đăng!</span></div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filter-row">
+    <button class="fbtn active" data-filter="all">📋 Tất cả</button>
+    <button class="fbtn plat-fb" data-filter="fb">📘 Facebook</button>
+    <button class="fbtn plat-zalo" data-filter="zalo">💬 Zalo</button>
+    <button class="fbtn plat-tiktok" data-filter="tiktok">🎵 TikTok</button>
+    <button class="fbtn plat-ig" data-filter="ig">📸 Instagram</button>
+    <span style="width:1px;background:rgba(255,255,255,.1);margin:0 4px;align-self:stretch;"></span>
+    <button class="fbtn" data-filter="insider">🔍 HLX Insider</button>
+    <button class="fbtn" data-filter="lifestyle">🌿 Lifestyle</button>
+    <button class="fbtn" data-filter="sanpham">🏡 Sản phẩm</button>
+    <button class="fbtn" data-filter="fomo">🔥 FOMO</button>
+    <button class="fbtn" data-filter="tiendo">🏗️ Tiến độ</button>
+  </div>
+</div>
+
+<main>
+  <div class="result-count" id="result-count">Hiển thị 30 bài</div>
+  <div id="posts-container"></div>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLB()">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<script>
+// ============================================================
+// POST DATA
+// ============================================================
+const POSTS = [
+
+// ═══════════════════════════════════════════════════════════
+// 🔍 HLX INSIDER — Kiến thức nội bộ, dự án, phân khu
+// ═══════════════════════════════════════════════════════════
+
+{
+  id:1, cat:'insider', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/quy-hoach-tong-the-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Quy hoạch tổng thể Vinhomes Global Gate Hạ Long',
+  caption:`🗺️ TOÀN CẢNH VIN HẠ LONG XANH — CON SỐ BẠN CẦN BIẾT
+
+6.206 ha — Lớn hơn toàn bộ quận Hoàn Kiếm
+456.000 tỷ đồng — Dự án có vốn đầu tư lớn nhất lịch sử Việt Nam
+9 phân khu — Mỗi phân khu mang kiến trúc 1 châu lục khác nhau
+200.000 cư dân — Quy mô bằng 1 thành phố tầm trung
+
+Khi môi giới nói HLX "lớn", đây là con số cụ thể để khách hàng hình dung.
+
+Anh/chị đang quan tâm phân khu nào nhất? Để lại tên bên dưới, tôi gửi thông tin chi tiết ngay! 👇`,
+  hashtags:'#VinhomesHaLongXanh #HLX #BatDongSanHaLong #VinhomesGlobalGate #MoiGioiHLX'
+},
+
+{
+  id:2, cat:'insider', platforms:['fb','zalo','ig'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/phan-khu-vinh-thien-duong-vinhomes-global-gate-ha-long-banner.jpg',
+  imgTitle:'Phân khu Vịnh Thiên Đường — Giai đoạn 1',
+  caption:`🏝️ VỊNH THIÊN ĐƯỜNG — PHASE 1 ĐANG MỞ BÁN
+
+Đây là phân khu ĐƯỢC CHỌN đầu tiên để mở bán tại HLX.
+
+Tại sao Vịnh Thiên Đường được chọn làm phase 1?
+✅ Vị trí đắc địa nhất trong toàn khu
+✅ Gần hồ nhân tạo 800ha — view triệu đô
+✅ 15.360 sản phẩm thấp tầng cao cấp
+✅ 4 loại: Biệt thự biển · Đơn lập · Song lập · Liền kề
+
+Phase 1 thường là phase ĐẦU TƯ TỐT NHẤT — vì giá còn chưa phản ánh hết tiện ích hoàn chỉnh.
+
+Nhắn tin cho tôi để nhận BẢNG GIÁ & QUỸ CĂN ĐẸP nhất hiện tại 🔥`,
+  hashtags:'#VinhThienDuong #HLX2026 #VinhomesHaLongXanh #Phase1 #BietThuBien'
+},
+
+{
+  id:3, cat:'insider', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/vi-tri-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Vị trí chiến lược dự án',
+  caption:`📍 TẠI SAO HẠ LONG — VÀ TẠI SAO NGAY BÂY GIỜ?
+
+Nhiều khách hỏi tôi: "Hạ Long có tiềm năng không, hay chỉ là hype?"
+
+Đây là câu trả lời thực tế:
+
+🔹 Cao tốc Hà Nội – Hạ Long: 2 tiếng
+🔹 Sân bay Vân Đồn: 45 phút từ dự án
+🔹 Cảng tàu quốc tế Hạ Long: sát ngay khu vực
+🔹 Đường sắt cao tốc Hà Nội – Quảng Ninh: đang triển khai
+
+Hạ tầng đến trước → BĐS tăng giá sau.
+Đây là quy luật không thay đổi từ trước đến nay.
+
+Bạn muốn đón đầu hay chờ giá đã tăng rồi mới vào? 🤔`,
+  hashtags:'#HaLong2026 #HatangBDS #HLX #CaoTocHaNoi #VinhomesGlobalGate'
+},
+
+{
+  id:4, cat:'insider', platforms:['fb','zalo','tiktok'],
+  img:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/04/Phan-Khu-Vinhomes-Ha-Long-Xanh.jpg',
+  imgTitle:'Các phân khu HLX — 9 phân khu 5 châu lục',
+  caption:`🌍 9 PHÂN KHU — 9 THẾ GIỚI THU NHỎ TẠI HẠ LONG
+
+Chưa có dự án nào ở Việt Nam làm điều này:
+
+🌏 Châu Á — Vịnh Thiên Đường (phase 1 mở bán)
+🌍 Châu Phi — Đảo Kỳ Quan
+🌎 Châu Mỹ — Đảo New Horizon
+🌎 Châu Âu — Đảo Pha Lê + Vịnh Lễ Hội
+⚡ Năng lượng xanh — Vịnh Năng Lượng
+🏆 Thể thao — Đảo Tinh Hoa
+
+Mỗi phân khu = kiến trúc riêng, lifestyle riêng, đẳng cấp riêng.
+
+Bạn thuộc "phân khu" nào? Comment xuống dưới 👇`,
+  hashtags:'#9PhanKhu #HLX #VinhomesHaLongXanh #KienTrucChauAu #DaoPhaLe'
+},
+
+{
+  id:5, cat:'insider', platforms:['fb','zalo'],
+  img:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/04/Vi-tri-Vinhomes-Ha-Long-Xanh-1.jpg',
+  imgTitle:'Vị trí kết nối giao thông HLX',
+  caption:`🛤️ HẠ LONG XANH — TRUNG TÂM CỦA MỌI KẾT NỐI
+
+Sáng ở Hà Nội → Chiều đã có mặt tại căn nhà view vịnh di sản.
+
+Đây không phải ước mơ. Đây là thực tế khi HLX hoàn thành:
+
+🚅 2 tiếng từ Hà Nội (cao tốc)
+✈️ 45 phút từ Sân bay Vân Đồn
+🚢 Ngay cạnh cảng tàu quốc tế
+🚄 Đường sắt cao tốc đang được đầu tư
+
+Đây là lý do người Hà Nội đang đổ về HLX mua đất.
+
+Anh/chị ở đâu? Tôi tư vấn lịch tham quan thực tế miễn phí 📞`,
+  hashtags:'#KetNoiGiaoThong #HLX #BDS2026 #VinhomesHaLong #MuaDat'
+},
+
+// ═══════════════════════════════════════════════════════════
+// 🌿 LIFESTYLE — Cuộc sống, thiên nhiên, resort living
+// ═══════════════════════════════════════════════════════════
+
+{
+  id:6, cat:'lifestyle', platforms:['fb','ig','tiktok'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/05/cau-go-rung-ngap-man-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Cầu gỗ rừng ngập mặn 800ha',
+  caption:`🌿 SÁNG MỞ MẮT RA — NHÌN THẤY RỪNG NGẬP MẶN 800HA
+
+Ở Hà Nội, sáng mở mắt ra nhìn thấy gì?
+— Xe máy, khói bụi, tiếng còi.
+
+Ở HLX, sáng mở mắt ra nhìn thấy gì?
+— Cầu gỗ, rừng đước, tiếng chim, ánh nắng chiếu qua tán lá.
+
+Wonder Mangrove — rừng ngập mặn 800 ha ngay trong khu đô thị.
+Đi bộ buổi sáng. Cắm trại cuối tuần. Câu cá chiều tối.
+
+Đây không phải resort nghỉ dưỡng — đây là nơi bạn SỐNG HÀNG NGÀY.
+
+Ai muốn đổi cảnh sống không? 🙋`,
+  hashtags:'#WonderMangrove #RungNgapMan #HLX #Resort365 #SongXanh'
+},
+
+{
+  id:7, cat:'lifestyle', platforms:['ig','fb'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/05/cafe-cong-vien-hoang-hon-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Café công viên hoàng hôn — view vịnh',
+  caption:`☕ CHIỀU CUỐI TUẦN NHƯ NÀY THÌ CHẲNG MUỐN VỀ
+
+Café nhìn ra vịnh di sản.
+Hoàng hôn đổ vàng mặt nước.
+Không tiếng còi, không bụi, không rush hour.
+
+Đây là góc café trong công viên hoàng hôn tại HLX —
+Một trong hàng chục tiện ích cộng đồng của dự án.
+
+Bạn đang cần 1 nơi như thế này không?
+— Để sống, không chỉ để nghỉ ngơi. 🌅`,
+  hashtags:'#HoangHonHaLong #ViewVinh #HLX #CafeCongVien #VinhomesGlobalGate'
+},
+
+{
+  id:8, cat:'lifestyle', platforms:['tiktok','ig'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/05/cam-trai-rung-ngap-man-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Cắm trại trong rừng ngập mặn',
+  caption:`⛺ CUỐI TUẦN KHÔNG CẦN ĐI ĐÂU XA
+
+Cắm trại ngay trong khu rừng ngập mặn của HLX.
+Không phải resort đắt tiền. Không phải đặt xe 4 tiếng.
+Chỉ cần bước ra khỏi nhà — thiên nhiên đón bạn ngay.
+
+800 ha rừng xanh + hồ nhân tạo + cầu câu cá + đường đi bộ ven biển.
+
+Đây là lifestyle mà người ta trả hàng tỷ để có được.
+Ở đây — bạn SỐNG nó mỗi ngày.
+
+Anh/chị hay đi cắm trại không? 🏕️🌿`,
+  hashtags:'#CamTrai #TienNhien #HLX #WonderMangrove #Resort365'
+},
+
+{
+  id:9, cat:'lifestyle', platforms:['fb','ig'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/05/duong-dao-bo-cong-vien-gio-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Đường đạo bộ công viên gió ven biển',
+  caption:`🚶 6 GIỜ SÁNG — ĐI BỘ VEN BIỂN, GIÓ VỊ MẶN
+
+Không phải ảnh du lịch.
+Đây là đường đạo bộ của khu đô thị HLX.
+
+Người dân Hạ Long Xanh sẽ tập thể dục ở đây mỗi sáng.
+Gió biển mát. View vịnh di sản ngay trước mặt.
+
+Bạn có biết — sức khỏe cũng là 1 loại tài sản?
+Và môi trường sống quyết định 70% chất lượng sức khỏe bạn.
+
+Hỏi tôi về lifestyle tại HLX — tôi gửi thêm ảnh thực tế 📲`,
+  hashtags:'#SucKhoe #DaoBo #HLX #VenBien #VinhomesHaLongXanh'
+},
+
+{
+  id:10, cat:'lifestyle', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/05/cau-ca-rung-ngap-man-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Câu cá trong rừng ngập mặn HLX',
+  caption:`🎣 "Tuần này mình ra cầu câu cá chiều rồi về ăn cơm"
+
+Nghe như câu chuyện ở quê — nhưng đây là cuộc sống tại HLX, khu đô thị hiện đại nhất Việt Nam.
+
+Cầu câu cá xây dựng ngay trong rừng ngập mặn 800ha.
+Không ồn ào. Không lo lắng. Chỉ có thiên nhiên và bình yên.
+
+Đây là điều mà các khu đô thị đắt tiền nhất Hà Nội không có.
+Mà HLX — có.
+
+Anh/chị thích câu cá không? Nếu có, thì HLX chính xác là nơi anh/chị nên sống 😄`,
+  hashtags:'#CauCa #HLX #SongBinhYen #RungNgapMan #HaLong2026'
+},
+
+// ═══════════════════════════════════════════════════════════
+// 🏡 SẢN PHẨM — Biệt thự, liền kề, giá, loại hình
+// ═══════════════════════════════════════════════════════════
+
+{
+  id:11, cat:'sanpham', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/biet-thu-bien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Biệt thự biển — Vịnh Thiên Đường',
+  caption:`🌊 BIỆT THỰ BIỂN HLX — KHI "VIEW TRIỆU ĐÔ" KHÔNG CÒN LÀ CỤM TỪ THỜI THƯỢNG
+
+Đây là dòng sản phẩm biệt thự biển tại Vịnh Thiên Đường.
+4 mặt giáp nước. Sân vườn riêng. Thang bộ xuống bãi tắm tư.
+
+Loại này không nhiều — và không dành cho số đông.
+
+Dành cho ai?
+→ Người muốn có tài sản nghỉ dưỡng riêng tư
+→ Người muốn đầu tư cho thuê dài hạn
+→ Người muốn để lại tài sản cho thế hệ sau
+
+Số lượng có hạn. Inbox tôi nếu bạn nghiêm túc 📩`,
+  hashtags:'#BietThuBien #HLX #VinhThienDuong #BietThuHaLong #BDSDauTu'
+},
+
+{
+  id:12, cat:'sanpham', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/biet-thu-don-lap-tan-co-dien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Biệt thự đơn lập Tân cổ điển — Vịnh Thiên Đường',
+  caption:`🏛️ BIỆT THỰ ĐƠN LẬP TÂN CỔ ĐIỂN — KIẾN TRÚC CHÂU ÂU BÊN VỊNH DI SẢN
+
+Khi bạn nhìn vào căn biệt thự này — cảm giác đầu tiên là gì?
+
+Kiến trúc Tân cổ điển được thiết kế bởi đội ngũ quốc tế.
+Sân vườn riêng. Bể bơi riêng. Garage riêng. Sự riêng tư tuyệt đối.
+
+Biệt thự đơn lập tại Vịnh Thiên Đường — phase 1 HLX.
+Đây là lựa chọn của người muốn SỐNG ĐẸP, không chỉ ở.
+
+Nhắn tôi để nhận file thiết kế chi tiết + bảng giá 📐`,
+  hashtags:'#BietThuDonLap #TanCoDien #HLX #KienTrucChauAu #VinhomesHaLong'
+},
+
+{
+  id:13, cat:'sanpham', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/biet-thu-song-lap-tan-co-dien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Biệt thự song lập — Vịnh Thiên Đường',
+  caption:`🏠 BIỆT THỰ SONG LẬP — "NGỌT" NHẤT TRONG CÁC DÒNG SẢN PHẨM HLX
+
+Đây là lý do môi giới giỏi thường chủ động giới thiệu biệt thự song lập:
+
+✅ Giá hợp lý hơn đơn lập (~30-40%)
+✅ Vẫn có sân vườn riêng + không gian riêng tư
+✅ Dễ thanh khoản hơn khi muốn bán lại
+✅ Phù hợp cả ở thực + đầu tư cho thuê
+
+Kiến trúc Tân cổ điển — cùng đẳng cấp, khác ngân sách.
+
+Anh/chị đang xem xét loại hình nào? Tôi phân tích ưu nhược từng loại cho anh/chị ngay 📊`,
+  hashtags:'#BietThuSongLap #HLX #VinhThienDuong #TuVanBDS #VinhomesHaLong'
+},
+
+{
+  id:14, cat:'sanpham', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/lien-ke-tan-co-dien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Liền kề Tân cổ điển — Vịnh Thiên Đường',
+  caption:`🏘️ LIỀN KỀ TÂN CỔ ĐIỂN — CỬA VÀO HLX VỚI NGÂN SÁCH TỐI ƯU
+
+Muốn sở hữu bất động sản tại HLX nhưng ngân sách chưa đến biệt thự?
+
+Liền kề Tân cổ điển chính là sản phẩm dành cho bạn.
+
+📐 Diện tích linh hoạt
+🏛️ Kiến trúc Tân cổ điển đồng nhất với toàn khu
+📍 Nằm trong Vịnh Thiên Đường — phase 1 đang triển khai
+💰 Thanh toán theo tiến độ — không áp lực ngay từ đầu
+
+Đây cũng là sản phẩm có tiềm năng cho thuê cao nhất khi khu vực phát triển.
+
+Inbox tôi để nhận BẢNG GIÁ chi tiết + phân tích đầu tư 📊`,
+  hashtags:'#LienKe #HLX #VinhThienDuong #BDS2026 #TuVanMuaNha'
+},
+
+{
+  id:15, cat:'sanpham', platforms:['fb','zalo'],
+  img:'https://tgdland.com/wp-content/uploads/2026/02/z7731571953805_de8289fba16040e55a629b5a06eae8d4-scaled.jpg',
+  imgTitle:'Nhà phố thương mại HLX — thiết kế hiện đại nhiệt đới',
+  caption:`🏪 NHÀ PHỐ THƯƠNG MẠI HLX — VỪA Ở, VỪA KINH DOANH, VỪA ĐẦU TƯ
+
+Đây là dòng sản phẩm "3 trong 1" mà nhiều nhà đầu tư thông minh đang nhắm đến:
+
+🏠 Tầng 1: Kinh doanh — café, shop thời trang, dịch vụ...
+🏠 Tầng 2-3: Ở cùng gia đình
+📈 Toàn bộ: Tài sản tăng giá theo thời gian
+
+Khi HLX đi vào vận hành với 200.000 cư dân — nhu cầu tiêu dùng trong khu sẽ rất lớn.
+Ai sở hữu mặt bằng thương mại từ sớm — nắm lợi thế cả chục năm.
+
+Tìm hiểu ngay khi quỹ hàng còn. Inbox tôi! 🔥`,
+  hashtags:'#NhaPhoThuongMai #ShopHouse #HLX #DauTuBDS #HaLong2026'
+},
+
+// ═══════════════════════════════════════════════════════════
+// 🔥 FOMO — Tạo khan hiếm, tâm lý cơ hội
+// ═══════════════════════════════════════════════════════════
+
+{
+  id:16, cat:'fomo', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-ban-ngay.jpg',
+  imgTitle:'Toàn cảnh HLX ban ngày',
+  caption:`⏰ ĐÂY LÀ CÁCH MÀ NGƯỜI ĐẾN SỚM KIẾM TIỀN
+
+Phú Quốc 2012: giá đất 500k/m²
+Phú Quốc 2022: giá đất 50 triệu/m²
+
+Đà Nẵng 2005: giá đất ven biển 2 triệu/m²
+Đà Nẵng 2020: giá đất ven biển 100 triệu/m²
+
+HLX 2026: đang mở bán phase 1
+HLX 203x: ???
+
+Lịch sử không lặp lại hoàn toàn, nhưng thường vần nhau.
+
+Người đến sớm không phải là may mắn — họ là người CHỦ ĐỘNG.
+Bạn thuộc nhóm nào? 📊`,
+  hashtags:'#DauTuSom #FOMO #HLX #BDS2026 #VinhomesHaLong'
+},
+
+{
+  id:17, cat:'fomo', platforms:['fb','zalo','tiktok'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-hoang-hon.jpg',
+  imgTitle:'HLX hoàng hôn — view vịnh Di Sản',
+  caption:`🌅 TẠI SAO NGƯỜI GIÀU MUA BDS KHI CHƯA XÂY XONG?
+
+Câu trả lời ngắn: vì đó là lúc giá thấp nhất.
+
+Quy luật BDS từ trước đến nay:
+🔴 Chuẩn bị xây → Giá thấp nhất (rủi ro cao nhất)
+🟡 Đang xây → Giá trung bình (cân bằng)
+🟢 Hoàn thành → Giá cao nhất (an toàn nhưng lãi ít)
+
+HLX hiện tại đang ở giai đoạn nào?
+→ Phase 1 vừa mở bán. Đại lộ và hạ tầng đang hoàn thiện.
+
+Đây là thời điểm VÀNG mà 5 năm sau bạn sẽ ước mình đã mua.
+
+Muốn biết chi tiết hơn? Inbox tôi ngay 📲`,
+  hashtags:'#NguoiGiauNghiGi #DauTuThongMinh #HLX #BDS2026 #MuaNhaSom'
+},
+
+{
+  id:18, cat:'fomo', platforms:['fb','zalo'],
+  img:'https://vinglobalgatehalong.com.vn/uploads/img-2019.jpeg',
+  imgTitle:'Island in city — HLX mô hình thành phố trong đảo',
+  caption:`❗ 3 LOẠI NGƯỜI KHI THẤY DỰ ÁN LỚN
+
+Loại 1: "Ôi to thế, chắc đắt lắm" — Không hỏi, bỏ qua.
+
+Loại 2: "Hay đấy nhỉ" — Hỏi thăm, do dự, chờ giá giảm, rồi tiếc.
+
+Loại 3: "Cơ hội như này mình cần hiểu rõ ngay" — Đặt hẹn, tìm hiểu, ra quyết định dựa trên thông tin.
+
+Bạn thuộc loại nào khi nhìn vào HLX?
+
+Tôi không thuyết phục ai.
+Tôi chỉ chia sẻ thông tin cho người thuộc Loại 3.
+Nếu bạn là Loại 3 — nhắn tin cho tôi 👇`,
+  hashtags:'#TamLyDauTu #HLX #BatDongSan2026 #QuyetDinhThongMinh'
+},
+
+{
+  id:19, cat:'fomo', platforms:['tiktok','ig'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Toàn cảnh phối cảnh HLX',
+  caption:`💬 "Tôi đã chờ giá xuống từ 2023, bây giờ giá còn cao hơn"
+
+Câu này tôi nghe từ khách hàng tuần trước.
+
+Và đây là câu tôi luôn phải nói thật:
+BDS tốt không bao giờ chờ bạn.
+Nó chờ ai hành động trước.
+
+HLX — dự án 18 tỷ USD, vị trí bên vịnh di sản thế giới.
+Vừa mở bán phase 1 tháng 4/2026.
+
+Chờ thêm không làm giá rẻ hơn.
+Chỉ làm bạn mua ít căn hơn với cùng số tiền.
+
+Thông tin chi tiết → Comment "HLX" hoặc nhắn tôi ngay 📲`,
+  hashtags:'#HLX #BDS2026 #ThoiDiemVang #VinhomesHaLong #DauTuBDS'
+},
+
+// ═══════════════════════════════════════════════════════════
+// 🏗️ TIẾN ĐỘ — Cập nhật thực tế công trường
+// ═══════════════════════════════════════════════════════════
+
+{
+  id:20, cat:'tiendo', platforms:['fb','zalo'],
+  img:'https://vinhomesvuyenhaiphong.com/uploads/img-0835.jpeg',
+  imgTitle:'Toàn cảnh công trường từ trên cao — Tháng 5/2026',
+  caption:`📸 CẬP NHẬT CÔNG TRƯỜNG HLX — THÁNG 5/2026
+
+Nhìn từ trên cao — đây là diện mạo công trường HLX hiện tại.
+
+Con số thực tế:
+✅ 3.080 ha đã được san lấp (75% tổng diện tích)
+✅ Hệ thống đê kè, trục đường chính đang hình thành
+✅ Hơn 3 ca thi công liên tục 24/7
+✅ Diện tích đã có mặt bằng = toàn bộ phường Bãi Cháy
+
+Đây là tiến độ THẦN TỐC mà ít dự án Việt Nam đạt được.
+
+Anh/chị muốn nhận cập nhật tiến độ hàng tháng không? Comment "Theo dõi" nhé! 👇`,
+  hashtags:'#TienDoHLX #CongTruong #VinhomesHaLongXanh #Update2026 #SanLap'
+},
+
+{
+  id:21, cat:'tiendo', platforms:['fb','zalo','tiktok'],
+  img:'https://vinhomesvuyenhaiphong.com/uploads/img-08321.jpeg',
+  imgTitle:'Thi công thần tốc 3 ca — Toàn cảnh',
+  caption:`⚡ VINHOMES XÂY NHƯ THẾ NÀO? — TÔI ĐI THỰC ĐỊA VỀ KỂ LẠI
+
+Tuần trước tôi ra thăm công trường HLX.
+Điều khiến tôi ấn tượng nhất: 3 ca thi công LIÊN TỤC, không nghỉ.
+
+Ban ngày — máy xúc, máy lu, xe tải nối đuôi nhau.
+Ban đêm — đèn chiếu sáng trắng cả công trường, vẫn thi công.
+
+Đây không phải kiểu "khởi công rồi để đó".
+Đây là Vingroup — tốc độ xây của họ đã được chứng minh ở hàng chục dự án.
+
+Anh/chị muốn tôi dẫn đi thực địa tham quan công trường không? 📞`,
+  hashtags:'#ThucDia #CongTruongHLX #Vingroup #TienDoXayDung #HLX2026'
+},
+
+{
+  id:22, cat:'tiendo', platforms:['fb','zalo'],
+  img:'https://karahomes.vn/public/files/2026/01/tien_do_vinhomes_ha_long_xanh_1_1.jpg',
+  imgTitle:'Hệ thống điện chiếu sáng đại lộ đã lắp đặt',
+  caption:`💡 ĐẠI LỘ TRUNG TÂM HLX — ĐÈN CHIẾU SÁNG ĐÃ LẮP XONG
+
+Cột điện chiếu sáng, dải cây xanh cảnh quan hai bên đại lộ.
+Ảnh chụp thực tế — không phải phối cảnh.
+
+Điều này có nghĩa gì?
+Hạ tầng hoàn thiện đến đây → Dân cư đến → Dịch vụ theo → Giá tăng.
+
+Đây là giai đoạn mà ai đã mua đất đang mỉm cười.
+Và giai đoạn mà ai chưa mua đang lo lắng.
+
+Bạn thuộc nhóm nào? Comment cho tôi biết 👇`,
+  hashtags:'#DaiLo #HLX #HaTang #TienDo #VinhomesHaLong'
+},
+
+{
+  id:23, cat:'tiendo', platforms:['fb','zalo'],
+  img:'https://karahomes.vn/public/files/2026/01/tien_do_vinhomes_ha_long_xanh_2_1.jpg',
+  imgTitle:'Cầu số 1 hoàn thành — xe tải trọng lớn đã thông',
+  caption:`🌉 CẦU SỐ 1 HOÀN THÀNH — XE TẢI TRỌNG LỚN ĐÃ THÔNG
+
+Đây là cầu số 1 tại công trường HLX.
+Hiện tại xe tải trọng lớn đã qua được — phục vụ thi công.
+
+Nhưng ý nghĩa lớn hơn là:
+Khi khu đô thị đi vào hoạt động, đây sẽ là hệ thống kết nối giao thông chính.
+
+HLX không xây nhà trước rồi làm hạ tầng sau.
+Họ làm ngược lại: hạ tầng trước, nhà sau.
+Đó là chuẩn của Vinhomes.
+
+Tôi cập nhật tiến độ hàng tuần. Follow để không bỏ lỡ 🔔`,
+  hashtags:'#CauSo1 #HaLongXanh #HaTang #VinhomesGlobalGate #TienDo2026'
+},
+
+{
+  id:24, cat:'tiendo', platforms:['fb','zalo','tiktok'],
+  img:'https://vinhomesvuyenhaiphong.com/uploads/img-0855.jpeg',
+  imgTitle:'Nhà bán hàng HLX khai trương tháng 5/2026',
+  caption:`🏢 NHÀ BÁN HÀNG HLX CHÍNH THỨC KHAI TRƯƠNG — THÁNG 5/2026
+
+Bước vào nhà bán hàng HLX — bạn sẽ thấy:
+🗺️ Sa bàn tổng thể 1:500 — Toàn khu 6.206 ha thu nhỏ
+📐 Mô hình từng phân khu chi tiết
+📊 Bảng giá chính thức đợt 1
+🎥 Video 360° tham quan ảo
+
+Đây là nơi tôi tư vấn cho khách hàng của mình.
+Và tôi đưa khách đến đây MIỄN PHÍ mỗi tuần.
+
+Anh/chị muốn tôi đặt lịch tham quan cho anh/chị không?
+Để lại SĐT bên dưới hoặc nhắn tin cho tôi 📱`,
+  hashtags:'#NhaBanHang #HLX #ThamQuan #VinhomesHaLong #TuVanMienPhi'
+},
+
+// ═══════════════════════════════════════════════════════════
+// TIỆN ÍCH — Amenities, đẳng cấp
+// ═══════════════════════════════════════════════════════════
+
+{
+  id:25, cat:'lifestyle', platforms:['fb','ig'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/san-golf-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Sân golf 54 lỗ quốc tế tiêu chuẩn',
+  caption:`⛳ 54 LỖ GOLF — THIÊN ĐƯỜNG CỦA NGƯỜI MÊ GÔN
+
+Golf Paradise lớn nhất Việt Nam ngay trong khu đô thị HLX.
+950 ha dành riêng cho golf — không phải 1 sân, mà là cả HỆ THỐNG golf resort.
+
+Bạn chơi golf mà phải lái xe đi mấy chục km?
+Ở HLX — sân golf ngay sân sau nhà.
+
+Đây không phải tiện ích xa xỉ — đây là lý do người có tiền chọn HLX để sống.
+
+Anh/chị có chơi golf không? 🏌️`,
+  hashtags:'#Golf #SanGolf #HLX #GolfResort #VinhomesHaLong'
+},
+
+{
+  id:26, cat:'lifestyle', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/ha-long-station.jpg',
+  imgTitle:'Hạ Long Station — nhà ga tàu đẳng cấp thế giới',
+  caption:`🚄 HẠ LONG STATION — NHÀ GA ĐẸP NHẤT ĐÔNG NAM Á?
+
+Đây là Hạ Long Station — nhà ga được thiết kế trong tổng thể HLX.
+
+Khi đường sắt cao tốc Hà Nội – Quảng Ninh hoàn thành:
+🚄 Từ Hà Nội đến HLX: 45 phút
+📍 Hạ Long Station ngay trong khu đô thị
+🌏 Kết nối với sân bay quốc tế Vân Đồn
+
+Đây là lý do người Hà Nội mua nhà ở HLX để dùng làm second home — cuối tuần ra, đầu tuần về.
+
+Khái niệm "xa xôi" đang biến mất. HLX là tương lai. 🔮`,
+  hashtags:'#HaLongStation #DuongSatCaoToc #HLX #SecondHome #HaNoiHaLong'
+},
+
+{
+  id:27, cat:'lifestyle', platforms:['fb','ig','tiktok'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/cong-vien-rung-globe-ha-long.jpg',
+  imgTitle:'Công viên rừng Globe Hạ Long',
+  caption:`🌳 CÔNG VIÊN RỪNG GLOBE — "LÒNG PHỔI XANH" CỦA HLX
+
+Hà Nội: 2m² cây xanh/người (thấp nhất khu vực)
+HLX: Hàng trăm hectare công viên rừng cho 200.000 cư dân
+
+Công viên Rừng Globe được thiết kế như Central Park của New York.
+Nhưng xung quanh là vịnh Hạ Long — không phải các tòa nhà chọc trời.
+
+Thế hệ sau của bạn sẽ lớn lên trong môi trường như thế nào?
+Đó cũng là câu hỏi về BDS mà ít người nghĩ đến.
+
+Chia sẻ bài này nếu bạn cũng muốn con cái có môi trường sống tốt 💚`,
+  hashtags:'#CongVienRung #HLX #MoiTruong #SongXanh #VinhomesHaLong'
+},
+
+{
+  id:28, cat:'sanpham', platforms:['fb','zalo'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/tien-ich-vinhomes-global-gate-ha-long.jpg',
+  imgTitle:'Hệ tiện ích tổng thể HLX',
+  caption:`🗂️ CHECKLIST TIỆN ÍCH HLX — THỬ ĐẾM XEM ĐỦ KHÔNG
+
+✅ Golf 54 lỗ (950ha) — lớn nhất Việt Nam
+✅ Vinwonders — công viên giải trí đẳng cấp quốc tế
+✅ Rừng ngập mặn Wonder Mangrove (800ha)
+✅ Hạ Long Station — nhà ga kết nối cao tốc
+✅ Casino Royal Bay
+✅ Wonder Theatre (3.000 chỗ ngồi)
+✅ Vinschool, Vinmec (đang triển khai)
+✅ Trung tâm văn hóa sự kiện quốc tế
+✅ Hồ nhân tạo 800ha
+✅ Cảng tàu, bãi tắm riêng...
+
+Câu hỏi: Dự án nào ở Việt Nam có đủ những điều này chưa?
+
+Câu trả lời: Chưa. Và HLX là cái đầu tiên. 🥇`,
+  hashtags:'#TienIch #HLX #CheckList #VinhomesGlobalGate #AllInOne'
+},
+
+{
+  id:29, cat:'fomo', platforms:['fb','zalo'],
+  img:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/02/Vinhomes-Ha-Long-Xanh-scaled.jpg',
+  imgTitle:'Vinhomes Hạ Long Xanh — banner chính thức',
+  caption:`📊 TÔI ĐÃ TÍNH THỬ — NẾU ĐẦU TƯ HLX 3 TỶ, 5 NĂM SAU LÀ BAO NHIÊU?
+
+(Dựa trên tốc độ tăng trung bình BDS ven biển Việt Nam 15-20%/năm)
+
+Năm 2026: 3 tỷ
+Năm 2027: 3.45 tỷ (+15%)
+Năm 2028: 3.97 tỷ
+Năm 2029: 4.56 tỷ
+Năm 2030: 5.25 tỷ
+Năm 2031: 6 tỷ+
+
+Đây là tính toán THẬN TRỌNG.
+Thực tế Phú Quốc giai đoạn phát triển tương tự: tăng 30-40%/năm.
+
+Tôi không đảm bảo con số này.
+Nhưng tôi hỏi bạn: Gửi ngân hàng 3 tỷ, 5 năm sau được bao nhiêu?
+
+→ Khoảng 4.2 tỷ (lãi 7%/năm)
+
+So sánh để tự quyết định. Inbox tôi nếu muốn phân tích chi tiết hơn 📊`,
+  hashtags:'#TinhToanDauTu #HLX #ROI #BDS2026 #TaiSan'
+},
+
+{
+  id:30, cat:'insider', platforms:['fb','zalo','tiktok'],
+  img:'https://vinhomesland.vn/wp-content/uploads/2026/04/horizon-bay-ha-long.jpg',
+  imgTitle:'Horizon Bay — Khu vịnh tinh hoa',
+  caption:`🌅 LỜI KHUYÊN TỪ NGƯỜI ĐÃ LÀM VIỆC VỚI HLX 6 THÁNG
+
+Tôi không nói HLX phù hợp với TẤT CẢ MỌI NGƯỜI.
+
+HLX phù hợp với bạn nếu:
+✅ Bạn có tầm nhìn 3-5-10 năm, không cần thanh khoản ngay
+✅ Bạn muốn tài sản nghỉ dưỡng + sinh lời song song
+✅ Bạn tin vào hạ tầng Quảng Ninh đang phát triển
+✅ Bạn có ngân sách từ X tỷ trở lên (tôi tư vấn cụ thể theo case)
+
+HLX không phù hợp nếu:
+❌ Bạn cần tiền mặt trong 1-2 năm
+❌ Bạn đang mua nhà để ở thực tại Hà Nội/HCM
+
+Tôi tư vấn thật — không tư vấn chỉ để bán hàng.
+Nhắn tôi để nói chuyện thật sự về tình huống của bạn. 📲`,
+  hashtags:'#TuVanThat #HLX #MoiGioiUyTin #BatDongSan2026 #HaLongXanh'
+},
+
+];
+
+// ============================================================
+// RENDER
+// ============================================================
+let activeFilter = 'all';
+
+const FILTER_MAP = {
+  fb: p => p.platforms.includes('fb'),
+  zalo: p => p.platforms.includes('zalo'),
+  tiktok: p => p.platforms.includes('tiktok'),
+  ig: p => p.platforms.includes('ig'),
+  insider: p => p.cat === 'insider',
+  lifestyle: p => p.cat === 'lifestyle',
+  sanpham: p => p.cat === 'sanpham',
+  fomo: p => p.cat === 'fomo',
+  tiendo: p => p.cat === 'tiendo',
+  all: () => true,
+};
+
+const CAT_INFO = {
+  insider: {label:'HLX Insider', cls:'cat-insider'},
+  lifestyle: {label:'Lifestyle', cls:'cat-lifestyle'},
+  sanpham: {label:'Sản phẩm', cls:'cat-sanpham'},
+  fomo: {label:'FOMO', cls:'cat-fomo'},
+  tiendo: {label:'Tiến độ', cls:'cat-tiendo'},
+};
+const PLAT_LABELS = {fb:'Facebook', zalo:'Zalo', tiktok:'TikTok', ig:'Instagram'};
+const PLAT_CLS = {fb:'plat-fb', zalo:'plat-zalo', tiktok:'plat-tiktok', ig:'plat-ig'};
+
+function renderPosts(filter) {
+  const container = document.getElementById('posts-container');
+  container.innerHTML = '';
+  const filtered = POSTS.filter(FILTER_MAP[filter] || (() => true));
+  document.getElementById('shown-count').textContent = filtered.length;
+  document.getElementById('result-count').textContent = `Hiển thị ${filtered.length} bài`;
+
+  filtered.forEach(post => {
+    const platTags = post.platforms.map(p =>
+      `<span class="plat-tag ${PLAT_CLS[p]}">${PLAT_LABELS[p]}</span>`
+    ).join('');
+    const catInfo = CAT_INFO[post.cat];
+
+    const card = document.createElement('div');
+    card.className = 'post-card';
+    card.innerHTML = `
+      <div class="pc-top">
+        <div class="pc-img" onclick="openLB('${post.img}')">
+          <div class="skeleton" id="sk${post.id}"></div>
+          <img data-src="${post.img}" alt="${post.imgTitle}"
+            onload="imgOk(this,'sk${post.id}')"
+            onerror="imgFail(this,'sk${post.id}')">
+          <div class="img-zoom">🔍 Xem to</div>
+        </div>
+        <div class="pc-content">
+          <div class="plat-row">
+            ${platTags}
+            <span class="cat-tag ${catInfo.cls}">${catInfo.label}</span>
+          </div>
+          <div>
+            <div class="post-label">📝 Caption — copy & paste</div>
+            <div class="post-text" id="txt${post.id}">${post.caption}</div>
+          </div>
+          <div>
+            <div class="post-label">🏷️ Hashtags</div>
+            <div class="hashtags" id="htag${post.id}">${post.hashtags}</div>
+          </div>
+        </div>
+      </div>
+      <div class="pc-actions">
+        <button class="ac-btn btn-copy-all" onclick="copyAll(${post.id}, this)">
+          📋 Copy Caption + Hashtag
+        </button>
+        <button class="ac-btn btn-copy-text" onclick="copyText(${post.id}, this)">
+          Copy Caption
+        </button>
+        <a class="ac-btn btn-open-img" href="${post.img}" target="_blank">🖼️ Mở ảnh</a>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Lazy load
+  const imgs = container.querySelectorAll('img[data-src]');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.src = e.target.dataset.src; obs.unobserve(e.target); }
+      });
+    }, {rootMargin:'300px'});
+    imgs.forEach(img => obs.observe(img));
+  } else {
+    imgs.forEach(img => img.src = img.dataset.src);
+  }
+}
+
+function imgOk(el, skId) {
+  el.classList.add('loaded');
+  const sk = document.getElementById(skId);
+  if (sk) sk.style.display = 'none';
+}
+function imgFail(el, skId) {
+  el.style.display = 'none';
+  const sk = document.getElementById(skId);
+  if (sk) { sk.style.animation = 'none'; sk.style.background = '#1a2d45'; }
+  const wrap = el.closest('.pc-img');
+  if (wrap) {
+    const err = document.createElement('div');
+    err.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:#4a5568;font-size:11px;';
+    err.innerHTML = '<span style="font-size:28px">🖼️</span><span>Ảnh không tải được</span>';
+    wrap.appendChild(err);
+  }
+}
+
+function copyAll(id, btn) {
+  const post = POSTS.find(p => p.id === id);
+  if (!post) return;
+  const text = post.caption + '\n\n' + post.hashtags;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ Đã copy xong!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Caption + Hashtag'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+function copyText(id, btn) {
+  const post = POSTS.find(p => p.id === id);
+  if (!post) return;
+  navigator.clipboard.writeText(post.caption).then(() => {
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Caption'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// FILTERS
+document.querySelectorAll('.fbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderPosts(btn.dataset.filter);
+  });
+});
+
+// LIGHTBOX
+function openLB(imgSrc) {
+  document.getElementById('lb-img').src = imgSrc;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLB() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+
+// INIT
+renderPosts('all');
+</script>
+</body>
+</html>
