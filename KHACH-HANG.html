@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📋 Danh Sách Khách Hàng — BDS Mastery Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1B3A6B; --nd: #102340; --nl: #2A5298;
+      --gold: #C9A84C; --gl: #E2C06A;
+      --green: #1a6b3c; --orange: #e87922;
+      --bronze: #cd7f32; --silver: #9ea8b3; --goldtier: #C9A84C;
+      --cream: #FAF8F3; --text: #1a1a2e; --mid: #4a5568; --light: #718096;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: #0f1923; color: var(--text); min-height: 100vh; }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(160deg, #0a1520 0%, var(--nd) 60%, #0a2010 100%);
+      padding: 36px 24px 28px; border-bottom: 1px solid rgba(201,168,76,.2);
+    }
+    .header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .header h1 { color: #fff; font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .header h1 span { color: var(--gl); }
+    .header-meta { color: rgba(255,255,255,.5); font-size: 13px; margin-top: 4px; }
+    .btn-add {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--gold); color: var(--nd); font-weight: 700; font-size: 13px;
+      padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer;
+      font-family: inherit; transition: .15s;
+    }
+    .btn-add:hover { background: var(--gl); transform: translateY(-1px); }
+
+    /* STATS */
+    .stats { max-width: 1000px; margin: 0 auto; padding: 20px 20px 0; display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 14px 20px; flex: 1; min-width: 130px; }
+    .stat-val { font-size: 28px; font-weight: 700; color: #fff; }
+    .stat-label { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 3px; }
+    .stat.bronze .stat-val { color: var(--bronze); }
+    .stat.silver .stat-val { color: var(--silver); }
+    .stat.gold   .stat-val { color: var(--goldtier); }
+
+    /* TOOLBAR */
+    .toolbar { max-width: 1000px; margin: 20px auto 0; padding: 0 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .search-box {
+      flex: 1; min-width: 200px; display: flex; align-items: center;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px; padding: 0 14px; gap: 8px;
+    }
+    .search-box input {
+      background: none; border: none; color: #fff; font-size: 14px; font-family: inherit;
+      padding: 10px 0; width: 100%; outline: none;
+    }
+    .search-box input::placeholder { color: rgba(255,255,255,.3); }
+    .filter-btns { display: flex; gap: 6px; }
+    .fbtn {
+      padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,.15);
+      background: transparent; color: rgba(255,255,255,.6); font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: .15s;
+    }
+    .fbtn:hover, .fbtn.active { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.3); }
+    .fbtn.active.bronze { border-color: var(--bronze); color: var(--bronze); background: rgba(205,127,50,.12); }
+    .fbtn.active.silver { border-color: var(--silver); color: var(--silver); background: rgba(158,168,179,.12); }
+    .fbtn.active.gold   { border-color: var(--goldtier); color: var(--goldtier); background: rgba(201,168,76,.12); }
+
+    /* TABLE */
+    .table-wrap { max-width: 1000px; margin: 16px auto 40px; padding: 0 20px; }
+    .customer-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; margin-bottom: 12px; overflow: hidden;
+      transition: border-color .2s, background .2s;
+    }
+    .customer-card:hover { border-color: rgba(201,168,76,.3); background: rgba(255,255,255,.06); }
+    .card-main { display: flex; align-items: center; gap: 14px; padding: 16px 20px; flex-wrap: wrap; }
+
+    /* Avatar */
+    .avatar {
+      width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 18px; font-weight: 700; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--navy), var(--nl));
+      color: var(--gl); font-size: 16px;
+    }
+
+    /* Info */
+    .cust-info { flex: 1; min-width: 160px; }
+    .cust-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .cust-meta { font-size: 12px; color: rgba(255,255,255,.45); display: flex; gap: 12px; flex-wrap: wrap; }
+    .cust-meta span { display: flex; align-items: center; gap: 4px; }
+
+    /* Tier badge */
+    .tier-badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .tier-bronze { background: rgba(205,127,50,.2); color: var(--bronze); border: 1px solid rgba(205,127,50,.4); }
+    .tier-silver { background: rgba(158,168,179,.2); color: var(--silver); border: 1px solid rgba(158,168,179,.4); }
+    .tier-gold   { background: rgba(201,168,76,.2); color: var(--goldtier); border: 1px solid rgba(201,168,76,.4); }
+
+    /* Date */
+    .cust-date { font-size: 12px; color: rgba(255,255,255,.35); white-space: nowrap; }
+
+    /* Actions */
+    .card-actions { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 20px 16px; }
+    .abtn {
+      display: flex; align-items: center; gap: 5px;
+      padding: 7px 12px; border-radius: 8px; border: none; cursor: pointer;
+      font-size: 12px; font-weight: 600; font-family: inherit; transition: .15s; white-space: nowrap;
+    }
+    .abtn-kit  { background: rgba(27,58,107,.6); color: #90b4e8; border: 1px solid rgba(27,58,107,.8); }
+    .abtn-kit:hover  { background: var(--navy); color: #fff; }
+    .abtn-land { background: rgba(26,107,60,.4); color: #6dca95; border: 1px solid rgba(26,107,60,.6); }
+    .abtn-land:hover { background: var(--green); color: #fff; }
+    .abtn-zalo { background: rgba(0,120,255,.2); color: #70b5ff; border: 1px solid rgba(0,120,255,.3); }
+    .abtn-zalo:hover { background: rgba(0,120,255,.4); color: #fff; }
+    .abtn-copy { background: rgba(255,255,255,.06); color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.1); }
+    .abtn-copy:hover { background: rgba(255,255,255,.12); color: #fff; }
+    .abtn-copy.copied { background: rgba(26,107,60,.3); color: #6dca95; border-color: rgba(26,107,60,.5); }
+
+    /* Empty state */
+    .empty { text-align: center; padding: 60px 20px; color: rgba(255,255,255,.3); }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(4px);
+      z-index: 100; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: #162032; border: 1px solid rgba(201,168,76,.25);
+      border-radius: 16px; padding: 28px; width: 100%; max-width: 480px;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal h2 { color: var(--gl); font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .mfield { margin-bottom: 14px; }
+    .mfield label { display: block; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.5); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
+    .mfield input, .mfield select {
+      width: 100%; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px; padding: 10px 14px; font-size: 14px; color: #fff; font-family: inherit;
+    }
+    .mfield input:focus, .mfield select:focus { outline: none; border-color: var(--gold); }
+    .mfield input::placeholder { color: rgba(255,255,255,.3); }
+    .mfield select option { background: #162032; color: #fff; }
+    .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+    .mbtn-save {
+      flex: 1; padding: 12px; background: var(--gold); color: var(--nd); font-weight: 700;
+      border: none; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 14px;
+    }
+    .mbtn-save:hover { background: var(--gl); }
+    .mbtn-cancel {
+      padding: 12px 20px; background: transparent; color: rgba(255,255,255,.5);
+      border: 1px solid rgba(255,255,255,.15); border-radius: 10px; cursor: pointer; font-family: inherit;
+    }
+    .mbtn-cancel:hover { background: rgba(255,255,255,.07); color: #fff; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      background: #1a6b3c; color: #fff; padding: 12px 20px; border-radius: 10px;
+      font-size: 13px; font-weight: 600; transform: translateY(80px); opacity: 0;
+      transition: all .3s; pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <h1>📋 Danh Sách <span>Khách Hàng</span></h1>
+      <div class="header-meta">BDS Mastery Kit · Quản lý giao hàng · Vinhomes Hạ Long Xanh</div>
+    </div>
+    <button class="btn-add" onclick="openModal()">+ Thêm Khách Mới</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-val" id="statTotal">0</div>
+    <div class="stat-label">Tổng khách</div>
+  </div>
+  <div class="stat bronze">
+    <div class="stat-val" id="statBronze">0</div>
+    <div class="stat-label">🥉 Bronze</div>
+  </div>
+  <div class="stat silver">
+    <div class="stat-val" id="statSilver">0</div>
+    <div class="stat-label">🥈 Silver</div>
+  </div>
+  <div class="stat gold">
+    <div class="stat-val" id="statGold">0</div>
+    <div class="stat-label">🥇 Gold</div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="search-box">
+    <span>🔍</span>
+    <input type="text" id="searchInput" placeholder="Tìm tên, SĐT, email..." oninput="renderList()">
+  </div>
+  <div class="filter-btns">
+    <button class="fbtn active" data-filter="all" onclick="setFilter('all',this)">Tất cả</button>
+    <button class="fbtn bronze" data-filter="bronze" onclick="setFilter('bronze',this)">🥉 Bronze</button>
+    <button class="fbtn silver" data-filter="silver" onclick="setFilter('silver',this)">🥈 Silver</button>
+    <button class="fbtn gold"   data-filter="gold"   onclick="setFilter('gold',this)">🥇 Gold</button>
+  </div>
+</div>
+
+<!-- LIST -->
+<div class="table-wrap" id="customerList"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h2>➕ Thêm Khách Hàng Mới</h2>
+    <div class="mfield">
+      <label>Họ và tên *</label>
+      <input type="text" id="mName" placeholder="Nguyễn Văn A">
+    </div>
+    <div class="mfield">
+      <label>Số điện thoại *</label>
+      <input type="tel" id="mPhone" placeholder="0901234567">
+    </div>
+    <div class="mfield">
+      <label>Email</label>
+      <input type="email" id="mEmail" placeholder="email@gmail.com">
+    </div>
+    <div class="mfield">
+      <label>Gói đã mua *</label>
+      <select id="mTier">
+        <option value="bronze">🥉 Bronze — 697.000đ</option>
+        <option value="silver">🥈 Silver — 1.297.000đ</option>
+        <option value="gold">🥇 Gold — 1.997.000đ</option>
+      </select>
+    </div>
+    <div class="mfield">
+      <label>Tên file landing page (không dấu)</label>
+      <input type="text" id="mSlug" placeholder="nguyen-van-a (tự điền)">
+      <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px;">Để trống → tự generate từ tên</div>
+    </div>
+    <div class="mfield">
+      <label>Ghi chú</label>
+      <input type="text" id="mNote" placeholder="VD: Khách HN, đã deploy xong...">
+    </div>
+    <div class="modal-btns">
+      <button class="mbtn-cancel" onclick="closeModal()">Huỷ</button>
+      <button class="mbtn-save" onclick="saveCustomer()">💾 Lưu Khách Hàng</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const GITHUB = 'https://yen670-oss.github.io/kit-hlx/';
+  const STORE_KEY = 'bds_customers_v1';
+  let currentFilter = 'all';
+
+  // ── DEFAULT DATA ─────────────────────────────────────────
+  const DEFAULT_CUSTOMERS = [
+    {
+      id: 1,
+      name: 'Vũ Thanh Tú',
+      phone: '0914866268',
+      email: 'anhtu24h@gmail.com',
+      tier: 'bronze',
+      slug: 'vu-thanh-tu',
+      note: '',
+      date: '2026-05-18'
+    },
+    {
+      id: 2,
+      name: 'Tô Thị Thúy Hà',
+      phone: '0876118668',
+      email: 'trainerha68@gmail.com',
+      tier: 'bronze',
+      slug: 'to-thi-thuy-ha',
+      note: '',
+      date: '2026-05-18'
+    }
+  ];
+
+  // ── LOAD / SAVE ───────────────────────────────────────────
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : DEFAULT_CUSTOMERS;
+    } catch { return DEFAULT_CUSTOMERS; }
+  }
+
+  function save(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+
+  function getInitials(name) {
+    return name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  }
+
+  function toSlug(str) {
+    return str.toLowerCase()
+      .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g,'a')
+      .replace(/[èéẹẻẽêềếệểễ]/g,'e')
+      .replace(/[ìíịỉĩ]/g,'i')
+      .replace(/[òóọỏõôồốộổỗơờớợởỡ]/g,'o')
+      .replace(/[ùúụủũưừứựửữ]/g,'u')
+      .replace(/[ỳýỵỷỹ]/g,'y')
+      .replace(/đ/g,'d')
+      .replace(/[^a-z0-9]/g,'-')
+      .replace(/-+/g,'-').replace(/^-|-$/g,'');
+  }
+
+  function kitLink(c) {
+    const enc = encodeURIComponent(c.name);
+    return `${GITHUB}kits/${c.tier}.html?ten=${enc}`;
+  }
+
+  function landLink(c) {
+    return `${GITHUB}09-landing-${c.slug}.html`;
+  }
+
+  function zaloLink(c) {
+    return `https://zalo.me/${c.phone}`;
+  }
+
+  // ── RENDER ────────────────────────────────────────────────
+  function renderList() {
+    const data = load();
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const list = document.getElementById('customerList');
+
+    const filtered = data.filter(c => {
+      const matchFilter = currentFilter === 'all' || c.tier === currentFilter;
+      const matchSearch = !q ||
+        c.name.toLowerCase().includes(q) ||
+        c.phone.includes(q) ||
+        (c.email||'').toLowerCase().includes(q);
+      return matchFilter && matchSearch;
+    });
+
+    // Stats
+    document.getElementById('statTotal').textContent  = data.length;
+    document.getElementById('statBronze').textContent = data.filter(c=>c.tier==='bronze').length;
+    document.getElementById('statSilver').textContent = data.filter(c=>c.tier==='silver').length;
+    document.getElementById('statGold').textContent   = data.filter(c=>c.tier==='gold').length;
+
+    if (!filtered.length) {
+      list.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><div>Không tìm thấy khách nào</div></div>`;
+      return;
+    }
+
+    list.innerHTML = filtered.map(c => {
+      const tierLabel = { bronze:'🥉 Bronze', silver:'🥈 Silver', gold:'🥇 Gold' }[c.tier];
+      const kl = kitLink(c);
+      const ll = landLink(c);
+      const zl = zaloLink(c);
+      return `
+        <div class="customer-card" data-id="${c.id}">
+          <div class="card-main">
+            <div class="avatar">${getInitials(c.name)}</div>
+            <div class="cust-info">
+              <div class="cust-name">${c.name}</div>
+              <div class="cust-meta">
+                <span>📞 ${c.phone}</span>
+                ${c.email ? `<span>✉️ ${c.email}</span>` : ''}
+                ${c.note ? `<span>💬 ${c.note}</span>` : ''}
+              </div>
+            </div>
+            <span class="tier-badge tier-${c.tier}">${tierLabel}</span>
+            <span class="cust-date">${c.date||''}</span>
+          </div>
+          <div class="card-actions">
+            <button class="abtn abtn-kit" onclick="openLink('${kl}')">📦 Mở Kit Hub</button>
+            <button class="abtn abtn-land" onclick="openLink('${ll}')">🌐 Landing Page</button>
+            <button class="abtn abtn-zalo" onclick="openLink('${zl}')">💬 Nhắn Zalo</button>
+            <button class="abtn abtn-copy" onclick="copyKit(this,'${kl}')">📋 Copy link kit</button>
+            <button class="abtn abtn-copy" onclick="copyKit(this,'${ll}')">📋 Copy landing</button>
+            <button class="abtn abtn-copy" style="margin-left:auto;color:rgba(255,80,80,.6);border-color:rgba(255,80,80,.2);" onclick="deleteCustomer(${c.id})">🗑</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function setFilter(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderList();
+  }
+
+  // ── ACTIONS ───────────────────────────────────────────────
+  function openLink(url) { window.open(url, '_blank'); }
+
+  function copyKit(btn, url) {
+    navigator.clipboard.writeText(url).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✅ Đã copy!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1800);
+    });
+  }
+
+  function deleteCustomer(id) {
+    if (!confirm('Xoá khách này?')) return;
+    const data = load().filter(c => c.id !== id);
+    save(data);
+    renderList();
+    showToast('Đã xoá khách hàng');
+  }
+
+  // ── MODAL ─────────────────────────────────────────────────
+  function openModal() {
+    document.getElementById('mName').value = '';
+    document.getElementById('mPhone').value = '';
+    document.getElementById('mEmail').value = '';
+    document.getElementById('mTier').value = 'bronze';
+    document.getElementById('mSlug').value = '';
+    document.getElementById('mNote').value = '';
+    document.getElementById('modalOverlay').classList.add('show');
+    setTimeout(()=>document.getElementById('mName').focus(), 100);
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('show');
+  }
+
+  function saveCustomer() {
+    const name  = document.getElementById('mName').value.trim();
+    const phone = document.getElementById('mPhone').value.trim().replace(/\s/g,'');
+    const email = document.getElementById('mEmail').value.trim();
+    const tier  = document.getElementById('mTier').value;
+    const note  = document.getElementById('mNote').value.trim();
+    let   slug  = document.getElementById('mSlug').value.trim();
+
+    if (!name || !phone) { alert('Vui lòng nhập tên và SĐT!'); return; }
+    if (!slug) slug = toSlug(name);
+
+    const data = load();
+    const newId = data.length ? Math.max(...data.map(c=>c.id)) + 1 : 1;
+    const today = new Date().toISOString().split('T')[0];
+
+    data.unshift({ id: newId, name, phone, email, tier, slug, note, date: today });
+    save(data);
+    closeModal();
+    renderList();
+    showToast(`✅ Đã thêm ${name}`);
+  }
+
+  // Close modal on overlay click
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ── TOAST ─────────────────────────────────────────────────
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── INIT ──────────────────────────────────────────────────
+  // Nếu localStorage trống, seed data mặc định
+  if (!localStorage.getItem(STORE_KEY)) {
+    save(DEFAULT_CUSTOMERS);
+  }
+  renderList();
+</script>
+</body>
+</html>

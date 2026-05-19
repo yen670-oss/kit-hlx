@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chiến Lược Nội Dung — Xây Dựng Tín Nhiệm Với Môi Giới HLX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#1B3A6B;--nd:#102340;--nl:#2A5298;
+      --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+      --green:#1a6b3c;--orange:#e87922;--red:#dc2626;--blue:#2563eb;
+      --p1:#1a6b3c;--p2:#1B3A6B;--p3:#7c3aed;--p4:#e87922;
+      --cream:#FAF8F3;--text:#1a1a2e;--mid:#4a5568;--light:#718096;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:#0c1520;color:var(--text);}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+
+    /* STICKY NAV */
+    .sticky-nav{position:sticky;top:0;z-index:200;background:rgba(12,21,32,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,.15);padding:0 20px;}
+    .nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;}
+    .nav-inner::-webkit-scrollbar{display:none;}
+    .nav-tab{padding:14px 16px;font-size:12px;font-weight:700;color:rgba(255,255,255,.45);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s;letter-spacing:.04em;}
+    .nav-tab:hover,.nav-tab.active{color:var(--gl);border-bottom-color:var(--gold);}
+
+    /* HERO */
+    .hero{background:linear-gradient(160deg,#060f1a,#0e1f38 40%,#0a1f10 80%,#1a0e05);padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.08) 1.5px,transparent 0);background-size:26px 26px;}
+    .hero-in{position:relative;z-index:1;max-width:740px;margin:0 auto;}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 18px;border-radius:50px;margin-bottom:20px;}
+    .pulse{width:6px;height:6px;background:var(--gl);border-radius:50%;animation:pulse 1.5s infinite;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+    .hero h1{font-size:clamp(26px,4vw,44px);color:#fff;font-weight:800;line-height:1.15;margin-bottom:12px;}
+    .hero h1 span{background:linear-gradient(135deg,#E2C06A,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:28px;}
+    .hero-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.75);font-size:12px;font-weight:600;padding:6px 14px;border-radius:8px;}
+
+    /* MAIN */
+    .main{max-width:960px;margin:0 auto;padding:36px 20px 80px;}
+
+    /* SECTION HEADER */
+    .sh{margin:40px 0 20px;display:flex;align-items:center;gap:12px;}
+    .sh-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .sh h2{font-size:21px;font-weight:700;color:#fff;margin-bottom:2px;}
+    .sh p{font-size:12px;color:rgba(255,255,255,.4);}
+
+    /* PILLAR CARDS */
+    .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0;}
+    .pillar{border-radius:14px;padding:20px;border:1.5px solid;}
+    .pillar h3{font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+    .pillar p{font-size:12px;line-height:1.6;}
+    .pillar ul{margin-top:10px;padding-left:16px;}
+    .pillar ul li{font-size:12px;margin-bottom:4px;}
+    .p1c{background:rgba(26,107,60,.12);border-color:rgba(26,107,60,.4);}
+    .p1c h3{color:#6dca95;}
+    .p1c p,.p1c li{color:rgba(109,202,149,.8);}
+    .p2c{background:rgba(27,58,107,.15);border-color:rgba(27,58,107,.5);}
+    .p2c h3{color:#90b4e8;}
+    .p2c p,.p2c li{color:rgba(144,180,232,.8);}
+    .p3c{background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.4);}
+    .p3c h3{color:#c4b5fd;}
+    .p3c p,.p3c li{color:rgba(196,181,253,.8);}
+    .p4c{background:rgba(232,121,34,.1);border-color:rgba(232,121,34,.4);}
+    .p4c h3{color:#f5a54a;}
+    .p4c p,.p4c li{color:rgba(245,165,74,.8);}
+
+    /* TRUST LADDER */
+    .trust-ladder{display:flex;flex-direction:column;gap:0;margin:16px 0;}
+    .tl-step{display:flex;gap:0;align-items:stretch;}
+    .tl-left{width:120px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:16px 0;}
+    .tl-circle{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0;}
+    .tl-line{flex:1;width:2px;background:rgba(255,255,255,.1);margin:6px 0;}
+    .tl-right{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 20px;margin:6px 0;transition:.2s;}
+    .tl-right:hover{background:rgba(255,255,255,.07);border-color:rgba(201,168,76,.25);}
+    .tl-week{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+    .tl-right h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;}
+    .tl-right p{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;}
+    .tl-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+    .tl-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;}
+
+    /* POST CARDS */
+    .post-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+    .ptab{padding:7px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;}
+    .ptab:hover,.ptab.on{background:rgba(201,168,76,.12);color:var(--gl);border-color:rgba(201,168,76,.4);}
+
+    .posts-grid{display:flex;flex-direction:column;gap:16px;}
+    .post-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;transition:.2s;}
+    .post-card:hover{border-color:rgba(201,168,76,.3);}
+    .post-header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06);}
+    .post-phase{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.08em;text-transform:uppercase;}
+    .ph1{background:rgba(26,107,60,.2);color:#6dca95;}
+    .ph2{background:rgba(27,58,107,.25);color:#90b4e8;}
+    .ph3{background:rgba(124,58,237,.2);color:#c4b5fd;}
+    .ph4{background:rgba(232,121,34,.15);color:#f5a54a;}
+    .post-meta{flex:1;}
+    .post-meta h4{font-size:14px;font-weight:700;color:#fff;}
+    .post-meta span{font-size:11px;color:rgba(255,255,255,.35);}
+    .post-platform{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.6);}
+    .post-copy-btn{padding:6px 12px;border-radius:7px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.5);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;}
+    .post-copy-btn:hover{background:rgba(201,168,76,.12);color:var(--gl);border-color:rgba(201,168,76,.4);}
+    .post-copy-btn.copied{background:rgba(26,107,60,.2);color:#6dca95;border-color:rgba(26,107,60,.4);}
+
+    .post-body{padding:16px 18px;}
+    .post-text{
+      white-space:pre-wrap;font-size:13px;color:rgba(255,255,255,.75);line-height:1.8;
+      background:rgba(0,0,0,.2);border-radius:10px;padding:16px;font-family:'Be Vietnam Pro',sans-serif;
+      border-left:3px solid rgba(201,168,76,.3);max-height:300px;overflow-y:auto;
+    }
+    .post-text::-webkit-scrollbar{width:4px;}
+    .post-text::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:2px;}
+    .post-tips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+    .tip-chip{font-size:11px;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);}
+
+    /* CALENDAR TABLE */
+    .cal-table{width:100%;border-collapse:collapse;font-size:12px;margin:16px 0;}
+    .cal-table th{background:rgba(27,58,107,.5);color:var(--gl);font-weight:700;padding:10px 12px;text-align:left;font-family:'Be Vietnam Pro',sans-serif;}
+    .cal-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);vertical-align:top;}
+    .cal-table tr:hover td{background:rgba(255,255,255,.03);}
+    .day-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:3px;}
+    .d2{background:rgba(26,107,60,.2);color:#6dca95;}
+    .d3{background:rgba(27,58,107,.3);color:#90b4e8;}
+    .d4{background:rgba(124,58,237,.2);color:#c4b5fd;}
+    .d5{background:rgba(232,121,34,.15);color:#f5a54a;}
+    .d6{background:rgba(201,168,76,.15);color:var(--gl);}
+    .d7{background:rgba(220,38,38,.15);color:#fca5a5;}
+
+    /* INFO CARD */
+    .ic{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:20px;margin:12px 0;}
+    .ic h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+
+    /* HIGHLIGHT */
+    .hl{border-radius:12px;padding:16px 20px;margin:14px 0;display:flex;gap:12px;align-items:flex-start;}
+    .hl.g{background:rgba(26,107,60,.1);border:1px solid rgba(26,107,60,.3);}
+    .hl.o{background:rgba(232,121,34,.08);border:1px solid rgba(232,121,34,.3);}
+    .hl.gold{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);}
+    .hl-icon{font-size:20px;flex-shrink:0;}
+    .hl-body p{font-size:13px;line-height:1.7;}
+    .hl.g .hl-body p{color:rgba(109,202,149,.9);}
+    .hl.o .hl-body p{color:rgba(245,165,74,.9);}
+    .hl.gold .hl-body p{color:rgba(226,192,106,.9);}
+    .hl-body strong{display:block;margin-bottom:5px;}
+
+    /* FOOTER */
+    .footer{background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.07);padding:24px;text-align:center;margin-top:60px;}
+    .footer p{color:rgba(255,255,255,.3);font-size:12px;line-height:1.8;}
+    .footer strong{color:var(--gl);}
+
+    /* PROGRESS */
+    .prog-bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:999;}
+    .prog-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));width:0%;transition:width .1s;}
+
+    @media(max-width:600px){.pillars{grid-template-columns:1fr 1fr;}.tl-left{width:70px;}}
+  </style>
+</head>
+<body>
+
+<div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+
+<!-- STICKY NAV -->
+<div class="sticky-nav">
+  <div class="nav-inner">
+    <div class="nav-tab active" onclick="scrollTo('pillars')">🎯 4 Trụ Cột</div>
+    <div class="nav-tab" onclick="scrollTo('ladder')">🪜 Trust Ladder</div>
+    <div class="nav-tab" onclick="scrollTo('calendar')">📅 Lịch Đăng</div>
+    <div class="nav-tab" onclick="scrollTo('posts')">✍️ 12 Bài Mẫu</div>
+    <div class="nav-tab" onclick="scrollTo('psychology')">🧠 Tâm Lý Khách</div>
+    <div class="nav-tab" onclick="scrollTo('competitor')">⚔️ Vượt Đối Thủ</div>
+    <div class="nav-tab" onclick="scrollTo('kit-pitch')">💰 Pitch Kit</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="eyebrow"><span class="pulse"></span> Content Strategy · BDS Mastery Kit</div>
+    <h1>Xây Dựng Tín Nhiệm<br>Với <span>Môi Giới HLX</span></h1>
+    <p class="hero-sub">
+      Chiến lược 8 tuần — Từ người lạ → Chuyên gia được tin → Bán kit tự nhiên<br>
+      12 bài mẫu copy-paste · 4 trụ cột nội dung · Lịch đăng chi tiết theo ngày
+    </p>
+    <div class="hero-chips">
+      <div class="chip">🪜 Trust Ladder 4 giai đoạn</div>
+      <div class="chip">✍️ 12 bài mẫu dùng ngay</div>
+      <div class="chip">🧠 Tâm lý khách BĐS cao cấp</div>
+      <div class="chip">⚔️ Script vượt đối thủ</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ===== PILLARS ===== -->
+  <div id="pillars">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#0f4c2a,#1a6b3c);">🎯</div>
+      <div>
+        <h2>4 Trụ Cột Nội Dung</h2>
+        <p>Mỗi bài đăng phải thuộc 1 trong 4 trụ — không đăng ngẫu nhiên</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar p1c">
+        <h3>🏙️ P1 — HLX Insider</h3>
+        <p>Hòa vào cảm hứng của họ. Phân tích sâu dự án mà môi giới khác không có.</p>
+        <ul>
+          <li>Phân tích vị trí từng phân khu</li>
+          <li>So sánh giá đợt 1 vs đợt 2</li>
+          <li>Tiềm năng tăng giá theo hạ tầng</li>
+          <li>Tin tức mới nhất về tiến độ</li>
+        </ul>
+      </div>
+      <div class="pillar p2c">
+        <h3>🧠 P2 — Tâm Lý Học BĐS</h3>
+        <p>Nghiên cứu khách hàng cao cấp. Nội dung này không ai khác chia sẻ.</p>
+        <ul>
+          <li>Trigger mua của khách giàu</li>
+          <li>Objection thật vs objection giả</li>
+          <li>5 kiểu khách — cách tiếp cận khác nhau</li>
+          <li>Tại sao khách "cần nghiên cứu thêm"</li>
+        </ul>
+      </div>
+      <div class="pillar p3c">
+        <h3>⚔️ P3 — Vượt Đối Thủ</h3>
+        <p>Môi giới đang cạnh tranh gay gắt. Giúp họ nổi bật = họ tin anh/chị.</p>
+        <ul>
+          <li>Cách phân biệt với 500 môi giới cùng bán HLX</li>
+          <li>Script chốt khi khách đang so sánh với MG khác</li>
+          <li>Personal brand trên social media</li>
+          <li>Niche down trong dự án lớn</li>
+        </ul>
+      </div>
+      <div class="pillar p4c">
+        <h3>💡 P4 — Mẹo Thực Chiến</h3>
+        <p>Tips ngắn, dùng được ngay. Đây là loại nội dung được share nhiều nhất.</p>
+        <ul>
+          <li>Script xử lý từng objection cụ thể</li>
+          <li>Template tin nhắn follow-up</li>
+          <li>Cách đăng bài FB không bị giảm reach</li>
+          <li>Checklist buổi tư vấn hoàn hảo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hl gold">
+      <span class="hl-icon">💡</span>
+      <div class="hl-body"><strong style="color:var(--gl);">Nguyên tắc 70-20-10</strong>
+      <p>70% nội dung giá trị thuần (P1+P2+P3+P4) · 20% câu hỏi/tranh luận tạo comment · 10% pitch kit. Tuần 1-4: chưa đề cập kit. Tuần 5-6: gián tiếp. Tuần 7-8: mới pitch trực tiếp.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TRUST LADDER ===== -->
+  <div id="ladder">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,var(--gd),var(--gold));">🪜</div>
+      <div>
+        <h2>Trust Ladder — 4 Giai Đoạn 8 Tuần</h2>
+        <p>Từ người lạ → người quen → chuyên gia → người bán kit được chào đón</p>
+      </div>
+    </div>
+
+    <div class="trust-ladder">
+      <div class="tl-step">
+        <div class="tl-left">
+          <div class="tl-circle" style="background:linear-gradient(135deg,#0f4c2a,#1a6b3c);">1</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-week" style="color:#6dca95;">Tuần 1–2 · GIAI ĐOẠN HOÀ NHẬP</div>
+          <h3>🏙️ "Tôi Cũng Đang Làm HLX Như Anh/Chị"</h3>
+          <p>Không bán gì cả. Chỉ đăng nội dung chứng minh anh/chị hiểu sâu về HLX như họ, thậm chí sâu hơn. Chia sẻ phân tích, số liệu, góc nhìn thú vị. Mục tiêu: được follow và tagged trong các cuộc thảo luận về HLX.</p>
+          <div class="tl-tags">
+            <span class="tl-tag" style="background:rgba(26,107,60,.2);color:#6dca95;">P1: HLX Insider</span>
+            <span class="tl-tag" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);">FB Group · Cá nhân</span>
+            <span class="tl-tag" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);">5 bài/tuần</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-left">
+          <div class="tl-circle" style="background:linear-gradient(135deg,#1B3A6B,#2A5298);">2</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-week" style="color:#90b4e8;">Tuần 3–4 · GIAI ĐOẠN GIÁO DỤC</div>
+          <h3>🧠 "Người Này Biết Thứ Mình Không Biết"</h3>
+          <p>Bắt đầu chia sẻ tâm lý học khách hàng, phân tích đối thủ. Nội dung sâu hơn, độc đáo hơn. Họ sẽ share bài vào group, tag đồng nghiệp. Anh/chị bắt đầu xuất hiện như "người hiểu chuyện" trong cộng đồng.</p>
+          <div class="tl-tags">
+            <span class="tl-tag" style="background:rgba(27,58,107,.3);color:#90b4e8;">P2: Tâm Lý Học</span>
+            <span class="tl-tag" style="background:rgba(124,58,237,.2);color:#c4b5fd;">P3: Vượt Đối Thủ</span>
+            <span class="tl-tag" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);">TikTok bắt đầu</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-left">
+          <div class="tl-circle" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);">3</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-week" style="color:#c4b5fd;">Tuần 5–6 · GIAI ĐOẠN ĐỊNH VỊ</div>
+          <h3>💡 "Đây Là Chuyên Gia Mình Cần Theo Dõi"</h3>
+          <p>Tăng cường mẹo thực chiến. Bắt đầu giới thiệu gián tiếp: "Trong bộ tài liệu tôi đang dùng có một script rất hay..." — không pitch, chỉ gợi tò mò. Đây là lúc inbox bắt đầu có người hỏi.</p>
+          <div class="tl-tags">
+            <span class="tl-tag" style="background:rgba(232,121,34,.15);color:#f5a54a;">P4: Mẹo Thực Chiến</span>
+            <span class="tl-tag" style="background:rgba(201,168,76,.12);color:var(--gl);">Gián tiếp mention kit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-left">
+          <div class="tl-circle" style="background:linear-gradient(135deg,#b05a10,#e87922);">4</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-week" style="color:#f5a54a;">Tuần 7–8 · GIAI ĐOẠN CHUYỂN ĐỔI</div>
+          <h3>💰 "Cho Mình Xem Kit Đó Được Không?"</h3>
+          <p>Lúc này anh/chị đã có trust. Pitch kit tự nhiên — không cảm giác bán hàng. Chia sẻ kết quả của người đã dùng kit (Vũ Thanh Tú, Tô Thị Thúy Hà). "Free 1 bài mẫu cho ai inbox hôm nay" → collect leads → convert.</p>
+          <div class="tl-tags">
+            <span class="tl-tag" style="background:rgba(232,121,34,.2);color:#f5a54a;">Pitch trực tiếp</span>
+            <span class="tl-tag" style="background:rgba(26,107,60,.2);color:#6dca95;">Testimonial thật</span>
+            <span class="tl-tag" style="background:rgba(201,168,76,.12);color:var(--gl);">Free sample → convert</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CALENDAR ===== -->
+  <div id="calendar">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,var(--nd),var(--navy));">📅</div>
+      <div>
+        <h2>Lịch Đăng Bài — Tuần Chuẩn</h2>
+        <p>Áp dụng lặp lại mỗi tuần · Thay nội dung cụ thể, giữ nguyên cấu trúc</p>
+      </div>
+    </div>
+
+    <div class="ic">
+      <table class="cal-table">
+        <thead><tr><th>Thứ</th><th>Kênh</th><th>Trụ cột</th><th>Loại nội dung</th><th>Mục tiêu</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="day-badge d2">T2</span></td>
+            <td>FB Cá nhân</td>
+            <td style="color:#6dca95;">🏙️ P1 HLX Insider</td>
+            <td>Phân tích / Số liệu sâu về dự án</td>
+            <td>Follow mới + được tag trong bình luận</td>
+          </tr>
+          <tr>
+            <td><span class="day-badge d3">T3</span></td>
+            <td>TikTok</td>
+            <td style="color:#6dca95;">🏙️ P1 HLX Insider</td>
+            <td>Video ngắn 30-45s: tour / phân tích phân khu</td>
+            <td>View organic, TikTok đẩy tự nhiên</td>
+          </tr>
+          <tr>
+            <td><span class="day-badge d4">T4</span></td>
+            <td>FB Group BĐS</td>
+            <td style="color:#90b4e8;">🧠 P2 Tâm Lý</td>
+            <td>Phân tích tâm lý khách / nghiên cứu sâu</td>
+            <td>Share nhiều vào group, tag đồng nghiệp</td>
+          </tr>
+          <tr>
+            <td><span class="day-badge d5">T5</span></td>
+            <td>FB Cá nhân</td>
+            <td style="color:#c4b5fd;">⚔️ P3 Vượt Đối Thủ</td>
+            <td>Câu hỏi tranh luận / debate gây comment</td>
+            <td>Engagement cao, thuật toán đẩy reach</td>
+          </tr>
+          <tr>
+            <td><span class="day-badge d6">T6</span></td>
+            <td>TikTok + FB</td>
+            <td style="color:#f5a54a;">💡 P4 Mẹo</td>
+            <td>Script / Tip / Checklist dùng ngay</td>
+            <td>Save post + share — viral tiềm năng</td>
+          </tr>
+          <tr>
+            <td><span class="day-badge d7">T7</span></td>
+            <td>Zalo cá nhân</td>
+            <td style="color:rgba(255,255,255,.5);">🤝 Cộng đồng</td>
+            <td>Story cá nhân / behind-the-scenes / kết quả</td>
+            <td>Humanize brand, tăng tin cậy cá nhân</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== POSTS ===== -->
+  <div id="posts">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#b05a10,#e87922);">✍️</div>
+      <div>
+        <h2>12 Bài Mẫu — Copy & Paste Ngay</h2>
+        <p>Mỗi bài đã có hook · body · CTA · hashtag · giờ đăng tối ưu</p>
+      </div>
+    </div>
+
+    <div class="post-tabs">
+      <button class="ptab on" onclick="filterPosts('all',this)">Tất cả (12)</button>
+      <button class="ptab" onclick="filterPosts('p1',this)">🏙️ HLX Insider</button>
+      <button class="ptab" onclick="filterPosts('p2',this)">🧠 Tâm Lý</button>
+      <button class="ptab" onclick="filterPosts('p3',this)">⚔️ Vượt Đối Thủ</button>
+      <button class="ptab" onclick="filterPosts('p4',this)">💡 Mẹo</button>
+      <button class="ptab" onclick="filterPosts('sell',this)">💰 Pitch Kit</button>
+    </div>
+
+    <div class="posts-grid" id="postsGrid">
+
+      <!-- POST 1 -->
+      <div class="post-card" data-pillar="p1">
+        <div class="post-header">
+          <span class="post-phase ph1">Giai đoạn 1 · Hoà nhập</span>
+          <div class="post-meta">
+            <h4>📊 Phân Tích 5 Phân Khu HLX — Cái Nào Tiềm Năng Nhất?</h4>
+            <span>FB Cá nhân · Thứ 2 · 20:00</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,1)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post1">Sau 3 tuần nghiên cứu kỹ HLX, đây là góc nhìn thật của mình về 5 phân khu — không phải thông tin marketing.
+
+🟢 PHÂN KHU MARINA (ven biển)
+→ Giá cao nhất, view đẹp nhất
+→ Phù hợp khách đầu tư dài hạn + nghỉ dưỡng
+→ Rủi ro: thanh khoản thứ cấp phụ thuộc vào du lịch
+
+🔵 PHÂN KHU CENTRAL PARK
+→ Giá trung bình, vị trí trung tâm đô thị
+→ Phù hợp khách ở thực + cho thuê
+→ Tiềm năng: gần hạ tầng thương mại nhất
+
+⚡ INSIGHT MÀ NHIỀU NGƯỜI BỎ QUA:
+Khi tàu cao tốc HN–QN hoàn thành (dự kiến 2028-2030), phân khu gần ga sẽ tăng giá mạnh nhất. Đây mới là "ẩn số" thật sự.
+
+Anh/chị đang focus phân khu nào? Comment bên dưới để mình thảo luận thêm nhé 👇
+
+#VinhomesHaLongXanh #HLX2026 #MoiGioiBDS #QuangNinh</div>
+          <div class="post-tips">
+            <span class="tip-chip">⏰ Đăng 20:00 T2</span>
+            <span class="tip-chip">🎯 Giai đoạn 1</span>
+            <span class="tip-chip">📈 Mục tiêu: comment + follow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 2 -->
+      <div class="post-card" data-pillar="p1">
+        <div class="post-header">
+          <span class="post-phase ph1">Giai đoạn 1 · Hoà nhập</span>
+          <div class="post-meta">
+            <h4>🏙️ "Tại Sao HLX Khác Với Mọi Dự Án Vinhomes Trước Đây"</h4>
+            <span>TikTok Script · Thứ 3 · 19:30</span>
+          </div>
+          <span class="post-platform">TikTok</span>
+          <button class="post-copy-btn" onclick="copyPost(this,2)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post2">🎬 SCRIPT TIKTOK (30-45 giây)
+
+[0-3s HOOK - nói thẳng vào camera]
+"Vinhomes Hạ Long Xanh KHÔNG phải dự án BĐS thông thường — và đây là lý do tại sao."
+
+[4-15s BODY]
+"18 tỷ đô la. 6.200 hecta. Lớn hơn quận Hoàn Kiếm gộp lại 5 lần.
+Nhưng điều khiến tôi thật sự ấn tượng là vị trí — khi tàu cao tốc hoàn thành, Hà Nội cách Hạ Long chỉ còn 23 phút.
+Khi đó, giá BĐS ở đây sẽ được định giá theo chuẩn ngoại ô Hà Nội, không phải tỉnh lẻ."
+
+[16-25s VALUE]
+"Đây là lần đầu tiên trong lịch sử BĐS Việt Nam, một dự án ven biển được hưởng lợi trực tiếp từ hạ tầng đường sắt cao tốc.
+Khách mua hôm nay đang mua tiềm năng của 5 năm tới."
+
+[26-30s CTA]
+"Follow để mình phân tích sâu hơn về từng phân khu. Link đặt câu hỏi ở bio."
+
+TEXT ON SCREEN: "23 phút HN → Hạ Long" | "18 tỷ USD" | "6.200 ha"
+HASHTAG: #HLX2026 #VinhomesHaLong #BatDongSanBien #MoiGioiBDS</div>
+          <div class="post-tips">
+            <span class="tip-chip">⏰ 19:30 T3</span>
+            <span class="tip-chip">🎯 Nói thẳng, không đọc</span>
+            <span class="tip-chip">📱 Dùng drone nếu có</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 3 -->
+      <div class="post-card" data-pillar="p2">
+        <div class="post-header">
+          <span class="post-phase ph2">Giai đoạn 2 · Giáo dục</span>
+          <div class="post-meta">
+            <h4>🧠 5 Kiểu Khách Mua HLX — Và Cách Tiếp Cận Khác Nhau</h4>
+            <span>FB Cá nhân + Group · Thứ 4 · 20:00</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,3)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post3">Sau nhiều năm trong nghề, mình nhận ra: tiếp cận sai kiểu khách = mất deal dù sản phẩm tốt.
+
+Đây là 5 kiểu khách điển hình khi mua HLX và cách xử lý:
+
+👔 TYPE 1 — KHÁCH ĐẦU TƯ THUẦN
+Họ nghĩ bằng số. Hỏi ROI, dòng tiền, lợi suất cho thuê.
+→ Đừng nói "view biển đẹp". Hãy nói "yield 6-8%/năm khi HLX đi vào vận hành".
+
+🏖️ TYPE 2 — KHÁCH NGHỈ DƯỠNG
+Họ mua cảm xúc. Hỏi tiện ích, trải nghiệm, "Tết gia đình ở đây".
+→ Đừng nói số liệu. Hãy vẽ ra cảnh "Sáng mở cửa ra biển, tối bơi hồ infinity pool".
+
+👨‍👩‍👧 TYPE 3 — KHÁCH Ở THỰC + CẦU VÀN GIÁO DỤC CON
+Họ lo lắng về trường học, y tế, an ninh.
+→ Focus vào hệ sinh thái đô thị khép kín của Vinhomes. Trường quốc tế, bệnh viện, an ninh 24/7.
+
+💼 TYPE 4 — KHÁCH DOANH NHÂN SHOPHOUSE
+Họ muốn "tiền đẻ ra tiền". Hỏi mật độ khách du lịch, lưu lượng người qua.
+→ Đưa số liệu khách du lịch Hạ Long: 14 triệu lượt/năm. Số shophouse = cơ hội.
+
+🤔 TYPE 5 — KHÁCH "ĐANG NGHIÊN CỨU"
+Thật ra 80% trong này đã có tiền nhưng chưa đủ tin. Họ cần lý do để "dám mua".
+→ Social proof. Cho họ gặp người đã mua (nếu có). Hoặc show thanh khoản thứ cấp.
+
+Anh/chị đang gặp kiểu khách nào nhiều nhất? 👇
+
+#TamLyKhachHang #KyNangBanHang #MoiGioiHLX</div>
+          <div class="post-tips">
+            <span class="tip-chip">⏰ 20:00 T4</span>
+            <span class="tip-chip">📌 Pin bài này lên tường</span>
+            <span class="tip-chip">🔁 Post vào 5 group BĐS lớn</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 4 -->
+      <div class="post-card" data-pillar="p2">
+        <div class="post-header">
+          <span class="post-phase ph2">Giai đoạn 2 · Giáo dục</span>
+          <div class="post-meta">
+            <h4>🧠 "Khách Nói Cần Nghiên Cứu Thêm" — Thực Ra Là Gì?</h4>
+            <span>TikTok Script · 45 giây</span>
+          </div>
+          <span class="post-platform">TikTok</span>
+          <button class="post-copy-btn" onclick="copyPost(this,4)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post4">🎬 SCRIPT TIKTOK (45 giây)
+
+[0-3s HOOK]
+"Khách nói 'anh cần nghiên cứu thêm' — đừng tin câu đó theo nghĩa đen."
+
+[4-20s BODY - phân tích]
+"Sau hàng trăm buổi tư vấn, mình rút ra: 'cần nghiên cứu thêm' thường có nghĩa là một trong 3 thứ này:
+
+Một: Họ chưa tin ANH/CHỊ. Không phải chưa tin sản phẩm.
+Hai: Họ đang so sánh với môi giới khác và chưa thấy lý do chọn anh/chị.
+Ba: Họ sợ ra quyết định sai và cần ai đó giúp họ 'dám mua'.
+
+Cái họ nói và cái họ nghĩ — hai thứ khác nhau."
+
+[21-35s SOLUTION]
+"Khi nghe câu đó, thay vì gửi thêm tài liệu — hãy hỏi:
+'Anh/chị đang phân vân điều gì cụ thể nhất?'
+Câu trả lời đó mới là objection thật. Xử lý đúng điểm đó là chốt được."
+
+[36-45s CTA]
+"Follow mình để nhận thêm các insight kiểu này mỗi ngày."
+
+OVERLAY: "Không phải thiếu info. Thiếu TRUST."
+HASHTAG: #KyNangMoiGioi #BanHangHLX #TamLyKhach</div>
+          <div class="post-tips">
+            <span class="tip-chip">🔥 Viral potential cao</span>
+            <span class="tip-chip">💬 Gây tranh luận tốt</span>
+            <span class="tip-chip">📌 Dễ share vào group</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 5 -->
+      <div class="post-card" data-pillar="p3">
+        <div class="post-header">
+          <span class="post-phase ph3">Giai đoạn 2-3 · Định vị</span>
+          <div class="post-meta">
+            <h4>⚔️ "500 Môi Giới Cùng Bán HLX — Tại Sao Khách Chọn Bạn?"</h4>
+            <span>FB Cá nhân · Thứ 5 · 20:00 · Tranh luận</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,5)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post5">Câu hỏi khó nhất trong ngành môi giới BĐS hiện nay:
+
+Khi có 500+ người cùng bán HLX, cùng bảng giá, cùng chính sách — khách hàng chọn ai?
+
+Câu trả lời không phải "ai bán rẻ hơn" (không ai bán rẻ hơn được).
+Và không phải "ai có nhiều hàng hơn" (tất cả đều có cùng quỹ căn).
+
+Khách chọn người họ TIN NHẤT.
+
+Mà tin = Anh/chị có gì mà người khác không có?
+
+Đây là 3 cách để tạo khác biệt khi sản phẩm giống nhau 100%:
+
+1️⃣ CHUYÊN SÂU HƠN
+Biết thứ người khác không biết. Phân tích vị trí căn, hướng nhà, tiềm năng phân khu. Trở thành "bách khoa toàn thư HLX" trong mắt khách.
+
+2️⃣ PHỤC VỤ TỐT HƠN
+Tốc độ phản hồi. Chất lượng tư vấn. Theo dõi sau ký. Khách giới thiệu bạn bè vì cách anh/chị chăm sóc, không phải vì sản phẩm.
+
+3️⃣ THƯƠNG HIỆU CÁ NHÂN MẠNH HƠN
+Người ta mua từ người, không từ công ty. Profile FB/TikTok của anh/chị đang nói gì về chuyên môn?
+
+Anh/chị đang tập trung vào cách nào? Hay có cách thứ 4 mình chưa nghĩ tới? 👇
+
+#ThiTruongMoiGioi #CanhTranh #PersonalBrand #HLX2026</div>
+          <div class="post-tips">
+            <span class="tip-chip">💬 Comment nhiều</span>
+            <span class="tip-chip">⚡ Debate tốt</span>
+            <span class="tip-chip">📈 Reach cao nhờ engagement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 6 -->
+      <div class="post-card" data-pillar="p3">
+        <div class="post-header">
+          <span class="post-phase ph3">Giai đoạn 3 · Định vị</span>
+          <div class="post-meta">
+            <h4>⚔️ Script Xử Lý "Khách Đang Hỏi Môi Giới Khác" — Dùng Được Ngay</h4>
+            <span>FB · Thứ 6 · Tips thực chiến</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,6)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post6">Tình huống: Khách nói "anh đang hỏi thêm vài bên nữa trước khi quyết định."
+
+Đây là script mình dùng — không ép buộc, không van xin, hiệu quả:
+
+---
+BƯỚC 1: Xác nhận quyền của khách
+"Anh hoàn toàn nên hỏi nhiều nơi. Đây là quyết định lớn, anh cần so sánh là đúng."
+
+(Đừng phòng thủ. Đừng nói "bên em tốt hơn". Xác nhận = giảm áp lực = họ mở lòng hơn.)
+
+---
+BƯỚC 2: Đặt câu hỏi thông minh
+"Anh đang so sánh theo tiêu chí nào? Giá? Phân khu? Hay là dịch vụ sau bán hàng?"
+
+(Câu hỏi này reveal cái họ thật sự quan tâm. Từ đó mình address đúng điểm.)
+
+---
+BƯỚC 3: Cung cấp thứ người khác không có
+"Bên em có bảng phân tích ROI theo từng phân khu và timeline hạ tầng — anh chưa có ở đâu tài liệu này đâu. Để em gửi cho anh tham khảo thêm nhé."
+
+(Đây là nơi tài liệu chất lượng = lợi thế cạnh tranh. Ai có công cụ tốt hơn, người đó win.)
+
+---
+BƯỚC 4: Tạo anchor nhẹ
+"Dù anh quyết định chọn ai, em vẫn sẵn sàng tư vấn miễn phí bất cứ lúc nào. Không có nghĩa vụ gì cả."
+
+(Generosity tạo obligation tự nhiên.)
+
+---
+Bài này mình đã dùng nhiều lần. Tỷ lệ convert khách "đang hỏi nhiều bên" lên 60%+.
+
+Lưu lại dùng nha! 👇 Ai có câu hỏi về tình huống cụ thể inbox mình.
+
+#ScriptBanHang #XuLyObjection #KyNangMoiGioi</div>
+          <div class="post-tips">
+            <span class="tip-chip">📌 Save nhiều nhất</span>
+            <span class="tip-chip">🔁 Share cao</span>
+            <span class="tip-chip">💬 Inbox dồn dập</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 7 -->
+      <div class="post-card" data-pillar="p4">
+        <div class="post-header">
+          <span class="post-phase ph3">Giai đoạn 2-3 · Tips</span>
+          <div class="post-meta">
+            <h4>💡 Checklist 7 Điểm Cho Buổi Tư Vấn HLX Hoàn Hảo</h4>
+            <span>FB + TikTok · Thứ 6 · Save nhiều</span>
+          </div>
+          <span class="post-platform">FB + TikTok</span>
+          <button class="post-copy-btn" onclick="copyPost(this,7)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post7">Mình tick checklist này trước mỗi buổi tư vấn HLX. Share anh/chị dùng thử:
+
+✅ 1. RESEARCH TRƯỚC
+Biết khách là ai, nghề gì, từng mua BĐS chưa. Đừng hỏi lại những gì họ đã nói trong inbox.
+
+✅ 2. MỞ ĐẦU BẰNG CÂU HỎI, KHÔNG BẰNG PITCH
+"Anh đang tìm kiếm điều gì trong một bất động sản lần này?" — Câu này mở ra cả buổi tư vấn.
+
+✅ 3. NGHE 70%, NÓI 30%
+Môi giới tốt là người nghe tốt. Khách nói ra nhu cầu thật = mình address đúng điểm.
+
+✅ 4. KHÔNG ĐẬY TẤT CẢ PHÂN KHU LÊN BÀN
+Chỉ show 2-3 option phù hợp nhất với nhu cầu họ. Nhiều lựa chọn = tê liệt quyết định.
+
+✅ 5. CÓ TÀI LIỆU TRỰC QUAN
+Bản đồ phân khu, bảng so sánh, ROI estimate. Tài liệu đẹp tạo professional impression.
+
+✅ 6. XỬ LÝ OBJECTION BẰNG CÂU HỎI
+Khi họ nói "quá đắt" → hỏi "anh đang so sánh với gì?" trước khi giải thích.
+
+✅ 7. CHỐT BẰNG NEXT STEP, KHÔNG BẰNG YÊU CẦU
+Không hỏi "anh có mua không?" → Hỏi "Tuần tới anh có thể ra xem thực địa không?"
+
+---
+Anh/chị đang thiếu điểm nào nhất? Comment nhé 👇
+
+#TuVanBDS #ChecklistMoiGioi #KyNangBanHang #HLX2026</div>
+          <div class="post-tips">
+            <span class="tip-chip">📌 Save nhiều nhất</span>
+            <span class="tip-chip">✅ Format checklist dễ share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 8 -->
+      <div class="post-card" data-pillar="p2">
+        <div class="post-header">
+          <span class="post-phase ph2">Giai đoạn 2 · Tâm lý</span>
+          <div class="post-meta">
+            <h4>🧠 Tâm Lý Người Giàu Khi Mua BĐS Cao Cấp — Khác Hoàn Toàn</h4>
+            <span>FB · Thứ 4 · Share + Tag đồng nghiệp</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,8)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post8">Một điều mình học được khi tư vấn BĐS cao cấp:
+
+Người giàu và người trung lưu mua bất động sản theo cách HOÀN TOÀN KHÁC NHAU.
+
+Người trung lưu hỏi:
+❓ "Giá bao nhiêu?"
+❓ "Trả góp được không?"
+❓ "Phí quản lý có đắt không?"
+
+Người giàu (net worth 10 tỷ+) hỏi:
+💎 "Cộng đồng ở đây là ai?"
+💎 "5 năm nữa khu này sẽ ra sao?"
+💎 "Ai là chủ đầu tư và track record của họ?"
+
+👉 Insight quan trọng nhất:
+Người giàu không mua căn hộ. Họ mua địa vị xã hội, cộng đồng xung quanh, và sự bảo đảm của thương hiệu chủ đầu tư.
+
+Khi tư vấn khách HLX phân khúc cao:
+→ Đừng nói "view biển đẹp" → Nói "đây là nơi gia đình anh sẽ cảm thấy đẳng cấp mỗi ngày"
+→ Đừng nói "giá hợp lý" → Nói "đây là mức giá mà 5 năm nữa anh sẽ tiếc nếu không mua"
+→ Đừng nói "chính sách tốt" → Nói "Vinhomes là tên tuổi đã chứng minh qua 30 năm"
+
+Cảm xúc > Logic với khách cao cấp.
+
+Chia sẻ để đồng nghiệp cùng đọc nhé 👇
+
+#TamLyKhachGiau #BDSCaoCap #HLX2026 #MoiGioi</div>
+          <div class="post-tips">
+            <span class="tip-chip">🔁 Share cao trong group</span>
+            <span class="tip-chip">📊 Nội dung độc đáo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 9 -->
+      <div class="post-card" data-pillar="p4">
+        <div class="post-header">
+          <span class="post-phase ph3">Giai đoạn 3 · Tip viral</span>
+          <div class="post-meta">
+            <h4>💡 3 Tin Nhắn Follow-Up Sau Tư Vấn — Copy Nguyên Xi</h4>
+            <span>FB + Zalo · Thứ 6</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,9)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post9">Sau buổi tư vấn, 90% môi giới gửi: "Anh/chị nghĩ sao ạ?"
+
+Câu đó tạo áp lực, khách ngại trả lời.
+
+Đây là 3 mẫu tin nhắn follow-up hiệu quả hơn:
+
+---
+📱 TIN NHẮN 1 (Ngay tối hôm tư vấn)
+"Anh [Tên] ơi, cảm ơn anh đã dành thời gian hôm nay ạ. Em vừa tìm thêm được thông tin về [phân khu anh quan tâm] — em gửi anh tham khảo nhé. Không cần trả lời ngay, chỉ để anh có thêm góc nhìn thôi ạ."
+
+→ Tại sao hiệu quả: Không tạo áp lực, nhưng giữ liên lạc và cung cấp thêm giá trị.
+
+---
+📱 TIN NHẮN 2 (Sau 3 ngày)
+"Anh [Tên] ơi, hôm nay có tin mới về tiến độ thi công HLX — anh có muốn em forward không ạ? Thấy anh đang quan tâm khu này nên em nghĩ anh sẽ muốn biết."
+
+→ Tại sao hiệu quả: Có lý do chính đáng để nhắn, không phải hỏi "mua chưa".
+
+---
+📱 TIN NHẮN 3 (Sau 1 tuần)
+"Anh ơi, có anh bạn em vừa đặt cọc khu [phân khu anh quan tâm] hôm qua. Thị trường đang dịch chuyển nhanh hơn mình dự đoán. Em muốn update anh để anh nắm bắt kịp thời ạ. Khi nào anh rảnh mình nói chuyện thêm không ạ?"
+
+→ Tại sao hiệu quả: Social proof + urgency thật (không bịa), tạo FOMO tự nhiên.
+
+---
+Lưu lại + share cho đồng nghiệp nhé 👇
+
+#FollowUp #ScriptMoiGioi #KyNangBanHang</div>
+          <div class="post-tips">
+            <span class="tip-chip">📌 Save cao nhất dạng này</span>
+            <span class="tip-chip">💬 Hỏi thêm script khác</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 10 -->
+      <div class="post-card" data-pillar="p1">
+        <div class="post-header">
+          <span class="post-phase ph1">Giai đoạn 1-2 · HLX Insider</span>
+          <div class="post-meta">
+            <h4>🏙️ "Góc Nhìn Thật Về HLX Sau Khi Mở Bán — Không Phải Marketing"</h4>
+            <span>FB · Seeding organic · Tranh luận tốt</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,10)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post10">11.000 tỷ đồng trong 9 ngày. HLX đang làm thị trường BĐS sốt lên.
+
+Nhưng mình muốn chia sẻ góc nhìn thật — không phải marketing:
+
+✅ ĐIỂM MẠNH THẬT SỰ
+→ Hạ tầng: Đường cao tốc + tàu cao tốc quy hoạch = connectivity thực sự
+→ Thương hiệu: Vinhomes = trust mặc định trong tâm trí người mua
+→ Quy mô: 55.000 sản phẩm = thị trường thứ cấp sẽ sôi động trong tương lai
+
+⚠️ RỦI RO CẦN THÀNH THẬT VỚI KHÁCH
+→ Thanh khoản ngắn hạn phụ thuộc vào du lịch — mùa thấp điểm có thể ảnh hưởng condotel
+→ Tiến độ bàn giao là ẩn số (như mọi dự án lớn)
+→ Phí quản lý vận hành chưa rõ dài hạn
+
+❓ CÂU HỎI MÀ KHÁCH CẦN ĐẶT RA
+→ Mình mua để ở, đầu tư hay nghỉ dưỡng? (Câu trả lời ảnh hưởng phân khu nên chọn)
+→ Khi nào thanh khoản tốt nhất? (Ngay sau mở bán vs khi bàn giao vs khi tàu cao tốc xong)
+
+---
+Mình nghĩ môi giới nói thật với khách là môi giới được tin lâu dài nhất.
+
+Anh/chị đồng ý không? 👇
+
+#HLX2026 #GoNhinThat #MoiGioiUyTin #VinhomesHaLong</div>
+          <div class="post-tips">
+            <span class="tip-chip">💎 Xây trust tốt nhất</span>
+            <span class="tip-chip">💬 Gây tranh luận lành mạnh</span>
+            <span class="tip-chip">🔁 Share nhiều vì "khác biệt"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 11 -->
+      <div class="post-card" data-pillar="sell">
+        <div class="post-header">
+          <span class="post-phase ph4">Giai đoạn 4 · Pitch Kit</span>
+          <div class="post-meta">
+            <h4>💰 Bài Pitch Kit Gián Tiếp — Tuần 5-6</h4>
+            <span>FB · Tự nhiên, không cảm giác bán hàng</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,11)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post11">Mình vừa hoàn thiện bộ tài liệu mà mình tự dùng cho HLX.
+
+Không phải ai cũng cần — nhưng khi có người hỏi "chị có script xử lý objection không?" thì mình thấy cần chia sẻ.
+
+Bộ này gồm:
+📋 30 bài đăng FB/Zalo sẵn sàng copy-paste cho HLX
+🎯 5 script xử lý từng kiểu objection phổ biến nhất
+📊 Infographic thị trường QN 2026 — đẹp, dùng được ngay để gửi khách
+🌐 Landing page cá nhân — thay SĐT, deploy 10 phút là có trang web riêng
+
+Mình đang dùng tất cả những thứ này hàng ngày.
+
+Nếu ai muốn xem thử 1 mẫu miễn phí trước khi quyết định → inbox mình nhé.
+
+Không bắt buộc gì cả, chỉ để anh/chị có thêm tham khảo.
+
+#BDSMasteryKit #CongCuMoiGioi #HLX2026</div>
+          <div class="post-tips">
+            <span class="tip-chip">⚡ Dùng tuần 5-6</span>
+            <span class="tip-chip">📬 Inbox tự nhiên đổ về</span>
+            <span class="tip-chip">🎁 "1 mẫu miễn phí" = lead magnet</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST 12 -->
+      <div class="post-card" data-pillar="sell">
+        <div class="post-header">
+          <span class="post-phase ph4">Giai đoạn 4 · Pitch Kit</span>
+          <div class="post-meta">
+            <h4>💰 Bài Pitch Kit Trực Tiếp — Tuần 7-8 (Có Testimonial)</h4>
+            <span>FB · Khi đã có proof từ khách thật</span>
+          </div>
+          <span class="post-platform">Facebook</span>
+          <button class="post-copy-btn" onclick="copyPost(this,12)">📋 Copy</button>
+        </div>
+        <div class="post-body">
+          <div class="post-text" id="post12">Anh Vũ Thanh Tú — môi giới HLX ở Hà Nội — nhắn mình cuối tuần rồi:
+
+"Chị ơi, cái script xử lý 'cần nghiên cứu thêm' trong kit của chị chuẩn quá. Em vừa dùng thử, khách hỏi thêm thay vì tắt máy."
+
+Đây là loại tin nhắn khiến mình cảm thấy việc đóng gói bộ kit này xứng đáng.
+
+Bộ BDS Mastery Kit mình làm cho môi giới HLX bao gồm:
+
+🥉 BRONZE — 697.000đ
+→ 30 bài FB/Zalo + Checklist đăng bài + Infographic QN 2026 + Landing page HTML
+→ Dùng được ngay, không cần kỹ năng kỹ thuật
+
+🥈 SILVER — 1.297.000đ
+→ Bronze + 15 script xử lý objection + Content 90 ngày + Chiến lược seeding chuyên gia
+
+🥇 GOLD — 1.997.000đ
+→ Silver + Review 1-1 với mình + Tùy chỉnh landing page theo tên/SĐT của anh/chị
+
+---
+Inbox mình "KIT" để mình gửi link xem thử miễn phí trước khi quyết định.
+
+48 giờ đầu giảm thêm 10% cho ai đặt trước.
+
+#BDSMasteryKit #MoiGioiHLX #CongCu2026</div>
+          <div class="post-tips">
+            <span class="tip-chip">⚡ Dùng tuần 7-8</span>
+            <span class="tip-chip">💬 Testimonial thật = trust cao</span>
+            <span class="tip-chip">⏰ Urgency 48h tự nhiên</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end posts-grid -->
+  </div>
+
+  <!-- ===== PSYCHOLOGY ===== -->
+  <div id="psychology">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#1B3A6B,#2A5298);">🧠</div>
+      <div>
+        <h2>Tâm Lý Khách BĐS Cao Cấp — Quick Reference</h2>
+        <p>Dùng khi tư vấn và khi viết content P2</p>
+      </div>
+    </div>
+    <div class="ic">
+      <table class="cal-table">
+        <thead><tr><th>Họ NÓI</th><th>Họ THẬT SỰ nghĩ</th><th>Cách xử lý đúng</th></tr></thead>
+        <tbody>
+          <tr><td>"Quá đắt"</td><td>Chưa thấy giá trị xứng đáng với số tiền đó</td><td>Reframe: so sánh với đầu tư khác, không giải thích giá</td></tr>
+          <tr><td>"Cần nghiên cứu thêm"</td><td>Chưa tin người bán, hoặc đang so sánh với MG khác</td><td>Hỏi: "Anh đang phân vân điều gì cụ thể nhất?"</td></tr>
+          <tr><td>"Để tôi hỏi vợ/chồng"</td><td>Chính họ chưa quyết, cần lý do để thuyết phục người kia</td><td>Giúp họ có "bài thuyết trình" cho người kia</td></tr>
+          <tr><td>"Chờ thị trường hạ"</td><td>Sợ ra quyết định sai, muốn ai đó "cho phép" mua</td><td>Show data: lần cuối cùng BĐS QN giảm là khi nào?</td></tr>
+          <tr><td>"Tôi không vội"</td><td>Thật sự không biết lý do để mua ngay</td><td>Tạo FOMO thật: quỹ căn đẹp giảm dần từng tuần</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== COMPETITOR ===== -->
+  <div id="competitor">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);">⚔️</div>
+      <div>
+        <h2>Script Vượt Đối Thủ — Tình Huống Cụ Thể</h2>
+        <p>Khi khách đang hỏi nhiều môi giới cùng lúc</p>
+      </div>
+    </div>
+    <div class="ic">
+      <h3>🎯 3 Bước Khi Biết Khách Đang Hỏi Môi Giới Khác</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+        <div style="background:rgba(26,107,60,.08);border:1px solid rgba(26,107,60,.2);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:12px;font-weight:800;color:#6dca95;margin-bottom:6px;">BƯỚC 1 — XÁC NHẬN QUYỀN CỦA HỌ</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.7);">"Anh hoàn toàn nên hỏi nhiều nơi. Đây là quyết định lớn." → Giảm áp lực, họ mở lòng hơn.</p>
+        </div>
+        <div style="background:rgba(27,58,107,.12);border:1px solid rgba(27,58,107,.3);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:12px;font-weight:800;color:#90b4e8;margin-bottom:6px;">BƯỚC 2 — TÌM TIÊU CHÍ SO SÁNH</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.7);">"Anh đang so sánh theo tiêu chí nào? Giá? Phân khu? Hay dịch vụ?" → Reveal điểm thật sự họ care.</p>
+        </div>
+        <div style="background:rgba(232,121,34,.08);border:1px solid rgba(232,121,34,.25);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:12px;font-weight:800;color:#f5a54a;margin-bottom:6px;">BƯỚC 3 — CUNG CẤP THỨ NGƯỜI KHÁC KHÔNG CÓ</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.7);">"Bên em có bảng phân tích ROI theo phân khu + timeline hạ tầng. Anh chưa có ở đâu đâu ạ." → Tài liệu chất lượng = lợi thế thật.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KIT PITCH ===== -->
+  <div id="kit-pitch">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,var(--gd),var(--gold));">💰</div>
+      <div>
+        <h2>Khi Nào &amp; Cách Pitch Kit Tự Nhiên</h2>
+        <p>Không bán sớm. Bán khi trust đã đủ — 5 tín hiệu cần chờ</p>
+      </div>
+    </div>
+    <div class="ic">
+      <h3>✅ 5 Tín Hiệu Cho Thấy Trust Đã Đủ Để Pitch Kit</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 14px;">
+          <span style="font-size:18px;">1️⃣</span>
+          <div><strong style="color:#fff;font-size:13px;">Người tag anh/chị trong thảo luận về HLX</strong><br><span style="font-size:12px;color:rgba(255,255,255,.5);">Đây là dấu hiệu họ coi anh/chị là chuyên gia đáng tin</span></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 14px;">
+          <span style="font-size:18px;">2️⃣</span>
+          <div><strong style="color:#fff;font-size:13px;">Có người inbox hỏi "chị có script/tài liệu nào không?"</strong><br><span style="font-size:12px;color:rgba(255,255,255,.5);">Họ đang tự nguyện hỏi → không cần pitch mạnh</span></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 14px;">
+          <span style="font-size:18px;">3️⃣</span>
+          <div><strong style="color:#fff;font-size:13px;">Bài đăng được share vào group bởi người không quen</strong><br><span style="font-size:12px;color:rgba(255,255,255,.5);">Nội dung đã có giá trị đủ để được phân phối tự nhiên</span></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 14px;">
+          <span style="font-size:18px;">4️⃣</span>
+          <div><strong style="color:#fff;font-size:13px;">Lượt follow tăng đều từ môi giới (không phải khách BĐS)</strong><br><span style="font-size:12px;color:rgba(255,255,255,.5);">Chứng tỏ đang tiếp cận đúng tệp target</span></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 14px;">
+          <span style="font-size:18px;">5️⃣</span>
+          <div><strong style="color:#fff;font-size:13px;">Có ít nhất 2 testimonial thật từ người đã dùng kit</strong><br><span style="font-size:12px;color:rgba(255,255,255,.5);">Social proof là bộ khuếch đại mạnh nhất cho pitch</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hl o">
+      <span class="hl-icon">⚡</span>
+      <div class="hl-body"><strong style="color:#f5a54a;">Lead Magnet "1 mẫu miễn phí"</strong>
+      <p>Công thức chuyển đổi tốt nhất: Đăng bài pitch gián tiếp → "Inbox mình để nhận 1 mẫu content miễn phí" → Gửi BAI-1-FB-cau-chuyen-ban-kit.txt → Khách thấy chất lượng → Mua kit đầy đủ. Không cần landing page, không cần form. Inbox trực tiếp = qualified lead nhất.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end main -->
+
+<div class="footer">
+  <p><strong>BDS Mastery Kit · Chiến Lược Nội Dung Xây Tín Nhiệm Với Môi Giới HLX</strong><br>
+  12 bài mẫu · 4 trụ cột · Trust Ladder 8 tuần · Pitch Kit tự nhiên<br>
+  Cập nhật nội dung theo diễn biến thị trường HLX — dùng ngay, không cần chỉnh sửa nhiều</p>
+</div>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    document.getElementById('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  });
+
+  // Nav scroll
+  function scrollTo(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  // Nav active
+  const sections=['pillars','ladder','calendar','posts','psychology','competitor','kit-pitch'];
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    sections.forEach(id=>{
+      const el=document.getElementById(id);
+      if(el&&el.getBoundingClientRect().top<150) cur=id;
+    });
+    document.querySelectorAll('.nav-tab').forEach((t,i)=>{
+      t.classList.toggle('active',sections[i]===cur||(cur===''&&i===0));
+    });
+  });
+
+  // Filter posts
+  function filterPosts(pillar,btn){
+    document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.post-card').forEach(c=>{
+      c.style.display=(pillar==='all'||c.dataset.pillar===pillar)?'block':'none';
+    });
+  }
+
+  // Copy post
+  const postTexts={};
+  document.querySelectorAll('.post-text[id]').forEach(el=>{postTexts[el.id]=el.textContent.trim();});
+
+  function copyPost(btn,num){
+    const text=document.getElementById('post'+num)?.textContent.trim()||'';
+    navigator.clipboard.writeText(text).then(()=>{
+      const orig=btn.textContent;
+      btn.textContent='✅ Copied!';
+      btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied');},2000);
+    });
+  }
+</script>
+</body>
+</html>
