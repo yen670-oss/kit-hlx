@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bộ Ảnh HLX — Vinhomes Hạ Long Xanh</title>
+  <style>
+    :root {
+      --bg:#0c1520; --bg2:#111d2e; --bg3:#162035;
+      --navy:#1B3A6B; --blue:#2563eb;
+      --gold:#C9A84C; --gl:#E2C06A; --gd:#A8862E;
+      --teal:#14b8a6; --green:#22c55e;
+      --text:#e2e8f0; --muted:#8da4c4;
+      --card:#1a2d45; --border:rgba(201,168,76,.18);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+    /* HEADER */
+    .hdr{background:linear-gradient(160deg,#0e1a2e,#1B3A6B 55%,#1a3a1a);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+    .hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.12) 1.5px,transparent 0);background-size:28px 28px;}
+    .hdr-in{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:16px;}
+    .hdr h1{font-size:clamp(22px,4vw,34px);font-weight:800;color:#fff;margin-bottom:8px;}
+    .tg{background:linear-gradient(135deg,#E2C06A,#C9A84C,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hdr p{color:#aab8d0;font-size:13.5px;line-height:1.7;}
+    .stats{display:flex;justify-content:center;gap:24px;margin-top:20px;flex-wrap:wrap;}
+    .stat{text-align:center;}
+    .stat-n{font-size:22px;font-weight:800;color:var(--gold);}
+    .stat-l{font-size:11px;color:var(--muted);margin-top:2px;}
+
+    /* FILTERS */
+    .filters{background:var(--bg2);padding:16px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+    .fbtn{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.2);color:#94a3b8;font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .fbtn:hover{background:rgba(201,168,76,.12);color:var(--gl);border-color:rgba(201,168,76,.4);}
+    .fbtn.active{background:linear-gradient(135deg,#A8862E,#C9A84C);color:#0c1520;border-color:transparent;}
+
+    /* NOTICE */
+    .notice{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:14px 18px;max-width:860px;margin:20px auto 0;font-size:12.5px;color:#c4a94a;display:flex;gap:10px;align-items:flex-start;}
+    .notice svg{flex-shrink:0;margin-top:1px;}
+
+    /* GRID */
+    main{max-width:1200px;margin:0 auto;padding:24px 16px 80px;}
+    .section-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:28px 0 12px;display:flex;align-items:center;gap:8px;}
+    .section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:8px;}
+
+    /* CARD */
+    .img-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;}
+    .img-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.5);}
+    .img-card.hidden{display:none;}
+    .img-wrap{position:relative;padding-bottom:66%;background:#0e1a2e;overflow:hidden;}
+    .img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s,opacity .3s;opacity:0;}
+    .img-wrap img.loaded{opacity:1;}
+    .img-card:hover .img-wrap img{transform:scale(1.05);}
+    .img-wrap .overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+    .img-card:hover .overlay{opacity:1;}
+    .ov-btn{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:11px;font-weight:600;padding:6px 12px;border-radius:7px;cursor:pointer;transition:background .15s;}
+    .ov-btn:hover{background:rgba(255,255,255,.25);}
+    .img-info{padding:10px 13px;}
+    .img-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px;}
+    .img-title{font-size:12.5px;color:var(--text);line-height:1.4;}
+    .cat-badge{position:absolute;top:8px;left:8px;font-size:9.5px;font-weight:700;text-transform:uppercase;padding:3px 8px;border-radius:5px;letter-spacing:.06em;}
+
+    /* CAT COLORS */
+    .cat-toan-canh .cat-badge{background:rgba(34,197,94,.2);color:#4ade80;border:1px solid rgba(34,197,94,.3);}
+    .cat-quy-hoach .cat-badge{background:rgba(37,99,235,.2);color:#93c5fd;border:1px solid rgba(37,99,235,.3);}
+    .cat-phan-khu .cat-badge{background:rgba(201,168,76,.2);color:#E2C06A;border:1px solid rgba(201,168,76,.3);}
+    .cat-san-pham .cat-badge{background:rgba(168,85,247,.2);color:#d8b4fe;border:1px solid rgba(168,85,247,.3);}
+    .cat-tien-ich .cat-badge{background:rgba(20,184,166,.2);color:#5eead4;border:1px solid rgba(20,184,166,.3);}
+    .cat-thien-nhien .cat-badge{background:rgba(34,197,94,.2);color:#86efac;border:1px solid rgba(34,197,94,.3);}
+    .cat-tien-do .cat-badge{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.3);}
+
+    /* LOADING SKELETON */
+    .skeleton{position:absolute;inset:0;background:linear-gradient(90deg,#1a2d45 25%,#1f3652 50%,#1a2d45 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    /* LIGHTBOX */
+    .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;align-items:center;justify-content:center;flex-direction:column;padding:16px;}
+    .lb.open{display:flex;}
+    .lb-wrap{position:relative;max-width:90vw;max-height:85vh;}
+    .lb-wrap img{max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;box-shadow:0 0 60px rgba(0,0,0,.8);}
+    .lb-close{position:fixed;top:16px;right:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .lb-close:hover{background:rgba(255,255,255,.25);}
+    .lb-info{margin-top:14px;text-align:center;}
+    .lb-title{font-size:13px;color:#e2e8f0;margin-bottom:8px;}
+    .lb-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+    .lb-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;padding:7px 14px;border-radius:7px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+    .lb-btn:hover{background:rgba(201,168,76,.25);border-color:rgba(201,168,76,.5);}
+    .lb-btn.copied{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.4);color:#86efac;}
+    .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background .2s;}
+    .lb-nav:hover{background:rgba(255,255,255,.25);}
+    .lb-prev{left:-56px;}
+    .lb-next{right:-56px;}
+    @media(max-width:600px){.lb-prev{left:-4px}.lb-next{right:-4px}}
+
+    /* EMPTY */
+    .empty{display:none;text-align:center;padding:60px 20px;color:var(--muted);}
+    .empty.show{display:block;}
+
+    /* TIPS BOX */
+    .tips{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:20px 24px;max-width:860px;margin:24px auto 0;}
+    .tips h3{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em;}
+    .tips ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+    .tips li{font-size:12.5px;color:#94a3b8;display:flex;gap:8px;}
+    .tips li::before{content:'→';color:var(--gold);flex-shrink:0;}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-in">
+    <div class="badge">📸 Bộ Ảnh Tài Liệu</div>
+    <h1>Ảnh <span class="tg">Vinhomes Hạ Long Xanh</span></h1>
+    <p>Toàn cảnh · Quy hoạch · Phân khu · Sản phẩm · Tiện ích · Rừng ngập mặn · Tiến độ thực tế<br>Sưu tầm từ nguồn chính thức — click ảnh để xem to, copy link hoặc mở nguồn gốc</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-n" id="total-count">45</div><div class="stat-l">Ảnh tổng cộng</div></div>
+      <div class="stat"><div class="stat-n">7</div><div class="stat-l">Danh mục</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">Nguồn chính thức</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <button class="fbtn active" data-cat="all">🔍 Tất cả</button>
+  <button class="fbtn" data-cat="toan-canh">🌊 Toàn cảnh</button>
+  <button class="fbtn" data-cat="quy-hoach">🗺️ Quy hoạch</button>
+  <button class="fbtn" data-cat="phan-khu">🏘️ Phân khu</button>
+  <button class="fbtn" data-cat="san-pham">🏡 Sản phẩm</button>
+  <button class="fbtn" data-cat="tien-ich">⛳ Tiện ích</button>
+  <button class="fbtn" data-cat="thien-nhien">🌿 Thiên nhiên</button>
+  <button class="fbtn" data-cat="tien-do">🏗️ Tiến độ thực</button>
+</div>
+
+<main>
+  <div class="notice">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#C9A84C" stroke-width="2" d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span>Ảnh được lấy từ các website chính thức của đại lý Vinhomes. Một số ảnh là <strong>ảnh phối cảnh</strong> — không phải ảnh thực tế. Khi dùng cho môi giới, hãy ghi rõ "ảnh phối cảnh thiết kế" để đúng quy định pháp lý.</span>
+  </div>
+
+  <div id="gallery"></div>
+  <div class="empty" id="empty">Không có ảnh trong danh mục này</div>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <div class="lb-wrap">
+    <button class="lb-nav lb-prev" onclick="navLB(-1)">‹</button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-nav lb-next" onclick="navLB(1)">›</button>
+  </div>
+  <div class="lb-info">
+    <div class="lb-title" id="lb-title"></div>
+    <div class="lb-actions">
+      <button class="lb-btn" onclick="copyURL()">📋 Copy Link</button>
+      <a class="lb-btn" id="lb-open" href="#" target="_blank">🔗 Mở nguồn</a>
+      <a class="lb-btn" id="lb-dl" href="#" download target="_blank">⬇️ Tải ảnh</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const IMAGES = [
+  // ── TOÀN CẢNH ─────────────────────────────────────────────
+  {cat:'toan-canh', title:'Phối cảnh ban ngày — Toàn khu HLX', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-ban-ngay.jpg'},
+  {cat:'toan-canh', title:'Phối cảnh hoàng hôn — Toàn khu HLX', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-hoang-hon.jpg'},
+  {cat:'toan-canh', title:'Phối cảnh tổng thể Vinhomes Global Gate Hạ Long', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long.jpg'},
+  {cat:'toan-canh', title:'Phối cảnh Vinhomes Hạ Long Xanh — Nhìn từ trên cao', url:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/04/Phoi-canh-Vinhomes-Ha-Long-Xanh.jpg'},
+  {cat:'toan-canh', title:'Vinhomes Hạ Long Xanh — Banner toàn cảnh', url:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/02/Vinhomes-Ha-Long-Xanh-scaled.jpg'},
+  {cat:'toan-canh', title:'Toàn cảnh khu đô thị bên vịnh di sản', url:'https://canhovinhomes.info/wp-content/uploads/2025/11/vh-HALONG-XANH-1.jpg'},
+  {cat:'toan-canh', title:'Mô hình thành phố trong đảo — Island in city', url:'https://vinglobalgatehalong.com.vn/uploads/img-2019.jpeg'},
+  {cat:'toan-canh', title:'Hệ sinh thái xanh toàn khu', url:'https://vinglobalgatehalong.com.vn/uploads/img-0735.jpeg'},
+  {cat:'toan-canh', title:'Banner Vinhomes Global Gate Hạ Long', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/vinhomes-global-gate-ha-long-banner.jpg'},
+  {cat:'toan-canh', title:'Horizon Bay Hạ Long — Khu vịnh tinh hoa', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/horizon-bay-ha-long.jpg'},
+
+  // ── QUY HOẠCH ─────────────────────────────────────────────
+  {cat:'quy-hoach', title:'Quy hoạch tổng thể Vinhomes Global Gate Hạ Long', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/quy-hoach-tong-the-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'quy-hoach', title:'Vị trí dự án Vinhomes Global Gate Hạ Long', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/vi-tri-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'quy-hoach', title:'Quy hoạch Vinhomes Hạ Long Xanh — Bản đồ chi tiết', url:'https://vinhomescorp.vn/wp-content/uploads/2026/01/quy-hoach-vinhomes-ha-long-xanh.jpg'},
+  {cat:'quy-hoach', title:'Vị trí dự án Vinhomes Hạ Long Xanh — Hạ Long & Quảng Yên', url:'https://vinhomescorp.vn/wp-content/uploads/2026/01/vi-tri-du-an-vinhomes-ha-long-xanh.jpg'},
+  {cat:'quy-hoach', title:'Vị trí chiến lược Vinhomes Hạ Long Xanh', url:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/04/Vi-tri-Vinhomes-Ha-Long-Xanh-1.jpg'},
+  {cat:'quy-hoach', title:'Các phân khu chức năng Vinhomes Hạ Long Xanh', url:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/04/Phan-Khu-Vinhomes-Ha-Long-Xanh.jpg'},
+  {cat:'quy-hoach', title:'Hình ảnh phân khu tổng thể Vin Hạ Long Xanh', url:'https://tgdland.com/wp-content/uploads/2026/02/Hinh-Anh-Phan-khu-tai-Vin-Ha-Long-Xanh-Chuan-scaled.png'},
+
+  // ── PHÂN KHU ──────────────────────────────────────────────
+  {cat:'phan-khu', title:'Phân khu Vịnh Thiên Đường — Banner chính thức', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/phan-khu-vinh-thien-duong-vinhomes-global-gate-ha-long-banner.jpg'},
+  {cat:'phan-khu', title:'Phân khu Vịnh Thiên Đường — Phối cảnh chi tiết', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/phan-khu-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'phan-khu', title:'Tổng thể phân khu Châu Mỹ', url:'https://vinhomehalongxanh.com.vn/wp-content/uploads/2026/04/Tong-the-Phan-khu-Chau-My-Vinhomes-Ha-Long-Xanh-scaled.jpg'},
+  {cat:'phan-khu', title:'Bảng giá phân khu Châu Mỹ', url:'https://tgdland.com/wp-content/uploads/2026/03/gIA-BAN-PHAN-KHU-CHAU-MY-scaled.png'},
+
+  // ── SẢN PHẨM ──────────────────────────────────────────────
+  {cat:'san-pham', title:'Liền kề Tân cổ điển — Vịnh Thiên Đường', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/lien-ke-tan-co-dien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'san-pham', title:'Biệt thự song lập Tân cổ điển — Vịnh Thiên Đường', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/biet-thu-song-lap-tan-co-dien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'san-pham', title:'Biệt thự đơn lập Tân cổ điển — Vịnh Thiên Đường', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/biet-thu-don-lap-tan-co-dien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'san-pham', title:'Biệt thự biển — Vịnh Thiên Đường', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/biet-thu-bien-vinh-thien-duong-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'san-pham', title:'Nhà phố thương mại — Thiết kế hiện đại nhiệt đới', url:'https://tgdland.com/wp-content/uploads/2026/02/z7731571953805_de8289fba16040e55a629b5a06eae8d4-scaled.jpg'},
+  {cat:'san-pham', title:'Liền kề — Phong cách đương đại sang trọng', url:'https://tgdland.com/wp-content/uploads/2026/02/z7731571969283_6064126e3650d19ba3f1a5797271e86b-scaled.jpg'},
+  {cat:'san-pham', title:'Liền kề thương mại — Modern Tropical', url:'https://tgdland.com/wp-content/uploads/2026/02/z7732246690405_580d487c9fb36976dba42ed.jpg'},
+  {cat:'san-pham', title:'Biệt thự cao cấp Vinhomes Hạ Long Xanh', url:'https://canhovinhomes.info/wp-content/uploads/2025/11/biet-thu-cao-cap-min-min.jpg.webp'},
+
+  // ── TIỆN ÍCH ──────────────────────────────────────────────
+  {cat:'tien-ich', title:'Hệ thống tiện ích tổng thể dự án', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/tien-ich-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'tien-ich', title:'Công viên rừng Globe Hạ Long', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/cong-vien-rung-globe-ha-long.jpg'},
+  {cat:'tien-ich', title:'Tàu lượn siêu tốc — Vinwonders Global Gate', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/tau-luon-sieu-toc-vinwonders-global-gate-ha-long.jpg'},
+  {cat:'tien-ich', title:'Sân golf — 54 lỗ quốc tế tiêu chuẩn', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/san-golf-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'tien-ich', title:'Hạ Long Station — Nhà ga đẳng cấp thế giới', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/ha-long-station.jpg'},
+  {cat:'tien-ich', title:'Casino Royal Bay — Khu giải trí cao cấp', url:'https://vinhomesland.vn/wp-content/uploads/2026/04/casino-royal-bay-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'tien-ich', title:'Trung tâm văn hóa sự kiện quốc tế', url:'https://vinhomesland.vn/wp-content/uploads/2026/05/trung-tam-van-hoa-su-kien-vinhomes-global-gate-ha-long.jpg'},
+
+  // ── THIÊN NHIÊN ───────────────────────────────────────────
+  {cat:'thien-nhien', title:'Cầu câu cá — Rừng ngập mặn Wonder Mangrove', url:'https://vinhomesland.vn/wp-content/uploads/2026/05/cau-ca-rung-ngap-man-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'thien-nhien', title:'Cầu gỗ đi bộ — Khám phá rừng ngập mặn', url:'https://vinhomesland.vn/wp-content/uploads/2026/05/cau-go-rung-ngap-man-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'thien-nhien', title:'Cắm trại trong rừng ngập mặn 800ha', url:'https://vinhomesland.vn/wp-content/uploads/2026/05/cam-trai-rung-ngap-man-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'thien-nhien', title:'Café công viên hoàng hôn — View vịnh', url:'https://vinhomesland.vn/wp-content/uploads/2026/05/cafe-cong-vien-hoang-hon-vinhomes-global-gate-ha-long.jpg'},
+  {cat:'thien-nhien', title:'Đường đạo bộ công viên gió ven biển', url:'https://vinhomesland.vn/wp-content/uploads/2026/05/duong-dao-bo-cong-vien-gio-vinhomes-global-gate-ha-long.jpg'},
+
+  // ── TIẾN ĐỘ THỰC TẾ ──────────────────────────────────────
+  {cat:'tien-do', title:'Toàn cảnh công trường từ trên cao — Tháng 5/2026', url:'https://vinhomesvuyenhaiphong.com/uploads/img-0835.jpeg'},
+  {cat:'tien-do', title:'Công trường triển khai thần tốc 3 ca — View tổng', url:'https://vinhomesvuyenhaiphong.com/uploads/img-08321.jpeg'},
+  {cat:'tien-do', title:'Máy móc thiết bị thi công đồng loạt', url:'https://vinhomesvuyenhaiphong.com/uploads/img-08491.jpeg'},
+  {cat:'tien-do', title:'Nhà bán hàng khai trương Tháng 5/2026', url:'https://vinhomesvuyenhaiphong.com/uploads/img-0855.jpeg'},
+  {cat:'tien-do', title:'Tổng quan tiến độ thi công Tháng 5/2026', url:'https://vinhomesvuyenhaiphong.com/uploads/img-0834.jpeg'},
+  {cat:'tien-do', title:'Hệ thống điện chiếu sáng đại lộ đã lắp đặt', url:'https://karahomes.vn/public/files/2026/01/tien_do_vinhomes_ha_long_xanh_1_1.jpg'},
+  {cat:'tien-do', title:'Cầu số 1 hoàn thành — Xe tải trọng lớn đã thông', url:'https://karahomes.vn/public/files/2026/01/tien_do_vinhomes_ha_long_xanh_2_1.jpg'},
+  {cat:'tien-do', title:'Đường nhánh đang trải nhựa — Lòng đường 8-9m', url:'https://karahomes.vn/public/files/2026/01/tien_do_vinhomes_ha_long_xanh_3_1.jpg'},
+  {cat:'tien-do', title:'Đại đô thị 200.000 cư dân tương lai', url:'https://karahomes.vn/public/files/2026/01/vinhomes-ha-long-xanh-11_23.jpg'},
+  {cat:'tien-do', title:'Vật liệu san lấp khai thác trong khu — Tiến độ thực', url:'https://karahomes.vn/public/files/2026/01/tien_do_vinhomes_ha_long_xanh_1.jpg'},
+];
+
+const CAT_LABELS = {
+  'toan-canh': 'Toàn cảnh',
+  'quy-hoach': 'Quy hoạch',
+  'phan-khu': 'Phân khu',
+  'san-pham': 'Sản phẩm',
+  'tien-ich': 'Tiện ích',
+  'thien-nhien': 'Thiên nhiên',
+  'tien-do': 'Tiến độ thực',
+};
+
+const CAT_ORDER = ['toan-canh','quy-hoach','phan-khu','san-pham','tien-ich','thien-nhien','tien-do'];
+const CAT_ICONS = {'toan-canh':'🌊','quy-hoach':'🗺️','phan-khu':'🏘️','san-pham':'🏡','tien-ich':'⛳','thien-nhien':'🌿','tien-do':'🏗️'};
+
+let currentFilter = 'all';
+let currentIndex = 0;
+let visibleImages = [];
+
+// ── BUILD GALLERY ──
+function buildGallery(filter) {
+  currentFilter = filter;
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML = '';
+
+  const cats = filter === 'all' ? CAT_ORDER : [filter];
+  let total = 0;
+
+  cats.forEach(cat => {
+    const imgs = IMAGES.filter(i => i.cat === cat);
+    if (!imgs.length) return;
+    total += imgs.length;
+
+    const label = document.createElement('div');
+    label.className = 'section-label';
+    label.textContent = CAT_ICONS[cat] + ' ' + CAT_LABELS[cat] + ' (' + imgs.length + ')';
+    gallery.appendChild(label);
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+
+    imgs.forEach((img, i) => {
+      const globalIdx = IMAGES.indexOf(img);
+      const card = document.createElement('div');
+      card.className = 'img-card cat-' + img.cat;
+      card.innerHTML = `
+        <div class="img-wrap">
+          <div class="skeleton" id="sk-${globalIdx}"></div>
+          <img data-src="${img.url}" alt="${img.title}" loading="lazy" onload="imgLoaded(this,${globalIdx})" onerror="imgError(this,${globalIdx})">
+          <div class="overlay">
+            <button class="ov-btn" onclick="openLB(${globalIdx},event)">🔍 Xem to</button>
+            <button class="ov-btn" onclick="quickCopy('${img.url}',this,event)">📋 Copy</button>
+          </div>
+        </div>
+        <div class="img-info">
+          <div class="cat-badge">${CAT_LABELS[img.cat]}</div>
+          <div style="height:4px"></div>
+          <div class="img-title">${img.title}</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    gallery.appendChild(grid);
+  });
+
+  document.getElementById('total-count').textContent = total;
+  document.getElementById('empty').classList.toggle('show', total === 0);
+
+  // Lazy load
+  lazyLoad();
+  buildVisible(filter);
+}
+
+function buildVisible(filter) {
+  visibleImages = filter === 'all' ? IMAGES : IMAGES.filter(i => i.cat === filter);
+}
+
+// ── LAZY LOAD ──
+function lazyLoad() {
+  const imgs = document.querySelectorAll('img[data-src]');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const img = e.target;
+          img.src = img.dataset.src;
+          obs.unobserve(img);
+        }
+      });
+    }, {rootMargin:'200px'});
+    imgs.forEach(img => obs.observe(img));
+  } else {
+    imgs.forEach(img => img.src = img.dataset.src);
+  }
+}
+
+function imgLoaded(el, idx) {
+  el.classList.add('loaded');
+  const sk = document.getElementById('sk-' + idx);
+  if (sk) sk.style.display = 'none';
+}
+
+function imgError(el, idx) {
+  const sk = document.getElementById('sk-' + idx);
+  if (sk) { sk.style.background = '#1a2d45'; sk.style.animation = 'none'; }
+  el.style.display = 'none';
+  const wrap = el.closest('.img-wrap');
+  if (wrap) {
+    const err = document.createElement('div');
+    err.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:#4a5568;font-size:11px;';
+    err.innerHTML = '<span style="font-size:24px">🖼️</span><span>Ảnh không tải được</span>';
+    wrap.appendChild(err);
+  }
+}
+
+// ── FILTERS ──
+document.querySelectorAll('.fbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildGallery(btn.dataset.cat);
+  });
+});
+
+// ── LIGHTBOX ──
+function openLB(idx, e) {
+  if (e) e.stopPropagation();
+  currentIndex = visibleImages.findIndex(i => IMAGES.indexOf(i) === idx);
+  if (currentIndex < 0) currentIndex = 0;
+  showLB();
+}
+
+function showLB() {
+  const img = visibleImages[currentIndex];
+  if (!img) return;
+  document.getElementById('lb-img').src = img.url;
+  document.getElementById('lb-title').textContent = img.title;
+  document.getElementById('lb-open').href = img.url;
+  document.getElementById('lb-dl').href = img.url;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLB() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function navLB(dir) {
+  currentIndex = (currentIndex + dir + visibleImages.length) % visibleImages.length;
+  showLB();
+}
+
+function copyURL() {
+  const url = visibleImages[currentIndex]?.url || '';
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.querySelector('.lb-actions .lb-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function quickCopy(url, btn, e) {
+  e.stopPropagation();
+  navigator.clipboard.writeText(url).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✅';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+// keyboard nav
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lb').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowRight') navLB(1);
+  if (e.key === 'ArrowLeft') navLB(-1);
+});
+
+document.getElementById('lb').addEventListener('click', e => {
+  if (e.target === document.getElementById('lb')) closeLB();
+});
+
+// ── INIT ──
+buildGallery('all');
+</script>
+
+<!-- TIPS -->
+<div style="max-width:1200px;margin:0 auto;padding:0 16px 60px;">
+  <div class="tips">
+    <h3>💡 Mẹo sử dụng bộ ảnh cho môi giới HLX</h3>
+    <ul>
+      <li>Ảnh <strong>Toàn cảnh & Phân khu</strong> → dùng đăng FB/Zalo kèm caption "Khám phá [tên phân khu] — View vịnh độc quyền"</li>
+      <li>Ảnh <strong>Tiến độ thực tế</strong> → tạo độ tin cậy cao, nên dùng trong story và reels "Cập nhật công trường HLX hôm nay"</li>
+      <li>Ảnh <strong>Tiện ích</strong> (golf, casino, rừng ngập mặn) → hook mạnh cho content lifestyle "Sống 365 ngày như nghỉ dưỡng"</li>
+      <li>Khi dùng cho quảng cáo: luôn ghi chú <em>"Ảnh phối cảnh thiết kế, chưa phải ảnh thực tế"</em> để tuân thủ quy định</li>
+      <li>Download ảnh về → chỉnh sáng tối nhẹ → thêm logo cá nhân → tăng nhận diện thương hiệu cá nhân môi giới</li>
+      <li>Kết hợp ảnh <strong>Vịnh Thiên Đường</strong> (phase 1 đang mở bán) để content có tính thời sự nhất</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
