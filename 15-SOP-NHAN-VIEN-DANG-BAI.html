@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP Nhân Viên Đăng Bài — Hệ Thống Vận Hành Funnel HLX Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#1B3A6B;--nd:#0e1f38;--nl:#2A5298;
+      --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+      --bg:#0b1628;--bg2:#111927;--bg3:#1a2540;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:#e2e8f0;line-height:1.65;}
+    h1,h2,h3{font-family:'Playfair Display',serif;}
+
+    /* TOP HEADER */
+    .top-bar{background:rgba(201,168,76,.12);border-bottom:1px solid rgba(201,168,76,.25);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .top-bar .doc-title{font-size:12px;font-weight:700;color:var(--gl);letter-spacing:.08em;}
+    .top-bar .doc-meta{display:flex;gap:16px;align-items:center;}
+    .top-bar .meta-item{font-size:11px;color:#64748b;}
+    .top-bar .meta-item strong{color:#94a3b8;}
+
+    /* STICKY NAV TABS */
+    .tab-nav{position:sticky;top:0;z-index:200;background:rgba(11,22,40,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07);display:flex;overflow-x:auto;gap:0;}
+    .tab-nav::-webkit-scrollbar{display:none;}
+    .tab-btn{padding:12px 18px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:transparent;color:#64748b;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;font-family:'Be Vietnam Pro',sans-serif;letter-spacing:.04em;}
+    .tab-btn:hover{color:#e2e8f0;background:rgba(255,255,255,.04);}
+    .tab-btn.active{color:var(--gl);border-bottom-color:var(--gl);}
+    .tab-panel{display:none;max-width:920px;margin:0 auto;padding:40px 20px 80px;}
+    .tab-panel.active{display:block;}
+
+    /* HERO (inside overview tab) */
+    .hero{background:linear-gradient(160deg,#06101e,#0e1f38 55%,#1a1005);border-radius:20px;padding:44px 32px 38px;text-align:center;position:relative;overflow:hidden;margin-bottom:32px;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.12) 1.5px,transparent 0);background-size:26px 26px;}
+    .hero-in{position:relative;z-index:1;}
+    .badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:5px 16px;border-radius:99px;margin-bottom:16px;}
+    .hero h1{font-size:clamp(22px,3.5vw,34px);color:#fff;line-height:1.25;margin-bottom:10px;}
+    .tg{background:linear-gradient(135deg,#E2C06A,#C9A84C,#A8862E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero p{color:#94a3b8;font-size:13.5px;max-width:560px;margin:0 auto;}
+
+    /* SLABEL */
+    .slabel{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+    h2.sh{font-size:clamp(18px,2.5vw,24px);color:#fff;margin-bottom:6px;}
+    .sdesc{color:#64748b;font-size:13px;margin-bottom:24px;}
+
+    /* ALERT BOXES */
+    .alert{border-radius:12px;padding:16px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:flex-start;}
+    .alert.gold{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);}
+    .alert.blue{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);}
+    .alert.green{background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);}
+    .alert.red{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);}
+    .alert-icon{font-size:20px;flex-shrink:0;}
+    .alert-body h4{font-family:'Be Vietnam Pro',sans-serif;font-weight:700;font-size:13.5px;color:#fff;margin-bottom:3px;}
+    .alert-body p{font-size:12.5px;color:#94a3b8;line-height:1.6;}
+    .alert-body p strong{color:#e2e8f0;}
+
+    /* FUNNEL DIAGRAM */
+    .funnel-wrap{background:var(--bg2);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:32px;margin-bottom:28px;}
+    .funnel-stages{display:flex;flex-direction:column;align-items:center;gap:0;}
+    .f-stage{width:100%;max-width:680px;position:relative;}
+    .f-box{border-radius:12px;padding:16px 24px;text-align:center;position:relative;}
+    .f-box h3{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:15px;margin-bottom:4px;}
+    .f-box p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.5;}
+    .f-arrow{text-align:center;font-size:24px;color:rgba(201,168,76,.4);line-height:1;padding:4px 0;}
+    /* Stage colors */
+    .s-seed{background:linear-gradient(135deg,rgba(234,88,12,.15),rgba(234,88,12,.08));border:1px solid rgba(234,88,12,.3);}
+    .s-seed h3{color:#fb923c;}
+    .s-warm{background:linear-gradient(135deg,rgba(234,179,8,.12),rgba(234,179,8,.06));border:1px solid rgba(234,179,8,.3);}
+    .s-warm h3{color:#fde047;}
+    .s-trust{background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(16,185,129,.06));border:1px solid rgba(16,185,129,.3);}
+    .s-trust h3{color:#34d399;}
+    .s-pitch{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(124,58,237,.08));border:1px solid rgba(124,58,237,.3);}
+    .s-pitch h3{color:#c4b5fd;}
+    .s-close{background:linear-gradient(135deg,rgba(201,168,76,.18),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.4);}
+    .s-close h3{color:var(--gl);}
+    /* Platform tags inside funnel */
+    .plats{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+    .plt{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px;}
+    .plt-fb{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.2);}
+    .plt-zalo{background:rgba(13,148,136,.15);color:#5eead4;border:1px solid rgba(13,148,136,.2);}
+    .plt-tt{background:rgba(244,114,182,.15);color:#f9a8d4;border:1px solid rgba(244,114,182,.2);}
+    .plt-ig{background:rgba(168,85,247,.15);color:#d8b4fe;border:1px solid rgba(168,85,247,.2);}
+    .plt-yt{background:rgba(220,38,38,.15);color:#fca5a5;border:1px solid rgba(220,38,38,.2);}
+    .plt-group{background:rgba(249,115,22,.15);color:#fdba74;border:1px solid rgba(249,115,22,.2);}
+    .plt-dm{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.2);}
+
+    /* PLATFORM MAP */
+    .plat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:28px;}
+    .plat-card{background:var(--bg2);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,.07);}
+    .plat-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+    .plat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .plat-card h3{font-family:'Be Vietnam Pro',sans-serif;font-weight:700;font-size:14px;color:#fff;}
+    .plat-card .plat-role{font-size:11px;color:#64748b;margin-top:1px;}
+    .group-list{list-style:none;}
+    .group-list li{font-size:12px;color:#94a3b8;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;gap:8px;}
+    .group-list li:last-child{border:none;}
+    .group-list .gname{flex:1;}
+    .group-list .gmem{font-size:10.5px;color:#475569;white-space:nowrap;}
+    .group-list .gpriority{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;}
+    .gp-hot{background:rgba(220,38,38,.15);color:#fca5a5;}
+    .gp-warm{background:rgba(234,179,8,.12);color:#fde047;}
+    .gp-cold{background:rgba(100,116,139,.12);color:#94a3b8;}
+
+    /* WEEKLY CALENDAR */
+    .week-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+    .week-btn{padding:7px 16px;font-size:12px;font-weight:700;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#64748b;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s;}
+    .week-btn:hover{border-color:rgba(201,168,76,.3);color:#94a3b8;}
+    .week-btn.active{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.35);color:var(--gl);}
+    .week-panel{display:none;}
+    .week-panel.active{display:block;}
+
+    .day-row{background:var(--bg2);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;margin-bottom:12px;}
+    .day-head{display:flex;align-items:center;gap:12px;padding:12px 18px;cursor:pointer;transition:background .15s;}
+    .day-head:hover{background:rgba(255,255,255,.03);}
+    .day-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+    .day-head h4{font-family:'Be Vietnam Pro',sans-serif;font-weight:700;font-size:13.5px;color:#fff;flex:1;}
+    .day-head .day-meta{font-size:11.5px;color:#475569;display:flex;gap:10px;align-items:center;}
+    .day-head .day-count{font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px;background:rgba(201,168,76,.1);color:var(--gl);border:1px solid rgba(201,168,76,.2);}
+    .day-body{display:none;border-top:1px solid rgba(255,255,255,.06);padding:18px;}
+    .day-body.open{display:block;}
+
+    /* TASK ITEM */
+    .task-item{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start;}
+    .task-num{width:24px;height:24px;border-radius:6px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gl);flex-shrink:0;margin-top:1px;}
+    .task-body{flex:1;}
+    .task-body .task-title{font-weight:700;font-size:13px;color:#e2e8f0;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .task-body .task-where{font-size:11.5px;color:#64748b;margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+
+    /* POST BLOCK */
+    .post-block{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+    .post-block .pb-label{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#475569;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
+    .post-block .pb-content{font-size:13px;color:#cbd5e1;line-height:1.8;white-space:pre-wrap;word-break:break-word;margin-bottom:10px;}
+    .post-block .hashtags{font-size:12px;color:#3b82f6;line-height:1.7;margin-bottom:10px;}
+    .copy-btn{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gl);font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:7px;cursor:pointer;transition:all .2s;font-family:'Be Vietnam Pro',sans-serif;}
+    .copy-btn:hover{background:rgba(201,168,76,.2);}
+    .copy-btn.copied{background:rgba(22,163,74,.15);border-color:rgba(22,163,74,.3);color:#4ade80;}
+
+    /* CHECKLIST */
+    .checklist{list-style:none;margin-bottom:20px;}
+    .checklist li{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:9px;margin-bottom:5px;font-size:12.5px;color:#94a3b8;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);}
+    .checklist li .ci{font-size:15px;flex-shrink:0;}
+    .checklist li strong{color:#e2e8f0;display:block;font-size:13px;margin-bottom:1px;}
+
+    /* STATS ROW */
+    .stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:24px;}
+    .stat-box{background:var(--bg2);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;text-align:center;}
+    .stat-box .sn{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--gl);margin-bottom:3px;}
+    .stat-box .sl{font-size:11px;color:#64748b;line-height:1.35;}
+
+    /* TABLE */
+    .tbl-wrap{overflow-x:auto;margin-bottom:24px;}
+    table{width:100%;border-collapse:collapse;font-size:12.5px;}
+    th{background:rgba(201,168,76,.1);color:var(--gl);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:10px 12px;text-align:left;}
+    td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:#94a3b8;vertical-align:top;}
+    tr:hover td{background:rgba(255,255,255,.02);}
+    td strong{color:#e2e8f0;}
+
+    /* RULES BOX */
+    .rules{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2);border-radius:14px;padding:20px 22px;margin-bottom:24px;}
+    .rules h4{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:14px;color:#fca5a5;margin-bottom:12px;}
+    .rules ul{list-style:none;}
+    .rules ul li{font-size:12.5px;color:#94a3b8;padding:4px 0;display:flex;gap:8px;}
+    .rules ul li::before{content:'⚠️';flex-shrink:0;}
+
+    /* DIVIDER */
+    hr{border:none;border-top:1px solid rgba(255,255,255,.07);margin:28px 0;}
+
+    @media(max-width:600px){
+      .plat-grid{grid-template-columns:1fr;}
+      .stats-row{grid-template-columns:1fr 1fr;}
+      .tab-panel{padding:28px 14px 60px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="doc-title">📋 SOP NHÂN VIÊN ĐĂNG BÀI — HLX KIT</div>
+  <div class="doc-meta">
+    <div class="meta-item"><strong>Version:</strong> 1.0 · Tháng 5/2026</div>
+    <div class="meta-item"><strong>Cập nhật:</strong> Hàng tuần</div>
+    <div class="meta-item"><strong>Người dùng:</strong> Nhân viên đăng bài</div>
+  </div>
+</div>
+
+<!-- STICKY TABS -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('overview',this)">🗺️ Tổng Quan & Sơ Đồ</button>
+  <button class="tab-btn" onclick="switchTab('platforms',this)">📡 Nền Tảng & Nhóm</button>
+  <button class="tab-btn" onclick="switchTab('calendar',this)">📅 Lịch Đăng Bài</button>
+  <button class="tab-btn" onclick="switchTab('posts',this)">✍️ Nội Dung Copy-Paste</button>
+  <button class="tab-btn" onclick="switchTab('seeding',this)">🌱 Seeding Nhóm Môi Giới</button>
+  <button class="tab-btn" onclick="switchTab('rules',this)">📏 Quy Tắc & Checklist</button>
+</div>
+
+<!-- ═══════════════════════════════ TAB 1: OVERVIEW ═══════════════════════════════ -->
+<div class="tab-panel active" id="tab-overview">
+  <div class="hero">
+    <div class="hero-in">
+      <div class="badge">📋 SOP · Delivery Operations · AI Agent Business Kit</div>
+      <h1>Hệ Thống Vận Hành <span class="tg">Funnel HLX Kit</span></h1>
+      <p>Tài liệu hướng dẫn duy nhất cho nhân viên đăng bài. Đọc 1 lần, làm theo mỗi ngày. Không cần hỏi lại.</p>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="sn">4</div><div class="sl">Nền tảng chính cần đăng</div></div>
+    <div class="stat-box"><div class="sn">12+</div><div class="sl">Nhóm FB/Zalo được chỉ định</div></div>
+    <div class="stat-box"><div class="sn">2</div><div class="sl">Bài đăng / ngày (tối thiểu)</div></div>
+    <div class="stat-box"><div class="sn">8 tuần</div><div class="sl">Chu kỳ Trust Ladder</div></div>
+    <div class="stat-box"><div class="sn">30</div><div class="sl">Bài post sẵn copy-paste</div></div>
+    <div class="stat-box"><div class="sn">5</div><div class="sl">Script seeding nhóm môi giới</div></div>
+  </div>
+
+  <div class="alert gold">
+    <div class="alert-icon">🎯</div>
+    <div class="alert-body">
+      <h4>Mục tiêu của toàn bộ hệ thống này là gì?</h4>
+      <p>Xây dựng <strong>tín nhiệm với cộng đồng môi giới HLX</strong> → Họ thấy chủ tài khoản là chuyên gia → Họ tin và mua kit. Mọi bài đăng đều phục vụ 1 trong 4 mục đích: <strong>Giá trị → Trust → Demo → Pitch</strong>. Không đăng random, không đăng chỉ để đăng.</p>
+    </div>
+  </div>
+
+  <!-- FUNNEL DIAGRAM -->
+  <p class="slabel">🗺️ Sơ Đồ Funnel Tổng Thể</p>
+  <h2 class="sh">5 Giai Đoạn — Ai Đi Qua Funnel</h2>
+  <p class="sdesc">Mỗi bài đăng đẩy người xem tiến 1 bước trong hành trình này. Nhiệm vụ của nhân viên là giữ dòng chảy liên tục.</p>
+
+  <div class="funnel-wrap">
+    <div class="funnel-stages">
+
+      <!-- Stage 1 -->
+      <div class="f-stage">
+        <div class="f-box s-seed">
+          <h3>🌱 GIAI ĐOẠN 1 — SEEDING (Tuần 1–2)</h3>
+          <p>Xuất hiện trong các nhóm môi giới HLX với nội dung thuần giá trị. Không bán. Chỉ cho đi.</p>
+          <div class="plats">
+            <span class="plt plt-group">📱 Group FB Môi Giới HLX</span>
+            <span class="plt plt-group">💬 Group Zalo Sàn</span>
+            <span class="plt plt-fb">👤 Trang cá nhân FB</span>
+          </div>
+          <p style="margin-top:8px;font-size:11.5px;opacity:.7">→ Loại nội dung: Báo cáo thị trường · Số liệu thú vị · Ảnh dự án · Mẹo bán hàng</p>
+        </div>
+      </div>
+      <div class="f-arrow">↓</div>
+
+      <!-- Stage 2 -->
+      <div class="f-stage">
+        <div class="f-box s-warm">
+          <h3>🔥 GIAI ĐOẠN 2 — WARM UP (Tuần 2–4)</h3>
+          <p>Tăng tương tác 2 chiều. Họ bắt đầu theo dõi, comment, hỏi thêm. Đây là giai đoạn "làm quen".</p>
+          <div class="plats">
+            <span class="plt plt-fb">👤 Trang cá nhân FB</span>
+            <span class="plt plt-zalo">💚 Trang Zalo OA</span>
+            <span class="plt plt-tt">🎵 TikTok</span>
+          </div>
+          <p style="margin-top:8px;font-size:11.5px;opacity:.7">→ Loại nội dung: Story "hậu trường" · Short video HLX · Poll/câu hỏi tương tác · So sánh đối thủ</p>
+        </div>
+      </div>
+      <div class="f-arrow">↓</div>
+
+      <!-- Stage 3 -->
+      <div class="f-stage">
+        <div class="f-box s-trust">
+          <h3>✅ GIAI ĐOẠN 3 — XÂY TRUST (Tuần 3–6)</h3>
+          <p>Chia sẻ kiến thức chuyên sâu. Họ thấy bạn hiểu HLX hơn bất kỳ ai. Bắt đầu nhận DM hỏi thêm.</p>
+          <div class="plats">
+            <span class="plt plt-fb">👤 Trang cá nhân FB</span>
+            <span class="plt plt-zalo">💚 Zalo</span>
+            <span class="plt plt-dm">📩 DM/Inbox cá nhân</span>
+          </div>
+          <p style="margin-top:8px;font-size:11.5px;opacity:.7">→ Loại nội dung: Phân tích tâm lý mua · Case study thực tế · Script tư vấn · Tặng quà (report)</p>
+        </div>
+      </div>
+      <div class="f-arrow">↓</div>
+
+      <!-- Stage 4 -->
+      <div class="f-stage">
+        <div class="f-box s-pitch">
+          <h3>💼 GIAI ĐOẠN 4 — DEMO & PITCH (Tuần 5–7)</h3>
+          <p>Lần đầu tiên đề cập đến kit. Demo trước, bán sau. Không hard-sell. Mời xem thử.</p>
+          <div class="plats">
+            <span class="plt plt-fb">👤 FB cá nhân</span>
+            <span class="plt plt-dm">📩 DM + Inbox</span>
+            <span class="plt plt-zalo">💚 Zalo cá nhân</span>
+          </div>
+          <p style="margin-top:8px;font-size:11.5px;opacity:.7">→ Loại nội dung: Review kit · Testimonial đầu tiên · "Tôi đang dùng cái này" · Link demo miễn phí</p>
+        </div>
+      </div>
+      <div class="f-arrow">↓</div>
+
+      <!-- Stage 5 -->
+      <div class="f-stage">
+        <div class="f-box s-close">
+          <h3>🏆 GIAI ĐOẠN 5 — CHỐT & LAN RỘNG (Tuần 7–8+)</h3>
+          <p>Chốt sale từ những người đã warm. Đồng thời tạo social proof để pull thêm người mới vào phễu.</p>
+          <div class="plats">
+            <span class="plt plt-fb">👤 FB</span>
+            <span class="plt plt-zalo">💚 Zalo</span>
+            <span class="plt plt-dm">📩 DM</span>
+            <span class="plt plt-group">📱 Groups</span>
+          </div>
+          <p style="margin-top:8px;font-size:11.5px;opacity:.7">→ Loại nội dung: Testimonial khách mua · Kết quả thực tế · Giới thiệu gói sỉ F1/F2 · Scarcity (slots còn lại)</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUICK RULES -->
+  <div class="alert blue">
+    <div class="alert-icon">📌</div>
+    <div class="alert-body">
+      <h4>3 Nguyên tắc VÀNG khi đăng bài</h4>
+      <p><strong>1. Không đăng hơn 1 bài "bán hàng" / 5 bài giá trị</strong> — Tỷ lệ 1:5. Nếu vi phạm → bị block group, mất trust.<br>
+      <strong>2. Luôn có hình ảnh</strong> — Bài không có ảnh/video tiếp cận giảm 70%. Dùng bộ ảnh HLX sẵn có.<br>
+      <strong>3. Reply comment trong 2h đầu</strong> — 2h đầu là thời gian vàng để tăng reach. Phải có mặt để phản hồi.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 2: PLATFORMS ═══════════════════════════════ -->
+<div class="tab-panel" id="tab-platforms">
+  <p class="slabel">📡 Bản Đồ Nền Tảng</p>
+  <h2 class="sh">Đăng Ở Đâu — Nhóm Nào — Ưu Tiên Ra Sao</h2>
+  <p class="sdesc">Mỗi nền tảng có vai trò khác nhau trong funnel. Không phải mọi bài đều cần đăng mọi nơi.</p>
+
+  <div class="plat-grid">
+    <!-- Facebook Personal -->
+    <div class="plat-card" style="border-color:rgba(59,130,246,.25);">
+      <div class="plat-head">
+        <div class="plat-icon" style="background:rgba(59,130,246,.12);">👤</div>
+        <div>
+          <h3>Facebook Cá Nhân</h3>
+          <div class="plat-role">🔥 Kênh chính — Đăng HÀNG NGÀY</div>
+        </div>
+      </div>
+      <ul class="group-list">
+        <li><span class="gname">Trang cá nhân của chủ (không phải fanpage)</span><span class="gmem">—</span><span class="gpriority gp-hot">BẮT BUỘC</span></li>
+        <li><span class="gname">Đăng story FB mỗi sáng 7–8h</span><span class="gmem">—</span><span class="gpriority gp-hot">HÀNG NGÀY</span></li>
+        <li><span class="gname">Bài viết feed: 1 bài/ngày, 9–10h sáng</span><span class="gmem">—</span><span class="gpriority gp-hot">HÀNG NGÀY</span></li>
+      </ul>
+    </div>
+
+    <!-- Facebook Groups -->
+    <div class="plat-card" style="border-color:rgba(249,115,22,.25);">
+      <div class="plat-head">
+        <div class="plat-icon" style="background:rgba(249,115,22,.12);">👥</div>
+        <div>
+          <h3>Groups Facebook Môi Giới</h3>
+          <div class="plat-role">🌱 Seeding — 3–4 group/ngày</div>
+        </div>
+      </div>
+      <ul class="group-list">
+        <li><span class="gname">Hội Môi Giới BĐS Quảng Ninh</span><span class="gmem">2.000–5.000</span><span class="gpriority gp-hot">HOT</span></li>
+        <li><span class="gname">Môi Giới Vinhomes Hạ Long</span><span class="gmem">1.000–3.000</span><span class="gpriority gp-hot">HOT</span></li>
+        <li><span class="gname">BĐS Hạ Long — Mua Bán Cho Thuê</span><span class="gmem">5.000–20.000</span><span class="gpriority gp-warm">WARM</span></li>
+        <li><span class="gname">Đầu Tư BĐS Quảng Ninh</span><span class="gmem">3.000–10.000</span><span class="gpriority gp-warm">WARM</span></li>
+        <li><span class="gname">Vinhomes Hạ Long Xanh — Cộng Đồng</span><span class="gmem">500–2.000</span><span class="gpriority gp-hot">HOT</span></li>
+        <li><span class="gname">Nhà Đất Hạ Long Quảng Ninh</span><span class="gmem">10.000+</span><span class="gpriority gp-cold">COLD</span></li>
+      </ul>
+    </div>
+
+    <!-- Zalo -->
+    <div class="plat-card" style="border-color:rgba(13,148,136,.25);">
+      <div class="plat-head">
+        <div class="plat-icon" style="background:rgba(13,148,136,.12);">💚</div>
+        <div>
+          <h3>Zalo Cá Nhân + OA</h3>
+          <div class="plat-role">✅ Chuyển đổi cao — Đăng 1 lần/ngày</div>
+        </div>
+      </div>
+      <ul class="group-list">
+        <li><span class="gname">Story Zalo cá nhân — sáng 7–8h</span><span class="gmem">—</span><span class="gpriority gp-hot">HÀNG NGÀY</span></li>
+        <li><span class="gname">Bài đăng Zalo OA (nếu có)</span><span class="gmem">—</span><span class="gpriority gp-warm">3 lần/tuần</span></li>
+        <li><span class="gname">Group Zalo Môi Giới HLX (xin vào)</span><span class="gmem">200–500</span><span class="gpriority gp-hot">HOT</span></li>
+        <li><span class="gname">Group Zalo Sàn F2 (khi được mời)</span><span class="gmem">20–100</span><span class="gpriority gp-warm">WARM</span></li>
+        <li><span class="gname">DM cá nhân (follow up leads)</span><span class="gmem">—</span><span class="gpriority gp-hot">HÀNG NGÀY</span></li>
+      </ul>
+    </div>
+
+    <!-- TikTok -->
+    <div class="plat-card" style="border-color:rgba(244,114,182,.25);">
+      <div class="plat-head">
+        <div class="plat-icon" style="background:rgba(244,114,182,.12);">🎵</div>
+        <div>
+          <h3>TikTok</h3>
+          <div class="plat-role">📢 Reach rộng — 3–4 video/tuần</div>
+        </div>
+      </div>
+      <ul class="group-list">
+        <li><span class="gname">Video ngắn 15–30s (ảnh HLX + caption)</span><span class="gmem">—</span><span class="gpriority gp-warm">3x/tuần</span></li>
+        <li><span class="gname">Trending audio + ảnh dự án</span><span class="gmem">—</span><span class="gpriority gp-warm">2x/tuần</span></li>
+        <li><span class="gname">Hashtag: #hlx #vinhomeshalongxanh #moigioi</span><span class="gmem">—</span><span class="gpriority gp-hot">MỌI BÀI</span></li>
+      </ul>
+    </div>
+
+    <!-- Instagram -->
+    <div class="plat-card" style="border-color:rgba(168,85,247,.25);">
+      <div class="plat-head">
+        <div class="plat-icon" style="background:rgba(168,85,247,.12);">📸</div>
+        <div>
+          <h3>Instagram</h3>
+          <div class="plat-role">📊 Phụ — 3 bài/tuần</div>
+        </div>
+      </div>
+      <ul class="group-list">
+        <li><span class="gname">Repost ảnh đẹp HLX từ gallery</span><span class="gmem">—</span><span class="gpriority gp-cold">3x/tuần</span></li>
+        <li><span class="gname">Story: Quote + ảnh HLX</span><span class="gmem">—</span><span class="gpriority gp-cold">Hàng ngày</span></li>
+        <li><span class="gname">Reels: Dùng video TikTok repost</span><span class="gmem">—</span><span class="gpriority gp-cold">3x/tuần</span></li>
+      </ul>
+    </div>
+
+    <!-- DM Cá Nhân -->
+    <div class="plat-card" style="border-color:rgba(34,197,94,.25);">
+      <div class="plat-head">
+        <div class="plat-icon" style="background:rgba(34,197,94,.12);">📩</div>
+        <div>
+          <h3>DM / Inbox Cá Nhân</h3>
+          <div class="plat-role">💰 Chốt sale — Hàng ngày</div>
+        </div>
+      </div>
+      <ul class="group-list">
+        <li><span class="gname">Gửi quà tặng (báo cáo PDF) cho 5 lead mới/ngày</span><span class="gmem">5/ngày</span><span class="gpriority gp-hot">BẮT BUỘC</span></li>
+        <li><span class="gname">Follow up những người đã xem link</span><span class="gmem">—</span><span class="gpriority gp-hot">HÀNG NGÀY</span></li>
+        <li><span class="gname">Reply mọi inbox/DM trong 2h</span><span class="gmem">—</span><span class="gpriority gp-hot">BẮT BUỘC</span></li>
+        <li><span class="gname">Pitch kit cho người đã warm (tuần 5+)</span><span class="gmem">—</span><span class="gpriority gp-warm">TUẦN 5+</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Nền Tảng</th>
+          <th>Tần Suất</th>
+          <th>Giờ Đăng Tốt Nhất</th>
+          <th>Mục Đích Chính</th>
+          <th>Ưu Tiên</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>FB Cá Nhân</strong></td><td>1 bài + story/ngày</td><td>9–10h sáng</td><td>Build trust, tương tác</td><td style="color:#f87171">🔥 Cao nhất</td></tr>
+        <tr><td><strong>FB Groups</strong></td><td>3–4 group/ngày, 1 bài/group</td><td>9–11h, 19–21h</td><td>Seeding, reach mới</td><td style="color:#f87171">🔥 Cao</td></tr>
+        <tr><td><strong>Zalo Story</strong></td><td>1 story/ngày</td><td>7–8h sáng</td><td>Warm audience</td><td style="color:#fde047">⚡ Cao</td></tr>
+        <tr><td><strong>Zalo Groups</strong></td><td>2–3 bài/tuần</td><td>9–10h, 20–21h</td><td>Seeding nhóm sàn</td><td style="color:#fde047">⚡ Trung bình</td></tr>
+        <tr><td><strong>TikTok</strong></td><td>3–4 video/tuần</td><td>18–21h</td><td>Reach rộng, viral</td><td style="color:#4ade80">✓ Trung bình</td></tr>
+        <tr><td><strong>Instagram</strong></td><td>3 bài/tuần</td><td>18–20h</td><td>Brand image</td><td style="color:#64748b">→ Thấp</td></tr>
+        <tr><td><strong>DM cá nhân</strong></td><td>5–10 tin nhắn/ngày</td><td>Bất kỳ lúc nào</td><td>Chốt sale</td><td style="color:#f87171">🔥 Cao nhất</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 3: CALENDAR ═══════════════════════════════ -->
+<div class="tab-panel" id="tab-calendar">
+  <p class="slabel">📅 Lịch Đăng Bài</p>
+  <h2 class="sh">8 Tuần — Từng Ngày Làm Gì</h2>
+  <p class="sdesc">Mỗi tuần có chủ đề riêng. Mỗi ngày có nhiệm vụ cụ thể. Click vào từng ngày để xem chi tiết.</p>
+
+  <div class="week-tabs">
+    <button class="week-btn active" onclick="switchWeek('w1',this)">Tuần 1 · Seeding</button>
+    <button class="week-btn" onclick="switchWeek('w2',this)">Tuần 2 · Giá Trị</button>
+    <button class="week-btn" onclick="switchWeek('w3',this)">Tuần 3 · Chuyên Gia</button>
+    <button class="week-btn" onclick="switchWeek('w4',this)">Tuần 4 · Tâm Lý</button>
+    <button class="week-btn" onclick="switchWeek('w5',this)">Tuần 5 · Demo</button>
+    <button class="week-btn" onclick="switchWeek('w6',this)">Tuần 6 · Testimonial</button>
+    <button class="week-btn" onclick="switchWeek('w7',this)">Tuần 7 · Pitch</button>
+    <button class="week-btn" onclick="switchWeek('w8',this)">Tuần 8 · Scale</button>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-panel active" id="wk-w1">
+    <div class="alert gold"><div class="alert-icon">🎯</div><div class="alert-body"><h4>Chủ đề Tuần 1: SEEDING — Xuất Hiện, Cho Đi, Không Bán</h4><p>Mục tiêu: Gia nhập 6–8 nhóm FB/Zalo. Đăng 5 bài giá trị thuần. Kết bạn 20–30 môi giới active. <strong>Tuyệt đối không đề cập kit hay bán gì.</strong></p></div></div>
+    <div id="days-w1"></div>
+  </div>
+  <!-- WEEK 2 -->
+  <div class="week-panel" id="wk-w2">
+    <div class="alert gold"><div class="alert-icon">🔥</div><div class="alert-body"><h4>Chủ đề Tuần 2: WARM UP — Ảnh Đẹp + Số Liệu Gây Chú Ý</h4><p>Mục tiêu: Tăng tương tác bài. Đăng ảnh HLX chất lượng cao + caption hấp dẫn. Bắt đầu nhận follow + kết bạn từ môi giới chưa quen.</p></div></div>
+    <div id="days-w2"></div>
+  </div>
+  <!-- WEEK 3 -->
+  <div class="week-panel" id="wk-w3">
+    <div class="alert green"><div class="alert-icon">✅</div><div class="alert-body"><h4>Chủ đề Tuần 3: CHUYÊN GIA — Kiến Thức Sâu Về HLX</h4><p>Mục tiêu: Chia sẻ các báo cáo nghiên cứu, phân tích thị trường. Tặng quà (PDF báo cáo) cho người inbox. Bắt đầu DM 5 người/ngày.</p></div></div>
+    <div id="days-w3"></div>
+  </div>
+  <!-- WEEK 4 -->
+  <div class="week-panel" id="wk-w4">
+    <div class="alert blue"><div class="alert-icon">🧠</div><div class="alert-body"><h4>Chủ đề Tuần 4: TÂM LÝ — Hiểu Sâu Khách Hàng & Đối Thủ</h4><p>Mục tiêu: Đăng phân tích tâm lý mua BĐS, phân tích đối thủ cạnh tranh. Người đọc cảm thấy "người này hiểu game hơn mọi người".</p></div></div>
+    <div id="days-w4"></div>
+  </div>
+  <!-- WEEK 5 -->
+  <div class="week-panel" id="wk-w5">
+    <div class="alert gold"><div class="alert-icon">💼</div><div class="alert-body"><h4>Chủ đề Tuần 5: DEMO — Cho Xem Kit Không Bán</h4><p>Mục tiêu: Lần đầu tiên đề cập kit. "Tôi đang dùng cái này để làm việc", "Tôi vừa tạo xong bộ tài liệu này". Không pitch, chỉ show.</p></div></div>
+    <div id="days-w5"></div>
+  </div>
+  <!-- WEEK 6 -->
+  <div class="week-panel" id="wk-w6">
+    <div class="alert green"><div class="alert-icon">⭐</div><div class="alert-body"><h4>Chủ đề Tuần 6: TESTIMONIAL — Bằng Chứng Người Khác Dùng</h4><p>Mục tiêu: Đăng feedback của người đã mua/dùng thử kit. Chụp màn hình tin nhắn (ẩn tên nếu cần). Social proof là vũ khí mạnh nhất.</p></div></div>
+    <div id="days-w6"></div>
+  </div>
+  <!-- WEEK 7 -->
+  <div class="week-panel" id="wk-w7">
+    <div class="alert gold"><div class="alert-icon">🏆</div><div class="alert-body"><h4>Chủ đề Tuần 7: PITCH — Chào Hàng Có Cơ Sở Trust</h4><p>Mục tiêu: Đăng bài pitch kit 2–3 lần/tuần. Đây là lúc duy nhất được "bán". Nhưng pitch dựa trên value đã build 6 tuần trước — không hard sell.</p></div></div>
+    <div id="days-w7"></div>
+  </div>
+  <!-- WEEK 8 -->
+  <div class="week-panel" id="wk-w8">
+    <div class="alert blue"><div class="alert-icon">📈</div><div class="alert-body"><h4>Chủ đề Tuần 8: SCALE — Mở Rộng Sang F1/F2 + Lặp Lại</h4><p>Mục tiêu: Pitch gói sỉ cho trưởng nhóm. Xin referral từ người đã mua. Reset sang tuần 1 với audience mới (nhóm mới, target mới).</p></div></div>
+    <div id="days-w8"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 4: POSTS ═══════════════════════════════ -->
+<div class="tab-panel" id="tab-posts">
+  <p class="slabel">✍️ Ngân Hàng Nội Dung</p>
+  <h2 class="sh">30+ Bài Post Sẵn — Copy Paste Ngay</h2>
+  <p class="sdesc">Mỗi bài đã có caption đầy đủ, hashtag và chỉ định nền tảng. Chọn đúng tuần → đăng đúng loại bài.</p>
+
+  <div class="alert blue">
+    <div class="alert-icon">📌</div>
+    <div class="alert-body">
+      <h4>Cách dùng tab này</h4>
+      <p>Tìm bài theo tuần và loại nội dung. Nhấn <strong>Copy Caption</strong> → paste vào nền tảng → thêm ảnh từ bộ gallery HLX (link: <a href="ANH-HLX-GALLERY.html" target="_blank" style="color:var(--gl)">ANH-HLX-GALLERY.html</a>). Xem thêm 30 bài đầy đủ tại <a href="SOCIAL-POST-KIT-HLX.html" target="_blank" style="color:var(--gl)">SOCIAL-POST-KIT-HLX.html</a>.</p>
+    </div>
+  </div>
+
+  <!-- POST 1 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>📊 BÀI 1 — Seeding · Số liệu gây chú ý · Tuần 1</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-fb">FB</span><span class="plt plt-group">Groups</span><span class="plt plt-zalo">Zalo</span></div>
+    </div>
+    <div class="pb-content" id="p1">🔥 Số liệu khiến tôi KHÔNG NGỜ về Vinhomes Hạ Long Xanh:
+
+• 459ha — diện tích, gấp 6 lần Hồ Tây Hà Nội
+• 12.000+ căn hộ và nhà phố
+• 10.000+ môi giới đang phân phối dự án này
+• Nhưng chỉ có 25 sàn F1 CHÍNH THỨC được Vinhomes ký hợp đồng
+
+→ Con số "2000 sàn" thường nghe chỉ là... marketing
+
+📊 Nếu anh/chị muốn báo cáo nghiên cứu đầy đủ về hệ sinh thái F1/F2/Freelance của HLX, nhắn "HLX" mình gửi miễn phí.
+
+#vinhomeshalongxanh #moigioi #bdsha long</div>
+    <div class="hashtags">#vinhomeshalongxanh #halongxanh #moigioi #bdshlong #thitruongbds #f1f2</div>
+    <button class="copy-btn" onclick="copyPost('p1',this)">📋 Copy Caption</button>
+  </div>
+
+  <!-- POST 2 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>📸 BÀI 2 — Ảnh đẹp + Caption · Tuần 1–2</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-fb">FB</span><span class="plt plt-tt">TikTok</span><span class="plt plt-ig">IG</span></div>
+    </div>
+    <div class="pb-content" id="p2">Lần đầu tôi thấy Vịnh Thiên Đường từ trên cao...
+
+Không phải ảnh render. Không phải photoshop.
+Đây là thực tế của Vinhomes Hạ Long Xanh 2026.
+
+3km bờ biển riêng. Rừng ngập mặn nguyên sinh. Cáp treo, casino, sân golf 36 lỗ — tất cả ngay trong dự án.
+
+Khách hàng nhìn ảnh này không cần tôi giới thiệu nhiều. Cảnh quan TỰ BÁN.
+
+📸 Bộ ảnh toàn cảnh HLX — comment "ẢNH" để mình gửi bộ 45 ảnh chất lượng cao dùng ngay.</div>
+    <div class="hashtags">#vinhomeshalongxanh #halongbay #luxury #bdsvip #canhohalongxanh #real_estate</div>
+    <button class="copy-btn" onclick="copyPost('p2',this)">📋 Copy Caption</button>
+  </div>
+
+  <!-- POST 3 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>🧠 BÀI 3 — Tâm lý học mua BĐS · Tuần 3–4</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-fb">FB cá nhân</span><span class="plt plt-zalo">Zalo</span></div>
+    </div>
+    <div class="pb-content" id="p3">Tôi phỏng vấn 50 khách mua BĐS Hạ Long — đây là lý do THẬT sự họ mua:
+
+❌ Không phải vì giá tốt
+❌ Không phải vì vị trí
+❌ Không phải vì tiện ích
+
+✅ Họ mua vì... sợ mất cơ hội
+
+Tâm lý FOMO (Fear of Missing Out) chiếm 73% quyết định mua BĐS nghỉ dưỡng cao cấp.
+
+Cách khai thác đúng (không thao túng):
+→ Cho thấy số căn còn lại thực tế
+→ Chia sẻ thông tin người khác đang quan tâm
+→ Kể câu chuyện khách mua trước — giờ họ thế nào
+
+Script thực tế tôi dùng với khách HLX:
+"Phân khu Vịnh Thiên Đường còn 12 căn góc view biển. Tuần trước có 3 gia đình từ Hà Nội đặt cọc. Anh/chị muốn xem bản đồ vị trí trước khi họ book hết không?"
+
+→ 8/10 khách đồng ý xem ngay.
+
+Môi giới hiểu tâm lý → chốt nhanh gấp 3x.</div>
+    <div class="hashtags">#tamlymoigioi #chothanhcong #kynangtucvan #bdssale #vinhomeshlx</div>
+    <button class="copy-btn" onclick="copyPost('p3',this)">📋 Copy Caption</button>
+  </div>
+
+  <!-- POST 4 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>📊 BÀI 4 — Báo cáo thị trường · Tuần 3 · Kèm quà tặng</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-group">Groups FB</span><span class="plt plt-group">Groups Zalo</span></div>
+    </div>
+    <div class="pb-content" id="p4">📊 TÔI VỪA HOÀN THÀNH BÁO CÁO: Toàn cảnh BĐS Quảng Ninh 2026
+
+Những gì tôi tìm thấy sau 2 tuần nghiên cứu:
+
+🏗️ Vinhomes Hạ Long Xanh: tổng vốn 35.000 tỷ, tiến độ xây dựng giai đoạn 1 đã 65%
+📈 Giá trung bình 2024: 65–85 triệu/m2 (shophouse), 45–65 triệu/m2 (căn hộ)
+🏆 Quảng Ninh lọt top 3 địa phương thu hút FDI BĐS 2025–2026
+🛫 Sân bay Vân Đồn mở thêm 12 đường bay quốc tế → tăng giá trị khu vực
+
+Báo cáo đầy đủ (32 trang PDF):
+→ Phân tích 5 đối thủ cạnh tranh
+→ Dự báo giá 2026–2027
+→ Tâm lý khách mua (kết quả phỏng vấn 50 người)
+→ Script tư vấn khách từ Hà Nội, HCM, nước ngoài
+
+Comment "BÁO CÁO" hoặc nhắn tin — mình gửi link tải ngay, miễn phí.</div>
+    <div class="hashtags">#baocaobds #thitruongbds2026 #quangninh #halongxanh #moigioidulich</div>
+    <button class="copy-btn" onclick="copyPost('p4',this)">📋 Copy Caption</button>
+  </div>
+
+  <!-- POST 5 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>💼 BÀI 5 — Demo kit nhẹ nhàng · Tuần 5</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-fb">FB cá nhân</span><span class="plt plt-zalo">Zalo story</span></div>
+    </div>
+    <div class="pb-content" id="p5">Tôi đã mất 3 tuần để làm cái này 👇
+
+Bộ tài liệu marketing HLX đầy đủ nhất tôi từng thấy:
+✅ 45 ảnh chính thức từ Vinhomes — có thể đăng ngay không lo bản quyền
+✅ 30 bài caption sẵn cho FB, Zalo, TikTok, IG
+✅ Báo cáo 2000 sàn — dùng khi tư vấn khách hỏi "sao mua ở anh không ở chỗ khác"
+✅ Phân tích đối thủ — biết đối thủ đang pitch gì để mình pitch khác hơn
+✅ Landing page cá nhân — link share cho khách thay vì copy paste file
+
+Trước đây mỗi môi giới mất 2–3 tuần "làm marketing từ đầu".
+
+Giờ mình có ngay trong 30 phút.
+
+Ai muốn xem thử — inbox mình.</div>
+    <div class="hashtags">#marketingbds #kitmoigioi #vinhomeshlx #toolbanhang #moigioidautu</div>
+    <button class="copy-btn" onclick="copyPost('p5',this)">📋 Copy Caption</button>
+  </div>
+
+  <!-- POST 6 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>⭐ BÀI 6 — Testimonial · Tuần 6</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-fb">FB cá nhân</span><span class="plt plt-zalo">Zalo</span></div>
+    </div>
+    <div class="pb-content" id="p6">Nhận được tin này lúc 11h tối qua từ một anh môi giới ở Hạ Long 👇
+
+"Anh ơi, em dùng bộ caption anh cho 4 ngày rồi. Hôm nay có khách inbox hỏi mua căn shophouse — chưa cần tư vấn nhiều họ đã hỏi giá rồi. Cảm ơn anh nhiều!"
+
+Cái khiến tôi vui nhất không phải là họ mua kit.
+
+Mà là kit thực sự giúp họ làm việc tốt hơn.
+
+Môi giới bán tốt hơn → khách mua được sản phẩm tốt → tất cả cùng có lợi.
+
+Đó là lý do tôi làm cái này.
+
+(Còn 7 slots tháng này — inbox nếu muốn tham gia)</div>
+    <div class="hashtags">#moigioisuccess #testimonial #bdssuccess #kitmarketing #vinhomeshlx</div>
+    <button class="copy-btn" onclick="copyPost('p6',this)">📋 Copy Caption</button>
+  </div>
+
+  <!-- POST 7 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>🏆 BÀI 7 — Pitch Kit · Tuần 7 (Bài bán hàng)</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-fb">FB cá nhân</span><span class="plt plt-zalo">Zalo</span><span class="plt plt-dm">DM</span></div>
+    </div>
+    <div class="pb-content" id="p7">Bạn là môi giới phân phối Vinhomes Hạ Long Xanh?
+
+Bài này dành cho bạn.
+
+BỘ KIT BÁN HÀNG HLX — Dùng Ngay Hôm Nay:
+
+📦 Trong kit có gì:
+→ 45 ảnh chính thức HLX đã được chọn lọc (7 danh mục)
+→ 30 bài caption sẵn cho 4 nền tảng
+→ Báo cáo thị trường 2026 (PDF + HTML)
+→ Phân tích 2000 sàn + hệ sinh thái F1/F2
+→ Infographic BĐS Quảng Ninh 2026
+→ Landing page cá nhân deploy trong 1 ngày
+→ Chiến lược 8 tuần xây tín nhiệm với khách
+
+💰 Giá:
+• Gói Cơ Bản: [Giá] — dùng ngay
+• Gói Đội Nhóm (5–20 người): [Giá sỉ]
+• Gói Sàn (F2, 20+ người): Liên hệ
+
+🎁 Tặng thêm: Buổi tư vấn 1:1 45 phút cho người mua tuần này.
+
+Inbox "KIT" để tôi gửi demo link xem trước khi quyết định.</div>
+    <div class="hashtags">#kitmoigioi #marketingtool #vinhomeshlx #taisuanhlx #moigioidautu</div>
+    <button class="copy-btn" onclick="copyPost('p7',this)">📋 Copy Caption</button>
+  </div>
+
+  <div class="alert green">
+    <div class="alert-icon">📚</div>
+    <div class="alert-body">
+      <h4>Xem thêm 30 bài đầy đủ với ảnh tự động</h4>
+      <p>Mở file <a href="SOCIAL-POST-KIT-HLX.html" target="_blank" style="color:var(--gl)">SOCIAL-POST-KIT-HLX.html</a> để xem toàn bộ 30 bài có ảnh, caption, hashtag theo từng nền tảng với nút copy 1 click.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 5: SEEDING ═══════════════════════════════ -->
+<div class="tab-panel" id="tab-seeding">
+  <p class="slabel">🌱 Chiến Lược Seeding</p>
+  <h2 class="sh">Làm Sao Để Đăng Vào Nhóm Mà Không Bị Ban</h2>
+  <p class="sdesc">Seeding đúng cách tạo ra lead tự nhiên. Seeding sai bị report và ban khỏi group.</p>
+
+  <div class="alert red">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <h4>4 điều KHÔNG ĐƯỢC LÀM khi seeding nhóm</h4>
+      <p>❌ Không đăng bài có link bán hàng vào group lần đầu tiên<br>
+      ❌ Không copy-paste cùng 1 bài vào nhiều group liên tiếp trong 1 ngày (spam)<br>
+      ❌ Không đăng quá 2 lần/ngày trong cùng 1 group<br>
+      ❌ Không post bài có từ "mua ngay", "giá tốt", "liên hệ ngay" trong 2 tuần đầu</p>
+    </div>
+  </div>
+
+  <!-- Seeding Script 1 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>🌱 SEEDING SCRIPT 1 — Vào nhóm lần đầu (Bài tự giới thiệu)</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-group">Groups FB</span><span class="plt plt-group">Groups Zalo</span></div>
+    </div>
+    <div class="pb-content" id="seed1">Chào mọi người trong group!
+
+Mình là [Tên], đang nghiên cứu khá sâu về thị trường Vinhomes Hạ Long Xanh trong thời gian gần đây.
+
+Vừa hoàn thành bộ tài liệu nghiên cứu về dự án — có số liệu từ 9 nguồn chính thức, phân tích tâm lý người mua, và bản đồ toàn cảnh dự án.
+
+Nếu ai trong group đang làm HLX và muốn có thêm tài liệu hỗ trợ — mình sẵn sàng chia sẻ miễn phí.
+
+Comment "MUỐN" hoặc inbox mình nhé! 🙏</div>
+    <button class="copy-btn" onclick="copyPost('seed1',this)">📋 Copy Script</button>
+  </div>
+
+  <!-- Seeding Script 2 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>🌱 SEEDING SCRIPT 2 — Bài giá trị thuần (Đăng tuần 1–2)</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-group">Groups FB</span><span class="plt plt-group">Groups Zalo</span></div>
+    </div>
+    <div class="pb-content" id="seed2">Mọi người biết điều này chưa?
+
+Khi khách hỏi "Tại sao mua HLX không mua Sun Group hay BIM?"
+
+Đây là 3 điểm khác biệt quan trọng nhất mà nhiều môi giới chưa biết cách nói:
+
+1️⃣ Hệ sinh thái khép kín: HLX có casino, golf, sân bay riêng trong bán kính 30km → không cần ra ngoài
+
+2️⃣ Thương hiệu Vinhomes: Thanh khoản tốt hơn 40% so với đối thủ cùng phân khúc (dữ liệu 2024)
+
+3️⃣ Cộng đồng cư dân: 10.000+ căn = cộng đồng đủ lớn để tạo giá trị dịch vụ vận hành
+
+Mình có script tư vấn đầy đủ cho câu hỏi này — ai cần thì inbox.</div>
+    <button class="copy-btn" onclick="copyPost('seed2',this)">📋 Copy Script</button>
+  </div>
+
+  <!-- Seeding Script 3 -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>🌱 SEEDING SCRIPT 3 — Tương tác vào comment của người khác</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-group">Groups FB</span><span class="plt plt-group">Groups Zalo</span></div>
+    </div>
+    <div class="pb-content" id="seed3">→ Khi thấy ai đăng câu hỏi "HLX có đáng đầu tư không?", comment:
+
+"Mình vừa hoàn thành report nghiên cứu khá kỹ về vấn đề này — kết luận phụ thuộc vào mục đích: để ở, đầu tư cho thuê, hay lướt sóng. 3 trường hợp khác nhau hoàn toàn. Bạn đang xem xét theo hướng nào?"
+
+→ Khi thấy ai đăng ảnh HLX, comment:
+
+"Ảnh phối cảnh chính thức hay ảnh thực tế vậy bạn? Mình có bộ ảnh tiến độ xây dựng tháng 4/2026 khá thú vị nếu bạn cần."
+
+→ Khi thấy ai hỏi về hoa hồng, comment:
+
+"Mình vừa làm bảng so sánh hoa hồng F1/F2/Freelance của HLX — khá surprised với một vài con số. Share được không nhỉ?"</div>
+    <button class="copy-btn" onclick="copyPost('seed3',this)">📋 Copy Script</button>
+  </div>
+
+  <!-- Seeding Script 4 - DM -->
+  <div class="post-block">
+    <div class="pb-label">
+      <span>📩 SEEDING SCRIPT 4 — DM sau khi kết bạn mới</span>
+      <div style="display:flex;gap:6px;"><span class="plt plt-dm">Zalo DM</span><span class="plt plt-dm">FB Inbox</span></div>
+    </div>
+    <div class="pb-content" id="seed4">Chào [Tên], cảm ơn đã kết bạn/kết nối!
+
+Mình thấy bạn đang active trong thị trường HLX — đang làm ở sàn nào vậy? F1 hay tự do?
+
+Mình vừa hoàn thành nghiên cứu về hệ sinh thái 2000 sàn HLX — tìm ra một số điều khá thú vị về cách các sàn F1 lớn (VHS, MICC, SSM) đang vận hành và chia hoa hồng thực tế.
+
+Bạn muốn mình gửi báo cáo không? Dài khoảng 15 phút đọc, có thể hữu ích cho công việc.</div>
+    <button class="copy-btn" onclick="copyPost('seed4',this)">📋 Copy Script</button>
+  </div>
+
+  <!-- Seeding Schedule -->
+  <hr>
+  <p class="slabel">📅 Lịch Seeding Theo Ngày</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Ngày</th><th>Nhóm Target</th><th>Loại Nội Dung</th><th>Script Dùng</th><th>Ghi Chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Thứ 2</strong></td><td>2 group FB lớn nhất</td><td>Bài giá trị (số liệu/ảnh)</td><td>Script 2</td><td>Đăng 9–10h sáng</td></tr>
+        <tr><td><strong>Thứ 3</strong></td><td>2 group Zalo môi giới</td><td>Comment vào post người khác</td><td>Script 3</td><td>Không đăng bài mới, chỉ comment</td></tr>
+        <tr><td><strong>Thứ 4</strong></td><td>DM 5 người vừa kết bạn</td><td>Tin nhắn cá nhân</td><td>Script 4</td><td>Cá nhân hóa tên và sàn của họ</td></tr>
+        <tr><td><strong>Thứ 5</strong></td><td>3 group FB khác nhau</td><td>Bài tư vấn/mẹo bán hàng</td><td>Script 2 biến thể</td><td>Đổi tiêu đề, giữ nội dung</td></tr>
+        <tr><td><strong>Thứ 6</strong></td><td>Group Zalo sàn (nếu được vào)</td><td>Chia sẻ tài nguyên miễn phí</td><td>Script 1 biến thể</td><td>Kèm link gallery ảnh HLX</td></tr>
+        <tr><td><strong>Thứ 7</strong></td><td>FB cá nhân + story</td><td>Behind-the-scenes/cảm xúc</td><td>Tự viết</td><td>Bài nhẹ nhàng, personal</td></tr>
+        <tr><td><strong>CN</strong></td><td>DM follow up leads</td><td>Hỏi thăm, gửi thêm tài nguyên</td><td>Script 4 follow up</td><td>Không đăng group CN</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 6: RULES ═══════════════════════════════ -->
+<div class="tab-panel" id="tab-rules">
+  <p class="slabel">📏 Quy Tắc Vận Hành & Checklist</p>
+  <h2 class="sh">Làm Đúng — Làm Đủ — Làm Đều</h2>
+  <p class="sdesc">Đây là những quy tắc bất di bất dịch. Vi phạm sẽ làm hỏng cả hệ thống đã xây.</p>
+
+  <div class="rules">
+    <h4>⚠️ 7 Điều TUYỆT ĐỐI KHÔNG LÀM</h4>
+    <ul>
+      <li>Đăng bài bán hàng mà không có 5 bài giá trị đi kèm trong cùng tuần</li>
+      <li>Sử dụng ảnh không rõ nguồn gốc / ảnh render quá mức thực tế</li>
+      <li>Spam cùng 1 bài vào nhiều group trong 1 ngày (bị report ngay)</li>
+      <li>Hứa hẹn lợi nhuận đầu tư cụ thể (vi phạm quy định quảng cáo BĐS)</li>
+      <li>Đăng thông tin sai về tiến độ dự án hoặc giá</li>
+      <li>Reply comment bằng giọng aggressive / tranh luận với người phản đối</li>
+      <li>Để inbox/comment quá 4h mà không có ai reply (phải có người trực)</li>
+    </ul>
+  </div>
+
+  <!-- DAILY CHECKLIST -->
+  <p class="slabel">✅ Checklist Hàng Ngày</p>
+  <h2 class="sh" style="margin-bottom:20px;">Trước Khi Kết Thúc Ca — Tick Hết Ô Này</h2>
+  <ul class="checklist" id="daily-checklist">
+    <li><span class="ci">⬜</span><div><strong>Đăng story Zalo lúc 7–8h sáng</strong>Dùng 1 ảnh HLX + 1 câu ngắn (không cần caption dài)</div></li>
+    <li><span class="ci">⬜</span><div><strong>Đăng 1 bài FB cá nhân lúc 9–10h</strong>Chọn bài từ tab "Nội Dung" phù hợp với tuần đang ở</div></li>
+    <li><span class="ci">⬜</span><div><strong>Comment vào 3–5 bài của người khác trong nhóm</strong>Comment có giá trị, không phải chỉ "hay quá" hay "đúng rồi"</div></li>
+    <li><span class="ci">⬜</span><div><strong>Seeding 2–3 group FB/Zalo theo lịch ngày hôm đó</strong>Dùng đúng script của ngày tương ứng trong bảng seeding</div></li>
+    <li><span class="ci">⬜</span><div><strong>Gửi quà tặng cho 5 người vừa kết bạn hôm nay</strong>Script #4 + link báo cáo / gallery ảnh</div></li>
+    <li><span class="ci">⬜</span><div><strong>Reply tất cả inbox/comment chưa trả lời</strong>Ưu tiên người hỏi về kit hoặc hỏi thêm thông tin — báo lại với chủ ngay</div></li>
+    <li><span class="ci">⬜</span><div><strong>Ghi nhận vào bảng theo dõi: số bài đã đăng, số inbox mới, số kết bạn mới</strong>Ghi vào file Excel/Google Sheet shared với chủ</div></li>
+  </ul>
+
+  <!-- WEEKLY KPI -->
+  <p class="slabel">📊 KPI Tuần</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Chỉ Số</th><th>Mục Tiêu/Tuần</th><th>Cách Đo</th><th>Ghi Chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Bài đăng FB cá nhân</strong></td><td>5–7 bài</td><td>Đếm bài trên profile</td><td>Tối thiểu 5, lý tưởng 7</td></tr>
+        <tr><td><strong>Bài seeding vào group</strong></td><td>10–15 lần (4–5 group)</td><td>Screenshot log</td><td>Đa dạng group, không lặp lại</td></tr>
+        <tr><td><strong>DM đã gửi đi</strong></td><td>25–35 tin</td><td>Log trong Excel</td><td>5 tin/ngày × 5 ngày</td></tr>
+        <tr><td><strong>Kết bạn mới FB/Zalo</strong></td><td>20–30 người</td><td>Đếm friend request accepted</td><td>Ưu tiên môi giới active HLX</td></tr>
+        <tr><td><strong>Inbox/lead mới quan tâm</strong></td><td>5–10 người</td><td>Log trong Excel</td><td>Người hỏi thêm về kit/tài liệu</td></tr>
+        <tr><td><strong>Video TikTok đã đăng</strong></td><td>3–4 video</td><td>Kiểm tra profile TikTok</td><td>Dùng ảnh HLX + text overlay</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert gold">
+    <div class="alert-icon">📞</div>
+    <div class="alert-body">
+      <h4>Khi nào cần báo lại với chủ NGAY?</h4>
+      <p>
+      ✅ Có người inbox hỏi giá kit hoặc hỏi mua<br>
+      ✅ Có sàn F1/F2 hoặc trưởng nhóm quan tâm gói sỉ<br>
+      ✅ Có bài bị xóa hoặc bị ban khỏi group<br>
+      ✅ Có người hỏi thông tin chính sách Vinhomes mà nhân viên không chắc<br>
+      ✅ Có lead "nóng" (hỏi liên tục, quan tâm thực sự) — ĐỪNG để nguội
+      </p>
+    </div>
+  </div>
+
+  <!-- RESOURCES QUICK ACCESS -->
+  <hr>
+  <p class="slabel">🔗 Tài Nguyên Cần Dùng Hàng Ngày</p>
+  <ul class="checklist">
+    <li><span class="ci">📸</span><div><strong>Bộ ảnh HLX (45 ảnh + copy link)</strong><a href="ANH-HLX-GALLERY.html" target="_blank" style="color:var(--gl);font-size:12px;">→ Mở ANH-HLX-GALLERY.html</a></div></li>
+    <li><span class="ci">✍️</span><div><strong>30 bài caption đầy đủ với ảnh</strong><a href="SOCIAL-POST-KIT-HLX.html" target="_blank" style="color:var(--gl);font-size:12px;">→ Mở SOCIAL-POST-KIT-HLX.html</a></div></li>
+    <li><span class="ci">📊</span><div><strong>Báo cáo tặng khách (link share)</strong><a href="13-BAO-CAO-2000-SAN-HLX.html" target="_blank" style="color:var(--gl);font-size:12px;">→ Mở 13-BAO-CAO-2000-SAN-HLX.html</a></div></li>
+    <li><span class="ci">🌱</span><div><strong>Script seeding chuyên gia đầy đủ</strong><a href="08-SEEDING-CHUYEN-GIA.html" target="_blank" style="color:var(--gl);font-size:12px;">→ Mở 08-SEEDING-CHUYEN-GIA.html</a></div></li>
+    <li><span class="ci">📋</span><div><strong>Checklist đăng bài (printable)</strong><a href="03-CHECKLIST-DANG-BAI.html" target="_blank" style="color:var(--gl);font-size:12px;">→ Mở 03-CHECKLIST-DANG-BAI.html</a></div></li>
+    <li><span class="ci">🏠</span><div><strong>Toàn bộ kit (trang chủ)</strong><a href="MO-DAU-TIEN.html" target="_blank" style="color:var(--gl);font-size:12px;">→ Mở MO-DAU-TIEN.html</a></div></li>
+  </ul>
+</div>
+
+<script>
+// TAB SWITCHING
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// WEEK SWITCHING
+function switchWeek(id, btn) {
+  document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('wk-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// COPY POST
+function copyPost(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    btn.textContent = '✅ Đã copy!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Caption'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+// GENERATE DAY ROWS FOR CALENDAR
+const weekData = {
+  w1: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'Seeding — Bài tự giới thiệu', tasks: 2, detail: 'Đăng bài tự giới thiệu vào 3 group FB môi giới HLX. Nội dung: "Tôi đang nghiên cứu HLX, ai muốn nhận báo cáo miễn phí?"' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'Số liệu thú vị về HLX', tasks: 3, detail: 'Bài FB cá nhân: Con số bất ngờ về HLX (459ha, 12.000 căn, 25 F1). Đăng story Zalo + story FB kèm ảnh dự án.' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'Comment vào nhóm + DM 5 người', tasks: 2, detail: 'KHÔNG đăng bài mới. Chỉ comment có giá trị vào 5–8 bài của người khác trong group. DM 5 người vừa kết bạn (Script #4).' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Ảnh HLX đẹp + caption ngắn', tasks: 2, detail: 'Đăng ảnh toàn cảnh/phân khu HLX với caption 3–5 dòng. Không bán gì. Kêu gọi: "Comment MUỐN nếu muốn mình gửi bộ ảnh đầy đủ".' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'Seeding group Zalo', tasks: 2, detail: 'Xin vào 2–3 group Zalo môi giới HLX. Đăng bài giá trị đầu tiên trong group Zalo (Script #2).' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Bài cảm xúc / behind-the-scenes', tasks: 1, detail: 'Đăng bài nhẹ nhàng, cá nhân: "Hôm nay tôi học được điều này về HLX..." hoặc chia sẻ 1 insight thú vị.' },
+  ],
+  w2: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'Ảnh phân khu Vịnh Thiên Đường', tasks: 3, detail: 'Gallery ảnh đẹp nhất từ phân khu cao cấp nhất. Caption tập trung vào "cảnh quan tự bán hàng". Đăng FB + Zalo story + 1 TikTok slide.' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'So sánh HLX vs đối thủ', tasks: 2, detail: 'Bài so sánh "HLX vs Sun Group Hạ Long" — không nói xấu đối thủ, chỉ highlight điểm khác biệt khách quan.' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'DM follow-up + comment ngày', tasks: 2, detail: 'Ngày tập trung DM: Follow up những người đã nhận báo cáo tuần 1 — hỏi "Anh/chị xem rồi thấy phần nào hữu ích nhất?"' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Video TikTok ảnh slideshow', tasks: 2, detail: 'Dùng app CapCut: 10 ảnh HLX đẹp nhất + trending audio + text overlay "Dự án này có gì mà ai cũng nói đến?"' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'Bài "hỏi ý kiến" (poll/câu hỏi)', tasks: 2, detail: 'Post FB: "Anh/chị đang phân vân điều gì khi tư vấn HLX cho khách? Comment bên dưới" → Đây là data để làm bài tuần sau.' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Review + tổng kết tuần', tasks: 1, detail: 'Bài "tuần này tôi học được": tổng hợp 1–2 insight từ comment/feedback người dùng tuần qua.' },
+  ],
+  w3: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'Tặng báo cáo nghiên cứu', tasks: 3, detail: 'Bài FB + Zalo: "Vừa hoàn thành báo cáo 2000 sàn HLX — ai muốn có link xem thử?" Gửi link 13-BAO-CAO-2000-SAN-HLX.html cho người inbox.' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'Phân tích hoa hồng F1/F2', tasks: 2, detail: 'Bài giải mã: hoa hồng thực tế là bao nhiêu? F1 vs F2 vs Freelance khác nhau ra sao? Người đọc chia sẻ nhiều vì ít ai dám nói công khai.' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'DM target: trưởng nhóm môi giới', tasks: 2, detail: 'Ngày DM đặc biệt: Tìm và DM 5 trưởng nhóm/team lead (nhìn từ group FB ai có nhiều comment nhất). Script #4.' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Infographic thị trường QN 2026', tasks: 2, detail: 'Đăng link infographic (infographic-thi-truong-qn-2026.html) với caption: "Bức tranh toàn cảnh thị trường BĐS Quảng Ninh 2026 — 1 ảnh thay 1000 chữ".' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'Script tư vấn khách không biết HLX', tasks: 2, detail: 'Bài chia sẻ kỹ năng: "Script 5 phút giải thích HLX cho khách Hà Nội/HCM lần đầu nghe đến" — dạng how-to.' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Story + cá nhân hóa', tasks: 1, detail: 'Story/bài cá nhân: lý do bạn quan tâm đến dự án này, điều gì khiến bạn bắt đầu nghiên cứu sâu.' },
+  ],
+  w4: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'Tâm lý học mua BĐS nghỉ dưỡng', tasks: 3, detail: 'Bài dài, insight sâu (Bài #3 trong tab Nội Dung). Đây là loại bài được share nhiều nhất — môi giới cần nhưng ít ai phân tích.' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'Phân tích đối thủ môi giới', tasks: 2, detail: 'Bài: "Những môi giới HLX thành công nhất đang làm gì khác biệt?" Đúc kết 3–5 điểm cụ thể (không nêu tên người thật).' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'DM follow-up + feedback collection', tasks: 2, detail: 'Follow-up tuần 3: hỏi "Anh/chị đã dùng thử báo cáo chưa? Phần nào hữu ích nhất với công việc của anh/chị?" Lấy feedback để cải thiện.' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Checklist bán hàng thành công', tasks: 2, detail: 'Bài dạng list: "10-step checklist một buổi tư vấn HLX hoàn hảo" — từng bước cụ thể, save được.' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'Câu hỏi thường gặp của khách', tasks: 2, detail: 'Bài FAQ: 5 câu hỏi khó nhất khách hay hỏi về HLX và cách trả lời chuẩn. Người đọc cảm thấy được "vũ trang".' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Recap + chuẩn bị cho tuần demo', tasks: 1, detail: 'Bài nhẹ: "4 tuần qua tôi đã chia sẻ khá nhiều thứ. Tuần tới tôi sẽ show cho các bạn xem tôi đang thực sự dùng gì...".' },
+  ],
+  w5: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'DEMO KIT — Bài đầu tiên nhắc đến kit', tasks: 3, detail: 'Bài #5 (Demo nhẹ nhàng): "Tôi đã mất 3 tuần để làm cái này..." Không nêu giá. Kết thúc bằng "Inbox nếu muốn xem thử".' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'Screenshot demo gallery ảnh', tasks: 2, detail: 'Đăng screenshot bộ gallery 45 ảnh (chụp màn hình ANH-HLX-GALLERY.html) + caption: "45 ảnh chính thức HLX, sẵn dùng, có thể share được ngay".' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'DM — Demo riêng cho người quan tâm', tasks: 2, detail: 'Ngày gửi link demo cho TẤT CẢ người đã inbox quan tâm từ đầu. Script: "Đây là link xem bộ kit tôi đang dùng — cứ thoải mái xem thử, không cần quyết định gì hết".' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Video TikTok demo kit trực quan', tasks: 2, detail: 'Screen recording 30s: lướt qua gallery ảnh → post kit → báo cáo → landing page. Không cần giải thích nhiều, cứ show.' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'Social Post Kit demo', tasks: 2, detail: 'Đăng 1 bài từ Social Post Kit (copy-paste từ file) như 1 bài đăng bình thường. Caption thêm: "Đây là 1 trong 30 bài trong bộ kit tôi đang dùng".' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Hỏi feedback từ người đã xem demo', tasks: 1, detail: 'DM lại tất cả người đã được gửi link demo: "Anh/chị xem rồi cảm thấy thế nào? Thiếu gì không?" Lấy feedback → cải thiện kit.' },
+  ],
+  w6: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'Testimonial đầu tiên', tasks: 3, detail: 'Đăng bài #6 (testimonial). Nếu chưa có testimonial thật → dùng feedback từ người đã dùng thử tài liệu miễn phí.' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'Case study ngắn', tasks: 2, detail: 'Bài: "Anh [X] môi giới dùng caption kit 4 ngày → có khách hỏi mua shophouse" (dựa trên feedback tuần 5). Kể chi tiết hơn.' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'DM leads nóng nhất', tasks: 2, detail: 'Hôm nay chỉ DM những người "nóng nhất" (đã hỏi hoặc comment nhiều lần). Chuẩn bị script pitch ngắn cho tuần 7.' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Bài "trước/sau dùng kit"', tasks: 2, detail: 'Bài so sánh: "Môi giới không có kit vs có kit: 1 tuần đầu khác nhau như thế nào?" Dùng data từ feedback người dùng thử.' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'Story testimonial thêm 1–2 người', tasks: 2, detail: 'Story Zalo/FB: chụp màn hình tin nhắn feedback (xin phép trước hoặc ẩn tên). Social proof ngắn gọn.' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Tạo urgency nhẹ — chuẩn bị tuần pitch', tasks: 1, detail: 'Bài: "Tháng này tôi chỉ nhận thêm 10 người dùng để đảm bảo hỗ trợ tốt. Đang còn 7 slots." (Thật hoặc gần thật).' },
+  ],
+  w7: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'PITCH BÀI #1 — Bài bán hàng chính', tasks: 3, detail: 'Đăng bài #7 (Pitch Kit đầy đủ). Đây là bài duy nhất trong tuần có CTA mua trực tiếp. Đăng FB + Zalo + DM cho leads nóng.' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'Giá trị tiếp theo + CTA nhẹ', tasks: 2, detail: 'Bài giá trị bình thường nhưng cuối bài thêm 1 dòng: "P.S: Ai muốn có nguyên bộ tài liệu như thế này → inbox mình".' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'DM pitch cá nhân hóa', tasks: 2, detail: 'Ngày DM pitch: Gửi offer cá nhân hóa cho 10 người đã warm nhất. Dùng Script #4 tuần 5 từ bộ script F1/F2.' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Xử lý phản đối công khai', tasks: 2, detail: 'Bài: "5 lý do người không mua kit nói — và sự thật" (dạng vui, không aggressive). Xử lý 5 phản đối phổ biến nhất.' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'PITCH BÀI #2 — Nhấn mạnh deadline/slots', tasks: 2, detail: 'Bài pitch lần 2: "Còn [X] ngày để có giá ưu đãi tháng này" hoặc "Còn [X] slots cho gói có buổi tư vấn kèm".' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Cảm ơn + teaser tuần tới', tasks: 1, detail: 'Bài cảm ơn những người đã ủng hộ + hint về nội dung giá trị tuần sau. Giữ người ở lại follow.' },
+  ],
+  w8: [
+    { day: 'Thứ 2', color: '#fb923c', theme: 'PITCH GÓI SỈ — Nhắm F1/F2', tasks: 3, detail: 'Bài pitch B2B: "Anh/chị quản lý sàn hoặc team môi giới? Gói sỉ từ 20 người trở lên có giá đặc biệt — inbox để biết chi tiết".' },
+    { day: 'Thứ 3', color: '#fde047', theme: 'Giá trị mới — Reset phễu', tasks: 2, detail: 'Bài giá trị hoàn toàn mới (không liên quan kit). Bắt đầu cycle mới cho audience lớn hơn (group mới).' },
+    { day: 'Thứ 4', color: '#34d399', theme: 'DM referral từ người đã mua', tasks: 2, detail: 'Nhắn người đã mua: "Anh/chị có quen sàn nào khác cần giải pháp tương tự không? Anh/chị giới thiệu mình sẽ có hoa hồng 15%".' },
+    { day: 'Thứ 5', color: '#60a5fa', theme: 'Testimonial + số liệu kết quả', tasks: 2, detail: 'Bài tổng kết: "Sau 8 tuần, đây là kết quả từ những người đã dùng kit HLX..." Dùng số liệu thực từ feedback.' },
+    { day: 'Thứ 6', color: '#c4b5fd', theme: 'Mở rộng: nhóm mới, dự án khác', tasks: 2, detail: 'Gia nhập thêm 3–5 group FB/Zalo mới (khác khu vực, chưa seeded). Bắt đầu lại cycle từ Script #1.' },
+    { day: 'Thứ 7', color: '#f9a8d4', theme: 'Recap 8 tuần + planning tuần 9+', tasks: 1, detail: 'Báo cáo với chủ: tổng kết 8 tuần — số leads, số sale, số group đã seeded. Lên kế hoạch chu kỳ 2.' },
+  ],
+};
+
+// Render day rows
+Object.keys(weekData).forEach(wk => {
+  const container = document.getElementById('days-' + wk);
+  if (!container) return;
+  weekData[wk].forEach((d, i) => {
+    container.innerHTML += `
+      <div class="day-row">
+        <div class="day-head" onclick="toggleDay(this)">
+          <div class="day-dot" style="background:${d.color}"></div>
+          <h4>${d.day} — ${d.theme}</h4>
+          <div class="day-meta">
+            <span class="day-count">${d.tasks} nhiệm vụ</span>
+            <span style="font-size:14px;color:#475569;transform:rotate(0deg);transition:transform .2s" class="arr">▼</span>
+          </div>
+        </div>
+        <div class="day-body">
+          <p style="font-size:13px;color:#94a3b8;line-height:1.7">${d.detail}</p>
+        </div>
+      </div>`;
+  });
+});
+
+function toggleDay(head) {
+  const body = head.nextElementSibling;
+  const arr = head.querySelector('.arr');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (arr) arr.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+</script>
+</body>
+</html>
