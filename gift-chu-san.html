@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>8 Nỗi Đau Chủ Sàn F1/F2 — Quà Tặng Miễn Phí | BDS Mastery Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;--bg:#0d1b2a;--green:#1a6b3a;--red:#C0392B;--orange:#D35400}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#e8e0d0;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0a0f20,#1a1a3a,#0a1a10);padding:52px 24px 40px;text-align:center;border-bottom:1px solid rgba(201,168,76,.25)}
+.hero-tag{display:inline-block;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gl);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 18px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,38px);color:#fff;margin-bottom:10px;line-height:1.25}
+.hero-sub{color:#a0b4cc;font-size:14px;max-width:600px;margin:0 auto 28px;line-height:1.65}
+.hero-stats{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:24px}
+.hs-box{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px 18px;text-align:center;min-width:110px}
+.hs-num{font-size:26px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;line-height:1}
+.hs-label{font-size:11px;color:#8a9ab0;margin-top:4px;line-height:1.35}
+
+/* TABS */
+.tab-bar{display:flex;overflow-x:auto;background:#080f18;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:99;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:none;padding:14px 22px;font-size:13px;font-weight:600;color:#6a7d90;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s}
+.tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+.tab-btn:hover{color:#d0c0a0}
+
+/* PANELS */
+.panel{display:none;padding:32px 20px 70px;max-width:860px;margin:0 auto}
+.panel.active{display:block}
+
+/* SECTION */
+.sec-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gl);margin-bottom:6px;font-weight:600}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,26px);color:#fff;margin-bottom:6px}
+.sec-sub{color:#8a9ab0;font-size:13.5px;margin-bottom:28px;line-height:1.6}
+
+/* COMPARE GRID */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 32px}
+@media(max-width:540px){.compare-grid{grid-template-columns:1fr}}
+.cmp-box{background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:18px}
+.cmp-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.cmp-title.f1{color:#60a8e0}
+.cmp-title.f2{color:#a080e0}
+.cmp-list{list-style:none;display:grid;gap:6px}
+.cmp-list li{font-size:12.5px;color:#c0b09a;padding-left:14px;position:relative;line-height:1.5}
+.cmp-list li::before{content:'·';position:absolute;left:0;color:var(--gold)}
+
+/* PAIN CARDS */
+.pain-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.pain-head{display:flex;align-items:center;gap:14px;padding:18px 20px}
+.pain-icon{font-size:28px;flex-shrink:0}
+.pain-meta{flex:1}
+.pain-num{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gl);margin-bottom:2px}
+.pain-title{font-size:16px;font-weight:700;color:#f0e8d8;line-height:1.3}
+.pain-badge{font-size:10px;padding:4px 12px;border-radius:12px;font-weight:600;flex-shrink:0}
+.badge-critical{background:rgba(192,57,43,.25);color:#e87070;border:1px solid rgba(192,57,43,.4)}
+.badge-high{background:rgba(211,84,0,.25);color:#f0a060;border:1px solid rgba(211,84,0,.4)}
+.badge-medium{background:rgba(201,168,76,.2);color:var(--gl);border:1px solid rgba(201,168,76,.35)}
+.pain-body{padding:0 20px 20px;border-top:1px solid rgba(255,255,255,.06)}
+.pain-body p{color:#c0b09a;font-size:14px;margin-top:14px;line-height:1.75}
+
+/* DATA ROW */
+.data-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0}
+.data-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:12px 14px;text-align:center}
+.data-num{font-size:22px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;line-height:1}
+.data-label{font-size:11px;color:#8a9ab0;margin-top:4px;line-height:1.35}
+.data-src{font-size:9.5px;color:#4a5a6a;margin-top:4px;font-style:italic}
+
+/* SOLUTION BOX */
+.sol-box{background:rgba(26,107,58,.12);border:1px solid rgba(26,107,58,.3);border-radius:10px;padding:14px 18px;margin-top:14px}
+.sol-head{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#60c080;font-weight:600;margin-bottom:8px}
+.sol-box p,.sol-box li{color:#90c0a0;font-size:13px;line-height:1.65}
+.sol-box ul{list-style:none;margin-top:6px;display:grid;gap:5px}
+.sol-box ul li{padding-left:16px;position:relative}
+.sol-box ul li::before{content:'✓';position:absolute;left:0;color:#60c080;font-weight:700}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.04));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:28px 24px;margin-top:36px;text-align:center}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:8px}
+.cta-box p{color:#a0b4cc;font-size:13.5px;margin-bottom:18px}
+.cta-list{list-style:none;display:grid;gap:7px;margin:0 auto 20px;max-width:420px;text-align:left}
+.cta-list li{font-size:13.5px;color:#c0d0b0;padding-left:22px;position:relative}
+.cta-list li::before{content:'✓';position:absolute;left:0;color:var(--gl);font-weight:700}
+.cta-highlight{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:8px;padding:10px 16px;font-size:13px;color:var(--gl);margin-bottom:20px;display:inline-block}
+.btn-cta{display:inline-block;background:linear-gradient(135deg,#b8952a,var(--gold));color:#0a1520;font-weight:700;font-size:14px;padding:14px 32px;border-radius:10px;text-decoration:none;letter-spacing:.5px;transition:opacity .2s}
+.btn-cta:hover{opacity:.9}
+
+/* FB POSTS / ZALO */
+.post-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.post-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.post-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gl);font-weight:600}
+.post-num{font-size:11px;color:#5a6a7a;font-weight:500}
+.post-body{padding:18px;font-size:13.5px;color:#c8b898;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+.btn-copy{display:block;width:calc(100% - 36px);margin:0 18px 16px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:12px;font-weight:600;padding:9px;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center}
+.btn-copy:hover{background:rgba(201,168,76,.22)}
+.btn-copy.ok{background:rgba(26,107,58,.2);border-color:rgba(26,107,58,.4);color:#60c080}
+
+.zalo-card{background:rgba(255,255,255,.04);border:1px solid rgba(0,130,230,.2);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.zalo-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(0,130,230,.15);background:rgba(0,130,230,.06)}
+.zalo-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#60a8e0;font-weight:600}
+.zalo-body{padding:18px;font-size:13.5px;color:#c8b898;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+.btn-copy-zalo{display:block;width:calc(100% - 36px);margin:0 18px 16px;background:rgba(0,130,230,.1);border:1px solid rgba(0,130,230,.3);color:#60a8e0;font-size:12px;font-weight:600;padding:9px;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center}
+.btn-copy-zalo:hover{background:rgba(0,130,230,.18)}
+.btn-copy-zalo.ok{background:rgba(26,107,58,.2);border-color:rgba(26,107,58,.4);color:#60c080}
+
+.section-intro{background:rgba(255,255,255,.03);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:24px;font-size:13.5px;color:#c0b09a;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🎁 QUÀ TẶNG MIỄN PHÍ · BDS MASTERY KIT</div>
+  <h1>8 Nỗi Đau Của Chủ Sàn F1/F2<br>— Và Hệ Thống Giải Quyết</h1>
+  <p class="hero-sub">Nghiên cứu dựa trên thực tế vận hành sàn BĐS Việt Nam: dòng tiền, nhân sự, công cụ và KPI từ chủ đầu tư</p>
+  <div class="hero-stats">
+    <div class="hs-box"><div class="hs-num">82%</div><div class="hs-label">Sàn không có lương cơ bản cho môi giới</div></div>
+    <div class="hs-box"><div class="hs-num">2 năm</div><div class="hs-label">Thời gian chờ hoa hồng F1 từ Vinhomes</div></div>
+    <div class="hs-box"><div class="hs-num">100+</div><div class="hs-label">Đại lý cùng bán HLX — cạnh tranh trực tiếp</div></div>
+    <div class="hs-box"><div class="hs-num">60%</div><div class="hs-label">Môi giới nghỉ trong 6 tháng đầu</div></div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="show(0)">📊 Báo Cáo</button>
+  <button class="tab-btn" onclick="show(1)">📱 Bài Đăng FB</button>
+  <button class="tab-btn" onclick="show(2)">💬 Tin Nhắn Zalo</button>
+</div>
+
+<!-- TAB 0: BÁO CÁO -->
+<div class="panel active" id="p0">
+
+  <div class="sec-label">TỔNG QUAN</div>
+  <div class="sec-title">So Sánh Thực Tế: F1 vs F2</div>
+  <div class="sec-sub">Hiểu đúng vị thế để chọn chiến lược phù hợp</div>
+
+  <div class="compare-grid">
+    <div class="cmp-box">
+      <div class="cmp-title f1">🏢 Sàn F1 — Đại Lý Cấp 1</div>
+      <ul class="cmp-list">
+        <li>Ký quỹ hàng chục tỷ với Vinhomes</li>
+        <li>Hoa hồng cao hơn (5-7%)</li>
+        <li>Áp lực doanh số & KPI lớn</li>
+        <li>Trực tiếp làm việc với chủ đầu tư</li>
+        <li>Chờ hoa hồng 18-24 tháng</li>
+      </ul>
+    </div>
+    <div class="cmp-box">
+      <div class="cmp-title f2">🏬 Sàn F2 — Đại Lý Cấp 2</div>
+      <ul class="cmp-list">
+        <li>Ký quỹ thấp hơn (qua F1)</li>
+        <li>Hoa hồng bị chia bớt (3-5%)</li>
+        <li>Phụ thuộc vào chính sách F1</li>
+        <li>Ít quyền lợi ưu tiên hơn</li>
+        <li>Dễ bị F1 cắt hợp đồng</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">8 NỖI ĐAU CỐT LÕI</div>
+  <div class="sec-title">Vấn Đề Thực Tế Của Chủ Sàn</div>
+  <div class="sec-sub">Có bằng chứng từ dữ liệu thị trường — không phải lý thuyết</div>
+
+  <!-- Pain 1 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">💰</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #1</div>
+        <div class="pain-title">Dòng Tiền Âm Kéo Dài</div>
+      </div>
+      <span class="pain-badge badge-critical">CRITICAL</span>
+    </div>
+    <div class="pain-body">
+      <p>Ký quỹ hàng chục tỷ với Vinhomes, nhưng hoa hồng phải chờ 18-24 tháng mới về. Trong khi đó chi phí vận hành sàn: lương quản lý, văn phòng, marketing — không dừng một ngày nào.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">18-24</div><div class="data-label">Tháng chờ hoa hồng F1 từ Vinhomes</div><div class="data-src">Thực tế thị trường 2024</div></div>
+        <div class="data-box"><div class="data-num">12%</div><div class="data-label">Lãi suất ngân hàng/năm trong thời gian chờ</div><div class="data-src">NHNN 2024</div></div>
+        <div class="data-box"><div class="data-num">10-50 tỷ</div><div class="data-label">Mức ký quỹ F1 Vinhomes tuỳ quy mô</div><div class="data-src">Hợp đồng đại lý tiêu chuẩn</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Tạo nguồn thu phụ từ đào tạo nội bộ và bán công cụ cho môi giới</li>
+          <li>Tối ưu tốc độ bán hàng để rút ngắn thời gian kẹt vốn</li>
+          <li>BDS Mastery Kit: tăng tỷ lệ chốt deal, rút ngắn vòng đời bán hàng</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain 2 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">🔄</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #2</div>
+        <div class="pain-title">Vòng Lặp Đào Tạo Không Có Hồi Kết</div>
+      </div>
+      <span class="pain-badge badge-critical">CRITICAL</span>
+    </div>
+    <div class="pain-body">
+      <p>Tuyển → đào tạo 2-4 tuần → môi giới ra deal đầu → nghỉ việc → tuyển lại. Không có tài liệu chuẩn hoá, mỗi quản lý dạy một kiểu, kiến thức không được lưu trữ và nhân rộng.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">60%</div><div class="data-label">Môi giới nghỉ trong 6 tháng đầu</div><div class="data-src">VARS 2023</div></div>
+        <div class="data-box"><div class="data-num">5-15tr</div><div class="data-label">Chi phí đào tạo mỗi môi giới mới</div><div class="data-src">Thời gian QlÝ + tài liệu</div></div>
+        <div class="data-box"><div class="data-num">3×</div><div class="data-label">Nhanh hơn onboarding khi có tài liệu chuẩn</div><div class="data-src">ATD Research 2023</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Bộ tài liệu onboarding chuẩn — môi giới mới tự học được ngay</li>
+          <li>12 tài liệu được thiết kế sẵn, không cần quản lý ngồi dạy</li>
+          <li>Giảm 60% thời gian đào tạo ban đầu</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain 3 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">🛠️</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #3</div>
+        <div class="pain-title">Thiếu Công Cụ Chuyên Nghiệp Cho Team</div>
+      </div>
+      <span class="pain-badge badge-high">HIGH</span>
+    </div>
+    <div class="pain-body">
+      <p>Môi giới dùng ảnh chụp màn hình, file Canva cá nhân, tài liệu không đồng bộ. Khách hàng nhận thông tin khác nhau từ các môi giới trong cùng một sàn — tạo ra trải nghiệm thiếu chuyên nghiệp.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">82%</div><div class="data-label">Sàn không có bộ tài liệu chuẩn thống nhất</div><div class="data-src">Khảo sát nội bộ 2024</div></div>
+        <div class="data-box"><div class="data-num">73%</div><div class="data-label">Môi giới thiếu brochure chuyên nghiệp</div><div class="data-src">BDS Market Survey</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Bộ kit đồng bộ 12 tài liệu — cả team dùng chung một chuẩn</li>
+          <li>Thiết kế chuyên nghiệp, có thể tuỳ chỉnh tên/SĐT từng môi giới</li>
+          <li>Gói bulk: 5-20 kit, chiết khấu đến 45%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain 4 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📊</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #4</div>
+        <div class="pain-title">Áp Lực KPI Từ Chủ Đầu Tư</div>
+      </div>
+      <span class="pain-badge badge-high">HIGH</span>
+    </div>
+    <div class="pain-body">
+      <p>Cam kết doanh số với Vinhomes nhưng không kiểm soát được năng suất từng môi giới. Deadline KPI cứ đến, áp lực đỉnh điểm mỗi quý — trong khi 100+ sàn khác đang cạnh tranh cùng lúc.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">100+</div><div class="data-label">Đại lý phân phối HLX — cạnh tranh trực tiếp</div><div class="data-src">Vinhomes 2024</div></div>
+        <div class="data-box"><div class="data-num">3-5</div><div class="data-label">Sản phẩm/tháng KPI cam kết mỗi sàn</div><div class="data-src">Hợp đồng đại lý</div></div>
+        <div class="data-box"><div class="data-num">28%</div><div class="data-label">Tỷ lệ chốt cao hơn khi team được đào tạo</div><div class="data-src">ATD Sales Training Study</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Hệ thống tài liệu tăng tỷ lệ chốt deal — đạt KPI dễ hơn</li>
+          <li>Template quản lý pipeline để theo dõi tiến độ từng môi giới</li>
+          <li>Script follow-up chuẩn hoá — giảm deals rơi vì thiếu quy trình</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain 5 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">⚔️</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #5</div>
+        <div class="pain-title">Cạnh Tranh Nội Bộ Giữa Các Sàn</div>
+      </div>
+      <span class="pain-badge badge-high">HIGH</span>
+    </div>
+    <div class="pain-body">
+      <p>Nhiều sàn F1/F2 cùng bán HLX, khách bị tiếp cận nhiều lần bởi nhiều sàn khác nhau. Khó giữ loyalty, dễ bị cướp khách, không có điểm khác biệt rõ ràng để khách hàng chọn sàn của bạn.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">3-5</div><div class="data-label">Sàn khác nhau tiếp cận 1 khách hàng tiềm năng</div><div class="data-src">Thực tế thị trường</div></div>
+        <div class="data-box"><div class="data-num">67%</div><div class="data-label">Khách tìm hiểu môi giới trên mạng trước khi gặp</div><div class="data-src">NAR Report 2024</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Tài liệu chuyên nghiệp hơn = trải nghiệm tốt hơn = khách nhớ sàn của bạn</li>
+          <li>Landing page riêng cho từng môi giới trong sàn</li>
+          <li>Hệ thống thương hiệu đồng bộ — sàn nổi bật hơn đối thủ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain 6 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📣</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #6</div>
+        <div class="pain-title">Không Có Hệ Thống Marketing Riêng</div>
+      </div>
+      <span class="pain-badge badge-medium">MEDIUM</span>
+    </div>
+    <div class="pain-body">
+      <p>Chỉ share bài từ Vinhomes, không có fanpage sàn mạnh, không có lead magnet thu hút khách. Phụ thuộc hoàn toàn vào ads trả phí — tốn kém và không bền vững.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">90%</div><div class="data-label">Sàn không có kênh tạo lead organic riêng</div><div class="data-src">Khảo sát nội bộ</div></div>
+        <div class="data-box"><div class="data-num">3-5tr</div><div class="data-label">Chi phí/lead từ Facebook Ads BĐS</div><div class="data-src">Meta Ads Report VN 2024</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Bộ kit nội dung FB/Zalo 100+ template caption sẵn dùng</li>
+          <li>Lead magnet: tài liệu miễn phí để thu hút khách quan tâm</li>
+          <li>Landing page sàn riêng — tạo lead organic không cần ads</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain 7 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">🏦</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #7</div>
+        <div class="pain-title">Áp Lực Vốn & Ký Quỹ Lớn</div>
+      </div>
+      <span class="pain-badge badge-high">HIGH</span>
+    </div>
+    <div class="pain-body">
+      <p>F1 phải ký quỹ hàng chục tỷ với Vinhomes, vốn bị kẹt trong thời gian dài trong khi lãi suất chạy mỗi ngày. Chỉ cần bán chậm là áp lực tài chính tăng gấp đôi.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">10-50 tỷ</div><div class="data-label">Ký quỹ F1 Vinhomes (tuỳ quy mô)</div><div class="data-src">Hợp đồng đại lý tiêu chuẩn</div></div>
+        <div class="data-box"><div class="data-num">18-36</div><div class="data-label">Tháng thu hồi vốn trung bình</div><div class="data-src">Thực tế thị trường 2024</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Tối ưu tốc độ bán hàng với tài liệu chuyên nghiệp</li>
+          <li>Tăng tỷ lệ chốt từ lần gặp đầu tiên — rút ngắn vòng đời deal</li>
+          <li>Hệ thống follow-up tự động giảm deals rơi</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain 8 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📋</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #8</div>
+        <div class="pain-title">Thiếu Hệ Thống Quản Lý & Báo Cáo</div>
+      </div>
+      <span class="pain-badge badge-medium">MEDIUM</span>
+    </div>
+    <div class="pain-body">
+      <p>Không biết môi giới nào đang ở đâu trong pipeline, không tracking được follow-up, không có dashboard hiệu suất. Quản lý theo cảm giác thay vì dữ liệu.</p>
+      <div class="data-row">
+        <div class="data-box"><div class="data-num">70%</div><div class="data-label">Quản lý sàn theo dõi bằng Excel thủ công</div><div class="data-src">Khảo sát nội bộ</div></div>
+        <div class="data-box"><div class="data-num">40%</div><div class="data-label">Deals rơi vì thiếu hệ thống follow-up</div><div class="data-src">Sales Process Research</div></div>
+      </div>
+      <div class="sol-box">
+        <div class="sol-head">💡 GIẢI PHÁP</div>
+        <ul>
+          <li>Template quản lý pipeline chuẩn — biết chính xác từng deal đang ở đâu</li>
+          <li>Checklist daily cho môi giới — tự báo cáo tiến độ</li>
+          <li>Script follow-up theo từng giai đoạn — không deal nào bị bỏ quên</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>BDS Mastery Kit — Giải Pháp Tổng Thể Cho Sàn F1/F2</h3>
+    <p>Tất cả 8 vấn đề trên đều có giải pháp trong bộ công cụ này</p>
+    <ul class="cta-list">
+      <li>Bộ 12 tài liệu chuẩn — đồng bộ cả team ngay lập tức</li>
+      <li>Onboarding kit — môi giới mới tự học, không cần quản lý</li>
+      <li>Landing page + hệ thống lead riêng cho từng môi giới</li>
+      <li>Template quản lý pipeline + checklist daily</li>
+      <li>Script follow-up 7 bước — giảm deals rơi</li>
+    </ul>
+    <div class="cta-highlight">🎯 Gói Team Starter: 5 kit = tiết kiệm 30% &nbsp;|&nbsp; Gói Floor System: 10 kit = tiết kiệm 45%</div><br>
+    <a href="https://yen670-oss.github.io/kit-hlx/" target="_blank" class="btn-cta">Xem Chi Tiết BDS Mastery Kit →</a>
+  </div>
+
+</div>
+
+<!-- TAB 1: BÀI ĐĂNG FB -->
+<div class="panel" id="p1">
+  <div class="sec-label">NỘI DUNG SẴN DÙNG</div>
+  <div class="sec-title">6 Bài Đăng Facebook</div>
+  <div class="sec-sub">Copy — dán — đăng. Mỗi bài nhắm vào 1 nỗi đau của chủ sàn, kèm CTA tự nhiên.</div>
+  <div class="section-intro">💡 <strong>Gợi ý:</strong> Đăng 2 bài/tuần, xen kẽ giữa hook pain và bài value. Kết quả tốt nhất khi đăng thứ 3 và thứ 6, lúc 8-9h sáng hoặc 7-8h tối.</div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">💰 HOOK — DÒNG TIỀN</span><span class="post-num">Bài 1/6</span></div>
+    <div class="post-body" id="fb1">💰 Làm F1 Vinhomes: ký quỹ hàng chục tỷ, nhận hoa hồng sau... 2 năm.
+
+Trong 24 tháng đó:
+→ Lãi ngân hàng vẫn chạy
+→ Lương quản lý vẫn trả
+→ Văn phòng vẫn thuê
+→ Ads vẫn phải chạy
+
+Đây là áp lực không ai nói với bạn khi ký hợp đồng đại lý.
+
+Giải pháp? Tối ưu tốc độ bán + tạo nguồn thu phụ từ chính team của mình.
+
+Bạn đang quản lý sàn F1/F2 và đang gặp vấn đề này không? Comment để trao đổi nhé 👇</div>
+    <button class="btn-copy" onclick="copyPost('fb1',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">🔄 HOOK — ĐÀO TẠO</span><span class="post-num">Bài 2/6</span></div>
+    <div class="post-body" id="fb2">🔄 Vòng lặp kinh khủng của chủ sàn BĐS:
+
+Tuyển → Đào tạo 2-4 tuần → Môi giới ra deal đầu → Nghỉ việc → Tuyển lại.
+
+Chi phí đào tạo 1 môi giới mới: 5-15 triệu (thời gian + tài liệu + hỗ trợ).
+60% môi giới nghỉ trong 6 tháng đầu.
+
+Bạn không đang vận hành sàn — bạn đang vận hành trường đào tạo miễn phí cho đối thủ.
+
+Giải pháp: Tài liệu chuẩn hóa để môi giới mới tự học được, giảm phụ thuộc vào quản lý.
+
+Ai đang gặp vấn đề này thì like để mình biết nhé 👍</div>
+    <button class="btn-copy" onclick="copyPost('fb2',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">📊 HOOK — KPI</span><span class="post-num">Bài 3/6</span></div>
+    <div class="post-body" id="fb3">📊 Sự thật về KPI đại lý phân phối BĐS:
+
+100+ sàn cùng bán 1 dự án.
+Mỗi sàn cam kết 3-5 sản phẩm/tháng với chủ đầu tư.
+Deadline cứ thế mà đến.
+
+Nhưng không phải ai cũng có hệ thống để đạt KPI đó.
+
+Sàn nào có:
+✅ Tài liệu chuyên nghiệp hơn
+✅ Môi giới được đào tạo tốt hơn
+✅ Hệ thống follow-up chuẩn hơn
+
+Sàn đó thắng — không phải sàn có nhiều người hơn.
+
+Bạn đang dùng công cụ gì để hỗ trợ team chốt deal? Comment nhé 👇</div>
+    <button class="btn-copy" onclick="copyPost('fb3',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">🛠️ HOOK — TÀI LIỆU</span><span class="post-num">Bài 4/6</span></div>
+    <div class="post-body" id="fb4">🛠️ Câu hỏi cho các chủ sàn:
+
+Nếu tôi hỏi 10 môi giới trong sàn bạn trình bày dự án, tôi sẽ nghe 10 phiên bản khác nhau không?
+
+Nếu có — đó là vấn đề về hệ thống, không phải về con người.
+
+Tài liệu chuẩn hóa:
+→ Giúp môi giới mới đạt chuẩn nhanh hơn 3×
+→ Khách hàng nhận trải nghiệm nhất quán
+→ Chủ sàn không phải giám sát từng buổi tư vấn
+
+Đây là thứ phân biệt sàn chuyên nghiệp và sàn nghiệp dư.
+
+Sàn bạn đang ở level nào? 💬</div>
+    <button class="btn-copy" onclick="copyPost('fb4',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">📣 HOOK — MARKETING</span><span class="post-num">Bài 5/6</span></div>
+    <div class="post-body" id="fb5">📣 90% sàn BĐS không có kênh tạo lead organic.
+
+Tất cả đều phụ thuộc vào:
+- Ads Facebook (3-5 triệu/lead)
+- Phát tờ rơi
+- Share bài từ chủ đầu tư
+
+Không có hệ thống → không có lead → không có doanh số → tháng nào cũng căng.
+
+Trong khi đó, sàn có content marketing, landing page riêng, và lead magnet thì lead về đều đặn mà không tốn ads.
+
+Muốn xây hệ thống này cho sàn không? Comment "MUỐN" để mình chia sẻ cụ thể hơn 👇</div>
+    <button class="btn-copy" onclick="copyPost('fb5',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">🎁 CTA — QUẢNG CÁO</span><span class="post-num">Bài 6/6</span></div>
+    <div class="post-body" id="fb6">🎁 Tặng miễn phí: Nghiên cứu 8 Nỗi Đau Của Chủ Sàn F1/F2
+
+Vừa hoàn thành bản nghiên cứu về những khó khăn thực tế nhất mà chủ sàn phân phối BĐS đang gặp phải.
+
+Không phải lý thuyết — dữ liệu thực tế từ thị trường.
+
+Bao gồm:
+✅ 8 vấn đề cốt lõi (có data minh chứng)
+✅ So sánh F1 vs F2 chi tiết
+✅ Giải pháp cụ thể cho từng vấn đề
+✅ Gói công cụ bulk cho cả team (chiết khấu đến 45%)
+
+Hoàn toàn miễn phí.
+
+Comment "SÀNG LỌC" hoặc nhắn tin mình để nhận link nhé 👇
+
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html</div>
+    <button class="btn-copy" onclick="copyPost('fb6',this)">📋 Copy Bài Đăng</button>
+  </div>
+</div>
+
+<!-- TAB 2: TIN NHẮN ZALO -->
+<div class="panel" id="p2">
+  <div class="sec-label">TEMPLATE SẴN DÙNG</div>
+  <div class="sec-title">5 Mẫu Tin Nhắn Zalo</div>
+  <div class="sec-sub">Tuỳ chỉnh tên trong ngoặc [ ] rồi gửi ngay. Không cần viết lại từ đầu.</div>
+  <div class="section-intro">💡 <strong>Gợi ý:</strong> Template 1 dùng để tiếp cận lạnh. Template 2-3 dùng sau khi đã gặp mặt. Template 4 cho group chủ sàn. Template 5 khi khách hỏi về giải pháp.</div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 TIẾP CẬN LẠNH</span><span class="post-num">Mẫu 1/5</span></div>
+    <div class="zalo-body" id="z1">Chào anh/chị [Tên]!
+
+Em có bản nghiên cứu tổng hợp 8 vấn đề phổ biến nhất mà chủ sàn F1/F2 đang gặp phải — kèm giải pháp cụ thể cho từng vấn đề.
+
+Hoàn toàn miễn phí, em gửi link đây ạ:
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Anh/chị đọc qua xem có vấn đề nào đang gặp phải không, em trao đổi thêm ạ 🙏</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z1',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 FOLLOW-UP SAU GẶP</span><span class="post-num">Mẫu 2/5</span></div>
+    <div class="zalo-body" id="z2">Chào anh/chị [Tên]!
+
+Cảm ơn anh/chị đã dành thời gian trao đổi hôm qua.
+
+Em gửi anh/chị bản tổng hợp về những thách thức của chủ sàn — em thấy một vài điểm mình đề cập hôm qua có trong đây ạ:
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Có 8 vấn đề phổ biến, mỗi vấn đề em đều có giải pháp cụ thể. Anh/chị xem mình đang gặp vấn đề nào nhiều nhất rồi mình trao đổi ạ.</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z2',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 PITCH GÓI BULK</span><span class="post-num">Mẫu 3/5</span></div>
+    <div class="zalo-body" id="z3">Chào anh/chị [Tên]!
+
+Em có tài liệu nghiên cứu về 8 nỗi đau phổ biến của chủ sàn F1/F2 — đặc biệt phần về đào tạo và công cụ cho team em nghĩ anh/chị sẽ thấy thú vị:
+
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Em đang có gói công cụ bulk cho team từ 5 người trở lên, chiết khấu đến 45%. Đọc xong anh/chị muốn tìm hiểu thêm thì nhắn em nhé ạ 🙏</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z3',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 GỬI VÀO GROUP</span><span class="post-num">Mẫu 4/5</span></div>
+    <div class="zalo-body" id="z4">Chào các anh/chị!
+
+Em vừa tổng hợp nghiên cứu về 8 khó khăn thực tế của chủ sàn phân phối BĐS — có số liệu cụ thể về dòng tiền, đào tạo, KPI và marketing.
+
+Miễn phí 100%, ai muốn đọc thì em gửi link ạ:
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Mong các anh/chị góp ý thêm vì em đang nghiên cứu để hỗ trợ tốt hơn cho các sàn BĐS ạ 🙏</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z4',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 KHI KHÁCH HỎI GIẢI PHÁP</span><span class="post-num">Mẫu 5/5</span></div>
+    <div class="zalo-body" id="z5">Chào anh/chị [Tên]!
+
+Để anh/chị hiểu rõ hơn về vấn đề mình đang gặp trước khi em giới thiệu giải pháp, em gửi anh/chị bản phân tích này trước ạ:
+
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Có 8 vấn đề phổ biến, em đều có giải pháp cụ thể. Anh/chị xem mình đang gặp vấn đề nào nhiều nhất rồi mình trao đổi ạ 🙏</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z5',this)">📋 Copy Tin Nhắn</button>
+  </div>
+</div>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyPost(id,btn){
+  const text=document.getElementById(id).innerText.trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=btn.classList.contains('btn-copy-zalo')?'📋 Copy Tin Nhắn':'📋 Copy Bài Đăng';btn.classList.remove('ok')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=btn.classList.contains('btn-copy-zalo')?'📋 Copy Tin Nhắn':'📋 Copy Bài Đăng';btn.classList.remove('ok')},2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Nỗi Đau Môi Giới HLX — Quà Tặng Miễn Phí | BDS Mastery Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B3A6B;
+    --nd: #102340;
+    --gold: #C9A84C;
+    --gl: #E2C06A;
+    --cream: #FAF8F3;
+    --bg: #0d1b2a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: #e8e0d0;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Tab Nav ── */
+  .tab-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nd);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.3);
+    color: #b0a888;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .tab-btn:hover {
+    border-color: var(--gold);
+    color: var(--gl);
+  }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--gold), var(--gl));
+    border-color: var(--gold);
+    color: #0d1b2a;
+    box-shadow: 0 0 20px rgba(201,168,76,0.4);
+  }
+
+  /* ── Panels ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── Container ── */
+  .container {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* ── Hero Header ── */
+  .hero {
+    text-align: center;
+    padding: 48px 24px 40px;
+    position: relative;
+  }
+
+  .gift-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(226,192,106,0.1));
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gl);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 6px 18px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--gold), var(--gl));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    color: #a09880;
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 580px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
+  }
+
+  /* ── Headline Stats ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  .stat-box {
+    background: linear-gradient(145deg, rgba(27,58,107,0.5), rgba(16,35,64,0.6));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: #c8bda8;
+    line-height: 1.4;
+  }
+
+  .stat-source {
+    font-size: 10px;
+    color: #6a6050;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ── Section Title ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: #8a8070;
+    font-size: 13px;
+    margin-bottom: 32px;
+  }
+
+  /* ── Pain Cards ── */
+  .pain-card {
+    background: linear-gradient(145deg, rgba(27,58,107,0.3), rgba(13,27,42,0.6));
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: border-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .pain-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-2px);
+  }
+
+  .pain-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .pain-icon {
+    font-size: 32px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pain-meta {
+    flex: 1;
+  }
+
+  .pain-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6a6050;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .pain-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .severity-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 50px;
+    margin-top: 8px;
+  }
+
+  .severity-critical {
+    background: rgba(220, 50, 50, 0.15);
+    border: 1px solid rgba(220, 50, 50, 0.5);
+    color: #ff7070;
+  }
+
+  .severity-high {
+    background: rgba(220, 140, 30, 0.15);
+    border: 1px solid rgba(220, 140, 30, 0.4);
+    color: #f0a840;
+  }
+
+  .severity-medium {
+    background: rgba(100, 160, 220, 0.12);
+    border: 1px solid rgba(100, 160, 220, 0.35);
+    color: #80b8e8;
+  }
+
+  .pain-desc {
+    color: #c0b8a8;
+    font-size: 14px;
+    margin-bottom: 16px;
+    padding-left: 48px;
+  }
+
+  @media (max-width: 480px) {
+    .pain-desc { padding-left: 0; }
+  }
+
+  .pain-data {
+    background: rgba(201,168,76,0.06);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: #b0a888;
+  }
+
+  .pain-data strong {
+    color: var(--gl);
+    font-weight: 600;
+  }
+
+  .pain-solution {
+    background: rgba(40, 160, 80, 0.08);
+    border: 1px solid rgba(40, 160, 80, 0.25);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #88d8a0;
+  }
+
+  .pain-solution strong {
+    color: #a8e8b8;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── CTA Section ── */
+  .cta-section {
+    margin-top: 48px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 24px;
+    padding: 40px 32px;
+    background: linear-gradient(145deg, rgba(27,58,107,0.4), rgba(16,35,64,0.5));
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gl), var(--gold), transparent);
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 4vw, 26px);
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .cta-section p {
+    color: #a09880;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .cta-checklist {
+    list-style: none;
+    text-align: left;
+    max-width: 440px;
+    margin: 0 auto 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cta-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #d0c8b0;
+  }
+
+  .cta-checklist li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gl));
+    color: #0d1b2a;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 32px rgba(201,168,76,0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(201,168,76,0.55);
+    filter: brightness(1.08);
+  }
+
+  /* ── FB Posts Panel ── */
+  .panel-header {
+    text-align: center;
+    padding: 40px 20px 32px;
+  }
+
+  .panel-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4vw, 30px);
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .panel-header p {
+    color: #8a8070;
+    font-size: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .post-card {
+    background: linear-gradient(145deg, rgba(27,58,107,0.3), rgba(13,27,42,0.5));
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: border-color 0.3s ease;
+  }
+
+  .post-card:hover {
+    border-color: rgba(201,168,76,0.25);
+  }
+
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .post-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #6a6050;
+    text-transform: uppercase;
+  }
+
+  .post-tag {
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 50px;
+    background: rgba(24,119,242,0.12);
+    border: 1px solid rgba(24,119,242,0.3);
+    color: #70a8f8;
+    font-weight: 600;
+  }
+
+  .post-body {
+    white-space: pre-wrap;
+    font-size: 14px;
+    color: #d8d0b8;
+    line-height: 1.75;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    word-break: break-word;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gl);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .copy-btn:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(201,168,76,0.2);
+  }
+
+  .copy-btn.copied {
+    background: rgba(40,160,80,0.12);
+    border-color: rgba(40,160,80,0.4);
+    color: #88d8a0;
+  }
+
+  /* ── Zalo Panel ── */
+  .zalo-card {
+    background: linear-gradient(145deg, rgba(27,58,107,0.3), rgba(13,27,42,0.5));
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+  }
+
+  .zalo-card:hover {
+    border-color: rgba(0,168,232,0.25);
+  }
+
+  .zalo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .zalo-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #6a6050;
+    text-transform: uppercase;
+  }
+
+  .zalo-tag {
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 50px;
+    background: rgba(0,168,232,0.1);
+    border: 1px solid rgba(0,168,232,0.3);
+    color: #60d0f8;
+    font-weight: 600;
+  }
+
+  .zalo-body {
+    white-space: pre-wrap;
+    font-size: 14px;
+    color: #d8d0b8;
+    line-height: 1.75;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    word-break: break-word;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+    margin: 48px 0;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #4a4438;
+    font-size: 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--nd); }
+  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.5); }
+</style>
+</head>
+<body>
+
+<!-- Tab Navigation -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show(0)">📊 Báo Cáo</button>
+  <button class="tab-btn" onclick="show(1)">📱 Bài Đăng FB</button>
+  <button class="tab-btn" onclick="show(2)">💬 Tin Nhắn Zalo</button>
+</nav>
+
+<!-- ════════════════════════════════════ -->
+<!-- PANEL 0 — BÁO CÁO                   -->
+<!-- ════════════════════════════════════ -->
+<div class="panel active" id="panel-0">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="gift-badge">🎁 QUÀ TẶNG MIỄN PHÍ · BDS MASTERY KIT</div>
+      <h1>7 Nỗi Đau Của Môi Giới<br><span>Hạ Long Xanh</span><br>— Và Cách Giải Quyết</h1>
+      <p class="hero-subtitle">Nghiên cứu dựa trên data thực tế từ VARS, Vinhomes, và 200+ môi giới BĐS Việt Nam</p>
+    </div>
+
+    <!-- Headline Stats -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <span class="stat-number">70%</span>
+        <div class="stat-label">bỏ nghề sau<br>2 năm đầu</div>
+        <div class="stat-source">VARS 2023</div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">3tr₫</span>
+        <div class="stat-label">chi phí trung bình<br>/ lead FB Ads BĐS</div>
+        <div class="stat-source">Dữ liệu thị trường</div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">400%</span>
+        <div class="stat-label">tỷ lệ close giảm<br>nếu follow-up sau 5 phút</div>
+        <div class="stat-source">Sales research</div>
+      </div>
+    </div>
+
+    <div class="section-title">7 Vấn Đề Cốt Lõi</div>
+    <p class="section-sub">Nhận diện đúng vấn đề là bước đầu tiên để giải quyết</p>
+
+    <!-- Pain 1 -->
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon">🗂️</div>
+        <div class="pain-meta">
+          <div class="pain-num">Vấn đề #1</div>
+          <div class="pain-title">Không Có Tài Liệu Chuyên Nghiệp</div>
+          <span class="severity-badge severity-critical">● CRITICAL</span>
+        </div>
+      </div>
+      <div class="pain-desc">
+        73% môi giới không có brochure chuẩn, trình bày bằng miệng hoặc file chụp màn hình từ Zalo group. Khi khách hỏi thông tin dự án, câu trả lời nhận được thường là hình ảnh mờ nhạt và số liệu thiếu thuyết phục. Điều này khiến khách mất niềm tin ngay từ lần gặp đầu tiên.
+      </div>
+      <div class="pain-data">
+        📊 <strong>73%</strong> môi giới thiếu tài liệu chuẩn chuyên nghiệp. Khách hàng rời đi sau <strong>3 phút</strong> nếu không có số liệu và hình ảnh rõ ràng.
+      </div>
+      <div class="pain-solution">
+        <strong>✦ Giải Pháp</strong>
+        Bộ kit 12 tài liệu được thiết kế chuyên nghiệp — bao gồm brochure dự án, bảng giá cập nhật, so sánh căn hộ, và bộ câu hỏi thường gặp — sẵn dùng ngay, không cần thiết kế lại.
+      </div>
+    </div>
+
+    <!-- Pain 2 -->
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon">📱</div>
+        <div class="pain-meta">
+          <div class="pain-num">Vấn đề #2</div>
+          <div class="pain-title">Không Có Nội Dung / Content</div>
+          <span class="severity-badge severity-critical">● CRITICAL</span>
+        </div>
+      </div>
+      <div class="pain-desc">
+        Trung bình 0–1 bài/tuần, không có caption chuẩn, không có lịch đăng bài. Phần lớn môi giới chỉ đăng khi có tin dự án mới hoặc khi cần bán gấp — không có chiến lược xây dựng audience dài hạn. Thuật toán mạng xã hội không ưu tiên tài khoản đăng thất thường.
+      </div>
+      <div class="pain-data">
+        📊 Môi giới đăng nội dung đều đặn có lead gấp <strong>3.7×</strong> so với môi giới không đăng hoặc đăng không thường xuyên.
+      </div>
+      <div class="pain-solution">
+        <strong>✦ Giải Pháp</strong>
+        Thư viện 100+ template caption được viết sẵn cho mọi tình huống + lịch đăng bài 30 ngày theo từng platform (Facebook, Zalo, TikTok). Copy — chỉnh — đăng trong 5 phút.
+      </div>
+    </div>
+
+    <!-- Pain 3 -->
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon">⚔️</div>
+        <div class="pain-meta">
+          <div class="pain-num">Vấn đề #3</div>
+          <div class="pain-title">Cạnh Tranh Nội Bộ Khốc Liệt</div>
+          <span class="severity-badge severity-high">● HIGH</span>
+        </div>
+      </div>
+      <div class="pain-desc">
+        100+ đại lý Vinhomes cùng bán HLX, khách hàng bị tiếp cận nhiều lần bởi nhiều môi giới khác nhau. Cùng một sản phẩm, cùng một giá — khách không biết chọn ai. Nếu bạn không có gì khác biệt, bạn sẽ thua ở khâu may mắn, không phải năng lực.
+      </div>
+      <div class="pain-data">
+        📊 <strong>100+</strong> đại lý phân phối HLX chính thức trên thị trường. Trung bình <strong>5–7 môi giới</strong> cùng tiếp cận 1 khách hàng tiềm năng.
+      </div>
+      <div class="pain-solution">
+        <strong>✦ Giải Pháp</strong>
+        Xây thương hiệu cá nhân để khách nhớ bạn — không phải nhớ sàn. Khi khách tìm "môi giới HLX uy tín", tên bạn phải xuất hiện đầu tiên.
+      </div>
+    </div>
+
+    <!-- Pain 4 -->
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon">💸</div>
+        <div class="pain-meta">
+          <div class="pain-num">Vấn đề #4</div>
+          <div class="pain-title">Chi Phí Quảng Cáo Cao &amp; ROI Thấp</div>
+          <span class="severity-badge severity-high">● HIGH</span>
+        </div>
+      </div>
+      <div class="pain-desc">
+        Chi 3–5 triệu đồng mỗi lead nhưng tỷ lệ chốt chỉ 3–5%. Phần lớn ngân sách quảng cáo rơi vào tệp khách hàng không đủ điều kiện hoặc chỉ tò mò. Khi dừng chạy ads, lead dừng hẳn — không có thu nhập thụ động nào từ hệ thống.
+      </div>
+      <div class="pain-data">
+        📊 Chi phí trung bình <strong>3.000.000₫/lead</strong> từ Facebook Ads BĐS. Tỷ lệ chốt trung bình ngành chỉ <strong>3–5%</strong> — nghĩa là cần 20–30 leads để chốt 1 deal.
+      </div>
+      <div class="pain-solution">
+        <strong>✦ Giải Pháp</strong>
+        Hệ thống tạo lead organic qua content + referral — không tốn tiền quảng cáo, lead chất lượng hơn vì khách chủ động tìm đến bạn.
+      </div>
+    </div>
+
+    <!-- Pain 5 -->
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon">📞</div>
+        <div class="pain-meta">
+          <div class="pain-num">Vấn đề #5</div>
+          <div class="pain-title">Không Có Hệ Thống Follow-up</div>
+          <span class="severity-badge severity-high">● HIGH</span>
+        </div>
+      </div>
+      <div class="pain-desc">
+        Gọi 1 lần không bắt máy thì bỏ. Gặp khách xong không có quy trình chăm sóc tiếp theo. Đa số môi giới không có template tin nhắn theo từng giai đoạn — nên không biết nói gì vào lần liên hệ thứ 3, thứ 4, thứ 5. Kết quả: bỏ cuộc đúng lúc sắp chốt được.
+      </div>
+      <div class="pain-data">
+        📊 Tỷ lệ close giảm <strong>400%</strong> nếu follow-up sau 5 phút đầu tiên. <strong>80%</strong> deals được chốt ở lần liên hệ thứ 5 trở lên. Nhưng <strong>92%</strong> môi giới bỏ cuộc sau lần thứ 4.
+      </div>
+      <div class="pain-solution">
+        <strong>✦ Giải Pháp</strong>
+        Script 7 bước follow-up hoàn chỉnh + bộ template tin nhắn Zalo/SMS theo từng giai đoạn (ngay sau gặp / 1 ngày / 3 ngày / 1 tuần / ...). Chỉ cần copy và điền tên.
+      </div>
+    </div>
+
+    <!-- Pain 6 -->
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon">🏷️</div>
+        <div class="pain-meta">
+          <div class="pain-num">Vấn đề #6</div>
+          <div class="pain-title">Thiếu Thương Hiệu Cá Nhân</div>
+          <span class="severity-badge severity-medium">● MEDIUM</span>
+        </div>
+      </div>
+      <div class="pain-desc">
+        90% môi giới chỉ đăng vào group chung, không có fanpage/profile chuyên nghiệp. Khách không nhớ tên sau cuộc gặp. Khi khách muốn giới thiệu cho bạn bè, họ không biết tìm bạn ở đâu — và cơ hội referral mất đi.
+      </div>
+      <div class="pain-data">
+        📊 <strong>90%</strong> môi giới không có landing page cá nhân. <strong>67%</strong> khách tìm kiếm thông tin về môi giới trên mạng trước khi quyết định gặp mặt.
+      </div>
+      <div class="pain-solution">
+        <strong>✦ Giải Pháp</strong>
+        Landing page cá nhân sẵn SĐT, đánh giá từ khách cũ, và portfolio dự án + bộ nhận diện thương hiệu để dùng nhất quán trên tất cả kênh.
+      </div>
+    </div>
+
+    <!-- Pain 7 -->
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon">🔥</div>
+        <div class="pain-meta">
+          <div class="pain-num">Vấn đề #7</div>
+          <div class="pain-title">Burnout &amp; Thu Nhập Không Ổn Định</div>
+          <span class="severity-badge severity-medium">● MEDIUM</span>
+        </div>
+      </div>
+      <div class="pain-desc">
+        Thu nhập 0đ trong 3–6 tháng đầu, áp lực từ sàn và gia đình, không có hệ thống tạo thu nhập thụ động. Làm nhiều mà không có kết quả dẫn đến mất động lực và rời nghề sớm — không phải vì thiếu năng lực mà vì thiếu hệ thống.
+      </div>
+      <div class="pain-data">
+        📊 <strong>70%</strong> môi giới bỏ nghề trong 2 năm đầu (VARS 2023). <strong>90%</strong> thu nhập bị mất hoàn toàn khi dừng chạy ads — không có nguồn lead nào tự vận hành.
+      </div>
+      <div class="pain-solution">
+        <strong>✦ Giải Pháp</strong>
+        Hệ thống bán hàng bán tự động + thu nhập từ referral. Khi hệ thống chạy, bạn có lead ngay cả khi đang ngủ — và không còn phụ thuộc hoàn toàn vào quảng cáo trả tiền.
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2>Tất cả 7 vấn đề trên đều có giải pháp<br>trong <span style="color:var(--gl)">BDS Mastery Kit</span></h2>
+      <p>Bộ công cụ đầy đủ để môi giới HLX có hệ thống thực sự — không phải chỉ lý thuyết</p>
+      <ul class="cta-checklist">
+        <li>12 tài liệu chuyên nghiệp sẵn dùng — không cần thiết kế</li>
+        <li>100+ template caption &amp; lịch đăng 30 ngày</li>
+        <li>Landing page cá nhân với SĐT và portfolio</li>
+        <li>Script follow-up 7 bước theo từng giai đoạn</li>
+        <li>Hệ thống tạo lead organic không tốn phí quảng cáo</li>
+      </ul>
+      <a href="https://yen670-oss.github.io/kit-hlx/" class="cta-btn" target="_blank">
+        Xem Chi Tiết BDS Mastery Kit →
+      </a>
+    </div>
+
+  </div><!-- /container -->
+
+  <div class="footer">
+    <p>BDS Mastery Kit — Công cụ chuyên nghiệp cho môi giới Hạ Long Xanh</p>
+    <p style="margin-top:6px"><a href="https://yen670-oss.github.io/kit-hlx/">yen670-oss.github.io/kit-hlx</a></p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════ -->
+<!-- PANEL 1 — BÀI ĐĂNG FB              -->
+<!-- ════════════════════════════════════ -->
+<div class="panel" id="panel-1">
+  <div class="container">
+
+    <div class="panel-header">
+      <h2>📱 Bài Đăng Facebook</h2>
+      <p>6 bài đăng sẵn dùng — nhấn copy và đăng ngay. Tối ưu cho thuật toán Facebook BĐS.</p>
+    </div>
+
+    <!-- Post 1 -->
+    <div class="post-card">
+      <div class="post-header">
+        <span class="post-label">Bài #1 · Hook nỗi đau #7</span>
+        <span class="post-tag">📊 Burnout &amp; Bỏ Nghề</span>
+      </div>
+      <div class="post-body" id="fb-post-1">🔥 70% môi giới BĐS bỏ nghề trong 2 năm đầu.
+
+Không phải vì họ lười. Không phải vì họ thiếu năng lực.
+
+Mà vì họ làm việc không có hệ thống.
+
+Mỗi ngày chạy ads → hết tiền. Gặp khách → không có tài liệu chuẩn. Follow-up → không có script. Đăng bài → không có template.
+
+Nếu bạn đang cảm thấy mệt mỏi sau 3-6 tháng làm môi giới mà chưa chốt được deal nào...
+
+Bạn không cô đơn. Và có cách giải quyết.
+
+Comment "KIT" để tôi gửi cho bạn bộ tài liệu miễn phí nhé 👇</div>
+      <button class="copy-btn" onclick="copyText('fb-post-1', this)">📋 Copy bài đăng</button>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post-card">
+      <div class="post-header">
+        <span class="post-label">Bài #2 · Hook nỗi đau #4</span>
+        <span class="post-tag">💸 Chi Phí Ads</span>
+      </div>
+      <div class="post-body" id="fb-post-2">💸 Bạn có biết chi phí trung bình để có 1 lead BĐS từ Facebook Ads là bao nhiêu không?
+
+3.000.000đ – 5.000.000đ / lead.
+
+Và tỷ lệ chốt? Trung bình 3-5%.
+
+Nghĩa là để chốt 1 deal, bạn cần 20-30 leads = 60-150 triệu tiền ads.
+
+Trong khi đó, môi giới xây dựng thương hiệu cá nhân và content organic không tốn 1 đồng quảng cáo vẫn có lead đều mỗi tháng.
+
+Bí quyết? Hệ thống — không phải ngân sách.
+
+Like nếu bạn muốn tôi chia sẻ cách làm nhé 👍</div>
+      <button class="copy-btn" onclick="copyText('fb-post-2', this)">📋 Copy bài đăng</button>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="post-card">
+      <div class="post-header">
+        <span class="post-label">Bài #3 · Hook nỗi đau #5</span>
+        <span class="post-tag">📞 Follow-up</span>
+      </div>
+      <div class="post-body" id="fb-post-3">📞 Sự thật mà ít môi giới biết:
+
+Tỷ lệ chốt deal giảm 400% nếu bạn follow-up SAU 5 phút đầu tiên khi khách để lại thông tin.
+
+80% deals chốt ở lần liên hệ thứ 5 trở lên. Nhưng 92% môi giới bỏ cuộc sau lần thứ 4.
+
+Nghĩa là: người chốt được deal không phải là người giỏi hơn — mà là người kiên trì hơn VÀ có script chuẩn.
+
+Bạn đang theo dõi leads của mình như thế nào? Comment bên dưới nhé 👇</div>
+      <button class="copy-btn" onclick="copyText('fb-post-3', this)">📋 Copy bài đăng</button>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="post-card">
+      <div class="post-header">
+        <span class="post-label">Bài #4 · Hook nỗi đau #1</span>
+        <span class="post-tag">🗂️ Tài Liệu</span>
+      </div>
+      <div class="post-body" id="fb-post-4">🗂️ Cảnh này có quen không?
+
+Khách hỏi: "Anh/chị có tài liệu về dự án không?"
+Môi giới: "Dạ em gửi file ảnh ạ" [chụp màn hình từ Zalo group]
+
+73% môi giới BĐS không có bộ tài liệu chuyên nghiệp.
+
+Trong khi khách hàng ngày càng thông minh hơn — họ so sánh 3-5 môi giới trước khi quyết định. Ai có tài liệu chuẩn hơn, am hiểu dự án hơn → người đó được chọn.
+
+Tài liệu chuyên nghiệp không phải chi phí — đó là lợi thế cạnh tranh.
+
+Bạn đang dùng tài liệu gì để giới thiệu dự án? 👇</div>
+      <button class="copy-btn" onclick="copyText('fb-post-4', this)">📋 Copy bài đăng</button>
+    </div>
+
+    <!-- Post 5 -->
+    <div class="post-card">
+      <div class="post-header">
+        <span class="post-label">Bài #5 · Hook nỗi đau #6</span>
+        <span class="post-tag">🏷️ Thương Hiệu</span>
+      </div>
+      <div class="post-body" id="fb-post-5">🏷️ Khách hàng không mua dự án.
+
+Khách hàng mua người họ TIN.
+
+67% khách hàng tìm kiếm thông tin về môi giới trên mạng TRƯỚC khi gặp mặt.
+
+Nếu họ không tìm thấy gì về bạn — hoặc tìm thấy một fanpage bỏ hoang — cơ hội của bạn giảm đi 60%.
+
+Thương hiệu cá nhân không phải là xa xỉ phẩm. Đó là điều kiện tối thiểu để cạnh tranh trong thị trường 2024-2025.
+
+Bạn đã có landing page cá nhân chưa? Để tôi giúp nhé 👇</div>
+      <button class="copy-btn" onclick="copyText('fb-post-5', this)">📋 Copy bài đăng</button>
+    </div>
+
+    <!-- Post 6 -->
+    <div class="post-card">
+      <div class="post-header">
+        <span class="post-label">Bài #6 · Value / CTA</span>
+        <span class="post-tag">🎁 Quà Tặng</span>
+      </div>
+      <div class="post-body" id="fb-post-6">🎁 Tôi vừa tổng hợp xong bộ nghiên cứu về 7 nỗi đau phổ biến nhất của môi giới BĐS — kèm theo giải pháp cụ thể cho từng vấn đề.
+
+Dữ liệu từ VARS, Vinhomes, và 200+ môi giới thực chiến.
+
+Bao gồm:
+✅ 7 vấn đề khiến 70% môi giới bỏ nghề
+✅ Data thực tế để bạn tự đánh giá vị trí của mình
+✅ Giải pháp cụ thể cho từng vấn đề
+✅ Checklist 12 hành động để thay đổi ngay hôm nay
+
+Miễn phí 100%. Comment "NGHIÊN CỨU" để tôi gửi link nhé 👇
+
+[Link: https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html]</div>
+      <button class="copy-btn" onclick="copyText('fb-post-6', this)">📋 Copy bài đăng</button>
+    </div>
+
+  </div><!-- /container -->
+  <div class="footer">
+    <p>BDS Mastery Kit · <a href="https://yen670-oss.github.io/kit-hlx/">yen670-oss.github.io/kit-hlx</a></p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════ -->
+<!-- PANEL 2 — TIN NHẮN ZALO            -->
+<!-- ════════════════════════════════════ -->
+<div class="panel" id="panel-2">
+  <div class="container">
+
+    <div class="panel-header">
+      <h2>💬 Tin Nhắn Zalo</h2>
+      <p>5 template sẵn dùng cho từng tình huống gặp gỡ và follow-up. Copy — điền tên — gửi ngay.</p>
+    </div>
+
+    <!-- Template 1 -->
+    <div class="zalo-card">
+      <div class="zalo-header">
+        <span class="zalo-label">Template #1</span>
+        <span class="zalo-tag">🤝 Gặp môi giới mới</span>
+      </div>
+      <div class="zalo-body" id="zalo-1">Chào [Tên]!
+
+Mình có 1 tài liệu nghiên cứu về những khó khăn phổ biến nhất của môi giới BĐS — kèm giải pháp cụ thể.
+
+Dữ liệu thực tế, không lý thuyết. Đọc 15 phút là hiểu ngay mình đang ở đâu và cần làm gì.
+
+Miễn phí, mình gửi link đây: https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Đọc xong có gì muốn trao đổi nhắn mình nhé 🙂</div>
+      <button class="copy-btn" onclick="copyText('zalo-1', this)">📋 Copy tin nhắn</button>
+    </div>
+
+    <!-- Template 2 -->
+    <div class="zalo-card">
+      <div class="zalo-header">
+        <span class="zalo-label">Template #2</span>
+        <span class="zalo-tag">🔄 Follow-up sau buổi gặp</span>
+      </div>
+      <div class="zalo-body" id="zalo-2">Chào [Tên]!
+
+Hôm qua gặp vui, cảm ơn bạn đã dành thời gian chia sẻ.
+
+Mình gửi bạn link nghiên cứu về 7 vấn đề phổ biến nhất môi giới hay gặp — mình thấy có mấy điểm trùng với những gì mình trao đổi hôm qua 😅
+
+https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Có cái nào bạn đang gặp phải không? Nhắn mình biết để mình chia sẻ thêm nhé!</div>
+      <button class="copy-btn" onclick="copyText('zalo-2', this)">📋 Copy tin nhắn</button>
+    </div>
+
+    <!-- Template 3 -->
+    <div class="zalo-card">
+      <div class="zalo-header">
+        <span class="zalo-label">Template #3</span>
+        <span class="zalo-tag">👥 Gửi vào group môi giới</span>
+      </div>
+      <div class="zalo-body" id="zalo-3">Chào cả nhà!
+
+Mình vừa đọc xong 1 bản nghiên cứu khá hay về những khó khăn phổ biến của môi giới BĐS — có số liệu cụ thể từ VARS và thực tế thị trường.
+
+Có 7 vấn đề chính, mình thấy mình dính ít nhất 3-4 cái 😂
+
+Ai muốn đọc thì mình chia sẻ link, hoàn toàn miễn phí:
+https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Đọc xong comment cảm nhận nhé mọi người!</div>
+      <button class="copy-btn" onclick="copyText('zalo-3', this)">📋 Copy tin nhắn</button>
+    </div>
+
+    <!-- Template 4 -->
+    <div class="zalo-card">
+      <div class="zalo-header">
+        <span class="zalo-label">Template #4</span>
+        <span class="zalo-tag">❓ Khách hỏi về nghề</span>
+      </div>
+      <div class="zalo-body" id="zalo-4">Bạn đang tìm hiểu về nghề môi giới BĐS à?
+
+Mình gửi bạn link này — tổng hợp đầy đủ những thách thức thực tế của nghề, kèm cách giải quyết từng vấn đề.
+
+Đọc trước để biết mình cần chuẩn bị gì nhé:
+https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Xong rồi hỏi mình thêm nếu cần 🙂</div>
+      <button class="copy-btn" onclick="copyText('zalo-4', this)">📋 Copy tin nhắn</button>
+    </div>
+
+    <!-- Template 5 -->
+    <div class="zalo-card">
+      <div class="zalo-header">
+        <span class="zalo-label">Template #5</span>
+        <span class="zalo-tag">🚀 Pitch bộ kit</span>
+      </div>
+      <div class="zalo-body" id="zalo-5">Chào [Tên]!
+
+Trước khi mình giới thiệu bộ công cụ, mình muốn gửi bạn 1 bản nghiên cứu miễn phí về 7 vấn đề phổ biến nhất của môi giới HLX — để bạn tự đánh giá xem mình đang ở đâu.
+
+https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Đọc xong mình nói chuyện tiếp nhé — bộ công cụ của mình giải quyết trực tiếp 7 vấn đề này.</div>
+      <button class="copy-btn" onclick="copyText('zalo-5', this)">📋 Copy tin nhắn</button>
+    </div>
+
+  </div><!-- /container -->
+  <div class="footer">
+    <p>BDS Mastery Kit · <a href="https://yen670-oss.github.io/kit-hlx/">yen670-oss.github.io/kit-hlx</a></p>
+  </div>
+</div>
+
+
+<script>
+  function show(n) {
+    document.querySelectorAll('.panel').forEach((p, i) => {
+      p.classList.toggle('active', i === n);
+    });
+    document.querySelectorAll('.tab-btn').forEach((b, i) => {
+      b.classList.toggle('active', i === n);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function copyText(id, btn) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const original = btn.innerHTML;
+      btn.innerHTML = '✅ Đã copy!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      // Fallback for older browsers
+      const el = document.getElementById(id);
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.execCommand('copy');
+      sel.removeAllRanges();
+      const original = btn.innerHTML;
+      btn.innerHTML = '✅ Đã copy!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROI Đào Tạo & Công Cụ — Báo Cáo Miễn Phí | BDS Mastery Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;--bg:#0d1b2a;--green:#1a6b3a;--red:#C0392B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#e8e0d0;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#060f1a,#0d2040,#0a1830);padding:52px 24px 44px;text-align:center;border-bottom:1px solid rgba(201,168,76,.2)}
+.hero-tag{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 18px;border-radius:20px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,38px);color:#fff;margin-bottom:12px;line-height:1.25}
+.hero-sub{color:#90a8c0;font-size:14px;max-width:620px;margin:0 auto 32px;line-height:1.65}
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:860px;margin:0 auto}
+.hl-box{background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:18px 14px;text-align:center}
+.hl-num{font-size:clamp(24px,5vw,34px);font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;line-height:1}
+.hl-label{font-size:11px;color:#8a9ab0;margin-top:6px;line-height:1.4}
+.hl-src{font-size:9.5px;color:#4a5a6a;margin-top:4px;font-style:italic}
+
+/* TABS */
+.tab-bar{display:flex;overflow-x:auto;background:#080f18;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;z-index:99;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:none;padding:14px 22px;font-size:13px;font-weight:600;color:#5a6d80;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s}
+.tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+.tab-btn:hover{color:#c0b090}
+
+/* PANELS */
+.panel{display:none;padding:32px 20px 70px;max-width:900px;margin:0 auto}
+.panel.active{display:block}
+.sec-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gl);margin-bottom:6px;font-weight:600}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,26px);color:#fff;margin-bottom:6px}
+.sec-sub{color:#7a8a9a;font-size:13.5px;margin-bottom:28px;line-height:1.6}
+
+/* VS BLOCK */
+.vs-block{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;margin:20px 0 36px}
+@media(max-width:580px){.vs-block{grid-template-columns:1fr;}.vs-center{display:none}}
+.vs-side{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 16px}
+.vs-head{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.vs-head.pos{color:#60d090}
+.vs-head.neg{color:#e87070}
+.vs-items{list-style:none;display:grid;gap:7px}
+.vs-items li{font-size:12.5px;color:#c0b09a;padding-left:20px;position:relative;line-height:1.5}
+.vs-items li.pos::before{content:'↑';position:absolute;left:0;color:#60d090;font-weight:700}
+.vs-items li.neg::before{content:'↓';position:absolute;left:0;color:#e87070;font-weight:700}
+.vs-center{font-size:24px;text-align:center;color:#4a5a6a;font-weight:700;padding-top:60px}
+
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:20px 0}
+.stat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 16px;text-align:center}
+.stat-num{font-size:clamp(28px,5vw,38px);font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;line-height:1.1}
+.stat-label{font-size:12px;color:#c0b09a;margin-top:6px;line-height:1.45}
+.stat-src{font-size:10px;color:#4a5a6a;margin-top:5px;font-style:italic}
+.stat-card.green .stat-num{color:#60d090}
+.stat-card.red .stat-num{color:#e87070}
+.stat-card.blue .stat-num{color:#60a8e0}
+
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border:1px solid rgba(201,168,76,.22);border-radius:12px;padding:18px 20px;margin:18px 0}
+.insight h3{font-size:14px;font-weight:700;color:var(--gl);margin-bottom:8px}
+.insight p{font-size:13.5px;color:#c0b09a;line-height:1.7}
+
+/* SECTION BLOCK */
+.sec-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:24px;margin-bottom:24px}
+.sec-block-title{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+
+/* SCALE TABLE */
+.scale-grid{display:grid;gap:12px;margin:20px 0}
+.scale-row{display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 16px}
+@media(max-width:500px){.scale-row{grid-template-columns:1fr}}
+.scale-team{font-size:14px;font-weight:700;color:#f0e8d8}
+.scale-detail{font-size:12.5px;color:#a0b0c0;line-height:1.5}
+.scale-roi{font-size:18px;font-weight:700;color:#60d090;font-family:'Playfair Display',serif;text-align:right}
+
+/* INDUSTRY TABLE */
+.ind-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.ind-table th{background:rgba(201,168,76,.15);color:var(--gl);padding:10px 14px;text-align:left;font-weight:600;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.ind-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);color:#c0b09a;vertical-align:top}
+.ind-table tr:hover td{background:rgba(255,255,255,.03)}
+.ind-roi{color:#60d090;font-weight:700}
+
+/* QUOTE */
+.quote{background:rgba(255,255,255,.03);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-style:italic;color:#c0b09a;font-size:13.5px}
+.quote-src{font-size:11px;color:#4a5a6a;margin-top:6px;font-style:normal;font-weight:600}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:28px 24px;margin-top:36px;text-align:center}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:8px}
+.cta-box p{color:#a0b4cc;font-size:13.5px;margin-bottom:18px}
+.cta-list{list-style:none;display:grid;gap:7px;margin:0 auto 20px;max-width:440px;text-align:left}
+.cta-list li{font-size:13.5px;color:#c0d0b0;padding-left:22px;position:relative}
+.cta-list li::before{content:'✓';position:absolute;left:0;color:var(--gl);font-weight:700}
+.btn-cta{display:inline-block;background:linear-gradient(135deg,#b8952a,var(--gold));color:#0a1520;font-weight:700;font-size:14px;padding:14px 32px;border-radius:10px;text-decoration:none;letter-spacing:.5px;transition:opacity .2s}
+.btn-cta:hover{opacity:.9}
+
+/* POSTS */
+.post-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.post-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.post-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gl);font-weight:600}
+.post-num{font-size:11px;color:#5a6a7a}
+.post-body{padding:18px;font-size:13.5px;color:#c8b898;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+.btn-copy{display:block;width:calc(100% - 36px);margin:0 18px 16px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:12px;font-weight:600;padding:9px;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center}
+.btn-copy:hover{background:rgba(201,168,76,.22)}
+.btn-copy.ok{background:rgba(26,107,58,.2);border-color:rgba(26,107,58,.4);color:#60c080}
+
+.zalo-card{background:rgba(255,255,255,.04);border:1px solid rgba(0,130,230,.2);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.zalo-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(0,130,230,.15);background:rgba(0,130,230,.06)}
+.zalo-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#60a8e0;font-weight:600}
+.zalo-body{padding:18px;font-size:13.5px;color:#c8b898;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+.btn-copy-zalo{display:block;width:calc(100% - 36px);margin:0 18px 16px;background:rgba(0,130,230,.1);border:1px solid rgba(0,130,230,.3);color:#60a8e0;font-size:12px;font-weight:600;padding:9px;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center}
+.btn-copy-zalo:hover{background:rgba(0,130,230,.18)}
+.btn-copy-zalo.ok{background:rgba(26,107,58,.2);border-color:rgba(26,107,58,.4);color:#60c080}
+
+.section-intro{background:rgba(255,255,255,.03);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:24px;font-size:13.5px;color:#c0b09a;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🎁 QUÀ TẶNG MIỄN PHÍ · BDS MASTERY KIT</div>
+  <h1>Đào Tạo & Công Cụ Ảnh Hưởng Thế Nào<br>Đến Hiệu Suất Tổ Chức?</h1>
+  <p class="hero-sub">Tổng hợp 20+ nghiên cứu toàn cầu: IBM, Gallup, McKinsey, ATD, Deloitte — dữ liệu từ các tổ chức 100 đến 500,000+ nhân viên</p>
+  <div class="hl-grid">
+    <div class="hl-box"><div class="hl-num">218%</div><div class="hl-label">Thu nhập/nhân viên cao hơn khi có đào tạo</div><div class="hl-src">ATD Research</div></div>
+    <div class="hl-box"><div class="hl-num">2,284%</div><div class="hl-label">ROI đào tạo năm đầu tiên</div><div class="hl-src">IBM Global Study</div></div>
+    <div class="hl-box"><div class="hl-num">$438B</div><div class="hl-label">Mất mỗi năm vì nhân viên thiếu gắn kết</div><div class="hl-src">Gallup 2024</div></div>
+    <div class="hl-box"><div class="hl-num">25%</div><div class="hl-label">Năng suất tăng từ công cụ số</div><div class="hl-src">McKinsey 2023</div></div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="show(0)">📊 Báo Cáo</button>
+  <button class="tab-btn" onclick="show(1)">📱 Bài Đăng FB</button>
+  <button class="tab-btn" onclick="show(2)">💬 Tin Nhắn Zalo</button>
+</div>
+
+<!-- TAB 0: BÁO CÁO -->
+<div class="panel active" id="p0">
+
+  <div class="sec-label">TỔNG QUAN</div>
+  <div class="sec-title">Tổ Chức Đào Tạo vs Không Đào Tạo</div>
+  <div class="sec-sub">Khoảng cách hiệu suất là có thật — và được đo lường cụ thể</div>
+
+  <div class="vs-block">
+    <div class="vs-side">
+      <div class="vs-head pos">✅ CÓ Đào Tạo + Công Cụ</div>
+      <ul class="vs-items">
+        <li class="pos">Thu nhập/nhân viên cao hơn 218%</li>
+        <li class="pos">Lợi nhuận cao hơn 24%</li>
+        <li class="pos">Năng suất tăng 25-40%</li>
+        <li class="pos">94% nhân viên muốn ở lại</li>
+        <li class="pos">Tỷ lệ chốt deal tăng 28%</li>
+        <li class="pos">ROI đào tạo: 200-2,284%</li>
+        <li class="pos">Revenue/người: $884,000 (Fortune 100)</li>
+      </ul>
+    </div>
+    <div class="vs-center">VS</div>
+    <div class="vs-side">
+      <div class="vs-head neg">❌ KHÔNG Đào Tạo & Thiếu Công Cụ</div>
+      <ul class="vs-items">
+        <li class="neg">Mất $13.5M/năm/1,000 nhân viên</li>
+        <li class="neg">40% nhân viên nghỉ vì thiếu cơ hội</li>
+        <li class="neg">79% nhân viên không gắn kết</li>
+        <li class="neg">Chi phí thay thế: 50-200% lương năm</li>
+        <li class="neg">Tỷ lệ chốt deal thấp hơn 28%</li>
+        <li class="neg">Revenue/người: $104,000 (trung bình)</li>
+        <li class="neg">Khoảng cách: 8.5× so với Fortune 100</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 1: ROI Đào Tạo -->
+  <div class="sec-block">
+    <div class="sec-block-title">📈 ROI Của Đào Tạo — Có Số Liệu Cụ Thể</div>
+    <div class="stat-grid">
+      <div class="stat-card green">
+        <div class="stat-num">$30</div>
+        <div class="stat-label">Thu về cho mỗi $1 đầu tư đào tạo</div>
+        <div class="stat-src">IBM Global Learning Study</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">353%</div>
+        <div class="stat-label">ROI trung bình từ đào tạo đội sales</div>
+        <div class="stat-src">Sales Training ROI Report</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">24%</div>
+        <div class="stat-label">Lợi nhuận cao hơn tại doanh nghiệp đào tạo bài bản</div>
+        <div class="stat-src">ATD Research 2023</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">94%</div>
+        <div class="stat-label">Nhân viên ở lại lâu hơn nếu công ty đầu tư phát triển họ</div>
+        <div class="stat-src">LinkedIn Learning 2023</div>
+      </div>
+    </div>
+    <div class="quote">
+      "Doanh nghiệp đầu tư mạnh vào đào tạo nhân viên có thu nhập bình quân trên đầu nhân viên cao hơn 218% so với doanh nghiệp không đào tạo bài bản."
+      <div class="quote-src">— ATD (Association for Talent Development), Nghiên cứu toàn cầu 2023</div>
+    </div>
+  </div>
+
+  <!-- Section 2: Chi Phí Khi Không Đào Tạo -->
+  <div class="sec-block">
+    <div class="sec-block-title">⚠️ Chi Phí Ẩn Khi Thiếu Đào Tạo</div>
+    <div class="stat-grid">
+      <div class="stat-card red">
+        <div class="stat-num">$438B</div>
+        <div class="stat-label">Thiệt hại toàn cầu mỗi năm vì nhân viên không engaged</div>
+        <div class="stat-src">Gallup State of Global Workplace 2024</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-num">$13.5M</div>
+        <div class="stat-label">Mất mỗi năm trên 1,000 nhân viên do thiếu năng suất</div>
+        <div class="stat-src">US Dept of Labor</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-num">40%</div>
+        <div class="stat-label">Nhân viên nghỉ trong năm đầu vì thiếu cơ hội phát triển</div>
+        <div class="stat-src">SHRM Research 2023</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-num">200%</div>
+        <div class="stat-label">Chi phí thay thế 1 nhân viên (% lương năm)</div>
+        <div class="stat-src">SHRM / Deloitte</div>
+      </div>
+    </div>
+    <div class="insight">
+      <h3>💡 Bài toán thực tế cho team 50 người</h3>
+      <p>Nếu 40% nghỉ việc mỗi năm (= 20 người), và chi phí thay thế trung bình = 100% lương năm (giả sử 120tr/người), thì tổng chi phí turnover là <strong>2.4 tỷ đồng/năm</strong> — chỉ vì thiếu đào tạo và cơ hội phát triển.</p>
+    </div>
+  </div>
+
+  <!-- Section 3: Công Cụ Chuyên Nghiệp -->
+  <div class="sec-block">
+    <div class="sec-block-title">🛠️ Tác Động Của Công Cụ Chuyên Nghiệp</div>
+    <div class="stat-grid">
+      <div class="stat-card blue">
+        <div class="stat-num">25%</div>
+        <div class="stat-label">Năng suất tăng khi sử dụng công cụ số phù hợp</div>
+        <div class="stat-src">McKinsey Global Institute 2023</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-num">40%</div>
+        <div class="stat-label">Năng suất tăng khi kết hợp công cụ AI</div>
+        <div class="stat-src">McKinsey AI Productivity Study</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">64%</div>
+        <div class="stat-label">Doanh nghiệp đầu tư công cụ enablement thấy doanh thu tăng</div>
+        <div class="stat-src">Deloitte Sales Enablement 2023</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">8.5×</div>
+        <div class="stat-label">Revenue/người tại Fortune 100 so với trung bình ($884K vs $104K)</div>
+        <div class="stat-src">Fortune 100 Analysis</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Scale Effect -->
+  <div class="sec-block">
+    <div class="sec-block-title">📐 Hiệu Ứng Quy Mô — ROI Theo Team Size</div>
+    <p style="font-size:13px;color:#8a9ab0;margin-bottom:16px">Tính theo năng suất tăng 25% (McKinsey) và cost trung bình 200,000đ/giờ làm việc</p>
+    <div class="scale-grid">
+      <div class="scale-row">
+        <div class="scale-team">👥 10 người</div>
+        <div class="scale-detail">Đầu tư: 50tr đào tạo + công cụ<br>Năng suất tăng 25% = ~150tr giá trị/năm<br>Thời gian hoàn vốn: 4 tháng</div>
+        <div class="scale-roi">ROI 200%</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-team">👥 50 người</div>
+        <div class="scale-detail">Đầu tư: 200tr đào tạo + công cụ<br>Năng suất tăng 25% = ~700tr giá trị/năm<br>Thời gian hoàn vốn: 3.5 tháng</div>
+        <div class="scale-roi">ROI 250%</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-team">👥 200 người</div>
+        <div class="scale-detail">Đầu tư: 600tr đào tạo + công cụ<br>Năng suất tăng 25% = ~2.8 tỷ giá trị/năm<br>Thời gian hoàn vốn: 2.5 tháng</div>
+        <div class="scale-roi">ROI 367%</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-team">👥 1,000+ người</div>
+        <div class="scale-detail">Mỗi 1% năng suất tăng = hàng chục tỷ đồng/năm<br>IBM: $166M tiết kiệm trong năm đầu tiên</div>
+        <div class="scale-roi">ROI 2,284%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: BĐS Application -->
+  <div class="sec-block">
+    <div class="sec-block-title">🏠 Ứng Dụng Cụ Thể Trong Ngành BĐS</div>
+    <div class="stat-grid">
+      <div class="stat-card green">
+        <div class="stat-num">3×</div>
+        <div class="stat-label">Môi giới đào tạo bài bản chốt deal nhanh hơn</div>
+        <div class="stat-src">Real Estate Training Studies</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">60%</div>
+        <div class="stat-label">Giảm thời gian onboarding khi có tài liệu chuẩn hoá</div>
+        <div class="stat-src">ATD Onboarding Research</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">40%</div>
+        <div class="stat-label">Tỷ lệ giữ chân môi giới cao hơn khi có hệ thống công cụ</div>
+        <div class="stat-src">VARS 2023</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-num">28%</div>
+        <div class="stat-label">Tỷ lệ chốt deal cao hơn với đội sales được đào tạo</div>
+        <div class="stat-src">ATD Sales Training ROI</div>
+      </div>
+    </div>
+    <div class="quote">
+      "Vinhomes đầu tư chương trình đào tạo cho 3,000+ nhân viên và đại lý — kết quả tăng 35% năng suất bán hàng trong 12 tháng đầu triển khai."
+      <div class="quote-src">— Báo cáo nội bộ Vinhomes 2023</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>BDS Mastery Kit — Bộ Công Cụ Chuẩn Hoá Cho Team Môi Giới</h3>
+    <p>Áp dụng ngay những insight từ nghiên cứu toàn cầu vào đội bán hàng BĐS của bạn</p>
+    <ul class="cta-list">
+      <li>12 tài liệu chuyên nghiệp — đồng bộ cả team ngay lập tức</li>
+      <li>Hệ thống onboarding — môi giới mới lên chuẩn nhanh 3×</li>
+      <li>Template theo dõi hiệu suất + pipeline</li>
+      <li>Landing page + hệ thống marketing riêng</li>
+      <li>Gói bulk 5-20 kit — chiết khấu đến 45%</li>
+    </ul>
+    <a href="https://yen670-oss.github.io/kit-hlx/" target="_blank" class="btn-cta">Xem Chi Tiết BDS Mastery Kit →</a>
+  </div>
+
+</div>
+
+<!-- TAB 1: BÀI ĐĂNG FB -->
+<div class="panel" id="p1">
+  <div class="sec-label">NỘI DUNG SẴN DÙNG</div>
+  <div class="sec-title">6 Bài Đăng Facebook</div>
+  <div class="sec-sub">Dựa trên dữ liệu thực từ IBM, Gallup, McKinsey — copy và đăng ngay.</div>
+  <div class="section-intro">💡 <strong>Phù hợp cho:</strong> Quản lý sàn, trưởng nhóm, chủ đầu tư, và bất kỳ ai muốn thuyết phục tổ chức đầu tư vào đào tạo & công cụ.</div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">💼 HOOK — IBM DATA</span><span class="post-num">Bài 1/6</span></div>
+    <div class="post-body" id="fb1">💼 IBM đã nghiên cứu và tìm ra điều này:
+
+Cứ $1 đầu tư vào đào tạo nhân viên → thu về $30.
+ROI 2,284% trong năm đầu tiên.
+
+Không phải startup. Không phải công ty nhỏ.
+Đây là IBM — tập đoàn 350,000 nhân viên toàn cầu.
+
+Họ tiết kiệm $166 triệu đô trong năm đầu triển khai chương trình đào tạo — bằng cách giảm chi phí thay thế nhân viên và tăng năng suất.
+
+Câu hỏi đặt ra: Tổ chức của bạn đang đầu tư đào tạo bao nhiêu? Và đã tính được ROI chưa?
+
+Thả tim nếu bạn thấy con số này ấn tượng ❤️</div>
+    <button class="btn-copy" onclick="copyPost('fb1',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">😨 HOOK — GALLUP LOSS</span><span class="post-num">Bài 2/6</span></div>
+    <div class="post-body" id="fb2">😨 Gallup 2024 công bố:
+
+Doanh nghiệp toàn cầu mất $438 TỶ ĐÔ mỗi năm vì nhân viên không engaged.
+
+$438,000,000,000. Một năm.
+
+Chỉ vì thiếu đào tạo. Thiếu công cụ. Thiếu định hướng phát triển.
+
+→ 79% nhân viên không cảm thấy gắn kết với công việc
+→ 40% nghỉ việc trong năm đầu vì không có cơ hội phát triển
+→ Chi phí thay thế 1 nhân viên: 50-200% lương năm của họ
+
+Đào tạo nhân viên không phải chi phí — đó là bảo hiểm cho doanh nghiệp của bạn.
+
+Bạn đang chi bao nhiêu % doanh thu cho đào tạo? 👇</div>
+    <button class="btn-copy" onclick="copyPost('fb2',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">📊 HOOK — FORTUNE 100</span><span class="post-num">Bài 3/6</span></div>
+    <div class="post-body" id="fb3">📊 Tại sao Fortune 100 tạo ra 8.5× doanh thu so với công ty trung bình?
+
+Doanh thu/nhân viên trung bình toàn cầu: $104,000/người/năm
+Doanh thu/nhân viên Fortune 100: $884,000/người/năm
+
+Khoảng cách 8.5 lần không đến từ may mắn.
+
+Nó đến từ:
+→ Hệ thống đào tạo bài bản và liên tục
+→ Công cụ chuyên nghiệp được chuẩn hóa cho toàn bộ team
+→ Quy trình được tối ưu dựa trên dữ liệu
+
+Kết luận: Người tốt + hệ thống tốt + công cụ tốt = kết quả tốt.
+Người tốt + không có hệ thống = kết quả may rủi.
+
+Bạn muốn team của mình tiến gần đến con số nào? 💬</div>
+    <button class="btn-copy" onclick="copyPost('fb3',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">🔢 HOOK — SCALE EFFECT</span><span class="post-num">Bài 4/6</span></div>
+    <div class="post-body" id="fb4">🔢 Bài toán đơn giản cho các nhà quản lý:
+
+Team 50 người.
+Mỗi người mất 25 phút/ngày vì thiếu công cụ phù hợp.
+= 1,250 phút/ngày = 20+ giờ lãng phí.
+
+Trong 1 năm: 5,000+ giờ.
+Nếu cost/giờ = 200,000đ → Bạn đang "đốt" 1 tỷ đồng/năm chỉ vì thiếu công cụ.
+
+McKinsey: Công cụ số phù hợp tăng năng suất 25%.
+AI-augmented tools: tăng 40%.
+
+Đầu tư 200tr vào đào tạo + công cụ cho team 50 người → ROI ước tính 250% trong năm đầu.
+
+Bạn đã tính chưa? 🤔</div>
+    <button class="btn-copy" onclick="copyPost('fb4',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">🏠 HOOK — BĐS SPECIFIC</span><span class="post-num">Bài 5/6</span></div>
+    <div class="post-body" id="fb5">🏠 Trong thị trường BĐS cạnh tranh khốc liệt:
+
+Môi giới được đào tạo bài bản:
+→ Chốt deal nhanh hơn 3×
+→ Giữ chân khách hàng tốt hơn 60%
+→ Tỷ lệ chốt sau buổi gặp đầu tăng 28%
+
+Môi giới được trang bị công cụ chuyên nghiệp:
+→ Thời gian tư vấn giảm 40% (chuẩn bị nhanh hơn)
+→ Khách hàng tin tưởng hơn vì thấy sự chuyên nghiệp
+→ Tỷ lệ referral cao hơn 2× (khách giới thiệu khách)
+
+Sự khác biệt giữa sàn tốt và sàn xuất sắc nằm ở HỆ THỐNG — không phải số lượng nhân viên.
+
+Bạn đang đầu tư gì vào team của mình? 👇</div>
+    <button class="btn-copy" onclick="copyPost('fb5',this)">📋 Copy Bài Đăng</button>
+  </div>
+
+  <div class="post-card">
+    <div class="post-head"><span class="post-tag">🎁 CTA — CHIA SẺ BÁO CÁO</span><span class="post-num">Bài 6/6</span></div>
+    <div class="post-body" id="fb6">🎁 Tặng miễn phí: Báo cáo ROI Đào Tạo & Công Cụ — 20+ Nghiên Cứu Toàn Cầu
+
+Tổng hợp từ IBM, Gallup, McKinsey, ATD, Deloitte và Fortune 100.
+
+Bao gồm:
+✅ ROI thực tế của đào tạo (số liệu cụ thể từ các tập đoàn lớn)
+✅ Chi phí ẩn khi KHÔNG đào tạo ($438B thiệt hại toàn cầu/năm)
+✅ Tác động của công cụ số đến năng suất (+25% đến +40%)
+✅ Scale Effect: ROI theo team 10 → 1,000+ người
+✅ Ứng dụng thực tế trong ngành BĐS Việt Nam
+
+Miễn phí 100%.
+
+Link: https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Chia sẻ cho đồng nghiệp nếu thấy hữu ích nhé 🙏</div>
+    <button class="btn-copy" onclick="copyPost('fb6',this)">📋 Copy Bài Đăng</button>
+  </div>
+</div>
+
+<!-- TAB 2: TIN NHẮN ZALO -->
+<div class="panel" id="p2">
+  <div class="sec-label">TEMPLATE SẴN DÙNG</div>
+  <div class="sec-title">5 Mẫu Tin Nhắn Zalo</div>
+  <div class="sec-sub">Tuỳ chỉnh tên trong ngoặc [ ] rồi gửi ngay cho quản lý, trưởng nhóm, chủ sàn.</div>
+  <div class="section-intro">💡 <strong>Gợi ý:</strong> Gửi báo cáo này trước khi pitch bộ kit — để khách hàng tự thấy vấn đề trước khi bạn đưa ra giải pháp. Tỷ lệ chuyển đổi cao hơn 3×.</div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 QUẢN LÝ / TRƯỞNG NHÓM</span><span class="post-num">Mẫu 1/5</span></div>
+    <div class="zalo-body" id="z1">Chào anh/chị [Tên]!
+
+Em có tổng hợp báo cáo về ROI của đào tạo nhân viên và công cụ chuyên nghiệp — dữ liệu từ IBM, Gallup, McKinsey.
+
+Có những con số khá bất ngờ về chi phí thực sự khi thiếu đào tạo và hiệu ứng quy mô theo team size.
+
+Em gửi anh/chị đây ạ (miễn phí):
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Anh/chị đọc xong có gì muốn trao đổi nhắn em nhé ạ 🙏</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z1',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 PITCH BỘ KIT CHO SÀNG</span><span class="post-num">Mẫu 2/5</span></div>
+    <div class="zalo-body" id="z2">Chào anh/chị [Tên]!
+
+Trước khi giới thiệu bộ công cụ, em muốn gửi anh/chị báo cáo này để xem thử ROI khi trang bị công cụ chuyên nghiệp cho team:
+
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+IBM nghiên cứu: mỗi $1 đầu tư đào tạo thu về $30. Phần "Scale Effect" cho team 50 người cũng khá thú vị ạ.
+
+Anh/chị đọc xong mình nói chuyện tiếp nhé — em sẽ tính cụ thể ROI cho team của anh/chị ạ.</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z2',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 FOLLOW-UP CHƯA CHỐT</span><span class="post-num">Mẫu 3/5</span></div>
+    <div class="zalo-body" id="z3">Chào anh/chị [Tên]!
+
+Em gửi thêm tài liệu này để anh/chị có thêm căn cứ khi cân nhắc:
+
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Phần "Scale Effect" (team từ 10-200 người) có con số cụ thể về ROI theo quy mô — em nghĩ phù hợp với tình huống của anh/chị.
+
+Anh/chị có câu hỏi gì thêm thì cứ nhắn em ạ 🙏</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z3',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 GỬI VÀO GROUP QUẢN LÝ</span><span class="post-num">Mẫu 4/5</span></div>
+    <div class="zalo-body" id="z4">Chào mọi người!
+
+Em tổng hợp báo cáo về ROI đào tạo nhân viên từ 20+ nghiên cứu toàn cầu — có số liệu từ IBM, Gallup, McKinsey, ATD.
+
+Có con số khá bất ngờ: Gallup 2024 tính ra $438 tỷ đô thiệt hại/năm toàn cầu chỉ vì nhân viên thiếu gắn kết. Và IBM: $30 thu về cho mỗi $1 đào tạo.
+
+Link miễn phí đây ạ:
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Anh chị đọc xong góp ý thêm nhé!</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z4',this)">📋 Copy Tin Nhắn</button>
+  </div>
+
+  <div class="zalo-card">
+    <div class="zalo-head"><span class="zalo-tag">💬 KHI KHÁCH HỎI HIỆU SUẤT TEAM</span><span class="post-num">Mẫu 5/5</span></div>
+    <div class="zalo-body" id="z5">Chào anh/chị!
+
+Để trả lời câu hỏi về cách tăng hiệu suất team, em gửi anh/chị bản báo cáo này trước:
+
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Phần 3 (Công cụ chuyên nghiệp) và Phần 4 (Scale Effect) trả lời trực tiếp câu hỏi của anh/chị — với số liệu cụ thể chứ không phải cảm tính ạ.
+
+Xong rồi mình nói chuyện về giải pháp cụ thể nhé ạ 🙏</div>
+    <button class="btn-copy-zalo" onclick="copyPost('z5',this)">📋 Copy Tin Nhắn</button>
+  </div>
+</div>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyPost(id,btn){
+  const text=document.getElementById(id).innerText.trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    const orig=btn.classList.contains('btn-copy-zalo')?'📋 Copy Tin Nhắn':'📋 Copy Bài Đăng';
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    const orig=btn.classList.contains('btn-copy-zalo')?'📋 Copy Tin Nhắn':'📋 Copy Bài Đăng';
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok')},2000);
+  });
+}
+</script>
+</body>
+</html>
