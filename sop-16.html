@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📋 16 SOP Nhân Viên Đăng Bài — HLX Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Be Vietnam Pro',sans-serif;background:#f5f5f0;color:#1a1a2e;}
+
+/* HEADER */
+.hd{background:linear-gradient(135deg,var(--nd),var(--navy));padding:28px 24px 24px;text-align:center;}
+.hd-badge{display:inline-flex;gap:6px;align-items:center;background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:12px;letter-spacing:.08em;}
+.hd h1{font-family:'Playfair Display',serif;font-size:clamp(20px,3.5vw,28px);color:#fff;margin-bottom:6px;}
+.hd h1 em{color:var(--gl);font-style:normal;}
+.hd p{color:rgba(255,255,255,.6);font-size:13px;}
+
+/* SIDEBAR + LAYOUT */
+.layout{display:flex;min-height:100vh;}
+.sidebar{width:240px;flex-shrink:0;background:#fff;border-right:1px solid #e5e2d8;position:sticky;top:0;height:100vh;overflow-y:auto;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:#d1c9b8;border-radius:2px;}
+.sb-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;padding:16px 16px 8px;}
+.sb-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;font-size:12.5px;font-weight:600;color:#374151;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:inherit;border-left:3px solid transparent;transition:.15s;}
+.sb-btn:hover{background:#f9f8f5;color:var(--nd);}
+.sb-btn.active{background:#fefce8;color:var(--nd);border-left-color:var(--gold);font-weight:700;}
+.sb-num{width:20px;height:20px;border-radius:5px;background:#f3f0e8;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#6b5000;}
+.sb-btn.active .sb-num{background:var(--gold);color:#fff;}
+
+/* CONTENT */
+.main{flex:1;min-width:0;}
+.panel{display:none;max-width:760px;margin:0 auto;padding:32px 24px 72px;}
+.panel.active{display:block;}
+
+/* SOP HEADER */
+.sop-hd{background:linear-gradient(135deg,var(--nd),var(--navy));border-radius:16px;padding:24px 28px;margin-bottom:24px;color:#fff;}
+.sop-num{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px;}
+.sop-hd h2{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:6px;}
+.sop-tagline{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:14px;}
+.sop-meta{display:flex;gap:10px;flex-wrap:wrap;}
+.sop-chip{background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.35);color:var(--gl);font-size:11px;font-weight:700;padding:4px 12px;border-radius:12px;}
+
+/* STEP */
+.steps{margin-bottom:24px;}
+.step{display:flex;gap:14px;margin-bottom:14px;}
+.step-n{width:32px;height:32px;border-radius:50%;background:var(--nd);color:var(--gl);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-body h4{font-size:13.5px;font-weight:700;color:var(--nd);margin-bottom:3px;}
+.step-body p{font-size:12.5px;color:#6b7280;line-height:1.6;}
+.step-body ul{padding-left:16px;margin-top:4px;}
+.step-body ul li{font-size:12.5px;color:#6b7280;line-height:1.6;margin-bottom:2px;}
+
+/* COPY CARD */
+.copy-card{background:#fff;border:1px solid #e5e2d8;border-radius:12px;margin-bottom:14px;overflow:hidden;}
+.cc-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#f9f8f5;border-bottom:1px solid #e5e2d8;}
+.cc-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;}
+.cc-body{padding:14px 16px;font-size:13px;color:#374151;line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;}
+.copy-btn{background:var(--nd);color:#fff;border:none;border-radius:7px;padding:5px 14px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+.copy-btn.ok{background:#16a34a;}
+
+/* RULE / WARNING BOX */
+.box-warn{background:#fef3c7;border:1px solid #f59e0b;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#92400e;line-height:1.6;}
+.box-warn strong{display:block;font-size:13.5px;margin-bottom:4px;}
+.box-ok{background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#166534;line-height:1.6;}
+.box-ok strong{display:block;font-size:13.5px;margin-bottom:4px;}
+
+/* CHECKLIST */
+.chk-list{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:16px 18px;margin-bottom:20px;}
+.chk-item{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #f3f0e8;font-size:13px;color:#374151;cursor:pointer;}
+.chk-item:last-child{border:none;}
+.chk-box{width:17px;height:17px;border:2px solid var(--gold);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.chk-item.done .chk-box{background:var(--gold);color:#fff;}
+.chk-item.done .chk-box::after{content:'✓';}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:20px;background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e5e2d8;}
+.tbl th{background:var(--nd);color:var(--gl);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:10px 12px;text-align:left;}
+.tbl td{padding:10px 12px;border-bottom:1px solid #f0ede4;color:#374151;}
+.tbl tr:last-child td{border:none;}
+
+/* SEC TITLE */
+.sec-t{font-family:'Playfair Display',serif;font-size:16px;color:var(--nd);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+.sec-t::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+
+/* MOBILE NAV */
+.mob-nav{display:none;background:#fff;border-bottom:1px solid #e5e2d8;padding:0 16px;overflow-x:auto;}
+.mob-nav-inner{display:flex;gap:0;min-width:max-content;}
+.mob-btn{padding:11px 14px;font-size:11.5px;font-weight:700;color:#6b7280;cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;white-space:nowrap;font-family:inherit;}
+.mob-btn.active{color:var(--nd);border-bottom-color:var(--gold);}
+
+@media(max-width:680px){
+  .sidebar{display:none;}
+  .mob-nav{display:block;}
+  .panel{padding:20px 16px 60px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-badge">📋 SOP NHÂN VIÊN · HLX MASTERY KIT · V2.0</div>
+  <h1>16 SOP <em>Nhân Viên Đăng Bài</em></h1>
+  <p>Đọc SOP → làm theo từng bước → copy-paste nội dung → đăng. Không cần hỏi thêm.</p>
+</div>
+
+<!-- MOBILE TOP NAV -->
+<div class="mob-nav">
+  <div class="mob-nav-inner" id="mob-nav-inner"></div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar"></div>
+
+  <!-- MAIN -->
+  <div class="main" id="main"></div>
+
+</div>
+
+<script>
+/* ─── DATA ─────────────────────────────────────────────── */
+const SOPS = [
+{
+  id:'s01', emoji:'👤', title:'Cài Đặt Profile Chuẩn',
+  tagline:'Thiết lập tài khoản FB, Zalo, TikTok đúng chuẩn trước khi bắt đầu đăng bài. Làm 1 lần, dùng mãi.',
+  chips:['Làm 1 lần','Tất cả nền tảng'],
+  steps:[
+    {h:'Ảnh đại diện', p:'Dùng ảnh chân dung rõ mặt, ánh sáng tốt. Mặc trang phục lịch sự (không selfie, không ảnh nhóm). Size tối thiểu 400×400px.'},
+    {h:'Ảnh bìa Facebook', p:'Ảnh ngang 820×312px. Gợi ý: ảnh dự án HLX đẹp + tên + SĐT chồng lên. Nhờ thiết kế trên Canva (miễn phí).'},
+    {h:'Mô tả / Bio', p:'Viết theo cấu trúc: "[Tên] — Tư vấn Vinhomes Hạ Long Xanh | Giúp [đối tượng] [lợi ích] | SĐT: 0964.827.670"'},
+    {h:'Kiểm tra quyền riêng tư FB', p:'Tất cả bài đăng phải ở chế độ Công khai (Public). Vào Cài đặt → Quyền riêng tư → Chọn Public làm mặc định.'},
+    {h:'Zalo cá nhân', p:'Tên Zalo = tên thật + nghề nghiệp. Ảnh đại diện = ảnh FB. Bio: "Tư vấn HLX · 0964.827.670". Bật cho phép người lạ tìm kiếm.'},
+    {h:'TikTok', p:'Username: [@ten_hlx hoặc @holoten.hlx]. Bio tối đa 80 ký tự: "Tư vấn VH Hạ Long Xanh 🏖️ Kiến thức BĐS thực tế 📊 SĐT trong bio". Thêm link landing page vào bio.'},
+  ],
+  copies:[
+    {label:'MẪU BIO FB / ZALO', text:`[Tên] — Tư Vấn Vinhomes Hạ Long Xanh
+📊 Phân tích thị trường BĐS Hạ Long mỗi tuần
+🏖️ Shophouse · Biệt thự biển · Condotel
+📞 0964.827.670
+🌐 [Link landing page cá nhân]`},
+    {label:'MẪU BIO TIKTOK (80 ký tự)', text:`Tư vấn VH Hạ Long Xanh 🏖️
+BĐS thực tế · Không hoa mỹ 📊
+SĐT: 0964.827.670`},
+  ]
+},
+{
+  id:'s02', emoji:'📘', title:'Đăng Bài Facebook Cá Nhân',
+  tagline:'Quy trình chuẩn đăng 1 bài trên trang cá nhân FB — từ chọn nội dung đến publish.',
+  chips:['Hàng ngày','2-3 bài/tuần trang cá nhân'],
+  steps:[
+    {h:'Chọn bài từ Content Plan', p:'Mở file Content Plan (link bên dưới). Xem ngày hôm nay thuộc giai đoạn nào (1-2-3). Chọn bài phù hợp.'},
+    {h:'Copy nội dung', p:'Bấm nút Copy trong Content Plan. Bài đã sẵn sàng — không cần chỉnh sửa gì thêm.'},
+    {h:'Thêm ảnh', p:'Mở Gallery 45 Ảnh HLX (link bên dưới). Chọn 1-3 ảnh phù hợp chủ đề bài. Copy link ảnh → paste vào bài hoặc tải về máy.'},
+    {h:'Paste vào FB', p:'Mở Facebook → Bấm "Bạn đang nghĩ gì?" → Paste nội dung bài → Thêm ảnh → Kiểm tra lại.'},
+    {h:'Kiểm tra trước đăng', p:'✅ Quyền đăng: Công khai (Public) | ✅ Có ảnh đính kèm | ✅ Không lỗi chính tả rõ ràng | ✅ Hashtag ở cuối bài'},
+    {h:'Đăng và theo dõi', p:'Bấm Đăng. Trong 30 phút đầu: like/rep comment nếu có. Báo cáo kết quả cuối ngày cho sếp.'},
+  ],
+  copies:[
+    {label:'LINK CONTENT PLAN (MỞ ĐỂ LẤY BÀI)', text:'https://yen670-oss.github.io/kit-hlx/content-plan-yen.html'},
+    {label:'LINK GALLERY ẢNH HLX', text:'https://yen670-oss.github.io/kit-hlx/ANH-HLX-GALLERY.html'},
+    {label:'HASHTAG CHUẨN FB (COPY NGUYÊN)', text:`#VinhomesHaLongXanh #BDSHL #HaLongXanh #HLX2026
+#ShophouseHaLong #BietThuBien #DauTuBDS
+#MoiGioiHaLong #VinhomesHL #BDSQuangNinh`},
+  ]
+},
+{
+  id:'s03', emoji:'👥', title:'Đăng Bài Vào Group FB Môi Giới',
+  tagline:'Seeding bài vào các nhóm Facebook môi giới HLX — quy trình tránh bị xóa bài, tránh bị report spam.',
+  chips:['Mỗi tuần','5-7 nhóm mục tiêu'],
+  steps:[
+    {h:'Danh sách nhóm ưu tiên', p:'Đăng theo thứ tự ưu tiên. Chỉ đăng 1-2 nhóm/ngày cùng 1 bài. Không đăng 5 nhóm trong 1 lúc → bị Facebook hạn chế.'},
+    {h:'Chờ 2-4 tiếng giữa các nhóm', p:'Nếu đăng nhiều group cùng nội dung → đổi 1-2 câu đầu và cuối cho mỗi group. Tránh FB phát hiện spam.'},
+    {h:'Loại bài được đăng vào group', p:'✅ Báo cáo thị trường | ✅ Ảnh dự án + caption ngắn | ✅ Câu hỏi tương tác | ✅ Tip bán hàng. ❌ KHÔNG đăng bài bán hàng trực tiếp vào group người khác.'},
+    {h:'Tương tác sau đăng', p:'Reply tất cả comment trong 1 giờ đầu. Nếu ai hỏi về kit → chuyển qua SOP 11 (Xử lý DM).'},
+    {h:'Ghi chép theo dõi', p:'Ghi vào sheet báo cáo: Tên nhóm / Ngày đăng / Số lượt xem / Số comment / Có lead không.'},
+  ],
+  copies:[
+    {label:'DANH SÁCH 12 NHÓM FB ƯU TIÊN (COPY VÀO SHEET)', text:`ƯU TIÊN CAO (đăng mỗi tuần):
+1. Mua Bán BĐS Hạ Long — Quảng Ninh
+2. Môi Giới BĐS Quảng Ninh
+3. Hội Môi Giới BĐS Việt Nam (khu Quảng Ninh)
+4. Đầu Tư BĐS Hạ Long
+5. Vinhomes Hạ Long Xanh — Mua Bán Cho Thuê
+
+ƯU TIÊN TRUNG (đăng 2 tuần/lần):
+6. BĐS Hà Nội — Kênh Đầu Tư
+7. Đầu Tư BĐS Thông Minh
+8. Hội Môi Giới Bất Động Sản HN
+9. BĐS Hải Phòng & Quảng Ninh
+
+ƯU TIÊN THẤP (đăng 1 lần/tháng):
+10. Nhà Đất Việt Nam
+11. BĐS & Tài Chính Cá Nhân
+12. Kênh Đầu Tư Sinh Lời`},
+    {label:'MẪU CAPTION NGẮN CHO GROUP (DÙNG THAY NỘI DUNG DÀI)', text:`📊 Cập nhật thị trường HLX tuần này:
+
+[Paste 3-4 dòng đầu của bài từ Content Plan]
+
+→ Ai đang tìm hiểu shophouse/biệt thự HLX muốn xem phân tích đầy đủ? Comment "HLX" mình gửi link báo cáo thị trường miễn phí nhé!
+
+#VinhomesHaLongXanh #MoiGioiHLX`},
+  ]
+},
+{
+  id:'s04', emoji:'💚', title:'Đăng Bài Zalo Cá Nhân',
+  tagline:'Quy trình đăng Story và bài viết Zalo — tận dụng tệp bạn bè sẵn có, chi phí 0 đồng.',
+  chips:['Hàng ngày','Story + Feed'],
+  steps:[
+    {h:'Zalo Story (ưu tiên số 1)', p:'Mỗi ngày đăng 1-2 Story. Story hiển thị đầu tiên trong danh sách bạn bè. Thời gian tốt nhất: 7:00-8:00 sáng và 19:00-21:00 tối.'},
+    {h:'Nội dung Story', p:'Story nên là: Ảnh dự án HLX đẹp + 1 câu hook ngắn. Hoặc: Số liệu thị trường + "Swipe up để xem đầy đủ". Thêm sticker/text/ảnh trực tiếp trong Zalo.'},
+    {h:'Bài viết Zalo Feed', p:'Đăng 3-4 bài/tuần. Nội dung dài hơn Story. Copy từ Content Plan (các bài FB) — rút gọn lại còn 60-70% độ dài.'},
+    {h:'Gửi bài vào nhóm Zalo', p:'Nếu có nhóm Zalo môi giới → gửi bài (không quá 1 bài/ngày/nhóm). Bài Zalo nên ngắn gọn hơn FB.'},
+    {h:'Broadcast Zalo', p:'Nếu có danh sách lead cũ → dùng tính năng "Nhắn tin hàng loạt" Zalo OA hoặc copy-paste thủ công. Chỉ gửi cho người đã từng liên hệ.'},
+  ],
+  copies:[
+    {label:'MẪU STORY ZALO — HOOK SỐ LIỆU (NGẮN)', text:`📊 HLX TUẦN NÀY:
+[X] giao dịch shophouse
+Giá trung bình: [X] tỷ
+→ Inbox "PHÂN TÍCH" để nhận báo cáo full miễn phí 🎁`},
+    {label:'MẪU STORY ZALO — ẢNH DỰ ÁN (CAPTION)', text:`🌊 Góc nhìn từ balcony shophouse HLX phân khu [X]
+
+Shophouse này đang được hỏi mua nhiều nhất tuần này — anh/chị biết tại sao không?
+
+💬 Inbox em để nghe giải thích!`},
+    {label:'MẪU BROADCAST ZALO (GỬI CHO LEAD CŨ)', text:`Dạ [Tên ạ]! Em [Tên môi giới] đây.
+
+Tuần này em có thông tin cập nhật về HLX muốn chia sẻ với anh/chị:
+
+[1-2 điểm tin tức ngắn gọn]
+
+Anh/chị có muốn em gửi báo cáo thị trường tháng này không ạ? Miễn phí — em vừa tổng hợp xong 📊`},
+  ]
+},
+{
+  id:'s05', emoji:'🟦', title:'Đăng Bài Zalo OA',
+  tagline:'Vận hành Zalo Official Account — đăng bài tin tức, gửi bản tin, quản lý follower.',
+  chips:['2-3 bài/tuần','Zalo OA'],
+  steps:[
+    {h:'Đăng nhập Zalo OA', p:'Truy cập: oa.zalo.me → Đăng nhập bằng tài khoản được cấp. Bảng điều khiển chính: Bài viết → Tạo bài viết.'},
+    {h:'Tạo bài viết OA', p:'Bấm Tạo bài viết → Chọn Bài viết thường → Nhập tiêu đề → Paste nội dung từ Content Plan → Thêm ảnh → Preview → Đăng.'},
+    {h:'Thêm ảnh cho bài OA', p:'Ảnh đầu bài (cover): 1200×630px. Lấy từ Gallery HLX. Thêm logo/watermark SĐT nếu có. Không dùng ảnh không rõ nguồn gốc.'},
+    {h:'Gửi broadcast cho followers', p:'Sau khi đăng bài → Gửi tin broadcast. Vào Quản lý tin nhắn → Gửi theo nhóm → Chọn "Tất cả follower" → Paste 1-2 dòng tóm tắt bài + link.'},
+    {h:'Theo dõi analytics', p:'Cuối tuần check: Số follower tăng thêm? Bài nào reach cao nhất? Bài nào có nhiều click? → Báo cáo cho sếp.'},
+  ],
+  copies:[
+    {label:'MẪU BROADCAST OA (GỬI SAU KHI ĐĂNG BÀI)', text:`📢 Bài mới trên trang của chúng tôi!
+
+"[TIÊU ĐỀ BÀI VIẾT]"
+
+[1-2 câu tóm tắt nội dung hấp dẫn]
+
+→ Đọc đầy đủ tại: [link bài viết OA]
+
+💬 Comment hoặc inbox nếu anh/chị có câu hỏi nhé!`},
+    {label:'MẪU TIN CHÀO FOLLOWER MỚI (TỰ ĐỘNG)', text:`Xin chào! Cảm ơn bạn đã theo dõi trang của chúng tôi 🙏
+
+Chúng tôi cập nhật thông tin thị trường Vinhomes Hạ Long Xanh mỗi tuần — hoàn toàn miễn phí.
+
+Nếu bạn cần tư vấn riêng: 📞 0964.827.670
+
+Chúc bạn ngày tốt lành! 🌊`},
+  ]
+},
+{
+  id:'s06', emoji:'💬', title:'Đăng Bài Trong Group Zalo Môi Giới',
+  tagline:'Seeding vào group Zalo — nhẹ nhàng hơn FB, tương tác trực tiếp hơn. Cần khéo léo để không bị kick.',
+  chips:['3-4 lần/tuần','Các group Zalo mục tiêu'],
+  steps:[
+    {h:'Danh sách group Zalo mục tiêu', p:'Chỉ đăng vào group có ít nhất 100 thành viên là môi giới BĐS. Không đăng vào group gia đình, bạn bè cá nhân.'},
+    {h:'Tần suất', p:'Tối đa 1 bài/ngày/group. Nếu group có admin nghiêm → chỉ đăng 1 bài/tuần. Xem phản ứng admin trước khi đăng thêm.'},
+    {h:'Loại nội dung phù hợp Zalo group', p:'✅ Cập nhật tin tức ngắn (3-5 dòng) | ✅ Câu hỏi tương tác | ✅ Ảnh dự án đẹp + caption | ✅ Chia sẻ link tài liệu miễn phí. ❌ KHÔNG: Đăng bài bán hàng dài, KHÔNG: Spam link kit liên tục.'},
+    {h:'Chiến lược "Cho trước, nhận sau"', p:'Tuần 1-2: Chỉ chia sẻ thông tin giá trị, không đề cập kit. Tuần 3+: Khi đã có tương tác → mới nhẹ nhàng đề cập kit khi có người hỏi phù hợp.'},
+    {h:'Xử lý khi bị nhắc nhở', p:'Admin nhắc → xin lỗi ngay → dừng đăng group đó 1-2 tuần. Không cãi, không xóa tin.'},
+  ],
+  copies:[
+    {label:'MẪU BÀI SEEDING GROUP ZALO (NGẮN — GIÁ TRỊ)', text:`📊 Cập nhật nhanh HLX tuần này:
+
+▸ Shophouse phân khu [X]: giá từ [Y] tỷ, còn [Z] căn tốt
+▸ Biệt thự view biển: đang có [X] căn secondhand giá tốt
+▸ Lãi vay hiện tại: [X%]/năm (cố định [Y] năm)
+
+Ai cần phân tích chi tiết hơn inbox mình nhé!`},
+    {label:'MẪU ĐĂNG ẢNH + CAPTION (ZALO GROUP)', text:`🌊 HLX - [Tên phân khu/Sản phẩm]
+
+[1-2 dòng mô tả điểm ấn tượng của ảnh]
+
+Ai đang tìm hiểu khu này? Có thể phân tích thêm cho mọi người nếu cần 😊`},
+  ]
+},
+{
+  id:'s07', emoji:'🎵', title:'Đăng Video TikTok',
+  tagline:'Quy trình tạo và đăng video ngắn TikTok — không cần quay phim chuyên nghiệp, dùng điện thoại là đủ.',
+  chips:['3-5 video/tuần','TikTok'],
+  steps:[
+    {h:'3 dạng video TikTok hiệu quả nhất', p:'① Text-only: Chữ + nhạc nền (làm trong app TikTok, 30-60 giây) | ② Talking head: Tự quay nói 60-90 giây | ③ Slideshow ảnh: 5-8 ảnh HLX + nhạc + text overlay'},
+    {h:'Quay video Talking Head', p:'Ánh sáng tự nhiên (quay hướng cửa sổ). Nền: tường trắng hoặc ảnh dự án in ra. Đứng thẳng, nhìn thẳng camera. Nói tự nhiên — không cần học thuộc. Quay 3-4 lần lấy cái tốt nhất.'},
+    {h:'Script cho video 60 giây', p:'Giây 0-5: Hook (câu hỏi hoặc số liệu gây shock). Giây 5-45: Nội dung chính (3 điểm). Giây 45-60: CTA (inbox/comment/link bio).'},
+    {h:'Chỉnh sửa trong TikTok', p:'Thêm caption tự động → chỉnh sửa nếu sai. Thêm text overlay cho 3 điểm chính. Thêm nhạc nền nhẹ (volume 20-30%). Thêm hashtag trước khi đăng.'},
+    {h:'Thời gian đăng tốt nhất', p:'07:00-08:00 sáng | 12:00-13:00 trưa | 19:00-22:00 tối. Không đăng sau 22:00 hoặc trước 7:00.'},
+  ],
+  copies:[
+    {label:'SCRIPT VIDEO 60 GIÂY — "SỐ LIỆU GÂY SỐC"', text:`[0-5 giây — NÓI TO, RÕ]:
+"[X] căn shophouse HLX đã bán trong 30 ngày — bạn có biết điều này không?"
+
+[5-35 giây — NỘI DUNG]:
+"Thứ nhất: [Điểm 1 về thị trường]
+Thứ hai: [Điểm 2 về giá/ROI]
+Thứ ba: [Điểm 3 về cơ hội]"
+
+[35-55 giây — PHÂN TÍCH]:
+"[2-3 câu kết luận ngắn gọn]"
+
+[55-60 giây — CTA]:
+"Muốn phân tích đầy đủ? Link báo cáo miễn phí trong bio nhé!"`},
+    {label:'HASHTAG TIKTOK CHUẨN (COPY NGUYÊN)', text:`#VinhomesHaLongXanh #BDSHaLong #ShophouseHaLong
+#DauTuBDS2026 #HLX #MoiGioiBDS
+#KienThucBDS #TaiChinhBDS #HaLong`},
+  ]
+},
+{
+  id:'s08', emoji:'📸', title:'Đăng Bài Instagram',
+  tagline:'Instagram phụ — tập trung ảnh đẹp và Reel. Dùng để xây thương hiệu hình ảnh, không phải kênh chốt đơn chính.',
+  chips:['2-3 bài/tuần','Instagram'],
+  steps:[
+    {h:'Nội dung phù hợp IG', p:'IG là nền tảng hình ảnh → Chỉ dùng ảnh chất lượng cao từ Gallery HLX. Caption ngắn hơn FB (tối đa 150 từ). Hashtag nhiều hơn (20-30 hashtag).'},
+    {h:'Reels IG (ưu tiên)', p:'Reels = video ngắn TikTok → Tái sử dụng video TikTok cho IG Reels. Tải video TikTok (không watermark) → upload lên IG Reels. Dùng tool snaptik.app để tải TikTok không watermark.'},
+    {h:'Stories IG hàng ngày', p:'Story IG: Re-share bài Feed vào Story. Thêm sticker Hỏi hoặc Poll. Link trong Story (nếu tài khoản >10K follower): link landing page.'},
+    {h:'Cấu trúc Caption IG', p:'Dòng 1-2: Hook mạnh. Dòng 3-6: Nội dung chính (ngắn gọn). Dòng 7: CTA. Dòng 8: 20-30 hashtag (có thể comment riêng).'},
+  ],
+  copies:[
+    {label:'CAPTION IG CHUẨN (NGẮN — ĐẸP)', text:`🌊 [TÊU ĐỀ NGẮN — HOOK]
+
+[2-3 câu nội dung]
+
+👇 Muốn biết thêm? Link tư vấn trong bio.
+
+—
+#VinhomesHaLongXanh #HLX #BDSHaLong #ShophouseHaLong #DauTuBDS #BietThuBien #VinhomesHL #QuangNinh #HaLong2026 #BDSQuangNinh #MoiGioiBDS #KinhDoanhBDS #BDSVietNam #ShophouseVietNam #DauTuThongMinh #TaiChinhCaNhan #ROI #BDSThongMinh #NhaHaLong #DatHaLong`},
+  ]
+},
+{
+  id:'s09', emoji:'🌱', title:'Seeding Nhóm Môi Giới Mới',
+  tagline:'Quy trình gia nhập và xây dựng uy tín trong group FB/Zalo môi giới mới — không bị kick, không bị report.',
+  chips:['Tuần 1-2','Các nhóm mới tham gia'],
+  steps:[
+    {h:'Bước 1: Gia nhập nhóm đúng cách', p:'Tìm nhóm → Gửi yêu cầu gia nhập → Nếu có câu hỏi thành viên: trả lời rõ ràng, chuyên nghiệp → Chờ duyệt.'},
+    {h:'Tuần 1 — Im lặng quan sát', p:'Không đăng bài. Chỉ like và comment bài của người khác. Tìm hiểu: Nhóm thường đăng gì? Admin có nghiêm không? Thành viên nào active?'},
+    {h:'Tuần 2 — Tương tác có giá trị', p:'Comment có chiều sâu (không chỉ "hay quá", "cảm ơn"). Thêm thông tin thực tế vào comment. Giới thiệu bản thân tự nhiên khi phù hợp.'},
+    {h:'Tuần 3+ — Đăng bài giá trị', p:'Đăng bài thông tin thuần giá trị (không bán hàng). Bài đầu tiên: báo cáo thị trường hoặc ảnh dự án + câu hỏi tương tác.'},
+    {h:'Luôn tuân theo quy tắc nhóm', p:'Đọc ghim/thông báo nhóm trước khi đăng. Nếu nhóm có quy định → tuân thủ tuyệt đối. Không tranh luận gay gắt trong group công khai.'},
+  ],
+  copies:[
+    {label:'MẪU COMMENT TĂNG UY TÍN (DÙNG TUẦN 1-2)', text:`Cảm ơn anh/chị chia sẻ thông tin bổ ích ạ!
+
+Em xin bổ sung thêm: theo số liệu em theo dõi gần đây, [thêm 1-2 thông tin thực tế liên quan đến bài gốc].
+
+Anh/chị có thể chia sẻ thêm về [câu hỏi liên quan] không ạ? Em đang nghiên cứu kỹ khu vực này.`},
+    {label:'BÀI GIỚI THIỆU BẢN THÂN VÀO GROUP MỚI', text:`Chào cả nhà! Em mới vừa được duyệt vào group ạ 👋
+
+Em [Tên], đang tập trung khu vực Vinhomes Hạ Long Xanh. Hàng tuần em có tổng hợp số liệu giao dịch và phân tích thị trường khu này nếu mọi người quan tâm.
+
+Rất vui được học hỏi và chia sẻ cùng cộng đồng ạ! 🙏`},
+  ]
+},
+{
+  id:'s10', emoji:'💬', title:'Reply Comment & Tương Tác',
+  tagline:'Quy trình trả lời comment trên tất cả nền tảng — nhanh, chuyên nghiệp, chuyển lead hiệu quả.',
+  chips:['Trong vòng 1 giờ','Tất cả nền tảng'],
+  steps:[
+    {h:'Thời gian trả lời chuẩn', p:'Reply trong 1 giờ đầu sau khi đăng bài (quan trọng nhất). Không để quá 4 giờ mà không reply. Nếu đang ngủ/bận: cài thông báo để không bỏ sót.'},
+    {h:'Phân loại comment', p:'① Comment hỏi thông tin → Trả lời + mời inbox (SOP 11). ② Comment tương tác (like, "hay quá") → Like lại + reply ngắn cảm ơn. ③ Comment tiêu cực → Reply bình tĩnh + không cãi. ④ Comment spam → Xóa + báo cáo.'},
+    {h:'Quy tắc trả lời comment', p:'Luôn gọi tên nếu biết. Trả lời thực chất — không chỉ "cảm ơn ạ". Thêm thông tin bổ ích. Kết = câu hỏi mở hoặc invite inbox.'},
+    {h:'Khi comment hỏi giá / quan tâm', p:'Reply ngắn: "Dạ có, em inbox thêm thông tin cho [Tên] ạ!" → Sau đó nhắn riêng ngay. Không paste giá/link vào comment công khai (trông spam).'},
+    {h:'Theo dõi comment', p:'Mở tất cả bài đăng mỗi 2-3 giờ để kiểm tra comment mới. Không để comment unanswered qua đêm.'},
+  ],
+  copies:[
+    {label:'MẪU REPLY COMMENT CÓ QUAN TÂM', text:`Dạ cảm ơn [Tên] đã quan tâm ạ!
+
+Em inbox riêng thêm thông tin chi tiết và phân tích cụ thể cho hoàn cảnh của anh/chị nhé — tư vấn miễn phí ạ 😊`},
+    {label:'MẪU REPLY COMMENT TIÊU CỰC', text:`Dạ em hiểu lo ngại của anh/chị ạ.
+
+Đây là một góc nhìn hoàn toàn hợp lý. Thực tế thị trường có nhiều điểm phức tạp — nếu anh/chị muốn trao đổi thêm, em sẵn sàng giải thích chi tiết hơn qua inbox để không chiếm không gian của group nhé ạ.`},
+    {label:'MẪU REPLY COMMENT HỎI GIÁ', text:`Dạ [Tên] ơi, giá phụ thuộc vào phân khu và diện tích cụ thể ạ — dao động khá rộng.
+
+Em inbox ngay để gửi bảng giá + phân tích ROI cụ thể theo ngân sách của anh/chị nhé! Nhanh hơn chat ở đây ạ 😊`},
+  ]
+},
+{
+  id:'s11', emoji:'📥', title:'Xử Lý DM / Lead Mới',
+  tagline:'Khi có người nhắn tin hỏi mua → quy trình xử lý, thu thập thông tin, chuyển cho sếp.',
+  chips:['Mọi lúc','FB/Zalo/TikTok'],
+  steps:[
+    {h:'Trả lời ngay trong 5 phút', p:'Lead nhắn tin là thời điểm vàng. Trả lời chậm = mất lead. Bật thông báo tất cả nền tảng. Nếu đang bận: gửi tin "Em đang họp, sẽ liên hệ lại trong X phút nhé ạ!"'},
+    {h:'Xác định loại lead', p:'Hỏi 3 câu: ① Anh/chị quan tâm phân khúc nào? ② Mục đích mua? ③ Ngân sách tham khảo? → Ghi vào sheet lead ngay.'},
+    {h:'Gửi thông tin ban đầu', p:'Sau khi biết loại lead → Gửi: Bảng giá tham khảo hoặc link landing page. Không gửi tất cả mọi thứ cùng lúc — quá tải lead.'},
+    {h:'Chuyển cho sếp', p:'Lead hot (đã xem nhà, có ngân sách rõ, muốn gặp) → Chuyển cho sếp NGAY. Forward toàn bộ lịch sử chat. Gọi điện báo sếp luôn.'},
+    {h:'Lead chưa sẵn sàng', p:'Lead warm (đang tìm hiểu, chưa quyết) → Tiếp tục nurture: Gửi bài hàng tuần, hỏi thăm mỗi 2 tuần. Ghi vào danh sách follow-up.'},
+  ],
+  copies:[
+    {label:'MẪU TIN NHẮN CHÀO ĐẦU TIÊN (REPLY DM)', text:`Dạ chào [Tên ạ]! Em [Tên nhân viên] — tư vấn Vinhomes Hạ Long Xanh đây ạ.
+
+Cảm ơn anh/chị đã nhắn tin! Để em tư vấn đúng nhất, anh/chị có thể cho em biết:
+
+① Đang tìm hiểu phân khúc nào: shophouse, biệt thự hay condotel?
+② Mục đích: để ở, đầu tư cho thuê, hay kết hợp?
+
+Em gửi thông tin phù hợp nhất cho anh/chị ạ 😊`},
+    {label:'MẪU BÁO CÁO LEAD CHO SẾP (GỬI QUA ZALO)', text:`🔔 LEAD MỚI — [Ngày/Giờ]
+
+Tên: [Tên khách]
+Nền tảng: [FB/Zalo/TikTok]
+Quan tâm: [Phân khúc + diện tích ước tính]
+Mục đích: [Ở/Đầu tư/Cho thuê]
+Ngân sách: [Tự khai / Ước tính]
+Mức độ: [Hot/Warm/Cold]
+Lịch sử chat: [Tóm tắt 2-3 dòng]
+
+Em đã gửi [thông tin gì] cho khách ạ.
+Sếp có muốn em book lịch gặp không?`},
+  ]
+},
+{
+  id:'s12', emoji:'🖼️', title:'Đăng Ảnh Dự Án HLX Chuẩn',
+  tagline:'Quy trình chọn, xử lý và đăng ảnh dự án HLX — đảm bảo chất lượng, đúng bản quyền, đúng thông điệp.',
+  chips:['Mỗi ngày','Tất cả nền tảng'],
+  steps:[
+    {h:'Nguồn ảnh chính thức', p:'CHỈ dùng ảnh từ: Gallery 45 Ảnh HLX Official (link bên dưới), ảnh được Vinhomes cung cấp chính thức, ảnh tự chụp tại dự án. KHÔNG dùng ảnh lấy từ group FB không rõ nguồn.'},
+    {h:'Chọn ảnh theo nội dung bài', p:'Bài về shophouse → ảnh shophouse. Bài về view biển → ảnh biển/biệt thự. Bài về tiện ích → ảnh hồ bơi/club house. Bài về ROI → ảnh toàn cảnh dự án.'},
+    {h:'Thêm watermark (tùy chọn)', p:'Nếu muốn thêm SĐT/tên vào ảnh: Dùng Canva (miễn phí). Template đơn giản: góc dưới phải + font nhỏ + màu trắng/vàng. Không che quá 10% diện tích ảnh.'},
+    {h:'Kích thước ảnh theo nền tảng', p:'FB Feed: 1200×630px. FB Story/Zalo Story: 1080×1920px. TikTok cover: 1080×1920px. IG Feed: 1080×1080px. Crop và resize trong Canva.'},
+    {h:'Quy tắc đăng ảnh', p:'Tối đa 5 ảnh/bài FB (không ít hơn 1). Ảnh phải sắc nét, không mờ, không bị cắt xén. Không đăng ảnh có watermark của đối thủ.'},
+  ],
+  copies:[
+    {label:'LINK GALLERY 45 ẢNH HLX OFFICIAL', text:'https://yen670-oss.github.io/kit-hlx/ANH-HLX-GALLERY.html'},
+    {label:'LINK CANVA (TẠO WATERMARK MIỄN PHÍ)', text:'https://www.canva.com'},
+    {label:'CAPTION MẪU CHO ẢNH DỰ ÁN', text:`📸 [Tên phân khu/Góc chụp] — Vinhomes Hạ Long Xanh
+
+[1 câu mô tả điểm ấn tượng của ảnh]
+[1 câu thông tin giá trị liên quan (giá/tiện ích/view)]
+
+💬 Anh/chị ấn tượng nhất điều gì ở góc ảnh này?
+
+#VinhomesHaLongXanh #HLX #HaLong`},
+  ]
+},
+{
+  id:'s13', emoji:'#️⃣', title:'Sử Dụng Hashtag Chuẩn',
+  tagline:'Danh sách hashtag theo nền tảng và chủ đề — copy nguyên, không cần nghĩ thêm.',
+  chips:['Mỗi bài đăng','Tất cả nền tảng'],
+  steps:[
+    {h:'Nguyên tắc hashtag FB', p:'5-10 hashtag/bài. Đặt cuối bài, cách nội dung chính 1-2 dòng trống. Không dùng hashtag không liên quan để "câu like".'},
+    {h:'Nguyên tắc hashtag TikTok', p:'5-8 hashtag. Mix: 2-3 hashtag lớn (triệu view) + 2-3 hashtag vừa (100K-1M) + 1-2 hashtag nhỏ (dưới 100K). Thêm ngay khi đăng.'},
+    {h:'Nguyên tắc hashtag IG', p:'20-30 hashtag. Đặt cuối caption hoặc comment đầu tiên. Mix tỷ lệ: 40% lớn + 40% vừa + 20% niche.'},
+    {h:'Hashtag Zalo', p:'Zalo ít dùng hashtag hơn → 3-5 hashtag là đủ. Dùng hashtag rõ nghĩa, tiếng Việt không dấu hoặc có dấu đều được.'},
+    {h:'Tạo hashtag thương hiệu riêng', p:'Hashtag cá nhân: #TenCuaBan hoặc #TenCuaBanHLX. Đưa vào tất cả bài để build brand recognition theo thời gian.'},
+  ],
+  copies:[
+    {label:'BỘ HASHTAG FB (COPY NGUYÊN — 10 CÁI)', text:`#VinhomesHaLongXanh #HaLongXanh #HLX2026
+#ShophouseHaLong #BietThuBien #DauTuBDS
+#MoiGioiHaLong #BDSQuangNinh #VinhomesHL
+#KinhDoanhBDS`},
+    {label:'BỘ HASHTAG TIKTOK (COPY NGUYÊN — 8 CÁI)', text:`#VinhomesHaLongXanh #BDSHaLong #DauTuBDS2026
+#HLX #MoiGioiBDS #KienThucBDS
+#ShophouseHaLong #HaLong`},
+    {label:'BỘ HASHTAG IG (COPY NGUYÊN — 25 CÁI)', text:`#VinhomesHaLongXanh #HLX #BDSHaLong #ShophouseHaLong
+#DauTuBDS #BietThuBien #VinhomesHL #QuangNinh
+#HaLong2026 #BDSQuangNinh #MoiGioiBDS #KinhDoanhBDS
+#BDSVietNam #ShophouseVietNam #DauTuThongMinh
+#TaiChinhCaNhan #ROI #BDSThongMinh #NhaHaLong
+#DatHaLong #NghiDuongBien #Resort #LuxuryLiving
+#VinhomesGroup #HaLong`},
+    {label:'BỘ HASHTAG ZALO (NGẮN — 5 CÁI)', text:`#VinhomesHaLongXanh #HLX #BDSHaLong #DauTuBDS #ShophouseHaLong`},
+  ]
+},
+{
+  id:'s14', emoji:'📅', title:'Lịch Đăng Bài Hàng Tuần',
+  tagline:'Lịch cố định cho mỗi tuần — ai đăng ngày nào, nền tảng nào, loại nội dung gì. Không cần quyết định lại từ đầu mỗi ngày.',
+  chips:['Mỗi tuần','Tất cả nền tảng'],
+  steps:[
+    {h:'Check Content Plan đầu tuần (Thứ 2)', p:'Mở Content Plan. Xem tuần này đang ở giai đoạn nào (1-2-3). Chọn 5-7 bài cho cả tuần. Ghi vào sheet lịch đăng.'},
+    {h:'Chuẩn bị ảnh trước', p:'Thứ 2: Vào Gallery HLX, chọn 10-15 ảnh phù hợp tuần này, lưu vào folder điện thoại/máy tính. Không cần chọn ảnh mỗi ngày nữa.'},
+    {h:'Đăng theo lịch cố định', p:'Không skip ngày. Nếu bận: đăng bài ngắn hơn, ảnh ít hơn, nhưng vẫn đăng. Consistency > Perfection.'},
+    {h:'Ghi chép kết quả mỗi ngày', p:'Sau khi đăng: ghi vào Google Sheet: Bài nào / Nền tảng / Giờ đăng / Reach / Comment / Lead. Dữ liệu này để tối ưu tuần sau.'},
+  ],
+  copies:[
+    {label:'LỊCH ĐĂNG BÀI CHUẨN — MỖI TUẦN (COPY VÀO SHEET)', text:`THỨ 2:
+▸ 07:30 — FB cá nhân: Bài giá trị (báo cáo thị trường / tip)
+▸ 19:30 — Zalo Story: Hook ngắn + ảnh dự án
+
+THỨ 3:
+▸ 07:00 — TikTok: Video 60 giây (dạng "3 điều cần biết về HLX")
+▸ 20:00 — Zalo group: Seeding bài giá trị vào 2 nhóm ưu tiên
+
+THỨ 4:
+▸ 07:30 — FB cá nhân: Bài case study hoặc social proof
+▸ 12:00 — Instagram: Ảnh đẹp + caption ngắn
+▸ 20:00 — Zalo cá nhân: Broadcast lead list
+
+THỨ 5:
+▸ 07:00 — TikTok: Video hoặc slideshow ảnh HLX
+▸ 19:30 — FB Group môi giới: 1 bài vào 2 nhóm hot nhất
+
+THỨ 6:
+▸ 07:30 — FB cá nhân + Zalo OA: Bài tổng kết tuần / cập nhật thị trường
+▸ 20:00 — IG Reels: Re-post TikTok tốt nhất tuần
+
+THỨ 7:
+▸ 09:00 — FB + Zalo: Bài nhẹ nhàng hơn (ảnh đẹp, hỏi ý kiến)
+
+CHỦ NHẬT:
+▸ Không đăng bài mới. Review số liệu tuần. Chuẩn bị kế hoạch tuần sau.`},
+  ]
+},
+{
+  id:'s15', emoji:'📊', title:'Báo Cáo Cuối Tuần Cho Sếp',
+  tagline:'Template báo cáo cuối tuần — điền số thực tế, gửi cho sếp mỗi Chủ Nhật tối. Không bao giờ bỏ qua.',
+  chips:['Mỗi Chủ Nhật','Báo cáo bắt buộc'],
+  steps:[
+    {h:'Thu thập số liệu trong tuần', p:'Ghi chép trong Google Sheet mỗi ngày (xem SOP 14). Cuối tuần: tổng hợp từ sheet. Nếu không có sheet → xem lại từng bài đăng.'},
+    {h:'Các chỉ số cần báo cáo', p:'Số bài đã đăng vs kế hoạch. Tổng reach (lượt hiển thị). Tổng engagement (comment + like + share). Số DM/lead nhận được. Số lead chuyển cho sếp.'},
+    {h:'Nhận xét cá nhân', p:'Bài nào hiệu quả nhất tuần này? Lý do? Bài nào kém nhất? Lý do? Gợi ý cải thiện tuần sau?'},
+    {h:'Gửi trước 21:00 Chủ Nhật', p:'Gửi qua Zalo cho sếp. Copy template bên dưới → điền số thực tế → gửi. Không gửi muộn hơn 21:00 Chủ Nhật.'},
+  ],
+  copies:[
+    {label:'MẪU BÁO CÁO TUẦN (COPY → ĐIỀN SỐ → GỬI ZALO)', text:`📊 BÁO CÁO TUẦN [X] — [Ngày bắt đầu]-[Ngày kết thúc]
+━━━━━━━━━━━━━━━━━━━━
+
+📱 SỐ BÀI ĐĂNG:
+▸ Kế hoạch: [X] bài | Thực tế: [Y] bài
+▸ FB cá nhân: [X] bài | TikTok: [X] | Zalo: [X] | IG: [X]
+
+📈 KẾT QUẢ:
+▸ Tổng reach ước tính: [X] lượt xem
+▸ Tổng comment: [X] | Like/React: [X]
+▸ DM mới nhận: [X] tin nhắn
+▸ Lead chuyển sếp: [X] người
+
+🏆 BÀI HIỆU QUẢ NHẤT:
+▸ "[Tiêu đề bài]" — [X] tương tác — Lý do: [...]
+
+⚠️ VẤN ĐỀ TUẦN NÀY:
+▸ [Nếu có vấn đề gì → ghi rõ]
+▸ [Nếu không có → ghi "Tuần chạy đúng kế hoạch"]
+
+💡 ĐỀ XUẤT TUẦN SAU:
+▸ [1-2 ý kiến cải thiện]
+
+━━━━━━━━━━━━━━━━━━━━
+[Tên nhân viên] · Gửi lúc [HH:MM] Chủ Nhật`},
+  ]
+},
+{
+  id:'s16', emoji:'🚨', title:'Xử Lý Sự Cố Khẩn Cấp',
+  tagline:'Bài bị xóa, tài khoản bị hạn chế, comment tiêu cực lan rộng, lead phàn nàn — xử lý đúng cách, không gây thêm rủi ro.',
+  chips:['Khi có sự cố','Xử lý ngay'],
+  steps:[
+    {h:'Sự cố 1: Bài bị xóa / bị hạn chế FB', p:'Nguyên nhân thường gặp: đăng quá nhiều link, dùng từ ngữ "vi phạm", đăng quá nhiều group trong 1 ngày. Xử lý: Dừng đăng 24-48 giờ. Không tạo bài mới có nội dung tương tự ngay. Báo cáo sếp. Đọc lại quy tắc cộng đồng FB.'},
+    {h:'Sự cố 2: Tài khoản bị checkpoint / khóa', p:'Báo sếp ngay. Nếu bị yêu cầu xác minh danh tính → chuẩn bị CMND/CCCD. Không dùng phần mềm bên thứ 3 để đăng hàng loạt (vi phạm ToS FB). Không share mật khẩu cho ai.'},
+    {h:'Sự cố 3: Comment tiêu cực / Bị report', p:'KHÔNG xóa comment tiêu cực ngay (càng gây chú ý hơn). Reply bình tĩnh, chuyên nghiệp (dùng mẫu SOP 10). Nếu comment sai sự thật nghiêm trọng → báo sếp trước khi reply. Nếu comment spam/lừa đảo → Report + xóa.'},
+    {h:'Sự cố 4: Lead phàn nàn qua DM', p:'Đọc kỹ phàn nàn. Không phản bác ngay. Reply: "Dạ em hiểu, em xin lỗi về trải nghiệm này. Em sẽ chuyển thông tin cho người phụ trách để giải quyết sớm nhất ạ." → Báo sếp NGAY.'},
+    {h:'Sự cố 5: Đăng nhầm nội dung', p:'Phát hiện trong 5 phút → Xóa ngay trước khi nhiều người thấy. Phát hiện sau 5 phút → Giữ lại, sửa trong phần chỉnh sửa bài (nếu có). Phát hiện sau 30 phút + bài có nhiều tương tác → Báo sếp, không tự xử lý.'},
+  ],
+  copies:[
+    {label:'MẪU BÁO CÁO SỰ CỐ CHO SẾP (GỬI NGAY)', text:`🚨 BÁO CÁO SỰ CỐ — [Ngày/Giờ]
+
+Loại sự cố: [Bài bị xóa / Tài khoản bị hạn chế / Comment tiêu cực / Khác]
+
+Nền tảng: [FB / Zalo / TikTok / IG]
+
+Mô tả: [Mô tả ngắn gọn chuyện gì xảy ra]
+
+Em đã làm gì: [Đã xử lý gì, nếu có]
+
+Em cần sếp hỗ trợ: [Ghi rõ cần gì]
+
+Screenshot: [Attach ảnh chụp màn hình]`},
+    {label:'MẪU REPLY COMMENT TIÊU CỰC (BÌNH TĨNH)', text:`Dạ cảm ơn anh/chị đã chia sẻ quan điểm ạ.
+
+Em hiểu sự lo ngại này là hoàn toàn hợp lý — thị trường BĐS có nhiều thông tin trái chiều.
+
+Nếu anh/chị muốn trao đổi cụ thể hơn, em sẵn sàng giải đáp qua inbox để có thể chia sẻ số liệu và tài liệu cụ thể ạ.`},
+  ]
+}
+];
+
+/* ─── RENDER ─────────────────────────────────────────────── */
+function renderSidebar(){
+  const sb = document.getElementById('sidebar');
+  const mn = document.getElementById('mob-nav-inner');
+  let sbHtml = `<div class="sb-label">16 SOP — Chọn để xem</div>`;
+  let mnHtml = '';
+  SOPS.forEach((s,i)=>{
+    const ac = i===0?'active':'';
+    sbHtml += `<button class="sb-btn ${ac}" onclick="show(${i},this)" id="sb${i}"><span class="sb-num">${String(i+1).padStart(2,'0')}</span>${s.emoji} ${s.title}</button>`;
+    mnHtml += `<button class="mob-btn ${ac}" onclick="show(${i},this)" id="mb${i}">${s.emoji} SOP${i+1}</button>`;
+  });
+  sb.innerHTML = sbHtml;
+  mn.innerHTML = mnHtml;
+}
+
+function renderPanels(){
+  const main = document.getElementById('main');
+  let html = '';
+  SOPS.forEach((s,i)=>{
+    const ac = i===0?'active':'';
+    html += `<div class="panel ${ac}" id="p${i}">`;
+    // SOP header
+    html += `<div class="sop-hd">
+      <div class="sop-num">SOP ${String(i+1).padStart(2,'0')} / 16</div>
+      <h2>${s.emoji} ${s.title}</h2>
+      <div class="sop-tagline">${s.tagline}</div>
+      <div class="sop-meta">${s.chips.map(c=>`<span class="sop-chip">${c}</span>`).join('')}</div>
+    </div>`;
+    // Steps
+    html += `<div class="sec-t">📋 Các Bước Thực Hiện</div><div class="steps">`;
+    s.steps.forEach((st,j)=>{
+      html += `<div class="step"><div class="step-n">${j+1}</div><div class="step-body"><h4>${st.h}</h4><p>${st.p}</p></div></div>`;
+    });
+    html += `</div>`;
+    // Copy cards
+    if(s.copies && s.copies.length){
+      html += `<div class="sec-t">📋 Nội Dung Copy-Paste</div>`;
+      s.copies.forEach((c,j)=>{
+        html += `<div class="copy-card">
+          <div class="cc-head">
+            <div class="cc-label">${c.label}</div>
+            <button class="copy-btn" onclick="cp(this,'cc${i}_${j}')">📋 Copy</button>
+          </div>
+          <div class="cc-body" id="cc${i}_${j}">${esc(c.text)}</div>
+        </div>`;
+      });
+    }
+    html += `</div>`;
+  });
+  main.innerHTML = html;
+}
+
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function show(idx, btn){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  document.querySelectorAll('.sb-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  document.querySelectorAll('.mob-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+}
+
+function cp(btn, id){
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.innerText).then(()=>{
+    btn.textContent='✅ Copied!'; btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('ok');},2200);
+  });
+}
+
+renderSidebar();
+renderPanels();
+</script>
+</body>
+</html>
