@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nghiên Cứu Nỗi Đau Chủ Sàn F1/F2 — BDS Mastery Kit</title>
+<style>
+  :root{
+    --navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;
+    --cream:#FAF8F3;--red:#C0392B;--green:#1a6b3a;--orange:#D35400;
+    --purple:#6b1a6b;--teal:#1a5a6b;--bg:#0d1b2a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:#e8e0d0;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
+
+  /* ── HERO */
+  .hero{background:linear-gradient(135deg,#0a0f20,#1a1a3a,#1a2a1a);padding:48px 24px 36px;text-align:center;border-bottom:1px solid rgba(201,168,76,.25)}
+  .hero-tag{display:inline-block;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gl);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:16px}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,38px);color:#fff;margin-bottom:10px;line-height:1.2}
+  .hero-sub{color:#a0b4cc;font-size:14px;max-width:600px;margin:0 auto 20px}
+  .hero-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:560px;margin:24px auto 0;text-align:left}
+  .hc-box{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:16px 18px}
+  .hc-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gl);margin-bottom:8px;font-weight:600}
+  .hc-list{list-style:none;display:grid;gap:4px}
+  .hc-list li{font-size:12.5px;color:#c0b09a;padding-left:14px;position:relative}
+  .hc-list li::before{content:'·';position:absolute;left:0;color:var(--gold)}
+  .hero-stats{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:24px}
+  .hs-box{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:12px 16px;text-align:center;min-width:100px}
+  .hs-num{font-size:22px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif}
+  .hs-label{font-size:10px;color:#8a9ab0;margin-top:2px;line-height:1.3}
+
+  /* ── TABS */
+  .tab-bar{display:flex;overflow-x:auto;background:#0a1520;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:99;scrollbar-width:none}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{flex:none;padding:14px 18px;font-size:12.5px;font-weight:600;color:#6a7d90;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s}
+  .tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+  .tab-btn:hover{color:#d0c0a0}
+
+  /* ── PANELS */
+  .panel{display:none;padding:28px 20px 60px;max-width:860px;margin:0 auto}
+  .panel.active{display:block}
+
+  /* ── HEADINGS */
+  .sec-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gl);margin-bottom:6px;font-weight:600}
+  .sec-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,26px);color:#fff;margin-bottom:6px}
+  .sec-sub{color:#8a9ab0;font-size:13.5px;margin-bottom:28px}
+
+  /* ── PAIN CARD */
+  .pain-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:20px;overflow:hidden}
+  .pain-head{display:flex;align-items:center;gap:14px;padding:18px 20px}
+  .pain-icon{font-size:28px;flex-shrink:0}
+  .pain-meta{flex:1}
+  .pain-num{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gl);margin-bottom:2px}
+  .pain-title{font-size:16px;font-weight:700;color:#f0e8d8}
+  .pain-badge{font-size:10px;padding:4px 12px;border-radius:12px;font-weight:600;flex-shrink:0;text-align:center}
+  .badge-critical{background:rgba(192,57,43,.25);color:#e87070;border:1px solid rgba(192,57,43,.4)}
+  .badge-high{background:rgba(211,84,0,.25);color:#f0a060;border:1px solid rgba(211,84,0,.4)}
+  .badge-medium{background:rgba(201,168,76,.2);color:var(--gl);border:1px solid rgba(201,168,76,.35)}
+  .pain-body{padding:0 20px 20px;border-top:1px solid rgba(255,255,255,.06)}
+  .pain-body p{color:#c0b09a;font-size:14px;margin-top:14px;line-height:1.75}
+
+  /* Data row */
+  .data-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:16px 0}
+  .data-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:12px 14px;text-align:center}
+  .data-num{font-size:22px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif}
+  .data-label{font-size:11px;color:#8a9ab0;margin-top:4px;line-height:1.35}
+  .data-src{font-size:9.5px;color:#4a5a6a;margin-top:4px;font-style:italic}
+
+  /* Quote */
+  .quote-block{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-style:italic;color:#c0b09a;font-size:13.5px}
+  .quote-src{font-size:11px;color:#5a6a7a;margin-top:6px;font-style:normal}
+
+  /* Solution */
+  .sol-box{background:rgba(26,107,58,.12);border:1px solid rgba(26,107,58,.3);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .sol-head{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#60c080;font-weight:600;margin-bottom:8px}
+  .sol-box p{color:#90c0a0;font-size:13px;line-height:1.65}
+  .sol-box ul{list-style:none;margin-top:8px;display:grid;gap:5px}
+  .sol-box ul li{font-size:13px;color:#90c0a0;padding-left:16px;position:relative}
+  .sol-box ul li::before{content:'✓';position:absolute;left:0;color:#60c080;font-weight:700}
+
+  /* Impact chain */
+  .chain{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:14px 0}
+  .chain-step{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:6px 12px;font-size:12px;color:#e87070}
+  .chain-arrow{color:#666;font-size:14px}
+
+  /* Overview cards */
+  .pain-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:20px 0}
+  .pm-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s}
+  .pm-card:hover{border-color:var(--gold);background:rgba(201,168,76,.06)}
+  .pm-card.critical{border-left:3px solid #e87070}
+  .pm-card.high{border-left:3px solid #f0a060}
+  .pm-card.medium{border-left:3px solid var(--gold)}
+  .pm-emoji{font-size:22px;margin-bottom:8px}
+  .pm-title{font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:4px}
+  .pm-severity{font-size:11px;margin-bottom:5px}
+  .pm-impact{font-size:12px;color:#8a9ab0;line-height:1.4}
+
+  /* Insight bar */
+  .insight-bar{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:18px 20px;margin:20px 0}
+  .insight-bar h3{font-size:14px;font-weight:700;color:var(--gl);margin-bottom:10px}
+  .insight-bar ul{list-style:none;display:grid;gap:7px}
+  .insight-bar li{font-size:13px;color:#c0b09a;padding-left:18px;position:relative}
+  .insight-bar li::before{content:'→';position:absolute;left:0;color:var(--gold)}
+
+  /* Script */
+  .script-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:16px;overflow:hidden}
+  .script-head{padding:14px 20px;background:rgba(255,255,255,.03);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  .script-name{font-weight:700;color:#f0e8d8;font-size:13.5px}
+  .script-tag{font-size:10px;padding:3px 10px;border-radius:12px;background:rgba(201,168,76,.15);color:var(--gl);border:1px solid rgba(201,168,76,.3)}
+  .script-body{padding:16px 20px}
+  .script-body pre{white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;font-size:13.5px;color:#c0b09a;line-height:1.7}
+  .copy-btn{display:block;width:100%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:13px;font-weight:600;padding:10px;border-radius:0 0 12px 12px;cursor:pointer;transition:all .2s}
+  .copy-btn:hover{background:rgba(201,168,76,.22)}
+  .copy-btn.ok{background:rgba(26,107,58,.25);border-color:rgba(26,107,58,.4);color:#80e0a0}
+
+  /* Solution matrix */
+  .sol-matrix{display:grid;gap:14px;margin:20px 0}
+  .sm-row{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:1fr 2fr;gap:16px;align-items:start}
+  .sm-pain{font-size:12.5px;font-weight:700;color:#e87070}
+  .sm-sol{font-size:13px;color:#90c0a0}
+  .sm-product{font-size:11px;color:var(--gl);margin-top:6px;font-weight:600}
+
+  /* Offer section */
+  .offer-card{background:linear-gradient(135deg,rgba(27,58,107,.3),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.25);border-radius:14px;padding:20px;margin-bottom:14px}
+  .oc-name{font-size:15px;font-weight:700;color:#f0e8d8;margin-bottom:6px}
+  .oc-for{font-size:11px;color:var(--gl);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+  .oc-desc{font-size:13px;color:#c0b09a;line-height:1.65;margin-bottom:12px}
+  .oc-items{list-style:none;display:grid;gap:4px}
+  .oc-items li{font-size:12.5px;color:#a0c0b0;padding-left:18px;position:relative}
+  .oc-items li::before{content:'→';position:absolute;left:0;color:var(--gl)}
+  .oc-price{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:13px;font-weight:700;padding:5px 14px;border-radius:20px;margin-top:10px}
+
+  /* Legend */
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+  .leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#8a9ab0}
+  .leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .dot-critical{background:#e87070}
+  .dot-high{background:#f0a060}
+  .dot-medium{background:var(--gold)}
+
+  /* Desktop */
+  @media(min-width:769px){
+    body{font-size:16px}
+    .panel{padding:36px 40px 80px}
+    .pain-body p{font-size:15px}
+    .data-num{font-size:26px}
+    .script-body pre{font-size:14.5px}
+    .pain-title{font-size:17px}
+    .quote-block{font-size:14.5px}
+    .sm-row{grid-template-columns:200px 1fr}
+    .hero-compare{max-width:600px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🏢 Market Intelligence · Chủ Sàn F1 / F2</div>
+  <h1>8 Nỗi Đau Sâu Nhất Của<br>Chủ Sàn F1 & F2 Phân Phối HLX</h1>
+  <p class="hero-sub">Nghiên cứu có bằng chứng từ data thực tế — Script khai thác, Giải pháp và Offer phù hợp từng tầng</p>
+
+  <div class="hero-compare">
+    <div class="hc-box">
+      <div class="hc-title">🏢 Chủ Sàn F1</div>
+      <ul class="hc-list">
+        <li>Ký hợp đồng trực tiếp với Vinhomes</li>
+        <li>Ký quỹ lớn, cam kết doanh số cao</li>
+        <li>Quản lý 20–200+ nhân viên</li>
+        <li>Phân phối xuống cho F2/Freelancer</li>
+      </ul>
+    </div>
+    <div class="hc-box">
+      <div class="hc-title">🏬 Chủ Sàn F2</div>
+      <ul class="hc-list">
+        <li>Nhận hàng từ F1, chia hoa hồng</li>
+        <li>Vốn nhỏ hơn, đội nhỏ hơn</li>
+        <li>Quản lý 5–50 môi giới</li>
+        <li>Bị kẹp giữa F1 và Freelancer</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hs-box">
+      <div class="hs-num">82%</div>
+      <div class="hs-label">sàn không có lương cơ bản cho nhân viên</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">2 năm</div>
+      <div class="hs-label">thời gian sàn phải chờ hoa hồng từ CĐT</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">70%</div>
+      <div class="hs-label">nhân viên bỏ nghề trong 1–2 năm đầu</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">3–7tr₫</div>
+      <div class="hs-label">lương cơ bản trả môi giới trong khi chờ hoa hồng</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">+76%</div>
+      <div class="hs-label">sàn quay lại H1/2025 — thị trường phục hồi</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="show(0)">🗺️ Bản Đồ Nỗi Đau</button>
+  <button class="tab-btn" onclick="show(1)">🔴 Nỗi Đau #1–4</button>
+  <button class="tab-btn" onclick="show(2)">🟠 Nỗi Đau #5–8</button>
+  <button class="tab-btn" onclick="show(3)">💬 Script Khai Thác</button>
+  <button class="tab-btn" onclick="show(4)">🎁 Giải Pháp & Offer</button>
+  <button class="tab-btn" onclick="show(5)">✅ Checklist Hành Động</button>
+</div>
+
+<!-- ─────────── TAB 0: OVERVIEW ─────────── -->
+<div class="panel active" id="p0">
+  <div class="sec-label">Market Intelligence — Chủ Sàn F1 / F2</div>
+  <div class="sec-title">Bản Đồ Nỗi Đau</div>
+  <div class="sec-sub">8 vấn đề cốt lõi — xếp hạng theo mức độ ảnh hưởng đến sự tồn tại của sàn</div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot dot-critical"></div> Nghiêm trọng — Đe dọa sự sống còn của sàn</div>
+    <div class="leg-item"><div class="leg-dot dot-high"></div> Cao — Cản trở tăng trưởng và khả năng mở rộng</div>
+    <div class="leg-item"><div class="leg-dot dot-medium"></div> Trung bình — Giới hạn hiệu quả vận hành</div>
+  </div>
+
+  <div class="pain-map">
+    <div class="pm-card critical" onclick="show(1)">
+      <div class="pm-emoji">💸</div>
+      <div class="pm-title">Dòng tiền âm liên tục</div>
+      <div class="pm-severity">🔴 Nghiêm trọng</div>
+      <div class="pm-impact">Chi trước, nhận sau 3–24 tháng → nguy cơ vỡ tiền mặt</div>
+    </div>
+    <div class="pm-card critical" onclick="show(1)">
+      <div class="pm-emoji">🔄</div>
+      <div class="pm-title">Vòng đào tạo vô tận</div>
+      <div class="pm-severity">🔴 Nghiêm trọng</div>
+      <div class="pm-impact">Nhân viên bỏ việc → đào tạo lại → tốn tiền & thời gian</div>
+    </div>
+    <div class="pm-card critical" onclick="show(1)">
+      <div class="pm-emoji">📭</div>
+      <div class="pm-title">Nhân viên thiếu công cụ</div>
+      <div class="pm-severity">🔴 Nghiêm trọng</div>
+      <div class="pm-impact">Sàn không có bộ tài liệu chuẩn → chất lượng tư vấn kém</div>
+    </div>
+    <div class="pm-card critical" onclick="show(1)">
+      <div class="pm-emoji">📈</div>
+      <div class="pm-title">Áp lực KPI từ F1</div>
+      <div class="pm-severity">🔴 Nghiêm trọng</div>
+      <div class="pm-impact">Cam kết doanh số cao → không đạt → mất quyền phân phối</div>
+    </div>
+    <div class="pm-card high" onclick="show(2)">
+      <div class="pm-emoji">⚔️</div>
+      <div class="pm-title">Cạnh tranh nội bộ</div>
+      <div class="pm-severity">🟠 Cao</div>
+      <div class="pm-impact">F2 tranh khách của F2 khác → phá vỡ thị trường chung</div>
+    </div>
+    <div class="pm-card high" onclick="show(2)">
+      <div class="pm-emoji">📢</div>
+      <div class="pm-title">Thiếu hệ thống marketing</div>
+      <div class="pm-severity">🟠 Cao</div>
+      <div class="pm-impact">Chủ sàn phải lo marketing cho 20–200 người → không kham nổi</div>
+    </div>
+    <div class="pm-card medium" onclick="show(2)">
+      <div class="pm-emoji">🏦</div>
+      <div class="pm-title">Vốn & ký quỹ khổng lồ</div>
+      <div class="pm-severity">🟡 Trung bình</div>
+      <div class="pm-impact">F1: hàng chục tỷ ký quỹ → F2 cũng đặt cọc với F1</div>
+    </div>
+    <div class="pm-card medium" onclick="show(2)">
+      <div class="pm-emoji">📊</div>
+      <div class="pm-title">Thiếu hệ thống quản trị</div>
+      <div class="pm-severity">🟡 Trung bình</div>
+      <div class="pm-impact">Không CRM, không theo dõi KPI → chủ sàn mù tịt đội ngũ</div>
+    </div>
+  </div>
+
+  <div class="insight-bar">
+    <h3>🔑 3 Insight Chiến Lược Dành Cho Chủ Sàn F1/F2</h3>
+    <ul>
+      <li>Vấn đề của chủ sàn không phải thiếu thị trường — HLX đang là cơn sóng lớn nhất Quảng Ninh. Vấn đề là thiếu hệ thống để tận dụng cơn sóng này mà không chảy máu tiền mặt</li>
+      <li>Đội ngũ mạnh = sàn mạnh: Mỗi môi giới có công cụ chuyên nghiệp = doanh thu tăng trực tiếp vào túi chủ sàn. Kit cho nhân viên không phải chi phí — đó là đòn bẩy doanh thu</li>
+      <li>Thị trường phục hồi là cơ hội cuối cùng để thiết lập vị trí dẫn đầu. Ai chuẩn bị hệ thống ngay bây giờ thắng toàn bộ giai đoạn 2026–2028</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ─────────── TAB 1: NỖI ĐAU 1-4 ─────────── -->
+<div class="panel" id="p1">
+  <div class="sec-label">Nghiêm Trọng — Đe Dọa Sự Tồn Tại Của Sàn</div>
+  <div class="sec-title">Nỗi Đau #1 → #4</div>
+  <div class="sec-sub">Bốn vấn đề cốt lõi — bất kỳ vấn đề nào cũng đủ để phá sàn nếu không giải quyết</div>
+
+  <!-- PAIN 1 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">💸</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #01</div>
+        <div class="pain-title">Dòng tiền âm — Chi trước, nhận sau hàng tháng đến 2 năm</div>
+      </div>
+      <div class="pain-badge badge-critical">🔴 Nghiêm Trọng</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Chủ sàn phải chi lương nhân viên, tiền văn phòng, marketing NGAY từ ngày 1 — trong khi hoa hồng từ chủ đầu tư chỉ được thanh toán theo tiến độ dự án, có thể kéo dài 3 tháng đến 2 năm. Sàn liên tục phải "tự vay" hoặc dùng vốn cá nhân để vận hành.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">2 năm</div>
+          <div class="data-label">thời gian tối đa sàn phải chờ hoa hồng từ CĐT</div>
+          <div class="data-src">Homedy — phân tích rủi ro dòng tiền sàn BĐS</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">3–7tr₫/tháng</div>
+          <div class="data-label">lương cơ bản phải trả mỗi nhân viên trong khi chờ hoa hồng</div>
+          <div class="data-src">Thực tế thị trường lương BĐS 2025</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Hàng chục tỷ</div>
+          <div class="data-label">ký quỹ để trở thành F1 Vinhomes</div>
+          <div class="data-src">Yêu cầu trở thành sàn F1 Vinhomes</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Chi phí cố định hàng tháng của sàn là không nhỏ: tiền ký quỹ, trả quảng cáo, và chính sách hoa hồng trả chậm của chủ đầu tư cũng làm sàn phân phối mệt mỏi. Nhiều sàn phải gồng mình chịu lỗ bởi chủ đầu tư chây ì và sàn chỉ đòi lại được phí hoa hồng sau tròn trịa 2 năm."
+        <div class="quote-src">— Landsoft, phân tích chính sách hoa hồng sàn BĐS</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Vòng xoáy nguy hiểm:</strong></p>
+      <div class="chain">
+        <div class="chain-step">Đóng deal</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Chờ CĐT thanh toán</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Vẫn phải trả lương</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Vay thêm vốn</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Lãi ăn vào margin</div>
+      </div>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Khi mỗi nhân viên có công cụ đầy đủ → tỷ lệ chốt tăng → cùng số nhân viên làm ra nhiều doanh số hơn → hoa hồng về sàn nhiều hơn trên cùng chi phí cố định. Không cần thêm vốn — cần tăng hiệu suất trên vốn hiện có.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 2 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">🔄</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #02</div>
+        <div class="pain-title">Vòng đào tạo vô tận — Nhân viên bỏ, đào tạo lại, bỏ tiếp</div>
+      </div>
+      <div class="pain-badge badge-critical">🔴 Nghiêm Trọng</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Chủ sàn mất 1–3 tháng đào tạo một nhân viên mới. Nhân viên không chốt được deal trong 3 tháng đầu → bỏ việc. Sàn mất toàn bộ chi phí đào tạo + thời gian của team leader. Vòng này lặp lại liên tục và chiếm 30–50% thời gian quản lý của chủ sàn.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">70%</div>
+          <div class="data-label">môi giới mới bỏ việc trong năm đầu tiên</div>
+          <div class="data-src">VARS & nghiên cứu ngành BĐS Việt Nam</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">82%</div>
+          <div class="data-label">sàn BĐS không có lương cơ bản ổn định cho nhân viên</div>
+          <div class="data-src">Diaocthanhphat — phân tích mô hình lương BĐS</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">1–3 tháng</div>
+          <div class="data-label">thời gian đào tạo nhân viên mới trước khi họ tự làm được</div>
+          <div class="data-src">Thực tế vận hành sàn</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Một số công ty môi giới BĐS không có các chương trình cố vấn mà chỉ để nhân viên mới tự tìm hiểu, điều này dẫn đến sự thiếu động lực, bất mãn, buộc các tài năng trẻ phải tìm kiếm công việc mới."
+        <div class="quote-src">— VnResource, phân tích thực trạng quản lý nhân sự ngành BĐS</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Chi phí thực sự của mỗi lần nhân viên bỏ việc:</strong> Lương 3 tháng đào tạo (3–7tr × 3 = 9–21tr) + chi phí tuyển dụng mới (2–5tr) + thời gian chủ sàn/leader bỏ ra + cơ hội bán hàng bị bỏ lỡ = ước tính 30–80 triệu đồng mỗi lần.</p>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>16 SOP đăng bài + bộ tài liệu chuẩn → nhân viên mới có hướng dẫn từng bước ngay từ ngày 1 → thấy kết quả sớm hơn → ở lại lâu hơn. Chủ sàn không cần đào tạo từ đầu mỗi lần — kit làm thay.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 3 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📭</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #03</div>
+        <div class="pain-title">Nhân viên không có công cụ — Chủ sàn phải làm thay tất cả</div>
+      </div>
+      <div class="pain-badge badge-critical">🔴 Nghiêm Trọng</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Đa số chủ sàn cung cấp cho nhân viên: brochure chung từ CĐT, đôi khi một số ảnh dự án — và thế là hết. Không có tài liệu tư vấn chuẩn, không có script, không có template tin nhắn, không có landing page riêng. Kết quả: chất lượng tư vấn của 20 người = 20 cách làm khác nhau → không kiểm soát được → uy tín sàn không đồng đều.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">&lt;5%</div>
+          <div class="data-label">môi giới có landing page cá nhân riêng</div>
+          <div class="data-src">Quan sát thực địa nhóm môi giới HLX</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">20 người</div>
+          <div class="data-label">= 20 cách tư vấn khác nhau nếu không có SOP chuẩn</div>
+          <div class="data-src">Thực tế quản lý sàn BĐS</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Hàng tỷ₫</div>
+          <div class="data-label">hoa hồng bị mất vì nhân viên tư vấn không thuyết phục</div>
+          <div class="data-src">Ước tính từ tỷ lệ chốt thấp</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Nhân sự mới thường thiếu định hướng, thiếu kỹ năng đặc thù và khó bắt nhịp với thị trường nếu không có quy trình đào tạo bài bản từ đầu."
+        <div class="quote-src">— Skillhub Mona Academy, phân tích đào tạo sale BĐS</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Hệ quả cụ thể:</strong> Khách hỏi 5 nhân viên của cùng 1 sàn → nhận 5 câu trả lời khác nhau → mất tin tưởng vào cả sàn → tìm môi giới ở sàn khác có hình ảnh nhất quán hơn.</p>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Kit giải quyết điều này như thế nào</div>
+        <ul>
+          <li>Landing page riêng cho từng nhân viên (tên + hình ảnh riêng)</li>
+          <li>16 SOP = quy trình chuẩn hóa → 20 người làm giống nhau</li>
+          <li>Bộ tài liệu HLX + script + template → nhân viên mới dùng được ngay</li>
+          <li>Chủ sàn mua kit cho cả đội → chuẩn hóa toàn bộ trong 1 tuần</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 4 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📈</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #04</div>
+        <div class="pain-title">Áp lực cam kết doanh số từ F1 — Không đạt = mất quyền phân phối</div>
+      </div>
+      <div class="pain-badge badge-critical">🔴 Nghiêm Trọng</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Để được là đại lý F1 Vinhomes, sàn phải cam kết doanh số cụ thể. Để F2 nhận hàng từ F1, F2 cũng phải cam kết. Chuỗi áp lực KPI đổ từ trên xuống: CĐT → F1 → F2 → Trưởng nhóm → Nhân viên. Khi thị trường khó, áp lực này không giảm nhưng khả năng đạt KPI giảm — tạo ra stress tột độ ở mọi tầng.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">100+</div>
+          <div class="data-label">đại lý F1/F2 Vinhomes đang cạnh tranh nhau</div>
+          <div class="data-src">Danh sách đại lý chính thức Vinhomes 2025</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">3 điều kiện</div>
+          <div class="data-label">Vinhomes yêu cầu F1: kết quả, vận hành, đào tạo theo chuẩn</div>
+          <div class="data-src">Yêu cầu đại lý chiến lược Vinhomes</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Mất quyền</div>
+          <div class="data-label">phân phối nếu không đạt KPI liên tục</div>
+          <div class="data-src">Cơ chế quản lý đại lý Vinhomes</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Áp lực sẽ đổ dồn từ giám đốc kinh doanh đến giám đốc sàn, trưởng phòng và cuối cùng là nhân viên kinh doanh. Khi KPI Trở Thành áp Lực, đây là dấu hiệu hệ thống đánh giá hiệu suất sai."
+        <div class="quote-src">— Optimi & Diaocthanhphat, phân tích hệ thống KPI ngành BĐS</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Vòng lặp không lối thoát:</strong> Áp lực KPI cao → nhân viên stress → bỏ việc → đội mỏng hơn → càng khó đạt KPI → áp lực càng tăng → nhân viên stress hơn...</p>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Mỗi nhân viên có công cụ đầy đủ → tỷ lệ chốt tăng mà không cần tăng số người → cùng đội ngũ hiện tại đạt KPI cao hơn. Đặc biệt: pipeline products (Weekly Brief, Follow-up Pack) giúp mỗi nhân viên manage nhiều khách đồng thời → output/người tăng lên rõ rệt.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────── TAB 2: NỖI ĐAU 5-8 ─────────── -->
+<div class="panel" id="p2">
+  <div class="sec-label">Cao → Trung Bình — Cản Trở Tăng Trưởng Bền Vững</div>
+  <div class="sec-title">Nỗi Đau #5 → #8</div>
+  <div class="sec-sub">Bốn vấn đề cộng hưởng — giải quyết được là mở ra giai đoạn tăng trưởng mới</div>
+
+  <!-- PAIN 5 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">⚔️</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #05</div>
+        <div class="pain-title">Cạnh tranh nội bộ F2–F2 phá thị trường chung của sàn</div>
+      </div>
+      <div class="pain-badge badge-high">🟠 Cao</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Trong cùng một hệ thống F1 → nhiều F2 → nhiều Freelancer, các đơn vị con cạnh tranh nhau để tiếp cận cùng pool khách hàng. Hiện tượng "kéo khách" của nhau, đưa ra mức chiết khấu cao hơn để win deal → làm sụt giảm margin toàn hệ thống và gây mất tin tưởng của khách hàng khi tiếp xúc với nhiều người cùng sàn nhưng thông tin mâu thuẫn.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">F1 → F2 → Free</div>
+          <div class="data-label">3 tầng cùng tiếp cận 1 pool khách HLX</div>
+          <div class="data-src">Cơ cấu phân phối Vinhomes</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Margin giảm</div>
+          <div class="data-label">khi F2 cạnh tranh bằng chiết khấu thêm cá nhân</div>
+          <div class="data-src">Thực tế thị trường HLX</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">1 khách</div>
+          <div class="data-label">có thể bị 3–5 người từ cùng sàn gọi → mất kiên nhẫn</div>
+          <div class="data-src">Quan sát thực tế</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Mở rộng quy mô phải đi kèm với năng lực quản trị, đặc biệt là kiểm soát chất lượng đội ngũ. Nếu phát triển ồ ạt nhưng không đảm bảo chất lượng, hiệu quả kinh doanh sẽ suy giảm, chi phí gia tăng nhanh chóng và bào mòn lợi nhuận."
+        <div class="quote-src">— Munkas, phân tích điều kiện trở thành sàn F1 BĐS</div>
+      </div>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Giải pháp cấu trúc</div>
+        <p>Phân vùng lãnh thổ + phân khách theo kênh: mỗi F2/Freelancer có kênh content riêng (landing page riêng) → tự build khách hàng của mình thay vì cùng tranh 1 pool. Kit giúp mỗi nhân viên xây kênh riêng → không cần "cướp" khách của nhau.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 6 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📢</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #06</div>
+        <div class="pain-title">Không có hệ thống marketing cho cả đội — Chủ sàn quá tải</div>
+      </div>
+      <div class="pain-badge badge-high">🟠 Cao</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Marketing cho sàn 20–50 người không thể làm bằng tay. Nhưng hầu hết chủ sàn F2 không có bộ phận marketing chuyên biệt — chủ sàn tự làm tất cả. Kết quả: content không đều, không có hệ thống, nhân viên tự lo marketing theo cách riêng → output không nhất quán, không scale được.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">20–200</div>
+          <div class="data-label">nhân viên mỗi sàn F1/F2 cần hỗ trợ marketing</div>
+          <div class="data-src">Quy mô điển hình sàn phân phối Vinhomes</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">0</div>
+          <div class="data-label">bộ phận marketing chuyên biệt ở hầu hết sàn F2</div>
+          <div class="data-src">Thực tế vận hành sàn nhỏ</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Dat Xanh</div>
+          <div class="data-label">tuyển 3.000 sale + 300 quản lý 2025 — đối thủ đang scale</div>
+          <div class="data-src">VnBusiness, 2025</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Không ít doanh nghiệp lựa chọn chiến lược tái cơ cấu địa bàn hoạt động, chỉ giữ lại thị trường có tiềm năng thanh khoản cao, tập trung nguồn lực thay vì dàn trải. Số hóa quy trình môi giới ngày càng được ưu tiên."
+        <div class="quote-src">— VnBusiness, phân tích thay đổi mô hình sàn BĐS 2025</div>
+      </div>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Kit giải quyết điều này như thế nào</div>
+        <ul>
+          <li>Chủ sàn mua kit bulk cho cả đội → mỗi nhân viên tự chạy marketing theo SOP</li>
+          <li>Không cần phòng marketing: 16 SOP = cẩm nang marketing đã chuẩn hóa</li>
+          <li>Lịch content 30 ngày → chủ sàn chỉ cần nhắc nhân viên follow theo lịch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 7 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">🏦</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #07</div>
+        <div class="pain-title">Vốn & ký quỹ khổng lồ — Rủi ro tài chính kép</div>
+      </div>
+      <div class="pain-badge badge-medium">🟡 Trung Bình</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Để trở thành F1 Vinhomes, sàn cần vốn ký quỹ hàng chục tỷ đồng + uy tín nhiều năm ổn định. F2 muốn nhận hàng từ F1 cũng phải đặt cọc. Toàn bộ vốn này bị "chôn" trong quá trình chờ dự án mở bán và chờ hoa hồng về — trong khi sàn vẫn phải chi vận hành hàng tháng.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">Hàng chục tỷ</div>
+          <div class="data-label">ký quỹ tối thiểu để trở thành sàn F1 Vinhomes</div>
+          <div class="data-src">Munkas — điều kiện sàn F1 Vinhomes</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">3+ năm</div>
+          <div class="data-label">kinh nghiệm ổn định yêu cầu để đủ điều kiện F1</div>
+          <div class="data-src">Tiêu chuẩn đại lý chiến lược Vinhomes</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Vốn kép</div>
+          <div class="data-label">F2 bị kẹp: đặt cọc F1 + chi vận hành hàng tháng</div>
+          <div class="data-src">Thực tế vận hành sàn F2</div>
+        </div>
+      </div>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Góc nhìn chiến lược</div>
+        <p>Không thể giảm ký quỹ — nhưng có thể tăng ROI trên từng đồng vốn bỏ ra. Mỗi deal chốt thêm = ký quỹ đang làm việc hiệu quả hơn. Kit tăng tỷ lệ chốt → ROI trên vốn ký quỹ tăng theo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 8 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📊</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #08</div>
+        <div class="pain-title">Không có hệ thống quản trị — Chủ sàn mù về đội ngũ</div>
+      </div>
+      <div class="pain-badge badge-medium">🟡 Trung Bình</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Không CRM, không hệ thống theo dõi KPI thực tế, không biết nhân viên nào đang có bao nhiêu lead, ai cần hỗ trợ, deal nào sắp đóng. Chủ sàn chỉ biết khi nhân viên báo cáo — mà báo cáo thường lạc quan hơn thực tế. Kết quả: dự báo doanh số sai → không chuẩn bị vốn kịp → bị động.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">Phụ thuộc</div>
+          <div class="data-label">100% vào báo cáo chủ quan của nhân viên</div>
+          <div class="data-src">Thực tế quản lý sàn nhỏ không có CRM</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Dự báo sai</div>
+          <div class="data-label">→ chuẩn bị vốn lưu động không đúng → bị động</div>
+          <div class="data-src">Hệ quả thiếu quản trị</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Leader mù</div>
+          <div class="data-label">không biết ai đang làm tốt, ai cần coaching khẩn cấp</div>
+          <div class="data-src">Vấn đề quản lý sàn BĐS</div>
+        </div>
+      </div>
+
+      <div class="sol-box">
+        <div class="sol-head">💡 Giải pháp có thể áp dụng ngay</div>
+        <ul>
+          <li>SOP báo cáo cuối tuần (SOP #15 trong Kit) → nhân viên tự báo cáo chuẩn hóa mỗi thứ 6</li>
+          <li>Dashboard đơn giản: số lead, số cuộc hẹn, số đang tư vấn, số sắp chốt</li>
+          <li>Không cần CRM đắt tiền — chỉ cần form Google Sheet chuẩn hóa theo SOP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────── TAB 3: SCRIPTS ─────────── -->
+<div class="panel" id="p3">
+  <div class="sec-label">Công Cụ Khai Thác — Chủ Sàn F1/F2</div>
+  <div class="sec-title">Script Tiếp Cận Chủ Sàn</div>
+  <div class="sec-sub">8 script — mở đầu cuộc trò chuyện và dẫn khách vào vùng nỗi đau trực tiếp</div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">💸 Script 1 — Khám phá vấn đề dòng tiền</div>
+      <div class="script-tag">Nỗi đau #1 — Mở đầu</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc1">Anh/chị đang vận hành sàn — trong 3 tháng gần nhất, đội đã chốt bao nhiêu deal chưa về hoa hồng?
+
+[Nghe câu trả lời]
+
+Vậy trong thời gian đó, anh/chị vẫn phải chi lương nhân viên, tiền văn phòng — trong khi tiền hoa hồng chưa về?
+
+[Xác nhận dòng tiền âm]
+
+Đây là vấn đề phổ biến nhất mà các sàn F2 đang gặp — chi trước, nhận sau 3–6 tháng hoặc thậm chí 2 năm. Câu hỏi là: có cách nào tăng tốc độ chốt deal trên cùng đội ngũ hiện tại không, để vòng thu hồi tiền nhanh hơn?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc1')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">🔄 Script 2 — Khám phá chi phí đào tạo ẩn</div>
+      <div class="script-tag">Nỗi đau #2 — Nhân sự</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc2">Trong 6 tháng gần nhất, anh/chị đã tuyển thêm bao nhiêu nhân viên mới?
+
+[Nghe câu trả lời]
+
+Trong số đó, còn bao nhiêu người đang ở lại và đang bán được hàng?
+
+[Thường là 30–50% ở lại]
+
+Như vậy phần còn lại đã bỏ việc — anh/chị đã đầu tư bao lâu để đào tạo họ trước khi họ đi?
+
+[Nghe câu trả lời]
+
+Chi phí đào tạo 1 người mà họ rời đi sau 2–3 tháng không chỉ là lương — là thời gian của anh/chị, của leader, và cả những deal bị bỏ lỡ trong lúc đó. Một hệ thống onboarding tốt hơn sẽ thay đổi con số này như thế nào theo anh/chị?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc2')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">📭 Script 3 — Nhân viên thiếu công cụ</div>
+      <div class="script-tag">Nỗi đau #3 — Công cụ</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc3">Khi một nhân viên mới gia nhập sàn anh/chị, ngày đầu tiên anh/chị cung cấp cho họ những gì để bắt đầu bán hàng?
+
+[Nghe câu trả lời — thường là: brochure, giới thiệu dự án, và... tự nghiên cứu thêm]
+
+Nếu họ gặp khách và khách hỏi "em có tài liệu gì về HLX không?" — họ có thể gửi ngay gì để tạo ấn tượng chuyên nghiệp?
+
+[Thường là: ảnh chụp màn hình, brochure chung, hoặc... không có gì riêng]
+
+Trong thị trường HLX, khi có 100+ môi giới từ các sàn khác nhau, khách chọn người tư vấn trước tiên dựa trên cảm nhận chuyên nghiệp. Nếu đội của anh/chị không có công cụ riêng, họ đang bắt đầu mỗi cuộc tư vấn ở thế thua.</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc3')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">📈 Script 4 — Áp lực KPI và cam kết</div>
+      <div class="script-tag">Nỗi đau #4 — KPI</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc4">Tháng này anh/chị đặt mục tiêu doanh số cho đội là bao nhiêu? Và đội đang chạy được khoảng mấy % so với mục tiêu đó?
+
+[Nghe câu trả lời]
+
+Phần thiếu hụt đó đến từ đâu theo anh/chị — đội thiếu người, hay đội đủ người nhưng tỷ lệ chốt thấp?
+
+[Thường là: tỷ lệ chốt thấp hơn kỳ vọng]
+
+Đây là điểm quan trọng: tăng số người = tăng chi phí cố định. Nhưng tăng tỷ lệ chốt trên đội hiện tại = tăng doanh số mà không tăng chi phí. Theo anh/chị, nếu mỗi nhân viên chốt thêm được 1 deal/tháng, con số đó thay đổi như thế nào?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc4')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">⚔️ Script 5 — Cạnh tranh nội bộ</div>
+      <div class="script-tag">Nỗi đau #5 — Nội bộ</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc5">Trong đội của anh/chị, có xảy ra tình huống 2 nhân viên tiếp cận cùng 1 khách không?
+
+[Thường là: có, thỉnh thoảng]
+
+Và khi đó thường xảy ra điều gì — cả hai cùng tư vấn và ai chốt được thì thôi, hay có tranh chấp?
+
+[Nghe câu trả lời]
+
+Vấn đề không chỉ là tranh chấp nội bộ — mà là trải nghiệm của khách hàng. Khi khách nhận 2 cuộc gọi từ cùng 1 sàn với thông tin đôi khi không nhất quán, họ mất tin tưởng vào cả sàn. Giải pháp lý tưởng là mỗi nhân viên có kênh khách hàng riêng — tự build, tự nurture, không cần cạnh tranh nhau.</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc5')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">📢 Script 6 — Hệ thống marketing sàn</div>
+      <div class="script-tag">Nỗi đau #6 — Marketing</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc6">Hiện tại, ai đang lo marketing cho cả đội của anh/chị — anh/chị tự làm, hay có người chuyên trách?
+
+[Thường là: tự làm một phần, hoặc để nhân viên tự lo]
+
+Và nhân viên đang đăng bài theo cách nào — có lịch cụ thể không, hay mỗi người một cách?
+
+[Thường là: tự do, không có hệ thống]
+
+Đây là điểm rò rỉ lớn nhất của hầu hết sàn F2: nhân viên không biết marketing đúng cách → không có lead inbound → phụ thuộc hoàn toàn vào paid ads hoặc chờ khách tự đến. Nếu có một bộ SOP chuẩn mà toàn đội cùng làm theo — anh/chị nghĩ kết quả sẽ khác như thế nào?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc6')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">🏆 Script 7 — Pitch Kit Bulk cho Sàn</div>
+      <div class="script-tag">Chốt — Đề xuất giải pháp</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc7">Nói tóm lại — anh/chị đang vận hành [X] nhân viên, và vấn đề cốt lõi là họ thiếu công cụ chuyên nghiệp để tư vấn và tạo nội dung đủ tốt.
+
+Tôi có một đề xuất cụ thể: thay vì anh/chị phải tự tạo tất cả — tôi có thể cung cấp Bộ Kit HLX đầy đủ cho từng nhân viên trong đội, bao gồm:
+
+✓ Landing page có tên riêng của từng người
+✓ 16 SOP đăng bài — nhân viên mới dùng được ngay
+✓ 45 ảnh HLX chuyên nghiệp + template caption
+✓ Bộ tài liệu dự án chuẩn
+✓ Script tư vấn + template tin nhắn follow-up
+
+Khi cả đội có công cụ này, anh/chị không cần đào tạo từ đầu — họ chỉ cần follow theo quy trình. Tỷ lệ chốt tăng ngay trên đội hiện tại.
+
+Anh/chị đang có [X] người — muốn tôi tính giá kit bulk cho cả đội không?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc7')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">💰 Script 8 — Xử lý objection "Đội tôi đã có rồi"</div>
+      <div class="script-tag">Objection Handling</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc8">[Khi chủ sàn nói: "Đội tôi đã có tài liệu rồi, CĐT cung cấp"]
+
+Tài liệu từ CĐT — anh/chị biết là 100 sàn F1/F2 khác cũng đang có y chang không?
+
+Điểm khác biệt của kit là: landing page có tên riêng từng nhân viên, không phải trang chung của sàn. Khi khách nhận link, họ thấy tên người tư vấn của mình → tăng tin tưởng cá nhân → khả năng mua cao hơn.
+
+CĐT cho anh/chị bộ tài liệu để bán sản phẩm của họ. Kit cho mỗi nhân viên công cụ để bán BẢN THÂN MÌNH — và khách hàng mua người trước khi mua sản phẩm.
+
+Đây là điểm khác biệt không thể thay thế bằng brochure chung.</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc8')">📋 Copy Script</button>
+  </div>
+</div>
+
+<!-- ─────────── TAB 4: GIẢI PHÁP & OFFER ─────────── -->
+<div class="panel" id="p4">
+  <div class="sec-label">Offer Architecture — Cho Chủ Sàn</div>
+  <div class="sec-title">Giải Pháp Và Offer Phù Hợp</div>
+  <div class="sec-sub">Từng gói offer gắn với từng nỗi đau — trình bày theo ngôn ngữ lợi ích của chủ sàn</div>
+
+  <!-- Solution matrix -->
+  <div class="insight-bar" style="margin-bottom:24px">
+    <h3>🎯 Ma Trận Giải Pháp — Nỗi Đau ↔ Sản Phẩm</h3>
+    <div class="sol-matrix" style="margin-top:14px">
+      <div class="sm-row">
+        <div class="sm-pain">💸 Dòng tiền âm</div>
+        <div class="sm-sol">Tăng tỷ lệ chốt/người → hoa hồng về sàn nhanh hơn<div class="sm-product">→ Kit HLX + Follow-up Pack 21 tin nhắn</div></div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-pain">🔄 Vòng đào tạo vô tận</div>
+        <div class="sm-sol">SOP chuẩn → onboarding nhanh → nhân viên bỏ ít hơn<div class="sm-product">→ 16 SOP Nhân Viên + Bộ Kit đầy đủ</div></div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-pain">📭 Thiếu công cụ đội ngũ</div>
+        <div class="sm-sol">Kit bulk cho cả sàn → chuẩn hóa chất lượng tư vấn<div class="sm-product">→ Gói Sàn (bulk kit cho nhiều người)</div></div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-pain">📈 Áp lực KPI</div>
+        <div class="sm-sol">Tăng output/người → đạt KPI không cần thêm nhân sự<div class="sm-product">→ Pipeline Products + Deal Coaching</div></div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-pain">📢 Thiếu marketing hệ thống</div>
+        <div class="sm-sol">SOP + lịch content → đội tự chạy, chủ sàn không lo<div class="sm-product">→ 16 SOP + Ads Pack + Content Kit</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offers -->
+  <div class="offer-card">
+    <div class="oc-for">Dành Cho Chủ Sàn F2 Nhỏ · 5–20 Nhân Viên</div>
+    <div class="oc-name">📦 Gói Trang Bị Đội — Team Starter Kit</div>
+    <div class="oc-desc">Trang bị đầy đủ công cụ cho cả đội → nhân viên mới dùng được ngay từ ngày 1 → tỷ lệ ở lại tăng, tỷ lệ chốt tăng. Chủ sàn không cần đào tạo từ đầu mỗi lần tuyển người mới.</div>
+    <ul class="oc-items">
+      <li>Kit HLX đầy đủ × số lượng nhân viên (landing page riêng từng người)</li>
+      <li>16 SOP đăng bài — tài liệu onboarding nhân viên mới</li>
+      <li>45 ảnh HLX chuyên nghiệp để dùng chung cả đội</li>
+      <li>Template weekly brief + follow-up 21 tin nhắn</li>
+      <li>Lịch content 30 ngày → giao cho nhân viên là xong</li>
+    </ul>
+    <div class="oc-price">Đề xuất giá: 697k/người × số lượng — bulk discount từ 5 người</div>
+  </div>
+
+  <div class="offer-card">
+    <div class="oc-for">Dành Cho Chủ Sàn F1 · 20–100+ Nhân Viên</div>
+    <div class="oc-name">🏢 Gói Hệ Thống Sàn — Floor System Package</div>
+    <div class="oc-desc">Bộ hệ thống vận hành đầy đủ cho sàn lớn — từ công cụ bán hàng cho từng nhân viên đến bộ tài liệu quản trị. Chủ sàn quản lý bằng dashboard, không cần họp báo cáo thủ công mỗi ngày.</div>
+    <ul class="oc-items">
+      <li>Tất cả trong Team Starter Kit</li>
+      <li>SOP báo cáo cuối tuần chuẩn hóa (SOP #15)</li>
+      <li>Template Google Sheet dashboard theo dõi pipeline đội</li>
+      <li>Bộ tài liệu đào tạo nhân viên mới (kit đóng gói lại thành training material)</li>
+      <li>Mastermind Group hàng tháng — chủ sàn học chiến lược từ peers</li>
+      <li>Team Leader Kit — hướng dẫn trưởng nhóm quản lý đội hiệu quả</li>
+    </ul>
+    <div class="oc-price">Đề xuất giá: Thương lượng theo quy mô sàn — 10+ người</div>
+  </div>
+
+  <div class="offer-card">
+    <div class="oc-for">Dành Cho Chủ Sàn Muốn Mở Rộng</div>
+    <div class="oc-name">🚀 Gói Phát Triển Kênh — Channel Builder</div>
+    <div class="oc-desc">Xây kênh phân phối mới bằng cách trang bị cho F2/Freelancer trong mạng lưới. Mỗi người trong mạng lưới có kit riêng = kênh lead riêng = không cạnh tranh nhau = nhiều deal hơn cho sàn trên.</div>
+    <ul class="oc-items">
+      <li>Kit cho toàn bộ F2 và Freelancer trong mạng lưới</li>
+      <li>Chiến lược phân vùng: mỗi đơn vị build kênh riêng không trùng lặp</li>
+      <li>Hệ thống refer — F2 giới thiệu khách không mua được vào pool của F1</li>
+      <li>Weekly brief thị trường — chủ sàn gửi cho cả mạng lưới, duy trì vị thế dẫn đầu</li>
+    </ul>
+    <div class="oc-price">Đề xuất giá: Custom theo số lượng đơn vị trong mạng lưới</div>
+  </div>
+</div>
+
+<!-- ─────────── TAB 5: CHECKLIST ─────────── -->
+<div class="panel" id="p5">
+  <div class="sec-label">Hành Động Ưu Tiên</div>
+  <div class="sec-title">Checklist Tiếp Cận Chủ Sàn F1/F2</div>
+  <div class="sec-sub">12 hành động cụ thể để convert chủ sàn thành khách hàng bulk của Kit</div>
+
+  <div style="display:grid;gap:12px">
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">🎯 1. Xác định chủ sàn F2 trong vùng HLX</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Search Facebook: "sàn BĐS Quảng Ninh", "đại lý Hạ Long", "team HLX" → tìm chủ sàn đang tuyển dụng hoặc đăng tuyển → đây là người có đội và đang cần hệ thống</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Ưu tiên sàn đang tuyển 5+ người</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">📩 2. Gửi Pain Point Research như lead magnet mở đầu</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Gửi link pain-point-f1-f2.html kèm tin nhắn: "Em nghiên cứu về những thách thức mà các chủ sàn đang gặp khi phân phối HLX — anh/chị thấy tài liệu này nói đúng không?" → không pitch ngay, chỉ chia sẻ giá trị</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Tỷ lệ reply cao vì nội dung liên quan trực tiếp</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">💬 3. Dùng Script 1 hoặc Script 2 để mở cuộc trò chuyện thực</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Khi họ đọc tài liệu và reply → dùng script dòng tiền hoặc đào tạo → dẫn vào cuộc khám phá nỗi đau sâu hơn</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Mục tiêu: nghe họ nói nhiều hơn mình nói</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">🔢 4. Tính ROI cụ thể dựa trên số nhân viên của họ</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Công thức: "Anh/chị có [X] người. Nếu mỗi người chốt thêm 1 deal/tháng = [X × hoa hồng trung bình] thêm mỗi tháng. Chi phí kit cho cả đội = [X × 697k]. ROI = [số tháng để hoàn vốn]."</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Con số cụ thể thuyết phục hơn mọi mô tả chung</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">🎁 5. Đề xuất pilot: mua kit cho 2–3 người thử trước</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Chủ sàn thường ngại mua số lượng lớn ngay → đề xuất họ trang bị cho 2–3 nhân viên tốt nhất trước, xem kết quả 30 ngày, rồi roll out cho cả đội</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Giảm rào cản quyết định ban đầu</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">📊 6. Dùng data "82% sàn không có lương cơ bản" để mở rộng context</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Đây là con số sốc — gần như mọi chủ sàn sẽ phản ứng khi nghe. Dùng để mở cuộc thảo luận về cách giữ chân nhân viên không phải bằng lương cao hơn mà bằng công cụ tốt hơn</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Chuyển từ "chi phí" sang "đầu tư giữ nhân sự"</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">🏢 7. Target đặc biệt: Sàn đang tuyển dụng ồ ạt</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Sàn đang tuyển 10+ người = đang chuẩn bị mở rộng = cần hệ thống onboarding ngay. Đây là thời điểm vàng để pitch — họ đang có vấn đề đào tạo ngay lúc này</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ LinkedIn/Facebook job posts là nguồn prospect tuyệt vời</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">🤝 8. Đề xuất partnership: Anh/chị bán kit cho đội, em hỗ trợ training</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Thêm một cuộc gọi hướng dẫn 1 tiếng để training cả đội cách dùng kit → tăng giá trị cảm nhận, tăng tỷ lệ nhân viên thực sự dùng → chủ sàn thấy kết quả nhanh hơn → mua thêm</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ 1 buổi online training cho cả đội = included trong gói sàn</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">📅 9. Follow-up chủ sàn theo lịch — không phải khi "có deal mới"</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Gửi weekly brief thị trường HLX hàng tuần → chủ sàn thấy giá trị liên tục → khi họ sẵn sàng mua, mình là người đầu tiên họ nghĩ đến</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Dùng Weekly Brief sản phẩm để chăm sóc chủ sàn</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">🏆 10. Tạo case study: 1 nhân viên dùng kit → kết quả → share với chủ sàn</div>
+      <div style="font-size:12.5px;color:#8a9ab0">Khi có 1 môi giới tự do dùng kit và có kết quả tốt → xin phép dùng story của họ (ẩn danh nếu cần) → share với chủ sàn: "Đây là kết quả của 1 người. Đội anh/chị có [X] người — con số nhân lên như thế nào?"</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Social proof từ người cùng ngành hiệu quả nhất</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">🔑 11. Framing quan trọng nhất: Kit = chi phí tuyển dụng thấp hơn</div>
+      <div style="font-size:12.5px;color:#8a9ab0">"Chi phí tuyển và đào tạo 1 nhân viên mới: 30–80 triệu nếu họ bỏ sau 3 tháng. Chi phí kit để giữ nhân viên ở lại lâu hơn: 697k. Anh/chị chọn cái nào tiết kiệm hơn?"</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Đây là ROI argument không thể bác bỏ với chủ sàn</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:6px">⏰ 12. Urgency thật: HLX đang trong giai đoạn vàng mở bán</div>
+      <div style="font-size:12.5px;color:#8a9ab0">"Giai đoạn 1 HLX mới ra tháng 5/2026. Trong 6 tháng đầu, khách hàng mua nhiều nhất vì sản phẩm còn mới, hào hứng. Sàn nào chuẩn bị đội ngũ tốt ngay bây giờ sẽ thắng giai đoạn cao điểm này."</div>
+      <div style="font-size:12px;color:#60c080;margin-top:6px">→ Urgency không cần bịa — thị trường thật sự đang mở</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+function cp(btn,id){
+  const el=document.getElementById(id);
+  const txt=el?el.innerText:btn.closest('.script-card').querySelector('pre').innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✅ Đã Copy!';
+    btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2200);
+  });
+}
+</script>
+</body>
+</html>
