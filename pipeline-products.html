@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 7 Sản Phẩm Đường Ống — BDS Mastery System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#0d1b2e,var(--nd),#1B3A6B);padding:44px 24px 40px;text-align:center;position:relative;overflow:hidden;}
+  .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.13) 1.5px,transparent 0);background-size:24px 24px;}
+  .hero-in{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+  .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11.5px;font-weight:700;padding:5px 16px;border-radius:20px;margin-bottom:14px;letter-spacing:.06em;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);color:#fff;margin-bottom:10px;line-height:1.2;}
+  .hero h1 em{color:var(--gl);font-style:normal;}
+  .hero p{color:rgba(255,255,255,.68);font-size:14px;line-height:1.65;max-width:560px;margin:0 auto 0;}
+
+  /* NAV */
+  .nav-bar{background:#fff;border-bottom:2px solid #e8e4d8;position:sticky;top:0;z-index:100;overflow-x:auto;}
+  .nav-inner{display:flex;gap:0;min-width:max-content;}
+  .nav-btn{padding:12px 18px;font-size:12px;font-weight:700;color:#6b7280;cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;white-space:nowrap;font-family:inherit;}
+  .nav-btn.active,.nav-btn:hover{color:var(--nd);border-bottom-color:var(--gold);}
+
+  /* PRODUCT PANEL */
+  .panel{display:none;max-width:780px;margin:0 auto;padding:32px 20px 64px;}
+  .panel.active{display:block;}
+
+  /* PRODUCT HEADER */
+  .prod-header{background:linear-gradient(135deg,var(--nd),#1B3A6B);border-radius:16px;padding:28px 28px 24px;margin-bottom:28px;color:#fff;}
+  .prod-num{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
+  .prod-header h2{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:8px;line-height:1.25;}
+  .prod-header .tagline{font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.6;margin-bottom:16px;}
+  .price-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .price-chip{background:rgba(201,168,76,.22);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;}
+
+  /* SECTION */
+  .sec{margin-bottom:28px;}
+  .sec-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--nd);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .sec-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+
+  /* TEMPLATE CARD */
+  .tpl-card{background:#fff;border:1px solid #e8e4d8;border-radius:12px;padding:18px 20px;margin-bottom:14px;position:relative;}
+  .tpl-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .tpl-body{font-size:13px;color:#374151;line-height:1.75;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;}
+  .copy-btn{position:absolute;top:14px;right:14px;background:var(--nd);color:#fff;border:none;border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .copy-btn.ok{background:var(--gold);color:var(--nd);}
+
+  /* VALUE BOX */
+  .val-box{background:linear-gradient(135deg,#fefce8,#fffbf0);border:1px solid #f59e0b33;border-radius:12px;padding:18px 20px;margin-bottom:20px;}
+  .val-box h4{font-weight:700;font-size:13.5px;color:#92400e;margin-bottom:10px;}
+  .val-box ul{padding-left:18px;}
+  .val-box ul li{font-size:13px;color:#374151;margin-bottom:5px;line-height:1.55;}
+
+  /* STEP LIST */
+  .step-list{counter-reset:step;}
+  .step-item{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start;}
+  .step-num{width:30px;height:30px;background:var(--nd);color:var(--gl);font-weight:800;font-size:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-body h4{font-size:13.5px;font-weight:700;color:var(--nd);margin-bottom:3px;}
+  .step-body p{font-size:12.5px;color:#6b7280;line-height:1.55;}
+
+  /* CHECKLIST */
+  .chk-grid{background:#fff;border-radius:12px;border:1px solid #e8e4d8;padding:16px 20px;margin-bottom:20px;}
+  .chk-row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #f3f0e8;font-size:13px;color:#374151;cursor:pointer;}
+  .chk-row:last-child{border:none;}
+  .chk-box{width:17px;height:17px;border:2px solid var(--gold);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+  .chk-row.done .chk-box{background:var(--gold);border-color:var(--gold);color:#fff;}
+  .chk-row.done .chk-box::after{content:'✓';}
+
+  /* WEEK CALENDAR */
+  .week-card{background:#fff;border:1px solid #e8e4d8;border-radius:12px;margin-bottom:12px;overflow:hidden;}
+  .week-head{background:var(--nd);color:var(--gl);padding:10px 16px;font-weight:700;font-size:13px;}
+  .week-body{padding:14px 16px;}
+  .day-row{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:12.5px;color:#374151;border-bottom:1px solid #f3f0e8;}
+  .day-row:last-child{border:none;}
+  .day-label{min-width:22px;font-weight:700;color:var(--gold);font-size:12px;}
+
+  /* HIGHLIGHT */
+  .highlight{background:linear-gradient(135deg,#0f4c2a,#1a6b3c);border-radius:12px;padding:18px 20px;color:#fff;margin-bottom:20px;}
+  .highlight h4{color:#86efac;font-size:13.5px;font-weight:700;margin-bottom:8px;}
+  .highlight p,.highlight li{font-size:13px;color:rgba(255,255,255,.78);line-height:1.65;}
+  .highlight ul{padding-left:18px;}
+  .highlight li{margin-bottom:4px;}
+
+  /* GRID 2COL */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr;}}
+  .mini-card{background:#fff;border:1px solid #e8e4d8;border-radius:10px;padding:14px 16px;}
+  .mini-card .icon{font-size:22px;margin-bottom:6px;}
+  .mini-card h5{font-size:13px;font-weight:700;color:var(--nd);margin-bottom:4px;}
+  .mini-card p{font-size:12px;color:#6b7280;line-height:1.5;}
+
+  /* FOOTER */
+  footer{background:var(--nd);padding:18px 24px;text-align:center;}
+  footer p{color:rgba(255,255,255,.4);font-size:11.5px;}
+  footer strong{color:var(--gl);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-tag">🚀 PIPELINE SYSTEM — BÁN ĐƯỜNG ỐNG KHÔNG BÁN DẦU</div>
+    <h1>7 Sản Phẩm <em>Đường Ống</em><br>Cho Môi Giới HLX</h1>
+    <p>Full package — nội dung sẵn sàng copy-paste, đóng gói xong, dùng ngay.<br>Mỗi sản phẩm = 1 nguồn thu nhập độc lập.</p>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="show(0)">📰 #1 Weekly Brief</button>
+    <button class="nav-btn" onclick="show(1)">💬 #2 Follow-up Pack</button>
+    <button class="nav-btn" onclick="show(2)">🤝 #3 Mastermind</button>
+    <button class="nav-btn" onclick="show(3)">📣 #4 Ads Pack</button>
+    <button class="nav-btn" onclick="show(4)">⭐ #5 Personal Brand</button>
+    <button class="nav-btn" onclick="show(5)">🎯 #6 Deal Coaching</button>
+    <button class="nav-btn" onclick="show(6)">👑 #7 Team Leader</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+  PRODUCT 1 — WEEKLY MARKET INTELLIGENCE BRIEF
+════════════════════════════════════════════ -->
+<div class="panel active" id="p0">
+  <div class="prod-header">
+    <div class="prod-num">SẢN PHẨM 01 / 07</div>
+    <h2>📰 Weekly Market Intelligence Brief</h2>
+    <div class="tagline">Bản tin tình báo thị trường BĐS Hạ Long tuần — gửi Zalo/email mỗi thứ Hai sáng. Môi giới subscribe = luôn có data tươi để tư vấn khách, không tốn công tự nghiên cứu.</div>
+    <div class="price-row">
+      <div class="price-chip">299.000đ/tháng</div>
+      <div class="price-chip">799.000đ/quý (tiết kiệm 100k)</div>
+      <div class="price-chip">2.499.000đ/năm (tiết kiệm 1tr)</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📋 Quy trình vận hành (mỗi tuần ~90 phút)</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">1</div><div class="step-body"><h4>Thu thập data (Thứ 6, 20 phút)</h4><p>Check số liệu giao dịch Cafeland/BatDongSan.com.vn, tin tức HLX mới nhất trên group FB môi giới, thông báo chủ đầu tư Vinhomes</p></div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-body"><h4>Viết bản tin (Thứ 7, 45 phút)</h4><p>Điền vào template bên dưới → copy-paste → review 5 phút. Không cần viết từ đầu.</p></div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-body"><h4>Gửi đồng loạt (Thứ 2, 7:30 sáng, 15 phút)</h4><p>Paste vào Zalo group subscriber. Dùng ứng dụng "Zalo PC" để gửi nhanh. Thêm ảnh cover tuần (tạo sẵn 4 mẫu, xoay vòng).</p></div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-body"><h4>Tương tác (Thứ 2-3, 10 phút/ngày)</h4><p>Trả lời câu hỏi trong group, tag câu hỏi hay → tạo nội dung tuần sau. Build authority tự nhiên.</p></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">✍️ 4 Mẫu Bản Tin Sẵn Sàng Dùng (Tuần 1-4)</div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">BẢN TIN TUẦN 1 — GÓC NHÌN VĨ MÔ</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">📊 BẢN TIN THỊ TRƯỜNG HLX — TUẦN 1/[THÁNG]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 SỐ LIỆU NỔI BẬT TUẦN QUA
+▸ Giao dịch khu vực Hạ Long: [X] căn shophouse, [Y] biệt thự ghi nhận
+▸ Mức giá trung bình: [X] tỷ/căn shophouse, [Y] tỷ/biệt thự — so tháng trước [+/-Z%]
+▸ Lãi suất vay mua nhà Big4: đang ở [X%]/năm (cố định [Y] năm đầu)
+
+🏗️ CẬP NHẬT DỰ ÁN HLX
+▸ [Thông tin tiến độ xây dựng mới nhất]
+▸ [Sự kiện / mở bán mới nếu có]
+▸ Tỷ lệ lấp đầy phân khu [X]: [Y%]
+
+📈 GÓC NHÌN ĐẦU TƯ TUẦN NÀY
+Câu hỏi được hỏi nhiều nhất: "[Câu hỏi thực tế của khách tuần qua]"
+
+Phân tích ngắn: [3-4 câu phân tích thực tế, data-driven]
+
+💡 1 TIP TƯ VẤN CHO ANH/CHỊ TUẦN NÀY
+[Tip thực tế về cách xử lý phản đối, câu nói hay để chốt khách, hoặc data để thuyết phục]
+
+🎯 SỰ KIỆN ĐÁNG QUAN TÂM TUẦN TỚI
+▸ [Ngày/Sự kiện 1]
+▸ [Ngày/Sự kiện 2]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+📞 Câu hỏi thị trường? Reply trực tiếp trong group này.
+🔔 Chia sẻ bản tin cho đồng nghiệp → họ subscribe → anh/chị nhận hoa hồng giới thiệu 50k/người/tháng</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">BẢN TIN TUẦN 2 — PHÂN TÍCH SẢN PHẨM</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">📊 BẢN TIN THỊ TRƯỜNG HLX — TUẦN 2/[THÁNG]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🏪 SHOPHOUSE TUẦN NÀY — ĐÂU ĐÁNG XEM?
+▸ Mặt tiền đường [X]: [giá hiện tại] — thanh khoản [đánh giá]
+▸ Shophouse góc vs shophouse giữa: chênh [X%] giá, thanh khoản [cao hơn/tương đương]
+▸ Phân khu nào đang có nhiều deal ngon nhất: [Tên phân khu] — lý do [...]
+
+🌊 BIỆT THỰ BIỂN — ĐIỂM NÓNG TUẦN NÀY
+▸ [Phân khu/lô cụ thể]: [giá] — [đánh giá tiềm năng]
+▸ Xu hướng người mua tuần này: [mua để ở / đầu tư ngắn / cho thuê nghỉ dưỡng]
+
+💰 SO SÁNH ROI NHANH
+Nếu đầu tư 5 tỷ vào HLX shophouse vs gửi ngân hàng:
+▸ Gửi ngân hàng 5 tỷ: ~[X triệu]/tháng (lãi [Y%]/năm)
+▸ Cho thuê shophouse 5 tỷ: ~[X triệu]/tháng + tăng giá tài sản
+▸ Kết luận: [nhận xét ngắn]
+
+🔮 DỰ BÁO NGẮN HẠN
+3 tháng tới: [nhận định thị trường dựa trên tín hiệu hiện tại]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 Khách hỏi "giá có xuống không?" — reply tuần này để nhận script trả lời chuẩn.</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">BẢN TIN TUẦN 3 — CASE STUDY THỰC TẾ</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">📊 BẢN TIN THỊ TRƯỜNG HLX — TUẦN 3/[THÁNG]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 CASE STUDY TUẦN NÀY
+(Nhân vật đã được ẩn danh theo yêu cầu)
+
+Anh/chị [X, 45 tuổi, Hà Nội, ngành XYZ] — mua shophouse HLX [phân khu] tháng [Y]/2025:
+
+TÌNH HUỐNG: [Mô tả hoàn cảnh ban đầu — không phải dân đầu tư chuyên, lo ngại về pháp lý, v.v.]
+
+QUYẾT ĐỊNH: [Tại sao họ chọn HLX, phân khu nào, diện tích, giá mua]
+
+KẾT QUẢ SAU [Z THÁNG]:
+▸ Giá trị tài sản: [Từ X → Y tỷ]
+▸ Thu nhập cho thuê: [X triệu/tháng]
+▸ ROI thực tế: [X%/năm]
+
+BÀI HỌC: [1-2 insight thực tế mà môi giới có thể dùng khi tư vấn]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 SCRIPT TUẦN NÀY: Cách kể case study với khách để tăng độ tin cậy
+
+"Tuần trước em có khách [vài từ mô tả tương tự khách đang gặp], anh/chị biết họ quyết định thế nào không? [Kể case] — Hoàn cảnh của mình cũng khá giống — mình có thể phân tích cụ thể hơn không?"</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">BẢN TIN TUẦN 4 — REVIEW THÁNG + PREVIEW THÁNG TỚI</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">📊 BẢN TIN HLX — TỔNG KẾT THÁNG [X] + DỰ BÁO THÁNG [X+1]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 TỔNG KẾT THÁNG [X] — 4 SỐ LIỆU QUAN TRỌNG
+① Tổng giao dịch ghi nhận: [X] căn
+② Giá trung bình shophouse: [X] tỷ — tăng/giảm [Y%] so tháng trước
+③ Phân khúc sôi động nhất: [Shophouse / Biệt thự / Condotel]
+④ Thời gian trung bình từ xem nhà → chốt: [X] ngày (giảm/tăng từ [Y] ngày)
+
+🔮 THÁNG TỚI — 3 TÍN HIỆU CẦN THEO DÕI
+① [Sự kiện/chính sách vĩ mô sắp có ảnh hưởng]
+② [Tin tức dự án HLX hoặc Vinhomes sắp announce]
+③ [Xu hướng khách mua — mùa vụ, dịp lễ, v.v.]
+
+💡 CHIẾN LƯỢC THÁNG TỚI CHO ANH/CHỊ
+▸ Tập trung phân khúc: [gợi ý cụ thể]
+▸ Script ưu tiên: [loại objection phổ biến tháng tới]
+▸ Content nên đăng: [chủ đề hot tháng tới]
+
+🏆 BẢN TIN THÁNG TỚI: Phân tích đối thủ cạnh tranh của HLX — ai đang cướp khách của mình và cách đối phó.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Đây là bản tin cuối tháng. Nếu bản tin này hữu ích, forward cho 1 đồng nghiệp — họ subscribe = anh/chị nhận 50k hoa hồng giới thiệu mỗi tháng.</div>
+    </div>
+  </div>
+
+  <div class="val-box">
+    <h4>📦 Gói bán kèm khi chào bản tin</h4>
+    <ul>
+      <li><strong>Gói Tháng 299k</strong> — 4 bản tin / tháng, gửi Zalo, hủy bất kỳ lúc nào</li>
+      <li><strong>Gói Quý 799k</strong> — 12 bản tin, tiết kiệm 98k + tặng 1 buổi Q&A online cuối quý</li>
+      <li><strong>Gói Năm 2.499k</strong> — 52 bản tin + tặng "HLX Data Dashboard" truy cập 12 tháng + ưu tiên trả lời câu hỏi riêng</li>
+      <li><strong>Hoa hồng giới thiệu</strong>: 50k/người/tháng (subscriber giới thiệu subscriber)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+  PRODUCT 2 — FOLLOW-UP AUTOMATION PACK
+════════════════════════════════════════════ -->
+<div class="panel" id="p1">
+  <div class="prod-header">
+    <div class="prod-num">SẢN PHẨM 02 / 07</div>
+    <h2>💬 Lead Follow-up Automation Pack</h2>
+    <div class="tagline">21 tin nhắn follow-up đã viết sẵn — 3 chuỗi 7 ngày cho 3 loại lead khác nhau. Copy-paste vào Zalo/Messenger, đổi tên khách, gửi. Không bao giờ để lead nguội vì quên follow-up.</div>
+    <div class="price-row">
+      <div class="price-chip">797.000đ — Trọn đời</div>
+      <div class="price-chip">Tặng thêm: 5 tin nhắn "lead hồi sinh"</div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>💡 Cách dùng 3 chuỗi follow-up</h4>
+    <ul>
+      <li><strong>Chuỗi A (Khách xem nhà — chưa quyết định):</strong> Gửi sau 2h, 1 ngày, 3 ngày, 5 ngày, 7 ngày</li>
+      <li><strong>Chuỗi B (Khách hỏi giá — chưa xem nhà):</strong> Gửi ngay, ngày 2, 4, 6, 7</li>
+      <li><strong>Chuỗi C (Khách cũ — đã mua 6+ tháng trước):</strong> Mỗi 30 ngày, trigger khi thị trường có tin mới</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">💬 Chuỗi A — Sau Khi Xem Nhà (7 tin nhắn)</div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">A1 — GỬI SAU 2 GIỜ XEM NHÀ</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Dạ [Anh/Chị Tên], em [Tên môi giới] đây ạ.
+
+Cảm ơn anh/chị đã dành thời gian tham quan HLX hôm nay! Hy vọng anh/chị thấy dự án ấn tượng như em đã mô tả 😊
+
+Em muốn hỏi thêm — trong các phân khu anh/chị xem hôm nay, anh/chị thấy phần nào ấn tượng nhất ạ? Để em cung cấp thêm thông tin chi tiết hơn cho phần đó.
+
+[Tên môi giới] — BDS Mastery HLX
+📞 [Số điện thoại]</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">A2 — GỬI NGÀY HÔM SAU</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Chào [Anh/Chị Tên] ạ!
+
+Hôm qua em đã tổng hợp lại thông tin chi tiết cho căn anh/chị quan tâm nhất — shophouse [phân khu/số căn] — để anh/chị tiện so sánh:
+
+📐 Diện tích: [X]m² (thông thủy [Y]m²)
+💰 Giá bán: [X] tỷ — tương đương [Y triệu]/m²
+🏦 Vay 70%: khoảng [X triệu]/tháng (lãi suất [Y%]/năm)
+💵 Cho thuê ước tính: [X-Y triệu]/tháng
+📈 ROI: khoảng [X%]/năm (gồm cho thuê + tăng giá)
+
+Anh/chị có muốn em phân tích thêm so sánh với căn nào khác không ạ?</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">A3 — NGÀY 3 (GỬI VALUE — KHÔNG HỎI MUA)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Dạ [Anh/Chị Tên], em gửi thêm thông tin này vì em nghĩ anh/chị sẽ quan tâm:
+
+Vinhomes vừa công bố thêm tiện ích mới tại HLX — [tên tiện ích / công trình / sự kiện thực tế]. Điều này thường ảnh hưởng tốt đến giá trị các căn xung quanh.
+
+Anh/chị đang cân nhắc thêm điều gì không ạ? Em sẵn sàng hỗ trợ thêm thông tin bất cứ lúc nào.</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">A4 — NGÀY 5 (SỰ KIỆN / DEADLINE)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Chào [Anh/Chị Tên]!
+
+Em muốn thông báo thông tin có thể ảnh hưởng đến quyết định của anh/chị:
+
+🔔 [Sự kiện thực tế: Chủ đầu tư sắp tăng giá / Còn X căn ở vị trí đẹp / Ngân hàng X sắp thay đổi lãi suất / v.v.]
+
+Anh/chị có muốn em giữ chỗ tham khảo trước để có thêm thời gian cân nhắc không? Không cần đặt cọc — em có thể book slot tư vấn riêng với chuyên gia pháp lý của chủ đầu tư cho mình luôn ạ.</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">A5 — NGÀY 7 (SOCIAL PROOF)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Dạ [Anh/Chị Tên], em có tin vui muốn chia sẻ!
+
+Tuần này em vừa hỗ trợ được 2 khách chốt thành công căn shophouse tại phân khu [X] — một anh ở Hà Nội mua đầu tư, một chị Hải Phòng mua kết hợp kinh doanh + cho thuê. Cả hai đều rất hài lòng với quá trình làm hồ sơ.
+
+Anh/chị có muốn em đặt lịch gặp offline để em giải đáp trực tiếp các câu hỏi còn băn khoăn không? Em có thể sắp xếp buổi chiều bất kỳ ngày nào tuần tới ạ.</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">A6 — NGÀY 10 (NHẸ NHÀNG — KHÔNG ÉP)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Chào [Anh/Chị Tên] ạ!
+
+Em biết anh/chị đang có nhiều thứ cần suy nghĩ — mua BĐS là quyết định lớn, không cần vội.
+
+Chỉ muốn hỏi nhanh: Hiện tại điều gì đang là lo ngại lớn nhất của anh/chị về căn HLX mình xem hôm đó ạ? Có thể là giá, pháp lý, thời điểm, hay điều gì khác?
+
+Em hỏi để nếu em có thể giải đáp — em sẽ gửi thông tin đúng trọng tâm, không làm mất thời gian mình thêm nữa.</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">A7 — NGÀY 14 (CHỐT HOẶC TẠM BIỆT)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Dạ [Anh/Chị Tên], em [Tên] lần cuối nhắn ạ — không muốn làm phiền thêm nếu anh/chị đã có kế hoạch khác.
+
+Nếu trong tương lai anh/chị muốn tham khảo thêm về HLX hoặc thị trường BĐS Hạ Long — em luôn sẵn sàng hỗ trợ, không cần lý do cụ thể.
+
+Em lưu thông tin mình trong danh bạ — khi nào anh/chị tiện thì nhắn nhé. Chúc anh/chị tuần tốt! 😊
+
+[Tên] — [SĐT]</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">💬 Chuỗi B — Khách Hỏi Giá Qua Mạng (7 tin nhắn)</div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">B1 — TRẢ LỜI NGAY LẬP TỨC (trong 5 phút)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Chào [Anh/Chị] ạ! Em [Tên] — chuyên viên tư vấn HLX đây.
+
+Cảm ơn anh/chị đã quan tâm đến Vinhomes Hạ Long Xanh!
+
+Để tư vấn giá chính xác nhất, em cần hỏi nhanh:
+① Anh/chị quan tâm phân khúc nào: shophouse, biệt thự biển, hay condotel ạ?
+② Mục đích: để ở, đầu tư cho thuê, hay kết hợp?
+③ Ngân sách tham khảo: dưới 5 tỷ, 5-10 tỷ, hay trên 10 tỷ?
+
+Em sẽ gửi bảng giá + phân tích phù hợp nhất trong 10 phút ạ!</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">B2 — NGÀY 2 (GỬI BẢNG GIÁ + ĐỀ NGHỊ GỌI)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Dạ [Anh/Chị Tên], theo thông tin mình chia sẻ, em tổng hợp options phù hợp nhất:
+
+🏪 SHOPHOUSE [phân khu phù hợp]
+▸ Diện tích: [X-Y]m² — Giá từ [A-B] tỷ
+▸ Thanh toán: 30% ký hợp đồng, còn lại theo tiến độ hoặc vay bank
+▸ Tiềm năng cho thuê: [X-Y triệu]/tháng
+
+🏡 BIỆT THỰ [phân khu phù hợp]
+▸ Diện tích: [X-Y]m² — Giá từ [A-B] tỷ
+▸ Đặc điểm nổi bật: [view biển / góc / cuối dãy]
+
+Anh/chị có rảnh 10-15 phút để em gọi điện giải thích chi tiết hơn không? Giải thích qua chat mất nhiều thời gian của mình lắm ạ 😊 Em gọi lúc nào tiện cho anh/chị?</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">B3 — NGÀY 4 (SO SÁNH ĐỐI THỦ)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Chào [Anh/Chị Tên]!
+
+Em biết khi tìm hiểu BĐS Hạ Long, anh/chị có thể đang so sánh nhiều dự án. Em tổng hợp nhanh:
+
+📊 HLX vs dự án cùng khu vực:
+
+| Tiêu chí | HLX | Dự án X | Dự án Y |
+|---|---|---|---|
+| Chủ đầu tư | Vinhomes (AAA) | [tên] | [tên] |
+| Pháp lý | Sổ đỏ/Hồng ✅ | [tình trạng] | [tình trạng] |
+| Giá/m² | [X triệu] | [Y triệu] | [Z triệu] |
+| Tiện ích | 5 sao | [mức] | [mức] |
+| Thanh khoản | Cao | TB | TB |
+
+Anh/chị đang phân vân giữa HLX và dự án nào cụ thể ạ? Em phân tích chi tiết hơn cho mình.</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">B4 — NGÀY 6 (XỬ LÝ PHẢN ĐỐI GIÁ)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Dạ [Anh/Chị Tên], em đoán anh/chị có thể đang cân nhắc về giá — đây là câu hỏi rất hợp lý.
+
+Để anh/chị nhìn từ góc khác: giá HLX có vẻ cao hơn một số dự án xung quanh, nhưng đây là lý do thực tế:
+
+① Thương hiệu Vinhomes → thanh khoản cao hơn 40% khi cần bán lại
+② Pháp lý sổ đỏ / sổ hồng đầy đủ → vay ngân hàng dễ, bán được giá cao
+③ Hạ tầng tiện ích đồng bộ → cho thuê giá cao hơn, lấp đầy nhanh hơn
+④ Cộng đồng cư dân chất lượng → giữ giá dài hạn
+
+Anh/chị đầu tư 1 đồng ở HLX — thanh khoản tốt hơn, bảo toàn vốn chắc hơn. Có phải anh/chị đang băn khoăn về phần này không ạ?</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">B5, B6, B7 — NGÀY 7, 10, 14 (TƯƠNG TỰ CHUỖI A)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">→ Dùng lại A5 (Social Proof), A6 (Hỏi Lo Ngại), A7 (Chốt Hoặc Tạm Biệt)
+   Chỉ thay context từ "sau khi xem nhà" → "sau khi trao đổi qua chat"
+
+LƯU Ý: Nếu khách chưa từng xem nhà → luôn cố gắng dẫn sang action "Anh/chị có thể tham quan thực tế không? Em book lịch miễn phí + đưa đón từ TP."</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">💬 Chuỗi C — Khách Cũ Hồi Sinh (7 tin nhắn — gửi mỗi 30 ngày)</div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">C1 — THÁNG 1 SAU MUA (CHÚC MỪNG)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Chào [Anh/Chị Tên]! Em [Tên] đây ạ.
+
+Chúc mừng [Anh/Chị] đã chính thức là chủ nhân căn [X] tại HLX được 1 tháng rồi! 🎉
+
+Anh/chị đã cho thuê chưa ạ? Hoặc đang ở / kế hoạch thế nào? Em hỏi để nếu cần em kết nối khách thuê — em đang có [X] khách đang tìm shophouse / biệt thự khu vực HLX.</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">C2-C7 — CÁC THÁNG TIẾP THEO (NGẮN GỌN)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">C2 (Tháng 2): Gửi tin tức thị trường liên quan đến căn mình đang sở hữu
+
+C3 (Tháng 3): "Anh/chị có biết HLX vừa [tin tức mới] không? Giá trị căn của mình ước tính [tăng/giữ nguyên] khoảng [X%] rồi đó ạ."
+
+C4 (Tháng 4): Hỏi về kinh nghiệm cho thuê — nếu họ đang cho thuê, xin phép chia sẻ case study (ẩn danh)
+
+C5 (Tháng 6): "Anh/chị có ai quen đang tìm mua / thuê BĐS khu HLX không? Em vẫn đang hoạt động khu vực này — giới thiệu giúp em với ạ 😊"
+
+C6 (Tháng 9): Gửi báo cáo thị trường HLX 9 tháng — anh/chị chính thức là "insider"
+
+C7 (Tháng 12): Chúc mừng năm mới + tổng kết giá trị tài sản ước tính — "Căn của mình từ [X] tỷ → ước tính [Y] tỷ rồi ạ, tăng [Z%]!"</div>
+    </div>
+  </div>
+
+  <div class="val-box">
+    <h4>🎁 Bonus: 5 Tin Nhắn "Lead Hồi Sinh" (gửi cho lead đã lạnh 3+ tháng)</div>
+    <ul>
+      <li>R1: Tin tức thị trường gây shock — mở đầu conversation tự nhiên</li>
+      <li>R2: "Em nhớ anh/chị từng hỏi về [X] — giờ có update quan trọng..."</li>
+      <li>R3: Social proof — "Khách tương tự hoàn cảnh mình vừa chốt tuần này..."</li>
+      <li>R4: Offer mới — "Em đang có chương trình ưu đãi đặc biệt tháng này cho..."</li>
+      <li>R5: Cuối cùng — "Em biết mình bận, chỉ hỏi 1 câu cuối..."</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+  PRODUCT 3 — HLX BROKER MASTERMIND
+════════════════════════════════════════════ -->
+<div class="panel" id="p2">
+  <div class="prod-header">
+    <div class="prod-num">SẢN PHẨM 03 / 07</div>
+    <h2>🤝 HLX Broker Mastermind</h2>
+    <div class="tagline">Community trả phí cho môi giới HLX — chia sẻ deal, cập nhật thị trường, hỗ trợ nhau chốt khách khó. 1 buổi call Zoom/tháng + Zalo group exclusive. Không cần cơ sở hạ tầng phức tạp.</div>
+    <div class="price-row">
+      <div class="price-chip">500.000đ/tháng</div>
+      <div class="price-chip">Giới hạn 30 thành viên/cohort</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📋 Cấu trúc Mastermind</div>
+    <div class="grid2">
+      <div class="mini-card"><div class="icon">💬</div><h5>Zalo Group Riêng</h5><p>Chỉ thành viên đang active — chia sẻ lead, hỏi nhanh, cập nhật tin tức HLX mới nhất</p></div>
+      <div class="mini-card"><div class="icon">📹</div><h5>Zoom Call Tháng</h5><p>90 phút — review thị trường, Q&A, 1 case study thực tế từ thành viên</p></div>
+      <div class="mini-card"><div class="icon">📊</div><h5>Bản Tin Weekly Brief</h5><p>Tặng kèm gói Weekly Brief (299k) — thành viên Mastermind nhận miễn phí</p></div>
+      <div class="mini-card"><div class="icon">🎯</div><h5>Script Tháng</h5><p>Mỗi tháng: 1 bộ script mới theo chủ đề — xử lý phản đối mới, câu chốt mới</p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📅 Agenda Buổi Call Tháng (Copy-paste dùng ngay)</div>
+    <div class="tpl-card">
+      <div class="tpl-label">AGENDA ZOOM CALL — 90 PHÚT</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">🎯 HLX MASTERMIND CALL — THÁNG [X]/2026
+📅 [Ngày] — [Giờ] — Zoom: [Link]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[00:00-00:10] WARM UP
+▸ Check-in nhanh: Mỗi người 30 giây — "Tháng này deal nào ấn tượng nhất?"
+
+[00:10-00:30] MARKET UPDATE
+▸ Số liệu thị trường HLX tháng qua
+▸ 3 tín hiệu cần chú ý tháng tới
+▸ Update từ chủ đầu tư Vinhomes
+
+[00:30-01:00] CASE STUDY THỰC TẾ
+▸ 1 thành viên chia sẻ: 1 deal thành công HOẶC 1 deal thất bại + bài học
+▸ Cả nhóm phân tích, đề xuất cách làm khác
+▸ Ai có tip tương tự? Chia sẻ nhanh.
+
+[01:00-01:20] SCRIPT THÁNG NÀY
+▸ Chủ đề: [VD: Xử lý "giá cao quá", "chờ thêm", "tôi cần hỏi vợ/chồng"]
+▸ Demo script live — roleplay với 1 thành viên tình nguyện
+▸ Feedback + điều chỉnh theo thực tế từng người
+
+[01:20-01:30] Q&A + KẾ HOẠCH THÁNG TỚI
+▸ Câu hỏi tự do
+▸ Mỗi người: 1 cam kết hành động tháng tới (ghi vào chat)
+▸ Hẹn ngày call tháng sau
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Ghi chú call được lưu trong group — thành viên vắng xem lại được.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">✉️ Tin Nhắn Chào Mừng Thành Viên Mới</div>
+    <div class="tpl-card">
+      <div class="tpl-label">TIN NHẮN WELCOME (GỬI KHI THÀNH VIÊN VÀO GROUP)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">🎉 Chào mừng [Tên] vào HLX Broker Mastermind!
+
+Xin giới thiệu nhanh về group này:
+
+👥 GROUP NÀY LÀ GÌ?
+Cộng đồng [X] môi giới HLX trả phí — chia sẻ thật, hỗ trợ thật, không spam.
+
+📌 QUY TẮC (ngắn gọn):
+① Chia sẻ thực tế — không lý thuyết
+② Hỗ trợ nhau — không cạnh tranh tiêu cực
+③ Câu hỏi nào cũng OK — không câu hỏi nào ngớ ngẩn
+④ Không quảng cáo sản phẩm ngoài không liên quan
+
+🎁 QUYỀN LỢI CỦA ANH/CHỊ:
+✅ Zalo group này — chat bất kỳ lúc nào
+✅ Zoom call tháng — [Ngày] hàng tháng, 20h
+✅ Bản tin Weekly Brief — tự động gửi thứ Hai
+✅ Script tháng — gửi trong group đầu mỗi tháng
+
+📞 HỎI GÌ CỨ TAG @[Tên bạn] hoặc nhắn riêng nhé!
+
+Tuần tới có call không [Tên]? Mong gặp mình! 🚀</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">🚀 Checklist Ra Mắt Mastermind</div>
+    <div class="chk-grid">
+      <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Tạo Zalo group kín — đặt tên "HLX Broker Mastermind [Tháng/Năm]"</span></div>
+      <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Mời 5-10 người đầu tiên (môi giới quen, đã mua kit của mình) → tạo founding member story</span></div>
+      <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Tạo tài khoản Zoom free (miễn phí đủ dùng cho 30 người, 40 phút — hoặc Zoom paid 150k/tháng nếu cần 90 phút)</span></div>
+      <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Lên lịch call đầu tiên — announce trong group ít nhất 1 tuần trước</span></div>
+      <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Chuẩn bị slide market update cho call đầu (dùng Google Slides, 10-15 slides)</span></div>
+      <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Chuẩn bị hệ thống thu tiền: SePay QR hoặc chuyển khoản manual tháng đầu</span></div>
+      <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-box"></div><span>Sau call đầu: xin testimonial từ 3 thành viên → dùng để bán slot tiếp theo</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+  PRODUCT 4 — FB/ZALO ADS TEMPLATE PACK
+════════════════════════════════════════════ -->
+<div class="panel" id="p3">
+  <div class="prod-header">
+    <div class="prod-num">SẢN PHẨM 04 / 07</div>
+    <h2>📣 FB/Zalo Ads Template Pack</h2>
+    <div class="tagline">10 template quảng cáo FB + 5 bài đăng Zalo OA mỗi tháng — cập nhật theo mùa vụ, sự kiện HLX, xu hướng thị trường. Môi giới chỉ cần thay số/tên/ảnh là chạy được.</div>
+    <div class="price-row">
+      <div class="price-chip">499.000đ/tháng</div>
+      <div class="price-chip">Template mới 100% mỗi tháng</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📣 10 Template FB Ads Tháng Này (Copy-paste → Chỉnh số → Chạy)</div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">FB AD #1 — HOOK: SỐ LIỆU GÂY SỐC</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">HEADLINE: [X] căn shophouse HLX đã bán trong 30 ngày — còn lại [Y] căn
+
+PRIMARY TEXT:
+Tôi không nói điều này để tạo áp lực.
+
+Tôi nói vì đây là dữ liệu thực: [X] giao dịch shophouse Vinhomes Hạ Long Xanh đã được ghi nhận trong 30 ngày qua. Tốc độ này nhanh hơn [Z%] so với quý trước.
+
+Những người mua sớm không phải vì họ giàu hơn — mà vì họ được tư vấn đúng và đưa ra quyết định đủ thông tin.
+
+Anh/chị muốn là người quyết định đúng thời điểm?
+
+👇 Để lại SĐT — em gọi lại trong 30 phút với bảng phân tích riêng cho anh/chị.
+
+CTA BUTTON: "Tìm Hiểu Ngay"
+AUDIENCE: Nhắm tuổi 30-55, thu nhập trung bình khá, quan tâm BĐS, Hà Nội/HCM/Hải Phòng</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">FB AD #2 — HOOK: ROI SO SÁNH</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">HEADLINE: 5 tỷ gửi ngân hàng vs 5 tỷ mua shophouse HLX — sau 3 năm ai thắng?
+
+PRIMARY TEXT:
+Gửi ngân hàng 5 tỷ @ 5%/năm = 750 triệu lãi cộng dồn sau 3 năm.
+
+Shophouse HLX 5 tỷ:
+→ Cho thuê: 25-35 triệu/tháng = 900 triệu-1,26 tỷ tiền thuê
+→ Tăng giá tài sản (dự báo 15-20% theo chu kỳ): +750 triệu đến 1 tỷ
+→ Tổng: 1,65 - 2,26 tỷ sau 3 năm
+
+Đây không phải hứa hẹn. Đây là toán học.
+
+Tôi chỉ chia sẻ với người muốn biết — không phải mọi người đều phù hợp.
+
+👇 SĐT của anh/chị — tôi phân tích cụ thể ngân sách và mục tiêu của mình.
+
+CTA: "Phân Tích Miễn Phí"</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">FB AD #3 — HOOK: SỢ BỎ LỠ (FOMO)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">HEADLINE: Người mua HLX tháng 3/2024 — giờ tài sản của họ thế nào?
+
+PRIMARY TEXT:
+Tháng 3 năm ngoái, khách của tôi — anh T., kỹ sư 38 tuổi Hà Nội — do dự mãi mới quyết định mua shophouse HLX [X] tỷ.
+
+Hôm qua anh ấy nhắn: "Em ơi may mà em tư vấn kỹ. Giờ có người hỏi mua lại giá [X+Z] tỷ mà anh không bán vì đang cho thuê tốt."
+
+Anh T. không phải nhà đầu tư chuyên nghiệp. Anh chỉ đưa ra quyết định đúng thời điểm — với đủ thông tin.
+
+Anh/chị đang ở thời điểm đó không?
+
+👇 Nhắn "HLX" để nhận bảng phân tích cơ hội hiện tại.
+
+CTA: "Nhắn Tin Ngay"</div>
+    </div>
+
+    <div class="tpl-card">
+      <div class="tpl-label">FB AD #4 đến #10 — CHỦ ĐỀ GỢI Ý THEO THÁNG</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">#4 MYTH-BUSTING: "5 điều sai về BĐS Hạ Long mà người ta vẫn tin" → debunk từng điểm → CTA tư vấn
+
+#5 BEHIND-THE-SCENES: "Ngày làm việc của môi giới HLX từ 6h sáng" → story-telling → build trust
+
+#6 EDUCATIONAL: "Sổ đỏ, sổ hồng, sổ xanh — khác nhau thế nào? Mua HLX loại nào?" → kiến thức thực tế
+
+#7 TESTIMONIAL: "[Tên ẩn danh], [nghề nghiệp], mua HLX [tháng] — kết quả sau [X] tháng:" → case study
+
+#8 CHECKLIST: "7 câu hỏi phải hỏi trước khi mua shophouse biển" → lead magnet → comment "nhận file"
+
+#9 VIDEO HOOK: "[Số] triệu/tháng từ shophouse HLX [X]m² — tính thế nào?" → video ngắn 60 giây
+
+#10 URGENCY: "Cuối tháng [X]: Chủ đầu tư điều chỉnh giá — phân khúc nào bị ảnh hưởng?" → news-jacking
+
+━━━
+💡 TIPS CHẠY ADS HIỆU QUẢ:
+▸ Budget test: 50-100k/ngày, 3-5 ngày trước khi scale
+▸ Audience: Custom audience từ page followers + Lookalike
+▸ Best performing: Video 15-60 giây > ảnh tĩnh
+▸ Thời gian chạy tốt nhất: 19:00-22:00 và 06:00-08:00</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">💬 5 Bài Đăng Zalo OA Tháng Này</div>
+    <div class="tpl-card">
+      <div class="tpl-label">ZALO #1 — BẢN TIN ĐẦU THÁNG</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">📊 THỊ TRƯỜNG HLX — [THÁNG X]/2026
+
+Chào anh/chị! [Tên] — tư vấn HLX đây.
+
+Tháng [X] bắt đầu với [1 tin tức thị trường nổi bật]. Đây là những gì anh/chị cần biết:
+
+① [Điểm quan trọng 1 — data cụ thể]
+② [Điểm quan trọng 2 — xu hướng]
+③ [Điểm quan trọng 3 — cơ hội hoặc cảnh báo]
+
+📌 Em có phân tích chi tiết hơn cho phân khúc anh/chị đang quan tâm. Nhắn "PHÂN TÍCH" để nhận ạ!
+
+[Tên] — 📞 [SĐT]</div>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-label">ZALO #2-5 — CHỦ ĐỀ TUẦN</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Zalo #2 (Tuần 2): Tip thực tế — "1 câu hỏi để biết khách có thực sự muốn mua không"
+→ Chia sẻ kinh nghiệm môi giới thực tế, không bán hàng trực tiếp
+
+Zalo #3 (Tuần 3): Ảnh + caption — "Góc này của HLX — anh/chị đoán giá bao nhiêu?"
+→ Engagement post, dùng ảnh thực tế từ gallery HLX
+
+Zalo #4 (Tuần 4): Case study tháng — kết quả 1 deal tháng này (ẩn danh)
+→ "Khách em tháng này, 42 tuổi, Hải Phòng, mua shophouse [X] tỷ..."
+
+Zalo #5 (Cuối tháng): Recap + CTA
+→ "Tháng [X] em đã tư vấn [X] khách. [Y] người đã ra quyết định. Tháng tới em còn slot tư vấn cho [Z] người — ai muốn nhắn em ạ."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+  PRODUCT 5 — PERSONAL BRAND 60 NGÀY
+════════════════════════════════════════════ -->
+<div class="panel" id="p4">
+  <div class="prod-header">
+    <div class="prod-num">SẢN PHẨM 05 / 07</div>
+    <h2>⭐ Personal Brand Acceleration — 60 Ngày</h2>
+    <div class="tagline">Lộ trình 60 ngày xây dựng thương hiệu cá nhân cho môi giới HLX — từ số 0 đến "chuyên gia được biết đến" trong cộng đồng môi giới Hạ Long. Content calendar + script + checklist hành động từng ngày.</div>
+    <div class="price-row">
+      <div class="price-chip">1.497.000đ — Trọn đời</div>
+      <div class="price-chip">Tặng: 1 buổi review profile 1-1</div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>🎯 Kết quả kỳ vọng sau 60 ngày</h4>
+    <ul>
+      <li>Facebook/Zalo: Tăng 500-1.000 follower đúng target (môi giới, nhà đầu tư HLX)</li>
+      <li>Ít nhất 3 bài đăng được chia sẻ viral trong cộng đồng BĐS</li>
+      <li>10+ lead inbound (tự tìm đến) mỗi tháng từ personal brand</li>
+      <li>Được mời tham gia ít nhất 1 panel/sự kiện BĐS khu vực</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📅 Lộ Trình 60 Ngày — Chi Tiết</div>
+
+    <div class="week-card">
+      <div class="week-head">⚡ TUẦN 1-2: NỀN TẢNG (Ngày 1-14) — "Setup trước, bắn sau"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">N1</div><span>Audit toàn bộ social hiện tại — note điểm yếu, xóa hoặc ẩn content cũ không phù hợp</span></div>
+        <div class="day-row"><div class="day-label">N2</div><span>Viết lại Bio FB/Zalo: "Tôi là X — tôi giúp Y đạt Z" — không nói "tôi là môi giới HLX"</span></div>
+        <div class="day-row"><div class="day-label">N3</div><span>Chụp 10 ảnh chuyên nghiệp (ảnh đại diện, ảnh bìa, ảnh tại dự án) — thuê thợ ảnh 300-500k</span></div>
+        <div class="day-row"><div class="day-label">N4-5</div><span>Viết bài "My Story" — tại sao chọn BĐS, tại sao chọn HLX, hành trình đến hôm nay</span></div>
+        <div class="day-row"><div class="day-label">N6-7</div><span>Join 10 group BĐS FB lớn — comment giá trị 5 bài/ngày (không quảng cáo)</span></div>
+        <div class="day-row"><div class="day-label">N8-14</div><span>Đăng 7 bài đầu tiên theo Content Pillar Plan bên dưới — 1 bài/ngày</span></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-head">🔥 TUẦN 3-4: MOMENTUM (Ngày 15-28) — "Bắt đầu có traction"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">N15</div><span>Phân tích 7 bài đầu: bài nào reach/tương tác tốt nhất → nhân đôi dạng content đó</span></div>
+        <div class="day-row"><div class="day-label">N16-20</div><span>5 bài "Chuyên Gia Lên Tiếng" — data + quan điểm cá nhân mạnh, không sợ tranh luận</span></div>
+        <div class="day-row"><div class="day-label">N21</div><span>Live stream đầu tiên (15-20 phút): "Thị trường HLX tháng này — 3 điều môi giới cần biết"</span></div>
+        <div class="day-row"><div class="day-label">N22-25</div><span>Xây dựng "Signature Series" — chuỗi nội dung định kỳ có tên riêng (VD: "Thứ Tư Thị Trường")</span></div>
+        <div class="day-row"><div class="day-label">N26-28</div><span>Kết nối cá nhân: nhắn tin cảm ơn 20 người đã tương tác nhiều nhất — không bán hàng</span></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-head">⭐ TUẦN 5-6: AUTHORITY (Ngày 29-42) — "Được nhận ra là chuyên gia"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">N29</div><span>Publish "Báo Cáo Thị Trường HLX" cá nhân — PDF đơn giản, chia sẻ miễn phí → thu lead</span></div>
+        <div class="day-row"><div class="day-label">N30-35</div><span>Case study series: 3 deal thực tế (ẩn danh) — vấn đề, giải pháp, kết quả cụ thể</span></div>
+        <div class="day-row"><div class="day-label">N36</div><span>Pitch bản thân vào 1-2 podcast/channel BĐS để được phỏng vấn — chuẩn bị angle độc đáo</span></div>
+        <div class="day-row"><div class="day-label">N37-42</div><span>Collaboration: Co-create content với 1 môi giới khác (không cạnh tranh trực tiếp) — cross-audience</span></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-head">🚀 TUẦN 7-8+: CONVERSION (Ngày 43-60) — "Biến follower thành khách"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">N43-49</div><span>Soft launch "BDS Kit" hoặc dịch vụ tư vấn cho audience — không hard sell, offer trước value</span></div>
+        <div class="day-row"><div class="day-label">N50-54</div><span>Testimonial campaign: xin feedback từ 5 khách hài lòng nhất — video ngắn hoặc text kèm ảnh</span></div>
+        <div class="day-row"><div class="day-label">N55-58</div><span>Phân tích toàn bộ 60 ngày: số follower, reach, lead, conversion — document lại</span></div>
+        <div class="day-row"><div class="day-label">N59-60</div><span>Plan 60 ngày tiếp theo dựa trên data thực — nhân đôi những gì hoạt động tốt</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">🎯 5 Content Pillars — Framework Không Bao Giờ Hết Ý Tưởng</div>
+    <div class="grid2">
+      <div class="mini-card"><div class="icon">📊</div><h5>Pillar 1: Thị Trường (30%)</h5><p>Data, xu hướng, dự báo, số liệu. Anh/chị = nguồn thông tin tin cậy.</p></div>
+      <div class="mini-card"><div class="icon">📖</div><h5>Pillar 2: Câu Chuyện (25%)</h5><p>Hành trình bản thân, deal ấn tượng, bài học thất bại — authentic content.</p></div>
+      <div class="mini-card"><div class="icon">🎓</div><h5>Pillar 3: Giáo Dục (25%)</h5><p>Pháp lý, tài chính, checklist, hướng dẫn — value không cần bán.</p></div>
+      <div class="mini-card"><div class="icon">💬</div><h5>Pillar 4: Tương Tác (10%)</h5><p>Poll, câu hỏi, debate, Q&A — engagement tạo visibility.</p></div>
+      <div class="mini-card"><div class="icon">🎯</div><h5>Pillar 5: Offer (10%)</h5><p>Dịch vụ, kit, coaching — chỉ 10%, sau 90% value đã build trust.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+  PRODUCT 6 — DEAL COACHING 1-1
+════════════════════════════════════════════ -->
+<div class="panel" id="p5">
+  <div class="prod-header">
+    <div class="prod-num">SẢN PHẨM 06 / 07</div>
+    <h2>🎯 Deal Coaching 1-1</h2>
+    <div class="tagline">Coaching 1-1 cho môi giới đang bế tắc với 1 deal cụ thể — phân tích tình huống, xây chiến lược chốt, roleplay xử lý phản đối. Kết quả: tăng tỷ lệ chốt deal khó từ dưới 20% lên 50%+.</div>
+    <div class="price-row">
+      <div class="price-chip">500.000đ/buổi 60 phút</div>
+      <div class="price-chip">1.200.000đ/3 buổi (tiết kiệm 300k)</div>
+      <div class="price-chip">Tặng: 7 ngày follow-up Zalo sau buổi</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📋 Intake Form — Gửi Trước Buổi Coaching (Copy-paste → Gửi Zalo)</div>
+    <div class="tpl-card">
+      <div class="tpl-label">INTAKE FORM — GỬI KHÁCH TRƯỚC 24H</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">Chào [Tên]! Để buổi coaching của mình hiệu quả nhất, anh/chị điền nhanh các thông tin này trước khi gặp nhé (10 phút):
+
+━━━ THÔNG TIN DEAL ━━━
+
+1. Mô tả khách hàng đang stuck:
+   ▸ Tuổi, nghề nghiệp, khu vực sống:
+   ▸ Mục đích mua (ở / đầu tư / cho thuê):
+   ▸ Ngân sách thực tế (khách confirm hay anh/chị đoán?):
+   ▸ Sản phẩm quan tâm (phân khu, diện tích, giá):
+
+2. Hiện trạng deal:
+   ▸ Đã gặp nhau bao nhiêu lần?
+   ▸ Đã xem nhà chưa? Bao nhiêu lần?
+   ▸ Phản ứng gần nhất của khách khi anh/chị liên hệ?
+   ▸ Lần cuối liên hệ: bao giờ?
+
+3. Vấn đề chính anh/chị đoán:
+   ▸ □ Giá cao / tài chính
+   ▸ □ Chờ thêm / không gấp
+   ▸ □ Cần xin ý kiến người thân
+   ▸ □ So sánh dự án khác
+   ▸ □ Lo ngại pháp lý
+   ▸ □ Khác: [ghi rõ]
+
+4. Anh/chị đã thử cách nào chưa?
+
+5. Mục tiêu của buổi coaching hôm nay:
+   ▸ Anh/chị muốn đạt được gì sau 60 phút này?
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Gửi lại form này trước [Giờ/Ngày] nhé! Em sẽ chuẩn bị sẵn chiến lược trước khi gặp.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">🗂️ Framework Coaching 60 Phút</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">1</div><div class="step-body"><h4>[00:00-10:00] Chẩn Đoán — "Deal bị kẹt ở đâu thực sự?"</h4><p>Hỏi chi tiết về deal. Không phán xét. Nghe nhiều hơn nói. Goal: identify root cause thực sự (thường ≠ lý do khách nói)</p></div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-body"><h4>[10:00-25:00] Phân Tích — "Khách muốn gì vs nói gì"</h4><p>Map ra: khách đang ở đâu trong hành trình quyết định, điểm chặn thực sự là gì, leverage point nào chưa dùng</p></div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-body"><h4>[25:00-45:00] Roleplay — "Luyện thật, gặp khách thật"</h4><p>Coach đóng vai khách. Môi giới thực hành script mới. Dừng, phân tích, thử lại. Ít nhất 2-3 vòng với scenarios khác nhau.</p></div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-body"><h4>[45:00-60:00] Kế Hoạch Hành Động</h4><p>3 actions cụ thể cho 48h tới. Ngày/giờ liên hệ khách. Script gửi tin nhắn đầu tiên. Chỉ số để biết đang đúng hướng.</p></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📝 Action Plan Template — Gửi Sau Buổi Coaching</div>
+    <div class="tpl-card">
+      <div class="tpl-label">POST-COACHING ACTION PLAN (GỬI TRONG 1H SAU BUỔI)</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">━━━ KẾ HOẠCH HÀNH ĐỘNG SAU COACHING ━━━
+Deal: [Khách X] | Ngày coaching: [Date]
+
+🎯 CHẨN ĐOÁN:
+Root cause thực sự: [Ghi rõ — VD: "Chồng chưa thống nhất, không phải giá"]
+Leverage point chưa khai thác: [VD: "Chưa cho vợ xem dự án trực tiếp"]
+
+📋 3 HÀNH ĐỘNG TRONG 48H:
+① [Hành động cụ thể] — Làm vào: [Giờ/Ngày]
+② [Hành động cụ thể] — Làm vào: [Giờ/Ngày]
+③ [Hành động cụ thể] — Làm vào: [Giờ/Ngày]
+
+💬 TIN NHẮN GỬI KHÁCH ĐẦU TIÊN:
+"[Script đã roleplay và điều chỉnh]"
+
+📊 CHỈ SỐ THEO DÕI:
+▸ Khách reply trong 24h? → Đúng hướng
+▸ Khách đề xuất gặp nhau? → Very good
+▸ Khách không reply → Thử approach #2 [ghi cụ thể]
+
+🔔 CHECK-IN: Em sẽ hỏi thăm anh/chị sau [48h/1 tuần] nhé!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+[Tên Coach] | Zalo: [SĐT] | "Không chốt được không lấy thêm phí"</div>
+    </div>
+  </div>
+
+  <div class="val-box">
+    <h4>💡 Định vị coaching — cách chào bán</h4>
+    <ul>
+      <li><strong>Không phải "dạy kỹ năng"</strong> — là "giải quyết 1 deal cụ thể đang bế tắc"</li>
+      <li><strong>Không cam kết "100% chốt"</strong> — cam kết "tăng đáng kể tỷ lệ thành công + luôn biết bước tiếp theo phải làm gì"</li>
+      <li><strong>Chào bán thời điểm tốt nhất</strong>: khi môi giới vừa share deal khó trong Mastermind group</li>
+      <li><strong>Gói 3 buổi</strong> tốt hơn 1 buổi vì: buổi 1 = chẩn đoán, buổi 2 = thực hiện & điều chỉnh, buổi 3 = tổng kết & scale</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+  PRODUCT 7 — TEAM LEADER KIT
+════════════════════════════════════════════ -->
+<div class="panel" id="p6">
+  <div class="prod-header">
+    <div class="prod-num">SẢN PHẨM 07 / 07</div>
+    <h2>👑 Team Leader Kit — Hệ Thống 5+ Người</h2>
+    <div class="tagline">Bộ công cụ vận hành team môi giới HLX 5+ người — onboarding, training, KPI tracking, họp tuần, phân công leads. Từ team hỗn loạn → team có hệ thống, leader không cần giám sát từng bước.</div>
+    <div class="price-row">
+      <div class="price-chip">4.997.000đ — Trọn đời</div>
+      <div class="price-chip">Cho team tối đa 20 người</div>
+      <div class="price-chip">Tặng: 2 buổi Team Setup 1-1</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📦 Những gì có trong Team Leader Kit</div>
+    <div class="grid2">
+      <div class="mini-card"><div class="icon">📋</div><h5>Onboarding Playbook</h5><p>Tuần 1-4 cho nhân viên mới — từ ngày đầu tiên đến đủ tự tin làm việc độc lập</p></div>
+      <div class="mini-card"><div class="icon">📅</div><h5>Họp Tuần Template</h5><p>Agenda 45 phút mỗi thứ Hai — review số, giải quyết vướng mắc, phân công tuần mới</p></div>
+      <div class="mini-card"><div class="icon">📊</div><h5>KPI Dashboard</h5><p>Google Sheets theo dõi: lead, call, gặp, xem nhà, chốt — từng người từng tuần</p></div>
+      <div class="mini-card"><div class="icon">🎓</div><h5>Training Curriculum 4 Tuần</h5><p>Từ product knowledge → sales process → objection handling → closing — có bài tập thực hành</p></div>
+      <div class="mini-card"><div class="icon">🗂️</div><h5>Lead Assignment System</h5><p>Quy tắc phân lead công bằng, tránh tranh giành nội bộ, rotation logic rõ ràng</p></div>
+      <div class="mini-card"><div class="icon">💰</div><h5>Commission Structure</h5><p>Template cơ cấu hoa hồng rõ ràng — tránh hiểu nhầm, giữ người tài, incentive đúng</p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📅 Onboarding Playbook — 4 Tuần Đầu Nhân Viên Mới</div>
+
+    <div class="week-card">
+      <div class="week-head">🟢 TUẦN 1: ORIENTATION — "Hiểu sản phẩm và môi trường"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">T2</div><span>Giới thiệu team, quy tắc, công cụ (Zalo/CRM/Google Sheets). Đọc file "HLX Product Bible"</span></div>
+        <div class="day-row"><div class="day-label">T3</div><span>Tham quan thực tế dự án HLX — ít nhất 2h. Ghi chú tất cả điểm ấn tượng và câu hỏi</span></div>
+        <div class="day-row"><div class="day-label">T4</div><span>Nghe shadow 2 buổi gọi điện thực tế (cùng senior) — không cần nói, chỉ nghe và ghi chép</span></div>
+        <div class="day-row"><div class="day-label">T5</div><span>Học 5 script cơ bản: chào hỏi lead mới, set hẹn xem nhà, xử lý "bận không nghe máy", giới thiệu sản phẩm, xin referral</span></div>
+        <div class="day-row"><div class="day-label">T6</div><span>Quiz kiến thức sản phẩm (15 câu) + roleplay với leader. Pass 80%+ mới chuyển sang tuần 2.</span></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-head">🔵 TUẦN 2: SUPERVISED PRACTICE — "Làm thật, có người đồng hành"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">T2-3</div><span>Tự gọi điện 10 lead/ngày dưới sự giám sát. Leader nghe và feedback sau mỗi cuối ngày</span></div>
+        <div class="day-row"><div class="day-label">T4</div><span>Co-pitch lần đầu tiên với khách thật — senior lead, nhân viên mới support và quan sát</span></div>
+        <div class="day-row"><div class="day-label">T5-6</div><span>Xây danh sách lead cá nhân đầu tiên (từ mạng xã hội cá nhân, người quen, seeding groups). Target: 50 lead tuần này</span></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-head">🟡 TUẦN 3: INDEPENDENCE — "Tự xử lý, có backup"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">Cả tuần</div><span>Tự quản lý pipeline — cập nhật CRM/Sheet hàng ngày. Leader review cuối ngày (không can thiệp giữa chừng)</span></div>
+        <div class="day-row"><div class="day-label">T4</div><span>Pitch độc lập lần đầu — leader dự để quan sát, không can thiệp trừ tình huống khẩn</span></div>
+        <div class="day-row"><div class="day-label">T6</div><span>Review tuần: Deal nào tiến tốt? Deal nào bế tắc? Phân tích và lên plan tuần 4</span></div>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-head">🔴 TUẦN 4: FULL FLIGHT — "Tự bay, report kết quả"</div>
+      <div class="week-body">
+        <div class="day-row"><div class="day-label">T2</div><span>Nhận quota tháng đầu tiên chính thức. Hiểu rõ KPI và cơ cấu hoa hồng.</span></div>
+        <div class="day-row"><div class="day-label">T3-5</div><span>Phụ trách hoàn toàn pipeline cá nhân. Họp 1-1 với leader 2 lần/tuần (30 phút mỗi lần)</span></div>
+        <div class="day-row"><div class="day-label">T6</div><span>Tổng kết 4 tuần: điểm mạnh, điểm cần phát triển, mục tiêu tháng 2. Ký biên bản đánh giá.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">📊 Agenda Họp Tuần — 45 Phút Thứ Hai</div>
+    <div class="tpl-card">
+      <div class="tpl-label">TEAM MEETING AGENDA — THỨ HAI 8:30 SÁNG</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">📅 HLX TEAM MEETING — TUẦN [X] — [NGÀY]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[08:30-08:35] WIN CỦA TUẦN TRƯỚC
+Mỗi người chia sẻ 1 win (dù nhỏ) — không skip, không âm tính ở phần này.
+
+[08:35-08:50] SỐ LIỆU TUẦN QUA
+Leader present bảng KPI:
+▸ Lead mới: [X] (target: [Y])
+▸ Cuộc gọi thực hiện: [X] (target: [Y])
+▸ Lịch xem nhà đặt: [X] (target: [Y])
+▸ Đang ở pipeline chốt: [X] deal
+▸ Chốt tuần trước: [X] deal / [Y] doanh số
+
+[08:50-09:00] 1 VẤN ĐỀ — 1 GIẢI PHÁP
+Ai đang bế tắc nhất? Nêu vấn đề (3 phút). Cả nhóm đề xuất (5 phút). Action clear.
+
+[09:00-09:10] FOCUS TUẦN NÀY
+▸ Ưu tiên #1: [cụ thể]
+▸ Ai phụ trách gì?
+▸ Check-in giữa tuần: thứ Tư [giờ]
+
+[09:10-09:15] THÔNG BÁO + Q&A NHANH
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Meeting notes được ghi vào group Zalo team trong 15 phút sau khi kết thúc.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">💰 Template Cơ Cấu Hoa Hồng (Điền vào phù hợp với team)</div>
+    <div class="tpl-card">
+      <div class="tpl-label">COMMISSION STRUCTURE TEMPLATE</div>
+      <button class="copy-btn" onclick="copyCard(this)">📋 Copy</button>
+      <div class="tpl-body">━━━ CƠ CẤU HOA HỒNG — HLX TEAM [TÊN] ━━━
+Áp dụng từ: [Ngày/Tháng/Năm]
+
+1. HOA HỒNG CƠ BẢN
+▸ Hoa hồng tổng (từ CĐT): [X%] trên giá trị hợp đồng
+▸ Phần môi giới cá nhân nhận: [Y%] (sau khi trừ phần sàn/team)
+▸ Môi giới cấp trưởng nhóm nhận thêm: [Z%] trên deal của team mình
+
+2. KPI BONUS THÁNG
+▸ Đạt 100% quota: + [X triệu] bonus
+▸ Vượt 120%: + [Y triệu] bonus
+▸ Top 1 team tháng: + [Z triệu] hoặc [quà/phần thưởng khác]
+
+3. HOA HỒNG GIỚI THIỆU
+▸ Giới thiệu khách cho đồng nghiệp (không tự làm): nhận [X%] của deal đó
+▸ Tự làm deal do mình giới thiệu: full hoa hồng cơ bản
+
+4. THỜI GIAN THANH TOÁN
+▸ Hoa hồng được thanh toán trong [X] ngày làm việc sau khi CĐT xác nhận giao dịch
+▸ Hoa hồng bonus được tính và thanh toán vào ngày [X] tháng sau
+
+5. TRƯỜNG HỢP ĐẶC BIỆT
+▸ Deal liên phòng: chia theo tỷ lệ [thỏa thuận] ghi rõ trong email trước khi close
+▸ Deal pending quá [X tháng]: chuyển sang lead pool chung
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+Ký xác nhận: ______________ | Ngày: ____________</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>🚀 7 Pipeline Products · <strong>BDS Mastery System</strong> · Nguyễn Thị Yến · 0964.827.670 · Copyright 2026</p>
+</footer>
+
+<script>
+function show(n) {
+  document.querySelectorAll('.panel').forEach((p,i) => p.classList.toggle('active', i===n));
+  document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', i===n));
+  window.scrollTo({top: document.querySelector('.nav-bar').offsetTop - 4, behavior:'smooth'});
+}
+
+function copyCard(btn) {
+  const body = btn.closest('.tpl-card').querySelector('.tpl-body');
+  navigator.clipboard.writeText(body.innerText).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2200);
+  });
+}
+</script>
+</body>
+</html>
