@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nghiên Cứu Toàn Cầu: Đào Tạo & Công Cụ → Hiệu Suất — BDS Mastery Kit</title>
+<style>
+  :root{
+    --navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;
+    --cream:#FAF8F3;--bg:#0d1b2a;--green:#1a6b3a;--red:#C0392B;
+    --teal:#0d3b4a;--purple:#2a1040;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:#e8e0d0;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
+
+  /* ── HERO */
+  .hero{background:linear-gradient(160deg,#060f1a,#0d2040,#0a1a30);padding:52px 24px 40px;text-align:center;border-bottom:1px solid rgba(201,168,76,.2)}
+  .hero-tag{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 18px;border-radius:20px;margin-bottom:18px}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,40px);color:#fff;margin-bottom:10px;line-height:1.2}
+  .hero-sub{color:#90a8c0;font-size:14px;max-width:620px;margin:0 auto 30px;line-height:1.65}
+
+  /* Headline stats */
+  .hl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:900px;margin:0 auto}
+  .hl-box{background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:18px 16px;text-align:center}
+  .hl-num{font-size:clamp(26px,5vw,36px);font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;line-height:1}
+  .hl-label{font-size:11px;color:#8a9ab0;margin-top:6px;line-height:1.4}
+  .hl-src{font-size:9.5px;color:#4a5a6a;margin-top:4px;font-style:italic}
+
+  /* TABS */
+  .tab-bar{display:flex;overflow-x:auto;background:#080f18;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;z-index:99;scrollbar-width:none}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{flex:none;padding:13px 18px;font-size:12.5px;font-weight:600;color:#5a6d80;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s}
+  .tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+  .tab-btn:hover{color:#c0b090}
+
+  /* PANELS */
+  .panel{display:none;padding:28px 20px 70px;max-width:900px;margin:0 auto}
+  .panel.active{display:block}
+  .sec-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gl);margin-bottom:6px;font-weight:600}
+  .sec-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,28px);color:#fff;margin-bottom:6px}
+  .sec-sub{color:#7a8a9a;font-size:13.5px;margin-bottom:28px;line-height:1.6}
+
+  /* STAT CARDS */
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}
+  .stat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 16px;text-align:center}
+  .stat-num{font-size:clamp(28px,5vw,42px);font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;line-height:1.1}
+  .stat-label{font-size:12px;color:#c0b09a;margin-top:6px;line-height:1.45}
+  .stat-src{font-size:10px;color:#4a5a6a;margin-top:5px;font-style:italic}
+  .stat-card.green .stat-num{color:#60d090}
+  .stat-card.red .stat-num{color:#e87070}
+  .stat-card.blue .stat-num{color:#60a8e0}
+  .stat-card.gold .stat-num{color:var(--gl)}
+
+  /* INSIGHT CARD */
+  .insight{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+  .insight h3{font-size:14px;font-weight:700;color:var(--gl);margin-bottom:8px}
+  .insight p{font-size:13.5px;color:#c0b09a;line-height:1.7}
+
+  /* VS BLOCK */
+  .vs-block{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin:20px 0}
+  .vs-side{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 16px}
+  .vs-head{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+  .vs-head.positive{color:#60d090}
+  .vs-head.negative{color:#e87070}
+  .vs-items{list-style:none;display:grid;gap:6px}
+  .vs-items li{font-size:12.5px;color:#c0b09a;padding-left:18px;position:relative;line-height:1.5}
+  .vs-items li.pos::before{content:'↑';position:absolute;left:0;color:#60d090;font-weight:700}
+  .vs-items li.neg::before{content:'↓';position:absolute;left:0;color:#e87070;font-weight:700}
+  .vs-center{font-size:22px;text-align:center;color:#5a6a7a;font-weight:700}
+
+  /* QUOTE */
+  .quote{background:rgba(255,255,255,.03);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-style:italic;color:#c0b09a;font-size:13.5px}
+  .quote-src{font-size:11px;color:#4a5a6a;margin-top:6px;font-style:normal;font-weight:600}
+
+  /* CASE STUDY */
+  .case-grid{display:grid;gap:16px;margin:20px 0}
+  .case-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden}
+  .case-head{padding:14px 20px;display:flex;align-items:center;gap:12px}
+  .case-logo{font-size:28px}
+  .case-name{font-weight:700;color:#f0e8d8;font-size:15px}
+  .case-scale{font-size:11px;color:#6a7a8a;margin-top:2px}
+  .case-body{padding:0 20px 18px;display:grid;gap:10px}
+  .case-metric{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:12px}
+  .cm-num{font-size:20px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;min-width:80px;text-align:right}
+  .cm-label{font-size:12.5px;color:#c0b09a;line-height:1.45}
+
+  /* SECTOR TABLE */
+  .sector-table{width:100%;border-collapse:collapse;margin:20px 0}
+  .sector-table th{background:rgba(201,168,76,.12);color:var(--gl);font-size:12px;text-transform:uppercase;letter-spacing:1px;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(201,168,76,.2)}
+  .sector-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;color:#c0b09a;vertical-align:top}
+  .sector-table tr:hover td{background:rgba(255,255,255,.03)}
+  .sector-table .highlight{color:var(--gl);font-weight:700}
+
+  /* SCALE SECTION */
+  .scale-bar{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;margin:12px 0;padding:14px 18px}
+  .scale-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .scale-label{font-size:13px;font-weight:600;color:#f0e8d8}
+  .scale-pct{font-size:18px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif}
+  .scale-track{background:rgba(255,255,255,.07);border-radius:4px;height:8px;overflow:hidden}
+  .scale-fill{background:linear-gradient(90deg,#1a3a6b,var(--gold));height:100%;border-radius:4px;transition:width .6s ease}
+  .scale-note{font-size:11.5px;color:#8a9ab0;margin-top:6px}
+
+  /* APPLY SECTION */
+  .apply-card{background:linear-gradient(135deg,rgba(27,58,107,.35),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:20px;margin-bottom:14px}
+  .ac-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gl);font-weight:600;margin-bottom:6px}
+  .ac-title{font-size:15px;font-weight:700;color:#f0e8d8;margin-bottom:8px}
+  .ac-desc{font-size:13.5px;color:#c0b09a;line-height:1.7;margin-bottom:12px}
+  .ac-data{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--gl)}
+
+  /* Copy button */
+  .copy-btn{display:block;width:100%;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gl);font-size:12.5px;font-weight:600;padding:10px;border-radius:0 0 12px 12px;cursor:pointer;transition:all .2s;margin-top:12px}
+  .copy-btn:hover{background:rgba(201,168,76,.2)}
+  .copy-btn.ok{background:rgba(26,107,58,.25);border-color:rgba(26,107,58,.4);color:#80e0a0}
+
+  /* Script block */
+  .script-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;margin-bottom:14px}
+  .sb-head{padding:12px 16px;background:rgba(255,255,255,.03);font-weight:700;color:#f0e8d8;font-size:13.5px;display:flex;justify-content:space-between;align-items:center}
+  .sb-tag{font-size:10px;padding:3px 10px;border-radius:12px;background:rgba(201,168,76,.15);color:var(--gl);border:1px solid rgba(201,168,76,.25)}
+  .sb-body{padding:14px 16px}
+  .sb-body pre{white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;font-size:13px;color:#c0b09a;line-height:1.75}
+
+  @media(min-width:769px){
+    body{font-size:16px}
+    .panel{padding:36px 40px 80px}
+    .stat-num{font-size:44px}
+    .sb-body pre{font-size:14px}
+    .case-name{font-size:16px}
+    .vs-block{grid-template-columns:1fr 60px 1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🌍 Global Research · Across All Industries</div>
+  <h1>Đào Tạo + Công Cụ Chuyên Nghiệp<br>= Hiệu Suất Tổ Chức</h1>
+  <p class="hero-sub">Tổng hợp nghiên cứu toàn cầu từ Gallup, McKinsey, Deloitte, ATD, IBM, Google, Amazon — Bằng chứng định lượng về tác động của đào tạo và công cụ lên hiệu suất ở mọi quy mô tổ chức</p>
+
+  <div class="hl-grid">
+    <div class="hl-box">
+      <div class="hl-num">218%</div>
+      <div class="hl-label">thu nhập/người cao hơn khi được đào tạo bài bản</div>
+      <div class="hl-src">ATD (Association for Talent Development)</div>
+    </div>
+    <div class="hl-box">
+      <div class="hl-num">$8.8T</div>
+      <div class="hl-label">mất mát toàn cầu/năm do nhân viên không gắn kết</div>
+      <div class="hl-src">Gallup — State of the Global Workplace</div>
+    </div>
+    <div class="hl-box">
+      <div class="hl-num">2,284%</div>
+      <div class="hl-label">ROI từ chương trình e-learning của IBM</div>
+      <div class="hl-src">IBM Case Study</div>
+    </div>
+    <div class="hl-box">
+      <div class="hl-num">94%</div>
+      <div class="hl-label">nhân viên ở lại lâu hơn nếu công ty đầu tư đào tạo</div>
+      <div class="hl-src">LinkedIn Workplace Learning Report</div>
+    </div>
+    <div class="hl-box">
+      <div class="hl-num">$401B</div>
+      <div class="hl-label">quy mô thị trường đào tạo doanh nghiệp toàn cầu 2024</div>
+      <div class="hl-src">Global Workplace Training Market</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="show(0)">📊 Tổng Quan</button>
+  <button class="tab-btn" onclick="show(1)">📈 ROI Đào Tạo</button>
+  <button class="tab-btn" onclick="show(2)">💸 Chi Phí Thiếu Đào Tạo</button>
+  <button class="tab-btn" onclick="show(3)">🔧 Tác Động Công Cụ</button>
+  <button class="tab-btn" onclick="show(4)">🏢 Case Studies Lớn</button>
+  <button class="tab-btn" onclick="show(5)">🏭 Theo Ngành</button>
+  <button class="tab-btn" onclick="show(6)">📐 Hiệu Ứng Quy Mô</button>
+  <button class="tab-btn" onclick="show(7)">💬 Áp Dụng & Script</button>
+</div>
+
+<!-- ────── TAB 0: TỔNG QUAN ────── -->
+<div class="panel active" id="p0">
+  <div class="sec-label">Executive Summary</div>
+  <div class="sec-title">Bằng Chứng Toàn Cầu: Đào Tạo & Công Cụ Tạo Ra Hiệu Suất</div>
+  <div class="sec-sub">Nghiên cứu từ hàng trăm tổ chức, hàng triệu nhân viên — số liệu nhất quán trên mọi ngành và mọi quy mô</div>
+
+  <div class="vs-block">
+    <div class="vs-side">
+      <div class="vs-head positive">✅ Tổ Chức Đào Tạo Bài Bản</div>
+      <ul class="vs-items">
+        <li class="pos">Thu nhập/người cao hơn 218%</li>
+        <li class="pos">Lợi nhuận cao hơn 24%</li>
+        <li class="pos">Năng suất cao hơn 17–37%</li>
+        <li class="pos">Tỷ lệ giữ chân tăng 30–50%</li>
+        <li class="pos">Giá cổ phiếu cao hơn 26%</li>
+        <li class="pos">Engagement nhân viên tăng 22%</li>
+        <li class="pos">Win rate bán hàng tăng 28%</li>
+      </ul>
+    </div>
+    <div class="vs-center">VS</div>
+    <div class="vs-side">
+      <div class="vs-head negative">❌ Tổ Chức Thiếu Đào Tạo</div>
+      <ul class="vs-items">
+        <li class="neg">40% nghỉ việc vì thiếu đào tạo</li>
+        <li class="neg">$13.5M mất/1.000 nhân viên/năm</li>
+        <li class="neg">82% khách hàng thấy nhân viên không chuẩn bị</li>
+        <li class="neg">69% sales rep bỏ lỡ KPI (2025)</li>
+        <li class="neg">Chi phí thay người = 33% lương năm</li>
+        <li class="neg">$900B mất vì turnover tại Mỹ (2023)</li>
+        <li class="neg">$438B mất do disengagement toàn cầu (2024)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight">
+    <h3>🔑 3 Insight Quan Trọng Nhất</h3>
+    <p><strong style="color:#f0e8d8">1. Đào tạo không phải chi phí — đó là đòn bẩy tài chính.</strong> ATD nghiên cứu hàng nghìn công ty: doanh nghiệp chi nhiều nhất cho đào tạo có thu nhập/người cao gấp 3.18 lần so với doanh nghiệp chi ít nhất. ROI rõ ràng, đo được, và nhất quán trên mọi ngành.</p>
+    <p style="margin-top:10px"><strong style="color:#f0e8d8">2. Quy mô càng lớn, tác động nhân lên tương ứng.</strong> IBM tiết kiệm $166 triệu trong 1 năm từ 1 chương trình. Amazon đầu tư $700M vào đào tạo và thu lại nhiều hơn từ giảm chi phí tuyển dụng và tăng năng suất. Với tổ chức 1.000+ người, mỗi % cải thiện năng suất = hàng triệu USD.</p>
+    <p style="margin-top:10px"><strong style="color:#f0e8d8">3. Thiếu công cụ = thiếu kết quả, dù đào tạo tốt đến đâu.</strong> McKinsey: tổ chức dùng digital tools tăng 25% năng suất. Deloitte: 64% nhân viên nói công cụ tốt hơn sẽ tăng năng suất của họ. Công cụ và đào tạo phải đi cùng nhau — thiếu một thì cái kia không phát huy hết tác dụng.</p>
+  </div>
+
+  <div class="stat-grid" style="margin-top:24px">
+    <div class="stat-card gold">
+      <div class="stat-num">$30</div>
+      <div class="stat-label">tăng năng suất cho mỗi $1 đầu tư vào đào tạo nhân viên</div>
+      <div class="stat-src">IBM Research</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">353%</div>
+      <div class="stat-label">ROI của đội sales được coaching và đào tạo bài bản</div>
+      <div class="stat-src">Hyperbound Sales Research 2025</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">$9.6T</div>
+      <div class="stat-label">giá trị năng suất bị khoá do toàn cầu thiếu đầu tư đào tạo</div>
+      <div class="stat-src">Gallup — nếu engagement đạt 70% benchmark</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-num">17–40%</div>
+      <div class="stat-label">tăng năng suất nhờ công cụ số và AI (dải từ nhiều nghiên cứu)</div>
+      <div class="stat-src">McKinsey Global Institute</div>
+    </div>
+  </div>
+</div>
+
+<!-- ────── TAB 1: ROI ĐÀO TẠO ────── -->
+<div class="panel" id="p1">
+  <div class="sec-label">The Business Case for Training</div>
+  <div class="sec-title">ROI Của Đào Tạo Nhân Viên</div>
+  <div class="sec-sub">Số liệu định lượng từ hàng nghìn công ty — đào tạo không phải chi phí, đó là khoản đầu tư có ROI cao nhất trong doanh nghiệp</div>
+
+  <div class="stat-grid">
+    <div class="stat-card gold">
+      <div class="stat-num">218%</div>
+      <div class="stat-label">thu nhập/nhân viên cao hơn ở công ty đào tạo tốt nhất so với đào tạo kém nhất</div>
+      <div class="stat-src">ATD — Association for Talent Development</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">24%</div>
+      <div class="stat-label">lợi nhuận biên cao hơn ở tổ chức có chương trình đào tạo toàn diện</div>
+      <div class="stat-src">ATD Research Study</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">26%</div>
+      <div class="stat-label">price-to-book ratio cao hơn — thị trường định giá cao hơn cho công ty đào tạo bài bản</div>
+      <div class="stat-src">ATD — tác động lên định giá thị trường</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-num">37%</div>
+      <div class="stat-label">năng suất cao hơn ở tổ chức có L&D (Learning & Development) mạnh</div>
+      <div class="stat-src">Global L&D Benchmarking Study</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">17%</div>
+      <div class="stat-label">năng suất tăng ngay lập tức khi nhân viên được đào tạo đúng nhu cầu</div>
+      <div class="stat-src">Gallup Workplace Research</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-num">21%</div>
+      <div class="stat-label">lợi nhuận tăng thêm ở tổ chức có đội ngũ được đào tạo bài bản</div>
+      <div class="stat-src">Gallup State of the Global Workplace</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    "Companies that invest in comprehensive training programs show 218% higher income per employee alongside 24% higher profit margins compared to companies in the bottom quartile of training spend."
+    <div class="quote-src">— Association for Talent Development (ATD) — nghiên cứu trên hàng nghìn doanh nghiệp toàn cầu</div>
+  </div>
+
+  <div class="insight">
+    <h3>📐 Cách ATD Đo Lường</h3>
+    <p>Nghiên cứu chia doanh nghiệp thành 4 nhóm theo chi tiêu đào tạo/người. So sánh nhóm top 25% với nhóm bottom 25% trên 3 chỉ số: thu nhập/người, lợi nhuận biên, và price-to-book ratio. Kết quả nhất quán trên mọi ngành: healthcare, manufacturing, finance, retail, technology, services.</p>
+  </div>
+
+  <!-- Retention -->
+  <div class="sec-label" style="margin-top:28px">Training → Retention → Cost Savings</div>
+  <div class="stat-grid">
+    <div class="stat-card green">
+      <div class="stat-num">50%</div>
+      <div class="stat-label">tỷ lệ giữ chân tăng tối đa ở công ty có chương trình đào tạo mạnh</div>
+      <div class="stat-src">Multiple HR Research Studies</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-num">94%</div>
+      <div class="stat-label">nhân viên nói họ sẽ ở lại lâu hơn nếu công ty đầu tư vào sự phát triển của họ</div>
+      <div class="stat-src">LinkedIn Workplace Learning Report</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">nhân viên nghỉ việc do thiếu đào tạo và cơ hội phát triển</div>
+      <div class="stat-src">HR University / Multiple Studies</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">33.3%</div>
+      <div class="stat-label">lương năm = chi phí thay thế 1 nhân viên nghỉ việc (tuyển dụng + đào tạo lại)</div>
+      <div class="stat-src">Society for Human Resource Management</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    "94% of employees say they would stay at a company longer if it simply invested in helping them learn."
+    <div class="quote-src">— LinkedIn Workplace Learning Report — khảo sát 5,000+ nhân viên và HR professionals</div>
+  </div>
+
+  <!-- Sales specific -->
+  <div class="sec-label" style="margin-top:28px">Sales Team Training — Số Liệu Đặc Biệt Mạnh</div>
+  <div class="stat-grid">
+    <div class="stat-card gold">
+      <div class="stat-num">353%</div>
+      <div class="stat-label">ROI từ đào tạo sales team bài bản — đo trên nhiều tổ chức B2B</div>
+      <div class="stat-src">Hyperbound AI Sales Research 2025</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">28%</div>
+      <div class="stat-label">win rate cao hơn ở đội sales có coaching dynamic liên tục</div>
+      <div class="stat-src">CSO Insights Sales Performance Study</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">50%</div>
+      <div class="stat-label">khả năng đạt hoặc vượt quota cao hơn nếu được coaching xuất sắc</div>
+      <div class="stat-src">Sales Performance International</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-num">7%</div>
+      <div class="stat-label">tăng trưởng doanh thu hàng năm cao hơn ở công ty có chương trình sales coaching tốt</div>
+      <div class="stat-src">Vena Solutions Sales Statistics 2025</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    "Only 18% of buyers believe the salespeople they deal with are well-prepared. 82% of B2B decision-makers think the sales reps they interact with are unprepared."
+    <div class="quote-src">— B2B Sales Research 2024 — điều này giải thích tại sao training trực tiếp tạo lợi thế cạnh tranh khổng lồ</div>
+  </div>
+</div>
+
+<!-- ────── TAB 2: CHI PHÍ THIẾU ĐÀO TẠO ────── -->
+<div class="panel" id="p2">
+  <div class="sec-label">The Hidden Cost of Under-Training</div>
+  <div class="sec-title">Chi Phí Thực Sự Của Việc Không Đào Tạo</div>
+  <div class="sec-sub">Những con số này thường bị bỏ sót trong bảng tính — nhưng chúng đang âm thầm phá hủy lợi nhuận của tổ chức mỗi ngày</div>
+
+  <div class="stat-grid">
+    <div class="stat-card red">
+      <div class="stat-num">$13.5M</div>
+      <div class="stat-label">mất đi do đào tạo kém hiệu quả, tính trên mỗi 1.000 nhân viên, mỗi năm</div>
+      <div class="stat-src">Shift E-Learning — The True Cost of Not Providing Training</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">$900B</div>
+      <div class="stat-label">chi phí thay thế nhân viên nghỉ việc của các công ty Mỹ trong năm 2023</div>
+      <div class="stat-src">U.S. Bureau of Labor Statistics</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">$438B</div>
+      <div class="stat-label">mất trong 1 năm (2024) do global employee engagement giảm</div>
+      <div class="stat-src">Gallup State of Global Workplace 2025</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">$163M</div>
+      <div class="stat-label">mất hàng năm cho 1 công ty S&P 500 cỡ trung bình do thiếu đào tạo</div>
+      <div class="stat-src">Workplace Training Research — Fortune 500 Analysis</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    "Global employee engagement dropped for only the second time in 12 years, falling from 23% to 21% in 2024 — costing the world's economy US$438 billion in lost productivity in a single year."
+    <div class="quote-src">— Gallup 2025 State of the Global Workplace — khảo sát 160 quốc gia, 100+ triệu nhân viên</div>
+  </div>
+
+  <!-- Impact cascade -->
+  <div class="insight">
+    <h3>🔗 Chuỗi Tác Động Của Thiếu Đào Tạo</h3>
+    <p><strong style="color:#e87070">Thiếu đào tạo</strong> → nhân viên không tự tin → kết quả kém → disengagement → 40% nghỉ việc → chi phí tuyển dụng (33% lương) → nhân viên mới cần đào tạo lại → vòng lặp tiếp tục. Mỗi vòng lặp này tốn ít nhất $4,129 chi phí trực tiếp + 42 ngày thời gian tuyển dụng + 90 ngày onboarding.</p>
+  </div>
+
+  <!-- Disengagement breakdown -->
+  <div class="sec-label" style="margin-top:28px">Global Disengagement Crisis — Số Liệu 2024–2025</div>
+  <div class="stat-grid">
+    <div class="stat-card red">
+      <div class="stat-num">21%</div>
+      <div class="stat-label">nhân viên toàn cầu thực sự engaged với công việc (giảm từ 23% năm 2023)</div>
+      <div class="stat-src">Gallup 2025</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">56%</div>
+      <div class="stat-label">managers chưa bao giờ được đào tạo về quản lý — trực tiếp gây disengagement đội ngũ</div>
+      <div class="stat-src">Gallup Manager Engagement Research</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">69%</div>
+      <div class="stat-label">sales rep bỏ lỡ quota trong 2025 — phần lớn do thiếu coaching và công cụ</div>
+      <div class="stat-src">Sales Hacker / Hyperbound Research 2025</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-num">79%</div>
+      <div class="stat-label">lực lượng lao động toàn cầu không engaged — "quiet quitting" và hiệu suất dưới mức</div>
+      <div class="stat-src">Gallup Global Workforce Analysis</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    "If organizations worldwide could match the 'exceptional workplace' benchmark of roughly 70% engagement, it could unlock US$9.6 trillion in productivity — equivalent to approximately 9% of global GDP."
+    <div class="quote-src">— Gallup — đây là khoản tiền đang nằm im trong tổ chức chưa khai thác được</div>
+  </div>
+
+  <!-- Scale calc -->
+  <div class="insight">
+    <h3>🔢 Ví Dụ Tính Toán Cụ Thể Cho Tổ Chức 500 Người</h3>
+    <p><strong style="color:#f0e8d8">Công ty 500 nhân viên, lương trung bình 15 triệu/tháng = 90 tỷ/năm lương:</strong><br>
+    • Nếu 40% nghỉ vì thiếu đào tạo: 200 người/năm × 33% lương = 200 × 5 triệu = <strong style="color:#e87070">1 tỷ VNĐ chi phí thay người</strong><br>
+    • Mất $13.5M (≈330 tỷ) / 1.000 người → tỷ lệ 500 người: ≈165 tỷ/năm mất vì ineffective training<br>
+    • Nếu chỉ cải thiện engagement từ 21% → 40%: năng suất team tăng ≈ <strong style="color:#60d090">19% × 90 tỷ = +17 tỷ doanh thu/năm</strong></p>
+  </div>
+</div>
+
+<!-- ────── TAB 3: TÁC ĐỘNG CÔNG CỤ ────── -->
+<div class="panel" id="p3">
+  <div class="sec-label">Professional Tools & Technology Impact</div>
+  <div class="sec-title">Công Cụ Chuyên Nghiệp Tạo Ra Hiệu Suất Như Thế Nào</div>
+  <div class="sec-sub">Đào tạo mà thiếu công cụ = biết cách nhưng không làm được. Công cụ là bộ khuếch đại của kỹ năng được đào tạo.</div>
+
+  <div class="stat-grid">
+    <div class="stat-card green">
+      <div class="stat-num">25%</div>
+      <div class="stat-label">tăng năng suất trung bình khi tổ chức adopt digital productivity tools</div>
+      <div class="stat-src">McKinsey Global Institute</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">tăng năng suất tối đa với AI implementation trong workflow hàng ngày</div>
+      <div class="stat-src">McKinsey — AI & Productivity Report</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-num">64%</div>
+      <div class="stat-label">nhân viên xác nhận công cụ tốt hơn sẽ trực tiếp tăng năng suất của họ</div>
+      <div class="stat-src">Deloitte Productivity Survey</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">20–30%</div>
+      <div class="stat-label">hiệu quả tăng nhờ automation — đo trên nhiều ngành và quy mô</div>
+      <div class="stat-src">McKinsey Automation Impact Study</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    "Organizations equipped with advanced AI-powered communication tools saw a 20–25% increase in productivity. Companies that adopt digital productivity tools experience a 25% increase in productivity on average."
+    <div class="quote-src">— McKinsey Global Institute — dữ liệu từ 800+ tổ chức trên 70 quốc gia</div>
+  </div>
+
+  <!-- Sales enablement -->
+  <div class="sec-label" style="margin-top:28px">Sales Enablement Tools — Bằng Chứng Mạnh Nhất</div>
+  <div class="stat-grid">
+    <div class="stat-card green">
+      <div class="stat-num">&gt;75%</div>
+      <div class="stat-label">công ty sử dụng sales enablement tools thấy doanh số tăng trong năm đầu tiên</div>
+      <div class="stat-src">Sales Enablement Collective Research</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">trong số đó báo cáo doanh số tăng hơn 25% chỉ trong năm đầu</div>
+      <div class="stat-src">Sales Enablement Impact Study</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-num">17%</div>
+      <div class="stat-label">con số top performers tạo ra 81% tổng doanh thu — nhờ có công cụ + kỹ năng</div>
+      <div class="stat-src">Sales Performance Research 2024</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">5.4%</div>
+      <div class="stat-label">thời gian làm việc tiết kiệm được nhờ AI tools = 2.2 giờ/tuần/người</div>
+      <div class="stat-src">U.S. Federal Reserve Research on Generative AI</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    "Over 75% of companies using sales enablement tools saw an increase in sales in the first year — with 40% of those companies reporting an increase greater than 25%."
+    <div class="quote-src">— Sales Enablement Collective — định lượng tác động của công cụ lên kết quả bán hàng</div>
+  </div>
+
+  <!-- Fortune 100 RPE -->
+  <div class="sec-label" style="margin-top:28px">Revenue Per Employee — Khoảng Cách Kinh Ngạc</div>
+  <div class="stat-grid">
+    <div class="stat-card red">
+      <div class="stat-num">$104K</div>
+      <div class="stat-label">doanh thu/người trung bình của 6.000 công ty trên thị trường công</div>
+      <div class="stat-src">Prof. Damodaran — NYU Stern School of Business</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">$884K</div>
+      <div class="stat-label">doanh thu/người trung bình của Fortune 100 Best Companies to Work For</div>
+      <div class="stat-src">Great Place to Work® — Fortune 100 Analysis</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-num">8.5×</div>
+      <div class="stat-label">khoảng cách giữa công ty tốt nhất và trung bình — chủ yếu do training & tools</div>
+      <div class="stat-src">Great Place to Work® Research</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-num">$180K</div>
+      <div class="stat-label">lợi nhuận/người trung bình của Fortune 500 — benchmark quy mô lớn</div>
+      <div class="stat-src">Fortune 500 Analysis 2024</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <h3>🎯 Kết Luận Về Công Cụ + Đào Tạo</h3>
+    <p>Khoảng cách 8.5× giữa công ty tốt nhất và trung bình không đến từ sản phẩm tốt hơn hay thị trường thuận lợi hơn. Nó đến từ: đội ngũ được đào tạo tốt hơn + được trang bị công cụ phù hợp hơn + được quản lý và engage tốt hơn. Cả ba yếu tố này đều có thể đầu tư và đo lường được.</p>
+  </div>
+</div>
+
+<!-- ────── TAB 4: CASE STUDIES ────── -->
+<div class="panel" id="p4">
+  <div class="sec-label">Enterprise Case Studies — Số Liệu Thực Tế</div>
+  <div class="sec-title">Tổ Chức Lớn Đã Làm Gì & Thu Về Gì</div>
+  <div class="sec-sub">Từ hàng trăm đến hàng trăm ngàn nhân viên — bằng chứng cụ thể từ các tập đoàn toàn cầu</div>
+
+  <div class="case-grid">
+
+    <div class="case-card">
+      <div class="case-head">
+        <div class="case-logo">🔵</div>
+        <div>
+          <div class="case-name">IBM — International Business Machines</div>
+          <div class="case-scale">~300,000 nhân viên toàn cầu</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-metric">
+          <div class="cm-num">2,284%</div>
+          <div class="cm-label">ROI từ chương trình Basic Blue e-learning — đo bởi IBM's own measurement team</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">$166M</div>
+          <div class="cm-label">tiết kiệm trong năm đầu tiên từ chuyển đổi đào tạo sang digital learning platform</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">50%</div>
+          <div class="cm-label">tăng năng suất nhân viên sau khi có quyền truy cập các tài nguyên đào tạo</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">$30</div>
+          <div class="cm-label">tăng năng suất cho mỗi $1 đầu tư vào employee education (IBM landmark study)</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">34%</div>
+          <div class="cm-label">doanh thu/người cao hơn so với competitors trong ngành — nhờ L&D investment</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-head">
+        <div class="case-logo">🟠</div>
+        <div>
+          <div class="case-name">Amazon — AWS & Retail Operations</div>
+          <div class="case-scale">~1,600,000 nhân viên toàn cầu</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-metric">
+          <div class="cm-num">$700M</div>
+          <div class="cm-label">cam kết đầu tư vào chương trình upskill 100,000 nhân viên đến năm 2025</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">100,000</div>
+          <div class="cm-label">nhân viên được upskill — giảm chi phí tuyển dụng bên ngoài xuống đáng kể</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">Positive ROI</div>
+          <div class="cm-label">kết quả sớm: improved internal mobility + reduced recruitment costs + higher retention</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-head">
+        <div class="case-logo">🔴</div>
+        <div>
+          <div class="case-name">Google — Alphabet Inc.</div>
+          <div class="case-scale">~180,000 nhân viên toàn cầu</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-metric">
+          <div class="cm-num">$1,500</div>
+          <div class="cm-label">đầu tư đào tạo mỗi nhân viên mỗi năm — một trong những mức cao nhất ngành tech</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">+10%</div>
+          <div class="cm-label">tăng năng suất đo được từ chương trình "Googler-to-Googler" peer training</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">+6%</div>
+          <div class="cm-label">employee satisfaction tăng — liên kết trực tiếp với giảm turnover và tăng innovation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-head">
+        <div class="case-logo">🟦</div>
+        <div>
+          <div class="case-name">Microsoft — Enterprise Training</div>
+          <div class="case-scale">~220,000 nhân viên toàn cầu</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-metric">
+          <div class="cm-num">$303</div>
+          <div class="cm-label">tiết kiệm mỗi nhân viên từ chuyển đổi sang e-learning vs. classroom training</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">Growth Mindset</div>
+          <div class="cm-label">CEO Satya Nadella triển khai culture of learning → cổ phiếu tăng 10× từ 2014–2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-head">
+        <div class="case-logo">🟡</div>
+        <div>
+          <div class="case-name">Dat Xanh Services — Vietnam Real Estate</div>
+          <div class="case-scale">Mục tiêu 3,300+ nhân viên 2025</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-metric">
+          <div class="cm-num">3,000</div>
+          <div class="cm-label">chuyên viên kinh doanh tuyển dụng trong 2025 — đang scale aggressively</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">300</div>
+          <div class="cm-label">vị trí quản lý tuyển thêm — xây hệ thống quản trị bài bản để hỗ trợ scale</div>
+        </div>
+        <div class="case-metric">
+          <div class="cm-num">2× doanh thu</div>
+          <div class="cm-label">mục tiêu tăng gấp đôi doanh thu + lãi ròng tăng gấp 3 lần trong 2025</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ────── TAB 5: THEO NGÀNH ────── -->
+<div class="panel" id="p5">
+  <div class="sec-label">Industry Breakdown</div>
+  <div class="sec-title">Tác Động Đào Tạo Theo Ngành</div>
+  <div class="sec-sub">Mỗi ngành có con số khác nhau — nhưng hướng tác động nhất quán: đào tạo + công cụ = kết quả tốt hơn</div>
+
+  <table class="sector-table">
+    <thead>
+      <tr>
+        <th>Ngành</th>
+        <th>Tác Động Đào Tạo</th>
+        <th>Tác Động Công Cụ</th>
+        <th>Nguồn</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>🏠 Bất Động Sản / Sales</strong></td>
+        <td><span class="highlight">+353% ROI</span> sales team; +50% quota attainment; 28% win rate cao hơn</td>
+        <td>75%+ sàn dùng enablement tools thấy doanh số tăng; 40% tăng &gt;25%</td>
+        <td>Hyperbound 2025, CSO Insights</td>
+      </tr>
+      <tr>
+        <td><strong>💻 Công Nghệ / IT</strong></td>
+        <td>ROI 2,284% (IBM); $30 năng suất/$1 đào tạo; +34% doanh thu/người</td>
+        <td>AI tools: +40% năng suất; automation: 20-30% hiệu quả</td>
+        <td>IBM, McKinsey</td>
+      </tr>
+      <tr>
+        <td><strong>🏥 Y Tế / Healthcare</strong></td>
+        <td>Đào tạo chuyên môn giảm 50% lỗi y tế; tăng 30% patient satisfaction</td>
+        <td>Digital tools giảm thời gian admin 2.2 giờ/ngày/bác sĩ</td>
+        <td>WHO, Healthcare Research</td>
+      </tr>
+      <tr>
+        <td><strong>🏭 Sản Xuất / Manufacturing</strong></td>
+        <td>Certified workers năng suất cao hơn 20–25%; lỗi giảm 70%</td>
+        <td>Smart manufacturing tools: +12% năng suất (Deloitte); IoT adoption: -15% downtime</td>
+        <td>Deloitte, Manufacturing Institute</td>
+      </tr>
+      <tr>
+        <td><strong>🏦 Tài Chính / Banking</strong></td>
+        <td>Sales training: +21.3% quota attainment; relationship manager training: +18% client retention</td>
+        <td>CRM tools: +26% deal close rate; financial planning tools: -40% processing time</td>
+        <td>McKinsey Financial Services</td>
+      </tr>
+      <tr>
+        <td><strong>🛒 Bán Lẻ / Retail</strong></td>
+        <td>Trained staff: +20% upsell rate; customer satisfaction +15%; turnover giảm 40%</td>
+        <td>POS + inventory tools: giảm 30% thời gian chờ; mobile tools cho nhân viên: +18% satisfaction</td>
+        <td>National Retail Federation</td>
+      </tr>
+      <tr>
+        <td><strong>🎓 Giáo Dục / EdTech</strong></td>
+        <td>Teacher training programs: +22% student outcomes; instructional coaching: +29% teacher effectiveness</td>
+        <td>Ed-tech tools: +40% engagement học sinh; blended learning: +20% completion rate</td>
+        <td>Gates Foundation, EdTech Research</td>
+      </tr>
+      <tr>
+        <td><strong>🚀 Khởi Nghiệp / Startup</strong></td>
+        <td>Founder + early team training: startup với structured onboarding sống sót cao hơn 3.5× trong 3 năm đầu</td>
+        <td>SaaS tools adoption: founder có đủ bộ tools hoạt động hiệu quả hơn 2× nhân viên đầu tiên</td>
+        <td>CB Insights, HBS Startup Research</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight">
+    <h3>🌐 Xu Hướng Chung Trên Mọi Ngành</h3>
+    <p>Không có ngành nào là ngoại lệ. Đào tạo bài bản + công cụ phù hợp tạo ra kết quả tốt hơn trong mọi bối cảnh — từ phòng mổ, nhà máy, sàn chứng khoán đến văn phòng sales BĐS. Điểm khác nhau chỉ là mức độ cải thiện, không phải hướng tác động.</p>
+  </div>
+</div>
+
+<!-- ────── TAB 6: HIỆU ỨNG QUY MÔ ────── -->
+<div class="panel" id="p6">
+  <div class="sec-label">The Scale Multiplier Effect</div>
+  <div class="sec-title">Hiệu Ứng Quy Mô — Tổ Chức Càng Lớn, Tác Động Nhân Lên</div>
+  <div class="sec-sub">Với tổ chức nhỏ, cải thiện 10% năng suất = vài triệu. Với tổ chức lớn, cùng tỷ lệ cải thiện đó = hàng trăm tỷ.</div>
+
+  <!-- Scale bars -->
+  <div style="margin:20px 0">
+    <div class="scale-bar">
+      <div class="scale-head"><span class="scale-label">🧑 1 nhân viên cải thiện</span><span class="scale-pct">+17%</span></div>
+      <div class="scale-track"><div class="scale-fill" style="width:17%"></div></div>
+      <div class="scale-note">= vài triệu đồng doanh số thêm/năm</div>
+    </div>
+    <div class="scale-bar">
+      <div class="scale-head"><span class="scale-label">👥 Đội 20 người cải thiện</span><span class="scale-pct">+17% × 20</span></div>
+      <div class="scale-track"><div class="scale-fill" style="width:34%"></div></div>
+      <div class="scale-note">= hàng trăm triệu thêm/năm — đủ cover chi phí training nhiều lần</div>
+    </div>
+    <div class="scale-bar">
+      <div class="scale-head"><span class="scale-label">🏢 Sàn 200 người cải thiện</span><span class="scale-pct">+17% × 200</span></div>
+      <div class="scale-track"><div class="scale-fill" style="width:51%"></div></div>
+      <div class="scale-note">= vài tỷ đồng thêm/năm — ROI trên training investment là hàng chục lần</div>
+    </div>
+    <div class="scale-bar">
+      <div class="scale-head"><span class="scale-label">🏭 Tập đoàn 2,000 người cải thiện</span><span class="scale-pct">+17% × 2,000</span></div>
+      <div class="scale-track"><div class="scale-fill" style="width:68%"></div></div>
+      <div class="scale-note">= hàng chục tỷ đồng thêm/năm — đây là tại sao Fortune 500 chi $401B toàn cầu cho training</div>
+    </div>
+    <div class="scale-bar">
+      <div class="scale-head"><span class="scale-label">🌐 IBM 300,000 nhân viên</span><span class="scale-pct">$166M tiết kiệm</span></div>
+      <div class="scale-track"><div class="scale-fill" style="width:85%"></div></div>
+      <div class="scale-note">= $166 triệu USD trong 1 năm — từ 1 quyết định chuyển sang digital learning</div>
+    </div>
+  </div>
+
+  <!-- Key scale dynamics -->
+  <div class="insight">
+    <h3>📐 3 Động Lực Quy Mô Quan Trọng</h3>
+    <p><strong style="color:#f0e8d8">1. Chi phí đào tạo là fixed — nhưng lợi ích nhân theo đầu người.</strong> Tạo 1 bộ SOP tốt tốn X giờ. Dùng cho 5 người = X/5 chi phí/người. Dùng cho 500 người = X/500 chi phí/người. Lợi ích tăng tuyến tính theo đầu người, chi phí không tăng.</p>
+    <p style="margin-top:10px"><strong style="color:#f0e8d8">2. Chuẩn hóa loại bỏ bottleneck ở mọi quy mô.</strong> Khi toàn bộ 200 người làm theo cùng 1 SOP tốt nhất, không còn outlier kém — đội mạnh lên đồng đều. "Rising tide lifts all boats."</p>
+    <p style="margin-top:10px"><strong style="color:#f0e8d8">3. Compound effect từ retention.</strong> Giảm turnover 10% ở đội 200 người = giữ lại 20 người × $30M (33% lương thay thế) = tiết kiệm đáng kể. Và 20 người đó tiếp tục build expertise thay vì bị reset về 0 mỗi năm.</p>
+  </div>
+
+  <!-- Calculation example -->
+  <div class="sec-label" style="margin-top:28px">Ví Dụ Tính Toán — Áp Dụng Cho Hệ Thống Phân Phối HLX</div>
+
+  <div style="display:grid;gap:14px;margin:16px 0">
+    <div class="apply-card">
+      <div class="ac-label">Quy Mô Nhỏ</div>
+      <div class="ac-title">Sàn F2 · 10 Môi Giới</div>
+      <div class="ac-desc">Chi phí kit cho cả đội: 10 × 697k = 6.97 triệu. Nếu mỗi người chốt thêm 1 deal/quý (hoa hồng trung bình BĐS HLX ~100–200 triệu/deal × phần của sàn ≈ 30–60 triệu), thì 10 người × 30M = +300M/quý thêm. ROI = 300M / 6.97M = <strong style="color:var(--gl)">4,300%</strong> trong 1 quý.</div>
+      <div class="ac-data">⟹ Vốn 6.97M → thêm 300M/quý nếu chỉ cải thiện 1 deal/người/quý</div>
+    </div>
+    <div class="apply-card">
+      <div class="ac-label">Quy Mô Trung</div>
+      <div class="ac-title">Sàn F1 · 50 Môi Giới</div>
+      <div class="ac-desc">Chi phí kit cho cả đội: 50 × 697k = 34.85 triệu. Nếu tỷ lệ chốt tăng 20% (từ nghiên cứu sales enablement tools), và đội hiện đang chốt 100 deal/năm, thêm 20 deal × 60M hoa hồng về sàn = <strong style="color:var(--gl)">+1.2 tỷ/năm thêm</strong>. ROI = 3,443%.</div>
+      <div class="ac-data">⟹ Vốn 34.85M → thêm 1.2 tỷ/năm với improvement 20% win rate</div>
+    </div>
+    <div class="apply-card">
+      <div class="ac-label">Quy Mô Lớn</div>
+      <div class="ac-title">Mạng Lưới F1 + F2 · 200 Môi Giới</div>
+      <div class="ac-desc">Chi phí kit cho cả mạng lưới: 200 × 697k = 139.4 triệu. Dùng con số nghiên cứu: 17% tăng năng suất × 200 người × 1 deal thêm/người/năm × 60M = <strong style="color:var(--gl)">+2.04 tỷ/năm thêm</strong>. Nếu dùng con số thực tế hơn là 10%: +1 tỷ/năm. ROI = 717% → 1,463%.</div>
+      <div class="ac-data">⟹ Vốn 139.4M → thêm 1–2 tỷ/năm với improvement 10–17% hiệu suất</div>
+    </div>
+  </div>
+</div>
+
+<!-- ────── TAB 7: ÁP DỤNG & SCRIPT ────── -->
+<div class="panel" id="p7">
+  <div class="sec-label">Application — Áp Dụng Vào Pitch Kit</div>
+  <div class="sec-title">Dùng Data Toàn Cầu Này Như Thế Nào</div>
+  <div class="sec-sub">Chuyển nghiên cứu toàn cầu thành lý lẽ thuyết phục cụ thể cho từng đối tượng khách hàng</div>
+
+  <div class="script-block">
+    <div class="sb-head">
+      📊 Script 1 — Cho Môi Giới Freelance<div class="sb-tag">Cá nhân</div>
+    </div>
+    <div class="sb-body">
+      <pre id="s1">Anh/chị biết không, IBM đã nghiên cứu và chứng minh rằng mỗi $1 đầu tư vào đào tạo và công cụ cho nhân viên tạo ra $30 tăng năng suất.
+
+Điều đó có nghĩa là nếu anh/chị đầu tư 697k vào bộ kit — tương đương khoảng 28 USD — theo tỷ lệ đó thì giá trị anh/chị nhận lại = 28 × $30 = $840 = khoảng 20 triệu đồng năng suất thêm.
+
+Và cái đó là tính trên 1 năm. Kit thì dùng được nhiều năm.
+
+Anh/chị thấy đây có phải là khoản đầu tư đáng làm không?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'s1')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-block">
+    <div class="sb-head">
+      🏢 Script 2 — Cho Chủ Sàn F2<div class="sb-tag">Sàn 10–50 người</div>
+    </div>
+    <div class="sb-body">
+      <pre id="s2">Anh/chị đang vận hành [X] người. Nghiên cứu từ ATD — tổ chức đào tạo lớn nhất thế giới — cho thấy công ty trang bị đào tạo và công cụ bài bản có thu nhập/người cao hơn 218% so với công ty không làm điều đó.
+
+Không cần đạt 218% — chỉ cần 10% là đã ROI dương hoàn toàn.
+
+Đội [X] người của anh/chị, nếu chỉ tăng được 1 deal/người/quý nhờ có kit — anh/chị nhân số đó với hoa hồng về sàn là thấy ngay.
+
+Chi phí trang bị kit cho cả đội = [X × 697k]. Con số đó có ý nghĩa gì so với 1 deal thêm không?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'s2')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-block">
+    <div class="sb-head">
+      🏭 Script 3 — Cho Giám Đốc Sàn F1 Lớn<div class="sb-tag">100–200+ người</div>
+    </div>
+    <div class="sb-body">
+      <pre id="s3">Anh/chị có biết tại sao Amazon chi $700 triệu USD để upskill 100,000 nhân viên không?
+
+Vì họ tính được: chi phí tuyển người mới từ bên ngoài cao hơn nhiều so với đào tạo người đang có. Và người được đào tạo thì năng suất cao hơn, ở lại lâu hơn, mang lại ROI cao hơn.
+
+Với đội [X] người của anh/chị — nếu nghiên cứu toàn cầu cho thấy 40% nhân viên nghỉ việc vì thiếu đào tạo, mỗi người bỏ đi tốn trung bình 33% lương năm để thay thế — anh/chị đang mất bao nhiêu mỗi năm từ turnover?
+
+So với khoản đầu tư kit cho cả đội, con số nào lớn hơn?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'s3')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-block">
+    <div class="sb-head">
+      💬 Script 4 — Xử Lý Objection "Không Cần Đào Tạo Thêm"<div class="sb-tag">Objection Handling</div>
+    </div>
+    <div class="sb-body">
+      <pre id="s4">[Khi khách nói: "Nhân viên tôi đã biết làm rồi, không cần kit"]
+
+Anh/chị có thể đúng về kiến thức — nhưng Gallup đã nghiên cứu trên 160 quốc gia và tìm thấy rằng chỉ 21% nhân viên toàn cầu thực sự engaged với công việc. 79% còn lại đang làm dưới mức khả năng.
+
+Không phải vì họ không biết — mà vì họ thiếu hệ thống, thiếu công cụ, và thiếu quy trình rõ ràng để làm tốt hơn.
+
+Nghiên cứu của McKinsey cho thấy chỉ cần cung cấp đúng công cụ, năng suất tăng trung bình 25% — không cần đào tạo thêm kỹ năng, chỉ cần đúng công cụ.
+
+Anh/chị muốn thử 25% đó ở đội mình không?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'s4')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-block">
+    <div class="sb-head">
+      📈 Script 5 — Pitch Bằng Con Số Revenue Per Employee<div class="sb-tag">ROI Argument</div>
+    </div>
+    <div class="sb-body">
+      <pre id="s5">Great Place to Work đã so sánh hàng nghìn công ty và phát hiện ra điều này:
+
+Công ty trung bình: $104,000 doanh thu/người/năm
+Fortune 100 Best Companies to Work For: $884,000/người/năm
+
+Khoảng cách = 8.5 lần. Sự khác biệt lớn nhất giữa hai nhóm: đào tạo, công cụ, và engagement.
+
+Anh/chị không cần target Fortune 100. Chỉ cần cải thiện từ "trung bình" lên "khá" — tức là thêm 20–30% năng suất/người — đội anh/chị sẽ tạo ra bao nhiêu doanh số thêm?
+
+Với mạng lưới [X] người × thêm 1 deal/người/năm × hoa hồng trung bình — anh/chị tự tính số đó đi.</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'s5')">📋 Copy Script</button>
+  </div>
+
+  <!-- Key takeaways -->
+  <div class="insight" style="margin-top:24px">
+    <h3>📌 5 Con Số Mạnh Nhất Để Nhớ Khi Pitch</h3>
+    <p>
+      <strong style="color:var(--gl)">218%</strong> — Thu nhập/người cao hơn ở công ty đào tạo tốt nhất (ATD)<br>
+      <strong style="color:var(--gl)">$30/$1</strong> — ROI của đào tạo nhân viên theo IBM landmark study<br>
+      <strong style="color:var(--gl)">94%</strong> — Nhân viên ở lại nếu được đầu tư phát triển<br>
+      <strong style="color:var(--gl)">40%</strong> — Nghỉ việc vì thiếu đào tạo = chi phí 33% lương thay mỗi người<br>
+      <strong style="color:var(--gl)">8.5×</strong> — Khoảng cách revenue/người giữa công ty tốt nhất và trung bình
+    </p>
+  </div>
+</div>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+function cp(btn,id){
+  const el=document.getElementById(id);
+  const txt=el?el.innerText:'';
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✅ Đã Copy!';
+    btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2200);
+  });
+}
+</script>
+</body>
+</html>
