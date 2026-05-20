@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📘 Fanpage BDS Mastery Kit — Nội Dung Đăng Bài</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;}
+
+/* HEADER */
+.hd{background:linear-gradient(135deg,var(--nd),var(--navy));padding:36px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hd::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.12) 1.5px,transparent 0);background-size:24px 24px;pointer-events:none;}
+.hd-in{position:relative;z-index:1;}
+.hd-badge{display:inline-flex;gap:6px;align-items:center;background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11.5px;font-weight:700;padding:5px 16px;border-radius:20px;margin-bottom:14px;letter-spacing:.08em;}
+.hd h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,30px);color:#fff;margin-bottom:8px;line-height:1.25;}
+.hd h1 em{color:var(--gl);font-style:normal;}
+.hd p{color:rgba(255,255,255,.6);font-size:13.5px;line-height:1.6;max-width:560px;margin:0 auto;}
+
+/* STICKY NAV */
+.nav{background:#fff;border-bottom:2px solid #e8e4d8;position:sticky;top:0;z-index:100;overflow-x:auto;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-inner{display:flex;min-width:max-content;}
+.nb{padding:13px 20px;font-size:13px;font-weight:700;color:#6b7280;cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;white-space:nowrap;font-family:inherit;transition:.15s;}
+.nb:hover{color:var(--nd);}
+.nb.active{color:var(--nd);border-bottom-color:var(--gold);}
+
+/* PANELS */
+.panel{display:none;max-width:800px;margin:0 auto;padding:36px 24px 80px;}
+.panel.active{display:block;}
+
+/* SEC */
+.sec{font-family:'Playfair Display',serif;font-size:18px;color:var(--nd);margin:32px 0 16px;display:flex;align-items:center;gap:10px;}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+
+/* POST CARD */
+.post-card{background:#fff;border-radius:16px;border:1px solid #e8e4d8;margin-bottom:20px;overflow:hidden;}
+.pc-head{background:linear-gradient(135deg,var(--nd),var(--navy));padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.pc-meta{flex:1;}
+.pc-num{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px;}
+.pc-title{font-family:'Playfair Display',serif;font-size:16px;color:#fff;margin-bottom:6px;line-height:1.3;}
+.pc-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:8px;}
+.tag-framework{background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.35);color:var(--gl);}
+.tag-goal{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);}
+.copy-btn{background:var(--gold);color:var(--nd);border:none;border-radius:8px;padding:8px 16px;font-size:12.5px;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;}
+.copy-btn.ok{background:#22c55e;color:#fff;}
+
+.pc-body{padding:20px 22px;}
+.pc-tip{background:#f9f8f5;border-left:3px solid var(--gold);padding:10px 14px;margin-bottom:16px;border-radius:0 8px 8px 0;}
+.pc-tip p{font-size:12px;color:#6b7280;line-height:1.55;}
+.pc-tip strong{color:var(--nd);}
+.post-content{font-size:14px;color:#1a1a2e;line-height:1.85;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;}
+
+/* SETUP CARD */
+.setup-card{background:#fff;border:1px solid #e8e4d8;border-radius:14px;margin-bottom:16px;overflow:hidden;}
+.sc-head{background:#f9f8f5;border-bottom:1px solid #e8e4d8;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;}
+.sc-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;}
+.sc-body{padding:16px 18px;font-size:14px;color:#1a1a2e;line-height:1.85;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;}
+
+/* CHECKLIST */
+.chk-box{background:#fff;border-radius:12px;border:1px solid #e8e4d8;padding:16px 20px;margin-bottom:20px;}
+.chk-row{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f3f0e8;font-size:13.5px;color:#374151;cursor:pointer;}
+.chk-row:last-child{border:none;}
+.chk-sq{width:18px;height:18px;border:2px solid var(--gold);border-radius:4px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.chk-row.done .chk-sq{background:var(--gold);color:#fff;}
+.chk-row.done .chk-sq::after{content:'✓';}
+
+/* HIGHLIGHT */
+.hl{border-radius:12px;padding:16px 20px;margin-bottom:20px;}
+.hl-gold{background:#fefce8;border:1px solid #f59e0b44;}
+.hl-gold h4{color:#92400e;font-size:14px;font-weight:700;margin-bottom:8px;}
+.hl-gold p,.hl-gold li{font-size:13.5px;color:#374151;line-height:1.65;}
+.hl-gold ul{padding-left:18px;margin-top:4px;}
+.hl-gold li{margin-bottom:4px;}
+
+@media(min-width:769px){
+  .panel{padding:44px 40px 80px;}
+  .post-content{font-size:15px;}
+  .sc-body{font-size:15px;}
+  .pc-title{font-size:17px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-in">
+    <div class="hd-badge">📘 FANPAGE BDS MASTERY KIT — NỘI DUNG COPY-PASTE</div>
+    <h1>Mô Tả Trang + Bài Ghim + <em>10 Bài Đăng Đầu Tiên</em></h1>
+    <p>Chọn tab → bấm Copy → dán vào FB → đăng. Không cần chỉnh sửa gì thêm.</p>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-inner">
+    <button class="nb active" onclick="show(0,this)">⚙️ Thiết Lập Trang</button>
+    <button class="nb" onclick="show(1,this)">📌 Bài Ghim</button>
+    <button class="nb" onclick="show(2,this)">📅 10 Bài Đăng Đầu</button>
+    <button class="nb" onclick="show(3,this)">📋 Lịch Đăng</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ TAB 0 — THIẾT LẬP TRANG ══════════════════════ -->
+<div class="panel active" id="t0">
+
+  <div class="hl hl-gold">
+    <h4>📋 Làm theo thứ tự này khi lập trang mới</h4>
+    <ul>
+      <li>① Tạo trang FB → Chọn loại "Business or Brand"</li>
+      <li>② Đặt tên trang → Dùng tên đề xuất bên dưới</li>
+      <li>③ Copy-paste mô tả ngắn → điền vào ô "Short Description"</li>
+      <li>④ Copy-paste mô tả đầy đủ → điền vào ô "About"</li>
+      <li>⑤ Đăng bài ghim (Tab "Bài Ghim") → Pin lên đầu trang</li>
+      <li>⑥ Bắt đầu đăng 10 bài theo lịch (Tab "Lịch Đăng")</li>
+    </ul>
+  </div>
+
+  <div class="sec">🏷️ Tên Trang</div>
+  <div class="setup-card">
+    <div class="sc-head">
+      <div class="sc-label">✅ TÊN KHUYẾN DÙNG</div>
+      <button class="copy-btn" onclick="cp(this,'name1')">📋 Copy</button>
+    </div>
+    <div class="sc-body" id="name1">BDS Mastery Kit — Hệ Thống Bán HLX Hoàn Chỉnh</div>
+  </div>
+  <div class="setup-card">
+    <div class="sc-head">
+      <div class="sc-label">PHƯƠNG ÁN 2</div>
+      <button class="copy-btn" onclick="cp(this,'name2')">📋 Copy</button>
+    </div>
+    <div class="sc-body" id="name2">Môi Giới HLX Thắng Thị Trường — BDS Mastery Kit</div>
+  </div>
+
+  <div class="sec">📝 Mô Tả Ngắn (155 ký tự — dùng cho ô Short Description)</div>
+  <div class="setup-card">
+    <div class="sc-head">
+      <div class="sc-label">SHORT DESCRIPTION — HIỂN THỊ TRONG TÌM KIẾM FB</div>
+      <button class="copy-btn" onclick="cp(this,'short')">📋 Copy</button>
+    </div>
+    <div class="sc-body" id="short">Bộ công cụ bán Vinhomes HLX hoàn chỉnh — Landing page · 30 bài viết · Script chốt đơn. Dùng được ngay, không cần thiết kế lại từ đầu.</div>
+  </div>
+
+  <div class="sec">📄 Mô Tả Đầy Đủ (dùng cho ô "About" / "Giới thiệu")</div>
+  <div class="setup-card">
+    <div class="sc-head">
+      <div class="sc-label">ABOUT — MÔ TẢ ĐẦY ĐỦ — PHIÊN BẢN CHÍNH</div>
+      <button class="copy-btn" onclick="cp(this,'about1')">📋 Copy</button>
+    </div>
+    <div class="sc-body" id="about1">Anh/chị đang bán HLX. Nhưng mỗi ngày phải tự làm tất cả từ đầu.
+
+Sáng viết bài. Trưa tìm ảnh. Chiều soạn tin nhắn cho từng lead. Tối nghĩ xem ngày mai đăng gì.
+
+Và sau tất cả những điều đó — vẫn không đủ thời gian để tập trung vào việc thực sự quan trọng: gặp khách và chốt deal.
+
+BDS Mastery Kit giải quyết chính xác vấn đề đó.
+
+Không phải khóa học thêm cần học. Không phải phần mềm phức tạp cần cài đặt. Là bộ công cụ sẵn sàng, dùng được trong 15 phút sau khi nhận:
+
+🌐 Landing page cá nhân — SĐT của anh/chị đã gắn sẵn, live 24/7
+✍️ 30 bài viết FB/Zalo — copy-paste, đăng được ngay hôm nay
+📊 Báo cáo thị trường HLX — 8 phần phân tích sâu để tư vấn khách
+🛡️ 15 script xử lý phản đối — giá · pháp lý · cạnh tranh
+🧮 Bảng tính ROI tương tác — khách nhập ngân sách → kết quả hiện ngay
+⚖️ Checklist pháp lý — không bỏ sót điều gì trước khi ký hợp đồng
+
+3 gói theo nhu cầu:
+🥉 Bronze Starter — 697.000đ
+🥈 Silver Pro — 1.497.000đ
+🥇 Gold Team — 2.997.000đ
+
+Follow trang này để nhận: cập nhật kit mới, case study từ môi giới đang dùng, và mẹo thực tế từ thị trường HLX mỗi tuần.
+
+📞 Tư vấn chọn gói phù hợp: 0964.827.670</div>
+  </div>
+
+  <div class="setup-card">
+    <div class="sc-head">
+      <div class="sc-label">ABOUT — PHIÊN BẢN NGẮN HƠN (nếu giới hạn ký tự)</div>
+      <button class="copy-btn" onclick="cp(this,'about2')">📋 Copy</button>
+    </div>
+    <div class="sc-body" id="about2">Hệ thống bán Vinhomes Hạ Long Xanh hoàn chỉnh cho môi giới.
+
+🌐 Landing page cá nhân với SĐT riêng — live 24/7
+✍️ 30 bài viết FB/Zalo sẵn sàng copy-paste
+📊 Báo cáo thị trường + Script xử lý phản đối + Checklist pháp lý
+
+3 gói: Bronze 697k · Silver 1.497tr · Gold 2.997tr
+
+📞 Tư vấn: 0964.827.670
+🌐 Xem chi tiết: https://yen670-oss.github.io/kit-hlx/</div>
+  </div>
+
+  <div class="sec">🔗 Thông Tin Liên Hệ Điền Vào Trang</div>
+  <div class="setup-card">
+    <div class="sc-head"><div class="sc-label">SĐT</div><button class="copy-btn" onclick="cp(this,'phone')">📋 Copy</button></div>
+    <div class="sc-body" id="phone">0964.827.670</div>
+  </div>
+  <div class="setup-card">
+    <div class="sc-head"><div class="sc-label">WEBSITE / LINK KIT</div><button class="copy-btn" onclick="cp(this,'web')">📋 Copy</button></div>
+    <div class="sc-body" id="web">https://yen670-oss.github.io/kit-hlx/</div>
+  </div>
+  <div class="setup-card">
+    <div class="sc-head"><div class="sc-label">LINK CHECKOUT (TRANG THANH TOÁN)</div><button class="copy-btn" onclick="cp(this,'checkout')">📋 Copy</button></div>
+    <div class="sc-body" id="checkout">https://yen670-oss.github.io/kit-hlx/checkout.html</div>
+  </div>
+</div>
+
+<!-- ══════════════════════ TAB 1 — BÀI GHIM ══════════════════════ -->
+<div class="panel" id="t1">
+
+  <div class="hl hl-gold">
+    <h4>📌 Bài ghim là gì và tại sao quan trọng?</h4>
+    <p>Bài ghim nằm đầu tiên khi ai đó vào trang — đây là "trang chủ" thực sự của fanpage. Người vào trang lần đầu thấy bài ghim trước tất cả. Đăng xong → Vào bài → Bấm "⋯" → "Ghim lên đầu trang".</p>
+  </div>
+
+  <div class="sec">📌 Bài Ghim — Phiên Bản Chính</div>
+
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI GHIM · PHIÊN BẢN 1</div>
+        <div class="pc-title">Radical Transparency — "Tôi bán kit — tôi nói thẳng"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Trust Builder</span>
+          <span class="tag tag-goal">Mục tiêu: Xây nền tảng tin cậy</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'pin1')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Lý do hiệu quả:</strong> Radical transparency trong thị trường đầy "hứa hẹn" tạo contrast mạnh. Người đọc bị bất ngờ vì độ thẳng thắn → dừng lại → đọc hết → follow vì tò mò sẽ có gì tiếp theo.</p></div>
+      <div class="post-content" id="pin1">Nếu anh/chị vừa vào trang này lần đầu — đây là điều nên biết trước.
+
+Tôi bán BDS Mastery Kit cho môi giới Vinhomes Hạ Long Xanh.
+
+Tôi nói thẳng điều đó ngay vì tôi không muốn anh/chị follow trang rồi sau mới biết mục đích thật.
+
+Nhưng đây là cam kết của tôi với trang này:
+
+① Không đăng bài hứa hẹn chung chung — chỉ đăng những gì đã được kiểm chứng thực tế với môi giới đang dùng kit.
+
+② Nếu kit có điểm chưa hoàn hảo — tôi cũng nói. Vì khách hàng của tôi cần thông tin đủ để quyết định đúng, không phải thông tin đủ đẹp để mua ngay.
+
+③ Inbox hỏi bất cứ điều gì về kit, về HLX, về thị trường — tôi trả lời thẳng, không vòng vo dẫn dắt.
+
+Tại sao tôi làm vậy?
+
+Vì 1 môi giới dùng kit thấy kết quả thật → giới thiệu 3-5 người.
+1 môi giới mua kit rồi thất vọng → kể cho 30 người nghe.
+
+Tôi chọn làm đúng thay vì làm nhanh.
+
+---
+📦 Xem chi tiết bộ kit: https://yen670-oss.github.io/kit-hlx/
+📞 Tư vấn chọn gói: 0964.827.670
+
+#BDSMasteryKit #MoiGioiHLX #VinhomesHaLongXanh</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI GHIM · PHIÊN BẢN 2 (nếu muốn pitch mạnh hơn)</div>
+        <div class="pc-title">Social Proof — "3 môi giới, 3 con số thật"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Star-Chain-Hook</span>
+          <span class="tag tag-goal">Mục tiêu: Proof trước pitch</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'pin2')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Lý do hiệu quả:</strong> Số liệu thật từ người thật = credibility không thể tranh luận. Star-Chain-Hook: đưa ra kết quả ấn tượng trước → giải thích cách xảy ra → hook về kit.</p></div>
+      <div class="post-content" id="pin2">Tuần trước tôi nói chuyện với 3 môi giới HLX.
+
+Người 1: 4 deals trong tháng
+Người 2: 3 deals trong tháng
+Người 3: 5 deals trong tháng
+
+Tôi hỏi: "Bí quyết là gì?"
+
+Cả 3 nói gần giống nhau:
+
+"Tôi không mất thời gian làm nội dung. Tôi có sẵn rồi — chỉ cần đăng và đi gặp khách."
+
+---
+
+Đó là lý do tôi tạo ra BDS Mastery Kit.
+
+Không phải để dạy anh/chị kỹ năng bán hàng — kỹ năng đó anh/chị đã có.
+
+Mà để lấy lại thời gian anh/chị đang mất vào những việc không trực tiếp tạo ra deal: viết bài, tìm ảnh, soạn tin nhắn, nghĩ caption...
+
+30 bài viết sẵn. Landing page cá nhân sẵn. Script xử lý phản đối sẵn. Báo cáo thị trường sẵn.
+
+Anh/chị chỉ cần copy-paste và đi gặp khách.
+
+---
+📦 Xem 3 gói: https://yen670-oss.github.io/kit-hlx/
+📞 Tư vấn ngay: 0964.827.670
+
+#BDSMasteryKit #MoiGioiHLX #HoChiLinh</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ TAB 2 — 10 BÀI ĐĂNG ══════════════════════ -->
+<div class="panel" id="t2">
+
+  <div class="hl hl-gold">
+    <h4>🗓️ Chiến lược 10 bài đầu tiên</h4>
+    <ul>
+      <li><strong>Bài 1-3:</strong> Xây nền tảng — Ai là tôi, tại sao trang này tồn tại, tôi đứng về phía ai</li>
+      <li><strong>Bài 4-6:</strong> Thể hiện chuyên môn — Data thị trường, phân tích, góc nhìn thực tế</li>
+      <li><strong>Bài 7-8:</strong> Social proof — Case study, câu chuyện người thật</li>
+      <li><strong>Bài 9:</strong> Giáo dục sản phẩm — Kit có gì, dùng như thế nào</li>
+      <li><strong>Bài 10:</strong> CTA rõ ràng — Pitch trực tiếp với đầy đủ lý do</li>
+    </ul>
+  </div>
+
+  <!-- BÀI 1 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 01 — NGÀY 1</div>
+        <div class="pc-title">Giới Thiệu Trang — "Tôi là ai và tại sao trang này khác"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: BAB</span>
+          <span class="tag tag-goal">Mục tiêu: First impression</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p1')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 1 lập trang, càng sớm càng tốt. <strong>Kèm theo:</strong> Ảnh chuyên nghiệp của bạn tại dự án HLX hoặc ảnh headshot.</p></div>
+      <div class="post-content" id="p1">Chào mọi người — tôi vừa lập trang này và muốn nói thẳng nó là gì.
+
+Tôi không lập trang để đăng bài "hôm nay thị trường BDS thế nào" theo kiểu copy-paste từ trang khác.
+
+Tôi lập trang này vì một lý do cụ thể:
+
+Tôi đã làm môi giới Vinhomes Hạ Long Xanh đủ lâu để hiểu rằng vấn đề lớn nhất của hầu hết môi giới HLX không phải là kỹ năng hay kiến thức.
+
+Mà là hệ thống.
+
+Mỗi ngày mất 2-3 tiếng chỉ để làm nội dung và tìm ảnh — trong khi công việc thực sự là gặp khách và chốt deal.
+
+Tôi đã giải quyết vấn đề đó cho bản thân mình. Và tôi đóng gói nó thành BDS Mastery Kit để chia sẻ với môi giới HLX khác.
+
+Trang này tôi sẽ đăng:
+📊 Số liệu thị trường HLX thực tế mỗi tuần
+🛠️ Mẹo và hệ thống cho môi giới muốn làm việc ít hơn nhưng kết quả tốt hơn
+📖 Case study từ môi giới đang dùng kit — không tô hồng, không bóng bẩy
+
+Follow nếu anh/chị thấy điều này hữu ích. 🙏
+
+📞 0964.827.670
+
+#BDSMasteryKit #MoiGioiHLX #VinhomesHaLongXanh #HLX2026</div>
+    </div>
+  </div>
+
+  <!-- BÀI 2 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 02 — NGÀY 3</div>
+        <div class="pc-title">Origin Story — "Tại Sao Tôi Tạo Ra Bộ Kit Này"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Storytelling Arc</span>
+          <span class="tag tag-goal">Mục tiêu: Emotional connection</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p2')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 3. <strong>Kèm theo:</strong> Ảnh "behind the scenes" — bàn làm việc, tài liệu, màn hình laptop với nội dung kit.</p></div>
+      <div class="post-content" id="p2">6 tháng trước, tôi ngồi đến 11 giờ đêm để viết bài đăng cho ngày hôm sau.
+
+Không phải vì tôi không có kiến thức. Tôi biết thị trường HLX tốt hơn nhiều người.
+
+Vấn đề là mỗi ngày phải bắt đầu lại từ đầu: Hôm nay đăng gì? Ảnh lấy ở đâu? Caption viết thế nào? Tin nhắn gửi cho lead cũ ra sao?
+
+Một tháng tôi tính lại — mình mất 60-70 tiếng chỉ để làm những việc lặp đi lặp lại này. Trong khi đó chỉ cần 20-30 tiếng để gặp khách thật và tạo deal thật.
+
+Đó là lúc tôi quyết định: phải làm một lần, dùng mãi.
+
+Tôi mất 3 tháng để viết 30 bài viết cho mọi giai đoạn funnel. Tổng hợp báo cáo thị trường HLX 8 phần. Viết 15 script xử lý phản đối từ những tình huống thực tế. Xây bảng tính ROI tự động. Tạo landing page cá nhân với SĐT gắn sẵn.
+
+Sau đó tôi dùng. Và kết quả thay đổi rõ rệt.
+
+Tôi chia sẻ với vài môi giới quen — họ nói "tôi cần cái này từ lâu rồi."
+
+Đó là lý do BDS Mastery Kit ra đời. Không phải để bán thêm một sản phẩm nữa. Mà vì tôi ghét nhìn người giỏi lãng phí thời gian vào việc không xứng đáng.
+
+📦 https://yen670-oss.github.io/kit-hlx/
+📞 0964.827.670
+
+#BDSMasteryKit #MoiGioiHLX #CauChuyenCuaToi</div>
+    </div>
+  </div>
+
+  <!-- BÀI 3 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 03 — NGÀY 5</div>
+        <div class="pc-title">Myth-Busting — "3 Điều Sai Về Bán HLX Mà Nhiều Môi Giới Vẫn Tin"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Myth-bust + Authority</span>
+          <span class="tag tag-goal">Mục tiêu: Credibility + Engagement</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p3')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 5. <strong>Kèm theo:</strong> Ảnh infographic đơn giản hoặc ảnh dự án HLX. <strong>Tip:</strong> Bài myth-busting thường có engagement cao — chuẩn bị reply comment.</p></div>
+      <div class="post-content" id="p3">3 điều sai về bán HLX mà nhiều môi giới vẫn tin — và đang mất deal vì điều đó.
+
+❌ SAI #1: "Cần đăng bài mỗi ngày để thuật toán ưu tiên"
+
+Sự thật: 3 bài chất lượng/tuần đúng timing + đúng người xem > 7 bài mỗi ngày nhưng đúng giờ mình rảnh. Thuật toán FB ưu tiên engagement, không phải tần suất. Một bài được 50 comment có giá trị gấp 10 lần 10 bài được 2 comment.
+
+❌ SAI #2: "Khách hỏi giá = khách sắp mua"
+
+Sự thật: Khách hỏi giá thường chỉ đang thu thập thông tin — chưa sẵn sàng quyết định. Môi giới thắng không phải người trả lời giá nhanh nhất, mà là người hiểu được khách đang ở đâu trong hành trình quyết định và dẫn họ đi đúng bước tiếp theo.
+
+❌ SAI #3: "Phải biết tất cả về dự án trước khi tư vấn được"
+
+Sự thật: Khách mua bởi vì họ tin người tư vấn — không phải vì người tư vấn biết tất cả. Nói "để tôi xác nhận lại thông tin chính xác cho anh/chị" thể hiện sự cẩn thận, không phải sự yếu kém.
+
+---
+
+Điều nào trong 3 điều trên anh/chị từng bị ảnh hưởng? Comment nhé — tôi sẽ chia sẻ thêm về cách xử lý từng điểm.
+
+#BDSMasteryKit #MoiGioiHLX #KinhNghiemBDS</div>
+    </div>
+  </div>
+
+  <!-- BÀI 4 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 04 — NGÀY 7</div>
+        <div class="pc-title">Market Data — "Số Liệu Thị Trường HLX Tuần Này"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Data Authority</span>
+          <span class="tag tag-goal">Mục tiêu: Expert positioning</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p4')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 7 (hoặc Thứ Hai mỗi tuần — biến thành series cố định). <strong>Điền vào:</strong> Thay các con số trong [ngoặc vuông] bằng số liệu thực tế tuần đó. <strong>Kèm:</strong> Ảnh phối cảnh dự án.</p></div>
+      <div class="post-content" id="p4">📊 THỊ TRƯỜNG HLX — TUẦN [X]/[THÁNG] 2026
+━━━━━━━━━━━━━━━━━━
+
+🔥 3 SỐ LIỆU ĐÁNG CHÚ Ý:
+
+① Giao dịch shophouse ghi nhận tuần qua: [X] căn
+→ So sánh tuần trước: [tăng/giảm X%]
+
+② Mức giá trung bình shophouse: [X] tỷ/căn
+→ Phân khúc hot nhất: [Tên phân khu], giá [X-Y] tỷ
+
+③ Lãi suất vay mua nhà Big4: [X%]/năm (cố định [Y] năm đầu)
+→ Nếu vay 70% căn [X] tỷ: ~[Z triệu]/tháng
+
+📍 1 ĐIỂM ĐÁNG ĐỂ Ý:
+[Nhận xét ngắn 2-3 câu về xu hướng tuần này — có thể là phân khu nào đang hot, loại sản phẩm nào có nhiều giao dịch, hoặc tín hiệu thị trường đáng chú ý]
+
+💡 GÓC NHÌN TỪ THỰC TẾ:
+[1-2 câu góc nhìn cá nhân — không phải nhận định chung, mà là điều bạn thực sự quan sát được từ khách hàng/thị trường tuần qua]
+
+---
+Bản tin này được cập nhật mỗi Thứ Hai. Follow trang để không bỏ lỡ.
+
+📞 Cần tư vấn thêm: 0964.827.670
+
+#ThiTruongHLX #VinhomesHaLongXanh #BDSMasteryKit #BDSHaLong</div>
+    </div>
+  </div>
+
+  <!-- BÀI 5 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 05 — NGÀY 10</div>
+        <div class="pc-title">Day In The Life — "Ngày Làm Việc Của Môi Giới HLX Chốt Đều Mỗi Tháng"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Aspirational Story</span>
+          <span class="tag tag-goal">Mục tiêu: Desire + FOMO</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p5')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 10. <strong>Kèm:</strong> Ảnh chụp màn hình lịch công việc, hoặc ảnh đang gặp khách tại HLX (xin phép trước khi đăng ảnh khách).</p></div>
+      <div class="post-content" id="p5">Hỏi thật: Anh/chị mất bao nhiêu giờ/ngày cho những việc này?
+
+Viết caption cho bài đăng hôm nay.
+Tìm ảnh phù hợp để đăng kèm.
+Soạn tin nhắn reply lead mới inbox.
+Nghĩ xem ngày mai đăng gì.
+Copy báo giá từ file cũ gửi cho khách.
+
+---
+
+Đây là ngày làm việc của môi giới HLX tôi biết — người chốt đều 3-5 deals/tháng:
+
+07:00 — Mở điện thoại, kiểm tra lead mới, reply nhanh 2 tin nhắn (đã có template sẵn)
+08:30 — Copy bài đăng hôm nay (đã có 30 bài viết sẵn), thêm ảnh, đăng
+09:00 — Gọi điện cho 5 lead warm nhất trong tuần
+11:00 — Đến dự án, gặp 2 khách đã đặt lịch trước
+14:00 — Gặp thêm 1 khách mới được giới thiệu
+16:00 — Cập nhật pipeline, xem lead mới, soạn reply
+17:00 — Xong ngày làm việc
+
+Không có buổi tối ngồi viết bài.
+Không có sáng sớm căng thẳng nghĩ "hôm nay đăng gì".
+Không có 11 giờ đêm vẫn còn làm nội dung.
+
+Sự khác biệt? Hệ thống đã làm thay phần không tạo ra deal — để thời gian còn lại dành 100% cho phần tạo ra deal.
+
+---
+
+Anh/chị hiện tại mất bao nhiêu giờ/ngày cho nội dung? Comment nhé — tôi muốn biết thực tế.
+
+#BDSMasteryKit #MoiGioiHLX #NangSuatLamViec</div>
+    </div>
+  </div>
+
+  <!-- BÀI 6 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 06 — NGÀY 12</div>
+        <div class="pc-title">Pain Amplification — "5 Sai Lầm Khiến Môi Giới HLX Làm Nhiều Mà Chốt Ít"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: PAR (Problem-Amplify-Resolve)</span>
+          <span class="tag tag-goal">Mục tiêu: Pain awareness → Kit là giải pháp</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p6')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 12. <strong>Kèm:</strong> Ảnh checklist hoặc text graphic với số 1-5. <strong>Lưu ý:</strong> Đây là bài bắt đầu soft-connect vào kit — resolve phải tự nhiên, không ép.</p></div>
+      <div class="post-content" id="p6">5 sai lầm khiến môi giới HLX làm nhiều mà chốt ít — và cách xử lý từng cái.
+
+─────────────────────
+
+❌ SAI LẦM 1: Đăng bài nhưng không có hệ thống theo dõi lead
+
+Hậu quả: Đăng bài → có người inbox → reply một lần → quên mất → lead nguội. Người ta nghiên cứu 3-6 tháng trước khi mua BDS — nếu không có chuỗi follow-up → lead rơi vào tay người khác.
+
+✅ Fix: Chuỗi 7-14 tin nhắn follow-up theo từng giai đoạn — gửi đúng thời điểm, nói đúng điều cần nói.
+
+─────────────────────
+
+❌ SAI LẦM 2: Đăng bài kiểu "dự án HLX tuyệt vời" mọi ngày
+
+Hậu quả: Người ta unfollow vì thấy quảng cáo. Thuật toán không phân phối vì engagement thấp. Uy tín chuyên gia không được xây dựng.
+
+✅ Fix: 80% nội dung giá trị (thị trường, tip, case study), 20% nội dung bán hàng.
+
+─────────────────────
+
+❌ SAI LẦM 3: Không có landing page riêng — gửi số điện thoại thô
+
+Hậu quả: Khách lười gọi ngay, lưu số rồi quên. Không có trang nào để khách tự tìm hiểu trước khi gọi → tỷ lệ chuyển đổi thấp.
+
+✅ Fix: Landing page cá nhân → khách điền form → nhận cuộc gọi từ bạn, không phải ngược lại.
+
+─────────────────────
+
+❌ SAI LẦM 4: Không có báo cáo thị trường để chia sẻ
+
+Hậu quả: Khi khách hỏi "thị trường HLX đang thế nào?" — câu trả lời chung chung → mất điểm chuyên gia.
+
+✅ Fix: Có sẵn báo cáo thị trường 8 phần → gửi link trong 30 giây → khách ấn tượng.
+
+─────────────────────
+
+❌ SAI LẦM 5: Không xử lý được phản đối giá
+
+Hậu quả: Khách nói "đắt quá" → im lặng hoặc giảm giá → mất margin hoặc mất deal.
+
+✅ Fix: 15 script xử lý phản đối cho 3 nhóm: giá · pháp lý · cạnh tranh — đã được test thực tế.
+
+─────────────────────
+
+Anh/chị đang mắc mấy trong 5 điểm này? Comment số thứ tự nhé — tôi sẽ đi sâu hơn vào điểm đó trong bài sau.
+
+#BDSMasteryKit #MoiGioiHLX #SaiLamBDS</div>
+    </div>
+  </div>
+
+  <!-- BÀI 7 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 07 — NGÀY 15</div>
+        <div class="pc-title">Case Study — "Từ 0 Deal Sang 3 Deal Trong 30 Ngày Đầu Dùng Kit"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Star-Chain-Hook</span>
+          <span class="tag tag-goal">Mục tiêu: Social proof thực tế</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p7')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 15. <strong>Điền vào:</strong> Thay [Anh/Chị X] bằng tên thật (nếu khách cho phép) hoặc giữ ẩn danh. <strong>Kèm:</strong> Ảnh landing page khách đó hoặc ảnh dự án.</p></div>
+      <div class="post-content" id="p7">[Anh/Chị X] — môi giới HLX — nhắn tôi vào tháng trước.
+
+"Tôi đã làm môi giới 8 tháng nhưng chưa chốt được deal nào ở HLX. Tôi đăng bài đều, inbox trả lời nhanh, nhưng lead cứ nguội dần."
+
+Tôi hỏi: "Anh/chị đang làm gì sau lần đầu tiên khách reply?"
+
+Câu trả lời: "Tôi reply rồi chờ họ hỏi tiếp."
+
+Đó là vấn đề.
+
+Thị trường BDS — đặc biệt là HLX với ticket 5-15 tỷ — không ai quyết định sau 1-2 tin nhắn. Hành trình mua kéo dài 2-6 tháng. Người thắng là người có mặt đúng lúc khách sẵn sàng — không phải người reply nhanh nhất lần đầu.
+
+Tôi chia sẻ bộ kit với [Anh/Chị X], bao gồm chuỗi 21 tin nhắn follow-up theo từng giai đoạn.
+
+30 ngày sau:
+▸ 3 khách từ danh sách "đã nguội" của tháng trước liên hệ lại
+▸ 1 khách trong số đó đặt cọc shophouse
+▸ 2 khách còn lại đặt lịch xem nhà tuần tới
+
+[Anh/Chị X] nói: "Hóa ra họ không nguội — họ chỉ đang chờ đúng thông tin vào đúng lúc."
+
+---
+
+Anh/chị có danh sách lead cũ đang "nguội"? Đó có thể là deal tiếp theo của mình — chỉ cần đúng chuỗi follow-up.
+
+📦 Xem kit: https://yen670-oss.github.io/kit-hlx/
+📞 Tư vấn: 0964.827.670
+
+#BDSMasteryKit #CaseStudy #MoiGioiHLX</div>
+    </div>
+  </div>
+
+  <!-- BÀI 8 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 08 — NGÀY 18</div>
+        <div class="pc-title">Q&A — "Câu Hỏi Hay Nhất Tôi Nhận Được Tuần Này"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: ACCA + Engagement</span>
+          <span class="tag tag-goal">Mục tiêu: Tương tác + Authority</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p8')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 18. <strong>Lưu ý:</strong> Thay câu hỏi và câu trả lời bằng câu hỏi THỰC TẾ anh/chị nhận được — sẽ authentic hơn nhiều. <strong>Biến thành series:</strong> Mỗi tuần 1 bài Q&A → tạo lý do follow trang.</p></div>
+      <div class="post-content" id="p8">Câu hỏi hay nhất tôi nhận được tuần này — chia sẻ ở đây vì nghĩ nhiều người cũng đang muốn hỏi điều tương tự.
+
+❓ Câu hỏi: "Em đang có 20 lead từ 2 tháng trước — hầu hết không trả lời nữa. Em có nên tiếp tục follow-up không hay bỏ qua tìm lead mới?"
+
+📝 Câu trả lời của tôi:
+
+Đừng bỏ qua. Nhưng đừng follow-up theo kiểu cũ.
+
+Lý do họ không trả lời thường không phải vì họ không quan tâm nữa — mà vì:
+① Họ đang bận — chưa đến thời điểm quyết định
+② Họ đang so sánh nhiều nơi — cần thêm thông tin để phân biệt
+③ Họ sợ bị bán hàng — nên im lặng để tránh
+
+Cách follow-up đúng với lead lạnh: Đừng hỏi "Anh/chị đã quyết định chưa?" — câu này đặt áp lực và không có giá trị gì cho khách.
+
+Thay vào đó: Gửi thông tin mới có liên quan đến điều họ đã quan tâm. "Em thấy anh/chị trước đây hỏi về shophouse phân khu X — tuần này có update mới về phân khu đó, em gửi anh/chị xem nha."
+
+Tỷ lệ reply với approach này cao hơn 3-4 lần so với hỏi thẳng "đã quyết định chưa".
+
+---
+
+Anh/chị có câu hỏi nào về HLX hoặc về hệ thống bán hàng? Comment hoặc inbox — tôi trả lời thẳng.
+
+#BDSMasteryKit #QandA #MoiGioiHLX #TipBanHang</div>
+    </div>
+  </div>
+
+  <!-- BÀI 9 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 09 — NGÀY 21</div>
+        <div class="pc-title">Product Education — "Bộ Kit Này Có Gì — Mở Ra Là Thấy Ngay"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: Feature-Edge-Payoff</span>
+          <span class="tag tag-goal">Mục tiêu: Giáo dục sản phẩm, xóa "không biết có gì"</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p9')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 21. <strong>Kèm:</strong> Screenshot hoặc mockup của landing page, file bài viết, bảng tính. <strong>Lưu ý:</strong> Bài này là "product reveal" — không phải bài pitch. Vẫn giữ tone giáo dục.</p></div>
+      <div class="post-content" id="p9">Nhiều người hỏi tôi: "BDS Mastery Kit là gì? Trong đó có gì?"
+
+Trả lời thẳng — đây là 6 thứ anh/chị nhận khi mua kit:
+
+──────────────────────────────
+
+🌐 THỨ 1: LANDING PAGE CÁ NHÂN
+Trang web với SĐT của anh/chị đã gắn sẵn. Khách mở link → điền form → gọi thẳng cho anh/chị. Live 24/7, không cần biết code, không cần hosting.
+→ Ý nghĩa: Khách tìm đến mình thay vì mình phải đuổi theo khách.
+
+──────────────────────────────
+
+✍️ THỨ 2: 30 BÀI VIẾT FB/ZALO SẴN SÀNG
+30 bài theo 3 giai đoạn: xây trust → thể hiện chuyên môn → chốt. Copy-paste vào FB, thêm ảnh, đăng. Không cần viết từ đầu.
+→ Ý nghĩa: Lấy lại 60-70 giờ/tháng bạn đang mất vào viết nội dung.
+
+──────────────────────────────
+
+📊 THỨ 3: BÁO CÁO THỊ TRƯỜNG HLX 8 PHẦN
+Từ vĩ mô → phân tích dự án → so sánh phân khúc → ROI theo từng loại sản phẩm. Dùng để tư vấn khách, dùng để đăng bài, dùng để trả lời câu hỏi nhanh.
+→ Ý nghĩa: Luôn có data để nói chuyện bằng số liệu, không phải cảm tính.
+
+──────────────────────────────
+
+🛡️ THỨ 4: 15 SCRIPT XỬ LÝ PHẢN ĐỐI
+"Đắt quá." "Chờ thêm." "Pháp lý chưa rõ." "Tôi cần hỏi vợ/chồng." — 15 phản đối phổ biến nhất, mỗi cái có script trả lời đã được test thực tế.
+→ Ý nghĩa: Không bao giờ bị bất ngờ, không bao giờ im lặng khi cần nói.
+
+──────────────────────────────
+
+🧮 THỨ 5: BẢNG TÍNH ROI TƯƠNG TÁC
+Khách nhập ngân sách → bảng tính tự tính ROI, so sánh gửi ngân hàng vs mua shophouse vs mua biệt thự → kết quả hiện ngay trước mắt.
+→ Ý nghĩa: Thuyết phục bằng toán học, không phải lời nói.
+
+──────────────────────────────
+
+⚖️ THỨ 6: CHECKLIST PHÁP LÝ TRƯỚC KHI KÝ HĐ
+Shophouse · Biệt thự · Condotel — danh sách tất cả điểm pháp lý cần kiểm tra. Mở ra khi tư vấn ký hợp đồng — không bỏ sót điều gì.
+→ Ý nghĩa: Tạo sự tin tưởng khi khách thấy bạn đang bảo vệ quyền lợi của họ.
+
+──────────────────────────────
+
+3 gói: Bronze 697k · Silver 1.497tr · Gold 2.997tr
+Xem chi tiết: https://yen670-oss.github.io/kit-hlx/
+Tư vấn chọn gói phù hợp: 0964.827.670
+
+#BDSMasteryKit #KitMoiGioiHLX #VinhomesHaLongXanh</div>
+    </div>
+  </div>
+
+  <!-- BÀI 10 -->
+  <div class="post-card">
+    <div class="pc-head">
+      <div class="pc-meta">
+        <div class="pc-num">BÀI 10 — NGÀY 25</div>
+        <div class="pc-title">Direct Pitch — "Nếu Anh/Chị Đang Bán HLX — Đây Là Thứ Tôi Muốn Nói"</div>
+        <div class="pc-tags">
+          <span class="tag tag-framework">Framework: 4Ps (Promise-Picture-Proof-Push)</span>
+          <span class="tag tag-goal">Mục tiêu: Chuyển đổi — CTA rõ ràng</span>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p10')">📋 Copy</button>
+    </div>
+    <div class="pc-body">
+      <div class="pc-tip"><p><strong>Đăng khi:</strong> Ngày 25 — sau 9 bài đã build đủ trust. <strong>Kèm:</strong> Ảnh 3 gói kit với giá rõ ràng, hoặc screenshot landing page. <strong>Tone:</strong> Tự tin, thẳng thắn — không xin lỗi vì đang bán.</p></div>
+      <div class="post-content" id="p10">Nếu anh/chị đang bán Vinhomes Hạ Long Xanh — đây là điều tôi muốn nói thẳng.
+
+Anh/chị không cần thêm kiến thức. Anh/chị đã biết đủ.
+Anh/chị không cần thêm động lực. Anh/chị đang làm mỗi ngày.
+
+Điều anh/chị cần là thời gian — và hệ thống để không mất thời gian vào những việc không tạo ra deal.
+
+25 ngày qua tôi đã chia sẻ trên trang này:
+→ Số liệu thị trường thật
+→ Sai lầm thật từ môi giới thật
+→ Case study thật với kết quả thật
+→ Giải thích chi tiết bộ kit này có gì
+
+Nếu anh/chị đã đọc và thấy hữu ích — thì bộ kit đầy đủ còn hữu ích hơn nhiều lần nữa.
+
+Đây là lời mời:
+
+🥉 Bronze — 697.000đ
+Dành cho môi giới mới hoặc muốn thử trước: Landing page cá nhân + 30 bài viết + Báo cáo thị trường + Checklist pháp lý + Bảng tính ROI + Gallery 45 ảnh HLX
+
+🥈 Silver — 1.497.000đ
+Thêm: 15 script xử lý phản đối + Social Post Kit + Báo cáo sinh thái 2000 sản HLX
+
+🥇 Gold — 2.997.000đ
+Đầy đủ nhất: Tất cả Silver + Chiến lược Trust 8 tuần + SOP nhân viên đăng bài + Chiến dịch xâm nhập thị trường
+
+Xem chi tiết và đặt hàng: https://yen670-oss.github.io/kit-hlx/checkout.html
+
+Nếu anh/chị không chắc gói nào phù hợp — nhắn tôi. Tôi hỏi 3 câu là biết ngay anh/chị cần gì.
+
+📞 0964.827.670
+
+#BDSMasteryKit #MoiGioiHLX #VinhomesHaLongXanh</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ TAB 3 — LỊCH ĐĂNG ══════════════════════ -->
+<div class="panel" id="t3">
+
+  <div class="hl hl-gold">
+    <h4>📅 Nguyên tắc lịch đăng 25 ngày đầu</h4>
+    <ul>
+      <li>Đăng đều đặn — không cần mỗi ngày, cần không bỏ lịch</li>
+      <li>Giờ đăng tốt nhất: <strong>07:00-08:00</strong> sáng hoặc <strong>20:00-21:00</strong> tối</li>
+      <li>Sau mỗi bài: reply tất cả comment trong 2 giờ đầu — quan trọng cho thuật toán</li>
+      <li>Không đăng 2 bài cùng ngày trong 25 ngày đầu</li>
+    </ul>
+  </div>
+
+  <div class="sec">📅 Lịch Đăng 25 Ngày Đầu</div>
+
+  <div class="setup-card">
+    <div class="sc-head">
+      <div class="sc-label">LỊCH CHI TIẾT — COPY VÀO GOOGLE CALENDAR / NOTES</div>
+      <button class="copy-btn" onclick="cp(this,'schedule')">📋 Copy Toàn Bộ Lịch</button>
+    </div>
+    <div class="sc-body" id="schedule">LỊCH ĐĂNG BÀI — FANPAGE BDS MASTERY KIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📌 TRƯỚC KHI ĐĂNG BÀI 1:
+→ Đăng bài Ghim (Tab "Bài Ghim" → Phiên bản 1)
+→ Điền About + Short Description + SĐT + Website
+→ Upload ảnh bìa + ảnh đại diện chuyên nghiệp
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NGÀY 1 (Hôm nay):
+📌 Bài Ghim: "Tôi bán kit — tôi nói thẳng"
+✍️ Bài 01: Giới thiệu trang
+⏰ Đăng: 07:00-08:00 sáng
+🖼️ Ảnh: Ảnh chuyên nghiệp của bạn tại HLX
+
+NGÀY 3:
+✍️ Bài 02: Origin story — Tại sao tạo ra kit
+⏰ Đăng: 20:00-21:00
+🖼️ Ảnh: Behind the scenes — bàn làm việc / màn hình laptop
+
+NGÀY 5:
+✍️ Bài 03: Myth-busting — 3 điều sai về bán HLX
+⏰ Đăng: 07:00-08:00
+🖼️ Ảnh: Ảnh infographic đơn giản hoặc ảnh dự án
+
+NGÀY 7:
+✍️ Bài 04: Số liệu thị trường HLX tuần này [ĐIỀN SỐ THẬT]
+⏰ Đăng: 07:00-08:00 (Thứ Hai — biến thành series)
+🖼️ Ảnh: Phối cảnh dự án HLX
+
+NGÀY 10:
+✍️ Bài 05: Day in the life — Ngày làm việc của môi giới chốt đều
+⏰ Đăng: 20:00-21:00
+🖼️ Ảnh: Lịch làm việc / ảnh gặp khách tại dự án
+
+NGÀY 12:
+✍️ Bài 06: 5 sai lầm khiến môi giới làm nhiều chốt ít
+⏰ Đăng: 07:00-08:00
+🖼️ Ảnh: Text graphic với 5 số thứ tự
+
+NGÀY 15:
+✍️ Bài 07: Case study — Từ 0 deal → 3 deals/30 ngày [ĐIỀN THỰC TẾ]
+⏰ Đăng: 20:00-21:00
+🖼️ Ảnh: Screenshot landing page hoặc ảnh dự án
+
+NGÀY 18:
+✍️ Bài 08: Q&A — Câu hỏi hay nhất tuần này [DÙNG CÂU HỎI THẬT]
+⏰ Đăng: 07:00-08:00
+🖼️ Ảnh: Ảnh chuyên nghiệp của bạn
+
+NGÀY 21:
+✍️ Bài 09: Product education — Kit có gì, mở ra là thấy ngay
+⏰ Đăng: 20:00-21:00
+🖼️ Ảnh: Screenshot kit / mockup landing page / ảnh các file
+
+NGÀY 25:
+✍️ Bài 10: Direct pitch — Nếu anh/chị đang bán HLX
+⏰ Đăng: 07:00-08:00
+🖼️ Ảnh: 3 gói kit với giá + link checkout
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAU NGÀY 25 — DUY TRÌ:
+▸ Thứ Hai: Bản tin thị trường HLX tuần mới
+▸ Thứ Tư: Bài giá trị (tip, case study, Q&A)
+▸ Thứ 6/7: Bài nhẹ (ảnh dự án, engagement post)
+▸ 1 lần/tuần: Mention kit tự nhiên trong bài value
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Nhớ: Reply comment trong 2h đầu sau mỗi bài đăng</div>
+  </div>
+
+  <div class="sec">✅ Checklist Trước Khi Lập Trang</div>
+
+  <div class="chk-box">
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Tạo trang FB → Loại: "Business or Brand" → Danh mục: "Marketing Agency" hoặc "Consulting Agency"</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Đặt tên trang (copy từ Tab Thiết Lập Trang)</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Upload ảnh đại diện: ảnh chân dung chuyên nghiệp, nền trắng hoặc tại dự án HLX</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Upload ảnh bìa: ảnh HLX ngang đẹp 820×312px, thêm text SĐT + tên kit trên Canva</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Điền Short Description (155 ký tự) → copy từ Tab Thiết Lập Trang</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Điền About đầy đủ → copy từ Tab Thiết Lập Trang</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Điền SĐT: 0964.827.670</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Điền Website: https://yen670-oss.github.io/kit-hlx/</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Đăng bài Ghim → Pin lên đầu trang (vào bài → "⋯" → "Ghim lên đầu trang")</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Đăng Bài 01 → Bắt đầu lịch 25 ngày</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Chia sẻ trang mới cho bạn bè → mời Like để có social proof ban đầu</span></div>
+    <div class="chk-row" onclick="this.classList.toggle('done')"><div class="chk-sq"></div><span>Join 5-10 group FB môi giới HLX → bắt đầu seeding sau khi trang có 3+ bài</span></div>
+  </div>
+
+</div>
+
+<script>
+function show(n,btn){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.nb').forEach((b,i)=>b.classList.toggle('active',i===n));
+  window.scrollTo({top:document.querySelector('.nav').offsetTop-2,behavior:'smooth'});
+}
+function cp(btn,id){
+  const el=document.getElementById(id);
+  navigator.clipboard.writeText(el.innerText||el.textContent).then(()=>{
+    const o=btn.textContent; btn.textContent='✅ Đã copy!'; btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('ok');},2200);
+  });
+}
+</script>
+</body>
+</html>
