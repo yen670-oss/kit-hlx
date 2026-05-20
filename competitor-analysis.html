@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 Phân Tích Đối Thủ — BDS Mastery Kit & HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--cream:#FAF8F3;
+  --red:#dc2626;--green:#16a34a;--orange:#ea580c;--blue:#2563eb;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:#1a1a2e;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d1b2e,var(--nd),#1B3A6B);padding:40px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1.5px 1.5px,rgba(201,168,76,.12) 1.5px,transparent 0);background-size:24px 24px;pointer-events:none;}
+.hero-in{position:relative;z-index:1;max-width:680px;margin:0 auto;}
+.hero-badge{display:inline-flex;gap:6px;align-items:center;background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11.5px;font-weight:700;padding:5px 16px;border-radius:20px;margin-bottom:14px;letter-spacing:.08em;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,3.8vw,32px);color:#fff;margin-bottom:10px;line-height:1.25;}
+.hero h1 em{color:var(--gl);font-style:normal;}
+.hero p{color:rgba(255,255,255,.65);font-size:14px;line-height:1.65;}
+
+/* TAB NAV */
+.tab-bar{background:#fff;border-bottom:2px solid #e8e4d8;position:sticky;top:0;z-index:100;overflow-x:auto;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab-inner{display:flex;min-width:max-content;}
+.tab-btn{padding:13px 22px;font-size:13px;font-weight:700;color:#6b7280;cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;white-space:nowrap;font-family:inherit;transition:.15s;}
+.tab-btn:hover{color:var(--nd);}
+.tab-btn.active{color:var(--nd);border-bottom-color:var(--gold);}
+
+/* CONTENT */
+.panel{display:none;max-width:860px;margin:0 auto;padding:36px 24px 72px;}
+.panel.active{display:block;}
+
+/* SECTION TITLE */
+.sec{font-family:'Playfair Display',serif;font-size:18px;color:var(--nd);margin:32px 0 16px;display:flex;align-items:center;gap:10px;}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+
+/* COMPETITOR CARD */
+.comp-card{background:#fff;border-radius:16px;border:1px solid #e8e4d8;margin-bottom:20px;overflow:hidden;}
+.comp-head{display:flex;align-items:flex-start;gap:16px;padding:20px 22px;border-bottom:1px solid #f0ede4;}
+.comp-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.ci-red{background:#fef2f2;}
+.ci-orange{background:#fff7ed;}
+.ci-blue{background:#eff6ff;}
+.ci-purple{background:#faf5ff;}
+.ci-green{background:#f0fdf4;}
+.comp-info{flex:1;}
+.comp-name{font-weight:800;font-size:16px;color:var(--nd);margin-bottom:3px;}
+.comp-type{font-size:12px;color:#9ca3af;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.comp-threat{display:flex;align-items:center;gap:6px;margin-top:6px;}
+.threat-bar{height:6px;border-radius:3px;flex:1;max-width:120px;background:#f0ede4;}
+.threat-fill{height:100%;border-radius:3px;}
+.threat-label{font-size:11.5px;font-weight:700;}
+.comp-body{padding:20px 22px;}
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+@media(max-width:580px){.comp-grid{grid-template-columns:1fr;}}
+.cg-box{border-radius:10px;padding:12px 14px;}
+.cg-strong{background:#fef9ec;border:1px solid #fde68a;}
+.cg-weak{background:#fef2f2;border:1px solid #fecaca;}
+.cg-box .label{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.label-strong{color:#92650a;}
+.label-weak{color:#b91c1c;}
+.cg-box ul{list-style:none;padding:0;}
+.cg-box ul li{font-size:13px;color:#374151;padding:3px 0;display:flex;gap:6px;line-height:1.5;}
+.cg-box ul li::before{flex-shrink:0;margin-top:2px;}
+.cg-strong li::before{content:'✅';}
+.cg-weak li::before{content:'⚠️';}
+
+/* GAP = OPPORTUNITY */
+.gap-box{background:linear-gradient(135deg,#0f4c2a,#1a6b3c);border-radius:12px;padding:16px 18px;margin-top:14px;}
+.gap-box h4{font-size:13px;font-weight:700;color:#86efac;margin-bottom:8px;}
+.gap-box p{font-size:13px;color:rgba(255,255,255,.78);line-height:1.6;}
+
+/* STRATEGY TABLE */
+.strat-tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:24px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e4d8;}
+.strat-tbl th{background:var(--nd);color:var(--gl);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:12px 14px;text-align:left;}
+.strat-tbl td{padding:12px 14px;border-bottom:1px solid #f0ede4;color:#374151;vertical-align:top;line-height:1.55;}
+.strat-tbl tr:last-child td{border:none;}
+.strat-tbl td strong{color:var(--nd);}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:8px;margin-right:4px;}
+.tag-win{background:#dcfce7;color:#166534;}
+.tag-avoid{background:#fee2e2;color:#b91c1c;}
+.tag-own{background:#fef9ec;color:#92650a;}
+
+/* COPY CARD */
+.copy-card{background:#fff;border:1px solid #e8e4d8;border-radius:12px;margin-bottom:14px;overflow:hidden;}
+.cc-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#f9f8f5;border-bottom:1px solid #e8e4d8;}
+.cc-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;}
+.cc-body{padding:14px 16px;font-size:13.5px;color:#374151;line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;}
+.copy-btn{background:var(--nd);color:#fff;border:none;border-radius:7px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
+.copy-btn.ok{background:#16a34a;}
+
+/* HIGHLIGHT BOX */
+.hl-box{border-radius:12px;padding:18px 20px;margin-bottom:20px;}
+.hl-gold{background:linear-gradient(135deg,#fefce8,#fffbf0);border:1px solid #f59e0b44;}
+.hl-gold h4{color:#92400e;font-size:14px;font-weight:700;margin-bottom:8px;}
+.hl-gold p,.hl-gold li{font-size:13.5px;color:#374151;line-height:1.65;}
+.hl-green{background:#f0fdf4;border:1px solid #86efac;}
+.hl-green h4{color:#166534;font-size:14px;font-weight:700;margin-bottom:8px;}
+.hl-green p,.hl-green li{font-size:13.5px;color:#374151;line-height:1.65;}
+.hl-box ul{padding-left:18px;margin-top:4px;}
+.hl-box li{margin-bottom:4px;}
+
+@media(min-width:769px){
+  .panel{padding:40px 36px 80px;}
+  .comp-name{font-size:17px;}
+  .strat-tbl{font-size:14.5px;}
+  .strat-tbl td{padding:14px 16px;}
+  .cg-box ul li{font-size:14px;}
+  .cc-body{font-size:15px;padding:16px 20px;}
+  .hl-gold p,.hl-gold li,.hl-green p,.hl-green li{font-size:14.5px;}
+  .gap-box p{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-badge">🔍 PHÂN TÍCH ĐỐI THỦ CẠNH TRANH — CẬP NHẬT 05/2026</div>
+    <h1>Đối Thủ Của Chúng Ta <em>Là Ai?</em></h1>
+    <p>Phân tích 2 chiều: Đối thủ bán BDS Kit (cạnh tranh với bộ kit) + Đối thủ dự án HLX (cạnh tranh với môi giới bán HLX). Biết họ → đánh đúng điểm yếu → thắng thị phần.</p>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <div class="tab-inner">
+    <button class="tab-btn active" onclick="show(0,this)">🗺️ Tổng Quan</button>
+    <button class="tab-btn" onclick="show(1,this)">📦 Đối Thủ Bán Kit</button>
+    <button class="tab-btn" onclick="show(2,this)">🏗️ Đối Thủ Dự Án HLX</button>
+    <button class="tab-btn" onclick="show(3,this)">⚔️ Chiến Lược Thắng</button>
+    <button class="tab-btn" onclick="show(4,this)">💬 Script Đối Phó</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  TAB 0 — TỔNG QUAN
+══════════════════════════════════════════════ -->
+<div class="panel active" id="t0">
+
+  <div class="hl-gold">
+    <h4>🎯 Tại sao phân tích đối thủ lại quan trọng với chúng ta?</h4>
+    <p>Chúng ta đang bán ở 2 thị trường đồng thời: <strong>(A)</strong> Bán BDS Kit cho môi giới HLX → đối thủ là ai cũng đang bán "công cụ" cho môi giới. <strong>(B)</strong> Bản thân dùng kit để bán sản phẩm HLX → đối thủ là môi giới/dự án khác cũng đang cạnh tranh khách mua BĐS Quảng Ninh.</p>
+    <ul>
+      <li>Biết điểm yếu đối thủ → định vị mình khác biệt, không cạnh tranh giá</li>
+      <li>Biết điểm mạnh đối thủ → không chính diện va chạm, đi đường vòng thông minh hơn</li>
+      <li>Biết gap thị trường → tìm "khoảng trống chưa ai làm" → thống trị mảng đó</li>
+    </ul>
+  </div>
+
+  <div class="sec">🗺️ Bản Đồ Cạnh Tranh Tổng Thể</div>
+
+  <table class="strat-tbl">
+    <tr><th>Phân Khúc Cạnh Tranh</th><th>Đối Thủ Chính</th><th>Mức Độ Đe Dọa</th><th>Ưu Tiên Theo Dõi</th></tr>
+    <tr>
+      <td><strong>Bán BDS Kit / Công Cụ Môi Giới</strong></td>
+      <td>PropTech startup · FB group admin bán template · Khóa học BDS online</td>
+      <td><span style="color:#ea580c;font-weight:700;">⬤⬤⬤⬢⬢ Trung Bình</span></td>
+      <td><span class="tag tag-own">Theo dõi định kỳ</span></td>
+    </tr>
+    <tr>
+      <td><strong>Dự Án Cạnh Tranh HLX (cùng phân khúc)</strong></td>
+      <td>Vin Hạ Long Bay · Sun Premier · BIM Land Amber · Sonasea Vân Đồn</td>
+      <td><span style="color:#dc2626;font-weight:700;">⬤⬤⬤⬤⬢ Cao</span></td>
+      <td><span class="tag tag-avoid">Theo dõi hàng tuần</span></td>
+    </tr>
+    <tr>
+      <td><strong>Môi Giới HLX Cùng Sàn / Cùng Dự Án</strong></td>
+      <td>Môi giới khác đang bán cùng sản phẩm HLX</td>
+      <td><span style="color:#f59e0b;font-weight:700;">⬤⬤⬢⬢⬢ Thấp</span></td>
+      <td><span class="tag tag-win">Hợp tác nhiều hơn cạnh tranh</span></td>
+    </tr>
+    <tr>
+      <td><strong>Kênh Đầu Tư Thay Thế (cho khách)</strong></td>
+      <td>Gửi ngân hàng · Chứng khoán · BĐS tỉnh khác</td>
+      <td><span style="color:#2563eb;font-weight:700;">⬤⬤⬤⬢⬢ Trung Bình</span></td>
+      <td><span class="tag tag-own">Có script riêng</span></td>
+    </tr>
+  </table>
+
+  <div class="hl-green">
+    <h4>✅ Lợi thế cạnh tranh cốt lõi của chúng ta (không ai copy được ngay)</h4>
+    <ul>
+      <li><strong>Tính cá nhân hóa:</strong> Mỗi khách có landing page riêng với SĐT riêng — đối thủ bán template generic không làm được</li>
+      <li><strong>Ecosystem đầy đủ:</strong> Kit + Landing page + Content + SOP + Coaching + Community = đối thủ chỉ bán lẻ từng mảnh</li>
+      <li><strong>Data insider:</strong> Chúng ta đang bán HLX + bán kit cho người bán HLX = hiểu thị trường sâu nhất</li>
+      <li><strong>Trust đã build sẵn:</strong> Khách mua kit vì tin người bán, không phải vì kit rẻ nhất</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  TAB 1 — ĐỐI THỦ BÁN KIT
+══════════════════════════════════════════════ -->
+<div class="panel" id="t1">
+
+  <div class="sec">📦 Đối Thủ Bán BDS Kit / Công Cụ Môi Giới</div>
+
+  <!-- Đối thủ 1 -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-red">📚</div>
+      <div class="comp-info">
+        <div class="comp-name">Khóa Học BDS Online (Udemy / KhoaHoc.vn)</div>
+        <div class="comp-type">Nền tảng khóa học · Giá 299k–1.5tr</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:55%;background:#ea580c;"></div></div>
+          <span class="threat-label" style="color:#ea580c;">Đe dọa Trung Bình</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Điểm Mạnh</div>
+          <ul>
+            <li>Thương hiệu nền tảng đã có sẵn (trust)</li>
+            <li>Giá rẻ, nhiều khóa lựa chọn</li>
+            <li>Video có thể xem lại nhiều lần</li>
+            <li>Certificate khi hoàn thành</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu</div>
+          <ul>
+            <li>Kiến thức generic — không chuyên dự án cụ thể</li>
+            <li>Không có landing page cá nhân hóa</li>
+            <li>Học xong tự làm, không có template/script</li>
+            <li>Không update theo thị trường thực</li>
+            <li>Không có community hỗ trợ sau mua</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cơ hội khai thác</h4>
+        <p>Người đã mua khóa học online nhưng vẫn chưa thấy kết quả thực tế → Đây là target hoàn hảo. Pitch: "Anh/chị đã có kiến thức — giờ cần công cụ thực thi cụ thể cho HLX, không cần học lại từ đầu."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Đối thủ 2 -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-orange">📱</div>
+      <div class="comp-info">
+        <div class="comp-name">Admin Group FB Bán Template / Script</div>
+        <div class="comp-type">Cá nhân · Bán qua inbox · Giá 200k–500k</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:40%;background:#f59e0b;"></div></div>
+          <span class="threat-label" style="color:#f59e0b;">Đe dọa Thấp–Trung</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Điểm Mạnh</div>
+          <ul>
+            <li>Giá rẻ, dễ mua</li>
+            <li>Nội dung đôi khi rất thực tế từ người trong ngành</li>
+            <li>Dễ trust vì người bán cũng là môi giới</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu</div>
+          <ul>
+            <li>Không có hệ thống — chỉ bán rời lẻ</li>
+            <li>Không có landing page, không có automation</li>
+            <li>Chất lượng không đồng đều, không có bảo hành</li>
+            <li>Không dự án cụ thể (generic cho mọi BDS)</li>
+            <li>Mua rồi không biết dùng thế nào vào thực tế</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cơ hội khai thác</h4>
+        <p>Họ bán script rời — ta bán hệ thống hoàn chỉnh. Pitch: "Anh/chị đã mua script nhưng chưa có pipeline để dùng nó? Kit của mình là đường ống — script chỉ là 1 phần nhỏ trong đó."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Đối thủ 3 -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-blue">💻</div>
+      <div class="comp-info">
+        <div class="comp-name">PropTech / CRM Tools (Rever, Cen Land Tools, iHomes)</div>
+        <div class="comp-type">Phần mềm SaaS · Giá 300k–2tr/tháng</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:30%;background:#2563eb;"></div></div>
+          <span class="threat-label" style="color:#2563eb;">Đe dọa Thấp</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Điểm Mạnh</div>
+          <ul>
+            <li>Phần mềm chuyên nghiệp, nhiều tính năng</li>
+            <li>CRM tự động, lưu trữ lead có hệ thống</li>
+            <li>Thương hiệu lớn, có đội hỗ trợ</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu</div>
+          <ul>
+            <li>Phí cao, khó dùng cho môi giới nhỏ lẻ</li>
+            <li>Không có content / nội dung dự án cụ thể</li>
+            <li>Không phù hợp môi giới mới, freelance</li>
+            <li>Thiếu tính nhân văn — chỉ là phần mềm</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cơ hội khai thác</h4>
+        <p>Thị trường ngách: môi giới dưới 2 năm kinh nghiệm, freelance, chưa cần CRM phức tạp → Kit đơn giản, không cần học, không phí tháng. Pitch: "Không cần CRM 2 triệu/tháng khi mới bắt đầu — kit này đủ dùng và rẻ hơn 10 lần."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Đối thủ 4 -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-purple">🎓</div>
+      <div class="comp-info">
+        <div class="comp-name">Huấn Luyện Viên / Coach BDS (Cá Nhân)</div>
+        <div class="comp-type">Coaching 1-1 · Workshop · Giá 2tr–20tr</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:45%;background:#9333ea;"></div></div>
+          <span class="threat-label" style="color:#9333ea;">Đe dọa Trung Bình</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Điểm Mạnh</div>
+          <ul>
+            <li>Personal brand mạnh, trust cao</li>
+            <li>Tương tác 1-1, cảm giác được chú ý riêng</li>
+            <li>Dạy tư duy, không chỉ công cụ</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu</div>
+          <ul>
+            <li>Giá cao, không phải ai cũng tiếp cận được</li>
+            <li>Kiến thức generic, không chuyên HLX</li>
+            <li>Sau coaching vẫn phải tự làm nội dung</li>
+            <li>Không có template/asset ready-to-use</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cơ hội khai thác</h4>
+        <p>Người đã học coaching nhưng thiếu "tay nghề thực chiến" với HLX cụ thể → Pitch: "Coaching dạy kỹ năng — kit này dạy cách làm cụ thể với HLX ngay hôm nay, không cần chờ học xong."</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+  TAB 2 — ĐỐI THỦ DỰ ÁN HLX
+══════════════════════════════════════════════ -->
+<div class="panel" id="t2">
+
+  <div class="sec">🏗️ Đối Thủ Dự Án Cạnh Tranh Với HLX</div>
+
+  <!-- Vin Ha Long Bay -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-red" style="background:#fef2f2;">🌊</div>
+      <div class="comp-info">
+        <div class="comp-name">Vinhomes Hạ Long Bay (Giai đoạn 1 cũ)</div>
+        <div class="comp-type">Cùng thương hiệu Vinhomes · Đã bàn giao · Secondhand market</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:70%;background:#dc2626;"></div></div>
+          <span class="threat-label" style="color:#dc2626;">Đe dọa Cao — Cùng thương hiệu</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Lợi thế của họ</div>
+          <ul>
+            <li>Đã bàn giao — khách thấy được thực tế ngay</li>
+            <li>Secondhand: giá có thể thương lượng linh hoạt</li>
+            <li>Pháp lý hoàn thiện 100% (đã có sổ)</li>
+            <li>Có dân cư thực tế → đánh giá tiện ích thật</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu So Với HLX</div>
+          <ul>
+            <li>Giá đã lên cao sau nhiều năm — room tăng ít hơn</li>
+            <li>Thiết kế cũ hơn, tiêu chuẩn cũ hơn</li>
+            <li>Không có chính sách hỗ trợ từ CĐT nữa</li>
+            <li>Không còn ưu đãi ngân hàng gói mới</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cách thắng khi khách so sánh</h4>
+        <p><strong>Angle đầu tư:</strong> HLX là "mua đáy mới" — vẫn còn dư địa tăng giá, trong khi HLB đã qua đỉnh chu kỳ. Khách mua HLX hôm nay = vị thế mà người mua HLB năm 2019 đã làm. <strong>Script mẫu:</strong> "Vin Hạ Long Bay bây giờ giá [X] tỷ — nhưng người mua năm 2019 chỉ mất [Y] tỷ. HLX đang ở giai đoạn mà HLB đã từng ở — cơ hội tương tự đang lặp lại."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sun Premier Village -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-orange">☀️</div>
+      <div class="comp-info">
+        <div class="comp-name">Sun Premier Village Hạ Long Bay</div>
+        <div class="comp-type">Sun Group · Biệt thự nghỉ dưỡng · Phân khúc cao cấp</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:65%;background:#ea580c;"></div></div>
+          <span class="threat-label" style="color:#ea580c;">Đe dọa Cao — Cùng phân khúc</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Lợi thế của họ</div>
+          <ul>
+            <li>Sun Group = thương hiệu resort 5 sao uy tín</li>
+            <li>Vận hành bởi Sun Hospitality → cam kết cho thuê</li>
+            <li>Vị trí đẹp, view vịnh trực tiếp</li>
+            <li>Cộng đồng cư dân chất lượng cao</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu So Với HLX</div>
+          <ul>
+            <li>Giá cao hơn HLX 20-40% — rào cản vốn lớn hơn</li>
+            <li>Thanh khoản secondhand hạn chế (thị trường nhỏ hơn)</li>
+            <li>Pháp lý condotel còn phức tạp một số lô</li>
+            <li>Không có shophouse thương mại</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cách thắng khi khách so sánh</h4>
+        <p><strong>Angle đa dạng hóa:</strong> Sun Premier = 1 loại sản phẩm (biệt thự nghỉ dưỡng). HLX = shophouse + biệt thự + condotel → linh hoạt theo ngân sách và mục đích. <strong>Script:</strong> "Sun Premier tuyệt vời cho người muốn nghỉ dưỡng thuần túy. Nhưng nếu anh/chị muốn vừa kinh doanh vừa đầu tư vừa cho thuê — shophouse HLX cho 3 lợi ích trong 1 sản phẩm."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIM Group Amber -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-blue">💎</div>
+      <div class="comp-info">
+        <div class="comp-name">BIM Land Amber Hills / Amber Residence</div>
+        <div class="comp-type">BIM Group · Phân khúc trung-cao · Hạ Long</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:50%;background:#2563eb;"></div></div>
+          <span class="threat-label" style="color:#2563eb;">Đe dọa Trung Bình</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Lợi thế của họ</div>
+          <ul>
+            <li>Giá tốt hơn HLX (~rẻ hơn 15-25%)</li>
+            <li>Vị trí trung tâm Hạ Long</li>
+            <li>BIM Group là doanh nghiệp lâu đời tại Quảng Ninh</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu So Với HLX</div>
+          <ul>
+            <li>Thương hiệu nhỏ hơn Vinhomes rất nhiều</li>
+            <li>Thanh khoản thứ cấp kém hơn đáng kể</li>
+            <li>Hệ thống tiện ích chưa đồng bộ như HLX</li>
+            <li>Ít được nhắc đến trên media quốc tế</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cách thắng khi khách so sánh</h4>
+        <p><strong>Angle thanh khoản:</strong> Khi cần bán lại, Vinhomes bán được nhanh hơn 50%+ do nhận diện thương hiệu. <strong>Script:</strong> "Giá BIM rẻ hơn, nhưng khi anh/chị cần bán lại sau 3-5 năm — Vinhomes HLX sẽ có 10 người hỏi mua trong khi BIM chỉ có 2-3 người. Thanh khoản = an toàn cho khoản đầu tư."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sonasea Van Don -->
+  <div class="comp-card">
+    <div class="comp-head">
+      <div class="comp-icon ci-green">🏝️</div>
+      <div class="comp-info">
+        <div class="comp-name">Sonasea Vân Đồn / BĐS Phú Quốc, Đà Nẵng</div>
+        <div class="comp-type">Dự án resort tỉnh/thành khác · Cùng phân khúc nghỉ dưỡng</div>
+        <div class="comp-threat">
+          <div class="threat-bar"><div class="threat-fill" style="width:55%;background:#16a34a;"></div></div>
+          <span class="threat-label" style="color:#16a34a;">Đe dọa Trung Bình (khác địa lý)</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-body">
+      <div class="comp-grid">
+        <div class="cg-box cg-strong">
+          <div class="label label-strong">Lợi thế của họ</div>
+          <ul>
+            <li>Phú Quốc: Thương hiệu du lịch quốc tế mạnh</li>
+            <li>Đà Nẵng: Thanh khoản cao, thị trường sôi động</li>
+            <li>Nhiều đối tác quản lý vận hành quốc tế</li>
+          </ul>
+        </div>
+        <div class="cg-box cg-weak">
+          <div class="label label-weak">Điểm Yếu So Với HLX</div>
+          <ul>
+            <li>Xa Hà Nội hơn (HLX chỉ 2.5h drive)</li>
+            <li>Chi phí đi lại cao hơn nếu tự sử dụng</li>
+            <li>Thị trường Phú Quốc đã bão hòa nhiều phân khúc</li>
+            <li>Pháp lý condotel Đà Nẵng/Phú Quốc còn vướng</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h4>🎯 Cách thắng khi khách so sánh</h4>
+        <p><strong>Angle vị trí địa lý:</strong> HLX = "Phú Quốc của miền Bắc" nhưng gần nhà hơn. Khách Hà Nội có thể lái xe xuống cuối tuần. <strong>Script:</strong> "Phú Quốc đẹp, nhưng bay 2 tiếng mỗi lần xuống thăm tài sản. HLX — anh/chị cầm vô lăng 2.5 tiếng từ Hà Nội là đến, vừa nghỉ dưỡng vừa kiểm tra tài sản mỗi tháng."</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+  TAB 3 — CHIẾN LƯỢC THẮNG
+══════════════════════════════════════════════ -->
+<div class="panel" id="t3">
+
+  <div class="sec">⚔️ Ma Trận Chiến Lược Cạnh Tranh</div>
+
+  <table class="strat-tbl">
+    <tr><th>Tình Huống</th><th>Đối Thủ Liên Quan</th><th>Chiến Lược</th><th>Kết Quả Kỳ Vọng</th></tr>
+    <tr>
+      <td><strong>Khách so sánh giá HLX vs BIM</strong></td>
+      <td>BIM Land, dự án giá rẻ hơn</td>
+      <td><span class="tag tag-win">Tăng giá trị cảm nhận</span> Nhấn vào thanh khoản, bảo toàn vốn, thương hiệu Vinhomes khi bán lại</td>
+      <td>Khách chấp nhận mức giá cao hơn khi hiểu "mua an toàn"</td>
+    </tr>
+    <tr>
+      <td><strong>Khách muốn mua Phú Quốc / Đà Nẵng</strong></td>
+      <td>BDS nghỉ dưỡng tỉnh khác</td>
+      <td><span class="tag tag-win">Địa lý + Chi phí vận hành</span> HLX gần hơn 4-5x so với Phú Quốc → tổng chi phí sở hữu thấp hơn</td>
+      <td>Khách tái cân nhắc, xem thêm HLX</td>
+    </tr>
+    <tr>
+      <td><strong>Khách đang cân nhắc Vin Hạ Long Bay cũ</strong></td>
+      <td>HLB secondhand</td>
+      <td><span class="tag tag-win">Chu kỳ thị trường</span> HLX = HLB năm 2019. Người mua HLB 2019 đang lãi X%. Anh/chị có muốn ở vị trí đó không?</td>
+      <td>Khách chuyển sang HLX (sản phẩm mới, room tăng giá lớn hơn)</td>
+    </tr>
+    <tr>
+      <td><strong>Khách hỏi "tại sao không gửi ngân hàng"</strong></td>
+      <td>Gửi tiết kiệm</td>
+      <td><span class="tag tag-own">ROI so sánh</span> Dùng Bảng Tính ROI → nhập số tiền khách có → so sánh trực tiếp</td>
+      <td>Số liệu thuyết phục hơn lời nói. Khách mở ra thảo luận tiếp.</td>
+    </tr>
+    <tr>
+      <td><strong>Môi giới khác đang bán kit generic</strong></td>
+      <td>Admin FB bán template</td>
+      <td><span class="tag tag-win">Cá nhân hóa + Ecosystem</span> Họ bán file — ta bán hệ thống + landing page cá nhân. Không thể so sánh.</td>
+      <td>Chúng ta thắng trên value, không cạnh tranh giá</td>
+    </tr>
+    <tr>
+      <td><strong>Khách đã mua khóa học BDS</strong></td>
+      <td>Khóa học online</td>
+      <td><span class="tag tag-own">Bổ sung, không thay thế</span> Kit = công cụ thực thi, khóa học = kiến thức nền. Hai cái bổ sung nhau.</td>
+      <td>Không cần thuyết phục "từ bỏ" → chỉ cần "thêm vào"</td>
+    </tr>
+  </table>
+
+  <div class="sec">🛡️ 3 Lớp Hào Bảo Vệ Cạnh Tranh</div>
+
+  <div class="hl-gold">
+    <h4>🏰 Lớp 1: Chuyên Môn Sâu — "Không Ai Biết HLX Hơn Chúng Ta"</h4>
+    <ul>
+      <li>Cập nhật số liệu thị trường HLX hàng tuần (Weekly Brief) — đối thủ generic không thể làm được</li>
+      <li>Case study thực tế từ khách hàng thực — không phải ví dụ sách vở</li>
+      <li>Mạng lưới môi giới HLX qua Mastermind — insider information flow</li>
+    </ul>
+  </div>
+
+  <div class="hl-gold">
+    <h4>🏰 Lớp 2: Cá Nhân Hóa — "Cái Anh/Chị Nhận Là Của Riêng Anh/Chị"</h4>
+    <ul>
+      <li>Landing page với SĐT riêng — không môi giới nào cũng có</li>
+      <li>Kit được giao kèm với tên khách — cảm giác "được phục vụ", không phải "mua hàng đại trà"</li>
+      <li>Follow-up cá nhân hóa — không phải email automation robot</li>
+    </ul>
+  </div>
+
+  <div class="hl-gold">
+    <h4>🏰 Lớp 3: Network Effect — "Càng Nhiều Người Dùng Kit, Kit Càng Giá Trị"</h4>
+    <ul>
+      <li>Mastermind community — người dùng kit kết nối nhau, chia sẻ deal, phát triển cùng nhau</li>
+      <li>Case study từ thành viên → thêm vào kit → kit ngày càng tốt hơn</li>
+      <li>Testimonial từ người thật → trust càng cao → dễ bán cho khách tiếp theo</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  TAB 4 — SCRIPT ĐỐI PHÓ
+══════════════════════════════════════════════ -->
+<div class="panel" id="t4">
+
+  <div class="sec">💬 Script Xử Lý Khi Khách Đề Cập Đối Thủ</div>
+
+  <div class="copy-card">
+    <div class="cc-head">
+      <div class="cc-label">SCRIPT: "Tôi thấy BIM Land rẻ hơn nhiều"</div>
+      <button class="copy-btn" onclick="cp(this,'sc1')">📋 Copy</button>
+    </div>
+    <div class="cc-body" id="sc1">Dạ anh/chị nói đúng — BIM Land giá có thấp hơn. Em xin phép hỏi: anh/chị định giữ đầu tư này bao lâu ạ? 3 năm, 5 năm, hay dài hơn?
+
+[Khách trả lời]
+
+Em hỏi vì thế này: nếu sau 5 năm anh/chị cần bán lại — tốc độ bán được và giá bán lại của Vinhomes so với BIM Land chênh nhau khá rõ. Theo số liệu em theo dõi, shophouse Vinhomes thường bán được trong 2-4 tuần, trong khi dự án khác thường mất 2-4 tháng và phải giảm giá thêm 5-10% để hút người mua.
+
+Anh/chị tính: khoản tiết kiệm ban đầu của BIM có bù đắp được rủi ro thanh khoản đó không?
+
+Em không nói BIM không tốt — em chỉ muốn anh/chị so sánh trọn vẹn, không chỉ giá mua vào ạ.</div>
+  </div>
+
+  <div class="copy-card">
+    <div class="cc-head">
+      <div class="cc-label">SCRIPT: "Tôi đang nghĩ đến Đà Nẵng / Phú Quốc"</div>
+      <button class="copy-btn" onclick="cp(this,'sc2')">📋 Copy</button>
+    </div>
+    <div class="cc-body" id="sc2">Đà Nẵng và Phú Quốc rất tốt — em hoàn toàn hiểu sức hút của hai nơi đó.
+
+Chỉ hỏi nhanh: anh/chị ở Hà Nội hay miền Bắc không? [Nếu có] → Thì anh/chị tính đến Đà Nẵng hết bao giờ? Bay 1.5 tiếng, taxi sân bay, cộng lại 3-4 triệu một chuyến đi và về.
+
+HLX từ Hà Nội: lái xe 2.5 tiếng, chi phí chuyến đi dưới 500k. Trong 1 năm nếu xuống thăm tài sản 6 lần — anh/chị tiết kiệm được [X triệu] chỉ riêng tiền đi lại. Sau 5 năm là [5X triệu].
+
+Chưa kể: vì gần nên anh/chị có thể tự vận hành cho thuê, không cần trả phí quản lý cho công ty vận hành (thường 20-30% doanh thu cho thuê).
+
+Anh/chị muốn em tính thử so sánh tổng chi phí sở hữu 5 năm giữa HLX và Đà Nẵng không ạ?</div>
+  </div>
+
+  <div class="copy-card">
+    <div class="cc-head">
+      <div class="cc-label">SCRIPT: "Tôi đang xem Vin Hạ Long Bay cũ — có vẻ ổn định hơn"</div>
+      <button class="copy-btn" onclick="cp(this,'sc3')">📋 Copy</button>
+    </div>
+    <div class="cc-body" id="sc3">Dạ, HLB đã bàn giao nên anh/chị thấy được thực tế — điều đó hoàn toàn hợp lý.
+
+Em muốn kể một câu chuyện: người mua HLB năm 2019 với giá [X] tỷ — bây giờ giá trị tài sản của họ là [X+Y] tỷ, chưa kể tiền thuê mấy năm qua. Nhiều người muốn "tôi ước gì mình mua năm 2019".
+
+HLX bây giờ đang ở điểm mà HLB đã từng ở. Pháp lý đang hoàn thiện, tiến độ xây đúng cam kết, và quan trọng: giá chưa phản ánh đầy đủ tiềm năng.
+
+Anh/chị mua HLB bây giờ = mua vào giai đoạn đã qua đỉnh cycle. Mua HLX bây giờ = vị thế mà người mua HLB 2019 đang có.
+
+Anh/chị muốn em phân tích chi tiết hơn không ạ?</div>
+  </div>
+
+  <div class="copy-card">
+    <div class="cc-head">
+      <div class="cc-label">SCRIPT: "Gửi ngân hàng chắc hơn, sao phải mua BDS?"</div>
+      <button class="copy-btn" onclick="cp(this,'sc4')">📋 Copy</button>
+    </div>
+    <div class="cc-body" id="sc4">Dạ câu hỏi rất hay — và thực ra gửi ngân hàng không sai, em không nói vậy đâu ạ.
+
+Chỉ là mình so sánh thực tế: 5 tỷ gửi ngân hàng @ 5%/năm = 250 triệu/năm, sau 5 năm = 1.25 tỷ lãi.
+
+5 tỷ mua shophouse HLX:
+▸ Cho thuê: 25-30 triệu/tháng = 300-360 triệu/năm → 5 năm: 1.5-1.8 tỷ
+▸ Tăng giá tài sản (chu kỳ Vinhomes): +15-25% → thêm 750k-1.25 tỷ
+▸ Tổng sau 5 năm: 2.25-3 tỷ so với 1.25 tỷ
+
+Nhưng đây là điểm quan trọng: gửi ngân hàng thì không thể "cho thuê" được. BDS vừa sinh lãi vừa tăng giá.
+
+Anh/chị muốn em mở bảng tính ROI thực tế theo ngân sách cụ thể của mình không? Điền vào 5 phút là ra ngay kết quả ạ.
+
+[Mở link: https://yen670-oss.github.io/kit-hlx/kits/shared/bang-tinh-roi.html]</div>
+  </div>
+
+  <div class="copy-card">
+    <div class="cc-head">
+      <div class="cc-label">SCRIPT: Khi khách hỏi "Kit của bạn khác gì template trên mạng?"</div>
+      <button class="copy-btn" onclick="cp(this,'sc5')">📋 Copy</button>
+    </div>
+    <div class="cc-body" id="sc5">Câu hỏi hay — em so sánh thẳng luôn:
+
+Template trên mạng (200-500k):
+▸ File Word/PDF để tự đọc
+▸ Nội dung generic cho mọi dự án BDS
+▸ Không có landing page
+▸ Không có SOP vận hành
+▸ Mua rồi tự figure out
+
+BDS Mastery Kit (697k-2.997tr):
+▸ Landing page cá nhân với SĐT riêng — live 24/7
+▸ Nội dung chuyên biệt 100% cho Vinhomes HLX
+▸ 30 bài viết đã viết sẵn, copy-paste đăng được ngay
+▸ Script xử lý phản đối thực tế từ khách HLX
+▸ SOP vận hành nhân viên đăng bài
+▸ Hỗ trợ 30 phút sau mua qua Zalo
+
+Giá template = giá mua nguyên liệu. Giá Kit = giá mua bữa ăn đã nấu sẵn, ăn được ngay.
+
+Anh/chị muốn mua nguyên liệu hay muốn ăn được ngay hôm nay?</div>
+  </div>
+
+</div>
+
+<script>
+function show(n,btn){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+  window.scrollTo({top:document.querySelector('.tab-bar').offsetTop-2,behavior:'smooth'});
+}
+function cp(btn,id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{
+    const o=btn.textContent; btn.textContent='✅ Copied!'; btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('ok');},2200);
+  });
+}
+</script>
+</body>
+</html>
