@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nghiên Cứu Nỗi Đau Môi Giới HLX — BDS Mastery Kit</title>
+<style>
+  :root{
+    --navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;
+    --cream:#FAF8F3;--red:#C0392B;--green:#1a6b3a;--orange:#D35400;
+    --bg:#0d1b2a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:#e8e0d0;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
+
+  /* ── HEADER */
+  .hero{background:linear-gradient(135deg,#0a1520,#1a2d4a);padding:48px 24px 36px;text-align:center;border-bottom:1px solid rgba(201,168,76,.25)}
+  .hero-tag{display:inline-block;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gl);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:16px}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,38px);color:#fff;margin-bottom:10px;line-height:1.2}
+  .hero-sub{color:#a0b4cc;font-size:14px;max-width:560px;margin:0 auto 20px}
+  .hero-stats{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:28px}
+  .hs-box{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px 20px;text-align:center;min-width:110px}
+  .hs-num{font-size:26px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif}
+  .hs-label{font-size:11px;color:#8a9ab0;margin-top:2px}
+
+  /* ── TABS */
+  .tab-bar{display:flex;overflow-x:auto;background:#0a1520;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:99;scrollbar-width:none}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{flex:none;padding:14px 20px;font-size:13px;font-weight:600;color:#6a7d90;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s}
+  .tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+  .tab-btn:hover{color:#d0c0a0}
+
+  /* ── PANELS */
+  .panel{display:none;padding:28px 20px 60px;max-width:820px;margin:0 auto}
+  .panel.active{display:block}
+
+  /* ── SECTION LABEL */
+  .sec-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gl);margin-bottom:6px;font-weight:600}
+  .sec-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,26px);color:#fff;margin-bottom:6px}
+  .sec-sub{color:#8a9ab0;font-size:13.5px;margin-bottom:28px}
+
+  /* ── PAIN CARD */
+  .pain-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:20px;overflow:hidden}
+  .pain-head{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;user-select:none}
+  .pain-icon{font-size:26px;flex-shrink:0}
+  .pain-meta{flex:1}
+  .pain-num{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gl);margin-bottom:2px}
+  .pain-title{font-size:16px;font-weight:700;color:#f0e8d8}
+  .pain-badge{font-size:10px;padding:3px 10px;border-radius:12px;font-weight:600;flex-shrink:0}
+  .badge-critical{background:rgba(192,57,43,.25);color:#e87070;border:1px solid rgba(192,57,43,.4)}
+  .badge-high{background:rgba(211,84,0,.25);color:#f0a060;border:1px solid rgba(211,84,0,.4)}
+  .badge-medium{background:rgba(201,168,76,.2);color:var(--gl);border:1px solid rgba(201,168,76,.35)}
+  .pain-body{padding:0 20px 20px;border-top:1px solid rgba(255,255,255,.06)}
+
+  .pain-body p{color:#c0b09a;font-size:14px;margin-top:14px;line-height:1.75}
+
+  /* Data proof */
+  .data-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}
+  .data-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px 16px;text-align:center}
+  .data-num{font-size:24px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif}
+  .data-label{font-size:11px;color:#8a9ab0;margin-top:4px;line-height:1.4}
+  .data-src{font-size:10px;color:#5a6a7a;margin-top:4px;font-style:italic}
+
+  /* Quote */
+  .quote-block{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-style:italic;color:#c0b09a;font-size:13.5px}
+  .quote-src{font-size:11px;color:#5a6a7a;margin-top:6px;font-style:normal}
+
+  /* How to use */
+  .how-box{background:rgba(26,107,58,.12);border:1px solid rgba(26,107,58,.3);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .how-head{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#60c080;font-weight:600;margin-bottom:8px}
+  .how-box p{color:#90c0a0;font-size:13px}
+
+  /* ── OVERVIEW TAB */
+  .pain-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0}
+  .pm-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s}
+  .pm-card:hover{border-color:var(--gold);background:rgba(201,168,76,.06)}
+  .pm-card.critical{border-left:3px solid #e87070}
+  .pm-card.high{border-left:3px solid #f0a060}
+  .pm-card.medium{border-left:3px solid var(--gold)}
+  .pm-emoji{font-size:24px;margin-bottom:8px}
+  .pm-title{font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:4px}
+  .pm-severity{font-size:11px;margin-bottom:6px}
+  .pm-impact{font-size:12px;color:#8a9ab0}
+
+  /* Summary bar */
+  .insight-bar{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.04));border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:18px 20px;margin:20px 0}
+  .insight-bar h3{font-size:14px;font-weight:700;color:var(--gl);margin-bottom:10px}
+  .insight-bar ul{list-style:none;display:grid;gap:7px}
+  .insight-bar li{font-size:13px;color:#c0b09a;padding-left:18px;position:relative}
+  .insight-bar li::before{content:'→';position:absolute;left:0;color:var(--gold)}
+
+  /* ── SCRIPT TAB */
+  .script-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:16px;overflow:hidden}
+  .script-head{padding:14px 20px;background:rgba(255,255,255,.03);display:flex;justify-content:space-between;align-items:center}
+  .script-name{font-weight:700;color:#f0e8d8;font-size:14px}
+  .script-tag{font-size:10px;padding:3px 10px;border-radius:12px;background:rgba(201,168,76,.15);color:var(--gl);border:1px solid rgba(201,168,76,.3)}
+  .script-body{padding:16px 20px}
+  .script-body pre{white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;font-size:13.5px;color:#c0b09a;line-height:1.7}
+  .copy-btn{display:block;width:100%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:13px;font-weight:600;padding:10px;border-radius:0 0 12px 12px;cursor:pointer;transition:all .2s}
+  .copy-btn:hover{background:rgba(201,168,76,.22)}
+  .copy-btn.ok{background:rgba(26,107,58,.25);border-color:rgba(26,107,58,.4);color:#80e0a0}
+
+  /* ── CHECKLIST TAB */
+  .checklist{list-style:none;display:grid;gap:10px;margin:18px 0}
+  .checklist li{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 16px}
+  .checklist .ck-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+  .checklist .ck-text{flex:1}
+  .ck-title{font-size:14px;font-weight:700;color:#f0e8d8;margin-bottom:3px}
+  .ck-desc{font-size:12.5px;color:#8a9ab0;line-height:1.5}
+  .ck-action{font-size:12px;color:#60c080;margin-top:5px}
+
+  /* Severity legend */
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+  .leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#8a9ab0}
+  .leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .dot-critical{background:#e87070}
+  .dot-high{background:#f0a060}
+  .dot-medium{background:var(--gold)}
+
+  /* Desktop */
+  @media(min-width:769px){
+    body{font-size:16px}
+    .panel{padding:36px 40px 80px}
+    .pain-body p{font-size:15px}
+    .data-num{font-size:28px}
+    .script-body pre{font-size:15px}
+    .pain-title{font-size:17px}
+    .quote-block{font-size:14.5px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🔬 Market Intelligence · BDS Mastery Kit</div>
+  <h1>7 Nỗi Đau Sâu Nhất Của<br>Môi Giới Hạ Long Xanh</h1>
+  <p class="hero-sub">Nghiên cứu có bằng chứng từ data — Dùng để định vị offer, viết copy, và chốt kit</p>
+
+  <div class="hero-stats">
+    <div class="hs-box">
+      <div class="hs-num">70%</div>
+      <div class="hs-label">môi giới bỏ nghề<br>(VARS 2023)</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">90%</div>
+      <div class="hs-label">giảm thu nhập<br>(2022–2023)</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">3tr₫</div>
+      <div class="hs-label">chi phí/lead<br>thực sự quan tâm</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">400%</div>
+      <div class="hs-label">giảm tỷ lệ chốt<br>nếu rep. sau 5'</div>
+    </div>
+    <div class="hs-box">
+      <div class="hs-num">18 tỷ$</div>
+      <div class="hs-label">tổng đầu tư HLX<br>≈ 456.000 tỷ₫</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="show(0)">🗺️ Bản Đồ Nỗi Đau</button>
+  <button class="tab-btn" onclick="show(1)">🔴 Nỗi Đau #1–3</button>
+  <button class="tab-btn" onclick="show(2)">🟠 Nỗi Đau #4–7</button>
+  <button class="tab-btn" onclick="show(3)">💬 Script Khai Thác</button>
+  <button class="tab-btn" onclick="show(4)">✅ Checklist Hành Động</button>
+</div>
+
+<!-- ─────────────── TAB 0: OVERVIEW ─────────────── -->
+<div class="panel active" id="p0">
+  <div class="sec-label">Market Intelligence</div>
+  <div class="sec-title">Bản Đồ Nỗi Đau Môi Giới HLX</div>
+  <div class="sec-sub">7 vấn đề cốt lõi — xếp hạng theo mức độ ảnh hưởng đến doanh số</div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot dot-critical"></div> Nghiêm trọng — Ảnh hưởng trực tiếp đến sống còn</div>
+    <div class="leg-item"><div class="leg-dot dot-high"></div> Cao — Cản trở tăng trưởng đáng kể</div>
+    <div class="leg-item"><div class="leg-dot dot-medium"></div> Trung bình — Giới hạn hiệu quả dài hạn</div>
+  </div>
+
+  <div class="pain-map">
+    <div class="pm-card critical" onclick="show(1)">
+      <div class="pm-emoji">📭</div>
+      <div class="pm-title">Thiếu tài liệu chuẩn</div>
+      <div class="pm-severity">🔴 Nghiêm trọng</div>
+      <div class="pm-impact">Không có gì để gửi khách — mất deal ngay vòng đầu</div>
+    </div>
+    <div class="pm-card critical" onclick="show(1)">
+      <div class="pm-emoji">📢</div>
+      <div class="pm-title">Không biết tạo content</div>
+      <div class="pm-severity">🔴 Nghiêm trọng</div>
+      <div class="pm-impact">Không ai biết mình tồn tại → 0 lead inbound</div>
+    </div>
+    <div class="pm-card critical" onclick="show(1)">
+      <div class="pm-emoji">⚔️</div>
+      <div class="pm-title">Cạnh tranh nội bộ</div>
+      <div class="pm-severity">🔴 Nghiêm trọng</div>
+      <div class="pm-impact">Hàng trăm môi giới bán cùng 1 sản phẩm → commodity</div>
+    </div>
+    <div class="pm-card high" onclick="show(2)">
+      <div class="pm-emoji">💸</div>
+      <div class="pm-title">Chi phí marketing cao</div>
+      <div class="pm-severity">🟠 Cao</div>
+      <div class="pm-impact">3tr₫/lead → hầu bao cạn trước khi chốt được</div>
+    </div>
+    <div class="pm-card high" onclick="show(2)">
+      <div class="pm-emoji">📋</div>
+      <div class="pm-title">Thiếu quy trình bán</div>
+      <div class="pm-severity">🟠 Cao</div>
+      <div class="pm-impact">Lead "chết" giữa chừng vì không có follow-up system</div>
+    </div>
+    <div class="pm-card medium" onclick="show(2)">
+      <div class="pm-emoji">🧠</div>
+      <div class="pm-title">Không xây được thương hiệu cá nhân</div>
+      <div class="pm-severity">🟡 Trung bình</div>
+      <div class="pm-impact">Khách không tin → chọn môi giới khác có "tên tuổi" hơn</div>
+    </div>
+    <div class="pm-card medium" onclick="show(2)">
+      <div class="pm-emoji">😰</div>
+      <div class="pm-title">Tâm lý bất ổn & bỏ cuộc</div>
+      <div class="pm-severity">🟡 Trung bình</div>
+      <div class="pm-impact">70% bỏ nghề → những ai trụ lại sẽ thắng toàn bộ</div>
+    </div>
+  </div>
+
+  <div class="insight-bar">
+    <h3>🔑 3 Insight Chiến Lược Từ Data</h3>
+    <ul>
+      <li>Thị trường HLX đang ở điểm vàng: hạ tầng đổ bộ, giá tăng 15-25%, nhưng môi giới chưa có công cụ để tận dụng cơn sóng này</li>
+      <li>Khoảng trống lớn nhất không phải về sản phẩm — mà về hệ thống bán hàng. Ai có hệ thống thắng ai không có</li>
+      <li>70% môi giới bỏ nghề tạo ra "dọn sân" cho 30% còn lại — đây là thời điểm xây nền tảng, không phải chờ</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ─────────────── TAB 1: NỖI ĐAU 1-3 ─────────────── -->
+<div class="panel" id="p1">
+  <div class="sec-label">Nghiêm Trọng — Tác Động Ngay Đến Doanh Số</div>
+  <div class="sec-title">Nỗi Đau #1 → #3</div>
+  <div class="sec-sub">Ba vấn đề cốt lõi khiến môi giới không bán được dù thị trường đang tốt</div>
+
+  <!-- PAIN 1 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📭</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #01</div>
+        <div class="pain-title">Không có tài liệu bán hàng chuyên nghiệp</div>
+      </div>
+      <div class="pain-badge badge-critical">🔴 Nghiêm Trọng</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Khi khách hỏi "Anh/chị có tài liệu gì về dự án không?", 80% môi giới trả lời bằng ảnh chụp màn hình, brochure mờ từ Zalo, hoặc link bài viết tổng hợp không rõ nguồn. Không có gì để gửi đi một cách chuyên nghiệp — không landing page cá nhân, không bộ tài liệu có tên mình.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">~2.000</div>
+          <div class="data-label">sản phẩm HLX giai đoạn 1</div>
+          <div class="data-src">Báo cáo thị trường 5/2026</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Hàng trăm</div>
+          <div class="data-label">môi giới cùng bán → cùng gửi 1 brochure</div>
+          <div class="data-src">Quan sát thị trường thực tế</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">&lt;5%</div>
+          <div class="data-label">môi giới có landing page cá nhân</div>
+          <div class="data-src">Ước tính thực địa</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Thiếu hụt các công cụ hỗ trợ chuyên sâu khiến dòng tiền của người làm nghề thiếu bền vững."
+        <div class="quote-src">— VnEconomy, phân tích về thực trạng nghề môi giới BĐS 2025</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Tại sao đây là vấn đề nghiêm trọng:</strong> Khách BĐS cao cấp quyết định bỏ hàng tỷ đồng. Họ so sánh giữa 3–5 môi giới. Ai gửi tài liệu đẹp hơn, rõ ràng hơn, có thương hiệu hơn → họ chọn người đó, dù giá hay chính sách như nhau.</p>
+
+      <div class="how-box">
+        <div class="how-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Bộ Kit HLX cung cấp ngay: landing page cá nhân có tên môi giới, bộ tài liệu dự án chuẩn, ảnh HLX chuyên nghiệp, và script tư vấn — tất cả dùng được trong 24h sau khi nhận kit</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 2 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📢</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #02</div>
+        <div class="pain-title">Không biết cách tạo content — Không ai biết mình tồn tại</div>
+      </div>
+      <div class="pain-badge badge-critical">🔴 Nghiêm Trọng</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Trong thị trường có cả ngàn môi giới HLX, nếu không có hiện diện online thì bằng như vô hình. Phần lớn môi giới chỉ biết "đăng bài rao" — không có chiến lược content, không có lịch đăng, không hiểu platform nào cho kết quả tốt nhất.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">Video ngắn</div>
+          <div class="data-label">xu hướng bắt buộc thay rao vặt (VnEconomy 2025)</div>
+          <div class="data-src">Theo khuyến nghị ngành</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">FB + TikTok + Zalo</div>
+          <div class="data-label">3 kênh chính khách HLX thường dùng</div>
+          <div class="data-src">Quan sát thực tế</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Ít hơn 20%</div>
+          <div class="data-label">môi giới đăng bài đều đặn theo lịch</div>
+          <div class="data-src">Ước tính thực địa</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Bước đầu tiên là chuyển đổi số và ứng dụng AI một cách thần tốc. Nếu trước đây bán hàng chủ yếu dựa vào bài đăng rao vặt, quảng cáo hay chờ khách gọi, thì nay cần tập trung sản xuất video ngắn."
+        <div class="quote-src">— VnEconomy, phân tích chuyển đổi nghề môi giới 2025</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Hệ quả thực tế:</strong> Môi giới không có lead inbound. Mọi khách đều phải "đi tìm" bằng cách gọi cold call, đăng nhóm FB, hoặc nhắn Zalo lạnh — cực kỳ tốn sức và tỷ lệ chuyển đổi thấp. Trong khi đó, những người có content bền vững liên tục được khách tìm đến.</p>
+
+      <div class="how-box">
+        <div class="how-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>16 SOP đăng bài chuẩn + lịch content 30 ngày + 45 ảnh HLX chuyên nghiệp + bộ hashtag tối ưu — môi giới không cần biết làm content, chỉ cần copy-paste theo đúng quy trình</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 3 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">⚔️</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #03</div>
+        <div class="pain-title">Cạnh tranh nội bộ khốc liệt — Bị commodity hóa</div>
+      </div>
+      <div class="pain-badge badge-critical">🔴 Nghiêm Trọng</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> HLX là dự án được cả trăm sàn và hàng nghìn môi giới F1/F2/Freelance cùng phân phối. Tất cả bán cùng 1 sản phẩm, cùng bảng giá, cùng chính sách. Khách hàng không phân biệt được bạn với người nào khác → họ chọn theo quan hệ cũ hoặc người nào gặp trước.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">F1 + F2 + Free</div>
+          <div class="data-label">3 lớp phân phối cùng bán HLX</div>
+          <div class="data-src">Cơ cấu thị trường Vinhomes</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Hoa hồng</div>
+          <div class="data-label">chia nhỏ qua nhiều tầng F1→F2→Free</div>
+          <div class="data-src">Thực tế vận hành sàn</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Cùng brochure</div>
+          <div class="data-label">99% môi giới dùng tài liệu giống nhau</div>
+          <div class="data-src">Quan sát nhóm FB</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Bất kể bạn làm tại sàn giao dịch hay tự do, bạn đều phải 'chốt deal' để duy trì thu nhập. Không đạt KPI đồng nghĩa với việc không có hoa hồng, không có thu nhập."
+        <div class="quote-src">— Agent Rever, phân tích áp lực nghề môi giới BĐS</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Hệ quả thực tế:</strong> Khách hỏi từ 3–5 môi giới rồi mới chốt. Ai không khác biệt → bị loại. Vòng cạnh tranh đẩy môi giới vào thế phải giảm phí dịch vụ, hỗ trợ thêm mà không được — mất đi cả thời gian lẫn giá trị cảm nhận.</p>
+
+      <div class="how-box">
+        <div class="how-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Kit tạo ra "bộ vũ khí khác biệt" riêng cho từng môi giới: landing page có tên riêng, bộ ảnh branded, weekly brief thị trường độc quyền → khách hàng cảm nhận đây là chuyên gia đang tư vấn, không phải một môi giới ngẫu nhiên</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── TAB 2: NỖI ĐAU 4-7 ─────────────── -->
+<div class="panel" id="p2">
+  <div class="sec-label">Cao → Trung Bình — Cản Trở Tăng Trưởng Bền Vững</div>
+  <div class="sec-title">Nỗi Đau #4 → #7</div>
+  <div class="sec-sub">Bốn vấn đề cộng hưởng khiến ngay cả môi giới có khách hàng vẫn không scale được</div>
+
+  <!-- PAIN 4 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">💸</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #04</div>
+        <div class="pain-title">Chi phí marketing cao — Lead đắt, tỷ lệ chuyển đổi thấp</div>
+      </div>
+      <div class="pain-badge badge-high">🟠 Cao</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Để tiếp cận 1 khách hàng thực sự quan tâm đến BĐS, trung bình mất 3 triệu đồng chi phí quảng cáo. Đa số môi giới freelance không có ngân sách này, hoặc chạy ads không biết tối ưu → đốt tiền không ra kết quả.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">~3.000.000₫</div>
+          <div class="data-label">chi phí/lead BĐS thực sự quan tâm</div>
+          <div class="data-src">Nguồn: Nghiên cứu chi phí môi giới BĐS VN 2025</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">-400%</div>
+          <div class="data-label">tỷ lệ chốt giảm nếu rep. khách sau 5 phút đầu</div>
+          <div class="data-src">Mstar Corp, nghiên cứu hành vi khách BĐS</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">5–10x</div>
+          <div class="data-label">ROI cao hơn khi có nội dung organic vs thuần paid</div>
+          <div class="data-src">Best practice ngành digital marketing</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Trung bình phải mất khoảng 3 triệu đồng mới có thể tiếp cận được một khách hàng thực sự quan tâm đến bất động sản."
+        <div class="quote-src">— Nghiên cứu chi phí tiếp cận khách BĐS, tổng hợp 2025</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Vòng xoáy nguy hiểm:</strong> Không có content → phải chạy ads → ads tốn tiền → không có thêm tiền → không dám chạy nữa → không có lead → không có doanh số → không có tiền chạy ads. Vòng này khiến 70% bỏ nghề trong 12 tháng.</p>
+
+      <div class="how-box">
+        <div class="how-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Content organic thay thế paid: 16 SOP đăng bài + 30 ngày lịch content → xây kênh organic tự động sinh lead mà không cần ngân sách ads. Chi phí kit = 697k → ROI dương ngay từ giao dịch đầu tiên</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 5 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">📋</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #05</div>
+        <div class="pain-title">Không có hệ thống — Lead "ngâm" rồi chết</div>
+      </div>
+      <div class="pain-badge badge-high">🟠 Cao</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Ngay cả khi có khách quan tâm, phần lớn môi giới không có quy trình follow-up. Khách hỏi giá → được trả lời → không mua ngay → bị quên lãng. Sau 2–3 tuần không ai nhắn lại, khách mua với người khác. Đây là "máy đốt lead" âm thầm nhất của nghề.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">75%</div>
+          <div class="data-label">môi giới không gọi lại sau 5 phút nhận lead</div>
+          <div class="data-src">Nghiên cứu hành vi môi giới BĐS</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">3–6 tháng</div>
+          <div class="data-label">vòng quyết định mua BĐS cao cấp điển hình</div>
+          <div class="data-src">Thực tế tư vấn BĐS</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">5–7 lần</div>
+          <div class="data-label">số lần tiếp xúc trung bình trước khi khách chốt</div>
+          <div class="data-src">Sales methodology nghiên cứu toàn cầu</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Quá trình tư vấn cho tới khi chốt giao dịch kéo dài khiến môi giới dễ nản. Thậm chí ngay cả khi mọi thỏa thuận đàm phán đã xong xuôi nhưng khách hàng lại hủy giao dịch vào phút chót."
+        <div class="quote-src">— Agent Rever, phân tích thất bại của môi giới BĐS</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Hệ quả thực tế:</strong> Môi giới tốn công tư vấn hàng giờ rồi mất khách vì không duy trì được mối quan hệ trong suốt hành trình 3–6 tháng quyết định của khách. Ai có hệ thống follow-up → thắng toàn bộ.</p>
+
+      <div class="how-box">
+        <div class="how-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Follow-up Pack 21 tin nhắn theo timeline + Trust 8 tuần + weekly brief thị trường → môi giới duy trì "hiện diện" trong tâm trí khách suốt hành trình quyết định mà không cần làm gì phức tạp</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 6 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">🧠</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #06</div>
+        <div class="pain-title">Không xây được thương hiệu cá nhân — Khách chọn người khác</div>
+      </div>
+      <div class="pain-badge badge-medium">🟡 Trung Bình</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Trong môi trường BĐS cao cấp (HLX: liền kề 8–15 tỷ, biệt thự 20–40 tỷ), khách hàng mua từ người họ TIN, không chỉ từ người họ biết. Thương hiệu cá nhân là yếu tố quyết định ai được trust. Hầu hết môi giới chưa có định vị, chưa có niche, không có điểm nhớ.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">Tin tưởng</div>
+          <div class="data-label">yếu tố #1 quyết định chọn môi giới BĐS cao cấp</div>
+          <div class="data-src">Hành vi mua BĐS tại Việt Nam</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">Liền kề: 8–15 tỷ</div>
+          <div class="data-label">giá trị sản phẩm HLX giai đoạn 1 (ước tính)</div>
+          <div class="data-src">Thông tin thị trường 5/2026</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">"Chuyên gia HLX"</div>
+          <div class="data-label">positioning cần xây dựng ngay từ đầu</div>
+          <div class="data-src">Framework định vị chuyên gia</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Kiến thức chủ yếu được học theo lối truyền miệng từ người đi trước, dẫn đến rủi ro sai lệch thông tin và thiếu tính cập nhật với các quy định mới."
+        <div class="quote-src">— VnEconomy, thực trạng đào tạo môi giới BĐS</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Cơ hội:</strong> Với HLX mới mở, đây là cửa sổ ngắn để ai xây nhanh nhất được nhớ đến đầu tiên như "chuyên gia HLX". Sau 6–12 tháng, vị trí này sẽ bị chiếm — ai chưa xây sẽ mãi là người không tên.</p>
+
+      <div class="how-box">
+        <div class="how-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Personal Brand 60 Ngày + content định vị chuyên gia + bộ ảnh branded → xây được hình ảnh "chuyên gia HLX" trước đám đông môi giới chưa kịp làm</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN 7 -->
+  <div class="pain-card">
+    <div class="pain-head">
+      <div class="pain-icon">😰</div>
+      <div class="pain-meta">
+        <div class="pain-num">NỖI ĐAU #07</div>
+        <div class="pain-title">Tâm lý bất ổn — Áp lực bỏ cuộc trong thị trường khó</div>
+      </div>
+      <div class="pain-badge badge-medium">🟡 Trung Bình</div>
+    </div>
+    <div class="pain-body">
+      <p><strong style="color:#f0e8d8">Vấn đề cốt lõi:</strong> Nghề môi giới BĐS có áp lực tâm lý cực lớn: không có lương cố định, không có khách = không có tiền. Khi thị trường đang ổn định dần sau 2022–2023 sụp đổ, môi giới mới vào dễ bỏ cuộc vì thấy khó — trong khi đây chính là lúc trụ lại sẽ thắng.</p>
+
+      <div class="data-row">
+        <div class="data-box">
+          <div class="data-num">70%</div>
+          <div class="data-label">môi giới bỏ nghề (VARS 2023 — đỉnh khủng hoảng)</div>
+          <div class="data-src">Hiệp hội Môi giới BĐS Việt Nam</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">40%</div>
+          <div class="data-label">đã quay lại thị trường khi BĐS phục hồi (2024)</div>
+          <div class="data-src">Báo Dân Trí, 6/2024</div>
+        </div>
+        <div class="data-box">
+          <div class="data-num">90%</div>
+          <div class="data-label">nhân sự BĐS giảm thu nhập năm 2022–2023</div>
+          <div class="data-src">Tổng hợp ngành BĐS</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "Mỗi ngày trôi qua đều là cuộc chiến với chính mình, 'làm hay nghỉ', 'có cố tiếp không', 'sai ở đâu mà không chốt được deal?' Đây là giai đoạn mà rất nhiều người bỏ cuộc."
+        <div class="quote-src">— Agent Rever, về tâm lý môi giới BĐS giai đoạn khó</div>
+      </div>
+
+      <p><strong style="color:#f0e8d8">Góc nhìn ngược chiều:</strong> 70% bỏ nghề = 70% thị phần đang bị bỏ trống. Những ai trụ lại + có hệ thống → kế thừa toàn bộ khách hàng, quan hệ, và cơ hội của những người bỏ cuộc. Đây là thời điểm đầu tư vào hệ thống, không phải thoát ra.</p>
+
+      <div class="how-box">
+        <div class="how-head">💡 Kit giải quyết điều này như thế nào</div>
+        <p>Kit không chỉ là công cụ — là hệ thống tư duy và quy trình giúp môi giới thấy mình đang làm đúng, đang tiến về phía trước mỗi ngày. Có hệ thống = có định hướng = trụ lại được khi người khác bỏ cuộc</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── TAB 3: SCRIPTS ─────────────── -->
+<div class="panel" id="p3">
+  <div class="sec-label">Công Cụ Khai Thác</div>
+  <div class="sec-title">Script Khơi Gợi Nỗi Đau</div>
+  <div class="sec-sub">7 câu hỏi + script dùng khi tư vấn/bán kit — khách tự nhận ra vấn đề của họ</div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">🔎 Script 1 — Khám phá thiếu tài liệu</div>
+      <div class="script-tag">Nỗi đau #1</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc1">Khi khách hỏi anh/chị thông tin dự án HLX, anh/chị thường gửi gì cho họ trước?
+
+[Nghe câu trả lời]
+
+Vậy nếu khách hỏi "anh/chị có tài liệu chuyên nghiệp không?" — anh/chị đang có gì để gửi ngay lúc đó không?
+
+[Nếu họ nói không / chỉ có brochure chung]
+
+Đó chính xác là lý do tại sao nhiều khách hàng hỏi xong rồi im — họ không thấy sự chuyên nghiệp, họ chuyển sang môi giới khác gửi cho họ bộ tài liệu đẹp hơn.
+
+Anh/chị thấy điều này có đúng trong trải nghiệm của mình không?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc1')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">📱 Script 2 — Khám phá vấn đề content</div>
+      <div class="script-tag">Nỗi đau #2</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc2">Trong 30 ngày gần nhất, anh/chị đã đăng bài trên FB hoặc Zalo bao nhiêu lần về HLX?
+
+[Nghe câu trả lời]
+
+Và trong số những khách hàng nhắn tin hỏi mình trong 30 ngày đó, bao nhiêu người tự tìm đến vì thấy bài đăng — không phải vì anh/chị chủ động nhắn trước?
+
+[Hầu hết sẽ nói: rất ít hoặc gần như không có]
+
+Đây là dấu hiệu anh/chị đang phải "săn" khách, thay vì để khách "tìm" mình. Hai cách này khác nhau về năng lượng, chi phí và kết quả dài hạn rất nhiều.</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc2')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">⚔️ Script 3 — Khám phá cạnh tranh nội bộ</div>
+      <div class="script-tag">Nỗi đau #3</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc3">Anh/chị thấy hiện tại có bao nhiêu môi giới đang bán HLX không? Chỉ trong nhóm của anh/chị thôi.
+
+[Nghe câu trả lời]
+
+Vậy khi khách hỏi một môi giới khác, họ sẽ nhận được thông tin dự án khác mình không? Hay gần như giống nhau?
+
+[Họ sẽ xác nhận: giống nhau]
+
+Đó chính là vấn đề. Khi tất cả bán giống nhau, khách chọn theo cảm tính — người quen hơn, người gặp trước, hoặc đơn giản là người gửi tài liệu chuyên nghiệp hơn. Anh/chị đang có lợi thế gì để khách chọn mình thay vì 99 người còn lại?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc3')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">💸 Script 4 — Khám phá chi phí marketing</div>
+      <div class="script-tag">Nỗi đau #4</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc4">Anh/chị có đang chạy ads Facebook hoặc Zalo cho HLX không?
+
+[Nếu có] Mỗi tháng chi bao nhiêu và nhận được bao nhiêu lead thực sự tiếp tục tư vấn?
+
+[Nếu không] Vậy khách đang đến từ đâu chủ yếu?
+
+[Nghe câu trả lời]
+
+Biết không, trung bình phải mất khoảng 3 triệu đồng mới tiếp cận được 1 khách BĐS thực sự quan tâm. Nếu mỗi tháng cần 10 lead → 30 triệu chỉ riêng tiền ads. Trong khi đó, content organic — nếu đúng quy trình — có thể sinh lead liên tục mà chi phí gần như bằng 0 sau 2–3 tháng xây dựng.
+
+Anh/chị đã thử chưa?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc4')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">📋 Script 5 — Khám phá thiếu follow-up</div>
+      <div class="script-tag">Nỗi đau #5</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc5">Trong 3 tháng gần nhất, có khách nào anh/chị đã tư vấn xong nhưng họ không mua với mình mà lại mua với người khác không?
+
+[Hầu như ai cũng có]
+
+Sau lần tư vấn đầu tiên, anh/chị thường nhắn tin lại cho họ sau bao lâu? Và nhắn gì?
+
+[Nghe câu trả lời]
+
+Nghiên cứu cho thấy nếu không liên hệ lại trong 5 phút đầu tiên sau khi họ để lại thông tin, tỷ lệ chốt giảm đến 400%. Và khách BĐS cao cấp cần 3–6 tháng để quyết định — ai duy trì được sự hiện diện trong thời gian đó mà không làm phiền, người đó thắng.
+
+Hiện tại anh/chị đang làm điều đó như thế nào?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc5')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">🧠 Script 6 — Thương hiệu cá nhân</div>
+      <div class="script-tag">Nỗi đau #6</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc6">Nếu tôi là khách hàng và tìm Google hoặc Facebook về "môi giới Hạ Long Xanh" — tôi có tìm thấy thông tin về anh/chị không?
+
+[Thường là: không]
+
+Khi khách cần tư vấn HLX và họ không biết ai — họ sẽ tìm ai trên mạng đầu tiên. Nếu anh/chị không có mặt ở đó, cơ hội đó về tay người khác.
+
+HLX mới mở. Đây là 6–12 tháng vàng để xây vị trí "chuyên gia HLX" — sau đó vị trí này sẽ bị những người làm sớm hơn chiếm. Anh/chị đang ở đâu trong cuộc đua này?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc6')">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head">
+      <div class="script-name">😰 Script 7 — Tâm lý & quyết tâm trụ lại</div>
+      <div class="script-tag">Nỗi đau #7</div>
+    </div>
+    <div class="script-body">
+      <pre id="sc7">Anh/chị có biết trong 2 năm khủng hoảng BĐS 2022–2023, có 70% môi giới đã bỏ nghề không?
+
+[Nghe phản ứng]
+
+Và ngay khi thị trường phục hồi 2024–2025, 40% trong số họ muốn quay lại — nhưng vị trí của họ đã bị người ở lại chiếm mất. Khách hàng cũ không còn nhớ đến họ nữa.
+
+Anh/chị đang ở giai đoạn quyết định tương tự. HLX là cơn sóng lớn nhất Quảng Ninh có trong vòng 10 năm — 6.206 ha, 18 tỷ USD. Ai có hệ thống sẵn sàng ngay bây giờ, người đó sẽ cưỡi sóng này.
+
+Câu hỏi là: anh/chị muốn xây hệ thống đó như thế nào?</pre>
+    </div>
+    <button class="copy-btn" onclick="cp(this,'sc7')">📋 Copy Script</button>
+  </div>
+</div>
+
+<!-- ─────────────── TAB 4: CHECKLIST ─────────────── -->
+<div class="panel" id="p4">
+  <div class="sec-label">Hành Động Ưu Tiên</div>
+  <div class="sec-title">Checklist Ứng Dụng Kết Quả Nghiên Cứu</div>
+  <div class="sec-sub">Dùng tài liệu này để làm gì — 12 hành động cụ thể ngay tuần này</div>
+
+  <ul class="checklist">
+    <li>
+      <div class="ck-icon">🎯</div>
+      <div class="ck-text">
+        <div class="ck-title">Dùng data #1 trong pitch kit: "97% môi giới gửi brochure chung"</div>
+        <div class="ck-desc">Mở đầu cuộc tư vấn bằng câu hỏi Script 1 — để khách tự nhận ra họ đang ở trong 97% đó</div>
+        <div class="ck-action">→ Script 1 trong Tab 3</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">📊</div>
+      <div class="ck-text">
+        <div class="ck-title">Print/save bản đồ nỗi đau — dùng khi trình bày cho khách</div>
+        <div class="ck-desc">7 ô nỗi đau trên Tab 1 là visual mạnh để khách thấy toàn cảnh vấn đề của họ cùng lúc</div>
+        <div class="ck-action">→ Tab 1: Bản đồ nỗi đau</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">💬</div>
+      <div class="ck-text">
+        <div class="ck-title">Chọn 1–2 script phù hợp đối tượng — luyện thuộc trước khi gặp</div>
+        <div class="ck-desc">Không cần dùng hết 7 script. Chọn script khớp nhất với vấn đề của người đang nói chuyện</div>
+        <div class="ck-action">→ Tab 3: 7 Scripts</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">📱</div>
+      <div class="ck-text">
+        <div class="ck-title">Dùng data nỗi đau #2 trong content fanpage: "Bạn có đang vô hình không?"</div>
+        <div class="ck-desc">Hook: "70% môi giới BĐS bỏ nghề vì không có hệ thống. Bạn đang ở đâu?" → bài viral ngay nhóm môi giới</div>
+        <div class="ck-action">→ Đăng FB/Zalo targeting nhóm môi giới HLX</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">💡</div>
+      <div class="ck-text">
+        <div class="ck-title">Gắn từng nỗi đau với tính năng kit cụ thể trong sales conversation</div>
+        <div class="ck-desc">Đừng nói "kit có 45 ảnh". Nói: "Nỗi đau #2 của anh/chị là không có content — kit giải quyết bằng 45 ảnh branded + 30 ngày lịch đăng"</div>
+        <div class="ck-action">→ Feature-to-pain mapping</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">🔢</div>
+      <div class="ck-text">
+        <div class="ck-title">Sử dụng con số "3 triệu đồng/lead" để tính ROI kit</div>
+        <div class="ck-desc">"Kit 697k = chi phí của 0.23 lead paid. Nhưng kit sinh lead organic liên tục trong 12+ tháng" → ROI argument không thể bác bỏ</div>
+        <div class="ck-action">→ Dùng trong objection handling khi khách kêu "đắt"</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">⏰</div>
+      <div class="ck-text">
+        <div class="ck-title">Dùng "cửa sổ 6–12 tháng" để tạo urgency thật</div>
+        <div class="ck-desc">"HLX mới mở. 6–12 tháng tới là thời điểm xây thương hiệu chuyên gia HLX. Sau đó vị trí này sẽ bị chiếm" — urgency này là thật, không cần bịa</div>
+        <div class="ck-action">→ Script 6: Thương hiệu cá nhân</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">🏷️</div>
+      <div class="ck-text">
+        <div class="ck-title">Targeting đúng: F2 và Freelancer có nhu cầu cao nhất</div>
+        <div class="ck-desc">F1 có team marketing hỗ trợ. F2 và Freelancer phải tự lo 100% — đây là nhóm đau nhất và sẵn sàng trả tiền nhất cho kit</div>
+        <div class="ck-action">→ Tập trung pitch nhóm này trước</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">📈</div>
+      <div class="ck-text">
+        <div class="ck-title">Dùng data thị trường HLX làm social proof cho content</div>
+        <div class="ck-desc">"Giá đất tăng 15–25% quanh HLX. 3.080/4.110 ha đã giải phóng. Tàu cao tốc rút ngắn Hà Nội còn 23 phút" → đây là tin tức, không phải quảng cáo</div>
+        <div class="ck-action">→ Dùng trong bài 10 đầu tiên fanpage</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">🤝</div>
+      <div class="ck-text">
+        <div class="ck-title">Chia sẻ tài liệu này cho khách hàng tiềm năng — đây là lead magnet</div>
+        <div class="ck-desc">Tài liệu "7 nỗi đau môi giới HLX" bản thân nó đã là quà tặng giá trị. Gửi cho môi giới → họ thấy mình được hiểu → tin tưởng → mua kit</div>
+        <div class="ck-action">→ Copy link tài liệu này gửi kèm khi tiếp cận</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">🔄</div>
+      <div class="ck-text">
+        <div class="ck-title">Cập nhật data mỗi quý — market thay đổi nhanh</div>
+        <div class="ck-desc">HLX đang trong giai đoạn phát triển. Số liệu mới (giá, tiến độ, chính sách) xuất hiện mỗi tháng — cập nhật vào script và content để luôn dẫn đầu</div>
+        <div class="ck-action">→ Lên lịch research update mỗi tháng</div>
+      </div>
+    </li>
+    <li>
+      <div class="ck-icon">🎤</div>
+      <div class="ck-text">
+        <div class="ck-title">Tổ chức mini webinar "Sự thật nghề môi giới HLX" — dùng data này</div>
+        <div class="ck-desc">Event 45 phút online: chia sẻ 7 nỗi đau + cách kit giải quyết → thu lead warm, pitch kit ở cuối. Tỷ lệ chuyển đổi từ event cao hơn cold outreach 5–10x</div>
+        <div class="ck-action">→ Dự kiến tổ chức sau 2–3 tuần setup</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+function cp(btn,id){
+  const el=document.getElementById(id);
+  const txt=el?el.innerText:btn.closest('.script-card').querySelector('pre').innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✅ Đã Copy!';
+    btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  });
+}
+</script>
+</body>
+</html>
