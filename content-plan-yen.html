@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kế Hoạch Content HLX — Nguyễn Thị Yến</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#1B3A6B; --nd:#102340; --gold:#C9A84C; --gl:#E2C06A; --cream:#FAF8F3;
+      --p1:#1a6b3c; --p2:#1B3A6B; --p3:#7c3a1e;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Be Vietnam Pro',sans-serif;background:#f0f2f5;color:#1a1a2e;}
+
+    /* TOP BAR */
+    .topbar{background:linear-gradient(135deg,var(--nd),var(--navy));padding:18px 24px 16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.25);}
+    .topbar-in{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .topbar h1{font-family:'Playfair Display',serif;font-size:17px;color:#fff;}
+    .topbar h1 span{color:var(--gl);}
+    .phase-nav{display:flex;gap:6px;flex-wrap:wrap;}
+    .pnav{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:20px;cursor:pointer;text-decoration:none;white-space:nowrap;}
+    .pnav:hover,.pnav.active{background:var(--gold);border-color:var(--gold);color:var(--nd);}
+
+    /* LAYOUT */
+    .wrap{max-width:860px;margin:0 auto;padding:24px 16px 80px;}
+
+    /* HERO */
+    .hero-card{background:linear-gradient(135deg,var(--nd),var(--navy),#2A5298);border-radius:16px;padding:28px 28px 24px;margin-bottom:24px;position:relative;overflow:hidden;}
+    .hero-card::after{content:'✍️';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:72px;opacity:.08;}
+    .hero-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px;}
+    .hero-card h2{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:6px;}
+    .hero-card p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.65;margin-bottom:18px;}
+    .stats-row{display:flex;gap:16px;flex-wrap:wrap;}
+    .stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:10px 16px;text-align:center;}
+    .stat-n{font-family:'Playfair Display',serif;font-size:22px;color:var(--gl);font-weight:700;}
+    .stat-l{font-size:10.5px;color:rgba(255,255,255,.55);margin-top:2px;}
+
+    /* PHASE HEADER */
+    .phase-block{margin-bottom:32px;}
+    .phase-head{border-radius:12px;padding:16px 22px;margin-bottom:16px;position:relative;overflow:hidden;}
+    .ph-1{background:linear-gradient(135deg,#0f4c2a,#1a6b3c);}
+    .ph-2{background:linear-gradient(135deg,var(--nd),var(--navy));}
+    .ph-3{background:linear-gradient(135deg,#5c2a0e,#8b4513);}
+    .phase-head h3{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:4px;}
+    .phase-head p{font-size:12.5px;color:rgba(255,255,255,.65);}
+    .phase-meta{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+    .pm-tag{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);}
+
+    /* POST CARD */
+    .post-card{background:#fff;border-radius:14px;border:1px solid #e5e2d8;margin-bottom:14px;overflow:hidden;}
+    .post-head{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid #f0ede4;gap:10px;flex-wrap:wrap;}
+    .post-meta{display:flex;align-items:center;gap:8px;}
+    .post-num{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
+    .num-1{background:#d1fae5;color:#065f46;}
+    .num-2{background:#dbeafe;color:#1e40af;}
+    .num-3{background:#fef3c7;color:#92400e;}
+    .post-title{font-weight:700;font-size:13.5px;color:var(--nd);}
+    .post-badge{font-size:10px;font-weight:700;padding:2px 9px;border-radius:8px;white-space:nowrap;}
+    .badge-fb{background:#e8f0fe;color:#1a73e8;}
+    .badge-zalo{background:#e3f2fd;color:#0077b6;}
+    .post-actions{display:flex;gap:8px;}
+    .btn-copy{background:var(--navy);color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:.15s;}
+    .btn-copy:hover{background:var(--gold);color:var(--nd);}
+    .btn-copy.ok{background:#16a34a !important;color:#fff !important;}
+
+    /* POST CONTENT */
+    .post-content{padding:16px 18px;}
+    .post-hook{font-size:13.5px;font-weight:700;color:var(--nd);margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid var(--gold);line-height:1.4;}
+    .post-body{font-size:13px;color:#374151;line-height:1.75;white-space:pre-wrap;word-break:break-word;}
+
+    /* TIPS */
+    .tip-box{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-top:10px;font-size:12px;color:#78350f;line-height:1.6;}
+    .tip-box strong{color:#92400e;}
+
+    /* SCHEDULE TABLE */
+    .schedule-card{background:#fff;border-radius:14px;border:1px solid #e5e2d8;overflow:hidden;margin-bottom:24px;}
+    .sch-head{background:linear-gradient(135deg,var(--nd),var(--navy));padding:14px 20px;}
+    .sch-head h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gl);}
+    .sch-table{width:100%;border-collapse:collapse;}
+    .sch-table th{background:#f9f8f5;font-size:11px;font-weight:700;color:#6b7280;text-align:left;padding:8px 14px;border-bottom:1px solid #e8e4d8;letter-spacing:.06em;text-transform:uppercase;}
+    .sch-table td{font-size:12.5px;padding:9px 14px;border-bottom:1px solid #f3f0e8;color:#374151;vertical-align:top;}
+    .sch-table tr:last-child td{border:none;}
+    .sch-table tr:hover td{background:#fafaf7;}
+    .week-label{font-weight:700;color:var(--nd);white-space:nowrap;}
+    .pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;margin:2px 2px 2px 0;}
+    .pill-g{background:#d1fae5;color:#065f46;}
+    .pill-b{background:#dbeafe;color:#1e40af;}
+    .pill-o{background:#fef3c7;color:#92400e;}
+
+    /* PILLAR SECTION */
+    .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:24px;}
+    .pillar{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:14px 16px;}
+    .pillar-icon{font-size:22px;margin-bottom:6px;}
+    .pillar-name{font-weight:700;font-size:13px;color:var(--nd);margin-bottom:4px;}
+    .pillar-pct{font-size:11px;color:#9ca3af;margin-bottom:6px;}
+    .pillar-bar{height:4px;background:#f0ede4;border-radius:2px;}
+    .pillar-fill{height:4px;border-radius:2px;}
+
+    /* HOOK BOX */
+    .hook-section{background:#fff;border-radius:14px;border:1px solid #e5e2d8;padding:20px;margin-bottom:24px;}
+    .hook-section h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--nd);margin-bottom:14px;}
+    .hook-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f3f0e8;}
+    .hook-item:last-child{border:none;}
+    .hook-num{width:32px;height:32px;background:var(--nd);color:var(--gl);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;}
+    .hook-text{flex:1;}
+    .hook-label{font-weight:700;font-size:12.5px;color:var(--nd);margin-bottom:3px;}
+    .hook-ex{font-size:12px;color:#6b7280;font-style:italic;}
+
+    footer{background:var(--nd);padding:14px 24px;text-align:center;}
+    footer p{color:rgba(255,255,255,.35);font-size:11.5px;}
+    footer strong{color:var(--gl);}
+
+    @media(max-width:600px){
+      .stats-row{gap:10px;}
+      .stat{flex:1;min-width:80px;}
+      .post-head{gap:8px;}
+      .post-actions{width:100%;}
+      .btn-copy{flex:1;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <h1>Content HLX · <span>Nguyễn Thị Yến</span></h1>
+    <nav class="phase-nav">
+      <a class="pnav" href="#phase1">🌱 Giai đoạn 1</a>
+      <a class="pnav" href="#phase2">📊 Giai đoạn 2</a>
+      <a class="pnav" href="#phase3">🎯 Giai đoạn 3</a>
+      <a class="pnav" href="#schedule">📅 Lịch đăng</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="hero-tag">✍️ KẾ HOẠCH CONTENT 8 TUẦN — COPY PASTE READY</div>
+    <h2>Top Agent HLX — Chiến Lược Content Cá Nhân</h2>
+    <p>Định vị: <em>Không chỉ bán HLX — giúp khách hàng đưa ra quyết định đầu tư đúng nhất cho hoàn cảnh của họ.</em><br>
+    Mỗi bài đã viết hoàn chỉnh — bấm Copy → dán vào FB/Zalo → đăng.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n">15</div><div class="stat-l">Bài viết sẵn</div></div>
+      <div class="stat"><div class="stat-n">8</div><div class="stat-l">Tuần kế hoạch</div></div>
+      <div class="stat"><div class="stat-n">3</div><div class="stat-l">Giai đoạn</div></div>
+      <div class="stat"><div class="stat-n">0đ</div><div class="stat-l">Chi phí ads cần</div></div>
+    </div>
+  </div>
+
+  <!-- 5 PILLARS -->
+  <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--nd);margin:0 0 14px;display:flex;align-items:center;gap:8px;">
+    🏛️ 5 Trụ Cột Content
+    <span style="flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);display:block;"></span>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🏗️</div>
+      <div class="pillar-name">Insider HLX</div>
+      <div class="pillar-pct">35% bài viết</div>
+      <div class="pillar-bar"><div class="pillar-fill" style="width:35%;background:#1a6b3c;"></div></div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📊</div>
+      <div class="pillar-name">Vĩ mô & Tài chính</div>
+      <div class="pillar-pct">25% bài viết</div>
+      <div class="pillar-bar"><div class="pillar-fill" style="width:25%;background:var(--navy);"></div></div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🧭</div>
+      <div class="pillar-name">Hành trình khách</div>
+      <div class="pillar-pct">20% bài viết</div>
+      <div class="pillar-bar"><div class="pillar-fill" style="width:20%;background:var(--gold);"></div></div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">💡</div>
+      <div class="pillar-name">Kiến thức chọn SP</div>
+      <div class="pillar-pct">15% bài viết</div>
+      <div class="pillar-bar"><div class="pillar-fill" style="width:15%;background:#7c3a1e;"></div></div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🎯</div>
+      <div class="pillar-name">Social proof + CTA</div>
+      <div class="pillar-pct">5% bài viết</div>
+      <div class="pillar-bar"><div class="pillar-fill" style="width:5%;background:#ef4444;"></div></div>
+    </div>
+  </div>
+
+  <!-- HOOK FORMULAS -->
+  <div class="hook-section">
+    <h3>⚡ 3 Hook Formula Dùng Cho Mọi Bài</h3>
+    <div class="hook-item">
+      <div class="hook-num">1</div>
+      <div class="hook-text">
+        <div class="hook-label">Con số gây sốc</div>
+        <div class="hook-ex">"Có 1 con số ít người để ý khi nghiên cứu HLX..."</div>
+      </div>
+    </div>
+    <div class="hook-item">
+      <div class="hook-num">2</div>
+      <div class="hook-text">
+        <div class="hook-label">Phản trực giác</div>
+        <div class="hook-ex">"3 điều tôi từng tin về HLX — và đã sai hoàn toàn."</div>
+      </div>
+    </div>
+    <div class="hook-item">
+      <div class="hook-num">3</div>
+      <div class="hook-text">
+        <div class="hook-label">Câu chuyện người thật</div>
+        <div class="hook-ex">"Chị H., giáo viên cấp 3, vừa nhận thu nhập 21 triệu tháng đầu tiên..."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 1 ═══ -->
+  <div class="phase-block" id="phase1">
+    <div class="phase-head ph-1">
+      <h3>🌱 Giai Đoạn 1 — Hoà Nhập (Tuần 1–3)</h3>
+      <p>Xuất hiện tự nhiên trong cộng đồng. Không có mùi bán hàng.</p>
+      <div class="phase-meta">
+        <span class="pm-tag">Tone: Chia sẻ · Hào hứng · Đồng đội</span>
+        <span class="pm-tag">Ratio: 100% value · 0% pitch</span>
+        <span class="pm-tag">Giờ đăng: 7:30 sáng hoặc 9:30 tối</span>
+      </div>
+    </div>
+
+    <!-- POST 1 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-1">1</div>
+          <div>
+            <div class="post-title">Story Mở Đầu — Lần Đầu Đến HLX</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 1 · T2</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p1',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Lần đầu tôi đến Hạ Long Xanh là 7 giờ sáng."</div>
+        <div class="post-body" id="p1">Lần đầu tôi đến Hạ Long Xanh là 7 giờ sáng.
+
+Sương còn chưa tan. Mặt vịnh phẳng lặng như gương.
+Và tôi đứng nhìn khu shophouse nhìn thẳng ra biển —
+không nói được câu gì trong 5 phút.
+
+Không phải vì đẹp (dù đúng là đẹp).
+Mà vì tôi chợt hiểu: đây không phải một dự án nhà ở.
+Đây là một thành phố mới đang được vẽ ra.
+
+Từ hôm đó tôi quyết định tìm hiểu kỹ hơn bất kỳ dự án nào tôi từng tiếp xúc trong 7 năm làm nghề.
+
+Trang này là nơi tôi chia sẻ tất cả những gì tôi học được.
+Không filter. Không PR.
+
+Anh/chị đang quan tâm HLX? Để lại "QUAN TÂM" — tôi sẽ gửi thêm phân tích chi tiết từng phân khu.</div>
+        <div class="tip-box"><strong>💡 Ghi chú đăng bài:</strong> Đăng kèm ảnh hoàng hôn vịnh Hạ Long (lấy từ gallery). Pin bài này lên đầu trang trong 2 tuần đầu.</div>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-1">2</div>
+          <div>
+            <div class="post-title">Vĩ Mô Hook — Con Số Ít Người Biết</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 1 · T4</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p2',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Có một con số ít người để ý khi nghiên cứu HLX..."</div>
+        <div class="post-body" id="p2">Có một con số ít người để ý khi nghiên cứu HLX:
+
+Hạ Long là 1 trong 4 thành phố loại I của Việt Nam được quy hoạch lên đô thị ven biển quốc tế đến 2045.
+
+Nhưng hiện tại — BĐS Hạ Long vẫn đang ở mức giá của một tỉnh lẻ, không phải thành phố du lịch quốc tế.
+
+Gap đó chính là cơ hội.
+
+Tôi đã nghiên cứu 3 mô hình tương tự ở Đà Nẵng (2012-2018), Phú Quốc (2017-2020), và Đà Lạt (2018-2023).
+
+Cả 3 đều có 1 pattern giống nhau:
+→ Cơ sở hạ tầng lớn được công bố
+→ Khách sạn/resort 5 sao vào trước
+→ BĐS dân cư tăng 3-5x trong 5-7 năm sau
+
+HLX đang ở giai đoạn nào? Anh/chị thử đoán xem.
+(Tôi sẽ giải đáp trong bài sau)</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Bài text thuần — KHÔNG cần ảnh. Text post thường reach tốt hơn trên Facebook. Kết thúc bằng câu hỏi để tăng comment.</div>
+      </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-1">3</div>
+          <div>
+            <div class="post-title">Myth-Busting — 3 Điều Tôi Từng Tin Và Sai</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 1 · T6 · ⭐ Bài quan trọng</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p3',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "3 điều tôi từng tin về HLX — và đã sai hoàn toàn."</div>
+        <div class="post-body" id="p3">3 điều tôi từng tin về HLX — và đã sai hoàn toàn.
+
+❌ Sai #1: "Condotel rủi ro, không nên mua"
+→ Đúng với condotel không có thương hiệu vận hành.
+→ HLX có Marriott, Mövenpick ký hợp đồng vận hành.
+→ Đây là 2 tập đoàn khách sạn top 5 thế giới — lịch sử chưa để resort nào dưới tay họ thất bại.
+
+❌ Sai #2: "Giá đã cao rồi, mua bây giờ không còn lợi"
+→ Giá shophouse HLX hiện 45-65tr/m²
+→ Shophouse mặt biển Đà Nẵng 2018: 80-120tr/m²
+→ Shophouse mặt biển Đà Nẵng 2024: 250-400tr/m²
+→ Bạn nghĩ sao?
+
+❌ Sai #3: "Phải có tiền mặt mới đầu tư được"
+→ CĐT đang hỗ trợ vay 70% GTCH, LS 0% 24 tháng
+→ Với shophouse 4 tỷ: vốn thực chỉ cần 1.2 tỷ
+→ Dòng tiền cho thuê khai thác có thể bù một phần lãi từ tháng 13
+
+Anh/chị đang băn khoăn điều nào khác?
+Comment bên dưới — tôi sẽ giải đáp thẳng.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Đây là bài reach tốt nhất trong giai đoạn 1. Nếu chỉ đăng được 1 bài — chọn bài này. Có thể repost vào nhóm môi giới HLX.</div>
+      </div>
+    </div>
+
+    <!-- POST 4 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-1">4</div>
+          <div>
+            <div class="post-title">Giáo Dục Thị Trường — UNESCO & Cung Hạn Chế</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 1 · T7</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p4',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Hạ Long có 1 thứ mà Đà Nẵng, Phú Quốc, Nha Trang KHÔNG có..."</div>
+        <div class="post-body" id="p4">Hạ Long có 1 thứ mà Đà Nẵng, Phú Quốc, Nha Trang KHÔNG có:
+
+UNESCO.
+
+Di sản thiên nhiên thế giới có nghĩa là gì với BĐS?
+
+→ Không thể xây thêm resort mới trong vùng lõi vịnh
+→ Nguồn cung BĐS nghỉ dưỡng có hạn về mặt pháp lý
+→ Tổng lượng khách quốc tế tăng 40%/năm nhưng số phòng không thể tăng theo mãi
+
+Đây là lý do shophouse thương mại ở HLX khác hoàn toàn với shophouse ở Bình Dương hay Long An.
+
+Một cái phụ thuộc dân số. Một cái phụ thuộc du lịch quốc tế.
+
+Khác nhau hoàn toàn về bản chất đầu tư.
+
+───
+P/S: Tuần tới tôi sẽ breakdown từng sản phẩm:
+Shophouse / Biệt thự / Condotel — cái nào hợp với anh/chị nhất.
+Theo dõi để không bỏ lỡ nhé.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Kết thúc bằng preview bài tiếp theo để tạo habit follow dõi. Đăng kèm ảnh map vị trí HLX trong vùng di sản.</div>
+      </div>
+    </div>
+
+    <!-- POST 5 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-1">5</div>
+          <div>
+            <div class="post-title">Behind-The-Scenes — Buổi Tư Vấn Thứ 4 Trong Tuần</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 2 · T2</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p5',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Sáng nay tôi vừa kết thúc buổi tư vấn thứ 4 trong tuần."</div>
+        <div class="post-body" id="p5">Sáng nay tôi vừa kết thúc buổi tư vấn thứ 4 trong tuần.
+
+Khách là một cặp vợ chồng ở Hà Nội — anh làm IT, chị làm giáo viên.
+Họ có 2 tỷ tiết kiệm và đang phân vân giữa: mua căn hộ Hà Nội để ở vs. đầu tư 1 condotel HLX để tạo dòng tiền.
+
+Tôi không vội chốt.
+
+Tôi hỏi họ 7 câu:
+1. Anh/chị đang ở đâu? Thuê hay có nhà rồi?
+2. Dự định 5 năm nữa sống ở đâu?
+3. Thu nhập hiện tại có ổn định không?
+4. Khoản 2 tỷ này có phải toàn bộ tiết kiệm không?
+5. Anh/chị có khoản vay nào không?
+6. Mục tiêu: để dành cho con, nghỉ hưu, hay tạo thu nhập thụ động?
+7. Nếu thị trường giảm 20% trong 2 năm, anh/chị có chịu được tâm lý không?
+
+Sau 7 câu đó — câu trả lời cho họ rõ hơn rất nhiều.
+
+Và đôi khi câu trả lời đúng nhất không phải là "mua HLX".
+
+Đó là lý do người ta tìm đến tôi tư vấn, không chỉ để mua nhà.
+
+Anh/chị muốn làm bài test 7 câu này? DM tôi, tôi gửi về miễn phí.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Bài humanize thương hiệu cá nhân — quan trọng nhất để tạo sự khác biệt với môi giới thông thường. Không cần ảnh.</div>
+      </div>
+    </div>
+
+    <!-- POST 6 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-1">6</div>
+          <div>
+            <div class="post-title">Engagement — Câu Hỏi Thật Của Tuần</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 2 · T4</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p6',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Câu hỏi thật của tuần:"</div>
+        <div class="post-body" id="p6">Câu hỏi thật của tuần:
+
+Nếu có 2 tỷ đồng, anh/chị sẽ chọn:
+
+A. Mua 1 căn hộ Hà Nội/HCM để ở hoặc cho thuê
+B. Mua 1 condotel HLX để tạo dòng tiền khai thác
+C. Gửi tiết kiệm + đợi thị trường rõ hơn
+D. Đầu tư vào thứ khác (ghi cụ thể bên dưới)
+
+Tôi sẽ phân tích ưu/nhược điểm từng lựa chọn dựa trên hoàn cảnh cụ thể — không có câu trả lời đúng tuyệt đối cho tất cả mọi người.
+
+Comment A/B/C/D + tuổi + nghề nghiệp của anh/chị.
+Tôi trả lời từng người trong 24h.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Bài này để lọc khách hàng tiềm năng. <strong>PHẢI trả lời từng comment</strong> — đây là cơ hội mở cuộc trò chuyện cá nhân. Theo dõi 24h sau khi đăng.</div>
+      </div>
+    </div>
+  </div><!-- /phase1 -->
+
+  <!-- ═══ PHASE 2 ═══ -->
+  <div class="phase-block" id="phase2">
+    <div class="phase-head ph-2">
+      <h3>📊 Giai Đoạn 2 — Xây Dựng Uy Tín (Tuần 4–6)</h3>
+      <p>Trở thành nguồn kiến thức đáng tin nhất về HLX và đầu tư BĐS nghỉ dưỡng.</p>
+      <div class="phase-meta">
+        <span class="pm-tag">Tone: Chuyên gia · Phân tích sâu · Giáo dục</span>
+        <span class="pm-tag">Ratio: 90% value · 10% soft offer</span>
+        <span class="pm-tag">Bắt đầu join nhóm môi giới HLX</span>
+      </div>
+    </div>
+
+    <!-- POST 7 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-2">7</div>
+          <div>
+            <div class="post-title">ROI Thực — Breakdown 3 Sản Phẩm HLX</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 4 · T2 · ⭐⭐ Authority content</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p7',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "TÔI ĐÃ TÍNH TOÁN ROI THỰC CỦA 3 SẢN PHẨM HLX. Đây là kết quả."</div>
+        <div class="post-body" id="p7">TÔI ĐÃ TÍNH TOÁN ROI THỰC CỦA 3 SẢN PHẨM HLX.
+Đây là kết quả.
+
+───────────────────────────────
+📊 SẢN PHẨM 1: SHOPHOUSE THƯƠNG MẠI
+Giá: ~4.5 tỷ | Diện tích: 45m² sàn kinh doanh
+
+✅ Dòng tiền cho thuê kinh doanh:
+→ Năm 1-3 (giai đoạn lấp đầy): 15-20tr/tháng
+→ Năm 4-7 (khu vực ổn định): 25-40tr/tháng
+→ Năm 8+ (vị trí đẳng cấp): 50-80tr/tháng
+
+✅ Tăng giá vốn (capital appreciation):
+→ Kịch bản thận trọng: +40% sau 5 năm
+→ Kịch bản cơ sở: +80% sau 5 năm
+→ Kịch bản lạc quan (Đà Nẵng 2012-2018 pattern): +200%
+
+⚠️ Rủi ro chính: Cần tìm tenant, quản lý trực tiếp
+
+───────────────────────────────
+📊 SẢN PHẨM 2: CONDOTEL (Vận hành Marriott)
+Giá: ~2.8 tỷ | Studio/1PN
+
+✅ Thu nhập cam kết:
+→ Giai đoạn 1 (CĐT cam kết): 8%/năm = 224tr/năm
+→ Sau giai đoạn cam kết: phụ thuộc công suất phòng
+
+✅ Ước tính thực tế (resort Marriott tương đương khu vực):
+→ Công suất phòng trung bình: 65-75%
+→ RevPAR ước tính: 1.2-1.8tr/đêm
+→ Sau phí vận hành 50%: ~180-250tr/năm = 6.5-9%/năm
+
+✅ Lợi thế: Hoàn toàn thụ động, không cần quản lý
+
+⚠️ Rủi ro: Phụ thuộc thương hiệu vận hành, du lịch quốc tế
+
+───────────────────────────────
+📊 SẢN PHẨM 3: BIỆT THỰ BIỂN
+Giá: ~12-25 tỷ | Diện tích đất 200-350m²
+
+✅ Dòng tiền: Khai thác villa cho thuê ngắn hạn
+→ Peak season (hè, Tết): 8-15tr/đêm
+→ Off-peak: 3-5tr/đêm
+→ Ước tính 120 đêm/năm: 600tr-1.2 tỷ/năm thô
+
+✅ Tăng giá: Đây là sản phẩm khan hiếm nhất
+→ Số lượng biệt thự biển có hạn về pháp lý + quy hoạch
+
+⚠️ Vốn lớn, cần quản lý vận hành hoặc thuê quản lý
+
+───────────────────────────────
+
+💬 Anh/chị muốn tôi phân tích sâu sản phẩm nào?
+Comment số: 1 / 2 / 3</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Bài dài nhất — không rút gọn. Bài này build authority mạnh nhất. Repost vào nhóm môi giới với lời dẫn: "Anh/chị em tham khảo — tôi vừa tổng hợp số liệu ROI 3 dòng sản phẩm HLX."</div>
+      </div>
+    </div>
+
+    <!-- POST 8 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-2">8</div>
+          <div>
+            <div class="post-title">Timing Đúng — 4 Điều Phải Hội Tụ</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 4 · T4</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p8',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Người ta sợ mua BĐS khi thị trường đang 'nóng'. Người ta cũng sợ mua khi thị trường đang 'lạnh'."</div>
+        <div class="post-body" id="p8">Người ta sợ mua BĐS khi thị trường đang "nóng".
+Người ta cũng sợ mua khi thị trường đang "lạnh".
+
+Rốt cuộc — không bao giờ có thời điểm "đúng" cả?
+
+Sai. Có. Nhưng không phải nhìn vào thị trường mà tìm.
+
+Thời điểm đúng = khi 4 điều này hội tụ:
+
+1️⃣ Cơ sở hạ tầng sắp hoàn thiện (không phải đã xong)
+→ HLX: Cao tốc Vân Đồn - Móng Cái 2024 ✅
+→ Sân bay Vân Đồn nâng cấp quốc tế ✅
+→ Cầu Cửa Lục 3 đang thi công
+
+2️⃣ Chủ đầu tư uy tín + pháp lý sạch
+→ Vinhomes: Top 1 thị trường, 0 dự án trễ bàn giao
+
+3️⃣ Sản phẩm có dòng tiền thực, không phụ thuộc lướt sóng
+→ Marriott/Mövenpick ký hợp đồng vận hành thực
+
+4️⃣ Tài chính cá nhân anh/chị ở trạng thái sẵn sàng
+→ Không vay quá 50% giá trị tài sản
+→ Không dùng tiền sinh hoạt
+
+Khi 4 điều này đủ cả — đó là "thời điểm đúng" của anh/chị.
+Không phải của thị trường. Của anh/chị.
+
+Anh/chị đang ở điều kiện nào rồi?
+Tôi có thể giúp đánh giá miễn phí nếu anh/chị muốn.</div>
+      </div>
+    </div>
+
+    <!-- POST 9 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-2">9</div>
+          <div>
+            <div class="post-title">Case Study Thực — Chị H. Giáo Viên 42 Tuổi</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 5 · T2 · ⭐⭐ Trust builder</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p9',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Chị H. ở Hà Nội — giáo viên cấp 3, 42 tuổi. Mua 1 condotel HLX tháng 8/2024."</div>
+        <div class="post-body" id="p9">Chị H. ở Hà Nội — giáo viên cấp 3, 42 tuổi.
+Mua 1 condotel HLX tháng 8/2024. Giá 2.65 tỷ.
+Vay 70%, tức vốn thực bỏ ra: ~800 triệu.
+
+Tôi chia sẻ vì đây là case điển hình nhất tôi từng tư vấn.
+
+─── Băn khoăn ban đầu của chị ───
+"Em ơi làm giáo viên mà đầu tư BĐS nghỉ dưỡng có phù hợp không? Chị chưa bao giờ đầu tư gì cả."
+
+─── Những gì chúng tôi đã làm ───
+→ Rà soát tài chính: Thu nhập 18tr/tháng, tiết kiệm 900tr, 0 khoản vay, nhà Hà Nội đã có (ba mẹ để lại)
+→ Tính toán: Lãi vay ~7.5%/năm ≈ 14tr/tháng
+→ Thu nhập condotel cam kết 8%: ~17.7tr/tháng
+→ Dòng tiền dương ngay từ tháng đầu: +3.7tr/tháng
+
+─── Kết quả sau 8 tháng ───
+✅ Nhận bàn giao đúng hẹn Q1/2025
+✅ Marriott bắt đầu vận hành tháng 3
+✅ Thu nhập tháng 4 đầu tiên: 21.2 triệu (vượt kỳ vọng)
+✅ Chị H. đã đặt cọc căn thứ 2
+
+─── Điều chị ấy nói với tôi tuần trước ───
+"Em ơi, chị ước gì mình quyết định sớm hơn 2 năm."
+
+───
+Không phải ai cũng hợp với condotel.
+Nhưng trường hợp của chị H. là ví dụ về khi nào nó phù hợp.
+
+Anh/chị muốn tôi phân tích hoàn cảnh của mình tương tự không?
+DM hoặc comment "PHÂN TÍCH" — tôi sẽ phản hồi trong 30 phút.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Đây là bài có tỷ lệ chuyển đổi cao nhất. Nếu có khách hàng thật — viết case study thật thay thế. Social proof thật luôn mạnh hơn ví dụ minh hoạ.</div>
+      </div>
+    </div>
+
+    <!-- POST 10 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-2">10</div>
+          <div>
+            <div class="post-title">Checklist Pháp Lý — 5 Điều Phải Kiểm Tra</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 4 · T6 · 📌 Save nhiều</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p10',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Trước khi ký bất kỳ hợp đồng BĐS nào — đọc cái này."</div>
+        <div class="post-body" id="p10">Trước khi ký bất kỳ hợp đồng BĐS nào — đọc cái này.
+
+5 điều PHẢI KIỂM TRA để không bao giờ hối hận:
+
+✅ 1. SỔ ĐỎ / PHÁP LÝ ĐẦU RA
+→ Condotel: có cấp sổ hồng lâu dài hay chỉ quyền sử dụng?
+→ Shophouse: đất thương mại hay đất ở thương mại?
+→ Biệt thự: đất ODT (ở đô thị) hay đất CLN?
+(Khác nhau hoàn toàn về quyền thừa kế và chuyển nhượng)
+
+✅ 2. NĂNG LỰC CHỦ ĐẦU TƯ
+→ Dự án nào đã bàn giao? Có đúng tiến độ không?
+→ Tỷ lệ tranh chấp pháp lý với khách hàng?
+→ Nguồn vốn phát triển dự án (vay ngân hàng nào? tỷ lệ bao nhiêu?)
+
+✅ 3. HỢP ĐỒNG THƯƠNG MẠI
+→ Điều khoản phạt trễ tiến độ là bao nhiêu %/năm?
+→ Có điều khoản bảo lãnh ngân hàng không?
+→ Điều kiện chuyển nhượng sang tên trong thời gian xây dựng?
+
+✅ 4. ĐƠN VỊ VẬN HÀNH (với BĐS nghỉ dưỡng)
+→ Thương hiệu vận hành đã ký hợp đồng chính thức chưa?
+→ Thời hạn hợp đồng vận hành bao lâu?
+→ Tỷ lệ chia sẻ doanh thu như thế nào?
+
+✅ 5. QUY HOẠCH KHU VỰC
+→ Vùng xung quanh có quy hoạch công nghiệp/cảng không?
+→ Hạ tầng giao thông 5-10 năm tới?
+→ Đã có quy hoạch 1/500 được phê duyệt chưa?
+
+───
+Tôi đã chuẩn bị checklist đầy đủ hơn với 23 mục kiểm tra.
+Comment "CHECKLIST" — tôi gửi ngay trong 30 phút.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Kêu gọi Save bài này. Người save = người đang nghiêm túc tìm hiểu. Theo dõi ai comment "CHECKLIST" để DM follow up.</div>
+      </div>
+    </div>
+
+    <!-- POST 11 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-2">11</div>
+          <div>
+            <div class="post-title">So Sánh Kênh Đầu Tư — Đòn Bẩy Thông Minh</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 5 · T4</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p11',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Bạn có 2 tỷ. Năm 2024."</div>
+        <div class="post-body" id="p11">Bạn có 2 tỷ. Năm 2024.
+
+Nếu bạn gửi tiết kiệm: +5.5%/năm → 2031 = ~2.85 tỷ
+Nếu bạn mua vàng: không ai biết (lên hay xuống)
+Nếu bạn mua cổ phiếu VN-Index: avg 12%/năm → 4.4 tỷ (nhưng biến động cao)
+
+Nếu bạn mua condotel HLX với đòn bẩy 70%:
+→ Vốn thực: 600 triệu
+→ Thu nhập 8%/năm: 160tr (trên tổng tài sản 2 tỷ)
+→ Dùng 600tr còn lại đầu tư cổ phiếu/tiết kiệm
+→ Tổng return trên 600tr vốn thực: ~26-30%/năm
+→ Chưa tính tăng giá vốn
+
+Đây là lý do người hiểu tài chính dùng đòn bẩy thông minh.
+
+⚠️ Nhưng đòn bẩy không phải ai cũng nên dùng.
+Phụ thuộc vào: Thu nhập ổn định, tỷ lệ nợ hiện tại, và khả năng chịu đựng áp lực tâm lý.
+
+Tôi hay gặp 2 kiểu người:
+Type A: Sợ vay → mất cơ hội tốt
+Type B: Vay quá nhiều → stress đến mức bán non
+
+Type C — người thành công — biết chính xác ngưỡng chịu đựng của mình.
+
+Anh/chị là Type A, B, hay C?
+Comment bên dưới — tôi không phán xét, tôi giúp phân tích.</div>
+      </div>
+    </div>
+
+    <!-- POST 12 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-2">12</div>
+          <div>
+            <div class="post-title">7 Con Số Về HLX — Save Để Dùng Khi Tư Vấn</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 4 · T7 · 📌 High save rate</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p12',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "7 CON SỐ VỀ HLX MÀ KHÁCH HÀNG CỦA TÔI ĐỀU HỎI:"</div>
+        <div class="post-body" id="p12">7 CON SỐ VỀ HLX MÀ KHÁCH HÀNG CỦA TÔI ĐỀU HỎI:
+
+📌 1 — 2,000 sàn giao dịch
+Tổng diện tích thương mại của toàn khu.
+Lớn hơn Royal City (Hà Nội) và Landmark 81 (HCM) cộng lại.
+
+📌 2 — 40 km đường bờ biển
+Chiều dài mặt tiền biển của dự án.
+Để so sánh: toàn bộ bán đảo Sơn Trà chỉ có 60km.
+
+📌 3 — 5 năm
+Thời gian từ khi mở bán đến khi khu vực đô thị ổn định.
+(Theo pattern Vinhomes Ocean Park, Vinhomes Smart City)
+
+📌 4 — 0% lãi suất, 24 tháng
+Gói hỗ trợ tài chính hiện tại của CĐT.
+Hiếm có dự án nào duy trì được gói này quá 6-12 tháng.
+
+📌 5 — 70%
+Tỷ lệ vay tối đa được hỗ trợ.
+Với shophouse 4.5 tỷ → vốn thực cần: 1.35 tỷ.
+
+📌 6 — 3 thương hiệu 5 sao đã ký vận hành
+Marriott, Mövenpick, và 1 thương hiệu đang trong NDA.
+Đây là tín hiệu mạnh nhất về tiêu chuẩn khai thác.
+
+📌 7 — 2045
+Năm Quảng Ninh đặt mục tiêu GDP đạt mức tỉnh phát triển nhất Đông Nam Á.
+HLX nằm ngay trung tâm của lộ trình đó.
+
+───
+Lưu bài này — anh/chị sẽ cần khi tư vấn khách.
+Hoặc khi cần giải thích với gia đình tại sao mình quyết định đầu tư.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Thêm CTA "Lưu bài" vào cuối caption khi đăng Instagram. Bài này phù hợp đăng vào nhóm môi giới — đồng nghiệp sẽ tag khách của họ vào.</div>
+      </div>
+    </div>
+  </div><!-- /phase2 -->
+
+  <!-- ═══ PHASE 3 ═══ -->
+  <div class="phase-block" id="phase3">
+    <div class="phase-head ph-3">
+      <h3>🎯 Giai Đoạn 3 — Chuyển Đổi (Tuần 7–8)</h3>
+      <p>Dẫn khách vào form tư vấn, chốt hẹn xem nhà, mở rộng network môi giới.</p>
+      <div class="phase-meta">
+        <span class="pm-tag">Tone: Tự tin · Social proof · CTA rõ ràng</span>
+        <span class="pm-tag">Ratio: 70% value · 30% conversion</span>
+        <span class="pm-tag">Pin bài 13 + 15 lên đầu trang</span>
+      </div>
+    </div>
+
+    <!-- POST 13 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-3">13</div>
+          <div>
+            <div class="post-title">Social Proof — 47 Trường Hợp Tư Vấn</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 7 · T2 · ⭐⭐ CTA post</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p13',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "8 tuần qua tôi đã tư vấn 47 trường hợp về HLX."</div>
+        <div class="post-body" id="p13">8 tuần qua tôi đã tư vấn 47 trường hợp về HLX.
+
+Đây là những gì tôi nhận ra:
+
+23/47 người → KHÔNG phù hợp mua lúc này
+(Và tôi đã nói thẳng điều đó với họ)
+
+Lý do phổ biến nhất:
+→ Vốn dưới 800 triệu, tỷ lệ vay sẽ tạo áp lực không cần thiết
+→ Thu nhập chưa ổn định (mới chuyển việc, đang kinh doanh giai đoạn đầu)
+→ Đang có khoản vay khác chưa tất toán
+
+15/47 người → Phù hợp nhưng cần thêm 6-12 tháng chuẩn bị
+(Tôi đang đồng hành cùng họ trong giai đoạn này)
+
+9/47 người → Đặt cọc và ký hợp đồng
+(7 người mua shophouse, 2 người mua condotel)
+
+───
+Không phải ai cũng nên mua HLX.
+Nhưng nếu anh/chị phù hợp — đây là thời điểm tốt nhất trong 3 năm tới.
+
+Tôi còn 5 slot tư vấn 1-1 trong tuần này (miễn phí, 45 phút).
+DM "TƯ VẤN" nếu anh/chị muốn một trong 5 slot đó.</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Cập nhật con số thực tế nếu có. Scarcity "5 slot" tạo urgency. <strong>Phải trả lời DM trong vòng 30 phút</strong> để tỷ lệ chuyển đổi cao nhất.</div>
+      </div>
+    </div>
+
+    <!-- POST 14 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-3">14</div>
+          <div>
+            <div class="post-title">Objection Handling — "Chờ Thêm Xem Thị Trường"</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 7 · T4</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p14',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: '"Chờ thêm vài tháng xem thị trường thế nào đã."'</div>
+        <div class="post-body" id="p14">"Chờ thêm vài tháng xem thị trường thế nào đã."
+
+Câu này tôi nghe 3-4 lần mỗi tuần.
+
+Tôi hiểu tâm lý đó. Bản thân tôi cũng từng như vậy.
+
+Nhưng hãy nhìn vào dữ liệu thực:
+
+Khách hàng đầu tiên tôi từng tư vấn (anh T., Hà Nội):
+→ Tháng 3/2024: "Để anh chờ xem thêm 3 tháng"
+→ Tháng 6/2024: "Thôi thị trường vẫn chưa rõ, chờ thêm"
+→ Tháng 9/2024: "Cuối năm xem sao"
+→ Tháng 1/2025: Giá shophouse anh muốn tăng 18%
+→ Anh T. hiện vẫn đang "chờ thêm"
+
+Tôi không cố thuyết phục.
+Mỗi người có hoàn cảnh riêng và thời điểm riêng.
+
+Nhưng "chờ thị trường rõ" thường đồng nghĩa với "chờ đến khi ai cũng thấy rõ" — và lúc đó giá đã phản ánh hết.
+
+Cơ hội đầu tư tồn tại chính xác vì không phải ai cũng thấy rõ.
+
+Anh/chị đang chờ điều gì cụ thể? Comment bên dưới.
+Tôi sẽ trả lời thẳng — không né tránh.</div>
+      </div>
+    </div>
+
+    <!-- POST 15 -->
+    <div class="post-card">
+      <div class="post-head">
+        <div class="post-meta">
+          <div class="post-num num-3">15</div>
+          <div>
+            <div class="post-title">CTA Trực Tiếp — Tôi Làm Điều 90% Môi Giới Không Làm</div>
+            <div style="margin-top:4px;display:flex;gap:6px;">
+              <span class="post-badge badge-fb">📘 Facebook</span>
+              <span class="post-badge badge-zalo">💙 Zalo</span>
+              <span style="font-size:10.5px;color:#9ca3af;">Tuần 8 · T2 · 📌 Pin lên đầu trang</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="btn-copy" onclick="copyPost('p15',this)">📋 Copy Bài</button>
+        </div>
+      </div>
+      <div class="post-content">
+        <div class="post-hook">Hook: "Tôi đang làm điều mà 90% môi giới không làm:"</div>
+        <div class="post-body" id="p15">Tôi đang làm điều mà 90% môi giới không làm:
+
+Tôi TỪ CHỐI khách hàng không phù hợp.
+
+Vì tôi tin rằng thương vụ tốt nhất là thương vụ mà 3 năm sau khách hàng vẫn cảm ơn mình.
+
+Nếu anh/chị đang nghiêm túc tìm hiểu HLX — đây là những gì tôi có thể làm cho anh/chị:
+
+✅ Phân tích tài chính cá nhân hóa (không phán xét)
+✅ So sánh 3 sản phẩm và chọn sản phẩm phù hợp nhất
+✅ Mô phỏng dòng tiền 5-10 năm với số liệu thực
+✅ Checklist pháp lý 23 điểm trước khi ký
+✅ Đồng hành suốt quá trình — không mất liên lạc sau ký
+
+Tôi nhận 3 ca tư vấn chuyên sâu mỗi tuần.
+(Miễn phí. Không ép mua. Không cần cam kết gì.)
+
+Nếu cuối buổi anh/chị thấy không phù hợp — tôi sẽ nói thẳng.
+Nếu phù hợp — tôi sẽ đề xuất lộ trình cụ thể.
+
+DM "PHÂN TÍCH" hoặc Zalo: 0964.827.670</div>
+        <div class="tip-box"><strong>💡 Ghi chú:</strong> Pin bài này lên đầu trang FB sau khi đăng. Đây là bài "giới thiệu dịch vụ" hiệu quả nhất — không bán nhà, bán quá trình tư vấn.</div>
+      </div>
+    </div>
+  </div><!-- /phase3 -->
+
+  <!-- SCHEDULE TABLE -->
+  <div id="schedule">
+    <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--nd);margin:0 0 14px;display:flex;align-items:center;gap:8px;">
+      📅 Lịch Đăng Bài 8 Tuần
+      <span style="flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);display:block;"></span>
+    </div>
+    <div class="schedule-card">
+      <div class="sch-head"><h3>Lịch Đăng — Giờ Vàng: 7:30 sáng hoặc 9:30 tối</h3></div>
+      <div style="overflow-x:auto;">
+        <table class="sch-table">
+          <thead>
+            <tr>
+              <th>Tuần</th>
+              <th>Thứ 2</th>
+              <th>Thứ 4</th>
+              <th>Thứ 6</th>
+              <th>Thứ 7</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="week-label">Tuần 1<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">🌱 Hoà nhập</span></td>
+              <td><span class="pill pill-g">Bài 1</span> Story mở đầu</td>
+              <td><span class="pill pill-g">Bài 2</span> Vĩ mô hook</td>
+              <td><span class="pill pill-g">Bài 3</span> Myth-busting ⭐</td>
+              <td><span class="pill pill-g">Bài 4</span> UNESCO</td>
+            </tr>
+            <tr>
+              <td class="week-label">Tuần 2<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">🌱 Hoà nhập</span></td>
+              <td><span class="pill pill-g">Bài 5</span> Behind-scenes</td>
+              <td><span class="pill pill-g">Bài 6</span> Engagement poll</td>
+              <td>Bài 3 biến thể<br><span style="font-size:10.5px;color:#9ca3af;">Thay 1 objection khác</span></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="week-label">Tuần 3<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">🌱 Hoà nhập</span></td>
+              <td>Q&A tổng hợp<br><span style="font-size:10.5px;color:#9ca3af;">Trả lời câu hỏi hay nhất từ comment</span></td>
+              <td>Bài 4 biến thể</td>
+              <td>Bài 1 biến thể<br><span style="font-size:10.5px;color:#9ca3af;">Lần thứ 2 đến HLX</span></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="week-label">Tuần 4<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">📊 Authority</span></td>
+              <td><span class="pill pill-b">Bài 7</span> ROI 3 SP ⭐⭐</td>
+              <td><span class="pill pill-b">Bài 8</span> 4 điều hội tụ</td>
+              <td><span class="pill pill-b">Bài 10</span> Checklist pháp lý</td>
+              <td><span class="pill pill-b">Bài 12</span> 7 con số</td>
+            </tr>
+            <tr>
+              <td class="week-label">Tuần 5<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">📊 Authority</span></td>
+              <td><span class="pill pill-b">Bài 9</span> Case study ⭐⭐</td>
+              <td><span class="pill pill-b">Bài 11</span> So sánh kênh ĐT</td>
+              <td>Bài 7 biến thể<br><span style="font-size:10.5px;color:#9ca3af;">Focus 1 sản phẩm cụ thể</span></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="week-label">Tuần 6<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">📊 Authority</span></td>
+              <td>Deep-dive Shophouse<br><span style="font-size:10.5px;color:#9ca3af;">Bài 7 chỉ phần SP 1</span></td>
+              <td>Deep-dive Condotel<br><span style="font-size:10.5px;color:#9ca3af;">Bài 7 chỉ phần SP 2</span></td>
+              <td>Deep-dive Biệt thự<br><span style="font-size:10.5px;color:#9ca3af;">Bài 7 chỉ phần SP 3</span></td>
+              <td>Bài 12 biến thể</td>
+            </tr>
+            <tr>
+              <td class="week-label">Tuần 7<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">🎯 Chuyển đổi</span></td>
+              <td><span class="pill pill-o">Bài 13</span> Social proof ⭐⭐</td>
+              <td><span class="pill pill-o">Bài 14</span> Objection: Chờ</td>
+              <td>Bài 13 biến thể<br><span style="font-size:10.5px;color:#9ca3af;">Update số liệu mới</span></td>
+              <td>Engagement sâu</td>
+            </tr>
+            <tr>
+              <td class="week-label">Tuần 8<br><span style="font-weight:400;color:#9ca3af;font-size:11px;">🎯 Chuyển đổi</span></td>
+              <td><span class="pill pill-o">Bài 15</span> CTA trực tiếp 📌</td>
+              <td>Testimonial thực<br><span style="font-size:10.5px;color:#9ca3af;">Case study từ khách thật</span></td>
+              <td>Summary series<br><span style="font-size:10.5px;color:#9ca3af;">Top 3 bài được share nhất</span></td>
+              <td>Pin Bài 15 lên đầu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <p>Content Plan · <strong>Nguyễn Thị Yến</strong> · BDS Mastery Kit · 2026 · Nội dung dành cho nội bộ</p>
+</footer>
+
+<script>
+function copyPost(id, btn) {
+  const el = document.getElementById(id);
+  const text = el ? el.textContent.trim() : '';
+  const orig = btn.textContent;
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Đã copy!';
+      btn.classList.add('ok');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2500);
+    }).catch(() => fallbackCopy(text, btn, orig));
+  } else {
+    fallbackCopy(text, btn, orig);
+  }
+}
+
+function fallbackCopy(text, btn, orig) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  btn.textContent = '✅ Đã copy!';
+  btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2500);
+}
+
+// Highlight active nav on scroll
+const phases = ['phase1','phase2','phase3','schedule'];
+window.addEventListener('scroll', () => {
+  let cur = '';
+  phases.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 100) cur = id;
+  });
+  document.querySelectorAll('.pnav').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
+</script>
+</body>
+</html>
