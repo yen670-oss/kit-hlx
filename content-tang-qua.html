@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📱 Content Tặng Quà — BDS Mastery Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--card2:#0e1d2e;
+  --fb:#1877f2;--zalo:#0068ff;--tiktok:#fe2c55;--green:#27ae60}
+body{background:var(--bg);color:#e8dfc8;font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0a1020,#0d1a35,#1a0a20);padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(24,119,242,.1),transparent 55%),radial-gradient(ellipse at 70% 50%,rgba(254,44,85,.08),transparent 55%)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weight:900;line-height:1.2;background:linear-gradient(135deg,#1877f2,var(--gold),#fe2c55);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:10px}
+.hero-sub{font-size:14px;color:rgba(232,223,200,.65);max-width:600px;margin:0 auto 24px;position:relative;z-index:1;line-height:1.7}
+.hero-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.chip{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.5px}
+.chip-fb{background:rgba(24,119,242,.2);border:1px solid rgba(24,119,242,.4);color:#6aabff}
+.chip-zalo{background:rgba(0,104,255,.2);border:1px solid rgba(0,104,255,.4);color:#80b3ff}
+.chip-tt{background:rgba(254,44,85,.2);border:1px solid rgba(254,44,85,.4);color:#ff8fa8}
+
+/* PLATFORM TABS */
+.ptab-wrap{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
+.ptab-nav{display:flex;gap:0;margin-bottom:32px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.2)}
+.ptab-btn{flex:1;padding:14px 8px;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:13px;font-weight:700;background:transparent;color:rgba(232,223,200,.5);transition:.25s;letter-spacing:.5px}
+.ptab-btn.active-fb{background:rgba(24,119,242,.2);color:#6aabff;border-bottom:3px solid #1877f2}
+.ptab-btn.active-zalo{background:rgba(0,104,255,.2);color:#80b3ff;border-bottom:3px solid #0068ff}
+.ptab-btn.active-tt{background:rgba(254,44,85,.2);color:#ff8fa8;border-bottom:3px solid #fe2c55}
+.ppanel{display:none}.ppanel.active{display:block}
+
+/* GIFT FILTER */
+.filter-bar{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filter-btn{padding:7px 16px;border-radius:20px;border:1px solid rgba(201,168,76,.2);background:transparent;color:rgba(232,223,200,.5);font-size:12px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s}
+.filter-btn:hover{border-color:rgba(201,168,76,.4);color:var(--gl)}
+.filter-btn.on{background:rgba(201,168,76,.15);border-color:var(--gold);color:var(--gold)}
+
+/* CONTENT CARDS */
+.content-grid{display:flex;flex-direction:column;gap:16px}
+.c-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden}
+.c-card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:10px}
+.c-head-left{display:flex;align-items:center;gap:10px}
+.gift-badge{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px}
+.gb-1{background:rgba(231,76,60,.15);color:#e74c3c}
+.gb-2{background:rgba(155,89,182,.15);color:#9b59b6}
+.gb-3{background:rgba(230,126,34,.15);color:#e67e22}
+.gb-4{background:rgba(26,188,156,.15);color:#1abc9c}
+.gb-5{background:rgba(52,152,219,.15);color:#3498db}
+.gb-6{background:rgba(39,174,96,.15);color:#27ae60}
+.gb-7{background:rgba(201,168,76,.15);color:var(--gold)}
+.gb-8{background:rgba(236,240,241,.1);color:#bdc3c7}
+.c-card-title{font-size:13px;font-weight:700;color:var(--gl)}
+.btn-cp{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gold);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s;white-space:nowrap}
+.btn-cp:hover{background:rgba(201,168,76,.22)}
+.btn-cp.ok{background:rgba(39,174,96,.15);border-color:rgba(39,174,96,.4);color:#2ecc71}
+
+.c-body{padding:18px}
+.c-text{font-size:13.5px;line-height:1.9;color:#d8cdb8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif}
+
+/* TIKTOK SPECIFIC */
+.tt-card{background:var(--card);border:1px solid rgba(254,44,85,.12);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.tt-head{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.tt-title-wrap{display:flex;align-items:center;gap:10px}
+.tt-duration{background:rgba(254,44,85,.15);border:1px solid rgba(254,44,85,.3);color:#ff8fa8;padding:3px 12px;border-radius:12px;font-size:10px;font-weight:700}
+.tt-body{padding:18px}
+.tt-timeline{display:flex;flex-direction:column;gap:12px}
+.tt-row{display:grid;grid-template-columns:90px 1fr;gap:12px;font-size:13px}
+.tt-time{color:#ff8fa8;font-weight:700;font-size:11px;padding-top:2px;letter-spacing:.5px}
+.tt-section-label{font-size:10px;font-weight:700;letter-spacing:1.5px;margin-bottom:4px;display:block}
+.sl-hook{color:#fe2c55}.sl-prob{color:#e67e22}.sl-val{color:#27ae60}.sl-cta{color:var(--gold)}
+.tt-content{color:#d8cdb8;line-height:1.75}
+.tt-divider{height:1px;background:rgba(255,255,255,.06);margin:4px 0}
+.tt-notes{background:rgba(0,0,0,.2);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:12px;color:rgba(232,223,200,.6);line-height:1.7}
+.tt-notes strong{color:var(--gl)}
+
+/* SCHEDULE */
+.schedule-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.schedule-table th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-size:11px;letter-spacing:.5px}
+.schedule-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);color:#d8cdb8;vertical-align:top}
+.schedule-table tr:hover td{background:rgba(255,255,255,.02)}
+.plat-tag{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;margin-right:4px}
+.pt-fb{background:rgba(24,119,242,.2);color:#6aabff}
+.pt-zalo{background:rgba(0,104,255,.2);color:#80b3ff}
+.pt-tt{background:rgba(254,44,85,.2);color:#ff8fa8}
+
+.sec-box{background:var(--card);border:1px solid rgba(201,168,76,.1);border-radius:14px;padding:24px;margin-bottom:20px}
+.sec-box-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--gl);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.sec-box-title::before{content:'';display:inline-block;width:4px;height:20px;background:var(--gold);border-radius:2px}
+
+footer{text-align:center;padding:28px 20px;border-top:1px solid rgba(201,168,76,.1);font-size:12px;color:rgba(232,223,200,.3)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>📱 Content Tặng Quà<br>BDS Mastery Kit</h1>
+  <p class="hero-sub">8 gói quà × 3 platform = 24 bài content dùng ngay. Copy một click — không cần chỉnh sửa gì thêm.</p>
+  <div class="hero-chips">
+    <span class="chip chip-fb">📘 8 Bài Facebook</span>
+    <span class="chip chip-zalo">💬 8 Tin Zalo</span>
+    <span class="chip chip-tt">🎬 8 Script TikTok</span>
+  </div>
+</div>
+
+<div class="ptab-wrap">
+  <div class="ptab-nav">
+    <button class="ptab-btn active-fb" onclick="showPlatform('fb',this)">📘 Facebook Posts</button>
+    <button class="ptab-btn" onclick="showPlatform('zalo',this)">💬 Zalo Messages</button>
+    <button class="ptab-btn" onclick="showPlatform('tt',this)">🎬 TikTok Scripts</button>
+    <button class="ptab-btn" onclick="showPlatform('sched',this)">📅 Lịch Đăng</button>
+  </div>
+
+  <!-- ══════════════════════════ FB POSTS ══════════════════════════ -->
+  <div class="ppanel active" id="pf-fb">
+    <div class="content-grid">
+
+      <!-- FB1 -->
+      <div class="c-card" data-gift="1">
+        <div class="c-card-head">
+          <div class="c-head-left">
+            <span class="gift-badge gb-1">GIFT #1</span>
+            <span class="c-card-title">7 Nỗi Đau Môi Giới HLX</span>
+          </div>
+          <button class="btn-cp" onclick="cp('fb1',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb1">Môi giới Hạ Long Xanh đang gặp đúng 7 vấn đề này — anh/chị check thử xem mình mắc mấy cái?
+
+❌ Lead nhiều nhưng không ai chịu cọc
+❌ Khách hỏi xong biến mất, không trace được
+❌ Không biết nói gì khi khách so sánh với dự án khác
+❌ Làm 1 mình, không có hệ thống, cứ chạy tại chỗ
+❌ Không có content chuyên nghiệp để đăng hàng ngày
+❌ Chốt được nhưng hồ sơ sai, mất hoa hồng
+❌ Không có ai đào tạo bài bản — tự mày mò mãi
+
+Nếu anh/chị mắc 3 cái trở lên → bình thường, không phải anh/chị kém. Đó là nỗi đau chung của 90% môi giới HLX.
+
+Em vừa đóng gói phân tích 7 nỗi đau này + giải pháp thực tế + 6 bài đăng FB + 5 mẫu Zalo copy-paste luôn.
+
+🎁 MIỄN PHÍ — Link bình luận đầu tiên 👇
+(Tag thêm đồng nghiệp đang bán HLX — họ cần cái này lắm)
+
+#HaLongXanh #VinhomesHLX #MoiGioiBDS</div></div>
+      </div>
+
+      <!-- FB2 -->
+      <div class="c-card" data-gift="2">
+        <div class="c-card-head">
+          <div class="c-head-left"><span class="gift-badge gb-2">GIFT #2</span><span class="c-card-title">5 Kiểu Khách Hàng & Script Tiếp Cận</span></div>
+          <button class="btn-cp" onclick="cp('fb2',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb2">Khách hỏi mua nhà mà anh/chị đang nói SAI ngôn ngữ với họ — đó là lý do 67% deal thất bại.
+
+Nhà đầu tư hỏi "view có đẹp không?" → thực ra họ muốn nghe về YIELD.
+Người mua lần đầu lo "pháp lý đầy đủ chưa?" → thực ra đang hỏi "tôi có an toàn không?"
+Người đang phân vân giữa 3 dự án → họ cần DEADLINE, không cần thêm thông tin.
+
+5 kiểu khách BĐS hoàn toàn khác nhau. Mỗi kiểu cần 1 ngôn ngữ, 1 điểm chạm, 1 cách chốt riêng.
+
+Em đóng gói bộ nhận biết + script tiếp cận riêng cho từng kiểu — dùng ngay không cần chỉnh gì.
+
+🎁 Tặng miễn phí — link comment đầu tiên 👇
+
+Anh/chị hay gặp kiểu khách nào nhất? Comment chia sẻ nhé!
+
+#BanHangBDS #KhachHangBDS #HaLongXanh</div></div>
+      </div>
+
+      <!-- FB3 -->
+      <div class="c-card" data-gift="3">
+        <div class="c-card-head">
+          <div class="c-head-left"><span class="gift-badge gb-3">GIFT #3</span><span class="c-card-title">10 Tip Xử Lý Từ Chối</span></div>
+          <button class="btn-cp" onclick="cp('fb3',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb3">Khách nói "để suy nghĩ thêm" — anh/chị có biết họ thực ra muốn nói gì không?
+
+📊 80% người mua BĐS sẽ mua SAU khi từ chối ít nhất 5 lần.
+📊 92% môi giới bỏ cuộc trước lần thứ 5.
+→ Đó là lý do 92% thương vụ chạy vào túi 8% môi giới còn lại.
+
+"Để suy nghĩ thêm" = Chưa đủ thuyết phục.
+"Giá cao quá" = Chưa thấy đủ giá trị.
+"Chồng/vợ chưa đồng ý" = Chưa có công cụ thuyết phục người thân.
+"Thị trường đang xấu" = Chưa có dữ liệu để yên tâm.
+
+Mỗi câu từ chối đều có ý nghĩa ẩn và có script phản hồi chuẩn.
+
+Em đóng gói 10 tình huống thực chiến nhất — mỗi cái có ý nghĩa ẩn + sai lầm thường gặp + script phản hồi + hội thoại Zalo mẫu.
+
+🎁 Tặng miễn phí 👇 [link comment]
+
+Save lại dùng cho buổi tư vấn tiếp theo nha!
+
+#XuLyTuChoi #BanHangBDS #MoiGioi</div></div>
+      </div>
+
+      <!-- FB4 -->
+      <div class="c-card" data-gift="4">
+        <div class="c-card-head">
+          <div class="c-head-left"><span class="gift-badge gb-4">GIFT #4</span><span class="c-card-title">ROI Đào Tạo (Chủ Sàn)</span></div>
+          <button class="btn-cp" onclick="cp('fb4',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb4">Chủ sàn nào đang nghĩ "đào tạo tốn tiền" — xem số này rồi hẳn suy nghĩ lại:
+
+📊 IBM: Nhân viên được đào tạo bài bản → năng suất cao hơn 230%
+📊 Gallup: Đội ngũ thiếu công cụ → mất 34% năng suất/người/năm
+📊 McKinsey: Công ty đầu tư upskilling → giữ chân nhân tài tốt hơn 4.3 lần
+
+Với sàn 20 môi giới: thiếu đào tạo + thiếu công cụ → mất ước tính 2–5 tỷ doanh thu mỗi năm chỉ vì inefficiency.
+
+Em tổng hợp 20+ nghiên cứu toàn cầu (IBM, McKinsey, Gallup, ATD) thành báo cáo ngắn — có bảng scale effect theo quy mô sàn: 10 người / 50 người / 200 người.
+
+🎁 Tặng miễn phí cho anh/chị đang quản lý đội nhóm BĐS 👇 [link comment]
+
+Tag chủ sàn nào cần thấy số liệu này đi nào!
+
+#ChuSan #ROIDaoTao #VinhomesHLX</div></div>
+      </div>
+
+      <!-- FB5 -->
+      <div class="c-card" data-gift="5">
+        <div class="c-card-head">
+          <div class="c-head-left"><span class="gift-badge gb-5">GIFT #5</span><span class="c-card-title">8 Nỗi Đau Chủ Sàn F1/F2</span></div>
+          <button class="btn-cp" onclick="cp('fb5',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb5">Chủ sàn BĐS đang chịu đựng 8 nỗi đau này — ai đồng cảm thì like 1 cái nhé:
+
+1️⃣ Tuyển môi giới liên tục nhưng nghỉ cũng liên tục
+2️⃣ KPI đặt ra nhưng không ai đạt — cũng không biết tại sao
+3️⃣ Chiều khách, chiều môi giới, chiều CĐT — không còn thời gian cho mình
+4️⃣ Môi giới không có công cụ chuyên nghiệp → khách không tin → tỷ lệ chốt thấp
+5️⃣ Marketing tốn tiền nhưng lead về không chất lượng
+6️⃣ Không có hệ thống bàn giao — mỗi người làm một kiểu
+7️⃣ Môi giới giỏi thì tự tách ra lập sàn riêng
+8️⃣ Biết cần thay đổi nhưng không biết bắt đầu từ đâu
+
+Em đã phân tích 8 nỗi đau này và đóng gói giải pháp + content marketing dành riêng cho chủ sàn F1/F2 bán HLX.
+
+🎁 Xem miễn phí — link bình luận 👇
+
+#ChuSanBDS #F1F2 #VinhomesHLX</div></div>
+      </div>
+
+      <!-- FB6 -->
+      <div class="c-card" data-gift="6">
+        <div class="c-card-head">
+          <div class="c-head-left"><span class="gift-badge gb-6">GIFT #6</span><span class="c-card-title">Máy Tính Chia Hoa Hồng</span></div>
+          <button class="btn-cp" onclick="cp('fb6',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb6">Hợp tác bán HLX mà chia hoa hồng kiểu nào cho đúng?
+
+Nhiều người làm theo "cảm giác" rồi sau đó tranh cãi không dứt.
+
+Em làm cái máy tính chia hoa hồng — nhập vào:
+✅ Giá căn hộ
+✅ % hoa hồng CĐT
+✅ Ai trả chi phí ads
+✅ Chọn mô hình hợp tác (5 mô hình phổ biến)
+
+→ Ra ngay: Marketer nhận bao nhiêu / Closer nhận bao nhiêu
+→ Bằng số tiền thật luôn, không phải chỉ % trên giấy
+
+🎁 Miễn phí — dùng ngay không cần đăng ký 👇 [link comment]
+
+Anh/chị đang hợp tác theo mô hình nào? Comment chia sẻ nhé!
+
+#HoaHongBDS #HopTacMoiGioi #VinhomesHLX</div></div>
+      </div>
+
+      <!-- FB7 -->
+      <div class="c-card" data-gift="7">
+        <div class="c-card-head">
+          <div class="c-head-left"><span class="gift-badge gb-7">GIFT #7</span><span class="c-card-title">Thỏa Thuận Hợp Tác Marketer × Closer</span></div>
+          <button class="btn-cp" onclick="cp('fb7',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb7">Hợp tác bán BĐS mà không có thỏa thuận → sớm muộn cũng tranh cãi.
+
+"Anh nói 30% thôi mà" — "Em nhớ mình thỏa thuận 40% cơ?"
+"Lead này em tự chốt, anh không liên quan" — "Nhưng em là người giới thiệu khách đó!"
+
+73% hợp tác BĐS thất bại vì không thỏa thuận rõ ràng ngay từ đầu.
+
+Em đóng gói thành:
+📄 Thỏa thuận 1 trang — copy gửi Zalo là xong, không cần luật sư
+💬 5 script Zalo tiếp cận đối tác — từ lần đầu tiếp cận đến nhắc thanh toán HH
+
+🎁 Tặng miễn phí 👇 [link comment]
+
+Tag đối tác đang hợp tác với anh/chị để cùng xem nhé!
+
+#HopTacBDS #MoiGioiHLX</div></div>
+      </div>
+
+      <!-- FB8 -->
+      <div class="c-card" data-gift="8">
+        <div class="c-card-head">
+          <div class="c-head-left"><span class="gift-badge gb-8">GIFT #8</span><span class="c-card-title">Checklist 15 Điều Bảo Vệ Quyền Lợi</span></div>
+          <button class="btn-cp" onclick="cp('fb8',this)">📋 Copy</button>
+        </div>
+        <div class="c-body"><div class="c-text" id="fb8">Trước khi chuyển lead đầu tiên cho đối tác — 15 điều này anh/chị check chưa?
+
+🔴 Tỷ lệ HH đã xác nhận bằng văn bản chưa?
+🔴 Ai đứng HĐ với CĐT — đã rõ ràng chưa?
+🔴 Thời hạn thanh toán HH có deadline cụ thể chưa?
+🔴 Lead được bảo vệ bao nhiêu ngày?
+🟠 Closer cam kết phản hồi lead trong 24h chưa?
+... và 10 điều nữa
+
+Thiếu 1 điều màu đỏ → chắc chắn có ngày xảy ra tranh cãi.
+
+Em làm thành checklist interactive — tick từng ô, nó báo còn thiếu gì trước khi bắt đầu.
+Kèm thêm: 7 dấu hiệu nhận biết đối tác không đáng tin.
+
+🎁 Miễn phí, dùng ngay trên điện thoại 👇 [link comment]
+
+#BaoVeQuyenLoi #HopTacBDS #MoiGioi</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ ZALO ══════════════════════════ -->
+  <div class="ppanel" id="pf-zalo">
+    <div class="content-grid">
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-1">GIFT #1</span><span class="c-card-title">7 Nỗi Đau Môi Giới HLX</span></div><button class="btn-cp" onclick="cp('z1',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z1">Chào anh/chị [Tên]!
+
+Em có tài liệu miễn phí muốn chia sẻ — phân tích 7 nỗi đau lớn nhất của môi giới Vinhomes Hạ Long Xanh, kèm giải pháp thực tế và mẫu bài đăng copy-paste luôn.
+
+Anh/chị đang bán HLX thì cái này rất hữu ích ạ 👇
+[LINK gift-moi-gioi.html]
+
+Xem xong có gì hay anh/chị cho em biết với nhé 😊</div></div></div>
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-2">GIFT #2</span><span class="c-card-title">5 Kiểu Khách & Script Tiếp Cận</span></div><button class="btn-cp" onclick="cp('z2',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z2">Anh/chị [Tên] ơi!
+
+Em tặng anh/chị cái này — bộ nhận diện 5 kiểu khách BĐS phổ biến nhất, kèm script tiếp cận riêng cho từng loại.
+
+Cụ thể: Nhà đầu tư / Mua để ở / Lần đầu mua / Đang phân vân / Được giới thiệu — mỗi kiểu có dấu hiệu nhận biết, điều NÊN nói và ĐỪNG nói, và 1 script Zalo copy-paste ngay.
+
+🎁 [LINK gift-5-kieu-khach.html]
+
+Anh/chị đang có khách nào đang phân vân không? Em có thể gợi ý cách tiếp cận 😊</div></div></div>
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-3">GIFT #3</span><span class="c-card-title">10 Tip Xử Lý Từ Chối</span></div><button class="btn-cp" onclick="cp('z3',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z3">Anh/chị [Tên] ơi — em tặng bộ xử lý từ chối này nhé!
+
+10 câu khách hay nói nhất khi từ chối, kèm:
+✅ Ý nghĩa ẩn thực sự là gì
+✅ Sai lầm phổ biến (tránh ngay)
+✅ Script phản hồi chuẩn copy-paste
+✅ 5 hội thoại Zalo mẫu
+
+🎁 [LINK gift-xu-ly-tu-choi.html]
+
+Anh/chị đang có lead nào đang nói "để suy nghĩ" không? Gửi em nghe thử, em gợi ý cách follow-up 😊</div></div></div>
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-4">GIFT #4</span><span class="c-card-title">ROI Đào Tạo (Chủ Sàn)</span></div><button class="btn-cp" onclick="cp('z4',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z4">Chào anh/chị [Tên],
+
+Em chia sẻ báo cáo này — tổng hợp 20+ nghiên cứu quốc tế về ROI khi đầu tư đào tạo và trang bị công cụ cho đội ngũ BĐS.
+
+Có bảng tính cụ thể: sàn 10 người, 50 người, 200 người — chi phí đào tạo so với doanh thu tăng thêm thực tế.
+
+Anh/chị xem qua, nếu muốn thảo luận thêm về giải pháp cho đội nhóm em sẵn sàng ạ.
+
+🎁 [LINK gift-training-roi.html]</div></div></div>
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-5">GIFT #5</span><span class="c-card-title">8 Nỗi Đau Chủ Sàn F1/F2</span></div><button class="btn-cp" onclick="cp('z5',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z5">Anh/chị [Tên] ơi!
+
+Em tặng tài liệu phân tích 8 nỗi đau lớn nhất của chủ sàn F1/F2 đang bán Vinhomes Hạ Long Xanh — kèm định hướng giải quyết từng cái và bộ content marketing đăng ngay được.
+
+🎁 [LINK gift-chu-san.html]
+
+Anh/chị thấy mình đang gặp cái nào nhiều nhất? Mình nói chuyện thêm nhé ạ 😊</div></div></div>
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-6">GIFT #6</span><span class="c-card-title">Máy Tính Chia Hoa Hồng</span></div><button class="btn-cp" onclick="cp('z6',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z6">Anh/chị [Tên]!
+
+Em chia sẻ công cụ này — máy tính chia hoa hồng HLX, dùng luôn trên điện thoại:
+
+Nhập giá căn + % HH CĐT + chọn mô hình hợp tác → ra ngay số tiền từng người nhận.
+Có 5 mô hình phổ biến và 5 tình huống thực tế để tham khảo.
+
+🧮 [LINK gift-tinh-hoa-hong.html]
+
+Anh/chị đang có deal nào cần tính thử không? Em tính cùng nhé 😊</div></div></div>
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-7">GIFT #7</span><span class="c-card-title">Thỏa Thuận Hợp Tác Nhanh</span></div><button class="btn-cp" onclick="cp('z7',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z7">Anh/chị [Tên],
+
+Em gửi bộ mẫu hợp tác này — dùng khi muốn hợp tác với môi giới khác bán HLX:
+
+📄 Thỏa thuận 1 trang — copy paste là có thể gửi Zalo xác nhận ngay
+💬 5 script Zalo mẫu — từ tiếp cận lần đầu đến nhắc thanh toán hoa hồng
+
+🤝 [LINK gift-hop-tac-moi-gioi.html]
+
+Anh/chị đang muốn hợp tác với ai không? Mình trao đổi thêm nhé ạ 😊</div></div></div>
+
+      <div class="c-card"><div class="c-card-head"><div class="c-head-left"><span class="gift-badge gb-8">GIFT #8</span><span class="c-card-title">Checklist 15 Điều Bảo Vệ Lead</span></div><button class="btn-cp" onclick="cp('z8',this)">📋 Copy</button></div><div class="c-body"><div class="c-text" id="z8">Anh/chị [Tên]!
+
+Em gửi checklist này — 15 điều nên xác nhận trước khi hợp tác với ai bán BĐS cùng:
+
+✅ Tick từng ô trên điện thoại được luôn
+✅ Phân loại rủi ro: đỏ = bắt buộc / cam = nên có / xanh = tốt thêm
+✅ Kèm 7 dấu hiệu nhận biết đối tác xấu + cách xử lý
+
+🛡️ [LINK gift-checklist-bao-ve-lead.html]
+
+Anh/chị đang chuẩn bị hợp tác với ai không? Dùng cái này trước khi chuyển lead đầu tiên nhé ạ!</div></div></div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ TIKTOK ══════════════════════════ -->
+  <div class="ppanel" id="pf-tt">
+    <p style="font-size:13px;color:rgba(232,223,200,.55);margin-bottom:24px;line-height:1.7">Mỗi script có timestamp, lời thoại và gợi ý hình ảnh. Thời lượng mục tiêu: <strong style="color:var(--gold)">30–45 giây</strong> — phù hợp nhất cho TikTok BĐS hiện tại.</p>
+
+    <!-- TT1 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-1">GIFT #1</span><span class="c-card-title">7 Nỗi Đau Môi Giới HLX</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 35 giây</span><button class="btn-cp" onclick="cpTT('tt1',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:03<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div>
+              <div class="tt-content">🎯 <strong>Lời thoại:</strong> "Môi giới Hạ Long Xanh đang mắc 7 cái này mà không biết — check xem anh/chị có không?"<br>📱 <strong>Visual:</strong> Selfie cam, biểu cảm nghiêm túc. Chữ to trên màn: "7 NỖI ĐAU MÔI GIỚI HLX"</div>
+            </div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:03–0:15<br><span class="tt-section-label sl-prob">VẤN ĐỀ</span></div>
+            <div>
+              <div class="tt-content">🎯 <strong>Lời thoại:</strong> "Một: lead về nhiều nhưng không ai cọc. Hai: khách hỏi xong biến mất. Ba: không biết nói gì khi khách so sánh dự án khác. Bốn: làm một mình không có hệ thống. Năm: không có content chuyên nghiệp. Sáu: hồ sơ sai mất hoa hồng. Bảy: không có ai đào tạo bài bản."<br>📱 <strong>Visual:</strong> Text animation từng điểm hiện lên. Dùng âm thanh trend đang hot.</div>
+            </div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:15–0:28<br><span class="tt-section-label sl-val">GIÁ TRỊ</span></div>
+            <div>
+              <div class="tt-content">🎯 <strong>Lời thoại:</strong> "Nếu anh/chị mắc 3 cái trở lên — bình thường. Đó là nỗi đau chung của 90% môi giới HLX. Em đã phân tích và đóng gói giải pháp cho từng cái một."</div>
+            </div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:28–0:35<br><span class="tt-section-label sl-cta">CTA</span></div>
+            <div>
+              <div class="tt-content">🎯 <strong>Lời thoại:</strong> "Link nhận miễn phí ở bio hoặc comment 'MUỐN' để em gửi link cho."<br>📱 <strong>Visual:</strong> Chỉ tay lên trên (bio) hoặc xuống dưới (comment). Chữ: "MIỄN PHÍ 🎁"</div>
+            </div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Gợi ý:</strong> Quay theo chiều dọc, ánh sáng tự nhiên. Mặc đồ professional. Dùng trending sound. Caption: "Mắc mấy cái? Comment số nhé 👇" · Hashtag: #moigioi #haLongXanh #batdongsan #vinhomes</div>
+      </div>
+    </div>
+
+    <!-- TT2 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-2">GIFT #2</span><span class="c-card-title">5 Kiểu Khách Hàng</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 40 giây</span><button class="btn-cp" onclick="cpTT('tt2',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:03<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "67% deal BĐS thất bại vì môi giới nói SAI ngôn ngữ với khách."<br>📱 <strong>Visual:</strong> Chữ lớn: "67% THẤT BẠI VÌ ĐIỀU NÀY" — hiệu ứng giật.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:03–0:25<br><span class="tt-section-label sl-prob">NỘI DUNG</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Có 5 kiểu khách BĐS hoàn toàn khác nhau. Nhà đầu tư hỏi view — thực ra muốn nghe về yield. Người mua lần đầu lo pháp lý — thực ra đang hỏi 'tôi có an toàn không'. Người đang phân vân — cần deadline, không cần thêm thông tin. Mỗi kiểu cần 1 ngôn ngữ, 1 script riêng."<br>📱 <strong>Visual:</strong> 5 icon khác nhau hiện lên theo từng câu nói. Dùng B-roll: cuộc trò chuyện với khách.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:25–0:40<br><span class="tt-section-label sl-cta">CTA</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Em đóng gói đủ 5 kiểu khách với dấu hiệu nhận biết và script tiếp cận — tặng miễn phí. Comment 'SCRIPT' để em gửi link."<br>📱 <strong>Visual:</strong> Chỉ tay comment, chữ "COMMENT SCRIPT 👇"</div></div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Tip:</strong> Nên dùng format "POV" — "POV: Anh/chị môi giới HLX đang nói nhầm ngôn ngữ với khách" · Hashtag: #kinhdobatdongsan #moigioi #script #haLongXanh</div>
+      </div>
+    </div>
+
+    <!-- TT3 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-3">GIFT #3</span><span class="c-card-title">10 Tip Xử Lý Từ Chối</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 45 giây</span><button class="btn-cp" onclick="cpTT('tt3',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:04<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "92% môi giới bỏ cuộc trước khi khách từ chối lần thứ 5. Nhưng 80% khách mua sau khi từ chối đúng 5 lần."<br>📱 <strong>Visual:</strong> Chữ: "SỐ LIỆU NÀY SẼ THAY ĐỔI CÁCH ANH/CHỊ BÁN HÀNG"</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:04–0:30<br><span class="tt-section-label sl-val">GIÁ TRỊ</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Khách nói 'để suy nghĩ thêm' — không phải không mua. Là chưa đủ thuyết phục. Nói 'giá cao quá' — không phải không có tiền. Là chưa thấy đủ giá trị. Nói 'chồng chưa đồng ý' — không phải họ không muốn. Là họ cần công cụ để thuyết phục người thân. Mỗi câu từ chối đều có nghĩa ẩn — và có script phản hồi chuẩn."<br>📱 <strong>Visual:</strong> Text "Họ nói..." → "Nghĩa thật là..." hiện lần lượt. Rất visual, dễ viral.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:30–0:45<br><span class="tt-section-label sl-cta">CTA</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Em tổng hợp 10 tình huống từ chối thực chiến nhất — mỗi cái có script phản hồi. Comment 'TỪ CHỐI' để nhận miễn phí."</div></div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Format gợi ý:</strong> Duet/stitch với video khách hàng phân vân BĐS. Hoặc format "Khách nói gì vs Nghĩa thật là gì" — cực kỳ shareable. Hashtag: #xulytuchoi #banchnag #batdongsan #moigioi</div>
+      </div>
+    </div>
+
+    <!-- TT4 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-4">GIFT #4</span><span class="c-card-title">ROI Đào Tạo — Cho Chủ Sàn</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 40 giây</span><button class="btn-cp" onclick="cpTT('tt4',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:04<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Chủ sàn đang nghĩ đào tạo nhân viên tốn tiền? Đây là con số IBM và McKinsey tìm ra."<br>📱 <strong>Visual:</strong> Logo IBM, McKinsey flash lên. Credibility ngay từ giây đầu.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:04–0:28<br><span class="tt-section-label sl-val">SỐ LIỆU</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "IBM: nhân viên được đào tạo bài bản — năng suất cao hơn 230%. Gallup: đội ngũ thiếu công cụ — mất 34% năng suất mỗi người mỗi năm. McKinsey: đầu tư upskilling — giữ chân nhân tài tốt hơn 4.3 lần. Với sàn 20 người, thiếu đào tạo và công cụ — ước tính mất 2 đến 5 tỷ doanh thu mỗi năm chỉ vì kém hiệu quả."<br>📱 <strong>Visual:</strong> Số liệu hiện to từng cái. Màu đỏ cho số âm, xanh cho số dương.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:28–0:40<br><span class="tt-section-label sl-cta">CTA</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Em tổng hợp 20 nghiên cứu quốc tế thành báo cáo — có bảng tính riêng cho sàn 10, 50, 200 người. Tặng miễn phí. Comment 'ROI' để nhận."</div></div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Target:</strong> Video này target chủ sàn, trưởng nhóm BĐS — tông nghiêm túc hơn, dùng số liệu. Đăng giờ hành chính 11h hoặc 3h chiều. Hashtag: #chusanBDS #quanly #daotaonhanvien #batdongsan</div>
+      </div>
+    </div>
+
+    <!-- TT5 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-5">GIFT #5</span><span class="c-card-title">8 Nỗi Đau Chủ Sàn F1/F2</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 35 giây</span><button class="btn-cp" onclick="cpTT('tt5',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:03<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Chủ sàn BĐS — anh/chị đang chịu đựng bao nhiêu cái trong 8 cái này?"<br>📱 <strong>Visual:</strong> Chữ: "8 NỖI ĐAU CHỦ SÀN BĐS — CHECK XEM ANH/CHỊ MẮC MẤY CÁI"</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:03–0:25<br><span class="tt-section-label sl-prob">LIST</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Một, tuyển liên tục nhưng nghỉ cũng liên tục. Hai, KPI không ai đạt. Ba, không có thời gian cho mình. Bốn, tỷ lệ chốt thấp vì thiếu công cụ. Năm, lead về không chất lượng. Sáu, không có hệ thống. Bảy, nhân viên giỏi tách ra lập sàn riêng. Tám, biết cần thay đổi nhưng không biết bắt đầu từ đâu."<br>📱 <strong>Visual:</strong> Số 1–8 hiện nhanh theo từng câu. Âm thanh urgent.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:25–0:35<br><span class="tt-section-label sl-cta">CTA</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Em có tài liệu phân tích 8 cái này + giải pháp cho từng cái. Tặng miễn phí. Comment số anh/chị mắc nhiều nhất!"</div></div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Engagement trick:</strong> Kêu gọi comment SỐ — "Comment 3 nếu mắc điều số 3" → tạo thread comment dài → thuật toán đẩy video. Hashtag: #chusanBDS #F1F2 #quanly #VinhomesHLX</div>
+      </div>
+    </div>
+
+    <!-- TT6 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-6">GIFT #6</span><span class="c-card-title">Máy Tính Chia Hoa Hồng</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 30 giây</span><button class="btn-cp" onclick="cpTT('tt6',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:03<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Hợp tác bán BĐS — chia hoa hồng bao nhiêu % mới đúng?"<br>📱 <strong>Visual:</strong> Screen recording máy tính hoa hồng — nhìn professional và khác lạ ngay.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:03–0:20<br><span class="tt-section-label sl-val">DEMO</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Em vừa làm cái máy tính — nhập giá căn, chọn mô hình hợp tác là ra ngay số tiền mỗi người nhận. Không phải %, là triệu đồng thật. Ví dụ căn 3.5 tỷ, hoa hồng 2%, mô hình 40/60 — Marketer nhận 28 triệu, Closer nhận 42 triệu."<br>📱 <strong>Visual:</strong> Screen record thật của tool đang nhập số và ra kết quả. Cực kỳ convincing.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:20–0:30<br><span class="tt-section-label sl-cta">CTA</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Tặng miễn phí — comment 'TÍNH' để em gửi link. Dùng ngay trên điện thoại, không cần đăng ký gì."</div></div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Tip quan trọng:</strong> Video này PHẢI có screen recording thật của tool. Đây là format "product demo" — cực kỳ hiệu quả cho TikTok BĐS. Hashtag: #hoahong #hopcatBDS #batdongsan #moigioi</div>
+      </div>
+    </div>
+
+    <!-- TT7 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-7">GIFT #7</span><span class="c-card-title">Thỏa Thuận Hợp Tác</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 40 giây</span><button class="btn-cp" onclick="cpTT('tt7',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:04<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "73% hợp tác BĐS thất bại vì không thỏa thuận rõ ràng từ đầu — đây là những gì thường xảy ra."<br>📱 <strong>Visual:</strong> Chữ đỏ: "73% THẤT BẠI"</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:04–0:22<br><span class="tt-section-label sl-prob">STORY</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Thực tế em hay thấy: Hai người hợp tác, một người lo marketing, một người lo bán hàng. Không có gì trên giấy tờ. Chốt được một căn 4 tỷ, hoa hồng về 80 triệu. Sau đó tranh cãi 3 tháng ai được bao nhiêu. Cuối cùng mất cả hoa hồng lẫn mối quan hệ."<br>📱 <strong>Visual:</strong> Reenact ngắn bằng cách chụp màn chat tranh cãi (fake). Hoặc kể chuyện trực tiếp vào cam.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:22–0:40<br><span class="tt-section-label sl-cta">GIẢI PHÁP + CTA</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Em làm sẵn mẫu thỏa thuận 1 trang — copy paste gửi Zalo là xong, không cần luật sư. Kèm 5 script tiếp cận đối tác. Tặng miễn phí. Comment 'HỢP TÁC' để nhận."</div></div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Format gợi ý:</strong> "Sai lầm em hay thấy trong hợp tác BĐS" — storytelling format rất được xem. Tông thật thà, không phán xét. Hashtag: #hoptacBDS #moigioi #thoathuan #batdongsan</div>
+      </div>
+    </div>
+
+    <!-- TT8 -->
+    <div class="tt-card">
+      <div class="tt-head">
+        <div class="tt-title-wrap"><span class="gift-badge gb-8">GIFT #8</span><span class="c-card-title">Checklist 15 Điều Bảo Vệ Lead</span></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="tt-duration">⏱ 35 giây</span><button class="btn-cp" onclick="cpTT('tt8',this)">📋 Copy Script</button></div>
+      </div>
+      <div class="tt-body">
+        <div class="tt-timeline">
+          <div class="tt-row">
+            <div class="tt-time">0:00–0:03<br><span class="tt-section-label sl-hook">HOOK</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Trước khi chuyển lead cho đối tác — check 15 điều này chưa? Thiếu 1 điều đỏ là sẽ có ngày hối hận."<br>📱 <strong>Visual:</strong> Checklist animation — từng ô tick lần lượt. Rất thu hút mắt.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:03–0:25<br><span class="tt-section-label sl-val">NỘI DUNG</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Điều đỏ số một: tỷ lệ hoa hồng đã xác nhận bằng văn bản chưa? Điều đỏ số hai: ai đứng hợp đồng với chủ đầu tư? Điều đỏ số ba: thời hạn thanh toán có deadline cụ thể chưa? Điều đỏ số bốn: lead được bảo vệ bao nhiêu ngày? Còn 11 điều nữa trong checklist."<br>📱 <strong>Visual:</strong> Screen recording checklist đang tick từng ô. Màu đỏ/cam/xanh hiện rõ.</div></div>
+          </div>
+          <div class="tt-divider"></div>
+          <div class="tt-row">
+            <div class="tt-time">0:25–0:35<br><span class="tt-section-label sl-cta">CTA</span></div>
+            <div><div class="tt-content">🎯 <strong>Lời thoại:</strong> "Checklist đầy đủ 15 điều — dùng ngay trên điện thoại, miễn phí. Comment 'CHECK' để em gửi link."</div></div>
+          </div>
+        </div>
+        <div class="tt-notes"><strong>Tip:</strong> Screen recording checklist interactive rất thu hút — xem checklist tick từng ô là loại content "satisfying" được xem nhiều trên TikTok. Hashtag: #baove #hoptac #moigioi #batdongsan</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════ SCHEDULE ══════════════════════════ -->
+  <div class="ppanel" id="pf-sched">
+    <div class="sec-box">
+      <div class="sec-box-title">📅 Lịch Đăng 4 Tuần</div>
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Tuần</th><th>Ngày</th><th>Gift</th><th>Platform</th><th>Giờ đăng</th><th>Ghi chú</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>T1</td><td>Thứ 2</td><td>Gift #1 — 7 Nỗi đau MG</td><td><span class="plat-tag pt-fb">FB</span><span class="plat-tag pt-zalo">Zalo</span></td><td>20:00</td><td>Mở đầu series — tạo nhận diện</td></tr>
+          <tr><td>T1</td><td>Thứ 4</td><td>Gift #1 — Video nỗi đau</td><td><span class="plat-tag pt-tt">TikTok</span></td><td>19:00</td><td>Repurpose thành video 35 giây</td></tr>
+          <tr><td>T1</td><td>Thứ 6</td><td>Gift #2 — 5 Kiểu khách</td><td><span class="plat-tag pt-fb">FB</span></td><td>20:00</td><td>Poll: "Hay gặp kiểu nào nhất?"</td></tr>
+          <tr><td>T2</td><td>Thứ 2</td><td>Gift #2 — POV 5 kiểu khách</td><td><span class="plat-tag pt-tt">TikTok</span></td><td>19:30</td><td>Format POV viral</td></tr>
+          <tr><td>T2</td><td>Thứ 3</td><td>Gift #3 — Xử lý từ chối</td><td><span class="plat-tag pt-fb">FB</span><span class="plat-tag pt-zalo">Zalo</span></td><td>20:00</td><td>Giờ vàng — đăng kèm câu hỏi</td></tr>
+          <tr><td>T2</td><td>Thứ 5</td><td>Gift #3 — "Họ nói / Nghĩa thật"</td><td><span class="plat-tag pt-tt">TikTok</span></td><td>18:00</td><td>Format text animation dễ viral</td></tr>
+          <tr><td>T2</td><td>Thứ 6</td><td>Gift #4 — ROI đào tạo</td><td><span class="plat-tag pt-zalo">Zalo</span></td><td>11:00</td><td>Target chủ sàn — giờ hành chính</td></tr>
+          <tr><td>T3</td><td>Thứ 2</td><td>Gift #4 — Video số liệu IBM/McKinsey</td><td><span class="plat-tag pt-tt">TikTok</span></td><td>15:00</td><td>Tông nghiêm túc, số liệu ấn tượng</td></tr>
+          <tr><td>T3</td><td>Thứ 3</td><td>Gift #5 — 8 Nỗi đau chủ sàn</td><td><span class="plat-tag pt-fb">FB</span></td><td>20:30</td><td>Tag chủ sàn — tạo viral loop</td></tr>
+          <tr><td>T3</td><td>Thứ 5</td><td>Gift #6 — Máy tính HH (demo)</td><td><span class="plat-tag pt-tt">TikTok</span></td><td>19:00</td><td>PHẢI có screen recording tool</td></tr>
+          <tr><td>T3</td><td>Thứ 6</td><td>Gift #6 — Máy tính HH</td><td><span class="plat-tag pt-fb">FB</span><span class="plat-tag pt-zalo">Zalo</span></td><td>20:00</td><td>Câu hỏi: "Đang hợp tác mô hình nào?"</td></tr>
+          <tr><td>T4</td><td>Thứ 2</td><td>Gift #7 — Thỏa thuận hợp tác</td><td><span class="plat-tag pt-fb">FB</span></td><td>20:00</td><td>Tag đối tác đang hợp tác</td></tr>
+          <tr><td>T4</td><td>Thứ 3</td><td>Gift #7 — Storytelling thất bại HT</td><td><span class="plat-tag pt-tt">TikTok</span></td><td>19:30</td><td>Format kể chuyện thật thà</td></tr>
+          <tr><td>T4</td><td>Thứ 4</td><td>Gift #8 — Checklist 15 điều</td><td><span class="plat-tag pt-fb">FB</span><span class="plat-tag pt-zalo">Zalo</span></td><td>20:00</td><td>Kết series — nhắc nhở + pitch Kit nhẹ</td></tr>
+          <tr><td>T4</td><td>Thứ 6</td><td>Gift #8 — Screen recording checklist</td><td><span class="plat-tag pt-tt">TikTok</span></td><td>18:00</td><td>"Satisfying content" — checklist tick</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sec-box">
+      <div class="sec-box-title">💡 3 Quy Tắc Đăng Bài Tặng Quà</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px;flex-shrink:0">1️⃣</span><div><div style="font-weight:700;color:var(--gl);margin-bottom:4px">Không để link ngay trong bài FB</div><div style="font-size:13px;color:rgba(232,223,200,.65);line-height:1.7">Đặt link ở comment đầu tiên hoặc reply khi được hỏi → tăng engagement, Facebook ưu tiên reach hơn.</div></div></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px;flex-shrink:0">2️⃣</span><div><div style="font-weight:700;color:var(--gl);margin-bottom:4px">Kết bài bằng câu hỏi</div><div style="font-size:13px;color:rgba(232,223,200,.65);line-height:1.7">"Anh/chị đang gặp cái nào?" → kéo comment → tăng organic reach. TikTok thì kêu gọi comment số cụ thể.</div></div></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px;flex-shrink:0">3️⃣</span><div><div style="font-weight:700;color:var(--gl);margin-bottom:4px">Zalo song song với FB</div><div style="font-size:13px;color:rgba(232,223,200,.65);line-height:1.7">FB tạo awareness rộng, Zalo convert 1-1 với lead nóng. Mỗi bài FB đăng xong → gửi ngay Zalo cho 5–10 người thân thiết.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>BDS Mastery Kit · 24 Bài Content Tặng Quà · FB + Zalo + TikTok · Dùng nội bộ</footer>
+
+<script>
+let curPlatform='fb';
+function showPlatform(p, btn){
+  curPlatform=p;
+  document.querySelectorAll('.ppanel').forEach(el=>el.classList.remove('active'));
+  document.getElementById('pf-'+p).classList.add('active');
+  document.querySelectorAll('.ptab-btn').forEach(b=>{
+    b.className='ptab-btn';
+  });
+  btn.classList.add('active-'+p);
+}
+
+function cp(id, btn){
+  const el=document.getElementById(id);
+  if(!el) return;
+  const text=el.innerText.trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('ok')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('ok')},2000);
+  });
+}
+
+function cpTT(id, btn){
+  const card=document.getElementById? null : null;
+  // collect all text from tt-content inside the card
+  const cards=document.querySelectorAll('.tt-card');
+  let targetCard=null;
+  cards.forEach(c=>{
+    const b=c.querySelector('.btn-cp');
+    if(b===btn) targetCard=c;
+  });
+  if(!targetCard) return;
+  const rows=targetCard.querySelectorAll('.tt-row');
+  let lines=[];
+  rows.forEach(r=>{
+    const time=r.querySelector('.tt-time');
+    const label=r.querySelector('.tt-section-label');
+    const content=r.querySelector('.tt-content');
+    if(time&&content){
+      lines.push('['+time.textContent.split('\n')[0]+'] '+(label?label.textContent:''));
+      lines.push(content.innerText.trim());
+      lines.push('');
+    }
+  });
+  const notes=targetCard.querySelector('.tt-notes');
+  if(notes) lines.push('GHI CHÚ: '+notes.innerText.trim());
+  const text=lines.join('\n');
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy Script';btn.classList.remove('ok')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy Script';btn.classList.remove('ok')},2000);
+  });
+}
+</script>
+</body>
+</html>
