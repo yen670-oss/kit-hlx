@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🛡️ 10 Tip Xử Lý Từ Chối — Quà Tặng #3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d1b2a;
+  --gold:#C9A84C;
+  --gl:#E2C06A;
+  --navy:#1B3A6B;
+  --red:#c0392b;
+  --orange:#e67e22;
+  --green:#27ae60;
+  --card:#112233;
+  --card2:#0f1e30;
+}
+body{background:var(--bg);color:#e8dfc8;font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#1a0a0a,#3a1a1a,#1a1a0a);
+  padding:60px 24px 48px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(192,57,43,.15) 0%,transparent 60%),
+              radial-gradient(ellipse at 70% 50%,rgba(201,168,76,.08) 0%,transparent 60%);
+}
+.drip-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--red),#8b0000);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  padding:6px 18px;border-radius:20px;
+  margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,6vw,52px);
+  font-weight:900;
+  line-height:1.15;
+  background:linear-gradient(135deg,#ff6b6b,var(--gold),#ff6b6b);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  position:relative;z-index:1;
+  margin-bottom:16px;
+}
+.hero-sub{
+  font-size:16px;color:rgba(232,223,200,.75);
+  max-width:580px;margin:0 auto 36px;
+  position:relative;z-index:1;
+  line-height:1.7;
+}
+.hero-stats{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:20px;
+  position:relative;z-index:1;
+}
+.stat-box{
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(192,57,43,.4);
+  border-radius:14px;padding:18px 28px;
+  min-width:160px;
+}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#ff8a80;display:block}
+.stat-label{font-size:12px;color:rgba(232,223,200,.65);margin-top:4px;line-height:1.4}
+
+/* TABS */
+.tabs-wrap{max-width:1100px;margin:0 auto;padding:40px 20px 60px}
+.tab-nav{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.tab-btn{
+  padding:12px 28px;border:none;border-radius:10px;cursor:pointer;
+  font-family:'Be Vietnam Pro',sans-serif;font-size:14px;font-weight:600;
+  background:rgba(255,255,255,.07);color:rgba(232,223,200,.6);
+  transition:.25s;letter-spacing:.5px;
+}
+.tab-btn.active{background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;box-shadow:0 4px 20px rgba(192,57,43,.4)}
+.panel{display:none}.panel.active{display:block}
+
+/* SECTION TITLE */
+.sec-title{
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
+  color:var(--gl);margin-bottom:8px;
+}
+.sec-sub{font-size:13px;color:rgba(232,223,200,.55);margin-bottom:28px;line-height:1.6}
+
+/* OBJECTION CARDS */
+.obj-grid{display:flex;flex-direction:column;gap:24px}
+.obj-card{
+  background:var(--card);
+  border:1px solid rgba(201,168,76,.15);
+  border-left:4px solid var(--gold);
+  border-radius:16px;
+  overflow:hidden;
+}
+.obj-card.danger{border-left-color:#e74c3c}
+.obj-card.warn{border-left-color:#e67e22}
+.obj-card.info{border-left-color:#3498db}
+.obj-card.purple{border-left-color:#9b59b6}
+.obj-card.teal{border-left-color:#1abc9c}
+
+.obj-header{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:22px 24px 18px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  cursor:pointer;
+}
+.obj-num{
+  min-width:36px;height:36px;
+  background:linear-gradient(135deg,var(--red),#8b0000);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:15px;color:#fff;
+  flex-shrink:0;margin-top:2px;
+}
+.obj-said{
+  font-size:17px;font-weight:600;color:#f0e0c0;
+  font-style:italic;
+  line-height:1.4;
+}
+.obj-said::before{content:'" '}.obj-said::after{content:' "'}
+.obj-body{padding:0 24px 22px;margin-top:16px}
+
+.obj-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+@media(max-width:600px){.obj-row{grid-template-columns:1fr}}
+
+.obj-box{background:rgba(0,0,0,.25);border-radius:10px;padding:14px 16px}
+.obj-box-label{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;
+  margin-bottom:8px;display:block;
+}
+.lbl-hidden{color:#f39c12}.lbl-mistake{color:#e74c3c}.lbl-right{color:#2ecc71}
+.obj-box-text{font-size:13px;color:rgba(232,223,200,.82);line-height:1.65}
+
+.obj-script{
+  background:rgba(192,57,43,.08);
+  border:1px solid rgba(192,57,43,.25);
+  border-radius:10px;padding:16px;
+  margin-top:4px;
+}
+.obj-script-label{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;color:#ff8a80;
+  margin-bottom:10px;display:block;
+}
+.obj-script-text{font-size:13.5px;color:#f0dfc0;line-height:1.75;font-style:italic}
+
+/* SCRIPT PANEL */
+.script-grid{display:flex;flex-direction:column;gap:24px}
+.script-card{
+  background:var(--card);
+  border:1px solid rgba(201,168,76,.12);
+  border-radius:16px;overflow:hidden;
+}
+.script-card-header{
+  padding:18px 22px 14px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+}
+.script-card-title{font-weight:700;color:var(--gl);font-size:15px}
+.btn-copy{
+  background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);
+  color:var(--gold);border-radius:8px;padding:8px 16px;
+  font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'Be Vietnam Pro',sans-serif;
+  transition:.2s;
+}
+.btn-copy:hover{background:rgba(201,168,76,.25)}
+.btn-copy.ok{background:rgba(39,174,96,.2);border-color:rgba(39,174,96,.4);color:#2ecc71}
+
+.dialogue{padding:18px 22px 22px;display:flex;flex-direction:column;gap:12px}
+.msg{display:flex;gap:10px;align-items:flex-start}
+.msg-kh{flex-direction:row-reverse}
+.avatar{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;margin-top:2px;
+}
+.av-kh{background:rgba(52,152,219,.25);border:1px solid rgba(52,152,219,.4)}
+.av-mg{background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.35)}
+.bubble{
+  max-width:85%;padding:12px 15px;border-radius:14px;
+  font-size:13.5px;line-height:1.7;
+}
+.bubble-kh{
+  background:rgba(255,255,255,.08);
+  border-radius:14px 0 14px 14px;
+  color:rgba(232,223,200,.85);
+}
+.bubble-mg{
+  background:rgba(201,168,76,.12);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:0 14px 14px 14px;
+  color:#f0e0c0;
+}
+.msg-label{font-size:10px;letter-spacing:1px;font-weight:600;margin-bottom:6px;display:block}
+.lbl-kh{color:rgba(52,152,219,.8)}
+.lbl-mg{color:rgba(201,168,76,.8)}
+
+/* NEXT GIFT */
+.next-gift{
+  background:linear-gradient(135deg,rgba(27,58,107,.4),rgba(201,168,76,.08));
+  border:1px solid rgba(201,168,76,.25);
+  border-radius:16px;padding:28px;margin-top:40px;text-align:center;
+}
+.next-gift h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--gl);margin-bottom:10px}
+.next-gift p{font-size:13px;color:rgba(232,223,200,.65);line-height:1.7}
+.next-tag{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);
+  color:var(--gold);padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;margin-top:14px}
+
+/* FOOTER */
+footer{text-align:center;padding:32px 20px;border-top:1px solid rgba(201,168,76,.1);
+  font-size:12px;color:rgba(232,223,200,.35);letter-spacing:.5px}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .hero{padding:44px 16px 36px}
+  .stat-box{min-width:130px;padding:14px 18px}
+  .obj-body{padding:0 16px 18px}
+  .dialogue{padding:14px 14px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="drip-badge">#3/7 · CHUỖI DRIP · QUÀ TẶNG</div>
+  <h1>🛡️ 10 Tip Xử Lý<br>Từ Chối Hiệu Quả</h1>
+  <p class="hero-sub">Những câu từ chối khách nói không phải là "Không" — đó là tín hiệu họ cần thêm thông tin. Đây là bộ xử lý từ chối thực chiến nhất cho môi giới BĐS.</p>
+  <div class="hero-stats">
+    <div class="stat-box">
+      <span class="stat-num">73%</span>
+      <span class="stat-label">thương vụ thất bại<br>do xử lý từ chối sai</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">80%</span>
+      <span class="stat-label">khách mua sau lần<br>từ chối thứ 5</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">92%</span>
+      <span class="stat-label">môi giới bỏ cuộc<br>trước lần thứ 5</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show(0)">🛡️ 10 Tip Xử Lý</button>
+    <button class="tab-btn" onclick="show(1)">📝 Script Phản Hồi</button>
+  </div>
+
+  <!-- PANEL 0: 10 TIP -->
+  <div class="panel active" id="p0">
+    <div class="sec-title">10 Tình Huống Từ Chối Thực Chiến</div>
+    <p class="sec-sub">Mỗi câu từ chối đều có ý nghĩa ẩn. Học cách đọc đúng → phản hồi đúng → chốt đúng lúc.</p>
+
+    <div class="obj-grid">
+
+      <!-- 1 -->
+      <div class="obj-card danger">
+        <div class="obj-header">
+          <div class="obj-num">1</div>
+          <div class="obj-said">Để anh/chị suy nghĩ thêm</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Họ chưa đủ thông tin, còn lo lắng hoặc chưa thấy sự cấp bách. Không phải "Không" — là "Chưa đủ thuyết phục".</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Nói "Vâng, anh/chị suy nghĩ rồi cho em biết" rồi biến mất. Không theo dõi, không tạo anchor điểm quyết định.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁC H</span>
+            <div class="obj-box-text">Tìm hiểu điều gì khiến họ còn do dự. Đặt câu hỏi mở. Tạo deadline tự nhiên từ thị trường (số lượng căn, chính sách sắp đổi...).</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Dạ em hiểu ạ, quyết định lớn cần suy nghĩ kỹ. Anh/chị cho em hỏi thêm — điều gì đang khiến anh/chị còn băn khoăn nhất? Để em hỗ trợ thông tin chính xác hơn. Vì hiện tại căn này chỉ còn 2 suất, nếu anh/chị cần giữ chỗ em có thể hỗ trợ đặt cọc giữ giá ngay hôm nay."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="obj-card warn">
+        <div class="obj-header">
+          <div class="obj-num">2</div>
+          <div class="obj-said">Giá cao quá, bên kia rẻ hơn</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Họ chưa thấy đủ giá trị để justify mức giá. Hoặc đang dùng giá làm đòn bẩy để thương lượng.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Ngay lập tức bảo vệ giá bằng cách liệt kê tiện ích. Hoặc tệ hơn: đồng ý giảm giá quá nhanh, mất uy tín.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">So sánh giá trị tổng thể, không chỉ giá mua. Chi phí vô hình ở dự án rẻ (pháp lý rủi ro, thanh khoản kém, tiện ích thiếu). Tính ROI thực tế 5–10 năm.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Anh/chị nói đúng — giá có cao hơn một chút. Nhưng cho em hỏi: bên kia pháp lý đã sổ chưa? Tiến độ bàn giao thế nào? Vì với dự án Vinhomes, em tính thử: nếu giá thuê 15 triệu/tháng, sau 5 năm anh/chị thu về gần 900 triệu — chưa kể giá trị tài sản tăng. Bài toán đầu tư thực ra không phải là giá mua, mà là giá trị nhận về."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="obj-card info">
+        <div class="obj-header">
+          <div class="obj-num">3</div>
+          <div class="obj-said">Chồng/vợ em chưa đồng ý</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Người nói đã thích nhưng chưa tự tin quyết định một mình. Họ cần "bình phong" hoặc thực sự cần sự đồng thuận của người thân.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Nói "Vâng anh/chị về bàn với gia đình rồi báo em" — mất cơ hội vì không biết bao giờ gặp lại người quyết định thực sự.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Đề nghị gặp cả hai vợ chồng. Chuẩn bị tài liệu đẹp để họ về thuyết phục người thân. Hỏi người còn lại quan tâm điều gì nhất.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Dạ, quyết định lớn nên cần cả hai đồng lòng là đúng rồi ạ. Anh/chị cho em hỏi: anh/chị ấy thường quan tâm nhất đến điều gì khi mua nhà — pháp lý, tiến độ, hay tiềm năng sinh lời? Để em chuẩn bị tài liệu phù hợp. Nếu tiện, em có thể sắp xếp buổi gặp ngắn 30 phút cho cả hai, hoặc gửi video walkthrough căn hộ để anh/chị ấy xem trước."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="obj-card danger">
+        <div class="obj-header">
+          <div class="obj-num">4</div>
+          <div class="obj-said">Thị trường đang xấu, chờ thêm</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Họ lo lắng về rủi ro, có thể chịu ảnh hưởng từ tin tức tiêu cực. Muốn mua nhưng sợ mua sai thời điểm.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Cãi lại ngay "Thị trường tốt lắm anh/chị ơi!" — mất credibility. Hoặc đồng ý với lo ngại mà không có lý luận thay thế.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Acknowledge lo ngại. Phân tích cụ thể thị trường HLX, không nói chung chung. Chứng minh bằng dữ liệu: giao dịch gần đây, tỷ lệ lấp đầy, chính sách Vinhomes.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Anh/chị lo lắng như vậy là rất hợp lý. Thị trường chung đúng là có biến động. Nhưng em chia sẻ thực tế: Hạ Long Xanh Q1/2025 có 47 giao dịch thành công, tỷ lệ lấp đầy đạt 78%. Vinhomes có chính sách mua lại và cam kết cho thuê — đây là safety net mà các dự án khác không có. Mua lúc thị trường trầm lặng thường cho giá tốt hơn 15–20% so với đỉnh sóng, anh/chị ạ."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="obj-card purple">
+        <div class="obj-header">
+          <div class="obj-num">5</div>
+          <div class="obj-said">Tôi đang xem mấy chỗ khác nữa</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Họ chưa committed, muốn so sánh. Đây là cơ hội tốt — họ chưa chốt chỗ khác, vẫn còn trong game.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Nói xấu đối thủ — phản tác dụng, mất chuyên nghiệp. Hoặc hoảng loạn, hối thúc quá mức khiến khách cảm thấy bị dồn ép.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Hoan nghênh việc so sánh. Giúp họ có framework so sánh đúng (tiêu chí chuẩn). Highlight điểm khác biệt độc đáo của HLX mà chỗ khác không có.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Rất tốt anh/chị ơi! So sánh kỹ trước khi quyết định là đúng. Em gửi anh/chị bảng tiêu chí so sánh 5 yếu tố quan trọng nhất — pháp lý, tiến độ, thanh khoản, tiện ích nội khu, và uy tín CĐT. Anh/chị điền thông tin các dự án đang xem vào, em giúp phân tích khách quan. Riêng Hạ Long Xanh, điểm độc đáo không dự án nào khác có được là [X, Y, Z]."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="obj-card teal">
+        <div class="obj-header">
+          <div class="obj-num">6</div>
+          <div class="obj-said">Sợ mua xong không bán được</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Lo ngại về thanh khoản — điển hình của nhà đầu tư. Họ muốn "exit" dễ dàng khi cần. Cần bằng chứng về tính thanh khoản của dự án.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Hứa hẹn chung chung "Bán được anh/chị ơi, em sẽ hỗ trợ" mà không có bằng chứng cụ thể — nghe thiếu thuyết phục.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Cung cấp dữ liệu lịch sử giao dịch thứ cấp. Hệ sinh thái môi giới Vinhomes. Cam kết hỗ trợ bán lại bằng văn bản (nếu có thể). Phân tích demand thực từ người thuê.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Đây là câu hỏi rất thông minh ạ. Em chia sẻ dữ liệu thực: trong 6 tháng qua, Hạ Long Xanh có [X] giao dịch thứ cấp, giá tăng trung bình [Y]%. Hơn nữa, Vinhomes có hệ sinh thái môi giới toàn quốc — khi anh/chị muốn bán, em kết nối ngay với mạng lưới 500+ môi giới đang có khách. Anh/chị không bao giờ bán một mình."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="obj-card warn">
+        <div class="obj-header">
+          <div class="obj-num">7</div>
+          <div class="obj-said">Tiến độ xây dựng không chắc</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Bị ảnh hưởng bởi các vụ chậm bàn giao từ CĐT khác. Họ cần bằng chứng cụ thể về track record của Vinhomes, không phải lời hứa.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">"Vinhomes uy tín lắm anh/chị ơi" — câu trả lời quá mơ hồ. Thiếu dẫn chứng cụ thể về lịch sử bàn giao của tập đoàn.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Cung cấp lịch sử bàn giao cụ thể của các dự án Vinhomes trước. Điều khoản phạt trong HĐMB. Hình ảnh/video tiến độ xây dựng thực tế. Cơ chế bảo lãnh ngân hàng.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Anh/chị lo lắng hoàn toàn có cơ sở với thị trường hiện tại. Nhưng Vinhomes có track record: 18 dự án trên toàn quốc, 100% bàn giao đúng/trước hạn. HĐMB quy định phạt 0.05%/ngày nếu chậm — họ không dám chậm. Em gửi anh/chị báo cáo tiến độ xây dựng tuần này kèm hình ảnh thực tế để anh/chị yên tâm."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="obj-card info">
+        <div class="obj-header">
+          <div class="obj-num">8</div>
+          <div class="obj-said">Pháp lý chưa rõ ràng</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Nghe tin đồn hoặc đã từng gặp vấn đề pháp lý với dự án khác. Sợ mua xong không có sổ, hoặc tranh chấp. Cần được giáo dục, không phải bị bán.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Nói "Pháp lý ổn hết rồi anh/chị" mà không giải thích cụ thể, không cung cấp tài liệu. Khách không tin mà còn nghĩ bị che giấu thông tin.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Cung cấp bản pháp lý thực: Quyết định phê duyệt 1/500, Giấy phép xây dựng, Bảo lãnh ngân hàng. Offer cho khách mang hỏi luật sư riêng.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Đây là lo ngại hoàn toàn hợp lý, em rất trân trọng anh/chị hỏi thẳng. Em gửi ngay bộ pháp lý đầy đủ: Quyết định 1/500, GPXD số [X], và thư bảo lãnh từ ngân hàng [Y]. Nếu anh/chị muốn, em kết nối với luật sư tư vấn BĐS độc lập để verify — miễn phí. Em không có gì phải giấu vì pháp lý đây là điểm mạnh nhất của dự án này."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="obj-card danger">
+        <div class="obj-header">
+          <div class="obj-num">9</div>
+          <div class="obj-said">Lãi suất cao, vay ngân hàng sợ</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Họ muốn mua nhưng lo khả năng trả nợ dài hạn. Có thể chưa biết về gói vay ưu đãi của CĐT hoặc các ngân hàng đối tác.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Phủ nhận nỗi lo "Lãi suất ổn thôi anh/chị" hoặc không có giải pháp cụ thể về tài chính để đề xuất.</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Tính toán cụ thể số tiền trả hàng tháng theo kịch bản khác nhau. Giới thiệu gói ưu đãi (ân hạn gốc, lãi suất 0% năm đầu). Tính bù trừ với dòng tiền cho thuê.</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Lãi suất đúng là một yếu tố quan trọng. Nhưng em tính thử cho anh/chị nhé: vay 70% trong 20 năm, lãi 9%/năm — trả khoảng [X] triệu/tháng. Nếu cho thuê 15 triệu/tháng, thực ra anh/chị chỉ bù thêm [Y] triệu. Hơn nữa, Vinhomes đang có gói ân hạn gốc 24 tháng — 2 năm đầu anh/chị chỉ trả lãi, trong khi giá trị căn hộ đã tăng. Anh/chị muốn em lập bảng tính chi tiết không?"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="obj-card warn">
+        <div class="obj-header">
+          <div class="obj-num">10</div>
+          <div class="obj-said">Người quen tôi mua rẻ hơn</div>
+        </div>
+        <div class="obj-body">
+          <div class="obj-row">
+            <div class="obj-box">
+              <span class="obj-box-label lbl-hidden">🔍 Ý NGHĨA ẨN</span>
+              <div class="obj-box-text">Cảm thấy không được đối xử fair, hoặc muốn thương lượng giá. Có thể đang nói căn khác, tầng khác, view khác — không so sánh được.</div>
+            </div>
+            <div class="obj-box">
+              <span class="obj-box-label lbl-mistake">❌ SAI LẦM PHỔ BIẾN</span>
+              <div class="obj-box-text">Ngay lập tức hạ giá hoặc xin chiết khấu thêm — vừa mất margin, vừa tạo precedent xấu. Hoặc tranh luận "không thể rẻ hơn".</div>
+            </div>
+          </div>
+          <div class="obj-box" style="margin-bottom:12px">
+            <span class="obj-box-label lbl-right">✅ ĐÚNG CÁCH</span>
+            <div class="obj-box-text">Hỏi rõ căn nào, tầng mấy, view gì — vì giá phụ thuộc nhiều yếu tố. Giải thích cấu trúc giá căn đang xét. Tìm cách thêm value thay vì giảm giá (quà tặng, phí quản lý, hỗ trợ khác).</div>
+          </div>
+          <div class="obj-script">
+            <span class="obj-script-label">💬 SCRIPT PHẢN HỒI</span>
+            <div class="obj-script-text">"Thú thật với anh/chị là giá Vinhomes rất minh bạch, khó có chênh lệch nhiều. Nhưng cho em hỏi: người quen mua căn tầng mấy, view gì, diện tích bao nhiêu? Vì giá căn tầng thấp view hồ và tầng cao view biển có thể chênh 20–30%. Nếu thực sự cùng loại căn mà giá khác, anh/chị cho em biết, em sẽ xác nhận lại với CĐT ngay — em cam kết anh/chị nhận mức tốt nhất."</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /obj-grid -->
+
+    <div class="next-gift">
+      <h3>🎯 Quà Tặng #4 sắp đến...</h3>
+      <p>15 Câu Hỏi Chốt Deal Thần Thánh — những câu hỏi ma thuật khiến khách tự thuyết phục chính mình và chủ động đề nghị mua. Gửi sau 2 ngày.</p>
+      <span class="next-tag">📅 GỬI SAU 2 NGÀY · CHUỖI DRIP #4/7</span>
+    </div>
+  </div>
+
+  <!-- PANEL 1: SCRIPT PHẢN HỒI -->
+  <div class="panel" id="p1">
+    <div class="sec-title">5 Script Hội Thoại Zalo Thực Chiến</div>
+    <p class="sec-sub">Copy nguyên văn — điều chỉnh tên và số liệu phù hợp với tình huống thực tế của anh/chị.</p>
+
+    <div class="script-grid">
+
+      <!-- Script 1 -->
+      <div class="script-card" id="sc1">
+        <div class="script-card-header">
+          <div class="script-card-title">🔄 Xử lý "Để suy nghĩ thêm" qua Zalo</div>
+          <button class="btn-copy" onclick="cp('sc1',this)">📋 Copy Script</button>
+        </div>
+        <div class="dialogue">
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Anh cần suy nghĩ thêm, em ơi. Để anh bàn với vợ rồi báo em sau.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ anh ơi, em hoàn toàn hiểu ạ! Quyết định lớn cần suy nghĩ kỹ là đúng rồi. Anh cho em hỏi một điều thôi: trong số những thông tin em đã chia sẻ, điều gì anh cảm thấy cần tìm hiểu thêm nhất? Để em hỗ trợ thêm thông tin cho anh có cái nhìn rõ hơn ạ.</div>
+            </div>
+          </div>
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Anh lo về tiến độ bàn giao thôi. Mấy dự án anh thấy hay chậm lắm.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ anh lo đúng điểm rồi ạ! Em gửi anh báo cáo tiến độ thực tế tuần này nhé — có hình ảnh công trình và lịch sử bàn giao của 3 dự án Vinhomes gần nhất, đều đúng hạn hoặc sớm hơn. Anh xem xong có thắc mắc gì em giải đáp ngay ạ. 📸 [đính kèm báo cáo]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Script 2 -->
+      <div class="script-card" id="sc2">
+        <div class="script-card-header">
+          <div class="script-card-title">💰 Xử lý "Giá cao quá" qua Zalo</div>
+          <button class="btn-copy" onclick="cp('sc2',this)">📋 Copy Script</button>
+        </div>
+        <div class="dialogue">
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Thật ra em ơi, giá bên đó rẻ hơn dự án này khoảng 10-15%. Anh đang phân vân lắm.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ anh ơi, so sánh giá là điều nên làm ạ! Nhưng em muốn chia sẻ thêm một góc nhìn: giá mua chỉ là 1 phần của bài toán đầu tư. Em tính thử cho anh nhé 👇</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">📊 So sánh 5 năm:<br>• HLX: Giá 3.5 tỷ | Cho thuê 15tr/tháng | Tăng giá ~12%/năm<br>• Dự án kia: Giá 3 tỷ | Cho thuê 10tr/tháng | Tăng giá ~5%/năm<br><br>Sau 5 năm, anh lời hơn ở HLX ~400 triệu dù mua giá cao hơn 500 triệu. Anh có muốn em lập bảng tính chi tiết không ạ?</div>
+            </div>
+          </div>
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Ừ em gửi anh xem thử đi.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ em gửi ngay ạ! 📎 [Bảng tính ROI so sánh]. Anh xem xong mình nói chuyện thêm nhé — em sẽ giải thích từng số liệu để anh thấy rõ ạ 👍</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Script 3 -->
+      <div class="script-card" id="sc3">
+        <div class="script-card-header">
+          <div class="script-card-title">👫 Xử lý "Vợ/chồng chưa đồng ý" qua Zalo</div>
+          <button class="btn-copy" onclick="cp('sc3',this)">📋 Copy Script</button>
+        </div>
+        <div class="dialogue">
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Anh thích dự án này lắm nhưng vợ anh chưa ưng. Cô ấy bảo thị trường bất ổn, chưa nên mua.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ anh ơi, chị lo như vậy là rất thận trọng và đúng đắn ạ! Quyết định cần cả hai đồng lòng mới bền được. Anh cho em hỏi: chị thường quan tâm nhất đến điều gì khi mua nhà — an toàn pháp lý, khả năng cho thuê, hay bảo toàn vốn ạ?</div>
+            </div>
+          </div>
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Vợ anh lo nhất về pháp lý và bán lại được không.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ em hiểu rồi ạ! Em gửi anh bộ tài liệu dành riêng cho chị gồm: ① Pháp lý đầy đủ có xác nhận ngân hàng ② Dữ liệu 47 giao dịch thứ cấp thành công ③ Video walkthrough căn hộ mẫu. Anh có thể cho chị xem trước, sau đó mình sắp xếp buổi tư vấn 30 phút cho cả hai không ạ? Em sẽ giải đáp trực tiếp mọi lo ngại của chị.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Script 4 -->
+      <div class="script-card" id="sc4">
+        <div class="script-card-header">
+          <div class="script-card-title">📉 Xử lý "Thị trường xấu, chờ thêm" qua Zalo</div>
+          <button class="btn-copy" onclick="cp('sc4',this)">📋 Copy Script</button>
+        </div>
+        <div class="dialogue">
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Em ơi, thị trường BĐS đang khó khăn. Anh muốn chờ thêm 6 tháng – 1 năm nữa xem sao đã.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ anh ơi, thận trọng trong giai đoạn này là sáng suốt ạ! Nhưng em muốn chia sẻ một góc nhìn: thị trường chung khó nhưng Hạ Long Xanh có phân khúc riêng. Anh có biết không, Q1/2025 dự án này vẫn có 47 giao dịch thành công và giá tăng 8% ạ.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Thêm nữa: nếu anh chờ 1 năm, giá có thể tăng thêm 10-15%. Với căn 3.5 tỷ, anh sẽ mất thêm 350-500 triệu cơ hội. Trong khi đó, dòng tiền thuê 15tr/tháng × 12 = 180 triệu anh cũng không nhận được. Anh muốn em gửi phân tích chi tiết về thị trường HLX riêng không ạ — khác với thị trường chung nhiều lắm ạ.</div>
+            </div>
+          </div>
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Ừ em gửi anh xem thử.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ gửi ngay ạ! 📊 [Báo cáo thị trường HLX Q1/2025]. Anh đọc xong mình nói chuyện tiếp nhé — em cam kết phân tích khách quan, không ép anh đâu ạ 😊</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Script 5 -->
+      <div class="script-card" id="sc5">
+        <div class="script-card-header">
+          <div class="script-card-title">💳 Xử lý "Lãi suất cao, sợ vay" qua Zalo</div>
+          <button class="btn-copy" onclick="cp('sc5',this)">📋 Copy Script</button>
+        </div>
+        <div class="dialogue">
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Lãi suất ngân hàng cao quá em ơi. Anh ngại vay lắm, sợ không trả nổi dài hạn.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ anh lo vậy là đúng, em cũng nghĩ nên tính kỹ trước khi vay ạ! Cho em hỏi: anh dự kiến vay bao nhiêu % giá trị căn và thời hạn bao lâu ạ? Để em tính con số cụ thể cho anh.</div>
+            </div>
+          </div>
+          <div class="msg msg-kh">
+            <div class="avatar av-kh">👤</div>
+            <div>
+              <span class="msg-label lbl-kh">KHÁCH HÀNG</span>
+              <div class="bubble bubble-kh">Anh muốn vay 70%, khoảng 15-20 năm.</div>
+            </div>
+          </div>
+          <div class="msg">
+            <div class="avatar av-mg">🏆</div>
+            <div>
+              <span class="msg-label lbl-mg">MÔI GIỚI</span>
+              <div class="bubble bubble-mg">Dạ em tính ngay ạ! Vay 2.45 tỷ (70% căn 3.5 tỷ), 20 năm, lãi 9%/năm:<br>• Trả hàng tháng: ~22 triệu<br>• Cho thuê thu về: ~15 triệu<br>• Thực bù thêm: ~7 triệu/tháng<br><br>Nhưng anh ơi: Vinhomes đang có gói ân hạn gốc 24 tháng — 2 năm đầu chỉ trả lãi ~18 triệu, mà trong 2 năm đó giá nhà thường tăng 15-20%. Anh có muốn em kết nối chuyên viên ngân hàng tư vấn miễn phí không ạ?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /script-grid -->
+
+    <div class="next-gift">
+      <h3>🎯 Quà Tặng #4 sắp đến...</h3>
+      <p>15 Câu Hỏi Chốt Deal Thần Thánh — dùng đúng lúc, khách tự thuyết phục chính mình. Gửi sau 2 ngày.</p>
+      <span class="next-tag">📅 GỬI SAU 2 NGÀY · CHUỖI DRIP #4/7</span>
+    </div>
+  </div>
+
+</div><!-- /tabs-wrap -->
+
+<footer>BDS Mastery Kit · Chuỗi Drip Quà Tặng · Chỉ dùng cho nội bộ đội nhóm</footer>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+function cp(id,btn){
+  const el=document.getElementById(id);
+  const lines=[];
+  el.querySelectorAll('.msg').forEach(m=>{
+    const isKH=m.classList.contains('msg-kh');
+    const label=isKH?'[KHÁCH HÀNG]':'[MÔI GIỚI]';
+    const text=m.querySelector('.bubble').innerText.trim();
+    lines.push(label+'\n'+text);
+  });
+  const text=lines.join('\n\n---\n\n');
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy Script';btn.classList.remove('ok')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy Script';btn.classList.remove('ok')},2000);
+  });
+}
+</script>
+</body>
+</html>

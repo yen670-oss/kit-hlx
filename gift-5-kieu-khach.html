@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5 Kiểu Khách Hàng BĐS — Quà Tặng #2 | BDS Mastery Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B3A6B;--nd:#102340;--gold:#C9A84C;--gl:#E2C06A;--bg:#0d1b2a;--green:#1a6b3a;--red:#C0392B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#e8e0d0;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+
+.hero{background:linear-gradient(135deg,#0a1a2a,#1a2a4a,#2a1a10);padding:52px 24px 40px;text-align:center;border-bottom:1px solid rgba(201,168,76,.2)}
+.hero-tag{display:inline-block;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gl);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 18px;border-radius:20px;margin-bottom:6px}
+.hero-seq{display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#a0b4cc;font-size:11px;letter-spacing:1px;padding:4px 14px;border-radius:20px;margin-bottom:16px;margin-left:8px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,36px);color:#fff;margin-bottom:10px;line-height:1.25}
+.hero-sub{color:#90a8c0;font-size:14px;max-width:580px;margin:0 auto 28px;line-height:1.65}
+.hero-stats{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.hs{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px 18px;text-align:center;min-width:110px}
+.hs-num{font-size:26px;font-weight:700;color:var(--gl);font-family:'Playfair Display',serif;line-height:1}
+.hs-label{font-size:11px;color:#8a9ab0;margin-top:4px;line-height:1.35}
+
+.tab-bar{display:flex;overflow-x:auto;background:#080f18;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;z-index:99;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:none;padding:14px 24px;font-size:13px;font-weight:600;color:#5a6d80;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s}
+.tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+.tab-btn:hover{color:#c0b090}
+
+.panel{display:none;padding:32px 20px 70px;max-width:880px;margin:0 auto}
+.panel.active{display:block}
+
+.sec-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gl);margin-bottom:6px;font-weight:600}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,26px);color:#fff;margin-bottom:6px}
+.sec-sub{color:#7a8a9a;font-size:13.5px;margin-bottom:28px;line-height:1.6}
+
+/* CUSTOMER TYPE CARDS */
+.kh-card{border-radius:16px;margin-bottom:20px;overflow:hidden;border:1px solid rgba(255,255,255,.07)}
+.kh-head{display:flex;align-items:center;gap:16px;padding:20px 22px 16px}
+.kh-avatar{font-size:36px;flex-shrink:0}
+.kh-meta{flex:1}
+.kh-num{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;font-weight:700}
+.kh-name{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:2px}
+.kh-sub{font-size:13px;opacity:.7}
+.kh-body{padding:0 22px 22px}
+.kh-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+@media(max-width:520px){.kh-grid{grid-template-columns:1fr}}
+.kh-box{border-radius:10px;padding:12px 14px}
+.kh-box-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:7px}
+.kh-box ul{list-style:none;display:grid;gap:5px}
+.kh-box li{font-size:13px;padding-left:16px;position:relative;line-height:1.5;color:#c0b09a}
+.kh-box li::before{position:absolute;left:0;font-size:12px}
+
+.say-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.say-grid{grid-template-columns:1fr}}
+.dont-box{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:10px;padding:12px 14px}
+.do-box{background:rgba(26,107,58,.1);border:1px solid rgba(26,107,58,.3);border-radius:10px;padding:12px 14px}
+.dont-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#e87070;font-weight:700;margin-bottom:7px}
+.do-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#60c080;font-weight:700;margin-bottom:7px}
+.dont-box p,.do-box p{font-size:13px;color:#c0b09a;line-height:1.6}
+
+/* Color themes */
+.kh-gold{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.04));border-color:rgba(201,168,76,.3)!important}
+.kh-gold .kh-num{color:var(--gl)}
+.kh-gold .kh-head{border-bottom:1px solid rgba(201,168,76,.2)}
+.kh-blue{background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(59,130,246,.03));border-color:rgba(59,130,246,.3)!important}
+.kh-blue .kh-num{color:#60a8e0}
+.kh-blue .kh-head{border-bottom:1px solid rgba(59,130,246,.2)}
+.kh-green{background:linear-gradient(135deg,rgba(26,107,58,.12),rgba(26,107,58,.04));border-color:rgba(26,107,58,.3)!important}
+.kh-green .kh-num{color:#60c080}
+.kh-green .kh-head{border-bottom:1px solid rgba(26,107,58,.2)}
+.kh-orange{background:linear-gradient(135deg,rgba(211,84,0,.12),rgba(211,84,0,.04));border-color:rgba(211,84,0,.3)!important}
+.kh-orange .kh-num{color:#f0a060}
+.kh-orange .kh-head{border-bottom:1px solid rgba(211,84,0,.2)}
+.kh-purple{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(139,92,246,.03));border-color:rgba(139,92,246,.3)!important}
+.kh-purple .kh-num{color:#c080e0}
+.kh-purple .kh-head{border-bottom:1px solid rgba(139,92,246,.2)}
+
+/* SUMMARY TABLE */
+.sum-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12.5px}
+.sum-table th{background:rgba(201,168,76,.15);color:var(--gl);padding:10px 12px;text-align:left;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.sum-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:#c0b09a;vertical-align:top}
+.sum-table tr:hover td{background:rgba(255,255,255,.03)}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:28px 24px;margin-top:36px;text-align:center}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:8px}
+.cta-box p{color:#a0b4cc;font-size:13.5px;margin-bottom:20px}
+.btn-cta{display:inline-block;background:linear-gradient(135deg,#b8952a,var(--gold));color:#0a1520;font-weight:700;font-size:14px;padding:14px 32px;border-radius:10px;text-decoration:none;letter-spacing:.5px}
+.btn-cta:hover{opacity:.9}
+
+.next-gift{background:rgba(255,255,255,.04);border:1px dashed rgba(201,168,76,.3);border-radius:12px;padding:16px 20px;margin-top:16px;display:flex;align-items:center;gap:14px}
+.next-gift-icon{font-size:28px;flex-shrink:0}
+.next-gift-meta{flex:1}
+.next-gift-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gl);margin-bottom:3px;font-weight:600}
+.next-gift-title{font-size:14px;color:#f0e8d8;font-weight:600}
+.next-gift-day{font-size:11px;color:#6a7a8a}
+
+/* SCRIPTS TAB */
+.script-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.script-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.script-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gl);font-weight:600}
+.script-body{padding:18px;font-size:13.5px;color:#c8b898;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.btn-copy{display:block;width:calc(100% - 36px);margin:0 18px 16px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:12px;font-weight:600;padding:9px;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center}
+.btn-copy:hover{background:rgba(201,168,76,.22)}
+.btn-copy.ok{background:rgba(26,107,58,.2);border-color:rgba(26,107,58,.4);color:#60c080}
+
+.section-intro{background:rgba(255,255,255,.03);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:24px;font-size:13.5px;color:#c0b09a;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div>
+    <div class="hero-tag">🎁 QUÀ TẶNG</div>
+    <div class="hero-seq">SỐ 2 / 7 · CHUỖI DRIP</div>
+  </div>
+  <h1>5 Kiểu Khách Hàng BĐS<br>Và Cách Tiếp Cận Từng Người</h1>
+  <p class="hero-sub">Nhận diện đúng khách → chọn đúng cách tiếp cận → tỷ lệ chốt tăng 3× mà không cần thêm lead</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-num">5</div><div class="hs-label">Kiểu khách hàng BĐS phổ biến</div></div>
+    <div class="hs"><div class="hs-num">3×</div><div class="hs-label">Tỷ lệ chốt khi tiếp cận đúng kiểu</div></div>
+    <div class="hs"><div class="hs-num">67%</div><div class="hs-label">Khách từ chối vì không được hiểu đúng</div></div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="show(0)">🎯 5 Kiểu Khách</button>
+  <button class="tab-btn" onclick="show(1)">💬 Script Tiếp Cận</button>
+</div>
+
+<!-- TAB 0 -->
+<div class="panel active" id="p0">
+
+  <div class="sec-label">PHÂN LOẠI KHÁCH HÀNG</div>
+  <div class="sec-title">5 Chân Dung Khách Hàng BĐS</div>
+  <div class="sec-sub">Mỗi kiểu có động lực mua khác nhau — cùng một căn hộ nhưng pitch khác nhau hoàn toàn</div>
+
+  <!-- Type 1: Nhà Đầu Tư -->
+  <div class="kh-card kh-gold">
+    <div class="kh-head">
+      <div class="kh-avatar">💼</div>
+      <div class="kh-meta">
+        <div class="kh-num">KIỂU #1 · PHỔ BIẾN NHẤT TẠI HLX</div>
+        <div class="kh-name">Nhà Đầu Tư</div>
+        <div class="kh-sub">Mua để sinh lời — ROI là ngôn ngữ duy nhất họ nghe</div>
+      </div>
+    </div>
+    <div class="kh-body">
+      <div class="kh-grid">
+        <div class="kh-box" style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);">
+          <div class="kh-box-title" style="color:var(--gl)">🔍 Nhận Biết Qua</div>
+          <ul>
+            <li style="--bullet:'📊'">Hỏi ngay ROI, lợi suất cho thuê</li>
+            <li style="--bullet:'📈'">Hỏi tốc độ tăng giá, thanh khoản</li>
+            <li style="--bullet:'🏦'">Hỏi về ngân hàng, đòn bẩy tài chính</li>
+          </ul>
+        </div>
+        <div class="kh-box" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);">
+          <div class="kh-box-title" style="color:#a0b8d0">💡 Họ Quan Tâm</div>
+          <ul>
+            <li>Lợi suất cho thuê (6–8%/năm)</li>
+            <li>Thanh khoản khi bán lại</li>
+            <li>Tốc độ tăng giá vùng</li>
+          </ul>
+        </div>
+      </div>
+      <div class="say-grid">
+        <div class="dont-box">
+          <div class="dont-title">🚫 Đừng Nói</div>
+          <p>"Căn này đẹp lắm anh ơi", "View biển tuyệt vời", "Cộng đồng cư dân tốt" — họ không quan tâm cảm xúc</p>
+        </div>
+        <div class="do-box">
+          <div class="do-title">✅ Nên Nói</div>
+          <p>"ROI ước tính 7.2%/năm nếu cho thuê ngắn hạn theo bảng tính em gửi" — luôn có số liệu cụ thể kèm theo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type 2: Người Mua Để Ở -->
+  <div class="kh-card kh-blue">
+    <div class="kh-head">
+      <div class="kh-avatar">🏠</div>
+      <div class="kh-meta">
+        <div class="kh-num">KIỂU #2 · CẢM XÚC CAO NHẤT</div>
+        <div class="kh-name">Người Mua Để Ở</div>
+        <div class="kh-sub">Mua tổ ấm — cảm xúc gia đình chi phối mọi quyết định</div>
+      </div>
+    </div>
+    <div class="kh-body">
+      <div class="kh-grid">
+        <div class="kh-box" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);">
+          <div class="kh-box-title" style="color:#60a8e0">🔍 Nhận Biết Qua</div>
+          <ul>
+            <li>Hỏi về trường học, bệnh viện gần đó</li>
+            <li>Đem cả gia đình đi xem</li>
+            <li>Hỏi về không khí, hàng xóm, cộng đồng</li>
+          </ul>
+        </div>
+        <div class="kh-box" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);">
+          <div class="kh-box-title" style="color:#a0b8d0">💡 Họ Quan Tâm</div>
+          <ul>
+            <li>An toàn cho con cái, môi trường sống</li>
+            <li>Tiện ích hàng ngày: siêu thị, trường, bệnh viện</li>
+            <li>Cảm giác "đây là nhà mình"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="say-grid">
+        <div class="dont-box">
+          <div class="dont-title">🚫 Đừng Nói</div>
+          <p>"ROI cao", "đầu tư sinh lời tốt", "thanh khoản dễ bán" — họ mua để ở, không phải để bán</p>
+        </div>
+        <div class="do-box">
+          <div class="do-title">✅ Nên Nói</div>
+          <p>"Khu này cư dân toàn gia đình trẻ, biển cách cửa 200m — sáng ra ngắm biển, cuối tuần có hồ bơi cho bé"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type 3: Người Mua Lần Đầu -->
+  <div class="kh-card kh-green">
+    <div class="kh-head">
+      <div class="kh-avatar">🌱</div>
+      <div class="kh-meta">
+        <div class="kh-num">KIỂU #3 · CẦN DẪN DẮT NHIỀU NHẤT</div>
+        <div class="kh-name">Người Mua Lần Đầu</div>
+        <div class="kh-sub">Chưa có kinh nghiệm — sợ sai, cần được dẫn dắt từng bước</div>
+      </div>
+    </div>
+    <div class="kh-body">
+      <div class="kh-grid">
+        <div class="kh-box" style="background:rgba(26,107,58,.1);border:1px solid rgba(26,107,58,.2);">
+          <div class="kh-box-title" style="color:#60c080">🔍 Nhận Biết Qua</div>
+          <ul>
+            <li>Hỏi nhiều câu rất cơ bản, hỏi đi hỏi lại</li>
+            <li>Tỏ ra e dè, cần xác nhận nhiều lần</li>
+            <li>Mang theo bố mẹ hoặc người thân để hỏi ý kiến</li>
+          </ul>
+        </div>
+        <div class="kh-box" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);">
+          <div class="kh-box-title" style="color:#a0b8d0">💡 Họ Quan Tâm</div>
+          <ul>
+            <li>Không bị lừa, không bị thiệt</li>
+            <li>Quy trình pháp lý rõ ràng, minh bạch</li>
+            <li>Được hỗ trợ sau khi ký hợp đồng</li>
+          </ul>
+        </div>
+      </div>
+      <div class="say-grid">
+        <div class="dont-box">
+          <div class="dont-title">🚫 Đừng Nói</div>
+          <p>Dùng thuật ngữ kỹ thuật phức tạp, rush họ quyết định nhanh, tạo áp lực khan hàng sớm quá</p>
+        </div>
+        <div class="do-box">
+          <div class="do-title">✅ Nên Nói</div>
+          <p>"Em sẽ hướng dẫn anh/chị từng bước — không cần tự lo gì cả. Pháp lý dự án này em đã kiểm tra kỹ..."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type 4: Khách Đang Phân Vân -->
+  <div class="kh-card kh-orange">
+    <div class="kh-head">
+      <div class="kh-avatar">⚖️</div>
+      <div class="kh-meta">
+        <div class="kh-num">KIỂU #4 · DỄ CHỐT NHẤT NẾU XỬ LÝ ĐÚNG</div>
+        <div class="kh-name">Khách Đang Phân Vân</div>
+        <div class="kh-sub">Đã thích rồi nhưng vẫn do dự — chỉ cần một cú hích cuối</div>
+      </div>
+    </div>
+    <div class="kh-body">
+      <div class="kh-grid">
+        <div class="kh-box" style="background:rgba(211,84,0,.1);border:1px solid rgba(211,84,0,.2);">
+          <div class="kh-box-title" style="color:#f0a060">🔍 Nhận Biết Qua</div>
+          <ul>
+            <li>Quay lại xem lần 2, lần 3</li>
+            <li>Hỏi nhiều về chính sách, so sánh căn khác</li>
+            <li>Nói "để suy nghĩ thêm" nhiều lần</li>
+          </ul>
+        </div>
+        <div class="kh-box" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);">
+          <div class="kh-box-title" style="color:#a0b8d0">💡 Họ Quan Tâm</div>
+          <ul>
+            <li>Sợ quyết định sai, sợ hối tiếc sau</li>
+            <li>Muốn thấy người khác đã mua và không hối hận</li>
+            <li>Cần lý do chính đáng để quyết định ngay</li>
+          </ul>
+        </div>
+      </div>
+      <div class="say-grid">
+        <div class="dont-box">
+          <div class="dont-title">🚫 Đừng Nói</div>
+          <p>"Căn này sắp hết rồi anh ơi!" khi không thật — tạo áp lực giả tạo làm mất niềm tin ngay lập tức</p>
+        </div>
+        <div class="do-box">
+          <div class="do-title">✅ Nên Nói</div>
+          <p>"Chị Lan hàng xóm vừa đặt căn tương tự tuần trước — chị ấy rất vui vì quyết định sớm. Em kể anh nghe câu chuyện không?"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type 5: Khách Giới Thiệu -->
+  <div class="kh-card kh-purple">
+    <div class="kh-head">
+      <div class="kh-avatar">🤝</div>
+      <div class="kh-meta">
+        <div class="kh-num">KIỂU #5 · TỶ LỆ CHỐT CAO NHẤT</div>
+        <div class="kh-name">Khách Được Giới Thiệu</div>
+        <div class="kh-sub">Đã tin tưởng sẵn — chỉ cần xác nhận họ không bị thiệt hơn người giới thiệu</div>
+      </div>
+    </div>
+    <div class="kh-body">
+      <div class="kh-grid">
+        <div class="kh-box" style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);">
+          <div class="kh-box-title" style="color:#c080e0">🔍 Nhận Biết Qua</div>
+          <ul>
+            <li>Nhắc tên người giới thiệu ngay từ đầu</li>
+            <li>Thái độ cởi mở, ít hỏi về uy tín môi giới</li>
+            <li>Thường hỏi "anh A mua giá bao nhiêu?"</li>
+          </ul>
+        </div>
+        <div class="kh-box" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);">
+          <div class="kh-box-title" style="color:#a0b8d0">💡 Họ Quan Tâm</div>
+          <ul>
+            <li>Không muốn mua đắt hơn người giới thiệu</li>
+            <li>Muốn được quan tâm riêng, không phải bị bán chung</li>
+            <li>Muốn duy trì mối quan hệ tốt với người giới thiệu</li>
+          </ul>
+        </div>
+      </div>
+      <div class="say-grid">
+        <div class="dont-box">
+          <div class="dont-title">🚫 Đừng Nói</div>
+          <p>Bỏ qua người giới thiệu, không nhắc đến — hoặc quá tập trung bán mà quên xây dựng quan hệ cá nhân</p>
+        </div>
+        <div class="do-box">
+          <div class="do-title">✅ Nên Nói</div>
+          <p>"Anh Minh nói anh quan tâm đến đầu tư — em đã chuẩn bị thêm bảng tính riêng cho anh, khác với bản em gửi chung"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary table -->
+  <div class="sec-label" style="margin-top:32px">BẢNG TÓM TẮT NHANH</div>
+  <div class="sec-title">Nhìn Một Cái Biết Ngay</div>
+  <table class="sum-table">
+    <thead>
+      <tr>
+        <th>Kiểu Khách</th>
+        <th>Dấu Hiệu Nhận Biết</th>
+        <th>Cảm Xúc Cốt Lõi</th>
+        <th>Từ Khóa Pitch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>💼 Nhà Đầu Tư</td><td>Hỏi ROI, lợi suất, thanh khoản</td><td>Tham lam (sinh lời)</td><td>ROI · Tăng giá · Thanh khoản</td></tr>
+      <tr><td>🏠 Mua Để Ở</td><td>Hỏi tiện ích, đem gia đình đi xem</td><td>Tình yêu (tổ ấm)</td><td>An toàn · Biển · Cộng đồng</td></tr>
+      <tr><td>🌱 Lần Đầu Mua</td><td>Hỏi cơ bản, do dự, mang người thân</td><td>Sợ hãi (sai lầm)</td><td>Hướng dẫn · Minh bạch · Hỗ trợ</td></tr>
+      <tr><td>⚖️ Đang Phân Vân</td><td>Xem lần 2-3, hỏi nhiều về chính sách</td><td>Phân vân (hối tiếc)</td><td>Social proof · Deadline thật</td></tr>
+      <tr><td>🤝 Được Giới Thiệu</td><td>Nhắc tên người giới thiệu, cởi mở</td><td>Tin tưởng (cần xác nhận)</td><td>Cá nhân hoá · Quan hệ</td></tr>
+    </tbody>
+  </table>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>BDS Mastery Kit — Script Tiếp Cận Đầy Đủ Cho Cả 5 Kiểu</h3>
+    <p>Bộ kit có sẵn script tiếp cận, xử lý từ chối và chốt deal cho từng kiểu khách hàng</p>
+    <a href="https://yen670-oss.github.io/kit-hlx/" target="_blank" class="btn-cta">Xem Chi Tiết BDS Mastery Kit →</a>
+  </div>
+
+  <div class="next-gift">
+    <div class="next-gift-icon">🎁</div>
+    <div class="next-gift-meta">
+      <div class="next-gift-label">Quà Tặng Tiếp Theo — Số 3/7</div>
+      <div class="next-gift-title">10 Tip Xử Lý Từ Chối — Biến "Không" Thành "Có"</div>
+      <div class="next-gift-day">Sẽ gửi sau 2 ngày nữa 📅</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TAB 1: SCRIPTS -->
+<div class="panel" id="p1">
+  <div class="sec-label">SCRIPT TIẾP CẬN</div>
+  <div class="sec-title">5 Script Theo Từng Kiểu Khách</div>
+  <div class="sec-sub">Copy — tuỳ chỉnh tên — gửi qua Zalo/nhắn tin. Mỗi script được viết riêng cho từng tâm lý.</div>
+  <div class="section-intro">💡 <strong>Nguyên tắc:</strong> Đừng dùng cùng 1 script cho tất cả khách. Xác định kiểu khách trước, chọn script phù hợp sau. Tỷ lệ phản hồi tăng 3× khi script đúng tâm lý.</div>
+
+  <div class="script-card">
+    <div class="script-head"><span class="script-tag">💼 SCRIPT #1 — NHÀ ĐẦU TƯ</span><span style="font-size:11px;color:#5a6a7a">Zalo / DM</span></div>
+    <div class="script-body" id="s1">Chào anh/chị [Tên]!
+
+Em được biết anh/chị đang quan tâm đến kênh đầu tư BĐS ven biển. Em có bảng phân tích ROI chi tiết cho Vinhomes Hạ Long Xanh — dựa trên giá cho thuê thực tế và tốc độ tăng giá đất Quảng Ninh.
+
+📊 ROI ước tính: 6.8–7.5%/năm nếu cho thuê ngắn hạn (Airbnb)
+📈 Giá đất HLX tăng 35% trong 2 năm (2022–2024)
+🏖️ Quảng Ninh: 10 triệu khách du lịch/năm → nhu cầu thuê ổn định
+
+Anh/chị có 10 phút để em trình bày bảng số liệu cụ thể không ạ?</div>
+    <button class="btn-copy" onclick="cp('s1',this)">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head"><span class="script-tag">🏠 SCRIPT #2 — MUA ĐỂ Ở</span><span style="font-size:11px;color:#5a6a7a">Zalo / DM</span></div>
+    <div class="script-body" id="s2">Chào anh/chị [Tên]!
+
+Gia đình mình đang tìm nơi an cư lâu dài ở Hạ Long à? HLX có cộng đồng cư dân rất tốt — chủ yếu gia đình trẻ, an ninh 24/7.
+
+🌊 Biển cách cổng dự án chỉ 200m
+🏊 Hồ bơi 4 mùa, khu vui chơi trẻ em, công viên nội khu
+🏫 Trường học quốc tế trong bán kính 3km
+
+Em có thể gửi anh/chị video thực tế về tiện ích không ạ? Có nhiều gia đình đã chuyển về đây sống, không khí rất trong lành.
+
+Anh/chị muốn em gửi link xem trước không ạ?</div>
+    <button class="btn-copy" onclick="cp('s2',this)">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head"><span class="script-tag">🌱 SCRIPT #3 — MUA LẦN ĐẦU</span><span style="font-size:11px;color:#5a6a7a">Zalo / DM</span></div>
+    <div class="script-body" id="s3">Chào anh/chị [Tên]!
+
+Nghe nói đây là lần đầu anh/chị cân nhắc mua BĐS — em hiểu sẽ có nhiều thắc mắc và băn khoăn lắm!
+
+Em sẽ hỗ trợ anh/chị từng bước một:
+✅ Kiểm tra pháp lý — em làm hết
+✅ Tính toán tài chính — em lập bảng riêng
+✅ Quy trình ký hợp đồng — em đi cùng
+✅ Hỗ trợ sau mua — em vẫn liên hệ thường xuyên
+
+Anh/chị không cần tự mình lo bất cứ thứ gì cả.
+
+Anh/chị muốn em gửi checklist pháp lý cần kiểm tra trước khi mua không? Miễn phí ạ.</div>
+    <button class="btn-copy" onclick="cp('s3',this)">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head"><span class="script-tag">⚖️ SCRIPT #4 — ĐANG PHÂN VÂN</span><span style="font-size:11px;color:#5a6a7a">Follow-up Zalo</span></div>
+    <div class="script-body" id="s4">Chào anh/chị [Tên]!
+
+Em thấy anh/chị đã xem qua dự án và vẫn đang cân nhắc. Em muốn chia sẻ thêm 2 thông tin mà nhiều người chưa biết:
+
+1️⃣ Chị Lan (khách của em) vừa đặt căn tương tự tuần trước — sau 3 tuần phân vân. Chị ấy chia sẻ: "Hối hận vì không đặt sớm hơn, giờ phải chọn tầng cao hơn."
+
+2️⃣ Chính sách ưu đãi lãi suất 0% hiện tại chỉ còn đến [ngày] — sau đó áp dụng lãi suất thông thường, chênh khoảng 15-20 triệu/năm.
+
+Anh/chị muốn em tư vấn thêm không ạ? Em có thể gặp trực tiếp hoặc gọi điện 15 phút ạ.</div>
+    <button class="btn-copy" onclick="cp('s4',this)">📋 Copy Script</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-head"><span class="script-tag">🤝 SCRIPT #5 — ĐƯỢC GIỚI THIỆU</span><span style="font-size:11px;color:#5a6a7a">Lần đầu tiếp cận</span></div>
+    <div class="script-body" id="s5">Chào anh/chị [Tên]!
+
+Anh [Minh] có nhờ em liên hệ để hỗ trợ anh/chị tìm hiểu về Vinhomes Hạ Long Xanh. Em đã chuẩn bị thêm thông tin dựa trên nhu cầu anh/chị chia sẻ với anh Minh — khác với tài liệu em gửi chung.
+
+Anh Minh hiện đang ở căn [X] tại phân khu [Y]. Nếu anh/chị muốn, em có thể gợi ý căn phù hợp trong cùng phân khu để tiện qua lại — và giá tốt hơn vì là bạn của anh Minh.
+
+Anh/chị muốn em gửi thông tin riêng qua Zalo hoặc sắp xếp gặp trực tiếp ạ?</div>
+    <button class="btn-copy" onclick="cp('s5',this)">📋 Copy Script</button>
+  </div>
+</div>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function cp(id,btn){
+  const text=document.getElementById(id).innerText.trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy Script';btn.classList.remove('ok')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy Script';btn.classList.remove('ok')},2000);
+  });
+}
+</script>
+</body>
+</html>
