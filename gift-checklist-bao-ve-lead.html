@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🛡️ 15 Điều Bảo Vệ Quyền Lợi Khi Hợp Tác</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--teal:#1abc9c;--red:#e74c3c;--orange:#e67e22;--green:#27ae60}
+body{background:var(--bg);color:#e8dfc8;font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+.hero{background:linear-gradient(135deg,#0a1520,#0d1a10,#1a1a0a);padding:52px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(26,188,156,.1) 0%,transparent 65%)}
+.drip-badge{display:inline-block;background:linear-gradient(135deg,var(--teal),#0e8a78);color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:6px 18px;border-radius:20px;margin-bottom:18px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,46px);font-weight:900;line-height:1.2;background:linear-gradient(135deg,var(--teal),var(--gold),var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:12px}
+.hero-sub{font-size:15px;color:rgba(232,223,200,.7);max-width:560px;margin:0 auto;position:relative;z-index:1;line-height:1.7}
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:28px;position:relative;z-index:1}
+.hstat{background:rgba(0,0,0,.3);border:1px solid rgba(26,188,156,.25);border-radius:12px;padding:14px 22px;text-align:center}
+.hstat .hn{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--teal);display:block}
+.hstat .hl{font-size:11px;color:rgba(232,223,200,.6);line-height:1.4}
+
+.tabs-wrap{max-width:900px;margin:0 auto;padding:36px 20px 60px}
+.tab-nav{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tab-btn{padding:11px 24px;border:none;border-radius:10px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:13px;font-weight:600;background:rgba(255,255,255,.07);color:rgba(232,223,200,.6);transition:.25s}
+.tab-btn.active{background:linear-gradient(135deg,var(--teal),#0e8a78);color:#fff;box-shadow:0 4px 20px rgba(26,188,156,.35)}
+.panel{display:none}.panel.active{display:block}
+
+.sec-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--gl);margin-bottom:6px}
+.sec-sub{font-size:13px;color:rgba(232,223,200,.55);margin-bottom:24px;line-height:1.6}
+
+/* CHECKLIST */
+.checklist-section{margin-bottom:32px}
+.cl-section-title{
+  background:var(--navy);padding:10px 18px;border-radius:10px 10px 0 0;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;
+  display:flex;align-items:center;gap:8px;
+}
+.cl-items{display:flex;flex-direction:column;gap:2px}
+
+.cl-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--card);padding:16px 18px;
+  border:1px solid rgba(255,255,255,.05);
+  cursor:pointer;transition:.2s;
+  position:relative;
+}
+.cl-item:last-child{border-radius:0 0 10px 10px}
+.cl-item:hover{background:#152840}
+.cl-item.checked{background:rgba(26,188,156,.08);border-color:rgba(26,188,156,.2)}
+
+.cl-check{
+  width:22px;height:22px;border-radius:6px;border:2px solid rgba(201,168,76,.4);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  margin-top:1px;transition:.2s;background:rgba(0,0,0,.2);
+}
+.cl-item.checked .cl-check{background:var(--teal);border-color:var(--teal)}
+.cl-check::after{content:'✓';font-size:13px;font-weight:700;color:#fff;opacity:0;transition:.15s}
+.cl-item.checked .cl-check::after{opacity:1}
+
+.cl-body{flex:1}
+.cl-num{font-size:10px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:3px}
+.cl-text{font-size:14px;font-weight:600;color:#f0e0c0;margin-bottom:5px;line-height:1.45}
+.cl-why{font-size:12px;color:rgba(232,223,200,.6);line-height:1.65}
+
+.risk-badge{
+  position:absolute;right:16px;top:14px;
+  padding:3px 10px;border-radius:10px;font-size:9px;font-weight:700;letter-spacing:1px;
+}
+.risk-high{background:rgba(231,76,60,.2);color:#e74c3c}
+.risk-med{background:rgba(230,126,34,.2);color:#e67e22}
+.risk-low{background:rgba(39,174,96,.2);color:#27ae60}
+
+/* PROGRESS */
+.progress-bar{background:rgba(0,0,0,.3);border-radius:10px;height:10px;margin:16px 0;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,var(--teal),var(--green));height:100%;border-radius:10px;transition:.4s;width:0%}
+.progress-label{font-size:12px;color:rgba(232,223,200,.6);text-align:right;margin-bottom:4px}
+
+/* RED FLAG PANEL */
+.red-flags{display:flex;flex-direction:column;gap:14px}
+.rf-card{background:var(--card);border:1px solid rgba(231,76,60,.15);border-left:4px solid var(--red);border-radius:12px;padding:18px}
+.rf-title{font-weight:700;color:#f0e0c0;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.rf-title::before{content:'🚩';font-size:16px}
+.rf-desc{font-size:13px;color:rgba(232,223,200,.7);line-height:1.7}
+.rf-fix{
+  margin-top:10px;background:rgba(39,174,96,.08);border-left:3px solid var(--green);
+  padding:8px 12px;border-radius:0 8px 8px 0;
+  font-size:12px;color:#a8e6c8;line-height:1.65;
+}
+.rf-fix::before{content:'✅ Cách xử lý: ';font-weight:700;color:var(--green)}
+
+/* DONE BLOCK */
+.done-block{background:linear-gradient(135deg,rgba(26,188,156,.15),rgba(39,174,96,.08));border:1px solid rgba(26,188,156,.3);border-radius:14px;padding:24px;text-align:center;margin-top:24px;display:none}
+.done-block.show{display:block}
+.done-block h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--teal);margin-bottom:10px}
+.done-block p{font-size:13px;color:rgba(232,223,200,.7);line-height:1.7}
+
+footer{text-align:center;padding:28px 20px;border-top:1px solid rgba(201,168,76,.1);font-size:12px;color:rgba(232,223,200,.3)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="drip-badge">🎁 BONUS KIT — CHECKLIST BẢO VỆ QUYỀN LỢI</div>
+  <h1>🛡️ 15 Điều Bảo Vệ<br>Quyền Lợi Khi Hợp Tác</h1>
+  <p class="hero-sub">Tick từng ô trước khi chuyển lead đầu tiên — tránh tranh cãi, tránh mất hoa hồng, tránh mất đối tác.</p>
+  <div class="hero-stats">
+    <div class="hstat"><span class="hn">73%</span><span class="hl">hợp tác thất bại<br>do không thỏa thuận rõ</span></div>
+    <div class="hstat"><span class="hn">90</span><span class="hl">ngày bảo vệ lead<br>là chuẩn ngành</span></div>
+    <div class="hstat"><span class="hn">3</span><span class="hl">ngày thanh toán<br>sau khi nhận HH</span></div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show(0)">✅ Checklist 15 Điều</button>
+    <button class="tab-btn" onclick="show(1)">🚩 Dấu Hiệu Đối Tác Xấu</button>
+  </div>
+
+  <!-- PANEL 0: CHECKLIST -->
+  <div class="panel active" id="p0">
+    <div class="sec-title">Tick Trước Khi Hợp Tác</div>
+    <p class="sec-sub">Click vào từng dòng để đánh dấu đã xác nhận. Đừng bỏ qua bất kỳ điều nào màu đỏ.</p>
+
+    <div class="progress-label"><span id="prog-text">0/15 đã xác nhận</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+
+    <!-- GROUP A -->
+    <div class="checklist-section">
+      <div class="cl-section-title">🔍 A — Xác Minh Đối Tác Trước Khi Bắt Đầu</div>
+      <div class="cl-items">
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 01</div>
+            <div class="cl-text">Xác nhận đối tác đang active bán HLX — không phải môi giới "ngủ đông"</div>
+            <div class="cl-why">Hỏi: "Tháng trước anh/chị có giao dịch nào tại HLX không?" — người active sẽ trả lời cụ thể.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 02</div>
+            <div class="cl-text">Xác nhận đối tác có hợp đồng đại lý hợp lệ với CĐT Vinhomes</div>
+            <div class="cl-why">Không có hợp đồng đại lý → không nhận được hoa hồng từ CĐT. Yêu cầu chụp màn hình hoặc gặp mặt kiểm tra.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 03</div>
+            <div class="cl-text">Kiểm tra reputation — hỏi 1–2 người từng hợp tác với đối tác này</div>
+            <div class="cl-why">Người tốt không ngại giới thiệu tham chiếu. Nếu tránh né câu hỏi này → cẩn thận.</div>
+          </div>
+          <div class="risk-badge risk-med">🟠 TB</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP B -->
+    <div class="checklist-section">
+      <div class="cl-section-title">📋 B — Thỏa Thuận Rõ Ràng Trước Khi Chuyển Lead</div>
+      <div class="cl-items">
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 04</div>
+            <div class="cl-text">Tỷ lệ hoa hồng đã được thỏa thuận bằng văn bản (Zalo OK)</div>
+            <div class="cl-why">Không bao giờ chuyển lead chỉ sau thỏa thuận miệng — dù thân thiết đến đâu.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 05</div>
+            <div class="cl-text">Ai đứng hợp đồng với CĐT đã xác định rõ</div>
+            <div class="cl-why">Người đứng HĐ với CĐT nắm quyền nhận hoa hồng. Nếu Closer đứng HĐ, họ kiểm soát dòng tiền — cần cam kết chia trong bao nhiêu ngày.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 06</div>
+            <div class="cl-text">Thời hạn thanh toán hoa hồng đã ghi rõ (đề xuất: 3 ngày sau khi CĐT trả)</div>
+            <div class="cl-why">"Trả sau" mà không có deadline = cơ hội trì hoãn vô tận. Luôn ghi con số cụ thể.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 07</div>
+            <div class="cl-text">Thời hạn bảo vệ lead đã thỏa thuận (đề xuất: 90 ngày)</div>
+            <div class="cl-why">Không có thời hạn bảo vệ → Closer có thể "để lead nguội" rồi giao dịch riêng sau đó.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 08</div>
+            <div class="cl-text">Định nghĩa "lead hợp lệ" đã rõ ràng để tránh tranh cãi sau này</div>
+            <div class="cl-why">Lead hợp lệ = SĐT thật, đã tương tác, chưa trong list Closer. Nếu không rõ, Closer có thể từ chối nhận lead vô lý.</div>
+          </div>
+          <div class="risk-badge risk-med">🟠 TB</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP C -->
+    <div class="checklist-section">
+      <div class="cl-section-title">⚙️ C — Quy Trình Vận Hành Hàng Ngày</div>
+      <div class="cl-items">
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 09</div>
+            <div class="cl-text">Closer cam kết phản hồi lead trong tối đa 24 giờ sau khi nhận</div>
+            <div class="cl-why">Lead nóng nguội rất nhanh — 24h không liên hệ, khách mua chỗ khác. Phải có SLA này.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 10</div>
+            <div class="cl-text">Báo cáo trạng thái lead: Closer cập nhật ít nhất 1 lần/tuần</div>
+            <div class="cl-why">Không có update → Marketer không biết lead đang ở đâu trong phễu, không thể hỗ trợ thêm.</div>
+          </div>
+          <div class="risk-badge risk-med">🟠 TB</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 11</div>
+            <div class="cl-text">Nếu lead "chết" sau 30 ngày không chăm sóc → Marketer được tự xử lý</div>
+            <div class="cl-why">Ngăn Closer "ôm lead không làm gì" để sau tự giao dịch riêng. Điều khoản này quan trọng với lead chất lượng cao.</div>
+          </div>
+          <div class="risk-badge risk-high">🔴 CAO</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 12</div>
+            <div class="cl-text">Số tài khoản ngân hàng của cả hai bên đã xác nhận chính xác</div>
+            <div class="cl-why">Lưu ảnh chụp màn hình tài khoản ngân hàng của đối tác. Tránh trường hợp "chuyển nhầm" hoặc số tài khoản thay đổi đột ngột.</div>
+          </div>
+          <div class="risk-badge risk-med">🟠 TB</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP D -->
+    <div class="checklist-section">
+      <div class="cl-section-title">🛡️ D — Bảo Vệ Dài Hạn</div>
+      <div class="cl-items">
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 13</div>
+            <div class="cl-text">Closer không được tiếp cận trực tiếp nguồn traffic/kênh của Marketer</div>
+            <div class="cl-why">Sau vài tháng, Closer học được cách Marketer tạo lead → tự làm không cần Marketer. Bảo vệ bí quyết nguồn traffic.</div>
+          </div>
+          <div class="risk-badge risk-med">🟠 TB</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 14</div>
+            <div class="cl-text">Điều khoản không cạnh tranh: 6 tháng sau khi chấm dứt hợp tác</div>
+            <div class="cl-why">Ngăn Closer lấy toàn bộ kiến thức về cách tạo lead của bạn và tự vận hành riêng ngay sau khi ngừng hợp tác.</div>
+          </div>
+          <div class="risk-badge risk-low">🟢 THẤP</div>
+        </div>
+        <div class="cl-item" onclick="toggle(this)">
+          <div class="cl-check"></div>
+          <div class="cl-body">
+            <div class="cl-num">ĐIỀU 15</div>
+            <div class="cl-text">Review định kỳ 3 tháng/lần — đánh giá lại tỷ lệ và điều chỉnh nếu cần</div>
+            <div class="cl-why">Thị trường thay đổi, đóng góp của mỗi bên cũng thay đổi. Review định kỳ giúp cả hai cảm thấy fair và gắn kết lâu dài.</div>
+          </div>
+          <div class="risk-badge risk-low">🟢 THẤP</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="done-block" id="done-block">
+      <h3>🎉 Sẵn sàng hợp tác!</h3>
+      <p>Anh/chị đã xác nhận đủ 15 điều kiện. Bây giờ có thể yên tâm chuyển lead đầu tiên.<br>Nhớ lưu thỏa thuận bằng văn bản hoặc screenshot Zalo trước khi bắt đầu.</p>
+    </div>
+  </div>
+
+  <!-- PANEL 1: RED FLAGS -->
+  <div class="panel" id="p1">
+    <div class="sec-title">Dấu Hiệu Đối Tác Không Đáng Tin</div>
+    <p class="sec-sub">Gặp 2 dấu hiệu trở lên → nên xem xét lại trước khi chuyển lead đầu tiên.</p>
+
+    <div class="red-flags">
+      <div class="rf-card">
+        <div class="rf-title">Từ chối xác nhận bằng văn bản</div>
+        <div class="rf-desc">"Mình tin nhau thôi, cần gì phải viết ra" — câu này nghe có vẻ thân thiện nhưng thực ra là không muốn bị ràng buộc. Người có ý định tốt không ngại xác nhận bằng chữ viết.</div>
+        <div class="rf-fix">Kiên định: "Để tiện theo dõi, mình xác nhận qua Zalo nhé anh/chị — copy paste lại là xong." Nếu vẫn từ chối → đừng chuyển lead.</div>
+      </div>
+
+      <div class="rf-card">
+        <div class="rf-title">Trì hoãn thanh toán lần đầu tiên</div>
+        <div class="rf-desc">Lần đầu đã chậm trả → lần sau còn chậm hơn. Thanh toán đúng hạn lần đầu là test character quan trọng nhất trong hợp tác.</div>
+        <div class="rf-fix">Sau giao dịch đầu tiên, nếu chậm quá 5 ngày mà không có lý do hợp lý → đặt vấn đề ngay, không chuyển thêm lead cho đến khi giải quyết xong.</div>
+      </div>
+
+      <div class="rf-card">
+        <div class="rf-title">Không báo cáo trạng thái lead</div>
+        <div class="rf-desc">Chuyển lead xong mà Closer im lặng, hỏi mới trả lời nhỏ giọt — không biết lead đang sống hay chết, đang ở đâu trong quy trình.</div>
+        <div class="rf-fix">Thiết lập format báo cáo đơn giản: "Lead [Tên] — Trạng thái: [Đã liên hệ / Đang xem / Đang cân nhắc / Đã chốt / Đã từ chối] — Ghi chú: [...]". Gửi mỗi thứ 6.</div>
+      </div>
+
+      <div class="rf-card">
+        <div class="rf-title">Tiếp cận khách "bypass" qua kênh khác</div>
+        <div class="rf-desc">Khách hỏi mua nhưng Closer giao dịch riêng mà không thông báo cho Marketer, hoặc tiếp cận khách qua Facebook cá nhân sau khi nhận thông tin từ Marketer.</div>
+        <div class="rf-fix">Theo dõi qua UTM links và tracking. Nếu phát hiện → áp dụng điều khoản phạt trong thỏa thuận. Không áp dụng phạt → mất uy tín với tất cả đối tác sau này.</div>
+      </div>
+
+      <div class="rf-card">
+        <div class="rf-title">Thường xuyên phàn nàn về chất lượng lead</div>
+        <div class="rf-desc">"Lead của em không chất lượng", "Khách không có tiền thật", "Toàn người hỏi cho vui" — nếu 70% lead đều bị phàn nàn vậy mà không có bằng chứng cụ thể, đây là dấu hiệu Closer không nỗ lực chuyển đổi.</div>
+        <div class="rf-fix">Yêu cầu ghi âm / log cuộc gọi với 3 lead cụ thể để đánh giá khách quan. Lead kém hay Closer kém — phải có data để phân biệt.</div>
+      </div>
+
+      <div class="rf-card">
+        <div class="rf-title">Muốn toàn bộ quyền kiểm soát, không chia sẻ thông tin giao dịch</div>
+        <div class="rf-desc">Closer không cho Marketer biết hoa hồng CĐT thực tế là bao nhiêu, không chia sẻ hợp đồng mua bán để verify số tiền. Marketer chỉ nhận "số tiền Closer nói".</div>
+        <div class="rf-fix">Yêu cầu được xem bản photo hợp đồng mua bán (ẩn thông tin cá nhân) để xác nhận giá trị giao dịch và tính đúng hoa hồng. Đây là quyền chính đáng của Marketer.</div>
+      </div>
+
+      <div class="rf-card">
+        <div class="rf-title">Đề xuất tỷ lệ bất hợp lý ngay từ đầu</div>
+        <div class="rf-desc">"Anh chỉ cho em 10% thôi nhé, anh lo hết mọi thứ" — nếu Marketer tạo ra toàn bộ traffic và lead mà chỉ nhận 10%, đây là dấu hiệu người này không hiểu giá trị của marketing hoặc cố tình chiếm lợi thế.</div>
+        <div class="rf-fix">Tham khảo bảng benchmark: Marketer tạo lead + tự bỏ ads → xứng đáng nhận 35–45%. Nếu đề xuất dưới 25% → thương lượng lại hoặc tìm đối tác khác.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>BDS Mastery Kit · Checklist bảo vệ quyền lợi hợp tác · Dùng nội bộ đội nhóm</footer>
+
+<script>
+let checked=0;
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+function toggle(el){
+  el.classList.toggle('checked');
+  checked=document.querySelectorAll('.cl-item.checked').length;
+  const total=15;
+  const pct=Math.round(checked/total*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=checked+'/'+total+' đã xác nhận';
+  document.getElementById('done-block').classList.toggle('show',checked===total);
+}
+</script>
+</body>
+</html>

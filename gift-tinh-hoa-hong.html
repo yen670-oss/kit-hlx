@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🧮 Máy Tính Chia Hoa Hồng HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--green:#27ae60;--red:#e74c3c;--orange:#e67e22}
+body{background:var(--bg);color:#e8dfc8;font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#071525,#0d2040,#1a3a10);padding:52px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(201,168,76,.1) 0%,transparent 65%)}
+.drip-badge{display:inline-block;background:linear-gradient(135deg,var(--green),#1a5c2e);color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:6px 18px;border-radius:20px;margin-bottom:18px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,46px);font-weight:900;line-height:1.2;background:linear-gradient(135deg,var(--gold),#fff,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:12px}
+.hero-sub{font-size:15px;color:rgba(232,223,200,.7);max-width:560px;margin:0 auto;position:relative;z-index:1;line-height:1.7}
+
+/* TABS */
+.tabs-wrap{max-width:900px;margin:0 auto;padding:36px 20px 60px}
+.tab-nav{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tab-btn{padding:11px 24px;border:none;border-radius:10px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:13px;font-weight:600;background:rgba(255,255,255,.07);color:rgba(232,223,200,.6);transition:.25s}
+.tab-btn.active{background:linear-gradient(135deg,var(--green),#1a5c2e);color:#fff;box-shadow:0 4px 20px rgba(39,174,96,.35)}
+.panel{display:none}.panel.active{display:block}
+
+/* CALCULATOR */
+.calc-card{background:var(--card);border:1px solid rgba(201,168,76,.15);border-radius:16px;padding:28px;margin-bottom:20px}
+.calc-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--gl);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.calc-title::before{content:'';display:inline-block;width:4px;height:20px;background:var(--gold);border-radius:2px}
+
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:540px){.field-grid{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-size:12px;font-weight:600;color:var(--gl);letter-spacing:.5px}
+.field input,.field select{
+  background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.25);border-radius:10px;
+  padding:12px 16px;font-size:14px;font-family:'Be Vietnam Pro',sans-serif;
+  color:#e8dfc8;outline:none;transition:.2s;width:100%;
+}
+.field input:focus,.field select:focus{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.field input[type=range]{padding:8px 0;background:transparent;border:none;cursor:pointer;accent-color:var(--gold)}
+.range-val{font-size:13px;font-weight:700;color:var(--gold);text-align:right}
+
+/* MODEL SELECTOR */
+.model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px}
+.model-btn{
+  background:rgba(0,0,0,.25);border:1px solid rgba(201,168,76,.15);border-radius:10px;
+  padding:14px 12px;cursor:pointer;text-align:center;transition:.25s;
+}
+.model-btn:hover{border-color:rgba(201,168,76,.4)}
+.model-btn.selected{background:rgba(201,168,76,.12);border-color:var(--gold)}
+.model-btn .mname{font-size:12px;font-weight:700;color:var(--gl);margin-bottom:4px}
+.model-btn .mratio{font-size:20px;font-weight:700;color:var(--gold)}
+.model-btn .mdesc{font-size:10px;color:rgba(232,223,200,.5);margin-top:4px;line-height:1.4}
+
+/* RESULT */
+.result-box{background:linear-gradient(135deg,rgba(27,58,107,.4),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:24px;margin-top:8px}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.result-row:last-child{border-bottom:none;padding-top:16px;margin-top:8px}
+.result-label{font-size:14px;color:rgba(232,223,200,.75)}
+.result-val{font-size:18px;font-weight:700;color:var(--gl)}
+.result-row.total .result-label{font-size:16px;font-weight:700;color:#fff}
+.result-row.total .result-val{font-size:24px;color:var(--gold)}
+.result-marketer{color:#2ecc71!important}
+.result-closer{color:#3498db!important}
+
+.btn-calc{
+  width:100%;padding:14px;border:none;border-radius:12px;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),#8b6914);
+  color:#fff;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:700;
+  letter-spacing:.5px;margin-top:16px;transition:.2s;
+}
+.btn-calc:hover{background:linear-gradient(135deg,var(--gl),#c9a84c);transform:translateY(-1px)}
+
+.note-box{background:rgba(0,0,0,.2);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:16px;font-size:12px;color:rgba(232,223,200,.65);line-height:1.7}
+
+/* COMPARISON TABLE */
+.sec-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--gl);margin-bottom:8px}
+.sec-sub{font-size:13px;color:rgba(232,223,200,.55);margin-bottom:24px;line-height:1.6}
+.comp-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:28px}
+.comp-table th{background:var(--navy);color:#fff;padding:12px 14px;text-align:left;font-size:11px;letter-spacing:.5px;font-weight:700}
+.comp-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);color:#d8cdb8;vertical-align:top}
+.comp-table tr:hover td{background:rgba(255,255,255,.03)}
+.comp-table .model-name{font-weight:700;color:var(--gl)}
+.comp-table .ratio{font-weight:700;color:var(--gold);font-size:15px}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.5px}
+.tag-green{background:rgba(39,174,96,.2);color:#2ecc71}
+.tag-blue{background:rgba(52,152,219,.2);color:#3498db}
+.tag-orange{background:rgba(230,126,34,.2);color:#e67e22}
+
+/* SCENARIO CARDS */
+.scenario-grid{display:flex;flex-direction:column;gap:16px}
+.scenario-card{background:var(--card);border:1px solid rgba(201,168,76,.12);border-radius:14px;padding:22px}
+.sc-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.sc-icon{font-size:28px;flex-shrink:0}
+.sc-title{font-weight:700;font-size:15px;color:var(--gl);margin-bottom:4px}
+.sc-desc{font-size:12px;color:rgba(232,223,200,.6);line-height:1.6}
+.sc-numbers{display:flex;gap:16px;flex-wrap:wrap}
+.sc-num{background:rgba(0,0,0,.25);border-radius:10px;padding:12px 16px;flex:1;min-width:120px;text-align:center}
+.sc-num .sn-label{font-size:10px;color:rgba(232,223,200,.5);letter-spacing:.5px;margin-bottom:6px;text-transform:uppercase}
+.sc-num .sn-val{font-size:20px;font-weight:700}
+.green{color:#2ecc71}.blue{color:#3498db}.gold{color:var(--gold)}
+
+footer{text-align:center;padding:28px 20px;border-top:1px solid rgba(201,168,76,.1);font-size:12px;color:rgba(232,223,200,.3)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="drip-badge">🎁 BONUS KIT — CÔNG CỤ HỢP TÁC MÔI GIỚI</div>
+  <h1>🧮 Máy Tính Chia Hoa Hồng<br>Vinhomes Hạ Long Xanh</h1>
+  <p class="hero-sub">Nhập thông tin giao dịch → chọn mô hình hợp tác → ra số ngay. Không cần tính tay, không tranh cãi.</p>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show(0)">🧮 Máy Tính</button>
+    <button class="tab-btn" onclick="show(1)">📊 So Sánh 5 Mô Hình</button>
+    <button class="tab-btn" onclick="show(2)">💡 Tình Huống Thực Tế</button>
+  </div>
+
+  <!-- PANEL 0: CALCULATOR -->
+  <div class="panel active" id="p0">
+    <div class="calc-card">
+      <div class="calc-title">Thông Tin Giao Dịch</div>
+      <div class="field-grid">
+        <div class="field">
+          <label>Giá trị căn hộ (tỷ đồng)</label>
+          <input type="number" id="can-gia" value="3.5" min="1" max="50" step="0.1" oninput="calc()">
+        </div>
+        <div class="field">
+          <label>Hoa hồng CĐT (%)</label>
+          <input type="number" id="hh-pct" value="2" min="0.5" max="5" step="0.1" oninput="calc()">
+        </div>
+        <div class="field">
+          <label>Chi phí marketing (triệu)</label>
+          <input type="number" id="chi-phi" value="5" min="0" step="0.5" oninput="calc()">
+          <span style="font-size:11px;color:rgba(232,223,200,.45)">Ads, content, tools... bên nào trả</span>
+        </div>
+        <div class="field">
+          <label>Ai trả chi phí marketing?</label>
+          <select id="who-pays" onchange="calc()">
+            <option value="marketer">Marketer trả 100%</option>
+            <option value="split">Hai bên chia đôi</option>
+            <option value="closer">Closer trả 100%</option>
+            <option value="none">Không ai trả (organic)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-title">Chọn Mô Hình Hợp Tác</div>
+      <div class="model-grid">
+        <div class="model-btn selected" onclick="selectModel(this,30,70)" data-m="30" data-c="70">
+          <div class="mname">REFERRAL</div>
+          <div class="mratio">30/70</div>
+          <div class="mdesc">Giới thiệu lead đơn thuần</div>
+        </div>
+        <div class="model-btn" onclick="selectModel(this,40,60)" data-m="40" data-c="60">
+          <div class="mname">CHUẨN NGÀNH</div>
+          <div class="mratio">40/60</div>
+          <div class="mdesc">Hợp tác thực sự, phổ biến nhất</div>
+        </div>
+        <div class="model-btn" onclick="selectModel(this,45,55)" data-m="45" data-c="55">
+          <div class="mname">CÂN BẰNG</div>
+          <div class="mratio">45/55</div>
+          <div class="mdesc">Đóng góp gần ngang nhau</div>
+        </div>
+        <div class="model-btn" onclick="selectModel(this,50,50)" data-m="50" data-c="50">
+          <div class="mname">JV NGANG</div>
+          <div class="mratio">50/50</div>
+          <div class="mdesc">Đóng góp hoàn toàn ngang</div>
+        </div>
+        <div class="model-btn" onclick="selectModel(this,60,40)" data-m="60" data-c="40">
+          <div class="mname">MARKETER MẠNH</div>
+          <div class="mratio">60/40</div>
+          <div class="mdesc">Marketer có audience lớn</div>
+        </div>
+      </div>
+
+      <button class="btn-calc" onclick="calc()">⚡ Tính Ngay</button>
+
+      <div class="result-box" id="result-box">
+        <div class="result-row">
+          <span class="result-label">💰 Tổng hoa hồng CĐT</span>
+          <span class="result-val" id="r-total">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">📉 Trừ chi phí marketing</span>
+          <span class="result-val" id="r-cost" style="color:#e74c3c">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">📦 Hoa hồng thực tế để chia</span>
+          <span class="result-val" id="r-net">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">🟢 Marketer nhận (<span id="lbl-m">30</span>%)</span>
+          <span class="result-val result-marketer" id="r-marketer">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">🔵 Closer nhận (<span id="lbl-c">70</span>%)</span>
+          <span class="result-val result-closer" id="r-closer">—</span>
+        </div>
+        <div class="result-row total">
+          <span class="result-label">✅ Kiểm tra</span>
+          <span class="result-val" id="r-check">—</span>
+        </div>
+      </div>
+
+      <div class="note-box">
+        ⚠️ Hoa hồng CĐT Vinhomes thực tế cần xác nhận với bộ phận Sales HLX — thường 1.5–2.5% tuỳ phân khu và đợt mở bán. Con số trên chỉ để tham khảo và thỏa thuận nội bộ.
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: COMPARISON -->
+  <div class="panel" id="p1">
+    <div class="sec-title">So Sánh 5 Mô Hình Hợp Tác</div>
+    <p class="sec-sub">Mỗi mô hình phù hợp với 1 tình huống cụ thể — chọn đúng thì cả hai đều thắng.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Mô hình</th>
+          <th>Marketer</th>
+          <th>Closer</th>
+          <th>Phù hợp khi</th>
+          <th>Rủi ro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="model-name">Referral đơn thuần</span><br><small style="color:rgba(232,223,200,.5)">Pass lead, xong việc</small></td>
+          <td><span class="ratio">30%</span></td>
+          <td><span class="ratio">70%</span></td>
+          <td>Marketer chỉ giới thiệu 1 lần, không theo dõi</td>
+          <td><span class="tag tag-orange">Marketer thiệt nếu lead hot</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Chuẩn ngành</span><br><small style="color:rgba(232,223,200,.5)">Phổ biến nhất VN</small></td>
+          <td><span class="ratio">40%</span></td>
+          <td><span class="ratio">60%</span></td>
+          <td>Marketer tạo lead chất lượng, Closer chăm sóc dài hạn</td>
+          <td><span class="tag tag-green">Cân bằng tốt</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Cân bằng</span><br><small style="color:rgba(232,223,200,.5)">Khi đóng góp gần ngang</small></td>
+          <td><span class="ratio">45%</span></td>
+          <td><span class="ratio">55%</span></td>
+          <td>Marketer chạy ads + Closer chốt trung bình 2–4 buổi</td>
+          <td><span class="tag tag-blue">Cần KPI rõ</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">JV ngang bằng</span><br><small style="color:rgba(232,223,200,.5)">Đối tác chiến lược</small></td>
+          <td><span class="ratio">50%</span></td>
+          <td><span class="ratio">50%</span></td>
+          <td>Cả hai đầu tư ngang nhau, có audience riêng</td>
+          <td><span class="tag tag-orange">Tranh cãi nếu không rõ ràng</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Marketer mạnh</span><br><small style="color:rgba(232,223,200,.5)">Khi marketer có audience</small></td>
+          <td><span class="ratio">55–60%</span></td>
+          <td><span class="ratio">40–45%</span></td>
+          <td>Marketer có list email/cộng đồng >5K đúng tệp</td>
+          <td><span class="tag tag-orange">Closer khó accept nếu không thấy giá trị</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="calc-card">
+      <div class="calc-title">Điều Chỉnh Theo Điều Kiện Thực Tế</div>
+      <table class="comp-table">
+        <thead><tr><th>Điều kiện</th><th>Cộng cho Marketer</th><th>Lý do</th></tr></thead>
+        <tbody>
+          <tr><td>Marketer tự bỏ 100% ad spend</td><td class="ratio">+5%</td><td>Bù đắp rủi ro tài chính</td></tr>
+          <tr><td>Marketer có audience >5.000 người đúng tệp</td><td class="ratio">+5%</td><td>Distribution có giá trị</td></tr>
+          <tr><td>Độc quyền theo khu vực</td><td class="ratio">+5%</td><td>Nhưng cần KPI tối thiểu</td></tr>
+          <tr><td>Lead đã được warm up (biết dự án, quan tâm thật)</td><td class="ratio">+3–5%</td><td>Công sức nurture lead</td></tr>
+          <tr><td>Closer phải chăm sóc >3 tháng mới chốt</td><td class="ratio">−5%</td><td>Compensate thời gian Closer</td></tr>
+          <tr><td>Closer tự bỏ tiền event, tiếp đón, đi lại</td><td class="ratio">−3%</td><td>Chi phí thực của Closer</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PANEL 2: SCENARIOS -->
+  <div class="panel" id="p2">
+    <div class="sec-title">5 Tình Huống Thực Tế</div>
+    <p class="sec-sub">Các kịch bản phổ biến nhất — đọc tình huống gần nhất với mình rồi áp dụng.</p>
+
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <div class="sc-header">
+          <div class="sc-icon">📱</div>
+          <div>
+            <div class="sc-title">Tình huống 1: Chạy Ads → Giới Thiệu Lead</div>
+            <div class="sc-desc">Marketer chạy Facebook Ads, tự bỏ tiền, lead điền form. Closer gọi điện, tư vấn, chốt. Giao dịch căn 3.5 tỷ, HH 2% = 70 triệu.</div>
+          </div>
+        </div>
+        <div class="sc-numbers">
+          <div class="sc-num"><div class="sn-label">Mô hình</div><div class="sn-val gold">40/60</div></div>
+          <div class="sc-num"><div class="sn-label">Marketer</div><div class="sn-val green">28 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Closer</div><div class="sn-val blue">42 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Chi phí ads (trừ trước)</div><div class="sn-val" style="color:#e74c3c">−5 triệu</div></div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="sc-header">
+          <div class="sc-icon">👥</div>
+          <div>
+            <div class="sc-title">Tình huống 2: Content Organic → Lead Zalo</div>
+            <div class="sc-desc">Marketer đăng bài TikTok/FB, lead tự nhắn Zalo. Không tốn tiền ads. Closer chăm sóc 6 tuần, dẫn đi xem thực tế 2 lần, chốt thành công.</div>
+          </div>
+        </div>
+        <div class="sc-numbers">
+          <div class="sc-num"><div class="sn-label">Mô hình</div><div class="sn-val gold">45/55</div></div>
+          <div class="sc-num"><div class="sn-label">Marketer</div><div class="sn-val green">31.5 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Closer</div><div class="sn-val blue">38.5 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Căn 3.5B × 2%</div><div class="sn-val gold">70 triệu</div></div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="sc-header">
+          <div class="sc-icon">🏘️</div>
+          <div>
+            <div class="sc-title">Tình huống 3: Cộng đồng sẵn có → Warm Lead</div>
+            <div class="sc-desc">Marketer có group FB 8.000 người quan tâm BĐS HLX. Lead đã biết dự án, chỉ cần được tư vấn chốt. Closer làm 2 buổi là xong.</div>
+          </div>
+        </div>
+        <div class="sc-numbers">
+          <div class="sc-num"><div class="sn-label">Mô hình</div><div class="sn-val gold">50/50</div></div>
+          <div class="sc-num"><div class="sn-label">Marketer</div><div class="sn-val green">35 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Closer</div><div class="sn-val blue">35 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Lý do 50/50</div><div class="sn-val gold">Lead warm, ít công</div></div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="sc-header">
+          <div class="sc-icon">🏦</div>
+          <div>
+            <div class="sc-title">Tình huống 4: Căn Villa 8 tỷ — HH 2.5%</div>
+            <div class="sc-desc">Phân khúc cao, HH lớn hơn. Closer phải đầu tư nhiều: dẫn xem 4–5 lần, kết nối ngân hàng, đàm phán hợp đồng. Thời gian 3 tháng.</div>
+          </div>
+        </div>
+        <div class="sc-numbers">
+          <div class="sc-num"><div class="sn-label">Tổng HH</div><div class="sn-val gold">200 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Mô hình</div><div class="sn-val gold">35/65</div></div>
+          <div class="sc-num"><div class="sn-label">Marketer</div><div class="sn-val green">70 triệu</div></div>
+          <div class="sc-num"><div class="sn-label">Closer</div><div class="sn-val blue">130 triệu</div></div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="sc-header">
+          <div class="sc-icon">📦</div>
+          <div>
+            <div class="sc-title">Tình huống 5: Tiered — Hợp tác dài hạn nhiều căn</div>
+            <div class="sc-desc">Hai bên hợp tác 6 tháng, target 6 căn. Thang hoa hồng tăng dần để cả hai có động lực.</div>
+          </div>
+        </div>
+        <div class="sc-numbers">
+          <div class="sc-num"><div class="sn-label">1–2 căn</div><div class="sn-val gold">35/65</div></div>
+          <div class="sc-num"><div class="sn-label">3–5 căn</div><div class="sn-val gold">40/60</div></div>
+          <div class="sc-num"><div class="sn-label">6+ căn</div><div class="sn-val gold">45/55</div></div>
+          <div class="sc-num"><div class="sn-label">Lợi ích</div><div class="sn-val green">Scale cùng nhau</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>BDS Mastery Kit · Công cụ hỗ trợ hợp tác môi giới · Chỉ dùng nội bộ</footer>
+
+<script>
+let mPct=30, cPct=70;
+
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+
+function selectModel(el, m, c){
+  document.querySelectorAll('.model-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  mPct=m; cPct=c;
+  calc();
+}
+
+function fmt(n){ return n.toLocaleString('vi-VN')+'đ'; }
+function fmtM(n){ return (n/1e6).toFixed(1)+' triệu'; }
+
+function calc(){
+  const gia = parseFloat(document.getElementById('can-gia').value)||0;
+  const hhPct = parseFloat(document.getElementById('hh-pct').value)||0;
+  const chiPhi = parseFloat(document.getElementById('chi-phi').value)||0;
+  const whoPays = document.getElementById('who-pays').value;
+
+  const totalHH = gia * 1e9 * hhPct / 100;
+  let mCost=0, cCost=0;
+  if(whoPays==='marketer') mCost = chiPhi*1e6;
+  else if(whoPays==='closer') cCost = chiPhi*1e6;
+  else if(whoPays==='split'){ mCost=chiPhi*1e6/2; cCost=chiPhi*1e6/2; }
+
+  const netHH = totalHH; // cost chia riêng, không trừ khỏi pool
+  const mGet = netHH * mPct/100 - mCost;
+  const cGet = netHH * cPct/100 - cCost;
+
+  document.getElementById('lbl-m').textContent=mPct;
+  document.getElementById('lbl-c').textContent=cPct;
+  document.getElementById('r-total').textContent = fmtM(totalHH);
+  document.getElementById('r-cost').textContent = chiPhi>0 ? '− '+fmtM(chiPhi*1e6) : 'Không có';
+  document.getElementById('r-net').textContent = fmtM(totalHH);
+  document.getElementById('r-marketer').textContent = fmtM(mGet);
+  document.getElementById('r-closer').textContent = fmtM(cGet);
+  document.getElementById('r-check').textContent = '✅ Tổng = '+fmtM(totalHH);
+}
+
+// init
+calc();
+</script>
+</body>
+</html>

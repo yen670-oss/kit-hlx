@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🤝 Bộ Mẫu Hợp Tác Marketer-Closer HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--teal:#1abc9c;--purple:#9b59b6}
+body{background:var(--bg);color:#e8dfc8;font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+.hero{background:linear-gradient(135deg,#050f20,#0d2040,#150a30);padding:52px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(155,89,182,.1) 0%,transparent 60%),radial-gradient(ellipse at 70% 40%,rgba(201,168,76,.08) 0%,transparent 60%)}
+.drip-badge{display:inline-block;background:linear-gradient(135deg,var(--purple),#6c3483);color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:6px 18px;border-radius:20px;margin-bottom:18px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,46px);font-weight:900;line-height:1.2;background:linear-gradient(135deg,var(--purple),var(--gold),var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:12px}
+.hero-sub{font-size:15px;color:rgba(232,223,200,.7);max-width:560px;margin:0 auto;position:relative;z-index:1;line-height:1.7}
+
+.tabs-wrap{max-width:900px;margin:0 auto;padding:36px 20px 60px}
+.tab-nav{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tab-btn{padding:11px 24px;border:none;border-radius:10px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:13px;font-weight:600;background:rgba(255,255,255,.07);color:rgba(232,223,200,.6);transition:.25s}
+.tab-btn.active{background:linear-gradient(135deg,var(--purple),#6c3483);color:#fff;box-shadow:0 4px 20px rgba(155,89,182,.35)}
+.panel{display:none}.panel.active{display:block}
+
+.sec-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--gl);margin-bottom:6px}
+.sec-sub{font-size:13px;color:rgba(232,223,200,.55);margin-bottom:24px;line-height:1.6}
+
+/* AGREEMENT */
+.agreement-card{background:#f8f5ef;color:#1a1a2e;border-radius:16px;padding:36px;margin-bottom:20px;font-family:'Be Vietnam Pro',sans-serif}
+.agr-header{text-align:center;border-bottom:2px solid #b8860b;padding-bottom:20px;margin-bottom:24px}
+.agr-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1B3A6B;margin-bottom:4px}
+.agr-sub{font-size:11px;color:#6b6560;letter-spacing:1px}
+.agr-meta{display:flex;justify-content:center;gap:24px;margin-top:12px;flex-wrap:wrap}
+.agr-meta span{font-size:12px;color:#6b6560}
+.agr-meta strong{color:#1a1a2e}
+
+.agr-parties{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:520px){.agr-parties{grid-template-columns:1fr}}
+.party-box{border:1px solid #d0c9b8;border-top:3px solid #b8860b;border-radius:8px;padding:14px}
+.party-head{font-size:10px;font-weight:700;color:#b8860b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.party-field{font-size:12px;color:#5a5550;padding:4px 0;border-bottom:1px dashed #d0c9b8}
+.party-field:last-child{border-bottom:none}
+.party-field .pfl{font-weight:600;color:#2a2a3a;min-width:80px;display:inline-block}
+
+.agr-section{margin-bottom:18px}
+.agr-section h4{font-size:13px;font-weight:700;color:#1B3A6B;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #e0d8cc;display:flex;align-items:center;gap:6px}
+.agr-section h4::before{content:'';display:inline-block;width:3px;height:14px;background:#b8860b;border-radius:2px}
+.agr-clause{font-size:12px;color:#3a3530;line-height:1.85;padding:4px 0 4px 16px;margin-bottom:6px}
+.agr-clause::before{content:attr(data-n);color:#b8860b;font-weight:700;margin-left:-16px;margin-right:8px}
+
+.agr-table{width:100%;border-collapse:collapse;font-size:11px;margin:8px 0}
+.agr-table th{background:#1B3A6B;color:#fff;padding:7px 10px;text-align:left;font-weight:600}
+.agr-table td{padding:7px 10px;border-bottom:1px solid #e0d8cc;color:#3a3530}
+.agr-table tr:nth-child(even) td{background:#f5f3ef}
+.ok{color:#1a5c2e;font-weight:700}.no{color:#8b2020;font-weight:700}.warn{color:#8b5e00;font-weight:700}
+
+.agr-sig{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;padding-top:20px;border-top:1px solid #e0d8cc}
+@media(max-width:440px){.agr-sig{grid-template-columns:1fr}}
+.sig-block{border:1px solid #e0d8cc;border-top:2px solid #1B3A6B;border-radius:6px;padding:14px}
+.sig-party{font-size:10px;font-weight:700;color:#1B3A6B;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.sig-stamp{height:60px;border:1px dashed #bbb;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:10px;margin:10px 0}
+.sig-line{font-size:11px;color:#6b6560;border-top:1px solid #bbb;padding-top:4px;margin-top:4px}
+
+.btn-copy-agr{
+  display:block;width:100%;margin-top:12px;padding:12px;
+  background:linear-gradient(135deg,var(--gold),#8b6914);color:#fff;
+  border:none;border-radius:10px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;
+  font-size:13px;font-weight:700;transition:.2s;
+}
+.btn-copy-agr:hover{background:linear-gradient(135deg,var(--gl),#c9a84c)}
+.btn-copy-agr.ok{background:linear-gradient(135deg,#27ae60,#1a5c2e)}
+
+/* SCRIPTS */
+.script-grid{display:flex;flex-direction:column;gap:20px}
+.script-card{background:var(--card);border:1px solid rgba(201,168,76,.12);border-radius:14px;overflow:hidden}
+.script-head{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.script-head-title{font-weight:700;color:var(--gl);font-size:14px}
+.btn-cp{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold);border-radius:8px;padding:7px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s}
+.btn-cp:hover{background:rgba(201,168,76,.25)}
+.btn-cp.ok{background:rgba(39,174,96,.2);border-color:rgba(39,174,96,.4);color:#2ecc71}
+
+.script-body{padding:18px 20px}
+.script-text{font-size:13.5px;line-height:1.85;color:#e0d5c0;white-space:pre-wrap}
+.script-tag{display:inline-block;padding:2px 10px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.5px;margin-bottom:10px}
+.tag-init{background:rgba(155,89,182,.2);color:#bb8fce}
+.tag-followup{background:rgba(26,188,156,.2);color:#48c9b0}
+.tag-confirm{background:rgba(201,168,76,.2);color:var(--gold)}
+
+footer{text-align:center;padding:28px 20px;border-top:1px solid rgba(201,168,76,.1);font-size:12px;color:rgba(232,223,200,.3)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="drip-badge">🎁 BONUS KIT — BỘ MẪU HỢP TÁC</div>
+  <h1>🤝 Bộ Mẫu Hợp Tác<br>Marketer × Closer HLX</h1>
+  <p class="hero-sub">Thỏa thuận nhanh 1 trang + 5 script Zalo tiếp cận đối tác — dùng ngay, không cần luật sư.</p>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show(0)">📄 Thỏa Thuận Nhanh</button>
+    <button class="tab-btn" onclick="show(1)">💬 Script Tiếp Cận Đối Tác</button>
+  </div>
+
+  <!-- PANEL 0: AGREEMENT -->
+  <div class="panel active" id="p0">
+    <div class="sec-title">Thỏa Thuận Hợp Tác 1 Trang</div>
+    <p class="sec-sub">Đơn giản, rõ ràng, ký tay hoặc xác nhận qua Zalo đều có giá trị. Điền vào và gửi trước khi chuyển lead đầu tiên.</p>
+
+    <div class="agreement-card" id="agreement-content">
+      <div class="agr-header">
+        <div class="agr-title">THỎA THUẬN HỢP TÁC BÁN HÀNG</div>
+        <div class="agr-sub">Vinhomes Hạ Long Xanh — Marketer & Closer</div>
+        <div class="agr-meta">
+          <span>Số: <strong>HT-MC-____/2025</strong></span>
+          <span>Ngày: <strong>___/___/2025</strong></span>
+        </div>
+      </div>
+
+      <div class="agr-parties">
+        <div class="party-box">
+          <div class="party-head">Bên Marketing (Marketer)</div>
+          <div class="party-field"><span class="pfl">Họ tên:</span> ___________________</div>
+          <div class="party-field"><span class="pfl">SĐT:</span> ___________________</div>
+          <div class="party-field"><span class="pfl">Zalo:</span> ___________________</div>
+          <div class="party-field"><span class="pfl">Ngân hàng:</span> ___________________</div>
+        </div>
+        <div class="party-box">
+          <div class="party-head">Bên Bán Hàng (Closer)</div>
+          <div class="party-field"><span class="pfl">Họ tên:</span> ___________________</div>
+          <div class="party-field"><span class="pfl">SĐT:</span> ___________________</div>
+          <div class="party-field"><span class="pfl">Zalo:</span> ___________________</div>
+          <div class="party-field"><span class="pfl">Ngân hàng:</span> ___________________</div>
+        </div>
+      </div>
+
+      <div class="agr-section">
+        <h4>Điều 1 — Phân Công</h4>
+        <div class="agr-clause" data-n="1.1">Marketer chịu trách nhiệm: tạo nội dung, chạy quảng cáo, tạo lead, và chuyển lead đủ điều kiện cho Closer.</div>
+        <div class="agr-clause" data-n="1.2">Closer chịu trách nhiệm: tiếp nhận lead, tư vấn, dẫn đi xem dự án, chăm sóc đến khi chốt hợp đồng.</div>
+        <div class="agr-clause" data-n="1.3">Lead hợp lệ được định nghĩa là: khách hàng có SĐT thật, đã tương tác với nội dung của Marketer, và chưa có trong danh sách khách của Closer.</div>
+      </div>
+
+      <div class="agr-section">
+        <h4>Điều 2 — Phân Chia Hoa Hồng</h4>
+        <table class="agr-table">
+          <thead><tr><th>Số căn/quý</th><th>Marketer</th><th>Closer</th><th>Ghi chú</th></tr></thead>
+          <tbody>
+            <tr><td>Căn 1–3</td><td class="ok">____%</td><td class="ok">____%</td><td></td></tr>
+            <tr><td>Căn 4–6</td><td class="ok">____%</td><td class="ok">____%</td><td>Đạt tier 2</td></tr>
+            <tr><td>Căn 7+</td><td class="ok">____%</td><td class="ok">____%</td><td>Đạt tier 3</td></tr>
+          </tbody>
+        </table>
+        <div class="agr-clause" data-n="2.1">Hoa hồng được tính trên phần CĐT Vinhomes thanh toán thực tế, sau khi trừ các khoản CĐT khấu trừ (nếu có).</div>
+        <div class="agr-clause" data-n="2.2">Thanh toán trong vòng <strong>3 ngày làm việc</strong> sau khi CĐT chuyển hoa hồng.</div>
+      </div>
+
+      <div class="agr-section">
+        <h4>Điều 3 — Bảo Vệ Lead</h4>
+        <div class="agr-clause" data-n="3.1">Lead do Marketer giới thiệu được bảo vệ <strong>90 ngày</strong>. Nếu khách mua trong 90 ngày — dù qua kênh nào — Marketer vẫn hưởng hoa hồng.</div>
+        <div class="agr-clause" data-n="3.2">Closer không được tiếp cận khách của Marketer để giao dịch độc lập mà không chia hoa hồng.</div>
+        <div class="agr-clause" data-n="3.3">Nếu Closer bỏ lead sau 30 ngày không chăm sóc, Marketer có quyền chuyển lead cho Closer khác hoặc tự xử lý.</div>
+      </div>
+
+      <div class="agr-section">
+        <h4>Điều 4 — Điều Khoản Nhanh</h4>
+        <table class="agr-table">
+          <thead><tr><th>Nội dung</th><th>Thỏa thuận</th></tr></thead>
+          <tbody>
+            <tr><td>Chi phí quảng cáo</td><td><strong>Marketer / Closer / Chia đôi</strong> (gạch chân lựa chọn)</td></tr>
+            <tr><td>Ai đứng hợp đồng với CĐT</td><td><strong>Marketer / Closer</strong> (gạch chân)</td></tr>
+            <tr><td>Khu vực ưu tiên</td><td>____________________________</td></tr>
+            <tr><td>Thời hạn thỏa thuận</td><td>Đến ngày: ___/___/______</td></tr>
+            <tr><td>Không cạnh tranh</td><td>Trong 6 tháng sau khi chấm dứt</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="agr-sig">
+        <div class="sig-block">
+          <div class="sig-party">Bên Marketing</div>
+          <div class="sig-stamp">Ký tên xác nhận</div>
+          <div class="sig-line">Họ tên: _________________________</div>
+          <div class="sig-line">Ngày: ___/___/2025</div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-party">Bên Bán Hàng</div>
+          <div class="sig-stamp">Ký tên xác nhận</div>
+          <div class="sig-line">Họ tên: _________________________</div>
+          <div class="sig-line">Ngày: ___/___/2025</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-copy-agr" id="agr-btn" onclick="copyAgreement(this)">📋 Copy Toàn Bộ Thỏa Thuận (Gửi Zalo)</button>
+  </div>
+
+  <!-- PANEL 1: SCRIPTS -->
+  <div class="panel" id="p1">
+    <div class="sec-title">Script Tiếp Cận & Đề Xuất Hợp Tác</div>
+    <p class="sec-sub">5 mẫu Zalo cho từng tình huống — copy, chỉnh tên, gửi ngay. Không cần soạn từ đầu.</p>
+
+    <div class="script-grid">
+
+      <div class="script-card" id="sc1">
+        <div class="script-head">
+          <div>
+            <span class="script-tag tag-init">💬 MỞ ĐẦU</span>
+            <div class="script-head-title">Script 1: Tiếp cận lần đầu — đề xuất hợp tác</div>
+          </div>
+          <button class="btn-cp" onclick="cp('sc1',this)">📋 Copy</button>
+        </div>
+        <div class="script-body">
+          <div class="script-text" id="sc1-text">Chào anh/chị [Tên], em [Tên bạn] đây ạ!
+
+Em đang chuyên làm marketing BĐS cho Vinhomes Hạ Long Xanh — hiện tại mỗi tháng em đang tạo được khoảng [X] lead quan tâm thật sự đến dự án này.
+
+Em muốn đề xuất với anh/chị mô hình hợp tác: em chuyên lo phần marketing và tạo lead chất lượng, anh/chị lo phần tư vấn và chốt đơn. Hai bên chia hoa hồng theo tỷ lệ thỏa thuận.
+
+Anh/chị có 10 phút để em trình bày cụ thể hơn không ạ? Em sẽ gửi trước mẫu thỏa thuận để anh/chị xem qua 🙏</div>
+        </div>
+      </div>
+
+      <div class="script-card" id="sc2">
+        <div class="script-head">
+          <div>
+            <span class="script-tag tag-init">📊 PITCH</span>
+            <div class="script-head-title">Script 2: Trình bày tỷ lệ hoa hồng đề xuất</div>
+          </div>
+          <button class="btn-cp" onclick="cp('sc2',this)">📋 Copy</button>
+        </div>
+        <div class="script-body">
+          <div class="script-text" id="sc2-text">Cảm ơn anh/chị đã đồng ý nói chuyện!
+
+Đây là đề xuất cụ thể của em anh/chị nhé:
+
+📌 MÔ HÌNH HỢP TÁC:
+• Em: Marketing, tạo lead, warm up khách
+• Anh/chị: Tư vấn, dẫn xem, chốt hợp đồng
+
+💰 PHÂN CHIA HOA HỒNG:
+• 3 căn đầu: Marketer 40% / Closer 60%
+• Từ căn 4–6: Marketer 43% / Closer 57%
+• Từ căn 7+: Marketer 45% / Closer 55%
+
+🛡️ CAM KẾT:
+• Lead được bảo vệ 90 ngày
+• Thanh toán trong 3 ngày sau khi nhận HH từ CĐT
+• Không cạnh tranh trong 6 tháng sau khi kết thúc
+
+Anh/chị thấy tỷ lệ này có ổn không? Mình có thể điều chỉnh linh hoạt ạ 😊</div>
+        </div>
+      </div>
+
+      <div class="script-card" id="sc3">
+        <div class="script-head">
+          <div>
+            <span class="script-tag tag-followup">🔄 FOLLOW-UP</span>
+            <div class="script-head-title">Script 3: Follow-up khi đối tác chưa phản hồi</div>
+          </div>
+          <button class="btn-cp" onclick="cp('sc3',this)">📋 Copy</button>
+        </div>
+        <div class="script-body">
+          <div class="script-text" id="sc3-text">Chào anh/chị [Tên], em nhắn lại lần nữa ạ 😊
+
+Tuần này em vừa tạo được [X] lead mới quan tâm Hạ Long Xanh — trong đó có [Y] người hỏi cụ thể về phân khu [ABC].
+
+Em đang cần một Closer chuyên nghiệp để tiếp nhận và tư vấn những khách này. Nếu anh/chị quan tâm, mình bắt đầu với 2–3 lead thử trước, không cần ký kết phức tạp — xác nhận qua Zalo là được.
+
+Anh/chị muốn thử không ạ? Em chuyển thông tin khách ngay hôm nay 🙏</div>
+        </div>
+      </div>
+
+      <div class="script-card" id="sc4">
+        <div class="script-head">
+          <div>
+            <span class="script-tag tag-confirm">✅ XÁC NHẬN</span>
+            <div class="script-head-title">Script 4: Xác nhận chuyển giao lead cụ thể</div>
+          </div>
+          <button class="btn-cp" onclick="cp('sc4',this)">📋 Copy</button>
+        </div>
+        <div class="script-body">
+          <div class="script-text" id="sc4-text">Anh/chị [Tên] ơi, em chuyển lead cho anh/chị nhé ạ:
+
+👤 THÔNG TIN KHÁCH:
+• Tên: [Tên khách]
+• SĐT: [SĐT]
+• Zalo: [Zalo]
+• Nhu cầu: [Mua để ở / Đầu tư]
+• Ngân sách: [X] tỷ
+• Quan tâm phân khu: [ABC]
+• Đã biết dự án: Có — đã xem video/bài đăng của em
+• Tình trạng: [Đang so sánh HLX với dự án X]
+
+📝 GHI CHÚ:
+Khách nhắn hỏi về [điểm cụ thể]. Anh/chị có thể dùng điểm này để mở đầu tư vấn.
+
+Theo thỏa thuận, lead này được bảo vệ đến ngày [90 ngày từ hôm nay]. Em đăng ký bảo vệ từ hôm nay ___/___/2025 nhé ạ ✅</div>
+        </div>
+      </div>
+
+      <div class="script-card" id="sc5">
+        <div class="script-head">
+          <div>
+            <span class="script-tag tag-confirm">💰 THANH TOÁN</span>
+            <div class="script-head-title">Script 5: Nhắc thanh toán hoa hồng sau chốt đơn</div>
+          </div>
+          <button class="btn-cp" onclick="cp('sc5',this)">📋 Copy</button>
+        </div>
+        <div class="script-body">
+          <div class="script-text" id="sc5-text">Chúc mừng anh/chị đã chốt thành công căn [X] của anh/chị [Tên khách]! 🎉
+
+Theo thỏa thuận của mình:
+• Tổng hoa hồng CĐT: [X] triệu
+• Tỷ lệ của em (Marketer): [40]% = [X] triệu
+• Tỷ lệ của anh/chị (Closer): [60]% = [X] triệu
+
+CĐT dự kiến thanh toán hoa hồng vào ngày [X]. Theo cam kết, anh/chị chuyển phần của em trong vòng 3 ngày sau khi nhận nhé ạ.
+
+Số TK của em: [STK] — [Tên ngân hàng]
+
+Hợp tác lần này vui lắm ạ! Mình tiếp tục với batch lead tháng sau nhé 💪</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>BDS Mastery Kit · Bộ mẫu hợp tác môi giới · Dùng nội bộ đội nhóm</footer>
+
+<script>
+function show(n){
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+
+function cp(id, btn){
+  const el = document.getElementById(id+'-text');
+  const text = el ? el.innerText.trim() : '';
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('ok')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('ok')},2000);
+  });
+}
+
+function copyAgreement(btn){
+  const lines = [
+    'THỎA THUẬN HỢP TÁC BÁN HÀNG — VINHOMES HẠ LONG XANH',
+    '════════════════════════════════════',
+    '',
+    'BÊN MARKETING (MARKETER)',
+    'Họ tên: ___________________  SĐT: ___________________',
+    '',
+    'BÊN BÁN HÀNG (CLOSER)',
+    'Họ tên: ___________________  SĐT: ___________________',
+    '',
+    '─────────────────────────────────',
+    'ĐIỀU 1 — PHÂN CÔNG',
+    '• Marketer: Tạo content, chạy ads, tạo lead chất lượng',
+    '• Closer: Tiếp nhận lead, tư vấn, chốt hợp đồng',
+    '• Lead hợp lệ: SĐT thật, đã tương tác, chưa có trong list Closer',
+    '',
+    'ĐIỀU 2 — PHÂN CHIA HOA HỒNG',
+    '• Căn 1–3:  Marketer ___% / Closer ___%',
+    '• Căn 4–6:  Marketer ___% / Closer ___%',
+    '• Căn 7+:   Marketer ___% / Closer ___%',
+    '• Thanh toán: trong 3 ngày sau khi CĐT trả HH',
+    '',
+    'ĐIỀU 3 — BẢO VỆ LEAD',
+    '• Lead được bảo vệ 90 ngày từ ngày chuyển',
+    '• Closer không tiếp cận lead của Marketer độc lập',
+    '• Nếu Closer bỏ lead 30 ngày → Marketer được chuyển người khác',
+    '',
+    'ĐIỀU 4 — THỎA THUẬN NHANH',
+    '• Chi phí ads: Marketer / Closer / Chia đôi',
+    '• Ai đứng HĐ với CĐT: Marketer / Closer',
+    '• Không cạnh tranh: 6 tháng sau khi kết thúc',
+    '• Thời hạn: ___/___/______',
+    '',
+    '─────────────────────────────────',
+    'XÁC NHẬN (ký tên hoặc reply "ĐỒNG Ý" qua Zalo)',
+    '',
+    'Bên Marketing: _________________  Ngày: ___/___/2025',
+    'Bên Bán Hàng:  _________________  Ngày: ___/___/2025',
+  ];
+  const text = lines.join('\n');
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Đã copy! Dán vào Zalo gửi ngay';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copy Toàn Bộ Thỏa Thuận (Gửi Zalo)';btn.classList.remove('ok')},3000);
+  });
+}
+</script>
+</body>
+</html>
