@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gift Post Hub — Copy Paste Ngay | BDS Mastery Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1b2a;--navy:#1B3A6B;--nd:#102340;
+  --gold:#C9A84C;--gl:#E2C06A;
+  --fb:#1877F2;--zalo:#0068FF;
+  --mg:#27ae60;--cs:#9b59b6;--roi:#e67e22;
+  --card:rgba(255,255,255,.04);--border:rgba(201,168,76,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:#e8e0d0;min-height:100vh;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060f1a,#0d1b2a,#1a2a4a);padding:36px 24px 28px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,.1),transparent);}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:14px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,32px);color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:var(--gl);}
+.hero p{font-size:13px;color:rgba(255,255,255,.5);position:relative;max-width:540px;margin:0 auto;}
+
+/* STICKY FILTERS */
+.sticky{position:sticky;top:0;z-index:99;background:rgba(13,27,42,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;flex-direction:column;gap:10px;}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.filter-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;}
+.fpill{font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);cursor:pointer;transition:.15s;font-family:inherit;white-space:nowrap;}
+.fpill:hover{border-color:var(--gold);color:var(--gl);}
+.fpill.a-mg{background:rgba(39,174,96,.2);border-color:rgba(39,174,96,.5);color:#5dde90;}
+.fpill.a-cs{background:rgba(155,89,182,.2);border-color:rgba(155,89,182,.5);color:#c97de8;}
+.fpill.a-roi{background:rgba(230,126,34,.2);border-color:rgba(230,126,34,.5);color:#f0a060;}
+.fpill.a-all{background:rgba(201,168,76,.2);border-color:rgba(201,168,76,.5);color:var(--gl);}
+.ppill{font-size:11.5px;font-weight:700;padding:6px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);cursor:pointer;transition:.15s;font-family:inherit;}
+.ppill:hover{border-color:rgba(255,255,255,.3);color:#fff;}
+.ppill.p-fb{background:rgba(24,119,242,.2);border-color:rgba(24,119,242,.5);color:#6aadff;}
+.ppill.p-zalo{background:rgba(0,104,255,.15);border-color:rgba(0,104,255,.4);color:#70b8ff;}
+.ppill.p-all{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gl);}
+
+/* STATS BAR */
+.stats-bar{background:var(--card);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;gap:20px;flex-wrap:wrap;}
+.stat{font-size:12px;color:rgba(255,255,255,.4);}
+.stat strong{color:var(--gl);}
+
+/* MAIN */
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 60px;}
+
+/* GIFT SECTION */
+.gift-section{margin-bottom:36px;}
+.gift-section.hidden{display:none;}
+.gift-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:14px 18px;border-radius:14px;border:1px solid;}
+.gift-head.mg{background:rgba(39,174,96,.07);border-color:rgba(39,174,96,.25);}
+.gift-head.cs{background:rgba(155,89,182,.07);border-color:rgba(155,89,182,.25);}
+.gift-head.roi{background:rgba(230,126,34,.07);border-color:rgba(230,126,34,.25);}
+.gift-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.mg .gift-dot{background:var(--mg);}
+.cs .gift-dot{background:var(--cs);}
+.roi .gift-dot{background:var(--roi);}
+.gift-name{font-size:14px;font-weight:800;color:#fff;flex:1;}
+.gift-meta{font-size:11px;color:rgba(255,255,255,.4);}
+.btn-open-gift{font-size:11px;font-weight:700;padding:5px 14px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+.mg .btn-open-gift{background:rgba(39,174,96,.2);color:#5dde90;border:1px solid rgba(39,174,96,.3);}
+.cs .btn-open-gift{background:rgba(155,89,182,.2);color:#c97de8;border:1px solid rgba(155,89,182,.3);}
+.roi .btn-open-gift{background:rgba(230,126,34,.2);color:#f0a060;border:1px solid rgba(230,126,34,.3);}
+
+/* POSTS GRID */
+.posts-grid{display:flex;flex-direction:column;gap:10px;}
+
+/* POST CARD */
+.post-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.15s;}
+.post-card.hidden{display:none;}
+.post-card:hover{border-color:rgba(201,168,76,.3);}
+.pc-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);}
+.pc-platform{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
+.pc-platform.fb{background:rgba(24,119,242,.2);color:#6aadff;border:1px solid rgba(24,119,242,.3);}
+.pc-platform.zalo{background:rgba(0,104,255,.15);color:#70b8ff;border:1px solid rgba(0,104,255,.3);}
+.pc-tag{font-size:11.5px;color:rgba(255,255,255,.5);flex:1;}
+.pc-num{font-size:11px;color:rgba(255,255,255,.25);}
+.pc-body{padding:12px 14px;font-size:13px;color:#d0c8b8;line-height:1.7;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;max-height:200px;overflow:hidden;transition:.3s;}
+.pc-body.expanded{max-height:2000px;}
+.pc-footer{padding:8px 14px;display:flex;gap:8px;border-top:1px solid rgba(255,255,255,.04);}
+.btn-cp{font-size:12px;font-weight:700;padding:7px 16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;transition:.15s;display:flex;align-items:center;gap:5px;}
+.btn-cp.fb-btn{background:rgba(24,119,242,.15);color:#6aadff;border:1px solid rgba(24,119,242,.25);}
+.btn-cp.zalo-btn{background:rgba(0,104,255,.15);color:#70b8ff;border:1px solid rgba(0,104,255,.25);}
+.btn-cp.ok{background:rgba(39,174,96,.2)!important;color:#5dde90!important;border-color:rgba(39,174,96,.3)!important;}
+.btn-expand{font-size:11px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(255,255,255,.35);cursor:pointer;font-family:inherit;}
+.btn-expand:hover{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7);}
+
+/* SECTION DIVIDER */
+.sdiv{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.15),transparent);margin:8px 0 16px;}
+.sdiv-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.15em;text-align:center;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📋 Gift Post Hub — BDS Mastery Kit</div>
+  <h1>Tất Cả Bài FB & Tin Zalo <span>Sẵn Copy Paste</span></h1>
+  <p>33 bài đăng + tin nhắn cho 3 gói quà — chọn đúng tình huống, nhấn copy, dán và gửi ngay</p>
+</div>
+
+<!-- STICKY FILTERS -->
+<div class="sticky">
+  <div class="filter-row">
+    <span class="filter-label">Quà:</span>
+    <button class="fpill a-all" onclick="filterGift('all',this)">🎁 Tất Cả</button>
+    <button class="fpill" onclick="filterGift('mg',this)">🟢 Môi Giới</button>
+    <button class="fpill" onclick="filterGift('cs',this)">🟣 Chủ Sàn</button>
+    <button class="fpill" onclick="filterGift('roi',this)">🟠 Training ROI</button>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Kênh:</span>
+    <button class="ppill p-all" onclick="filterPlatform('all',this)">📢 Tất Cả</button>
+    <button class="ppill" onclick="filterPlatform('fb',this)">📘 Chỉ FB Posts</button>
+    <button class="ppill" onclick="filterPlatform('zalo',this)">💬 Chỉ Zalo</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <span class="stat">📊 Tổng: <strong>33 card</strong></span>
+  <span class="stat">📘 FB Posts: <strong>18 bài</strong></span>
+  <span class="stat">💬 Zalo: <strong>15 mẫu</strong></span>
+  <span class="stat">🎁 Gói quà: <strong>3 file</strong></span>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- GIFT 1: MÔI GIỚI                                  -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="gift-section" id="sec-mg" data-gift="mg">
+  <div class="gift-head mg">
+    <div class="gift-dot"></div>
+    <div class="gift-name">🟢 Quà Tặng: 7 Nỗi Đau Môi Giới HLX</div>
+    <div class="gift-meta">6 FB · 5 Zalo</div>
+    <a href="https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html" target="_blank" class="btn-open-gift">🔗 Mở Quà</a>
+  </div>
+
+  <div class="sdiv-label">📘 BÀI ĐĂNG FACEBOOK — 6 BÀI</div>
+  <div class="posts-grid">
+
+    <div class="post-card" data-platform="fb" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🔥 Burnout & Bỏ Nghề — Hook nỗi đau #7</span>
+        <span class="pc-num">1/6</span>
+      </div>
+      <div class="pc-body" id="mg-fb1">🔥 70% môi giới BĐS bỏ nghề trong 2 năm đầu.
+
+Không phải vì họ lười. Không phải vì họ thiếu năng lực.
+
+Mà vì họ làm việc không có hệ thống.
+
+Mỗi ngày chạy ads → hết tiền. Gặp khách → không có tài liệu chuẩn. Follow-up → không có script. Đăng bài → không có template.
+
+Nếu bạn đang cảm thấy mệt mỏi sau 3-6 tháng làm môi giới mà chưa chốt được deal nào...
+
+Bạn không cô đơn. Và có cách giải quyết.
+
+Comment "KIT" để tôi gửi cho bạn bộ tài liệu miễn phí nhé 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('mg-fb1',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">💸 Chi Phí Ads — Hook nỗi đau #4</span>
+        <span class="pc-num">2/6</span>
+      </div>
+      <div class="pc-body" id="mg-fb2">💸 Bạn có biết chi phí trung bình để có 1 lead BĐS từ Facebook Ads là bao nhiêu không?
+
+3.000.000đ – 5.000.000đ / lead.
+
+Và tỷ lệ chốt? Trung bình 3-5%.
+
+Nghĩa là để chốt 1 deal, bạn cần 20-30 leads = 60-150 triệu tiền ads.
+
+Trong khi đó, môi giới xây dựng thương hiệu cá nhân và content organic không tốn 1 đồng quảng cáo vẫn có lead đều mỗi tháng.
+
+Bí quyết? Hệ thống — không phải ngân sách.
+
+Like nếu bạn muốn tôi chia sẻ cách làm nhé 👍</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('mg-fb2',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">📞 Follow-up — Hook nỗi đau #5</span>
+        <span class="pc-num">3/6</span>
+      </div>
+      <div class="pc-body" id="mg-fb3">📞 Sự thật mà ít môi giới biết:
+
+Tỷ lệ chốt deal giảm 400% nếu bạn follow-up SAU 5 phút đầu tiên khi khách để lại thông tin.
+
+80% deals chốt ở lần liên hệ thứ 5 trở lên. Nhưng 92% môi giới bỏ cuộc sau lần thứ 4.
+
+Nghĩa là: người chốt được deal không phải là người giỏi hơn — mà là người kiên trì hơn VÀ có script chuẩn.
+
+Bạn đang theo dõi leads của mình như thế nào? Comment bên dưới nhé 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('mg-fb3',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🗂️ Tài Liệu — Hook nỗi đau #1</span>
+        <span class="pc-num">4/6</span>
+      </div>
+      <div class="pc-body" id="mg-fb4">🗂️ Cảnh này có quen không?
+
+Khách hỏi: "Anh/chị có tài liệu về dự án không?"
+Môi giới: "Dạ em gửi file ảnh ạ" [chụp màn hình từ Zalo group]
+
+73% môi giới BĐS không có bộ tài liệu chuyên nghiệp.
+
+Trong khi khách hàng ngày càng thông minh hơn — họ so sánh 3-5 môi giới trước khi quyết định. Ai có tài liệu chuẩn hơn, am hiểu dự án hơn → người đó được chọn.
+
+Tài liệu chuyên nghiệp không phải chi phí — đó là lợi thế cạnh tranh.
+
+Bạn đang dùng tài liệu gì để giới thiệu dự án? 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('mg-fb4',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🏷️ Thương Hiệu — Hook nỗi đau #6</span>
+        <span class="pc-num">5/6</span>
+      </div>
+      <div class="pc-body" id="mg-fb5">🏷️ Khách hàng không mua dự án.
+
+Khách hàng mua người họ TIN.
+
+67% khách hàng tìm kiếm thông tin về môi giới trên mạng TRƯỚC khi gặp mặt.
+
+Nếu họ không tìm thấy gì về bạn — hoặc tìm thấy một fanpage bỏ hoang — cơ hội của bạn giảm đi 60%.
+
+Thương hiệu cá nhân không phải là xa xỉ phẩm. Đó là điều kiện tối thiểu để cạnh tranh trong thị trường 2024-2025.
+
+Bạn đã có landing page cá nhân chưa? Để tôi giúp nhé 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('mg-fb5',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🎁 CTA — Tặng quà & link</span>
+        <span class="pc-num">6/6</span>
+      </div>
+      <div class="pc-body" id="mg-fb6">🎁 Tôi vừa tổng hợp xong bộ nghiên cứu về 7 nỗi đau phổ biến nhất của môi giới BĐS — kèm theo giải pháp cụ thể cho từng vấn đề.
+
+Dữ liệu từ VARS, Vinhomes, và 200+ môi giới thực chiến.
+
+Bao gồm:
+✅ 7 vấn đề khiến 70% môi giới bỏ nghề
+✅ Data thực tế để bạn tự đánh giá vị trí của mình
+✅ Giải pháp cụ thể cho từng vấn đề
+✅ Checklist 12 hành động để thay đổi ngay hôm nay
+
+Miễn phí 100%. Comment "NGHIÊN CỨU" để tôi gửi link nhé 👇
+
+[Link: https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html]</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('mg-fb6',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sdiv" style="margin-top:16px;"></div>
+  <div class="sdiv-label">💬 TIN NHẮN ZALO — 5 MẪU</div>
+  <div class="posts-grid">
+
+    <div class="post-card" data-platform="zalo" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">🤝 Gặp môi giới mới</span>
+        <span class="pc-num">1/5</span>
+      </div>
+      <div class="pc-body" id="mg-z1">Chào [Tên]!
+
+Mình có 1 tài liệu nghiên cứu về những khó khăn phổ biến nhất của môi giới BĐS — kèm giải pháp cụ thể.
+
+Dữ liệu thực tế, không lý thuyết. Đọc 15 phút là hiểu ngay mình đang ở đâu và cần làm gì.
+
+Miễn phí, mình gửi link đây: https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Đọc xong có gì muốn trao đổi nhắn mình nhé 🙂</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('mg-z1',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">🔄 Follow-up sau buổi gặp</span>
+        <span class="pc-num">2/5</span>
+      </div>
+      <div class="pc-body" id="mg-z2">Chào [Tên]!
+
+Hôm qua gặp vui, cảm ơn bạn đã dành thời gian chia sẻ.
+
+Mình gửi bạn link nghiên cứu về 7 vấn đề phổ biến nhất môi giới hay gặp — mình thấy có mấy điểm trùng với những gì mình trao đổi hôm qua 😅
+
+https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Có cái nào bạn đang gặp phải không? Nhắn mình biết để mình chia sẻ thêm nhé!</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('mg-z2',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">👥 Gửi vào group môi giới</span>
+        <span class="pc-num">3/5</span>
+      </div>
+      <div class="pc-body" id="mg-z3">Chào cả nhà!
+
+Mình vừa đọc xong 1 bản nghiên cứu khá hay về những khó khăn phổ biến của môi giới BĐS — có số liệu cụ thể từ VARS và thực tế thị trường.
+
+Có 7 vấn đề chính, mình thấy mình dính ít nhất 3-4 cái 😂
+
+Ai muốn đọc thì mình chia sẻ link, hoàn toàn miễn phí:
+https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Đọc xong comment cảm nhận nhé mọi người!</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('mg-z3',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">❓ Khách hỏi về nghề</span>
+        <span class="pc-num">4/5</span>
+      </div>
+      <div class="pc-body" id="mg-z4">Bạn đang tìm hiểu về nghề môi giới BĐS à?
+
+Mình gửi bạn link này — tổng hợp đầy đủ những thách thức thực tế của nghề, kèm cách giải quyết từng vấn đề.
+
+Đọc trước để biết mình cần chuẩn bị gì nhé:
+https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html
+
+Xong rồi hỏi mình thêm nếu cần 🙂</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('mg-z4',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="mg">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💼 Pitch bộ kit sau quà</span>
+        <span class="pc-num">5/5</span>
+      </div>
+      <div class="pc-body" id="mg-z5">Chào [Tên]!
+
+Bạn đọc bản nghiên cứu 7 nỗi đau xong rồi chứ? Có vấn đề nào bạn thấy mình đang gặp không?
+
+Mình đang có bộ công cụ hoàn chỉnh để giải quyết tất cả những vấn đề đó — từ tài liệu dự án, script, content đến landing page cá nhân.
+
+Mình gửi thêm thông tin chi tiết nếu bạn muốn xem qua nhé?</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('mg-z5',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- GIFT 2: CHỦ SÀN                                   -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="gift-section" id="sec-cs" data-gift="cs">
+  <div class="gift-head cs">
+    <div class="gift-dot"></div>
+    <div class="gift-name">🟣 Quà Tặng: 8 Nỗi Đau Chủ Sàn F1/F2</div>
+    <div class="gift-meta">6 FB · 5 Zalo</div>
+    <a href="https://yen670-oss.github.io/kit-hlx/gift-chu-san.html" target="_blank" class="btn-open-gift">🔗 Mở Quà</a>
+  </div>
+
+  <div class="sdiv-label">📘 BÀI ĐĂNG FACEBOOK — 6 BÀI</div>
+  <div class="posts-grid">
+
+    <div class="post-card" data-platform="fb" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">💰 Dòng Tiền — Áp lực F1</span>
+        <span class="pc-num">1/6</span>
+      </div>
+      <div class="pc-body" id="cs-fb1">💰 Làm F1 Vinhomes: ký quỹ hàng chục tỷ, nhận hoa hồng sau... 2 năm.
+
+Trong 24 tháng đó:
+→ Lãi ngân hàng vẫn chạy
+→ Lương quản lý vẫn trả
+→ Văn phòng vẫn thuê
+→ Ads vẫn phải chạy
+
+Đây là áp lực không ai nói với bạn khi ký hợp đồng đại lý.
+
+Giải pháp? Tối ưu tốc độ bán + tạo nguồn thu phụ từ chính team của mình.
+
+Bạn đang quản lý sàn F1/F2 và đang gặp vấn đề này không? Comment để trao đổi nhé 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('cs-fb1',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🔄 Đào Tạo — Vòng lặp tuyển dụng</span>
+        <span class="pc-num">2/6</span>
+      </div>
+      <div class="pc-body" id="cs-fb2">🔄 Vòng lặp kinh khủng của chủ sàn BĐS:
+
+Tuyển → Đào tạo 2-4 tuần → Môi giới ra deal đầu → Nghỉ việc → Tuyển lại.
+
+Chi phí đào tạo 1 môi giới mới: 5-15 triệu (thời gian + tài liệu + hỗ trợ).
+60% môi giới nghỉ trong 6 tháng đầu.
+
+Bạn không đang vận hành sàn — bạn đang vận hành trường đào tạo miễn phí cho đối thủ.
+
+Giải pháp: Tài liệu chuẩn hóa để môi giới mới tự học được, giảm phụ thuộc vào quản lý.
+
+Ai đang gặp vấn đề này thì like để mình biết nhé 👍</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('cs-fb2',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">📊 KPI — Áp lực chỉ tiêu</span>
+        <span class="pc-num">3/6</span>
+      </div>
+      <div class="pc-body" id="cs-fb3">📊 Sự thật về KPI đại lý phân phối BĐS:
+
+100+ sàn cùng bán 1 dự án.
+Mỗi sàn cam kết 3-5 sản phẩm/tháng với chủ đầu tư.
+Deadline cứ thế mà đến.
+
+Nhưng không phải ai cũng có hệ thống để đạt KPI đó.
+
+Sàn nào có:
+✅ Tài liệu chuyên nghiệp hơn
+✅ Môi giới được đào tạo tốt hơn
+✅ Hệ thống follow-up chuẩn hơn
+
+Sàn đó thắng — không phải sàn có nhiều người hơn.
+
+Bạn đang dùng công cụ gì để hỗ trợ team chốt deal? Comment nhé 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('cs-fb3',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🛠️ Tài Liệu — Chuẩn hóa trình bày</span>
+        <span class="pc-num">4/6</span>
+      </div>
+      <div class="pc-body" id="cs-fb4">🛠️ Câu hỏi cho các chủ sàn:
+
+Nếu tôi hỏi 10 môi giới trong sàn bạn trình bày dự án, tôi sẽ nghe 10 phiên bản khác nhau không?
+
+Nếu có — đó là vấn đề về hệ thống, không phải về con người.
+
+Tài liệu chuẩn hóa:
+→ Giúp môi giới mới đạt chuẩn nhanh hơn 3×
+→ Khách hàng nhận trải nghiệm nhất quán
+→ Chủ sàn không phải giám sát từng buổi tư vấn
+
+Đây là thứ phân biệt sàn chuyên nghiệp và sàn nghiệp dư.
+
+Sàn bạn đang ở level nào? 💬</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('cs-fb4',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">📣 Marketing — Lead organic</span>
+        <span class="pc-num">5/6</span>
+      </div>
+      <div class="pc-body" id="cs-fb5">📣 90% sàn BĐS không có kênh tạo lead organic.
+
+Tất cả đều phụ thuộc vào:
+- Ads Facebook (3-5 triệu/lead)
+- Phát tờ rơi
+- Share bài từ chủ đầu tư
+
+Không có hệ thống → không có lead → không có doanh số → tháng nào cũng căng.
+
+Trong khi đó, sàn có content marketing, landing page riêng, và lead magnet thì lead về đều đặn mà không tốn ads.
+
+Muốn xây hệ thống này cho sàn không? Comment "MUỐN" để mình chia sẻ cụ thể hơn 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('cs-fb5',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🎁 CTA — Tặng nghiên cứu chủ sàn</span>
+        <span class="pc-num">6/6</span>
+      </div>
+      <div class="pc-body" id="cs-fb6">🎁 Tặng miễn phí: Nghiên cứu 8 Nỗi Đau Của Chủ Sàn F1/F2
+
+Vừa hoàn thành bản nghiên cứu về những khó khăn thực tế nhất mà chủ sàn phân phối BĐS đang gặp phải.
+
+Không phải lý thuyết — dữ liệu thực tế từ thị trường.
+
+Bao gồm:
+✅ 8 vấn đề cốt lõi (có data minh chứng)
+✅ So sánh F1 vs F2 chi tiết
+✅ Giải pháp cụ thể cho từng vấn đề
+✅ Gói công cụ bulk cho cả team (chiết khấu đến 45%)
+
+Hoàn toàn miễn phí.
+
+Comment "SÀNG LỌC" hoặc nhắn tin mình để nhận link nhé 👇
+
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('cs-fb6',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sdiv" style="margin-top:16px;"></div>
+  <div class="sdiv-label">💬 TIN NHẮN ZALO — 5 MẪU</div>
+  <div class="posts-grid">
+
+    <div class="post-card" data-platform="zalo" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Tiếp cận lạnh chủ sàn</span>
+        <span class="pc-num">1/5</span>
+      </div>
+      <div class="pc-body" id="cs-z1">Chào anh/chị [Tên]!
+
+Em có bản nghiên cứu tổng hợp 8 vấn đề phổ biến nhất mà chủ sàn F1/F2 đang gặp phải — kèm giải pháp cụ thể cho từng vấn đề.
+
+Hoàn toàn miễn phí, em gửi link đây ạ:
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Anh/chị đọc qua xem có vấn đề nào đang gặp phải không, em trao đổi thêm ạ 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('cs-z1',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Follow-up sau gặp</span>
+        <span class="pc-num">2/5</span>
+      </div>
+      <div class="pc-body" id="cs-z2">Chào anh/chị [Tên]!
+
+Cảm ơn anh/chị đã dành thời gian trao đổi hôm qua.
+
+Em gửi anh/chị bản tổng hợp về những thách thức của chủ sàn — em thấy một vài điểm mình đề cập hôm qua có trong đây ạ:
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Có 8 vấn đề phổ biến, mỗi vấn đề em đều có giải pháp cụ thể. Anh/chị xem mình đang gặp vấn đề nào nhiều nhất rồi mình trao đổi ạ.</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('cs-z2',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Pitch gói bulk cho sàn</span>
+        <span class="pc-num">3/5</span>
+      </div>
+      <div class="pc-body" id="cs-z3">Chào anh/chị [Tên]!
+
+Em có tài liệu nghiên cứu về 8 nỗi đau phổ biến của chủ sàn F1/F2 — đặc biệt phần về đào tạo và công cụ cho team em nghĩ anh/chị sẽ thấy thú vị:
+
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Em đang có gói công cụ bulk cho team từ 5 người trở lên, chiết khấu đến 45%. Đọc xong anh/chị muốn tìm hiểu thêm thì nhắn em nhé ạ 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('cs-z3',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Gửi vào group chủ sàn</span>
+        <span class="pc-num">4/5</span>
+      </div>
+      <div class="pc-body" id="cs-z4">Chào các anh/chị!
+
+Em vừa tổng hợp nghiên cứu về 8 khó khăn thực tế của chủ sàn phân phối BĐS — có số liệu cụ thể về dòng tiền, đào tạo, KPI và marketing.
+
+Miễn phí 100%, ai muốn đọc thì em gửi link ạ:
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Mong các anh/chị góp ý thêm vì em đang nghiên cứu để hỗ trợ tốt hơn cho các sàn BĐS ạ 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('cs-z4',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="cs">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Khi khách hỏi giải pháp</span>
+        <span class="pc-num">5/5</span>
+      </div>
+      <div class="pc-body" id="cs-z5">Chào anh/chị [Tên]!
+
+Để anh/chị hiểu rõ hơn về vấn đề mình đang gặp trước khi em giới thiệu giải pháp, em gửi anh/chị bản phân tích này trước ạ:
+
+https://yen670-oss.github.io/kit-hlx/gift-chu-san.html
+
+Có 8 vấn đề phổ biến, em đều có giải pháp cụ thể. Anh/chị xem mình đang gặp vấn đề nào nhiều nhất rồi mình trao đổi ạ 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('cs-z5',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- GIFT 3: TRAINING ROI                              -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="gift-section" id="sec-roi" data-gift="roi">
+  <div class="gift-head roi">
+    <div class="gift-dot"></div>
+    <div class="gift-name">🟠 Quà Tặng: Báo Cáo ROI Đào Tạo & Công Cụ</div>
+    <div class="gift-meta">6 FB · 5 Zalo</div>
+    <a href="https://yen670-oss.github.io/kit-hlx/gift-training-roi.html" target="_blank" class="btn-open-gift">🔗 Mở Quà</a>
+  </div>
+
+  <div class="sdiv-label">📘 BÀI ĐĂNG FACEBOOK — 6 BÀI</div>
+  <div class="posts-grid">
+
+    <div class="post-card" data-platform="fb" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">📈 IBM ROI — $1 đào tạo → $30</span>
+        <span class="pc-num">1/6</span>
+      </div>
+      <div class="pc-body" id="roi-fb1">📈 IBM nghiên cứu và tìm ra:
+
+Mỗi $1 đầu tư vào đào tạo nhân viên → thu về $30.
+
+ROI 2,284%.
+
+Không phải lý thuyết — đây là kết quả từ dữ liệu thực của tập đoàn 300,000+ nhân viên.
+
+Gallup 2024 bổ sung: Nhân viên thiếu gắn kết gây thiệt hại $8.8 NGHÌN TỶ đô cho nền kinh tế toàn cầu mỗi năm.
+
+Câu hỏi: Team của bạn đang được đầu tư đúng mức chưa?
+
+Bạn đang chi bao nhiêu % doanh thu cho đào tạo? 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('roi-fb1',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🏆 Fortune 100 — 8.5x doanh thu</span>
+        <span class="pc-num">2/6</span>
+      </div>
+      <div class="pc-body" id="roi-fb2">📊 Tại sao Fortune 100 tạo ra 8.5× doanh thu so với công ty trung bình?
+
+Doanh thu/nhân viên trung bình toàn cầu: $104,000/người/năm
+Doanh thu/nhân viên Fortune 100: $884,000/người/năm
+
+Khoảng cách 8.5 lần không đến từ may mắn.
+
+Nó đến từ:
+→ Hệ thống đào tạo bài bản và liên tục
+→ Công cụ chuyên nghiệp được chuẩn hóa cho toàn bộ team
+→ Quy trình được tối ưu dựa trên dữ liệu
+
+Kết luận: Người tốt + hệ thống tốt + công cụ tốt = kết quả tốt.
+Người tốt + không có hệ thống = kết quả may rủi.
+
+Bạn muốn team của mình tiến gần đến con số nào? 💬</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('roi-fb2',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🔢 Scale Effect — 1 tỷ/năm bị đốt</span>
+        <span class="pc-num">3/6</span>
+      </div>
+      <div class="pc-body" id="roi-fb3">🔢 Bài toán đơn giản cho các nhà quản lý:
+
+Team 50 người.
+Mỗi người mất 25 phút/ngày vì thiếu công cụ phù hợp.
+= 1,250 phút/ngày = 20+ giờ lãng phí.
+
+Trong 1 năm: 5,000+ giờ.
+Nếu cost/giờ = 200,000đ → Bạn đang "đốt" 1 tỷ đồng/năm chỉ vì thiếu công cụ.
+
+McKinsey: Công cụ số phù hợp tăng năng suất 25%.
+AI-augmented tools: tăng 40%.
+
+Đầu tư 200tr vào đào tạo + công cụ cho team 50 người → ROI ước tính 250% trong năm đầu.
+
+Bạn đã tính chưa? 🤔</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('roi-fb3',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🏠 BĐS Specific — Chốt deal nhanh 3x</span>
+        <span class="pc-num">4/6</span>
+      </div>
+      <div class="pc-body" id="roi-fb4">🏠 Trong thị trường BĐS cạnh tranh khốc liệt:
+
+Môi giới được đào tạo bài bản:
+→ Chốt deal nhanh hơn 3×
+→ Giữ chân khách hàng tốt hơn 60%
+→ Tỷ lệ chốt sau buổi gặp đầu tăng 28%
+
+Môi giới được trang bị công cụ chuyên nghiệp:
+→ Thời gian tư vấn giảm 40% (chuẩn bị nhanh hơn)
+→ Khách hàng tin tưởng hơn vì thấy sự chuyên nghiệp
+→ Tỷ lệ referral cao hơn 2× (khách giới thiệu khách)
+
+Sự khác biệt giữa sàn tốt và sàn xuất sắc nằm ở HỆ THỐNG — không phải số lượng nhân viên.
+
+Bạn đang đầu tư gì vào team của mình? 👇</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('roi-fb4',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">⚠️ Chi phí ẩn — $438B thiệt hại</span>
+        <span class="pc-num">5/6</span>
+      </div>
+      <div class="pc-body" id="roi-fb5">⚠️ Con số Gallup không ai muốn thừa nhận:
+
+$8.8 nghìn tỷ đô — thiệt hại toàn cầu mỗi năm do nhân viên thiếu gắn kết.
+
+Chỉ riêng tại Việt Nam ước tính: $438 tỷ đô/năm.
+
+Nguyên nhân số 1 khiến nhân viên mất gắn kết:
+→ Thiếu cơ hội học hỏi và phát triển
+→ Không được trang bị công cụ phù hợp
+→ Cảm thấy không được đầu tư
+
+Nhân viên được đào tạo tốt: 87% có xu hướng gắn bó lâu dài.
+Nhân viên không được đào tạo: 40% sẽ rời đi trong năm đầu.
+
+Bạn đang chọn chi phí nào? 💬</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('roi-fb5',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="fb" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform fb">FB</span>
+        <span class="pc-tag">🎁 CTA — Tặng báo cáo ROI</span>
+        <span class="pc-num">6/6</span>
+      </div>
+      <div class="pc-body" id="roi-fb6">🎁 Tặng miễn phí: Báo cáo ROI Đào Tạo & Công Cụ — 20+ Nghiên Cứu Toàn Cầu
+
+Tổng hợp từ IBM, Gallup, McKinsey, ATD, Deloitte và Fortune 100.
+
+Bao gồm:
+✅ ROI thực tế của đào tạo (số liệu cụ thể từ các tập đoàn lớn)
+✅ Chi phí ẩn khi KHÔNG đào tạo ($438B thiệt hại toàn cầu/năm)
+✅ Tác động của công cụ số đến năng suất (+25% đến +40%)
+✅ Scale Effect: ROI theo team 10 → 1,000+ người
+✅ Ứng dụng thực tế trong ngành BĐS Việt Nam
+
+Miễn phí 100%.
+
+Link: https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Chia sẻ cho đồng nghiệp nếu thấy hữu ích nhé 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp fb-btn" onclick="cp('roi-fb6',this)">📋 Copy FB Post</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sdiv" style="margin-top:16px;"></div>
+  <div class="sdiv-label">💬 TIN NHẮN ZALO — 5 MẪU</div>
+  <div class="posts-grid">
+
+    <div class="post-card" data-platform="zalo" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Gửi quản lý / trưởng nhóm</span>
+        <span class="pc-num">1/5</span>
+      </div>
+      <div class="pc-body" id="roi-z1">Chào anh/chị [Tên]!
+
+Em có tổng hợp báo cáo về ROI của đào tạo nhân viên và công cụ chuyên nghiệp — dữ liệu từ IBM, Gallup, McKinsey.
+
+Có những con số khá bất ngờ về chi phí thực sự khi thiếu đào tạo và hiệu ứng quy mô theo team size.
+
+Em gửi anh/chị đây ạ (miễn phí):
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Anh/chị đọc xong có gì muốn trao đổi nhắn em nhé ạ 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('roi-z1',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Pitch bộ kit cho sàn</span>
+        <span class="pc-num">2/5</span>
+      </div>
+      <div class="pc-body" id="roi-z2">Chào anh/chị [Tên]!
+
+Trước khi giới thiệu bộ công cụ, em muốn gửi anh/chị báo cáo này để xem thử ROI khi trang bị công cụ chuyên nghiệp cho team:
+
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+IBM nghiên cứu: mỗi $1 đầu tư đào tạo thu về $30. Phần "Scale Effect" cho team 50 người cũng khá thú vị ạ.
+
+Anh/chị đọc xong mình nói chuyện tiếp nhé — em sẽ tính cụ thể ROI cho team của anh/chị ạ.</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('roi-z2',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Follow-up chưa chốt</span>
+        <span class="pc-num">3/5</span>
+      </div>
+      <div class="pc-body" id="roi-z3">Chào anh/chị [Tên]!
+
+Em gửi thêm tài liệu này để anh/chị có thêm căn cứ khi cân nhắc:
+
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Phần "Scale Effect" (team từ 10-200 người) có con số cụ thể về ROI theo quy mô — em nghĩ phù hợp với tình huống của anh/chị.
+
+Anh/chị có câu hỏi gì thêm thì cứ nhắn em ạ 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('roi-z3',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Gửi vào group quản lý</span>
+        <span class="pc-num">4/5</span>
+      </div>
+      <div class="pc-body" id="roi-z4">Chào mọi người!
+
+Em tổng hợp báo cáo về ROI đào tạo nhân viên từ 20+ nghiên cứu toàn cầu — có số liệu từ IBM, Gallup, McKinsey, ATD.
+
+Có con số khá bất ngờ: Gallup 2024 tính ra $438 tỷ đô thiệt hại/năm toàn cầu chỉ vì nhân viên thiếu gắn kết. Và IBM: $30 thu về cho mỗi $1 đào tạo.
+
+Link miễn phí đây ạ:
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Anh chị đọc xong góp ý thêm nhé!</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('roi-z4',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-platform="zalo" data-gift="roi">
+      <div class="pc-head">
+        <span class="pc-platform zalo">ZALO</span>
+        <span class="pc-tag">💬 Khi khách hỏi hiệu suất team</span>
+        <span class="pc-num">5/5</span>
+      </div>
+      <div class="pc-body" id="roi-z5">Chào anh/chị!
+
+Để trả lời câu hỏi về cách tăng hiệu suất team, em gửi anh/chị bản báo cáo này trước:
+
+https://yen670-oss.github.io/kit-hlx/gift-training-roi.html
+
+Phần 3 (Công cụ chuyên nghiệp) và Phần 4 (Scale Effect) trả lời trực tiếp câu hỏi của anh/chị — với số liệu cụ thể chứ không phải cảm tính ạ.
+
+Xong rồi mình nói chuyện về giải pháp cụ thể nhé ạ 🙏</div>
+      <div class="pc-footer">
+        <button class="btn-cp zalo-btn" onclick="cp('roi-z5',this)">📋 Copy Tin Zalo</button>
+        <button class="btn-expand" onclick="expand(this)">Xem đầy đủ ↓</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ── COPY ──
+function cp(id,btn){
+  const txt=document.getElementById(id).innerText.trim();
+  const isZalo=btn.classList.contains('zalo-btn');
+  const orig=isZalo?'📋 Copy Tin Zalo':'📋 Copy FB Post';
+  navigator.clipboard.writeText(txt).then(done).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done();
+  });
+  function done(){btn.textContent='✅ Đã copy!';btn.classList.add('ok');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);}
+}
+
+// ── EXPAND ──
+function expand(btn){
+  const body=btn.closest('.pc-footer').previousElementSibling;
+  const expanded=body.classList.toggle('expanded');
+  btn.textContent=expanded?'Thu gọn ↑':'Xem đầy đủ ↓';
+}
+
+// ── FILTER GIFT ──
+let curGift='all', curPlatform='all';
+function filterGift(g,btn){
+  curGift=g;
+  document.querySelectorAll('.filter-row .fpill').forEach(b=>b.classList.remove('a-all','a-mg','a-cs','a-roi'));
+  btn.classList.add(g==='all'?'a-all':'a-'+g);
+  applyFilters();
+}
+function filterPlatform(p,btn){
+  curPlatform=p;
+  document.querySelectorAll('.filter-row .ppill').forEach(b=>b.classList.remove('p-all','p-fb','p-zalo'));
+  btn.classList.add(p==='all'?'p-all':'p-'+p);
+  applyFilters();
+}
+function applyFilters(){
+  // sections
+  document.querySelectorAll('.gift-section').forEach(s=>{
+    const g=s.dataset.gift;
+    s.classList.toggle('hidden', curGift!=='all' && g!==curGift);
+  });
+  // cards
+  document.querySelectorAll('.post-card').forEach(c=>{
+    const pg=c.dataset.gift, pp=c.dataset.platform;
+    const gOk=curGift==='all'||pg===curGift;
+    const pOk=curPlatform==='all'||pp===curPlatform;
+    c.classList.toggle('hidden',!(gOk&&pOk));
+  });
+}
+</script>
+</body>
+</html>
