@@ -174,9 +174,24 @@ footer{text-align:center;padding:20px;font-size:11px;color:rgba(232,223,200,.25)
 
 <div class="wrap">
 
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- CARD: QUÀ TẶNG — link gửi khách           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div style="background:linear-gradient(135deg,#1a0a0a,#2a1010);border:1px solid rgba(192,57,43,.35);border-radius:16px;padding:20px 22px;margin-bottom:28px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#ff8a80;margin-bottom:12px;">🎁 QUÀ TẶNG — GỬI LINK NÀY CHO KHÁCH</div>
+    <div style="font-size:17px;font-weight:700;color:#e8dfc8;margin-bottom:6px;">10 Tip Xử Lý Từ Chối Hiệu Quả</div>
+    <div style="font-size:13px;color:rgba(232,223,200,.6);margin-bottom:16px;line-height:1.6;">
+      10 tình huống thực chiến · Ý nghĩa ẩn từng câu từ chối · Script phản hồi copy-paste · 5 hội thoại Zalo mẫu
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div id="gift-link-box" style="flex:1;min-width:200px;background:rgba(0,0,0,.4);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:10px 14px;font-size:12.5px;color:var(--gl);word-break:break-all;font-family:monospace;">https://yen670-oss.github.io/kit-hlx/gift-xu-ly-tu-choi.html</div>
+      <button class="btn-copy" onclick="cpLink('gift-link-box',this)" style="white-space:nowrap;">📋 Copy Link Quà</button>
+      <a href="https://yen670-oss.github.io/kit-hlx/gift-xu-ly-tu-choi.html" target="_blank" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#e8dfc8;border-radius:8px;padding:9px 16px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;">👁 Xem Quà →</a>
+    </div>
+  </div>
+
   <div class="guide-bar">
-    💡 <strong>Cách dùng:</strong> Copy bài → Dán vào FB → Đăng → Ghim comment đầu tiên với link:
-    <code style="background:rgba(0,0,0,.3);padding:2px 8px;border-radius:6px;font-size:12px;color:var(--gl)">https://yen670-oss.github.io/kit-hlx/gift-xu-ly-tu-choi.html</code>
+    💡 <strong>Quy trình:</strong> Chọn 1 bài FB bên dưới → Copy → Dán vào Facebook → Đăng → Ghim comment với link quà trên
   </div>
 
   <div class="tips-box">
@@ -500,6 +515,20 @@ Bao gồm:
 <footer>BDS Mastery Kit · Bài FB Quảng Bá Quà Tặng #3 · Copy-paste dùng ngay</footer>
 
 <script>
+function cpLink(id,btn){
+  const txt=document.getElementById(id).innerText.trim();
+  const orig=btn.textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=txt;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✅ Đã copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  });
+}
 function cp(id,btn){
   const el=document.getElementById(id);
   const txt=el.innerText.trim();
