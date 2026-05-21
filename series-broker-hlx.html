@@ -141,12 +141,49 @@ body{background:var(--bg);color:#e8dfc8;font-family:'Be Vietnam Pro',sans-serif;
 .guide{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:14px 18px;margin-bottom:28px;font-size:13px;color:rgba(232,223,200,.8);line-height:1.7;}
 .guide strong{color:var(--gl);}
 
+/* IMAGE CARD */
+.img-wrap{margin-bottom:10px;}
+.img-label{font-size:11px;color:rgba(232,223,200,.4);font-weight:600;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.img-label span{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:2px 10px;}
+.img-card{
+  width:100%;aspect-ratio:1200/630;border-radius:14px;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;justify-content:flex-end;
+  border:1px solid rgba(201,168,76,.2);
+}
+.ic-bg{position:absolute;inset:0;z-index:0;}
+.ic-content{position:relative;z-index:1;padding:clamp(16px,4%,32px);}
+.ic-series{font-size:clamp(9px,1.2vw,12px);font-weight:700;letter-spacing:2px;color:rgba(201,168,76,.8);margin-bottom:8px;}
+.ic-num{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,64px);font-weight:900;line-height:1;color:var(--gl);opacity:.15;position:absolute;top:clamp(12px,3%,24px);right:clamp(16px,3%,32px);}
+.ic-headline{font-family:'Playfair Display',serif;font-size:clamp(15px,2.8vw,28px);font-weight:700;line-height:1.25;color:#fff;margin-bottom:10px;max-width:70%;}
+.ic-sub{font-size:clamp(10px,1.4vw,14px);color:rgba(232,223,200,.65);line-height:1.5;max-width:65%;}
+.ic-stat{display:flex;gap:clamp(10px,2%,20px);margin-top:clamp(10px,2%,18px);}
+.ic-stat-box{background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.3);border-radius:8px;padding:clamp(6px,1%,10px) clamp(10px,2%,16px);}
+.ic-stat-num{font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,24px);font-weight:700;color:var(--gl);display:block;}
+.ic-stat-label{font-size:clamp(8px,1vw,11px);color:rgba(232,223,200,.5);}
+.ic-brand{position:absolute;top:clamp(12px,2%,20px);left:clamp(16px,3%,28px);font-size:clamp(9px,1.1vw,12px);font-weight:700;letter-spacing:1px;color:rgba(201,168,76,.6);display:flex;align-items:center;gap:6px;}
+.ic-brand::before{content:'🏠';font-size:clamp(12px,1.5vw,16px);}
+.ic-quote{font-size:clamp(11px,1.6vw,16px);color:rgba(232,223,200,.85);font-style:italic;line-height:1.6;max-width:72%;border-left:3px solid var(--gold);padding-left:12px;margin-top:8px;}
+.ic-steps{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+.ic-step{font-size:clamp(9px,1.3vw,13px);color:rgba(232,223,200,.8);display:flex;align-items:center;gap:7px;}
+.ic-step::before{content:'→';color:var(--gold);font-weight:700;flex-shrink:0;}
+.btn-screenshot{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
+  color:rgba(232,223,200,.7);border-radius:8px;padding:6px 14px;
+  font-size:11px;font-weight:600;cursor:pointer;margin-top:8px;
+  font-family:'Be Vietnam Pro',sans-serif;transition:.15s;display:inline-block;
+}
+.btn-screenshot:hover{background:rgba(255,255,255,.1);color:#fff;}
+
 footer{text-align:center;padding:20px;font-size:11px;color:rgba(232,223,200,.2);border-top:1px solid rgba(255,255,255,.05);}
 
 @media(max-width:520px){
   .post-header{flex-direction:column;align-items:flex-start;}
   .btn-copy{align-self:flex-end;}
   .roadmap-step{min-width:70px;}
+  .ic-headline{max-width:85%;}
+  .ic-sub{max-width:85%;}
+  .ic-quote{max-width:85%;}
+  .ic-steps{max-width:85%;}
 }
 </style>
 </head>
@@ -218,6 +255,27 @@ footer{text-align:center;padding:20px;font-size:11px;color:rgba(232,223,200,.2);
 
   <!-- ══════════════════ TUẦN 1 ══════════════════ -->
   <div class="week-head"><span class="week-badge w1">📅 TUẦN 1 — MINDSET & FOUNDATION</span></div>
+
+  <!-- BÀI 1 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#071525 0%,#1B3A6B 50%,#0a2a10 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.12),transparent 55%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">1</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 1 / 8 · TUẦN 1 · MINDSET</div>
+        <div class="ic-headline">Hàng chục nghìn môi giới đổ về HLX.<br>Khách chọn ai?</div>
+        <div class="ic-sub">Người được biết đến · được tin tưởng · được nhớ đến đúng lúc</div>
+        <div class="ic-stat">
+          <div class="ic-stat-box"><span class="ic-stat-num">10K+</span><span class="ic-stat-label">Môi giới cạnh tranh</span></div>
+          <div class="ic-stat-box"><span class="ic-stat-num">1</span><span class="ic-stat-label">Người khách chọn</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+  </div>
 
   <!-- BÀI 1 -->
   <div class="post-card">
@@ -295,6 +353,27 @@ Follow để không bỏ lỡ bài nào.
       <span class="chip">Pillar: Mindset</span>
       <span class="chip">CTA: Follow</span>
     </div>
+  </div>
+
+  <!-- BÀI 2 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#0a1a0a 0%,#1a3a1a 45%,#0d1b2a 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 70%,rgba(39,174,96,.12),transparent 55%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">2</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 2 / 8 · TUẦN 1 · FOUNDATION</div>
+        <div class="ic-headline">500 môi giới cùng bán HLX.<br>Tại sao khách chọn bạn?</div>
+        <div class="ic-steps">
+          <div class="ic-step">Bạn phục vụ ai?</div>
+          <div class="ic-step">Bạn giỏi gì hơn người khác?</div>
+          <div class="ic-step">Người ta nhớ bạn vì điều gì?</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
   </div>
 
   <!-- BÀI 2 -->
@@ -388,6 +467,28 @@ Comment câu của bạn bên dưới — tôi sẽ góp ý.
   <!-- ══════════════════ TUẦN 2 ══════════════════ -->
   <div class="week-head"><span class="week-badge w2">📅 TUẦN 2 — CHỌN NGÁCH & NỘI DUNG</span></div>
 
+  <!-- BÀI 3 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#1a0a2e 0%,#2d1060 50%,#0d1b2a 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(142,68,173,.18),transparent 55%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">3</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 3 / 8 · TUẦN 2 · FOUNDATION</div>
+        <div class="ic-headline">Bán cho tất cả mọi người<br>= Không bán được cho ai.</div>
+        <div class="ic-sub" style="margin-top:10px;">3 ngách tiềm năng tại HLX</div>
+        <div class="ic-steps">
+          <div class="ic-step">🏠 Ngách ở thực — Gia đình, an cư</div>
+          <div class="ic-step">📈 Ngách đầu tư — Dòng tiền cho thuê</div>
+          <div class="ic-step">🤝 Ngách môi giới — Hợp tác bulk</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+  </div>
+
   <!-- BÀI 3 -->
   <div class="post-card">
     <div class="post-header">
@@ -452,6 +553,29 @@ Bạn đang nhắm đến ngách nào? Comment bên dưới.
       <span class="chip">Pillar: Foundation</span>
       <span class="chip">CTA: Comment ngách</span>
     </div>
+  </div>
+
+  <!-- BÀI 4 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#0a1a2e 0%,#1a3a5a 50%,#0a2a1a 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(22,160,133,.12),transparent 55%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">4</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 4 / 8 · TUẦN 2 · CONTENT SYSTEM</div>
+        <div class="ic-headline">5 nguồn nội dung vô tận<br>cho broker HLX</div>
+        <div class="ic-steps">
+          <div class="ic-step">Câu hỏi khách hỏi hôm nay</div>
+          <div class="ic-step">Điều bạn học được trong tuần</div>
+          <div class="ic-step">Hậu trường công việc</div>
+          <div class="ic-step">Câu chuyện thực tế deal</div>
+          <div class="ic-step">Thông tin thị trường HLX</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
   </div>
 
   <!-- BÀI 4 -->
@@ -541,6 +665,28 @@ Bạn đang dùng nguồn nào nhiều nhất?
   <!-- ══════════════════ TUẦN 3 ══════════════════ -->
   <div class="week-head"><span class="week-badge w3">📅 TUẦN 3 — HỆ THỐNG & NIỀM TIN</span></div>
 
+  <!-- BÀI 5 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#1a1a0a 0%,#3a3a10 45%,#0d1b2a 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(201,168,76,.15),transparent 55%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">5</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 5 / 8 · TUẦN 3 · CONTENT SYSTEM</div>
+        <div class="ic-headline">90 phút Chủ nhật.<br>Đủ content cả tuần.</div>
+        <div class="ic-stat">
+          <div class="ic-stat-box"><span class="ic-stat-num">3</span><span class="ic-stat-label">Bài/tuần</span></div>
+          <div class="ic-stat-box"><span class="ic-stat-num">12</span><span class="ic-stat-label">Bài/tháng</span></div>
+          <div class="ic-stat-box"><span class="ic-stat-num">144</span><span class="ic-stat-label">Bài/năm</span></div>
+        </div>
+        <div class="ic-sub" style="margin-top:10px;">Batch 1 lần · Lên lịch tự động · Không lo "đăng gì hôm nay"</div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+  </div>
+
   <!-- BÀI 5 -->
   <div class="post-card">
     <div class="post-header">
@@ -615,6 +761,28 @@ Ai muốn template lịch đăng bài sẵn — comment "LỊCH" tôi gửi ngay
       <span class="chip">Pillar: Content System</span>
       <span class="chip gold">Lead capture: comment "LỊCH"</span>
     </div>
+  </div>
+
+  <!-- BÀI 6 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#0a1525 0%,#1B3A6B 40%,#1a0a2e 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 75% 60%,rgba(142,68,173,.15),transparent 50%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">6</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 6 / 8 · TUẦN 3 · COMMUNITY</div>
+        <div class="ic-headline">Niềm tin không xây được<br>bằng quảng cáo.</div>
+        <div class="ic-steps">
+          <div class="ic-step">🔍 Transparency — Chia sẻ thật</div>
+          <div class="ic-step">📊 Expertise — Chứng minh bạn biết hơn</div>
+          <div class="ic-step">🏆 Social Proof — Để khách nói thay</div>
+          <div class="ic-step">🙋 Consistency — Xuất hiện đều đặn</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
   </div>
 
   <!-- BÀI 6 -->
@@ -694,6 +862,27 @@ Bạn không cần nổi tiếng. Bạn chỉ cần được nhớ đến đúng
   <!-- ══════════════════ TUẦN 4 ══════════════════ -->
   <div class="week-head"><span class="week-badge w4">📅 TUẦN 4 — CHUYỂN ĐỔI & HỆ THỐNG</span></div>
 
+  <!-- BÀI 7 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#1a0a0a 0%,#3a1010 45%,#1a1a0a 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 50%,rgba(192,57,43,.15),transparent 55%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">7</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 7 / 8 · TUẦN 4 · CONVERSION</div>
+        <div class="ic-headline">Nhiều like, ít deal —<br>bạn đang thiếu bước này.</div>
+        <div class="ic-steps">
+          <div class="ic-step">Attract → Capture → Nurture</div>
+          <div class="ic-step">Offer → Close</div>
+        </div>
+        <div class="ic-quote">Hầu hết môi giới nhảy thẳng từ bước 1 sang bước 5. Bỏ qua 2–4 = bỏ qua phần lớn doanh thu.</div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+  </div>
+
   <!-- BÀI 7 -->
   <div class="post-card">
     <div class="post-header">
@@ -770,6 +959,29 @@ Nếu chưa có — đó là việc cần làm ngay tuần này.
       <span class="chip">Pillar: Conversion</span>
       <span class="chip">CTA: Comment hoặc inbox</span>
     </div>
+  </div>
+
+  <!-- BÀI 8 — IMAGE -->
+  <div class="img-wrap">
+    <div class="img-label">🖼 Ảnh đăng kèm — <span>Screenshot để dùng</span></div>
+    <div class="img-card">
+      <div class="ic-bg" style="background:linear-gradient(135deg,#071525 0%,#1B3A6B 35%,#3a2a0a 100%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 65% 35%,rgba(201,168,76,.15),transparent 50%);z-index:0;"></div>
+      <div class="ic-brand">BDS Mastery Kit · #BrokerHLX</div>
+      <div class="ic-num">8</div>
+      <div class="ic-content">
+        <div class="ic-series">BÀI 8 / 8 · TUẦN 4 · HỆ THỐNG</div>
+        <div class="ic-headline">Hệ thống tạo khách hàng —<br>không phải may rủi.</div>
+        <div class="ic-steps">
+          <div class="ic-step">📌 Định vị rõ</div>
+          <div class="ic-step">📌 Content đều đặn · 3 bài/tuần</div>
+          <div class="ic-step">📌 Quà tặng lấy thông tin khách</div>
+          <div class="ic-step">📌 Phễu nuôi dưỡng Zalo/inbox</div>
+          <div class="ic-step">📌 Lịch gặp khách thật hàng tuần</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
   </div>
 
   <!-- BÀI 8 -->
