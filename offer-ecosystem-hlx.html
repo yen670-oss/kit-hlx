@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HLX Ecosystem Offer — Value Ladder 3 Tầng</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1b2a;--navy:#1B3A6B;--nd:#102340;
+  --gold:#C9A84C;--gl:#E2C06A;--glf:#F5E09A;
+  --kit:#27ae60;--kh:#9b59b6;--mt:#e67e22;--vip:#e74c3c;
+  --card:rgba(255,255,255,.04);--border:rgba(201,168,76,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:#e8e0d0;min-height:100vh;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060f1a,#0d1b2a,#1a2a4a);padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.12),transparent);}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,44px);color:#fff;line-height:1.2;margin-bottom:14px;position:relative;}
+.hero h1 span{color:var(--gl);}
+.hero p{font-size:15px;color:rgba(255,255,255,.6);max-width:600px;margin:0 auto 28px;line-height:1.7;position:relative;}
+.hero-eq{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:12px;padding:14px 24px;font-size:13px;color:rgba(255,255,255,.8);}
+.hero-eq strong{color:var(--gl);}
+.hero-eq span{color:rgba(255,255,255,.3);font-size:18px;}
+
+/* LADDER VISUAL */
+.ladder{padding:36px 20px;max-width:860px;margin:0 auto;}
+.ladder-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--gl);text-align:center;margin-bottom:28px;}
+.ladder-wrap{display:flex;flex-direction:column;gap:8px;}
+.rung{display:grid;grid-template-columns:120px 1fr 120px;align-items:center;gap:12px;padding:16px 20px;border-radius:12px;border:1px solid;transition:.2s;}
+.rung.r-free{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.1);}
+.rung.r-kit{background:rgba(39,174,96,.08);border-color:rgba(39,174,96,.25);}
+.rung.r-kh{background:rgba(155,89,182,.08);border-color:rgba(155,89,182,.25);}
+.rung.r-mt{background:rgba(230,126,34,.08);border-color:rgba(230,126,34,.25);}
+.rung.r-vip{background:rgba(231,76,60,.08);border-color:rgba(231,76,60,.25);}
+.rung-price{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;text-align:center;}
+.rung.r-free .rung-price{color:#aaa;}
+.rung.r-kit .rung-price{color:var(--kit);}
+.rung.r-kh .rung-price{color:var(--kh);}
+.rung.r-mt .rung-price{color:var(--mt);}
+.rung.r-vip .rung-price{color:var(--vip);}
+.rung-mid h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+.rung-mid p{font-size:12px;color:rgba(255,255,255,.5);}
+.rung-conv{font-size:11px;color:rgba(255,255,255,.4);text-align:right;line-height:1.5;}
+.rung-conv strong{display:block;font-size:13px;color:rgba(255,255,255,.7);}
+.arrow-down{text-align:center;color:var(--gold);font-size:20px;opacity:.5;}
+
+/* TABS */
+.tabs{max-width:900px;margin:0 auto;padding:0 20px 60px;}
+.tab-nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 0 16px;}
+.tab-nav::-webkit-scrollbar{display:none;}
+.tab-btn{flex:none;font-size:12px;font-weight:700;padding:8px 20px;border-radius:20px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:.2s;font-family:inherit;white-space:nowrap;}
+.tab-btn.ak{background:rgba(39,174,96,.2);border-color:rgba(39,174,96,.5);color:#5dde90;}
+.tab-btn.ak2{background:rgba(155,89,182,.2);border-color:rgba(155,89,182,.5);color:#c97de8;}
+.tab-btn.ak3{background:rgba(230,126,34,.2);border-color:rgba(230,126,34,.5);color:#f0a060;}
+.tab-btn.ak4{background:rgba(231,76,60,.2);border-color:rgba(231,76,60,.5);color:#f08070;}
+.tab-btn.ak5{background:rgba(201,168,76,.2);border-color:rgba(201,168,76,.5);color:var(--gl);}
+.panel{display:none;}.panel.active{display:block;}
+
+/* OFFER CARD */
+.offer-hero{border-radius:20px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden;}
+.offer-hero.kit-bg{background:linear-gradient(135deg,#0a2a15,#145a2a,#1a3a20);}
+.offer-hero.kh-bg{background:linear-gradient(135deg,#1a0a2e,#3b1060,#1e0a35);}
+.offer-hero.mt-bg{background:linear-gradient(135deg,#2a1505,#6b3a10,#3a1a05);}
+.offer-hero.vip-bg{background:linear-gradient(135deg,#2a0505,#6b1010,#3a0505);}
+.offer-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+.kit-badge{background:rgba(39,174,96,.25);color:#5dde90;border:1px solid rgba(39,174,96,.4);}
+.kh-badge{background:rgba(155,89,182,.25);color:#c97de8;border:1px solid rgba(155,89,182,.4);}
+.mt-badge{background:rgba(230,126,34,.25);color:#f0a060;border:1px solid rgba(230,126,34,.4);}
+.vip-badge{background:rgba(231,76,60,.25);color:#f08070;border:1px solid rgba(231,76,60,.4);}
+.offer-hero h2{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,30px);color:#fff;margin-bottom:8px;}
+.offer-hero p{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;max-width:580px;}
+.price-box{display:inline-flex;align-items:baseline;gap:10px;background:rgba(0,0,0,.3);border-radius:12px;padding:16px 24px;margin-top:18px;}
+.price-orig{font-size:16px;color:rgba(255,255,255,.35);text-decoration:line-through;}
+.price-main{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,42px);color:#fff;font-weight:800;}
+.price-save{font-size:13px;padding:4px 12px;border-radius:20px;margin-left:8px;}
+.kit-save{background:rgba(39,174,96,.25);color:#5dde90;}
+.kh-save{background:rgba(155,89,182,.25);color:#c97de8;}
+.mt-save{background:rgba(230,126,34,.25);color:#f0a060;}
+.vip-save{background:rgba(231,76,60,.25);color:#f08070;}
+
+/* VALUE STACK */
+.vs-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;}
+.vs-title{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gl);margin-bottom:16px;}
+.vs-item{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);gap:16px;}
+.vs-item:last-child{border:none;}
+.vs-left{display:flex;gap:10px;align-items:flex-start;}
+.vs-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.vs-name{font-size:13.5px;color:#e8e0d0;font-weight:600;}
+.vs-desc{font-size:12px;color:rgba(255,255,255,.45);margin-top:2px;}
+.vs-val{font-size:13px;font-weight:700;color:rgba(255,255,255,.5);white-space:nowrap;}
+.vs-total{display:flex;justify-content:space-between;padding:16px 0 8px;margin-top:8px;border-top:2px solid rgba(201,168,76,.3);}
+.vs-total-label{font-size:14px;font-weight:700;color:#e8e0d0;}
+.vs-total-val{font-size:15px;font-weight:800;color:rgba(255,255,255,.5);text-decoration:line-through;}
+.vs-price-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;}
+.vs-price-label{font-size:16px;font-weight:800;color:#fff;}
+.vs-price-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;}
+.kit-col{color:var(--kit);}
+.kh-col{color:#c97de8;}
+.mt-col{color:var(--mt);}
+.vip-col{color:var(--vip);}
+
+/* COMPONENTS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:640px){.two-col{grid-template-columns:1fr;}}
+.mini-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;}
+.mini-card h4{font-size:13px;font-weight:800;color:var(--gl);margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em;}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.check-list li{font-size:13px;color:rgba(255,255,255,.75);display:flex;gap:8px;align-items:flex-start;line-height:1.5;}
+.check-list li::before{content:'✓';color:var(--kit);font-weight:800;flex-shrink:0;}
+.check-list li.x::before{content:'✗';color:rgba(255,255,255,.25);}
+.check-list li.star::before{content:'★';color:var(--gl);}
+
+/* GUARANTEE */
+.guarantee{background:linear-gradient(135deg,rgba(39,174,96,.08),rgba(39,174,96,.03));border:1px solid rgba(39,174,96,.25);border-radius:14px;padding:20px 24px;display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;}
+.g-icon{font-size:32px;flex-shrink:0;}
+.g-title{font-size:14px;font-weight:800;color:#5dde90;margin-bottom:6px;}
+.g-text{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;}
+
+/* URGENCY */
+.urgency{background:linear-gradient(135deg,rgba(231,76,60,.1),rgba(231,76,60,.04));border:1px solid rgba(231,76,60,.3);border-radius:14px;padding:18px 22px;margin-bottom:20px;display:flex;gap:14px;align-items:center;}
+.u-icon{font-size:28px;flex-shrink:0;}
+.u-title{font-size:14px;font-weight:800;color:#f08070;margin-bottom:4px;}
+.u-text{font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.6;}
+
+/* COMPARISON TABLE */
+.cmp-wrap{overflow-x:auto;}
+.cmp-table{width:100%;border-collapse:collapse;font-size:13px;}
+.cmp-table th{padding:14px 16px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
+.cmp-table th:first-child{text-align:left;color:rgba(255,255,255,.5);}
+.cmp-table th.kit-h{color:var(--kit);background:rgba(39,174,96,.08);}
+.cmp-table th.kh-h{color:#c97de8;background:rgba(155,89,182,.08);}
+.cmp-table th.mt-h{color:var(--mt);background:rgba(230,126,34,.08);}
+.cmp-table th.vip-h{color:var(--vip);background:rgba(231,76,60,.08);}
+.cmp-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);}
+.cmp-table td:first-child{color:rgba(255,255,255,.65);font-weight:600;}
+.cmp-table td.center{text-align:center;}
+.yes{color:#5dde90;font-size:16px;}
+.no{color:rgba(255,255,255,.2);font-size:16px;}
+.partial{color:var(--gl);font-size:13px;}
+.cmp-table tr:hover td{background:rgba(255,255,255,.02);}
+.price-row-cmp{background:rgba(201,168,76,.05)!important;}
+.price-row-cmp td{font-weight:800;}
+
+/* REVENUE MODEL */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+@media(max-width:600px){.rev-grid{grid-template-columns:1fr;}}
+.rev-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;}
+.rev-card h4{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.rev-card .rev-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--gl);margin-bottom:6px;}
+.rev-card p{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5;}
+
+/* PAYMENT PLANS */
+.pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px;}
+.pay-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;}
+.pay-card.rec{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.05);}
+.pay-tag{font-size:10px;font-weight:800;color:var(--gl);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.pay-price{font-family:'Playfair Display',serif;font-size:24px;color:#fff;font-weight:800;}
+.pay-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;}
+.pay-label{font-size:11px;font-weight:700;color:var(--gl);background:rgba(201,168,76,.15);border-radius:8px;padding:3px 10px;margin-top:10px;display:inline-block;}
+
+.sec-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:28px 0;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🏗️ HLX Brand Builder Ecosystem — Offer Document</div>
+  <h1>Value Ladder <span>3 Tầng</span><br>Môi Giới BDS Hạ Long Xanh</h1>
+  <p>Từ bộ Kit công cụ đến khóa học thương hiệu đến mentoring 1-1 — hệ sinh thái sản phẩm hoàn chỉnh cho môi giới HLX</p>
+  <div class="hero-eq">
+    <strong>Giá trị</strong> <span>=</span>
+    <span style="color:#e8e0d0">(Dream Outcome × Xác suất thành công)</span>
+    <span>÷</span>
+    <span style="color:#e8e0d0">(Thời gian × Nỗ lực)</span>
+  </div>
+</div>
+
+<!-- VALUE LADDER VISUAL -->
+<div class="ladder">
+  <div class="ladder-title">🪜 Cấu Trúc Phễu — Từ Nhỏ Đến Lớn</div>
+  <div class="ladder-wrap">
+
+    <div class="rung r-free">
+      <div class="rung-price" style="color:#aaa;">FREE</div>
+      <div class="rung-mid">
+        <h3>Quà Tặng Lead Magnet</h3>
+        <p>7 gói quà (checklist, script, máy tính HH, hợp đồng…) — đổi lấy thông tin liên lạc</p>
+      </div>
+      <div class="rung-conv"><strong>20–40%</strong>chuyển đổi từ traffic</div>
+    </div>
+
+    <div class="arrow-down">⬇</div>
+
+    <div class="rung r-kit">
+      <div class="rung-price" style="color:var(--kit);">997K<br><span style="font-size:11px;font-weight:400">– 2,97M</span></div>
+      <div class="rung-mid">
+        <h3>BDS Mastery Kit HLX</h3>
+        <p>Bộ công cụ, script, content, phân tích dự án — đang bán · Entry Point chính</p>
+      </div>
+      <div class="rung-conv"><strong>10–20%</strong>lead → mua kit</div>
+    </div>
+
+    <div class="arrow-down">⬇</div>
+
+    <div class="rung r-kh">
+      <div class="rung-price" style="color:var(--kh);">3,99M<br><span style="font-size:11px;font-weight:400">– 7,99M</span></div>
+      <div class="rung-mid">
+        <h3>HLX Brand Builder — Khóa Học Online</h3>
+        <p>6 module · Video hướng dẫn công cụ + xây thương hiệu · Group hỗ trợ · Live Q&A</p>
+      </div>
+      <div class="rung-conv"><strong>15–25%</strong>kit buyer → học viên</div>
+    </div>
+
+    <div class="arrow-down">⬇</div>
+
+    <div class="rung r-mt">
+      <div class="rung-price" style="color:var(--mt);">15M<br><span style="font-size:11px;font-weight:400">– 29,99M</span></div>
+      <div class="rung-mid">
+        <h3>Brand Accelerator — Mentoring 1-1</h3>
+        <p>8 tuần × 2 buổi/tuần · Review bài thực tế · Pipeline chạy trước khi kết thúc</p>
+      </div>
+      <div class="rung-conv"><strong>5–10%</strong>học viên → mentee</div>
+    </div>
+
+    <div class="arrow-down">⬇</div>
+
+    <div class="rung r-vip">
+      <div class="rung-price" style="color:var(--vip);">29M<br><span style="font-size:11px;font-weight:400">– 49M</span></div>
+      <div class="rung-mid">
+        <h3>Done-For-You — Brand Setup Complete</h3>
+        <p>Anh làm toàn bộ: profile · 30 bài content · 5 video TikTok · Lịch 60 ngày · Bàn giao chìa khóa trao tay</p>
+      </div>
+      <div class="rung-conv"><strong>2–5%</strong>học viên → DFY client</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab-nav">
+    <button class="tab-btn ak active" onclick="show(0,this)">🟢 Tầng 1 — Kit</button>
+    <button class="tab-btn ak2" onclick="show(1,this)">🟣 Tầng 2 — Khóa Học</button>
+    <button class="tab-btn ak3" onclick="show(2,this)">🟠 Tầng 3 — Mentoring</button>
+    <button class="tab-btn ak4" onclick="show(3,this)">🔴 Tầng 4 — Done-For-You</button>
+    <button class="tab-btn ak5" onclick="show(4,this)">⭐ So Sánh & Doanh Thu</button>
+  </div>
+
+  <!-- PANEL 0: KIT -->
+  <div class="panel active" id="p0">
+    <div class="offer-hero kit-bg">
+      <div class="offer-badge kit-badge">🟢 TẦNG 1 — ENTRY OFFER · ĐÃ CÓ SẴN</div>
+      <h2>BDS Mastery Kit HLX<br>— Bộ Công Cụ Môi Giới Hoàn Chỉnh</h2>
+      <p>Toàn bộ tài nguyên để bắt đầu bán BDS HLX: phân tích dự án, script, content 30 bài, 45 ảnh chính thức, funnel, lịch đăng. Tự học, tự áp dụng ngay.</p>
+      <div class="price-box">
+        <span class="price-orig">4,500,000đ</span>
+        <span class="price-main">1,497,000đ</span>
+        <span class="price-save kit-save">Tiết kiệm 67%</span>
+      </div>
+    </div>
+
+    <div class="vs-wrap">
+      <div class="vs-title">📦 Value Stack — Bộ Kit Bao Gồm</div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📊</span><div><div class="vs-name">Phân Tích Dự Án HLX Hoàn Chỉnh</div><div class="vs-desc">Tổng quan · Vị trí · Pháp lý · So sánh đối thủ · Điểm mạnh yếu</div></div></div>
+        <div class="vs-val">800,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📝</span><div><div class="vs-name">Script Bán Hàng + Xử Lý Từ Chối</div><div class="vs-desc">10 tình huống từ chối · 5 script Zalo · Hướng dẫn ứng dụng</div></div></div>
+        <div class="vs-val">600,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📱</span><div><div class="vs-name">Social Post Kit — 30 Bài Viết Sẵn</div><div class="vs-desc">FB · Zalo · TikTok · 4 nền tảng · Copy paste đăng ngay</div></div></div>
+        <div class="vs-val">500,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🖼️</span><div><div class="vs-name">Gallery 45 Ảnh HLX Official</div><div class="vs-desc">Shophouse · Biệt thự biển · Tiện ích · Phối cảnh · Link copy ngay</div></div></div>
+        <div class="vs-val">400,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎁</span><div><div class="vs-name">7 Gói Quà Tặng Lead Magnet</div><div class="vs-desc">Tặng khách trước khi pitch · Tăng uy tín · Tạo cơ hội follow-up</div></div></div>
+        <div class="vs-val">700,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🧮</span><div><div class="vs-name">Máy Tính Hoa Hồng HLX Tự Động</div><div class="vs-desc">5 mô hình · Tính ngay trong trình duyệt · Share được</div></div></div>
+        <div class="vs-val">300,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📋</span><div><div class="vs-name">Hợp Đồng Marketing + Bảo Mật</div><div class="vs-desc">NDA · Điều khoản bên thứ 3 · Bản HTML gửi đối tác · Bản Word in ký</div></div></div>
+        <div class="vs-val">500,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎯</span><div><div class="vs-name">Chiến Dịch Funnel TOFU/MOFU/BOFU</div><div class="vs-desc">3 kịch bản doanh số · Checklist hành động từng tuần</div></div></div>
+        <div class="vs-val">700,000đ</div>
+      </div>
+      <div class="vs-total">
+        <span class="vs-total-label">Tổng giá trị thực tế:</span>
+        <span class="vs-total-val">4,500,000đ</span>
+      </div>
+      <div class="vs-price-row">
+        <span class="vs-price-label">💰 Giá đầu tư hôm nay:</span>
+        <span class="vs-price-val kit-col">1,497,000đ</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>✅ Ai Nên Mua Kit?</h4>
+        <ul class="check-list">
+          <li>Môi giới mới bắt đầu bán HLX</li>
+          <li>Cần tài nguyên ngay, không có thời gian tự làm</li>
+          <li>Muốn có content sẵn để đăng ngay</li>
+          <li>Cần script xử lý từ chối chuyên nghiệp</li>
+          <li>Muốn tạo quà tặng để tăng uy tín với khách</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>📈 Kết Quả Cam Kết</h4>
+        <ul class="check-list">
+          <li>Có đủ công cụ trong 24h sau khi nhận kit</li>
+          <li>30 bài content đăng được ngay không cần viết</li>
+          <li>Trả lời được 10 tình huống từ chối phổ biến</li>
+          <li>Gửi quà tặng chuyên nghiệp cho khách warm</li>
+          <li class="star">Nền tảng để nâng lên Tầng 2 — Khóa Học</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="g-icon">🛡️</div>
+      <div><div class="g-title">Cam Kết Hoàn Tiền 7 Ngày</div>
+      <div class="g-text">Nếu sau 7 ngày anh/chị thấy tài nguyên không đúng mô tả, hoàn tiền 100% không hỏi lý do. Rủi ro thuộc về bên bán — anh/chị chỉ mất thời gian xem qua.</div></div>
+    </div>
+
+    <div class="pay-grid">
+      <div class="pay-card">
+        <div class="pay-tag">Gói Cơ Bản</div>
+        <div class="pay-price">997K</div>
+        <div class="pay-sub">Bronze — Tài liệu cốt lõi</div>
+      </div>
+      <div class="pay-card rec">
+        <div class="pay-tag">⭐ Phổ Biến Nhất</div>
+        <div class="pay-price">1,497K</div>
+        <div class="pay-sub">Silver — Full kit + quà tặng</div>
+        <div class="pay-label">Most Popular</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-tag">Đầy Đủ Nhất</div>
+        <div class="pay-price">2,970K</div>
+        <div class="pay-sub">Gold — Full + mentoring 1 buổi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: KHÓA HỌC -->
+  <div class="panel" id="p1">
+    <div class="offer-hero kh-bg">
+      <div class="offer-badge kh-badge">🟣 TẦNG 2 — CORE OFFER · KHÓA HỌC ONLINE</div>
+      <h2>HLX Brand Builder<br>— 30 Ngày Xây Thương Hiệu Môi Giới</h2>
+      <p>6 module video · Hướng dẫn 5 công cụ thiết yếu · Xây profile chuyên nghiệp trên 4 nền tảng · 30 ngày content sẵn · Group học viên riêng · 2 buổi Live Q&A/tháng.</p>
+      <div class="price-box">
+        <span class="price-orig">9,500,000đ</span>
+        <span class="price-main">4,490,000đ</span>
+        <span class="price-save kh-save">Tiết kiệm 53%</span>
+      </div>
+    </div>
+
+    <div class="vs-wrap">
+      <div class="vs-title">🎓 Value Stack — Khóa Học Bao Gồm</div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎬</span><div><div class="vs-name">Module 0: Nền Tảng Thương Hiệu Cá Nhân</div><div class="vs-desc">Mindset · Audit hiện trạng · Roadmap 30 ngày cá nhân hóa</div></div></div>
+        <div class="vs-val">500,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🛠️</span><div><div class="vs-name">Module 1: Bộ 5 Công Cụ Thiết Yếu</div><div class="vs-desc">Canva BDS · CapCut video · ChatGPT content · Notion quản lý · Zalo OA</div></div></div>
+        <div class="vs-val">1,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">✨</span><div><div class="vs-name">Module 2: Tối Ưu Profile 4 Nền Tảng</div><div class="vs-desc">FB cá nhân · Fanpage BDS · Zalo OA · TikTok BDS — đúng chuẩn chuyên gia</div></div></div>
+        <div class="vs-val">800,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📝</span><div><div class="vs-name">Module 3: Content HLX 30 Ngày</div><div class="vs-desc">4 dạng content · Lịch đăng sẵn · Ảnh + caption · Video ngắn 60s</div></div></div>
+        <div class="vs-val">1,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎯</span><div><div class="vs-name">Module 4: Lead Từ MXH — Không Tốn Ads</div><div class="vs-desc">Cold traffic · Kỹ thuật inbox · Like → Lead → Pipeline thực tế</div></div></div>
+        <div class="vs-val">1,200,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">👑</span><div><div class="vs-name">Module 5: Thương Hiệu Dài Hạn</div><div class="vs-desc">Uy tín · Review · Case study · Testimonial · Tái sử dụng content</div></div></div>
+        <div class="vs-val">800,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎁</span><div><div class="vs-name">BONUS: BDS Mastery Kit HLX đầy đủ</div><div class="vs-desc">Tất cả tài nguyên Kit — script · content · ảnh · funnel · checklist</div></div></div>
+        <div class="vs-val">1,497,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">💬</span><div><div class="vs-name">BONUS: Group Học Viên Riêng (3 tháng)</div><div class="vs-desc">Hỏi đáp 24/7 · Chia sẻ case study · Networking môi giới HLX</div></div></div>
+        <div class="vs-val">1,500,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📹</span><div><div class="vs-name">BONUS: 2 Buổi Live Q&A/Tháng</div><div class="vs-desc">Video call trực tiếp · Giải đáp thắc mắc · Review bài thực tế</div></div></div>
+        <div class="vs-val">2,000,000đ</div>
+      </div>
+      <div class="vs-total">
+        <span class="vs-total-label">Tổng giá trị:</span>
+        <span class="vs-total-val">10,297,000đ</span>
+      </div>
+      <div class="vs-price-row">
+        <span class="vs-price-label">💰 Giá đầu tư hôm nay:</span>
+        <span class="vs-price-val kh-col">4,490,000đ</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>📅 Lộ Trình 30 Ngày</h4>
+        <ul class="check-list">
+          <li>Tuần 1: Setup công cụ + profile</li>
+          <li>Tuần 2: Tạo content batch 30 ngày</li>
+          <li>Tuần 3: Bắt đầu đăng + tiếp cận cold</li>
+          <li>Tuần 4: Tối ưu + đo kết quả + scale</li>
+          <li class="star">Sau 30 ngày: Profile chạy tự động</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🎯 Kết Quả Sau 30 Ngày</h4>
+        <ul class="check-list">
+          <li>Profile 4 nền tảng đã tối ưu 100%</li>
+          <li>30 bài content đã lên lịch sẵn</li>
+          <li>Có ít nhất 5–10 lead organic đầu tiên</li>
+          <li>Biết dùng thành thạo 5 công cụ</li>
+          <li class="star">Thương hiệu cá nhân: Được nhận ra trong cộng đồng HLX</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="g-icon">🛡️</div>
+      <div><div class="g-title">Cam Kết 30 Ngày — Hoàn Tiền Nếu Không Có Kết Quả</div>
+      <div class="g-text">Học xong 30 ngày, áp dụng đủ 80% bài tập — nếu profile vẫn chưa được tối ưu và chưa có lead đầu tiên, hoàn 100% học phí. Điều kiện duy nhất: phải làm bài.</div></div>
+    </div>
+
+    <div class="urgency">
+      <div class="u-icon">⏳</div>
+      <div><div class="u-title">Early Bird Launch — Giá Tăng Sau 20 Học Viên Đầu</div>
+      <div class="u-text">20 học viên đầu tiên nhận mức 3,990,000đ (thay vì 4,490,000đ). Lý do: anh cần feedback thực tế để hoàn thiện khóa — đây là cam kết thực, không phải chiêu trò marketing.</div></div>
+    </div>
+
+    <div class="pay-grid">
+      <div class="pay-card">
+        <div class="pay-tag">Trả 1 lần</div>
+        <div class="pay-price">4,490K</div>
+        <div class="pay-sub">Nhận ngay toàn bộ</div>
+      </div>
+      <div class="pay-card rec">
+        <div class="pay-tag">⭐ Combo Kit+Khóa</div>
+        <div class="pay-price">5,490K</div>
+        <div class="pay-sub">Thay vì 5,987K — tiết kiệm 497K</div>
+        <div class="pay-label">Best Value</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-tag">Trả góp 3 kỳ</div>
+        <div class="pay-price">1,590K</div>
+        <div class="pay-sub">×3 tháng · Tổng 4,770K</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: MENTORING -->
+  <div class="panel" id="p2">
+    <div class="offer-hero mt-bg">
+      <div class="offer-badge mt-badge">🟠 TẦNG 3 — HIGH TICKET · MENTORING 1-1</div>
+      <h2>Brand Accelerator Program<br>— 8 Tuần Xây Pipeline Thực Tế</h2>
+      <p>Không phải học thêm lý thuyết — là anh ngồi cùng với học viên, review từng bài thực tế, sửa từng lỗi, tối ưu từng bước đến khi pipeline chạy trước khi kết thúc chương trình.</p>
+      <div class="price-box">
+        <span class="price-orig">35,000,000đ</span>
+        <span class="price-main">14,990,000đ</span>
+        <span class="price-save mt-save">Chỉ 5 slot/tháng</span>
+      </div>
+    </div>
+
+    <div class="vs-wrap">
+      <div class="vs-title">🏆 Value Stack — Brand Accelerator 8 Tuần</div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📹</span><div><div class="vs-name">16 Buổi Coaching 1-1 (2 buổi/tuần × 8 tuần)</div><div class="vs-desc">45 phút/buổi · Video call Zoom · Ghi lại để xem lại</div></div></div>
+        <div class="vs-val">12,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">✏️</span><div><div class="vs-name">Review & Chỉnh Sửa Không Giới Hạn</div><div class="vs-desc">Profile · Content · Script · Video · Kịch bản tiếp cận — anh review và sửa tất cả</div></div></div>
+        <div class="vs-val">8,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎯</span><div><div class="vs-name">Kế Hoạch Cá Nhân Hóa 90 Ngày</div><div class="vs-desc">Roadmap riêng dựa trên điểm mạnh · Mục tiêu doanh số · KPI tracking</div></div></div>
+        <div class="vs-val">3,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">💬</span><div><div class="vs-name">Hỗ Trợ Zalo Chat 24/7 Trong 8 Tuần</div><div class="vs-desc">Hỏi bất kỳ lúc nào · Trả lời trong 4 giờ làm việc</div></div></div>
+        <div class="vs-val">4,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎁</span><div><div class="vs-name">Full Kit + Khóa Học Brand Builder</div><div class="vs-desc">Bao gồm cả Tầng 1 + Tầng 2 — không cần mua thêm</div></div></div>
+        <div class="vs-val">5,987,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🌐</span><div><div class="vs-name">Landing Page Riêng Đã Deploy (Bonus)</div><div class="vs-desc">1 landing page bán hàng cá nhân với SĐT/info của học viên</div></div></div>
+        <div class="vs-val">3,000,000đ</div>
+      </div>
+      <div class="vs-total">
+        <span class="vs-total-label">Tổng giá trị:</span>
+        <span class="vs-total-val">35,987,000đ</span>
+      </div>
+      <div class="vs-price-row">
+        <span class="vs-price-label">💰 Giá đầu tư:</span>
+        <span class="vs-price-val mt-col">14,990,000đ</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>👤 Điều Kiện Tham Gia</h4>
+        <ul class="check-list">
+          <li>Đã mua Kit hoặc Khóa Học (ưu tiên)</li>
+          <li>Có smartphone dùng được Zoom</li>
+          <li>Cam kết 3h/tuần cho bài tập</li>
+          <li>Là môi giới BDS đang hoạt động</li>
+          <li class="star">Apply qua form — 5 slot/tháng, anh sẽ chọn</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🎯 Kết Quả Cam Kết (8 Tuần)</h4>
+        <ul class="check-list">
+          <li>Profile đã tối ưu 100% cả 4 nền tảng</li>
+          <li>Ít nhất 1 deal closing từ lead MXH</li>
+          <li>Pipeline ít nhất 10 lead warm đang nuôi</li>
+          <li>Thói quen đăng content không cần nhắc</li>
+          <li class="star">Sau 8 tuần: Tự vận hành không cần mentoring</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="g-icon">🛡️</div>
+      <div><div class="g-title">Cam Kết Kép — Hoàn Tiền + Thêm 4 Tuần Miễn Phí</div>
+      <div class="g-text">Nếu sau 8 tuần làm đủ bài mà chưa có deal đầu tiên từ MXH, anh sẽ thêm 4 tuần coaching miễn phí HOẶC hoàn 50% học phí — học viên chọn. Đây là cam kết kép — anh chịu rủi ro cùng với học viên.</div></div>
+    </div>
+
+    <div class="urgency">
+      <div class="u-icon">🔒</div>
+      <div><div class="u-title">Giới Hạn 5 Slot/Tháng — Application-Based</div>
+      <div class="u-text">Không phải ai apply cũng được nhận. Anh cần đảm bảo chất lượng từng mentee để giữ track record. Apply → Phỏng vấn 15 phút → Xác nhận trong 48h.</div></div>
+    </div>
+
+    <div class="pay-grid">
+      <div class="pay-card">
+        <div class="pay-tag">Trả trước 50%</div>
+        <div class="pay-price">7,495K</div>
+        <div class="pay-sub">+ 7,495K sau tuần 4</div>
+      </div>
+      <div class="pay-card rec">
+        <div class="pay-tag">⭐ Trả Full 1 Lần</div>
+        <div class="pay-price">14,990K</div>
+        <div class="pay-sub">Tiết kiệm 1 tuần khởi động</div>
+        <div class="pay-label">Recommended</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-tag">Nâng Lên Premium</div>
+        <div class="pay-price">29,990K</div>
+        <div class="pay-sub">12 tuần + DFY setup profile</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: DFY -->
+  <div class="panel" id="p3">
+    <div class="offer-hero vip-bg">
+      <div class="offer-badge vip-badge">🔴 TẦNG 4 — DONE-FOR-YOU · VIP SERVICE</div>
+      <h2>Brand Setup Complete<br>— Chìa Khóa Trao Tay Trong 14 Ngày</h2>
+      <p>Anh làm tất cả. Khách chỉ cần cung cấp thông tin, duyệt bài và nhận bàn giao. Profile chuyên nghiệp · 30 bài content · 5 video TikTok · Lịch đăng 60 ngày · Hướng dẫn duy trì.</p>
+      <div class="price-box">
+        <span class="price-orig">70,000,000đ</span>
+        <span class="price-main">29,990,000đ</span>
+        <span class="price-save vip-save">2 slot/tháng</span>
+      </div>
+    </div>
+
+    <div class="vs-wrap">
+      <div class="vs-title">⚡ Value Stack — Done-For-You Brand Setup</div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎨</span><div><div class="vs-name">Setup Toàn Bộ Profile 4 Nền Tảng</div><div class="vs-desc">FB cá nhân · Fanpage · Zalo OA · TikTok — ảnh bìa · bio · highlight · link</div></div></div>
+        <div class="vs-val">8,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">✍️</span><div><div class="vs-name">30 Bài Content Viết Sẵn (Cá Nhân Hóa)</div><div class="vs-desc">Ảnh + caption · FB/Zalo format · Thông tin cá nhân của khách · Lên lịch sẵn</div></div></div>
+        <div class="vs-val">12,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🎬</span><div><div class="vs-name">5 Video TikTok — Script + Hướng Dẫn Quay</div><div class="vs-desc">Script viết sẵn · B-roll notes · Hướng dẫn quay · Caption + hashtag</div></div></div>
+        <div class="vs-val">10,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📅</span><div><div class="vs-name">Lịch Đăng 60 Ngày Chi Tiết</div><div class="vs-desc">Ngày giờ · Platform · Link ảnh · Caption · Note đặc biệt</div></div></div>
+        <div class="vs-val">3,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🌐</span><div><div class="vs-name">Landing Page Riêng — Deploy Ngay</div><div class="vs-desc">Thông tin khách hàng · SĐT · Link thanh toán · Trên GitHub Pages miễn phí</div></div></div>
+        <div class="vs-val">5,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">📖</span><div><div class="vs-name">SOP Duy Trì Thương Hiệu</div><div class="vs-desc">Hướng dẫn cập nhật hàng tuần · Checklist đăng bài · Tool đã setup sẵn</div></div></div>
+        <div class="vs-val">2,000,000đ</div>
+      </div>
+      <div class="vs-item">
+        <div class="vs-left"><span class="vs-icon">🤝</span><div><div class="vs-name">1 Tháng Hỗ Trợ Sau Bàn Giao</div><div class="vs-desc">Giải đáp câu hỏi trong tháng đầu vận hành</div></div></div>
+        <div class="vs-val">3,000,000đ</div>
+      </div>
+      <div class="vs-total">
+        <span class="vs-total-label">Tổng giá trị:</span>
+        <span class="vs-total-val">43,000,000đ</span>
+      </div>
+      <div class="vs-price-row">
+        <span class="vs-price-label">💰 Giá đầu tư:</span>
+        <span class="vs-price-val vip-col">29,990,000đ</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>⏱️ Timeline 14 Ngày</h4>
+        <ul class="check-list">
+          <li>Ngày 1–2: Thu thập brief + info khách</li>
+          <li>Ngày 3–5: Setup profile + ảnh bìa</li>
+          <li>Ngày 6–10: Tạo content batch 30 bài</li>
+          <li>Ngày 11–13: Script TikTok + lịch đăng</li>
+          <li class="star">Ngày 14: Bàn giao + demo hướng dẫn 1h</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>📋 Khách Cần Chuẩn Bị</h4>
+        <ul class="check-list">
+          <li>Ảnh cá nhân (5–10 ảnh chuyên nghiệp)</li>
+          <li>Thông tin cơ bản: tên · SĐT · kinh nghiệm</li>
+          <li>Câu chuyện bán hàng nổi bật (nếu có)</li>
+          <li>Duyệt bài trong 24h (tối đa 2 vòng sửa)</li>
+          <li class="star">Chỉ mất ~2h tổng thời gian của khách</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="g-icon">🛡️</div>
+      <div><div class="g-title">Bảo Đảm Bàn Giao Đúng Hạn Hoặc Hoàn 20%</div>
+      <div class="g-text">Nếu anh bàn giao trễ hơn 14 ngày mà không có lý do bất khả kháng, khách nhận hoàn 20% học phí ngay lập tức. Commitment rõ ràng — không hứa suông.</div></div>
+    </div>
+
+    <div class="urgency">
+      <div class="u-icon">🔒</div>
+      <div><div class="u-title">Tối Đa 2 Slot/Tháng — Đặt Lịch Trước</div>
+      <div class="u-text">Done-For-You đòi hỏi thời gian thực tế. Giới hạn 2 khách/tháng để đảm bảo chất lượng cao nhất. Đặt cọc 30% để giữ slot.</div></div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: COMPARISON -->
+  <div class="panel" id="p4">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px;">
+      <div class="vs-title">📊 So Sánh 4 Tầng Sản Phẩm</div>
+      <div class="cmp-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Tính Năng / Tiêu Chí</th>
+              <th class="kit-h center">🟢 Kit<br>1,497K</th>
+              <th class="kh-h center">🟣 Khóa Học<br>4,490K</th>
+              <th class="mt-h center">🟠 Mentoring<br>14,990K</th>
+              <th class="vip-h center">🔴 DFY<br>29,990K</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Tài nguyên content sẵn dùng</td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td></tr>
+            <tr><td>Video hướng dẫn chi tiết</td><td class="center"><span class="no">✗</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td></tr>
+            <tr><td>Hướng dẫn sử dụng công cụ</td><td class="center"><span class="partial">Cơ bản</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td></tr>
+            <tr><td>Feedback cá nhân hóa</td><td class="center"><span class="no">✗</span></td><td class="center"><span class="no">✗</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td></tr>
+            <tr><td>Profile được setup sẵn</td><td class="center"><span class="no">✗</span></td><td class="center"><span class="no">✗</span></td><td class="center"><span class="no">✗</span></td><td class="center"><span class="yes">✓</span></td></tr>
+            <tr><td>Content cá nhân hóa viết sẵn</td><td class="center"><span class="no">✗</span></td><td class="center"><span class="no">✗</span></td><td class="center"><span class="no">✗</span></td><td class="center"><span class="yes">✓</span></td></tr>
+            <tr><td>Landing page riêng</td><td class="center"><span class="no">✗</span></td><td class="center"><span class="no">✗</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td></tr>
+            <tr><td>Coaching 1-1</td><td class="center"><span class="no">✗</span></td><td class="center"><span class="no">✗</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="no">✗</span></td></tr>
+            <tr><td>Group hỗ trợ</td><td class="center"><span class="no">✗</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="yes">✓</span></td><td class="center"><span class="partial">1 tháng</span></td></tr>
+            <tr><td>Thời gian cần đầu tư</td><td class="center">Tự học<br>1–2 tuần</td><td class="center">30 ngày<br>tích cực</td><td class="center">8 tuần<br>có hướng dẫn</td><td class="center">~2h<br>của khách</td></tr>
+            <tr><td>Phù hợp với</td><td class="center" style="font-size:11px">Mới bắt đầu<br>Tự học</td><td class="center" style="font-size:11px">Muốn hệ thống<br>bài bản</td><td class="center" style="font-size:11px">Muốn kết quả<br>nhanh hơn</td><td class="center" style="font-size:11px">Bận · Muốn<br>chuyên gia làm</td></tr>
+            <tr class="price-row-cmp">
+              <td>💰 Đầu tư</td>
+              <td class="center kit-col">1,497,000đ</td>
+              <td class="center kh-col">4,490,000đ</td>
+              <td class="center mt-col">14,990,000đ</td>
+              <td class="center vip-col">29,990,000đ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec-divider"></div>
+    <div class="vs-title" style="font-size:15px;margin-bottom:20px;">💰 Mô Hình Doanh Thu Dự Kiến</div>
+
+    <div class="rev-grid">
+      <div class="rev-card">
+        <h4>🟡 Thận Trọng<br>Tháng 1–3</h4>
+        <div class="rev-num">28,5M</div>
+        <p>10 Kit/tháng × 1,5M<br>+ 3 Khóa × 4,5M</p>
+      </div>
+      <div class="rev-card">
+        <h4>🟢 Chuẩn<br>Tháng 4–6</h4>
+        <div class="rev-num">96M</div>
+        <p>20 Kit + 8 Khóa<br>+ 2 Mentoring</p>
+      </div>
+      <div class="rev-card">
+        <h4>🔵 Tăng Tốc<br>Tháng 7–12</h4>
+        <div class="rev-num">187,5M</div>
+        <p>30 Kit + 15 Khóa<br>+ 3 Mentoring + 1 DFY</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <h4>📌 Conversion Funnel Thực Tế</h4>
+        <ul class="check-list">
+          <li>100 lead nhận quà tặng → 20 hỏi Kit</li>
+          <li>20 hỏi Kit → 10 mua Kit (50% close)</li>
+          <li>10 Kit buyer → 2 lên Khóa (20%)</li>
+          <li>10 học viên → 1 lên Mentoring (10%)</li>
+          <li class="star">10 học viên → 1 mua DFY (5–10%)</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🚀 Ưu Tiên Launch</h4>
+        <ul class="check-list">
+          <li>Bước 1: Validate Kit (đang có sẵn ✓)</li>
+          <li>Bước 2: Pre-sell 5 học viên beta Khóa</li>
+          <li>Bước 3: Record live → hoàn thiện course</li>
+          <li>Bước 4: Launch Mentoring giới hạn 3 slot</li>
+          <li class="star">Bước 5: DFY khi đã có testimonial từ Mentoring</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const panels = document.querySelectorAll('.panel');
+const btns = document.querySelectorAll('.tab-btn');
+const activeClasses = ['ak','ak2','ak3','ak4','ak5'];
+function show(i, btn){
+  panels.forEach(p=>p.classList.remove('active'));
+  btns.forEach((b,j)=>{b.classList.remove('active');activeClasses.forEach(c=>b.classList.remove(c));b.classList.add(activeClasses[j]);});
+  panels[i].classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
