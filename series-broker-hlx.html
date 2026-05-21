@@ -166,13 +166,16 @@ body{background:var(--bg);color:#e8dfc8;font-family:'Be Vietnam Pro',sans-serif;
 .ic-steps{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
 .ic-step{font-size:clamp(9px,1.3vw,13px);color:rgba(232,223,200,.8);display:flex;align-items:center;gap:7px;}
 .ic-step::before{content:'→';color:var(--gold);font-weight:700;flex-shrink:0;}
-.btn-screenshot{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
-  color:rgba(232,223,200,.7);border-radius:8px;padding:6px 14px;
-  font-size:11px;font-weight:600;cursor:pointer;margin-top:8px;
-  font-family:'Be Vietnam Pro',sans-serif;transition:.15s;display:inline-block;
+.btn-dl{
+  background:linear-gradient(135deg,#1a4a1a,#0a2a0a);
+  border:1px solid rgba(39,174,96,.4);
+  color:#7effc0;border-radius:8px;padding:8px 18px;
+  font-size:12px;font-weight:700;cursor:pointer;
+  font-family:'Be Vietnam Pro',sans-serif;transition:.15s;
 }
-.btn-screenshot:hover{background:rgba(255,255,255,.1);color:#fff;}
+.btn-dl:hover{background:linear-gradient(135deg,#27ae60,#1a6b3a);color:#fff;transform:translateY(-1px);}
+.btn-dl.loading{opacity:.6;cursor:wait;}
+.btn-dl.done{background:linear-gradient(135deg,#27ae60,#1a6b3a);color:#fff;}
 
 footer{text-align:center;padding:20px;font-size:11px;color:rgba(232,223,200,.2);border-top:1px solid rgba(255,255,255,.05);}
 
@@ -274,7 +277,7 @@ footer{text-align:center;padding:20px;font-size:11px;color:rgba(232,223,200,.2);
         </div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 1 -->
@@ -373,7 +376,7 @@ Follow để không bỏ lỡ bài nào.
         </div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 2 -->
@@ -486,7 +489,7 @@ Comment câu của bạn bên dưới — tôi sẽ góp ý.
         </div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 3 -->
@@ -575,7 +578,7 @@ Bạn đang nhắm đến ngách nào? Comment bên dưới.
         </div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 4 -->
@@ -684,7 +687,7 @@ Bạn đang dùng nguồn nào nhiều nhất?
         <div class="ic-sub" style="margin-top:10px;">Batch 1 lần · Lên lịch tự động · Không lo "đăng gì hôm nay"</div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 5 -->
@@ -782,7 +785,7 @@ Ai muốn template lịch đăng bài sẵn — comment "LỊCH" tôi gửi ngay
         </div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 6 -->
@@ -880,7 +883,7 @@ Bạn không cần nổi tiếng. Bạn chỉ cần được nhớ đến đúng
         <div class="ic-quote">Hầu hết môi giới nhảy thẳng từ bước 1 sang bước 5. Bỏ qua 2–4 = bỏ qua phần lớn doanh thu.</div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 7 -->
@@ -981,7 +984,7 @@ Nếu chưa có — đó là việc cần làm ngay tuần này.
         </div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:4px;"><span class="btn-screenshot">📸 Bấm chuột phải → Lưu ảnh</span></div>
+    <div style="text-align:right;margin-top:6px;"><button class="btn-dl" onclick="dlImg(this)">📥 Tải ảnh PNG</button></div>
   </div>
 
   <!-- BÀI 8 -->
@@ -1058,6 +1061,7 @@ Và nếu bạn muốn có sẵn toàn bộ công cụ — bộ bài viết, bá
 
 <footer>BDS Mastery Kit · Series #BrokerHLX · 8 bài · 4 tuần · Copy-paste dùng ngay</footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 function cp(id,btn){
   const txt=document.getElementById(id).innerText.trim();
@@ -1071,6 +1075,45 @@ function cp(id,btn){
     btn.textContent='✅ Đã copy!';btn.classList.add('ok');
     setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
   }
+}
+
+function dlImg(btn){
+  const card = btn.closest('.img-wrap').querySelector('.img-card');
+  const postNum = btn.closest('.img-wrap').previousElementSibling
+    ? (btn.closest('.img-wrap').querySelector('.ic-series')||{innerText:''}).innerText
+    : '';
+  const orig = btn.textContent;
+  btn.textContent = '⏳ Đang xử lý...';
+  btn.classList.add('loading');
+
+  // Detect bài số mấy từ ic-series text
+  const seriesEl = card.querySelector('.ic-series');
+  const seriesText = seriesEl ? seriesEl.innerText : 'broker-hlx';
+  const match = seriesText.match(/BÀI (\d+)/);
+  const fileNum = match ? match[1] : 'x';
+  const filename = 'brokerhlx-bai' + fileNum + '.png';
+
+  html2canvas(card, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: null,
+    logging: false,
+    width: card.offsetWidth,
+    height: card.offsetHeight
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    btn.textContent = '✅ Đã tải!';
+    btn.classList.remove('loading');
+    btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('done');}, 2500);
+  }).catch(err=>{
+    btn.textContent = '❌ Lỗi — thử lại';
+    btn.classList.remove('loading');
+    setTimeout(()=>{btn.textContent=orig;},2000);
+  });
 }
 </script>
 </body>
