@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chương 5 — Vinhomes Hạ Long Xanh | Broker Pro Book</title>
+<meta name="description" content="Vinhomes Hạ Long Xanh — Cơ Hội Vàng Trên Vịnh Di Sản | Sách Broker Pro">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1b2a;
+  --surface:#112236;
+  --surface2:#162d45;
+  --gold:#C9A84C;
+  --gl:#E2C06A;
+  --navy:#1B3A6B;
+  --text:#e8e8e8;
+  --muted:#a0aab8;
+  --green:#27ae60;
+  --red:#e74c3c;
+  --purple:#8e44ad;
+  --border:rgba(201,168,76,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Be Vietnam Pro',sans-serif;
+  font-size:17px;
+  line-height:1.85;
+}
+
+/* PRINT STYLES */
+@media print {
+  body{background:#fff;color:#111;font-size:13pt}
+  .no-print{display:none}
+  .chapter-hero{background:#1B3A6B!important;-webkit-print-color-adjust:exact}
+  .note-box{border:2px solid #C9A84C!important;-webkit-print-color-adjust:exact}
+}
+
+/* NAVIGATION */
+.top-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,27,42,0.96);
+  border-bottom:1px solid var(--border);
+  padding:12px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter:blur(8px);
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;
+  color:var(--gold);font-size:15px;font-weight:600;
+  text-decoration:none;
+}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{
+  color:var(--muted);font-size:13px;text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold)}
+.btn-print{
+  background:var(--gold);color:#0d1b2a;
+  border:none;padding:7px 16px;border-radius:6px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:'Be Vietnam Pro',sans-serif;
+  transition:background .2s;
+}
+.btn-print:hover{background:var(--gl)}
+
+/* HERO */
+.chapter-hero{
+  background:linear-gradient(135deg,#0d1b2a 0%,#1B3A6B 50%,#0d2a1b 100%);
+  padding:80px 40px;
+  text-align:center;
+  border-bottom:3px solid var(--gold);
+  position:relative;overflow:hidden;
+}
+.chapter-hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.12) 0%,transparent 70%);
+}
+.chapter-label{
+  display:inline-block;
+  background:rgba(201,168,76,0.15);
+  border:1px solid var(--border);
+  color:var(--gold);
+  font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  padding:6px 18px;border-radius:20px;margin-bottom:24px;
+}
+.chapter-label span{color:var(--muted);margin:0 8px}
+.chapter-hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,48px);
+  color:#fff;
+  line-height:1.25;margin-bottom:16px;
+  position:relative;
+}
+.chapter-hero h1 em{color:var(--gold);font-style:normal}
+.chapter-hero .subtitle{
+  color:var(--muted);font-size:16px;
+  max-width:600px;margin:0 auto 32px;
+}
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+}
+.hero-badge{
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.15);
+  color:#fff;font-size:13px;
+  padding:7px 16px;border-radius:20px;
+}
+
+/* LAYOUT */
+.page-wrap{
+  max-width:820px;margin:0 auto;
+  padding:60px 32px;
+}
+@media(max-width:640px){.page-wrap{padding:40px 20px}}
+
+/* QUOTE */
+.chapter-quote{
+  border-left:4px solid var(--gold);
+  background:var(--surface);
+  padding:24px 28px;
+  border-radius:0 12px 12px 0;
+  margin:40px 0;
+  font-style:italic;
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  color:var(--gl);
+  line-height:1.6;
+}
+
+/* SECTIONS */
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,3vw,30px);
+  color:var(--gold);
+  margin:56px 0 20px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.section-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;
+  background:var(--gold);color:#0d1b2a;
+  border-radius:50%;font-size:16px;font-weight:700;
+  flex-shrink:0;font-family:'Be Vietnam Pro',sans-serif;
+}
+.subsection-title{
+  font-family:'Playfair Display',serif;
+  font-size:20px;color:#fff;
+  margin:36px 0 14px;
+}
+.subsection-title::before{
+  content:'▸ ';color:var(--gold);
+}
+
+p{margin-bottom:16px;color:var(--text)}
+strong{color:#fff}
+
+/* NOTE BOX */
+.note-box{
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.35);
+  border-left:4px solid var(--gold);
+  border-radius:0 10px 10px 0;
+  padding:18px 22px;
+  margin:20px 0;
+}
+.note-box .note-label{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.note-box .note-label::before{content:'✏️ '}
+.note-box p{color:#d4b96a;margin:0;font-size:14px}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;margin:28px 0}
+table{
+  width:100%;border-collapse:collapse;font-size:14px;
+}
+th{
+  background:var(--navy);
+  color:var(--gold);
+  padding:12px 14px;text-align:left;
+  font-weight:700;font-size:13px;letter-spacing:.5px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+td{
+  padding:11px 14px;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--text);
+  vertical-align:top;
+}
+tr:nth-child(even) td{background:rgba(255,255,255,0.03)}
+tr:hover td{background:rgba(201,168,76,0.05)}
+
+/* HIGHLIGHT BOX */
+.highlight{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px 28px;
+  margin:24px 0;
+}
+.highlight.green{border-color:rgba(39,174,96,0.4);background:rgba(39,174,96,0.05)}
+.highlight.red{border-color:rgba(231,76,60,0.4);background:rgba(231,76,60,0.05)}
+.highlight.purple{border-color:rgba(142,68,173,0.4);background:rgba(142,68,173,0.05)}
+
+/* CARD GRID */
+.card-grid{
+  display:grid;gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  margin:24px 0;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:22px;
+}
+.card .card-icon{font-size:28px;margin-bottom:12px}
+.card h4{color:var(--gold);font-size:15px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:13px;margin:0;line-height:1.6}
+
+/* ADVANTAGE LIST */
+.advantage-item{
+  background:var(--surface);
+  border-left:4px solid var(--gold);
+  border-radius:0 10px 10px 0;
+  padding:20px 24px;
+  margin:16px 0;
+}
+.advantage-num{
+  display:inline-block;
+  background:var(--gold);color:#0d1b2a;
+  width:28px;height:28px;line-height:28px;
+  border-radius:50%;text-align:center;font-weight:700;font-size:14px;
+  margin-right:8px;
+}
+.advantage-title{font-weight:700;color:#fff;font-size:16px}
+.advantage-body{color:var(--muted);margin-top:8px;font-size:14px;line-height:1.7}
+
+/* CUSTOMER PROFILE CARDS */
+.profile-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:28px;
+  margin:20px 0;
+}
+.profile-badge{
+  display:inline-block;
+  padding:5px 14px;border-radius:20px;
+  font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.profile-badge.g1{background:rgba(39,174,96,0.2);color:#2ecc71}
+.profile-badge.g2{background:rgba(52,152,219,0.2);color:#3498db}
+.profile-badge.g3{background:rgba(231,76,60,0.2);color:#e74c3c}
+.profile-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  margin:14px 0;
+}
+.profile-row{font-size:14px}
+.profile-row span:first-child{color:var(--muted);margin-right:6px}
+.profile-row span:last-child{color:#fff;font-weight:500}
+.profile-pain{
+  background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.2);
+  border-radius:8px;padding:14px;margin-top:14px;
+}
+.profile-pain .label{font-size:11px;font-weight:700;letter-spacing:2px;color:#e74c3c;margin-bottom:8px}
+.profile-pain ul{padding-left:18px;font-size:13px;color:var(--muted)}
+.profile-approach{
+  background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.2);
+  border-radius:8px;padding:14px;margin-top:10px;
+}
+.profile-approach .label{font-size:11px;font-weight:700;letter-spacing:2px;color:#2ecc71;margin-bottom:8px}
+.profile-approach p{font-size:13px;color:var(--muted);margin:0}
+
+/* JOURNEY FLOW */
+.journey{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:32px;
+  margin:24px 0;
+}
+.journey-step{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.journey-step:last-child{border-bottom:none}
+.step-num{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;min-width:36px;
+  background:var(--navy);
+  border:2px solid var(--gold);
+  border-radius:50%;
+  font-weight:700;color:var(--gold);font-size:14px;
+}
+.step-content{flex:1}
+.step-title{font-weight:700;color:#fff;margin-bottom:4px}
+.step-desc{font-size:13px;color:var(--muted)}
+.step-tip{
+  display:inline-block;margin-top:6px;
+  background:rgba(201,168,76,0.12);
+  border:1px solid rgba(201,168,76,0.25);
+  padding:4px 10px;border-radius:12px;
+  font-size:12px;color:var(--gold);
+}
+
+/* RISK BOXES */
+.risk-item{
+  background:rgba(231,76,60,0.07);
+  border:1px solid rgba(231,76,60,0.2);
+  border-radius:10px;
+  padding:18px 20px;
+  margin:12px 0;
+  display:flex;gap:14px;
+}
+.risk-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.risk-title{font-weight:700;color:#e74c3c;margin-bottom:4px;font-size:15px}
+.risk-body{font-size:13px;color:var(--muted)}
+
+/* SUMMARY TABLE */
+.summary-table{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  margin:24px 0;
+}
+.summary-table-header{
+  background:var(--navy);
+  padding:16px 24px;
+  font-family:'Playfair Display',serif;
+  font-size:18px;color:var(--gold);
+  border-bottom:1px solid var(--border);
+}
+
+/* CHECKLIST */
+.checklist{padding:0;margin:16px 0}
+.checklist li{
+  list-style:none;
+  display:flex;align-items:flex-start;gap:10px;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:14px;color:var(--muted);
+}
+.checklist li::before{
+  content:'□';
+  color:var(--gold);font-size:16px;flex-shrink:0;margin-top:1px;
+}
+.checklist li strong{color:#fff}
+
+/* EXERCISE BOX */
+.exercise-box{
+  background:linear-gradient(135deg,rgba(27,58,107,0.4),rgba(201,168,76,0.1));
+  border:1px solid rgba(201,168,76,0.3);
+  border-radius:14px;
+  padding:28px;
+  margin:40px 0;
+}
+.exercise-box h3{
+  font-family:'Playfair Display',serif;
+  color:var(--gold);font-size:20px;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.exercise-item{
+  background:rgba(0,0,0,0.2);
+  border-radius:10px;padding:18px 20px;
+  margin:12px 0;
+}
+.exercise-item h4{color:#fff;margin-bottom:10px;font-size:15px}
+
+/* SUMMARY BOX */
+.chapter-summary{
+  background:linear-gradient(135deg,var(--navy),rgba(201,168,76,0.15));
+  border:2px solid var(--gold);
+  border-radius:16px;
+  padding:36px;
+  margin:48px 0 24px;
+}
+.chapter-summary h2{
+  font-family:'Playfair Display',serif;
+  color:var(--gold);font-size:22px;margin-bottom:24px;
+  text-align:center;
+}
+
+/* NEXT CHAPTER */
+.next-chapter{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px 28px;
+  margin:32px 0;
+  text-decoration:none;
+  transition:border-color .2s,background .2s;
+}
+.next-chapter:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+.next-chapter .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.next-chapter .title{font-family:'Playfair Display',serif;color:#fff;font-size:18px}
+.next-chapter .arrow{font-size:28px;color:var(--gold)}
+
+/* NOTES TRACKER */
+.notes-tracker{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  margin:32px 0;
+}
+.notes-tracker-header{
+  background:rgba(201,168,76,0.1);
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.notes-tracker-header h3{color:var(--gold);font-size:17px}
+.priority-badge{
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:4px 10px;border-radius:12px;text-transform:uppercase;
+}
+.p-high{background:rgba(231,76,60,0.2);color:#e74c3c}
+.p-mid{background:rgba(243,156,18,0.2);color:#f39c12}
+.notes-row{
+  display:grid;grid-template-columns:36px 1fr 160px 100px;
+  gap:12px;align-items:center;
+  padding:12px 24px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:13px;
+}
+.notes-row.header{
+  background:rgba(0,0,0,0.2);
+  font-weight:700;font-size:12px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:1px;
+}
+.notes-num{color:var(--gold);font-weight:700}
+.notes-section{color:var(--muted)}
+.notes-info{color:#fff}
+
+/* FOOTER */
+.book-footer{
+  text-align:center;
+  padding:48px 32px;
+  border-top:1px solid var(--border);
+  margin-top:60px;
+}
+.book-footer .book-title{
+  font-family:'Playfair Display',serif;
+  color:var(--gold);font-size:20px;margin-bottom:8px;
+}
+.book-footer .footer-meta{color:var(--muted);font-size:13px}
+.page-indicator{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:20px;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
+.dot.active{background:var(--gold)}
+
+ul,ol{padding-left:22px;margin:12px 0 16px}
+li{margin-bottom:6px;color:var(--muted)}
+li strong{color:#fff}
+blockquote{
+  border-left:3px solid var(--gold);
+  padding:12px 20px;
+  margin:20px 0;
+  color:var(--muted);
+  font-style:italic;
+}
+code{
+  background:rgba(201,168,76,0.1);
+  color:var(--gold);
+  padding:2px 8px;border-radius:4px;
+  font-size:13px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav no-print">
+  <a href="D:\LƯU TRỮ KÊNH\LINKS-GIAO-KIT\index.html" class="nav-brand">📚 Broker Pro Book</a>
+  <div class="nav-links">
+    <a href="#">Phần I: Nền Tảng</a>
+    <a href="#" style="color:var(--gold)">Phần II: HLX</a>
+    <a href="#">Phần III: Broker</a>
+    <button class="btn-print" onclick="window.print()">🖨️ In / Lưu PDF</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="chapter-hero">
+  <div class="chapter-label">Phần II <span>|</span> Chương 5</div>
+  <h1>Vinhomes Hạ Long Xanh —<br><em>Cơ Hội Vàng Trên Vịnh Di Sản</em></h1>
+  <p class="subtitle">Hiểu dự án từ gốc rễ: bối cảnh, lợi thế, rủi ro, và cách tư vấn như một broker chuyên nghiệp thực sự</p>
+  <div class="hero-badges">
+    <span class="hero-badge">🏆 Di Sản UNESCO</span>
+    <span class="hero-badge">🏢 Vinhomes</span>
+    <span class="hero-badge">💰 Commission 2–5%</span>
+    <span class="hero-badge">📋 12 Notes Thực Tế</span>
+    <span class="hero-badge">🎯 3 Nhóm Khách Hàng</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- QUOTE -->
+<div class="chapter-quote">
+  "Trong lịch sử BĐS Việt Nam, chưa bao giờ có một dự án nào hội tụ đủ ba yếu tố cùng một lúc: vị trí không thể sao chép, thương hiệu đã được kiểm chứng, và thời điểm thị trường chín muồi. Hạ Long Xanh là dự án như vậy."
+</div>
+
+<!-- OPENING -->
+<div class="section-title">
+  <span class="section-num">↑</span>
+  Mở Đầu Chương — Tại Sao Broker PHẢI Hiểu HLX?
+</div>
+
+<p>Khi tôi bắt đầu làm môi giới, có một câu hỏi mà tôi mất rất nhiều thời gian mới tìm được câu trả lời:</p>
+<p><strong>"Tại sao có những broker chỉ bán một dự án mà thu nhập vẫn cao hơn những người bán cả chục dự án?"</strong></p>
+<p>Câu trả lời rất đơn giản: họ chọn đúng sản phẩm. Không phải sản phẩm rẻ nhất. Không phải sản phẩm "dễ bán" nhất. Mà là sản phẩm có <strong>câu chuyện đủ lớn</strong> để kể, có <strong>giá trị đủ thật</strong> để tin, và có <strong>thị trường đủ rộng</strong> để khai thác lâu dài.</p>
+<p>Vinhomes Hạ Long Xanh là một trong số ít dự án đáp ứng cả ba tiêu chí đó.</p>
+<p>Trong chương này, tôi sẽ đưa anh/chị qua một hành trình hiểu dự án từ gốc rễ — không phải theo kiểu brochure hay catalog, mà theo cách một <strong>broker chuyên nghiệp thực sự cần hiểu</strong>: bối cảnh thị trường, lợi thế cạnh tranh, rủi ro tiềm ẩn, và cách chuyển tất cả những thông tin đó thành lời khuyên có giá trị cho khách hàng.</p>
+
+<!-- 5.1 -->
+<div class="section-title">
+  <span class="section-num">1</span>
+  Bối Cảnh — Tại Sao Hạ Long Xanh Ra Đời?
+</div>
+
+<div class="subsection-title">Quảng Ninh — Tỉnh Đang Chuyển Mình</div>
+<p>Để hiểu Hạ Long Xanh, trước tiên phải hiểu Quảng Ninh. Trong vòng một thập kỷ qua, Quảng Ninh đã thực hiện một cuộc chuyển đổi kinh tế ít tỉnh nào làm được: từ tỉnh <strong>phụ thuộc khai thác than</strong> sang tỉnh <strong>dẫn đầu về du lịch và dịch vụ cao cấp</strong>.</p>
+
+<div class="note-box">
+  <div class="note-label">Note #1 — Bổ Sung Số Liệu Kinh Tế</div>
+  <p>GDP Quảng Ninh năm 20XX: _____ tỷ đồng (tăng ____% so với 5 năm trước) | Lượng khách du lịch đến Hạ Long năm 20XX: _____ triệu lượt | Số chuyến bay quốc tế đến sân bay Vân Đồn: _____ chuyến/tuần</p>
+</div>
+
+<p>Điều quan trọng hơn là <strong>tư duy lãnh đạo</strong> của tỉnh Quảng Ninh. Khi nhiều tỉnh khác còn đang lên kế hoạch quy hoạch, Quảng Ninh đã:</p>
+<ul>
+  <li>Hoàn thành <strong>cao tốc Hà Nội — Hạ Long</strong> (thời gian di chuyển giảm từ 3,5 giờ xuống còn khoảng 2 giờ)</li>
+  <li>Xây dựng <strong>sân bay quốc tế Vân Đồn</strong> — đón đầu du lịch cao cấp</li>
+  <li>Quy hoạch <strong>khu kinh tế Vân Đồn</strong> thành đặc khu kinh tế</li>
+</ul>
+
+<div class="subsection-title">Vịnh Hạ Long — Tài Sản Không Thể Sao Chép</div>
+<p>Có một thực tế mà mọi broker HLX cần khắc sâu vào tư duy:</p>
+<div class="highlight">
+  <strong style="color:var(--gold);font-size:18px">🏆 Vịnh Hạ Long là Di Sản Thiên Nhiên Thế Giới được UNESCO công nhận.</strong>
+  <p style="margin-top:12px">Điều này không chỉ là danh hiệu trên giấy. Nó có nghĩa là view của dự án sẽ không bao giờ bị che khuất, không thể nhân bản, và có giá trị thương hiệu toàn cầu.</p>
+</div>
+
+<div class="card-grid">
+  <div class="card">
+    <div class="card-icon">🌊</div>
+    <h4>Không Thể Nhân Bản</h4>
+    <p>Không ai có thể xây thêm một "Hạ Long thứ hai". Đây là lợi thế địa lý tuyệt đối.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">🛡️</div>
+    <h4>Bảo Tồn Vĩnh Viễn</h4>
+    <p>UNESCO và Chính phủ VN cam kết bảo tồn. View biển không bao giờ bị che khuất.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">🌍</div>
+    <h4>Thương Hiệu Toàn Cầu</h4>
+    <p>"View Vịnh Hạ Long" — khách quốc tế hiểu ngay, không cần giải thích thêm.</p>
+  </div>
+</div>
+
+<blockquote>Khi anh/chị giới thiệu HLX, đừng chỉ nói "view biển đẹp". Hãy nói: <strong>"View Vịnh Di Sản Thiên Nhiên Thế Giới — tài sản không thể sao chép trên bản đồ Việt Nam."</strong> Nghe khác nhau hoàn toàn, phải không?</blockquote>
+
+<!-- 5.2 -->
+<div class="section-title">
+  <span class="section-num">2</span>
+  Giải Phẫu Dự Án — Hiểu Để Tư Vấn Đúng
+</div>
+
+<div class="subsection-title">Quy Mô & Phân Khu Tổng Thể</div>
+
+<div class="note-box">
+  <div class="note-label">Note #2 — Bổ Sung Thông Tin Dự Án</div>
+  <p>Tổng diện tích: _____ ha | Số lượng sản phẩm: _____ căn | Phân khu chính: _____ | Tiến độ xây dựng: _____ | Chủ đầu tư: Vinhomes (Vingroup) | Đơn vị quản lý vận hành: _____</p>
+</div>
+
+<div class="card-grid">
+  <div class="card">
+    <div class="card-icon">🏢</div>
+    <h4>Căn Hộ Chung Cư Cao Cấp</h4>
+    <p>Diện tích từ ___m² đến ___m² | Tầm giá: ___ đến ___ tỷ</p>
+    <div class="note-box" style="margin-top:12px;padding:10px 14px">
+      <div class="note-label" style="font-size:10px">Note #3</div>
+      <p style="font-size:12px">Bổ sung giá thực tế từng loại SP</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-icon">🏠</div>
+    <h4>Biệt Thự Liền Kề / Đơn Lập</h4>
+    <p>Diện tích đất: ___m² | Tầm giá: ___ đến ___ tỷ</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">🏪</div>
+    <h4>Shophouse Thương Mại</h4>
+    <p>Diện tích: ___m² | ___ tầng | Tầm giá: ___ đến ___ tỷ</p>
+  </div>
+</div>
+
+<div class="subsection-title">Tiện Ích & Hạ Tầng Nội Khu</div>
+<p>Một trong những lý do Vinhomes chiếm được lòng tin của khách hàng Việt là <strong>hệ sinh thái tiện ích tự túc</strong>. Không cần ra ngoài khu đô thị, cư dân có đầy đủ mọi thứ.</p>
+
+<div class="note-box">
+  <div class="note-label">Note #4 — Danh Sách Tiện Ích Chính Thức</div>
+  <p>Liệt kê tiện ích thực tế của HLX theo brochure chính thức. Tiêu chuẩn Vinhomes cao cấp thường có: Vinschool, Vinmec, Vincom, Marina, Clubhouse, Hồ bơi, Công viên ven biển...</p>
+</div>
+
+<div class="highlight" style="margin-top:20px">
+  <strong>💡 Tại sao tiện ích quan trọng với broker?</strong>
+  <p style="margin-top:10px">Anh/chị không chỉ bán "căn hộ view biển". Anh/chị bán <strong>một lối sống</strong>. Khách hàng mua second home ở HLX không muốn phải lo "đi chợ ở đâu, con học trường nào, ốm đau khám bác sĩ chỗ nào". Hệ sinh thái Vinhomes giải quyết tất cả — đây là điểm bán hàng quan trọng nhất mà broker mới thường bỏ qua.</p>
+</div>
+
+<!-- 5.3 -->
+<div class="section-title">
+  <span class="section-num">3</span>
+  Lợi Thế Cạnh Tranh — Tại Sao HLX, Không Phải Dự Án Khác?
+</div>
+
+<div class="subsection-title">So Sánh Với Đối Thủ Chính</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Tiêu Chí</th>
+  <th style="color:#E2C06A">Vinhomes HLX ⭐</th>
+  <th>Sun Group HLX</th>
+  <th>BIM Group</th>
+  <th>Dự Án Khác</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Thương hiệu</strong></td><td style="color:#E2C06A">⭐⭐⭐⭐⭐ Vingroup</td><td>⭐⭐⭐⭐ Sun Group</td><td>⭐⭐⭐</td><td>⭐⭐</td></tr>
+<tr><td><strong>Quy mô dự án</strong></td><td style="color:#E2C06A">Rất lớn</td><td>Lớn</td><td>Trung bình</td><td>Nhỏ</td></tr>
+<tr><td><strong>Hệ sinh thái</strong></td><td style="color:#E2C06A">Đầy đủ (trường, bv, TTTM)</td><td>Du lịch</td><td>Hạn chế</td><td>Cơ bản</td></tr>
+<tr><td><strong>Pháp lý</strong></td><td style="color:#E2C06A">Sổ đỏ lâu dài</td><td>Tùy loại SP</td><td>Tùy loại SP</td><td>Rủi ro hơn</td></tr>
+<tr><td><strong>Thanh khoản</strong></td><td style="color:#E2C06A">Cao</td><td>Trung bình-cao</td><td>Trung bình</td><td>Thấp</td></tr>
+<tr><td><strong>Chính sách bán</strong></td><td style="color:#E2C06A">Linh hoạt, vay được</td><td>Linh hoạt</td><td>Cứng hơn</td><td>Khác nhau</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Note #5 — So Sánh Đối Thủ Thực Tế</div>
+  <p>Bổ sung thông tin cập nhật về các đối thủ cạnh tranh trực tiếp: giá cụ thể, chính sách bán hàng, ưu nhược điểm so sánh thực tế từ kinh nghiệm của anh/chị trên thị trường</p>
+</div>
+
+<div class="subsection-title">5 Lợi Thế Cốt Lõi Của HLX</div>
+
+<div class="advantage-item">
+  <div><span class="advantage-num">①</span><span class="advantage-title">Thương Hiệu Vinhomes = Bảo Chứng Bàn Giao</span></div>
+  <div class="advantage-body">Trong BĐS Việt Nam, rủi ro lớn nhất của người mua là: "Chủ đầu tư có bàn giao đúng tiến độ không?" Vinhomes đã bàn giao hàng chục dự án trên toàn quốc. Đây là <strong>yếu tố an toàn</strong> mà khách hàng sẵn sàng trả thêm tiền để có.</div>
+</div>
+
+<div class="advantage-item">
+  <div><span class="advantage-num">②</span><span class="advantage-title">Vị Trí UNESCO = View Bền Vững</span></div>
+  <div class="advantage-body">View Vịnh Hạ Long không bao giờ bị che. Đây là cam kết từ thiên nhiên và luật pháp — không phải từ lời hứa của chủ đầu tư. Đây là lợi thế tuyệt đối, vĩnh viễn.</div>
+</div>
+
+<div class="advantage-item">
+  <div><span class="advantage-num">③</span><span class="advantage-title">Hạ Tầng Giao Thông Đang Hoàn Thiện</span></div>
+  <div class="advantage-body">Khi hạ tầng hoàn thiện → thời gian di chuyển giảm → giá BĐS tăng. HLX đang ở giai đoạn "hạ tầng đang hoàn thiện" = <strong>cơ hội mua trước, hưởng lợi sau</strong>.
+    <div class="note-box" style="margin-top:12px;padding:10px 14px"><div class="note-label" style="font-size:10px">Note #7</div><p style="font-size:12px">Cập nhật tiến độ cao tốc, sân bay, cầu đường thực tế</p></div>
+  </div>
+</div>
+
+<div class="advantage-item">
+  <div><span class="advantage-num">④</span><span class="advantage-title">Tiềm Năng Du Lịch = Dòng Tiền Cho Thuê</span></div>
+  <div class="advantage-body">Hạ Long là điểm đến du lịch top 5 Việt Nam. Với khách thuê ngắn hạn (Airbnb, Booking.com), một căn hộ 2PN view biển có thể generate dòng tiền hấp dẫn.
+    <div class="note-box" style="margin-top:12px;padding:10px 14px"><div class="note-label" style="font-size:10px">Note #6</div><p style="font-size:12px">Bổ sung giá cho thuê thực tế từ Airbnb/kinh nghiệm thực tế: giá theo mùa, occupancy rate, thu nhập/năm ước tính, yield on cost</p></div>
+  </div>
+</div>
+
+<div class="advantage-item">
+  <div><span class="advantage-num">⑤</span><span class="advantage-title">Chính Sách Thanh Toán Linh Hoạt</span></div>
+  <div class="advantage-body">Vinhomes thường có: trả góp 0% lãi suất trong thời gian ân hạn, hỗ trợ vay ngân hàng đối tác, chiết khấu thanh toán sớm.
+    <div class="note-box" style="margin-top:12px;padding:10px 14px"><div class="note-label" style="font-size:10px">Note #8</div><p style="font-size:12px">Bổ sung chính sách thanh toán, gói vay ngân hàng, ưu đãi hiện tại từ bộ kinh doanh</p></div>
+  </div>
+</div>
+
+<!-- 5.4 -->
+<div class="section-title">
+  <span class="section-num">4</span>
+  Hiểu Khách Hàng HLX — Ai Thực Sự Mua Dự Án Này?
+</div>
+
+<p>Đây là phần nhiều broker bỏ qua nhất — và cũng là lý do họ mãi không chốt được deal. <strong>Biết AI mua quan trọng hơn biết CÁI GÌ để bán.</strong></p>
+
+<!-- Profile 1 -->
+<div class="profile-card">
+  <span class="profile-badge g1">Nhóm 1 — ~45–50%</span>
+  <h3 style="color:#fff;font-family:'Playfair Display',serif;margin-bottom:16px">Người Mua Second Home</h3>
+  <div class="profile-grid">
+    <div class="profile-row"><span>Tuổi:</span><span>40–55</span></div>
+    <div class="profile-row"><span>Địa phương:</span><span>Hà Nội (đa số), HCM</span></div>
+    <div class="profile-row"><span>Thu nhập:</span><span>Doanh nhân, giám đốc</span></div>
+    <div class="profile-row"><span>Vốn có:</span><span>2–5 tỷ nhàn rỗi</span></div>
+    <div class="profile-row" style="grid-column:1/-1"><span>Mục tiêu:</span><span>Nơi nghỉ dưỡng cuối tuần/hè cho gia đình</span></div>
+  </div>
+  <div class="profile-pain">
+    <div class="label">⚠️ NỖI LO</div>
+    <ul>
+      <li>"Mua xong có người quản lý không? Tôi không ở Hạ Long."</li>
+      <li>"Pháp lý ổn không? Con cái có thừa kế được không?"</li>
+      <li>"Có bị mất giá không?"</li>
+    </ul>
+  </div>
+  <div class="profile-approach">
+    <div class="label">✅ CÁCH TIẾP CẬN</div>
+    <p>Nhấn mạnh vào: <strong>Lifestyle + An toàn pháp lý + Dịch vụ quản lý</strong>. Tránh nói nhiều về ROI cho thuê — nhóm này mua bằng <strong>cảm xúc</strong>, không phải bảng tính.</p>
+  </div>
+</div>
+
+<!-- Profile 2 -->
+<div class="profile-card">
+  <span class="profile-badge g2">Nhóm 2 — ~30–35%</span>
+  <h3 style="color:#fff;font-family:'Playfair Display',serif;margin-bottom:16px">Nhà Đầu Tư Cho Thuê</h3>
+  <div class="profile-grid">
+    <div class="profile-row"><span>Tuổi:</span><span>35–50</span></div>
+    <div class="profile-row"><span>Địa phương:</span><span>Khắp cả nước</span></div>
+    <div class="profile-row"><span>Vốn:</span><span>1–3 tỷ + đòn bẩy</span></div>
+    <div class="profile-row"><span>Mục tiêu:</span><span>Dòng tiền từ cho thuê ngắn hạn</span></div>
+  </div>
+  <div class="profile-pain">
+    <div class="label">⚠️ NỖI LO</div>
+    <ul>
+      <li>"Occupancy rate thực tế bao nhiêu? Mùa thấp điểm thế nào?"</li>
+      <li>"Chi phí vận hành (quản lý, điện nước, platform fee) tốn bao nhiêu?"</li>
+      <li>"Bao nhiêu năm hoàn vốn?"</li>
+    </ul>
+  </div>
+  <div class="profile-approach">
+    <div class="label">✅ CÁCH TIẾP CẬN</div>
+    <p>Nhóm này cần <strong>số liệu cụ thể</strong>. Hãy chuẩn bị bảng phân tích ROI chi tiết (xem Chương 6). Đừng nói chung chung "cho thuê tốt lắm" — họ sẽ không tin và sẽ tìm người khác có số liệu.</p>
+  </div>
+</div>
+
+<!-- Profile 3 -->
+<div class="profile-card">
+  <span class="profile-badge g3">Nhóm 3 — ~15–20%</span>
+  <h3 style="color:#fff;font-family:'Playfair Display',serif;margin-bottom:16px">Nhà Đầu Tư Lướt Sóng</h3>
+  <div class="profile-grid">
+    <div class="profile-row"><span>Tuổi:</span><span>28–45</span></div>
+    <div class="profile-row"><span>Kinh nghiệm:</span><span>Đã đầu tư BĐS</span></div>
+    <div class="profile-row"><span>Tài chính:</span><span>Linh hoạt, đòn bẩy cao</span></div>
+    <div class="profile-row"><span>Mục tiêu:</span><span>Mua sớm, bán khi tăng giá</span></div>
+  </div>
+  <div class="profile-pain">
+    <div class="label">⚠️ NỖI LO</div>
+    <ul>
+      <li>"Thanh khoản thế nào? Bán lại có dễ không?"</li>
+      <li>"Khi nào ra hàng đợt tiếp? Có suất ngoại giao không?"</li>
+      <li>"Chiết khấu tốt nhất là bao nhiêu?"</li>
+    </ul>
+  </div>
+  <div class="profile-approach">
+    <div class="label">✅ CÁCH TIẾP CẬN</div>
+    <p>Họ quyết định nhanh nhưng cũng từ chối nhanh. Họ cần thấy <strong>lợi thế thông tin</strong> từ anh/chị — biết trước thị trường, có suất ưu tiên. Đây là nguồn <strong>referral cực kỳ mạnh</strong> nếu anh/chị xây dựng được quan hệ.</p>
+  </div>
+</div>
+
+<!-- 5.5 -->
+<div class="section-title">
+  <span class="section-num">5</span>
+  Hành Trình Mua Của Khách HLX — 7 Bước
+</div>
+
+<div class="journey">
+  <div class="journey-step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">Nhận Diện Nhu Cầu</div>
+      <div class="step-desc">Khách nhận ra họ "cần" second home hoặc cơ hội đầu tư</div>
+      <span class="step-tip">Trigger: thấy bạn bè mua, đọc báo, xem video</span>
+    </div>
+  </div>
+  <div class="journey-step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">Tìm Kiếm Thông Tin</div>
+      <div class="step-desc">Google "BĐS Hạ Long", xem YouTube, hỏi bạn bè</div>
+      <span class="step-tip">🎯 Anh/chị cần xuất hiện ở giai đoạn này!</span>
+    </div>
+  </div>
+  <div class="journey-step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">Đánh Giá Lựa Chọn</div>
+      <div class="step-desc">So sánh HLX vs Sun Group vs các dự án khác</div>
+      <span class="step-tip">🎯 Đây là lúc anh/chị cần bảng so sánh chi tiết</span>
+    </div>
+  </div>
+  <div class="journey-step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <div class="step-title">Khảo Sát Trực Tiếp</div>
+      <div class="step-desc">Đến Hạ Long, tham quan dự án, gặp broker</div>
+      <span class="step-tip">🎯 Giai đoạn quan trọng nhất — trải nghiệm thực tế</span>
+    </div>
+  </div>
+  <div class="journey-step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <div class="step-title">Đàm Phán & Xác Nhận</div>
+      <div class="step-desc">Hỏi về giá, chính sách, pháp lý, vay ngân hàng</div>
+      <span class="step-tip">🎯 Anh/chị cần xử lý từ chối và objections</span>
+    </div>
+  </div>
+  <div class="journey-step">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <div class="step-title">Quyết Định Mua</div>
+      <div class="step-desc">Ký hợp đồng, đặt cọc</div>
+      <span class="step-tip">⚠️ Đừng để khách "về suy nghĩ thêm" quá lâu</span>
+    </div>
+  </div>
+  <div class="journey-step">
+    <div class="step-num">7</div>
+    <div class="step-content">
+      <div class="step-title">Sau Mua</div>
+      <div class="step-desc">Bàn giao, quản lý cho thuê, referral</div>
+      <span class="step-tip">🎯 Giai đoạn tạo khách hàng trọn đời</span>
+    </div>
+  </div>
+</div>
+
+<div class="highlight">
+  <strong>⏱️ Thực tế của thị trường HLX:</strong>
+  <p style="margin-top:8px">Chu kỳ từ bước 1 đến bước 6 thường kéo dài <strong>30–90 ngày</strong> với khách second home, và <strong>7–21 ngày</strong> với khách đầu tư có kinh nghiệm.</p>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Note #9 — Case Study Thực Tế</div>
+  <p>Chia sẻ một case study thực tế của anh/chị — một khách hàng cụ thể đã trải qua hành trình này như thế nào, mất bao lâu, anh/chị đã làm gì ở mỗi bước. Đây là phần làm sách trở nên sống động và đáng tin nhất.</p>
+</div>
+
+<!-- 5.6 -->
+<div class="section-title">
+  <span class="section-num">6</span>
+  Những Gì Broker PHẢI Biết Về Pháp Lý HLX
+</div>
+
+<div class="highlight" style="border-color:rgba(231,76,60,0.4);background:rgba(231,76,60,0.05)">
+  <strong style="color:#e74c3c">⚠️ Lưu ý quan trọng:</strong>
+  <p style="margin-top:8px">Broker không hiểu pháp lý là broker mất uy tín ngay lập tức. Đây là phần cần đầu tư học thật kỹ.</p>
+</div>
+
+<div class="subsection-title">Câu Hỏi Pháp Lý Thường Gặp Nhất</div>
+
+<div class="note-box">
+  <div class="note-label">Note #10 — Pháp Lý Sổ Đỏ/Sổ Hồng</div>
+  <p>Bổ sung thông tin pháp lý chính xác dựa trên hợp đồng mẫu và tài liệu pháp lý của dự án HLX. Phân biệt rõ: loại sản phẩm nào được cấp sổ đỏ lâu dài, loại nào có thời hạn sử dụng. Điều này thay đổi theo từng phân khu và loại sản phẩm.</p>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Note #11 — Quyền Sở Hữu Người Nước Ngoài</div>
+  <p>Bổ sung thông tin theo Luật Nhà Ở 2023 về quyền sở hữu nhà ở của người nước ngoài tại Việt Nam, áp dụng cụ thể cho HLX (số lượng căn, thời hạn, điều kiện)</p>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Note #12 — Quy Trình & Chi Phí Chuyển Nhượng</div>
+  <p>Bổ sung thông tin về quy trình chuyển nhượng, chi phí thực tế (thuế TNCN 2%, phí công chứng, thời gian thực hiện), lưu ý pháp lý đặc thù nếu HLX có sản phẩm condotel</p>
+</div>
+
+<div class="subsection-title">⚠️ 5 Rủi Ro Pháp Lý Cần Minh Bạch Với Khách</div>
+
+<blockquote>"Broker tốt không phải người chỉ nói điều khách muốn nghe. Broker tốt là người giúp khách hiểu đầy đủ cả rủi ro lẫn cơ hội."</blockquote>
+
+<div class="risk-item">
+  <div class="risk-icon">⏳</div>
+  <div>
+    <div class="risk-title">Rủi Ro 1 — Tiến Độ Bàn Giao</div>
+    <div class="risk-body">Dù Vinhomes có track record tốt, vẫn có thể có sự chậm trễ. Hãy luôn cung cấp thông tin tiến độ chính thức, không phóng đại.</div>
+  </div>
+</div>
+
+<div class="risk-item">
+  <div class="risk-icon">📉</div>
+  <div>
+    <div class="risk-title">Rủi Ro 2 — Biến Động Thị Trường</div>
+    <div class="risk-body">BĐS không chỉ tăng giá. Chu kỳ thị trường có thể ảnh hưởng đến giá trị tài sản trong ngắn hạn. Hãy trung thực về điều này.</div>
+  </div>
+</div>
+
+<div class="risk-item">
+  <div class="risk-icon">📄</div>
+  <div>
+    <div class="risk-title">Rủi Ro 3 — Pháp Lý Condotel (nếu áp dụng)</div>
+    <div class="risk-body">Tình trạng pháp lý condotel tại Việt Nam vẫn đang trong quá trình hoàn thiện. Cần nắm rõ tình trạng pháp lý của từng phân khu HLX.</div>
+  </div>
+</div>
+
+<div class="risk-item">
+  <div class="risk-icon">💸</div>
+  <div>
+    <div class="risk-title">Rủi Ro 4 — Chi Phí Quản Lý & Vận Hành</div>
+    <div class="risk-body">Phí quản lý, phí dịch vụ, thuế — tất cả ảnh hưởng đến yield thực tế. Hãy tính đủ, không bỏ sót khi tư vấn ROI cho thuê.</div>
+  </div>
+</div>
+
+<div class="risk-item">
+  <div class="risk-icon">✈️</div>
+  <div>
+    <div class="risk-title">Rủi Ro 5 — Phụ Thuộc Vào Du Lịch</div>
+    <div class="risk-body">Đối với khách đầu tư cho thuê — dịch bệnh, khủng hoảng du lịch (như COVID-19 2020-2021) có thể ảnh hưởng nghiêm trọng đến occupancy rate.</div>
+  </div>
+</div>
+
+<div class="highlight green" style="margin-top:24px">
+  <strong style="color:#2ecc71">💡 Tại sao phải nói về rủi ro?</strong>
+  <p style="margin-top:8px">Vì khi anh/chị minh bạch về rủi ro, khách hàng <strong>tin tưởng anh/chị hơn</strong>. Và khi họ tin tưởng, họ mua — và họ <strong>giới thiệu người thân</strong>. Đây là bí quyết xây dựng sự nghiệp môi giới lâu dài.</p>
+</div>
+
+<!-- CHAPTER SUMMARY -->
+<div class="chapter-summary">
+  <h2>⭐ 5 Điều Phải Nhớ Từ Chương 5</h2>
+  <div class="table-wrap">
+  <table>
+  <thead><tr><th>#</th><th>Điều Cần Nhớ</th><th>Tại Sao Quan Trọng</th></tr></thead>
+  <tbody>
+  <tr><td style="color:var(--gold);font-weight:700">1</td><td>HLX được đỡ lưng bởi Di Sản UNESCO — lợi thế địa lý không thể sao chép</td><td>USP số 1 khi tư vấn</td></tr>
+  <tr><td style="color:var(--gold);font-weight:700">2</td><td>Có 3 nhóm khách chính với nhu cầu KHÁC NHAU hoàn toàn</td><td>Sai nhóm = sai pitch = mất deal</td></tr>
+  <tr><td style="color:var(--gold);font-weight:700">3</td><td>Chu kỳ bán 30–90 ngày — cần nuôi dưỡng, không thể rush</td><td>Hiểu timeline để quản lý kỳ vọng</td></tr>
+  <tr><td style="color:var(--gold);font-weight:700">4</td><td>Pháp lý là câu hỏi số 1 — broker phải biết trả lời đúng</td><td>Sai pháp lý = mất uy tín vĩnh viễn</td></tr>
+  <tr><td style="color:var(--gold);font-weight:700">5</td><td>Nói về rủi ro là dấu hiệu của broker chuyên nghiệp</td><td>Tin tưởng → Mua → Referral</td></tr>
+  </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- EXERCISE -->
+<div class="exercise-box">
+  <h3>📝 Bài Tập Thực Hành — Cuối Chương 5</h3>
+
+  <div class="exercise-item">
+    <h4>Bài Tập 1 — Biết Dự Án Của Mình</h4>
+    <ul class="checklist">
+      <li>Giá hiện tại của 3 sản phẩm bạn sẽ tập trung bán</li>
+      <li>Chính sách thanh toán hiện hành</li>
+      <li>Tiến độ bàn giao của phân khu bạn bán</li>
+      <li>3 câu hỏi pháp lý khó nhất và câu trả lời chính xác</li>
+    </ul>
+  </div>
+
+  <div class="exercise-item">
+    <h4>Bài Tập 2 — Hiểu Khách Hàng</h4>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:10px">Phỏng vấn 3 người bạn/người quen thuộc nhóm second home hoặc đầu tư:</p>
+    <ul class="checklist">
+      <li>Họ có biết về HLX không?</li>
+      <li>Họ quan tâm đến điều gì nhất?</li>
+      <li>Rào cản lớn nhất của họ là gì?</li>
+    </ul>
+  </div>
+
+  <div class="exercise-item">
+    <h4>Bài Tập 3 — So Sánh Đối Thủ</h4>
+    <ul class="checklist">
+      <li>Nghiên cứu 1 dự án cạnh tranh chính</li>
+      <li>Lập bảng so sánh 5 tiêu chí với HLX</li>
+      <li>Viết 3 câu lý do HLX vượt trội hơn</li>
+    </ul>
+  </div>
+</div>
+
+<!-- NOTES TRACKER -->
+<div class="notes-tracker">
+  <div class="notes-tracker-header">
+    <h3>📋 Theo Dõi 12 Notes Cần Bổ Sung</h3>
+    <span style="color:var(--muted);font-size:13px">Anh/chị bổ sung sau</span>
+  </div>
+  <div class="notes-row header">
+    <div>#</div><div>Thông Tin Cần Bổ Sung</div><div>Vị Trí</div><div>Độ Ưu Tiên</div>
+  </div>
+  <div class="notes-row"><div class="notes-num">1</div><div>GDP Quảng Ninh, số liệu du lịch</div><div class="notes-section">§5.1</div><div><span class="priority-badge p-mid">Trung bình</span></div></div>
+  <div class="notes-row"><div class="notes-num">2</div><div>Diện tích, số lượng SP, phân khu HLX</div><div class="notes-section">§5.2</div><div><span class="priority-badge p-high">Cao</span></div></div>
+  <div class="notes-row"><div class="notes-num">3</div><div>Bảng giá thực tế từng loại sản phẩm</div><div class="notes-section">§5.2</div><div><span class="priority-badge p-high">Cao</span></div></div>
+  <div class="notes-row"><div class="notes-num">4</div><div>Danh sách tiện ích nội khu chính thức</div><div class="notes-section">§5.2</div><div><span class="priority-badge p-high">Cao</span></div></div>
+  <div class="notes-row"><div class="notes-num">5</div><div>Bảng so sánh đối thủ — số liệu thực</div><div class="notes-section">§5.3</div><div><span class="priority-badge p-high">Cao</span></div></div>
+  <div class="notes-row"><div class="notes-num">6</div><div>Giá cho thuê Airbnb, occupancy rate HLX</div><div class="notes-section">§5.3</div><div><span class="priority-badge p-high">Cao</span></div></div>
+  <div class="notes-row"><div class="notes-num">7</div><div>Tiến độ cao tốc, sân bay, cầu đường</div><div class="notes-section">§5.3</div><div><span class="priority-badge p-mid">Trung bình</span></div></div>
+  <div class="notes-row"><div class="notes-num">8</div><div>Chính sách thanh toán, gói vay hiện hành</div><div class="notes-section">§5.3</div><div><span class="priority-badge p-high">Cao</span></div></div>
+  <div class="notes-row"><div class="notes-num">9</div><div>Case study thực tế từ kinh nghiệm</div><div class="notes-section">§5.4</div><div><span class="priority-badge p-mid">Trung bình</span></div></div>
+  <div class="notes-row"><div class="notes-num">10</div><div>Pháp lý sổ đỏ/sổ hồng theo từng loại SP</div><div class="notes-section">§5.6</div><div><span class="priority-badge p-high">Cao</span></div></div>
+  <div class="notes-row"><div class="notes-num">11</div><div>Quyền sở hữu người nước ngoài (Luật 2023)</div><div class="notes-section">§5.6</div><div><span class="priority-badge p-mid">Trung bình</span></div></div>
+  <div class="notes-row"><div class="notes-num">12</div><div>Quy trình + chi phí chuyển nhượng thực tế</div><div class="notes-section">§5.6</div><div><span class="priority-badge p-mid">Trung bình</span></div></div>
+</div>
+
+<!-- NEXT CHAPTER -->
+<a href="broker-pro-book-chapter6.html" class="next-chapter">
+  <div>
+    <div class="label">Tiếp theo →</div>
+    <div class="title">Chương 6: Phân Tích ROI Đầu Tư HLX — Con Số Thực Tế</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px">Công thức tính ROI, bảng phân tích 3 kịch bản, breakeven analysis</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+
+</div><!-- /page-wrap -->
+
+<div class="book-footer">
+  <div class="book-title">BROKER PRO — Hành Trình Từ 0 Đến Thu Nhập 200 Triệu/Năm</div>
+  <div class="footer-meta">Thực Chiến Tại Hạ Long Xanh | Phần II, Chương 5</div>
+  <div class="page-indicator">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot active"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+</div>
+
+</body>
+</html>

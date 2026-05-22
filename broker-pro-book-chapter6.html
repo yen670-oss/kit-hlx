@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chương 6 — Phân Tích ROI Đầu Tư HLX | Broker Pro Book</title>
+<meta name="description" content="Phân tích ROI chi tiết, 3 kịch bản đầu tư, công thức tính yield và breakeven cho Hạ Long Xanh">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1b2a;--surface:#112236;--surface2:#162d45;
+  --gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;
+  --text:#e8e8e8;--muted:#a0aab8;
+  --green:#27ae60;--red:#e74c3c;--blue:#3498db;--purple:#8e44ad;
+  --border:rgba(201,168,76,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:17px;line-height:1.85}
+
+@media print{
+  body{background:#fff;color:#111;font-size:12pt}
+  .no-print{display:none}
+  .chapter-hero{background:#1B3A6B!important;-webkit-print-color-adjust:exact}
+  .scenario-card,.roi-formula,.calc-table{page-break-inside:avoid}
+}
+
+.top-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,27,42,0.96);border-bottom:1px solid var(--border);
+  padding:12px 32px;display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter:blur(8px);
+}
+.nav-brand{font-family:'Playfair Display',serif;color:var(--gold);font-size:15px;font-weight:600;text-decoration:none}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{color:var(--muted);font-size:13px;text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.btn-print{background:var(--gold);color:#0d1b2a;border:none;padding:7px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:background .2s}
+.btn-print:hover{background:var(--gl)}
+
+.chapter-hero{
+  background:linear-gradient(135deg,#0d1b2a 0%,#1a3a1a 40%,#1B3A6B 100%);
+  padding:80px 40px;text-align:center;border-bottom:3px solid var(--gold);
+  position:relative;overflow:hidden;
+}
+.chapter-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(39,174,96,0.1) 0%,transparent 70%)}
+.chapter-label{display:inline-block;background:rgba(201,168,76,0.15);border:1px solid var(--border);color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:24px}
+.chapter-label span{color:var(--muted);margin:0 8px}
+.chapter-hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,46px);color:#fff;line-height:1.25;margin-bottom:16px;position:relative}
+.chapter-hero h1 em{color:#2ecc71;font-style:normal}
+.chapter-hero .subtitle{color:var(--muted);font-size:16px;max-width:620px;margin:0 auto 32px}
+.hero-badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.hero-badge{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:13px;padding:7px 16px;border-radius:20px}
+
+.page-wrap{max-width:820px;margin:0 auto;padding:60px 32px}
+@media(max-width:640px){.page-wrap{padding:40px 20px}}
+
+.chapter-quote{border-left:4px solid var(--green);background:var(--surface);padding:24px 28px;border-radius:0 12px 12px 0;margin:40px 0;font-style:italic;font-family:'Playfair Display',serif;font-size:18px;color:#a8d8b0;line-height:1.6}
+
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,28px);color:var(--gold);margin:56px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.section-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--gold);color:#0d1b2a;border-radius:50%;font-size:15px;font-weight:700;flex-shrink:0;font-family:'Be Vietnam Pro',sans-serif}
+.subsection-title{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin:36px 0 14px}
+.subsection-title::before{content:'▸ ';color:var(--green)}
+
+p{margin-bottom:16px;color:var(--text)}
+strong{color:#fff}
+ul,ol{padding-left:22px;margin:12px 0 16px}
+li{margin-bottom:6px;color:var(--muted)}
+li strong{color:#fff}
+blockquote{border-left:3px solid var(--green);padding:12px 20px;margin:20px 0;color:var(--muted);font-style:italic}
+
+/* NOTE BOX */
+.note-box{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.35);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:18px 22px;margin:20px 0}
+.note-box .note-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.note-box .note-label::before{content:'✏️ '}
+.note-box p{color:#d4b96a;margin:0;font-size:14px}
+
+/* ROI FORMULA */
+.roi-formula{
+  background:linear-gradient(135deg,rgba(39,174,96,0.12),rgba(27,58,107,0.3));
+  border:2px solid rgba(39,174,96,0.4);border-radius:16px;
+  padding:32px;margin:28px 0;text-align:center;
+}
+.roi-formula .formula-title{font-family:'Playfair Display',serif;color:var(--green);font-size:16px;margin-bottom:20px;letter-spacing:1px;text-transform:uppercase}
+.roi-formula .formula-main{
+  font-family:'Be Vietnam Pro',sans-serif;
+  font-size:clamp(16px,3vw,22px);color:#fff;
+  background:rgba(0,0,0,0.3);border-radius:10px;padding:18px 24px;
+  margin:12px 0;
+  border:1px solid rgba(39,174,96,0.25);
+  line-height:1.6;
+}
+.roi-formula .formula-main em{color:#2ecc71;font-style:normal;font-weight:700}
+.formula-note{font-size:13px;color:var(--muted);margin-top:12px}
+
+/* CALC TABLE */
+.calc-table{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:28px 0;
+}
+.calc-header{background:var(--navy);padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.calc-header h3{font-family:'Playfair Display',serif;color:var(--gold);font-size:17px}
+.calc-header .tag{font-size:12px;color:var(--muted)}
+.calc-row{display:grid;grid-template-columns:1fr auto;gap:16px;padding:13px 24px;border-bottom:1px solid rgba(255,255,255,0.05);align-items:center}
+.calc-row:last-child{border-bottom:none}
+.calc-row.total{background:rgba(39,174,96,0.08);border-top:2px solid rgba(39,174,96,0.3)}
+.calc-row.subtotal{background:rgba(201,168,76,0.05);border-top:1px solid var(--border)}
+.calc-label{font-size:14px;color:var(--muted)}
+.calc-label.main{color:#fff;font-weight:600}
+.calc-value{font-weight:700;text-align:right;white-space:nowrap}
+.calc-value.positive{color:#2ecc71}
+.calc-value.negative{color:#e74c3c}
+.calc-value.gold{color:var(--gold)}
+.calc-value.white{color:#fff}
+
+/* SCENARIO CARDS */
+.scenarios-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:28px 0}
+.scenario-card{border-radius:14px;overflow:hidden}
+.scenario-header{padding:20px 22px;text-align:center}
+.scenario-header .s-icon{font-size:36px;margin-bottom:8px}
+.scenario-header h3{font-family:'Playfair Display',serif;font-size:19px;margin-bottom:4px}
+.scenario-header .s-sub{font-size:13px;opacity:.8}
+.scenario-body{padding:20px 22px}
+.s-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:13px}
+.s-row:last-child{border-bottom:none}
+.s-row .s-label{color:rgba(255,255,255,0.6)}
+.s-row .s-val{font-weight:700}
+.scenario-result{margin-top:14px;padding:14px;border-radius:8px;text-align:center}
+.scenario-result .res-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.scenario-result .res-yield{font-size:28px;font-weight:700;font-family:'Playfair Display',serif}
+
+.s-conservative .scenario-header{background:linear-gradient(135deg,#1a3a1a,#2d5a2d)}
+.s-conservative .scenario-header h3{color:#2ecc71}
+.s-conservative{background:rgba(39,174,96,0.06);border:1px solid rgba(39,174,96,0.3)}
+.s-conservative .scenario-result{background:rgba(39,174,96,0.1)}
+.s-conservative .res-yield{color:#2ecc71}
+
+.s-base .scenario-header{background:linear-gradient(135deg,#1a2a3a,#1B3A6B)}
+.s-base .scenario-header h3{color:var(--gl)}
+.s-base{background:rgba(201,168,76,0.06);border:2px solid var(--gold)}
+.s-base .scenario-result{background:rgba(201,168,76,0.1)}
+.s-base .res-yield{color:var(--gold)}
+
+.s-optimistic .scenario-header{background:linear-gradient(135deg,#2a1a3a,#4a1a6b)}
+.s-optimistic .scenario-header h3{color:#a678d8}
+.s-optimistic{background:rgba(142,68,173,0.06);border:1px solid rgba(142,68,173,0.3)}
+.s-optimistic .scenario-result{background:rgba(142,68,173,0.1)}
+.s-optimistic .res-yield{color:#a678d8}
+
+/* HIGHLIGHT */
+.highlight{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin:24px 0}
+.highlight.green{border-color:rgba(39,174,96,0.4);background:rgba(39,174,96,0.05)}
+.highlight.red{border-color:rgba(231,76,60,0.4);background:rgba(231,76,60,0.05)}
+.highlight.gold{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;margin:28px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--navy);color:var(--gold);padding:12px 14px;text-align:left;font-weight:700;font-size:13px;border:1px solid rgba(255,255,255,0.08)}
+td{padding:11px 14px;border:1px solid rgba(255,255,255,0.06);color:var(--text);vertical-align:top}
+tr:nth-child(even) td{background:rgba(255,255,255,0.03)}
+tr:hover td{background:rgba(201,168,76,0.05)}
+
+/* BREAKEVEN */
+.breakeven-visual{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;margin:28px 0;
+}
+.breakeven-bar-wrap{margin:20px 0}
+.breakeven-label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:8px}
+.breakeven-bar{height:20px;border-radius:10px;background:rgba(255,255,255,0.08);overflow:hidden;position:relative}
+.breakeven-fill{height:100%;border-radius:10px;transition:width 1s}
+.breakeven-fill.green{background:linear-gradient(90deg,#1a6b2a,#27ae60)}
+.breakeven-fill.gold{background:linear-gradient(90deg,#6b4a00,#C9A84C)}
+.breakeven-fill.purple{background:linear-gradient(90deg,#4a1a6b,#8e44ad)}
+.breakeven-year{text-align:center;margin-top:12px;font-family:'Playfair Display',serif;font-size:22px}
+
+/* COMPARISON */
+.compare-grid{display:grid;gap:16px;grid-template-columns:1fr 1fr;margin:24px 0}
+@media(max-width:640px){.compare-grid{grid-template-columns:1fr}}
+.compare-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.compare-item h4{margin-bottom:12px;font-size:15px}
+.compare-item.bad{border-color:rgba(231,76,60,0.3)}
+.compare-item.good{border-color:rgba(39,174,96,0.3)}
+
+/* SCRIPT BOX */
+.script-box{
+  background:var(--surface2);border:1px solid rgba(52,152,219,0.3);
+  border-radius:12px;padding:24px 28px;margin:24px 0;
+}
+.script-box .script-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.script-box .script-label::before{content:'💬 '}
+.script-line{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:14px}
+.script-line:last-child{border-bottom:none}
+.script-role{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.script-role.broker{color:var(--blue)}
+.script-role.client{color:var(--gold)}
+.script-text{color:var(--text);line-height:1.65}
+
+/* EXERCISE */
+.exercise-box{background:linear-gradient(135deg,rgba(27,58,107,0.4),rgba(39,174,96,0.1));border:1px solid rgba(39,174,96,0.3);border-radius:14px;padding:28px;margin:40px 0}
+.exercise-box h3{font-family:'Playfair Display',serif;color:#2ecc71;font-size:20px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.exercise-item{background:rgba(0,0,0,0.2);border-radius:10px;padding:18px 20px;margin:12px 0}
+.exercise-item h4{color:#fff;margin-bottom:10px;font-size:15px}
+.checklist{padding:0;margin:10px 0}
+.checklist li{list-style:none;display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:14px;color:var(--muted)}
+.checklist li::before{content:'□';color:var(--gold);font-size:16px;flex-shrink:0;margin-top:1px}
+.checklist li strong{color:#fff}
+
+/* SUMMARY */
+.chapter-summary{background:linear-gradient(135deg,var(--navy),rgba(39,174,96,0.15));border:2px solid var(--green);border-radius:16px;padding:36px;margin:48px 0 24px}
+.chapter-summary h2{font-family:'Playfair Display',serif;color:#2ecc71;font-size:22px;margin-bottom:24px;text-align:center}
+
+/* NEXT/PREV */
+.chapter-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+@media(max-width:500px){.chapter-nav{grid-template-columns:1fr}}
+.chapter-nav-btn{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;text-decoration:none;transition:border-color .2s}
+.chapter-nav-btn:hover{border-color:var(--gold)}
+.chapter-nav-btn.prev{flex-direction:row-reverse;text-align:right}
+.chapter-nav-btn .nav-arrow{font-size:24px;color:var(--gold)}
+.chapter-nav-btn .nav-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
+.chapter-nav-btn .nav-title{font-family:'Playfair Display',serif;color:#fff;font-size:15px}
+
+.book-footer{text-align:center;padding:48px 32px;border-top:1px solid var(--border);margin-top:60px}
+.book-footer .book-title{font-family:'Playfair Display',serif;color:var(--gold);font-size:20px;margin-bottom:8px}
+.book-footer .footer-meta{color:var(--muted);font-size:13px}
+
+/* COPY BUTTON */
+.copy-btn{background:rgba(52,152,219,0.15);border:1px solid rgba(52,152,219,0.3);color:var(--blue);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;margin-left:10px;vertical-align:middle;transition:all .2s}
+.copy-btn:hover{background:rgba(52,152,219,0.25)}
+</style>
+</head>
+<body>
+
+<nav class="top-nav no-print">
+  <a href="D:\LƯU TRỮ KÊNH\LINKS-GIAO-KIT\index.html" class="nav-brand">📚 Broker Pro Book</a>
+  <div class="nav-links">
+    <a href="broker-pro-book-chapter5.html">← Chương 5</a>
+    <a href="#" style="color:var(--green)">Chương 6</a>
+    <a href="#">Chương 7 →</a>
+    <button class="btn-print" onclick="window.print()">🖨️ In / Lưu PDF</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="chapter-hero">
+  <div class="chapter-label">Phần II <span>|</span> Chương 6</div>
+  <h1>Phân Tích ROI Đầu Tư HLX —<br><em>Con Số Thực Tế</em></h1>
+  <p class="subtitle">Công thức tính yield, 3 kịch bản đầu tư, breakeven analysis và script trình bày ROI cho khách hàng</p>
+  <div class="hero-badges">
+    <span class="hero-badge">📊 3 Kịch Bản Đầu Tư</span>
+    <span class="hero-badge">🧮 Công Thức ROI</span>
+    <span class="hero-badge">⏱️ Breakeven Analysis</span>
+    <span class="hero-badge">💬 Script Tư Vấn ROI</span>
+    <span class="hero-badge">⚠️ 5 Chi Phí Ẩn</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<div class="chapter-quote">
+  "Số liệu là ngôn ngữ của người đầu tư. Broker nào trình bày được ROI rõ ràng, có căn cứ, broker đó đang tư vấn — không phải đang bán hàng. Và người tư vấn bao giờ cũng được tin tưởng hơn người bán hàng."
+</div>
+
+<div class="section-title" style="margin-top:0">
+  <span class="section-num">↑</span>
+  Mở Đầu — Tại Sao ROI Là Vũ Khí Của Broker Chuyên Nghiệp?
+</div>
+
+<p>Có hai loại broker khi gặp khách hỏi "Đầu tư HLX có lời không?"</p>
+
+<div class="compare-grid">
+  <div class="compare-item bad">
+    <h4 style="color:#e74c3c">❌ Broker Mới Trả Lời:</h4>
+    <p style="font-size:14px;color:var(--muted)">"Dạ, HLX tiềm năng lắm anh/chị ơi! Hạ Long đang phát triển mạnh, Vinhomes uy tín, chắc chắn sinh lời tốt!"</p>
+    <p style="font-size:13px;color:#e74c3c;margin-top:8px;margin-bottom:0">→ Không có số liệu, không có cơ sở, khách không tin</p>
+  </div>
+  <div class="compare-item good">
+    <h4 style="color:#2ecc71">✅ Broker Chuyên Nghiệp Trả Lời:</h4>
+    <p style="font-size:14px;color:var(--muted)">"Để em phân tích cụ thể cho anh/chị: với căn 2PN giá 2.5 tỷ, cho thuê ngắn hạn kịch bản cơ sở yield khoảng 5.8%/năm, hoàn vốn 17 năm. Em có bảng chi tiết đây ạ."</p>
+    <p style="font-size:13px;color:#2ecc71;margin-top:8px;margin-bottom:0">→ Có số liệu, có căn cứ, khách tin và mua</p>
+  </div>
+</div>
+
+<p>Chương này sẽ trang bị cho anh/chị <strong>toàn bộ kiến thức và công cụ</strong> để phân tích ROI cho bất kỳ sản phẩm HLX nào — và trình bày nó một cách thuyết phục với khách hàng.</p>
+
+<!-- 6.1 -->
+<div class="section-title">
+  <span class="section-num">1</span>
+  Các Khái Niệm ROI Căn Bản — Broker PHẢI Biết
+</div>
+
+<div class="subsection-title">Gross Yield vs Net Yield</div>
+
+<div class="roi-formula">
+  <div class="formula-title">📐 Công Thức Gross Yield (Thu Nhập Cho Thuê Gộp)</div>
+  <div class="formula-main">
+    Gross Yield (%) = <em>(Doanh Thu Cho Thuê Năm ÷ Giá Mua)</em> × 100
+  </div>
+  <div class="formula-note">Ví dụ: Cho thuê 200 triệu/năm, mua giá 2.5 tỷ → Gross Yield = 8%</div>
+</div>
+
+<div class="roi-formula">
+  <div class="formula-title">📐 Công Thức Net Yield (Thu Nhập Thực Tế Sau Chi Phí)</div>
+  <div class="formula-main">
+    Net Yield (%) = <em>((Doanh Thu − Chi Phí Vận Hành) ÷ Giá Mua)</em> × 100
+  </div>
+  <div class="formula-note">Chi phí vận hành bao gồm: phí quản lý, điện nước, platform fee, thuế, sửa chữa, trống phòng</div>
+</div>
+
+<div class="roi-formula">
+  <div class="formula-title">📐 Công Thức Tổng ROI (Bao Gồm Tăng Giá Trị)</div>
+  <div class="formula-main">
+    Total ROI = <em>Net Yield + % Tăng Giá Trị Tài Sản/Năm</em>
+  </div>
+  <div class="formula-note">Đây mới là con số thực sự hấp dẫn — nhiều nhà đầu tư bỏ qua phần tăng giá trị</div>
+</div>
+
+<div class="highlight gold">
+  <strong>💡 Lưu ý quan trọng khi tư vấn:</strong>
+  <p style="margin-top:10px">Luôn trình bày <strong>Net Yield</strong>, không phải Gross Yield. Broker nào chỉ nêu Gross Yield (con số đẹp hơn) sẽ bị mất uy tín khi khách tự tính sau và thấy sai. Trung thực từ đầu = tin tưởng lâu dài.</p>
+</div>
+
+<div class="subsection-title">5 Chi Phí Ẩn Broker PHẢI Tính Vào ROI</div>
+<p>Đây là "cạm bẫy" mà hầu hết broker mới mắc phải — và khiến khách hàng thất vọng sau khi mua:</p>
+
+<div class="calc-table">
+  <div class="calc-header">
+    <h3>Chi Phí Vận Hành Thực Tế</h3>
+    <span class="tag">% Doanh Thu Cho Thuê</span>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">🏢 Phí quản lý tòa nhà (Vinhomes)</div>
+    <div class="calc-value negative">
+      <span id="note-fee1">____%/tháng</span>
+      <div class="note-box" style="margin-top:4px;padding:6px 10px;font-size:11px;display:inline-block">
+        <span style="color:var(--gold)">✏️ Note: Bổ sung phí quản lý thực tế HLX</span>
+      </div>
+    </div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">🌐 Platform fee (Airbnb/Booking): 15–20% doanh thu</div>
+    <div class="calc-value negative">−15–20%</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">🧹 Chi phí dọn dẹp, laundry, đón khách</div>
+    <div class="calc-value negative">−5–10%</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">🔧 Sửa chữa, bảo trì định kỳ</div>
+    <div class="calc-value negative">−3–5%</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">📊 Thuế cho thuê nhà (10% doanh thu nếu >100tr/năm)</div>
+    <div class="calc-value negative">−10%</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">🏖️ Phòng trống mùa thấp điểm (est. 30–40% thời gian)</div>
+    <div class="calc-value negative">−30–40%</div>
+  </div>
+  <div class="calc-row subtotal">
+    <div class="calc-label main">📉 Tổng chi phí ước tính (trên doanh thu gộp)</div>
+    <div class="calc-value negative">40–55%</div>
+  </div>
+  <div class="calc-row total">
+    <div class="calc-label main">✅ Doanh thu thực giữ lại (Net)</div>
+    <div class="calc-value positive">45–60%</div>
+  </div>
+</div>
+
+<!-- 6.2 -->
+<div class="section-title">
+  <span class="section-num">2</span>
+  3 Kịch Bản Đầu Tư — Phân Tích Chi Tiết
+</div>
+
+<p>Tôi sẽ phân tích 3 kịch bản cho <strong>căn hộ 2 phòng ngủ điển hình tại HLX</strong>. Anh/chị điền số liệu thực tế vào các ô trống để có bảng phân tích hoàn chỉnh.</p>
+
+<div class="note-box">
+  <div class="note-label">Note Trước Khi Đọc</div>
+  <p>Tất cả số liệu trong phần 6.2 là ước tính mẫu — anh/chị cần bổ sung giá mua thực tế HLX và số liệu cho thuê Airbnb thực tế trong khu vực để có bảng phân tích chính xác cho tư vấn khách hàng.</p>
+</div>
+
+<div class="scenarios-grid">
+  <!-- Conservative -->
+  <div class="scenario-card s-conservative">
+    <div class="scenario-header">
+      <div class="s-icon">🌱</div>
+      <h3>Thận Trọng</h3>
+      <div class="s-sub">Kịch Bản Xấu / An Toàn</div>
+    </div>
+    <div class="scenario-body">
+      <div class="s-row"><span class="s-label">Giá mua</span><span class="s-val">2.5 tỷ</span></div>
+      <div class="s-row"><span class="s-label">Giá/đêm</span><span class="s-val">___đ <span style="font-size:11px;opacity:.6">(thấp điểm)</span></span></div>
+      <div class="s-row"><span class="s-label">Occupancy</span><span class="s-val">45% năm</span></div>
+      <div class="s-row"><span class="s-label">Doanh thu gộp</span><span class="s-val">___tr/năm</span></div>
+      <div class="s-row"><span class="s-label">Chi phí vận hành</span><span class="s-val">55% DT</span></div>
+      <div class="s-row"><span class="s-label">Thu nhập ròng</span><span class="s-val" style="color:#2ecc71">___tr/năm</span></div>
+      <div class="s-row"><span class="s-label">Tăng giá/năm</span><span class="s-val">3–5%</span></div>
+      <div class="scenario-result">
+        <div class="res-label">Net Yield Ước Tính</div>
+        <div class="res-yield">~3–4%</div>
+        <div style="font-size:12px;margin-top:4px;opacity:.7">+ 3–5% tăng giá trị</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Base -->
+  <div class="scenario-card s-base">
+    <div class="scenario-header">
+      <div class="s-icon">⚖️</div>
+      <h3>Cơ Sở</h3>
+      <div class="s-sub">Kịch Bản Thực Tế Nhất</div>
+    </div>
+    <div class="scenario-body">
+      <div class="s-row"><span class="s-label">Giá mua</span><span class="s-val">2.5 tỷ</span></div>
+      <div class="s-row"><span class="s-label">Giá/đêm</span><span class="s-val">___đ <span style="font-size:11px;opacity:.6">(trung bình)</span></span></div>
+      <div class="s-row"><span class="s-label">Occupancy</span><span class="s-val">60% năm</span></div>
+      <div class="s-row"><span class="s-label">Doanh thu gộp</span><span class="s-val">___tr/năm</span></div>
+      <div class="s-row"><span class="s-label">Chi phí vận hành</span><span class="s-val">48% DT</span></div>
+      <div class="s-row"><span class="s-label">Thu nhập ròng</span><span class="s-val" style="color:var(--gold)">___tr/năm</span></div>
+      <div class="s-row"><span class="s-label">Tăng giá/năm</span><span class="s-val">7–10%</span></div>
+      <div class="scenario-result">
+        <div class="res-label">Net Yield Ước Tính</div>
+        <div class="res-yield">~5–7%</div>
+        <div style="font-size:12px;margin-top:4px;opacity:.7">+ 7–10% tăng giá trị</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optimistic -->
+  <div class="scenario-card s-optimistic">
+    <div class="scenario-header">
+      <div class="s-icon">🚀</div>
+      <h3>Lạc Quan</h3>
+      <div class="s-sub">Kịch Bản Tốt</div>
+    </div>
+    <div class="scenario-body">
+      <div class="s-row"><span class="s-label">Giá mua</span><span class="s-val">2.5 tỷ</span></div>
+      <div class="s-row"><span class="s-label">Giá/đêm</span><span class="s-val">___đ <span style="font-size:11px;opacity:.6">(cao điểm)</span></span></div>
+      <div class="s-row"><span class="s-label">Occupancy</span><span class="s-val">75% năm</span></div>
+      <div class="s-row"><span class="s-label">Doanh thu gộp</span><span class="s-val">___tr/năm</span></div>
+      <div class="s-row"><span class="s-label">Chi phí vận hành</span><span class="s-val">42% DT</span></div>
+      <div class="s-row"><span class="s-label">Thu nhập ròng</span><span class="s-val" style="color:#a678d8">___tr/năm</span></div>
+      <div class="s-row"><span class="s-label">Tăng giá/năm</span><span class="s-val">12–15%</span></div>
+      <div class="scenario-result">
+        <div class="res-label">Net Yield Ước Tính</div>
+        <div class="res-yield">~8–10%</div>
+        <div style="font-size:12px;margin-top:4px;opacity:.7">+ 12–15% tăng giá trị</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Note Quan Trọng — Bổ Sung Số Thực</div>
+  <p>Điền giá/đêm và doanh thu gộp thực tế bằng cách: (1) Kiểm tra Airbnb.com khu vực Hạ Long — lọc căn hộ 2PN; (2) Hỏi các chủ sở hữu đang cho thuê tại HLX hoặc khu vực lân cận; (3) Liên hệ đơn vị quản lý cho thuê tại Hạ Long. Số liệu thực tế = lợi thế cạnh tranh của anh/chị.</p>
+</div>
+
+<!-- 6.3 -->
+<div class="section-title">
+  <span class="section-num">3</span>
+  Breakeven Analysis — Bao Nhiêu Năm Hoàn Vốn?
+</div>
+
+<div class="breakeven-visual">
+  <h3 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:20px">⏱️ Ước Tính Thời Gian Hoàn Vốn</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Tính toán dựa trên dòng tiền cho thuê ròng + tăng giá trị tài sản</p>
+
+  <div class="breakeven-bar-wrap">
+    <div class="breakeven-label">
+      <span>🌱 Kịch Bản Thận Trọng</span><span style="color:#2ecc71">~22–25 năm (chỉ dòng tiền thuần)</span>
+    </div>
+    <div class="breakeven-bar"><div class="breakeven-fill green" style="width:88%"></div></div>
+  </div>
+
+  <div class="breakeven-bar-wrap">
+    <div class="breakeven-label">
+      <span>⚖️ Kịch Bản Cơ Sở</span><span style="color:var(--gold)">~14–17 năm (dòng tiền thuần)</span>
+    </div>
+    <div class="breakeven-bar"><div class="breakeven-fill gold" style="width:65%"></div></div>
+  </div>
+
+  <div class="breakeven-bar-wrap">
+    <div class="breakeven-label">
+      <span>🚀 Kịch Bản Lạc Quan</span><span style="color:#a678d8">~10–12 năm (dòng tiền thuần)</span>
+    </div>
+    <div class="breakeven-bar"><div class="breakeven-fill purple" style="width:48%"></div></div>
+  </div>
+
+  <div class="highlight gold" style="margin-top:24px">
+    <strong>💡 Bao gồm tăng giá trị tài sản:</strong>
+    <p style="margin-top:8px;font-size:14px">Nếu giá trị căn hộ tăng <strong>7–10%/năm</strong> (lịch sử BĐS Vinhomes), thời gian hoàn vốn thực tế (tiền thuê + tăng giá) có thể rút ngắn xuống còn <strong>7–9 năm</strong> ở kịch bản cơ sở — đây là con số rất hấp dẫn so với lãi suất tiết kiệm ngân hàng (~5%/năm).</p>
+  </div>
+</div>
+
+<!-- 6.4 -->
+<div class="section-title">
+  <span class="section-num">4</span>
+  So Sánh Với Kênh Đầu Tư Khác — Câu Hỏi Khách Thường Hỏi
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Kênh Đầu Tư</th>
+  <th>Lợi Nhuận/Năm</th>
+  <th>Rủi Ro</th>
+  <th>Thanh Khoản</th>
+  <th>Bảo Vệ Lạm Phát</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Gửi tiết kiệm ngân hàng</strong></td>
+  <td>4.5–6%</td>
+  <td>Rất thấp</td>
+  <td>Cao</td>
+  <td>Không (mất giá thực)</td>
+</tr>
+<tr>
+  <td><strong>Trái phiếu doanh nghiệp</strong></td>
+  <td>7–11%</td>
+  <td>Trung bình-cao</td>
+  <td>Thấp</td>
+  <td>Không</td>
+</tr>
+<tr>
+  <td><strong>Cổ phiếu / chứng khoán</strong></td>
+  <td>−20% đến +30%</td>
+  <td>Cao</td>
+  <td>Rất cao</td>
+  <td>Có (một phần)</td>
+</tr>
+<tr>
+  <td><strong>Vàng</strong></td>
+  <td>8–12% (avg 10 năm)</td>
+  <td>Trung bình</td>
+  <td>Cao</td>
+  <td>Có</td>
+</tr>
+<tr style="background:rgba(201,168,76,0.06)">
+  <td><strong style="color:var(--gold)">BĐS HLX — cho thuê ngắn hạn</strong></td>
+  <td style="color:var(--gold)"><strong>12–20%+ (net + tăng giá)</strong></td>
+  <td style="color:var(--gold)">Trung bình</td>
+  <td style="color:var(--gold)">Trung bình</td>
+  <td style="color:var(--gold)">Có (mạnh)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="highlight green">
+  <strong>📌 Điểm mấu chốt khi tư vấn:</strong>
+  <p style="margin-top:8px">BĐS HLX không phải kênh đầu tư tốt nhất ở mọi tiêu chí — nhưng là kênh <strong>cân bằng nhất</strong> về: lợi nhuận, bảo vệ lạm phát, có tài sản thực cầm tay, và còn được hưởng lợi ích sử dụng cá nhân (nghỉ dưỡng). Không kênh nào khác có lợi thế cuối cùng này.</p>
+</div>
+
+<!-- 6.5 -->
+<div class="section-title">
+  <span class="section-num">5</span>
+  Phân Tích ROI Bằng Đòn Bẩy Tài Chính
+</div>
+
+<div class="subsection-title">Kịch Bản Vay 50% Giá Trị Căn Hộ</div>
+<p>Đây là cách nhiều nhà đầu tư kinh nghiệm tối ưu hóa ROI — và cũng là cách anh/chị giúp khách thấy "tiền đẻ ra tiền" như thế nào.</p>
+
+<div class="calc-table">
+  <div class="calc-header">
+    <h3>Phân Tích Đòn Bẩy — Mua Căn 2.5 Tỷ, Vay 1.25 Tỷ</h3>
+    <span class="tag">Kịch Bản Cơ Sở</span>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">Giá mua căn hộ</div>
+    <div class="calc-value white">2,500,000,000đ</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">Vốn tự có (50%)</div>
+    <div class="calc-value gold">1,250,000,000đ</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">Vốn vay ngân hàng (50%)</div>
+    <div class="calc-value negative">1,250,000,000đ</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">Lãi suất vay (ước tính 8.5%/năm trong thời gian ân hạn)</div>
+    <div class="calc-value negative">~106tr/năm</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">Thu nhập cho thuê ròng (kịch bản cơ sở)</div>
+    <div class="calc-value positive">+___tr/năm</div>
+  </div>
+  <div class="calc-row subtotal">
+    <div class="calc-label main">Dòng tiền ròng sau trả lãi</div>
+    <div class="calc-value positive">+___tr/năm</div>
+  </div>
+  <div class="calc-row">
+    <div class="calc-label">Tăng giá trị tài sản (7%/năm × 2.5 tỷ)</div>
+    <div class="calc-value positive">+175tr/năm</div>
+  </div>
+  <div class="calc-row total">
+    <div class="calc-label main">✅ ROI trên VỐN TỰ CÓ (1.25 tỷ)</div>
+    <div class="calc-value positive">~___% (vs ~___% không dùng đòn bẩy)</div>
+  </div>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Note — Điền Vào Từ Số Liệu Thực</div>
+  <p>Thu nhập cho thuê ròng = số liệu từ Note #6 (Chương 5). Lãi suất vay = cập nhật từ ngân hàng đối tác Vinhomes. Điền đủ số → bảng này trở thành công cụ tư vấn mạnh nhất của anh/chị.</p>
+</div>
+
+<blockquote>Đòn bẩy tài chính là con dao hai lưỡi. Khi thị trường tốt, ROI trên vốn tự có tăng mạnh. Khi thị trường xấu, áp lực trả nợ vẫn còn đó. Hãy tư vấn khách dùng đòn bẩy ở mức họ có thể "chịu được kịch bản xấu" — thường là không quá 50% giá trị tài sản.</blockquote>
+
+<!-- 6.6 -->
+<div class="section-title">
+  <span class="section-num">6</span>
+  Script Trình Bày ROI Với Khách Hàng
+</div>
+
+<p>Biết số liệu mới là bước đầu. Biết cách trình bày số liệu đó theo cách thuyết phục mới là kỹ năng của broker chuyên nghiệp.</p>
+
+<div class="subsection-title">Script 6.1 — Với Khách Đầu Tư Cho Thuê</div>
+
+<div class="script-box">
+  <div class="script-label">Script Tư Vấn ROI — Nhóm Đầu Tư Cho Thuê</div>
+
+  <div class="script-line">
+    <div class="script-role client">Khách hàng:</div>
+    <div class="script-text">"Đầu tư HLX có lời không? Bao nhiêu %/năm?"</div>
+  </div>
+
+  <div class="script-line">
+    <div class="script-role broker">Broker:</div>
+    <div class="script-text">"Dạ, để em phân tích cụ thể cho anh/chị luôn nhé. Em có bảng phân tích 3 kịch bản đây ạ [mở file/bảng ra]. Với căn 2PN giá khoảng 2.5 tỷ hiện tại, nếu mình cho thuê ngắn hạn trên Airbnb:<br><br>
+    Kịch bản thận trọng — occupancy 45%: net yield khoảng <strong>3–4%/năm</strong>, cộng thêm tăng giá trị tài sản lịch sử 5–7%/năm → tổng ROI khoảng 8–11%.<br><br>
+    Kịch bản cơ sở — đây là kịch bản em thấy thực tế nhất với khách thuê mùa cao điểm Hạ Long: net yield khoảng <strong>5–7%/năm</strong>, cộng tăng giá → tổng ROI 12–17%.<br><br>
+    Anh/chị đang so sánh với kênh nào ạ? Gửi ngân hàng hay cổ phiếu?"</div>
+  </div>
+
+  <div class="script-line">
+    <div class="script-role client">Khách hàng:</div>
+    <div class="script-text">"Tôi đang gửi tiết kiệm 6%/năm, nghĩ đến đầu tư thêm."</div>
+  </div>
+
+  <div class="script-line">
+    <div class="script-role broker">Broker:</div>
+    <div class="script-text">"Dạ, gửi tiết kiệm 6% là an toàn, nhưng đó là lãi suất danh nghĩa — sau lạm phát 3–4%/năm, thực ra anh/chị chỉ được 2–3% thực. Còn HLX: vừa có dòng tiền cho thuê thực, vừa có tài sản tăng giá theo lạm phát và phát triển khu vực, vừa có thể dùng nghỉ dưỡng cuối tuần. Ba trong một — không kênh tiết kiệm nào làm được điều đó ạ."</div>
+  </div>
+</div>
+
+<div class="subsection-title">Script 6.2 — Xử Lý Objection "Yield Thấp Hơn Tôi Nghĩ"</div>
+
+<div class="script-box">
+  <div class="script-label">Xử Lý Từ Chối — Yield Thấp Hơn Kỳ Vọng</div>
+
+  <div class="script-line">
+    <div class="script-role client">Khách hàng:</div>
+    <div class="script-text">"5–7% thôi à? Tôi nghe người ta nói cho thuê HLX 10–12%/năm mà."</div>
+  </div>
+
+  <div class="script-line">
+    <div class="script-role broker">Broker:</div>
+    <div class="script-text">"Dạ, 10–12% đó là <strong>gross yield</strong> — doanh thu gộp trước khi trừ chi phí. Em đang trình bày <strong>net yield</strong> — số tiền anh/chị thực sự bỏ vào túi sau tất cả chi phí.<br><br>
+    Nhiều người bị thất vọng vì được tư vấn gross yield rồi khi thực tế thu được ít hơn. Em muốn anh/chị có con số trung thực để quyết định đúng — dù số đó có thể ít 'hấp dẫn' hơn trên giấy.<br><br>
+    Thực ra, net yield 5–7% + tăng giá 7–10% = tổng 12–17%/năm trên vốn tự có — đây vẫn là một trong những kênh đầu tư tốt nhất ở Việt Nam hiện tại, anh/chị đồng ý không ạ?"</div>
+  </div>
+</div>
+
+<div class="subsection-title">Script 6.3 — Với Khách Second Home Ít Quan Tâm ROI</div>
+
+<div class="script-box">
+  <div class="script-label">Script Cho Khách Second Home — ROI Là Bonus</div>
+
+  <div class="script-line">
+    <div class="script-role client">Khách hàng:</div>
+    <div class="script-text">"Tôi mua để gia đình nghỉ dưỡng là chính, không cần cho thuê đâu."</div>
+  </div>
+
+  <div class="script-line">
+    <div class="script-role broker">Broker:</div>
+    <div class="script-text">"Dạ, mục tiêu của anh/chị rất rõ ràng — và đó là cách rất nhiều khách của em chọn lựa. Em vẫn muốn chia sẻ một điều thôi:<br><br>
+    Anh/chị mua căn 2.5 tỷ để gia đình dùng. Trung bình một gia đình nghỉ tại Hạ Long khoảng 8–12 tuần/năm. Còn lại 40 tuần — căn hộ bỏ không.<br><br>
+    Nếu cho thuê những tuần đó — ngay cả với giá vừa phải — anh/chị có thể thu về ___–___ triệu/năm. Đủ để trang trải <strong>toàn bộ phí quản lý và vận hành</strong> trong năm, thực chất là anh/chị đang ở miễn phí.<br><br>
+    Mình có thể bàn về option quản lý cho thuê tự động — anh/chị không cần làm gì, chỉ nhận tiền về tài khoản. Anh/chị muốn nghe thêm không ạ?"</div>
+  </div>
+</div>
+
+<!-- 6.7 -->
+<div class="section-title">
+  <span class="section-num">7</span>
+  Bảng Phân Tích ROI — Template Tư Vấn
+</div>
+
+<p>Đây là template anh/chị có thể in ra, điền số liệu thực tế, và dùng khi gặp khách hàng nhóm đầu tư.</p>
+
+<div class="calc-table">
+  <div class="calc-header">
+    <h3>📊 Bảng Phân Tích ROI — [Tên Khách Hàng] — [Ngày]</h3>
+    <span class="tag">Template Tư Vấn</span>
+  </div>
+
+  <div class="calc-row" style="background:rgba(27,58,107,0.3)">
+    <div class="calc-label" style="font-weight:700;color:var(--gold);font-size:15px">A. THÔNG TIN SẢN PHẨM</div>
+    <div></div>
+  </div>
+  <div class="calc-row"><div class="calc-label">Loại sản phẩm</div><div class="calc-value white">Căn hộ 2PN — [Phân khu _____]</div></div>
+  <div class="calc-row"><div class="calc-label">Diện tích</div><div class="calc-value white">_____m²</div></div>
+  <div class="calc-row"><div class="calc-label">Giá bán</div><div class="calc-value gold">_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Vốn tự có (_____%)</div><div class="calc-value gold">_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Vay ngân hàng (_____%)</div><div class="calc-value negative">_________đ @ _____% lãi/năm</div></div>
+
+  <div class="calc-row" style="background:rgba(27,58,107,0.3)">
+    <div class="calc-label" style="font-weight:700;color:var(--gold);font-size:15px">B. DOANH THU CHO THUÊ</div>
+    <div></div>
+  </div>
+  <div class="calc-row"><div class="calc-label">Giá cho thuê cao điểm/đêm</div><div class="calc-value white">_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Giá cho thuê thấp điểm/đêm</div><div class="calc-value white">_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Giá trung bình/đêm</div><div class="calc-value white">_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Occupancy rate ước tính</div><div class="calc-value white">_____%/năm (_____ đêm)</div></div>
+  <div class="calc-row subtotal"><div class="calc-label main">DOANH THU GỘP/NĂM</div><div class="calc-value positive">+_________đ</div></div>
+
+  <div class="calc-row" style="background:rgba(27,58,107,0.3)">
+    <div class="calc-label" style="font-weight:700;color:var(--gold);font-size:15px">C. CHI PHÍ VẬN HÀNH</div>
+    <div></div>
+  </div>
+  <div class="calc-row"><div class="calc-label">Platform fee (Airbnb/Booking ~15–18%)</div><div class="calc-value negative">−_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Chi phí quản lý, dọn dẹp (~8%)</div><div class="calc-value negative">−_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Phí quản lý tòa nhà</div><div class="calc-value negative">−_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Thuế cho thuê (10% nếu >100tr)</div><div class="calc-value negative">−_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Sửa chữa, bảo trì ước tính</div><div class="calc-value negative">−_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Lãi vay ngân hàng (nếu có)</div><div class="calc-value negative">−_________đ</div></div>
+  <div class="calc-row subtotal"><div class="calc-label main">TỔNG CHI PHÍ</div><div class="calc-value negative">−_________đ</div></div>
+
+  <div class="calc-row" style="background:rgba(27,58,107,0.3)">
+    <div class="calc-label" style="font-weight:700;color:var(--gold);font-size:15px">D. KẾT QUẢ</div>
+    <div></div>
+  </div>
+  <div class="calc-row"><div class="calc-label">Thu nhập ròng/năm (B − C)</div><div class="calc-value positive">+_________đ</div></div>
+  <div class="calc-row"><div class="calc-label">Net Yield (trên giá mua)</div><div class="calc-value positive">_____%</div></div>
+  <div class="calc-row"><div class="calc-label">Tăng giá trị tài sản ước tính (7%/năm)</div><div class="calc-value positive">+_________đ</div></div>
+  <div class="calc-row total"><div class="calc-label main">✅ TỔNG ROI THỰC (NET YIELD + TĂNG GIÁ)</div><div class="calc-value positive">~_____%/năm</div></div>
+  <div class="calc-row total"><div class="calc-label main">✅ THỜI GIAN HOÀN VỐN ƯỚC TÍNH</div><div class="calc-value positive">~ _____ năm</div></div>
+</div>
+
+<!-- SUMMARY -->
+<div class="chapter-summary">
+  <h2>📊 5 Điều Phải Nhớ Từ Chương 6</h2>
+  <div class="table-wrap">
+  <table>
+  <thead><tr><th>#</th><th>Điều Cần Nhớ</th><th>Áp Dụng Thế Nào</th></tr></thead>
+  <tbody>
+  <tr><td style="color:#2ecc71;font-weight:700">1</td><td>Luôn dùng Net Yield, không phải Gross Yield</td><td>Tránh thất vọng sau mua = giữ được uy tín</td></tr>
+  <tr><td style="color:#2ecc71;font-weight:700">2</td><td>5 chi phí ẩn ảnh hưởng 40–55% doanh thu</td><td>Tính đủ → tư vấn trung thực → khách tin</td></tr>
+  <tr><td style="color:#2ecc71;font-weight:700">3</td><td>3 kịch bản: thận trọng / cơ sở / lạc quan</td><td>Cho khách thấy đủ mặt tốt và xấu</td></tr>
+  <tr><td style="color:#2ecc71;font-weight:700">4</td><td>Đòn bẩy tài chính tối ưu ROI trên vốn tự có</td><td>Nhưng khuyên vay ≤50% và an toàn</td></tr>
+  <tr><td style="color:#2ecc71;font-weight:700">5</td><td>Mỗi nhóm khách có góc nhìn ROI khác nhau</td><td>Dùng đúng script cho đúng nhóm</td></tr>
+  </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- EXERCISE -->
+<div class="exercise-box">
+  <h3>📝 Bài Tập Thực Hành — Cuối Chương 6</h3>
+
+  <div class="exercise-item">
+    <h4>Bài Tập 1 — Xây Bảng ROI Của Riêng Mình</h4>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:10px">Sử dụng template ở §6.7, điền số liệu thực tế:</p>
+    <ul class="checklist">
+      <li>Kiểm tra Airbnb.com — tìm 5 căn hộ 2PN tại Hạ Long đang cho thuê, ghi lại giá/đêm và occupancy</li>
+      <li>Liên hệ bộ phận kinh doanh HLX — hỏi phí quản lý và chính sách vay ngân hàng</li>
+      <li>Điền đầy đủ bảng template cho 1 căn cụ thể (giá 2.5 tỷ)</li>
+      <li>Tính được Net Yield và thời gian hoàn vốn của riêng anh/chị</li>
+    </ul>
+  </div>
+
+  <div class="exercise-item">
+    <h4>Bài Tập 2 — Luyện Script ROI</h4>
+    <ul class="checklist">
+      <li>Đọc Script 6.1 to 3 lần, ghi nhớ cấu trúc chính</li>
+      <li>Role-play với đồng nghiệp: anh/chị là broker, đồng nghiệp là khách đầu tư</li>
+      <li>Thực hành xử lý objection "yield thấp hơn tôi nghĩ" (Script 6.2)</li>
+    </ul>
+  </div>
+
+  <div class="exercise-item">
+    <h4>Bài Tập 3 — So Sánh Với Kênh Khác</h4>
+    <ul class="checklist">
+      <li>Lấy lãi suất tiết kiệm ngân hàng hiện tại (tra Google)</li>
+      <li>Tính ROI thực sau lạm phát (giả sử lạm phát 3.5%)</li>
+      <li>Viết 3 câu so sánh HLX vs tiết kiệm ngân hàng bằng lời của anh/chị</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CHAPTER NAV -->
+<div class="chapter-nav">
+  <a href="broker-pro-book-chapter5.html" class="chapter-nav-btn prev">
+    <div class="nav-arrow">←</div>
+    <div>
+      <div class="nav-label">Chương trước</div>
+      <div class="nav-title">Chương 5: Vinhomes HLX — Tổng Quan</div>
+    </div>
+  </a>
+  <a href="#" class="chapter-nav-btn">
+    <div>
+      <div class="nav-label">Chương tiếp theo</div>
+      <div class="nav-title">Chương 7: Khách Hàng Tiềm Năng — Ai Mua & Khi Nào?</div>
+    </div>
+    <div class="nav-arrow">→</div>
+  </a>
+</div>
+
+</div><!-- /page-wrap -->
+
+<div class="book-footer">
+  <div class="book-title">BROKER PRO — Hành Trình Từ 0 Đến Thu Nhập 200 Triệu/Năm</div>
+  <div class="footer-meta">Thực Chiến Tại Hạ Long Xanh | Phần II, Chương 6</div>
+</div>
+
+</body>
+</html>
