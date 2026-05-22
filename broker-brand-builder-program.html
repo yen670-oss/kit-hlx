@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🏆 Program Hub — Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+/* HEADER */
+.header{background:linear-gradient(160deg,#040d18,#0d1b2a,#1B3A6B);padding:32px 24px 28px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(201,168,76,.12),transparent 55%),radial-gradient(ellipse at 80%,rgba(27,58,107,.2),transparent 55%)}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:5px 16px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--gl);margin-bottom:14px;position:relative;z-index:1}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,32px);font-weight:900;background:linear-gradient(135deg,var(--gl),#fff,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:8px}
+.header-sub{font-size:13px;color:rgba(232,223,200,.55);position:relative;z-index:1;margin-bottom:20px}
+
+/* TIER SELECTOR */
+.tier-bar{background:rgba(0,0,0,.3);border-bottom:1px solid rgba(201,168,76,.12);padding:10px 20px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:99;backdrop-filter:blur(10px)}
+.tier-btn{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 18px;font-size:12px;font-weight:700;color:rgba(232,223,200,.55);cursor:pointer;transition:.2s;font-family:'Be Vietnam Pro',sans-serif}
+.tier-btn:hover{border-color:rgba(201,168,76,.4);color:var(--gl)}
+.tier-btn.active{border-color:var(--gold);color:var(--gl);background:rgba(201,168,76,.1)}
+.tier-btn.vip-btn.active{border-color:#9b59b6;color:#bb8fce;background:rgba(155,89,182,.1)}
+
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+
+/* TIER WELCOME */
+.tier-welcome{background:linear-gradient(135deg,rgba(27,58,107,.3),rgba(0,0,0,.2));border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:20px 22px;margin-bottom:24px;display:flex;align-items:flex-start;gap:16px}
+.tw-icon{font-size:36px;flex-shrink:0}
+.tw-content h2{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:4px}
+.tw-content p{font-size:13px;color:rgba(232,223,200,.65);line-height:1.6}
+.tw-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:8px;margin-top:8px}
+.tw-badge.starter{background:rgba(201,168,76,.15);color:var(--gl);border:1px solid rgba(201,168,76,.3)}
+.tw-badge.brand{background:rgba(201,168,76,.2);color:var(--gl);border:1px solid rgba(201,168,76,.4)}
+.tw-badge.vip{background:rgba(155,89,182,.2);color:#bb8fce;border:1px solid rgba(155,89,182,.4)}
+
+/* PROGRESS */
+.progress-section{background:var(--card);border-radius:12px;padding:18px 20px;margin-bottom:20px}
+.prog-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:14px}
+.prog-modules{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.prog-mod{text-align:center;padding:12px 8px;border-radius:10px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);cursor:pointer;transition:.2s;text-decoration:none;display:block}
+.prog-mod:hover{border-color:rgba(201,168,76,.25)}
+.prog-mod.locked{opacity:.35;cursor:not-allowed;pointer-events:none}
+.pm-icon{font-size:22px;margin-bottom:6px}
+.pm-num{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:3px}
+.pm-name{font-size:11px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.2}
+.pm-days{font-size:10px;color:rgba(232,223,200,.35)}
+.pm-status{font-size:10px;font-weight:800;margin-top:6px}
+.pm-status.open{color:#2ecc71}
+.pm-status.locked-s{color:rgba(232,223,200,.3)}
+@media(max-width:480px){.prog-modules{grid-template-columns:repeat(2,1fr)}}
+
+/* SECTION HEADER */
+.sec-head{display:flex;align-items:center;gap:10px;margin:28px 0 14px}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:16px;color:#fff;white-space:nowrap}
+.sec-head::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.3),transparent)}
+
+/* RESOURCE CARDS */
+.resource-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.resource-card{background:var(--card);border-radius:12px;border:1px solid rgba(255,255,255,.07);padding:16px 18px;display:flex;align-items:center;gap:14px;transition:.2s}
+.resource-card:hover{border-color:rgba(201,168,76,.2)}
+.resource-card.locked{opacity:.4;pointer-events:none}
+.rc-icon{font-size:24px;flex-shrink:0}
+.rc-content{flex:1;min-width:0}
+.rc-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(226,192,106,.4);margin-bottom:3px}
+.rc-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
+.rc-desc{font-size:12px;color:rgba(232,223,200,.5);line-height:1.4}
+.rc-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:5px}
+.rc-tag.included{background:rgba(39,174,96,.15);color:#2ecc71;border:1px solid rgba(39,174,96,.25)}
+.rc-tag.locked{background:rgba(255,255,255,.06);color:rgba(232,223,200,.3);border:1px solid rgba(255,255,255,.08)}
+.rc-tag.bonus{background:rgba(201,168,76,.12);color:var(--gl);border:1px solid rgba(201,168,76,.25)}
+.rc-tag.vip-only{background:rgba(155,89,182,.15);color:#bb8fce;border:1px solid rgba(155,89,182,.3)}
+.rc-actions{display:flex;gap:8px;flex-shrink:0}
+.btn-go{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-weight:800;font-size:11.5px;padding:8px 16px;border-radius:8px;text-decoration:none;white-space:nowrap;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+.btn-go:hover{opacity:.9}
+.btn-go.outline{background:rgba(255,255,255,.07);color:rgba(232,223,200,.7);border:1px solid rgba(255,255,255,.12)}
+.btn-go.purple{background:linear-gradient(135deg,#8e44ad,#6c3483)}
+
+/* VIP CARD */
+.vip-coaching{background:linear-gradient(135deg,rgba(44,22,84,.4),rgba(27,58,107,.3));border:1.5px solid rgba(155,89,182,.3);border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.vc-title{font-size:13px;font-weight:800;color:#bb8fce;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.vc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.vc-item{background:rgba(0,0,0,.25);border-radius:10px;padding:12px 14px}
+.vc-item h4{font-size:12.5px;font-weight:700;color:#fff;margin-bottom:4px}
+.vc-item p{font-size:11.5px;color:rgba(232,223,200,.55);line-height:1.4}
+
+/* UPGRADE NUDGE */
+.upgrade-card{background:linear-gradient(135deg,rgba(27,58,107,.25),rgba(0,0,0,.2));border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:16px 20px;text-align:center;margin-top:20px}
+.uc-title{font-size:13px;font-weight:700;color:var(--gl);margin-bottom:6px}
+.uc-desc{font-size:12px;color:rgba(232,223,200,.55);margin-bottom:12px}
+.btn-upgrade{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-weight:800;font-size:12.5px;padding:10px 22px;border-radius:9px;text-decoration:none;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+
+/* COMMUNITY */
+.community-card{background:linear-gradient(135deg,#071525,#1B3A6B);border-radius:12px;padding:18px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.cc-text h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--gl);margin-bottom:4px}
+.cc-text p{font-size:12px;color:rgba(255,255,255,.5)}
+.btn-zalo{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#071525;font-weight:800;font-size:12.5px;padding:10px 18px;border-radius:9px;text-decoration:none;white-space:nowrap}
+
+/* SUPPORT */
+.support-strip{background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.2);border-radius:10px;padding:14px 16px;margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ss-icon{font-size:22px}
+.ss-text{flex:1;font-size:12.5px;color:rgba(232,223,200,.75);line-height:1.5}
+.ss-text strong{color:#2ecc71}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">🏆 Broker HLX Brand Builder · Program Hub</div>
+  <h1>Chào Mừng Đến Với<br>Hành Trình 60 Ngày</h1>
+  <p class="header-sub">Tất cả tài liệu, bài học và công cụ của anh/chị ở đây · Chọn gói để xem nội dung</p>
+</div>
+
+<!-- TIER SELECTOR -->
+<div class="tier-bar">
+  <button class="tier-btn active" id="btn-starter" onclick="setTier('starter')">🥉 Starter</button>
+  <button class="tier-btn" id="btn-brand" onclick="setTier('brand')">🥇 Brand Builder</button>
+  <button class="tier-btn vip-btn" id="btn-vip" onclick="setTier('vip')">💎 VIP Accelerator</button>
+</div>
+
+<div class="wrap">
+
+<!-- TIER WELCOME -->
+<div class="tier-welcome" id="tier-welcome">
+  <div class="tw-icon">🥉</div>
+  <div class="tw-content">
+    <h2 id="tw-title">Gói Starter — Bắt Đầu Hành Trình</h2>
+    <p id="tw-desc">Anh/chị có Module 1 đầy đủ (5 bài học) + 30 template bài viết HLX. Đây là nền móng quan trọng nhất — hãy hoàn thành Module 1 trước khi làm bất cứ thứ gì khác.</p>
+    <span class="tw-badge starter" id="tw-badge">🥉 STARTER</span>
+  </div>
+</div>
+
+<!-- MODULE PROGRESS -->
+<div class="progress-section">
+  <div class="prog-title">📅 Lộ Trình 60 Ngày</div>
+  <div class="prog-modules" id="prog-modules">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- CORE MODULES -->
+<div class="sec-head"><h2>📚 Bài Học</h2></div>
+<div class="resource-grid" id="modules-grid"></div>
+
+<!-- BONUS MATERIALS -->
+<div class="sec-head" id="bonus-head"><h2>🎁 Tài Liệu Bonus</h2></div>
+<div class="resource-grid" id="bonus-grid"></div>
+
+<!-- VIP COACHING (hidden unless vip) -->
+<div id="vip-section" style="display:none">
+  <div class="sec-head"><h2>💎 VIP Coaching 1:1</h2></div>
+  <div class="vip-coaching">
+    <div class="vc-title">📞 4 Buổi Coaching Cá Nhân — Đặt Lịch Qua Zalo</div>
+    <div class="vc-grid">
+      <div class="vc-item"><h4>Buổi 1 — Tuần 1</h4><p>Review profile & định vị · Audit toàn bộ MXH · Chiến lược cá nhân hoá</p></div>
+      <div class="vc-item"><h4>Buổi 2 — Tuần 3</h4><p>Review content đã đăng · Tối ưu format · Giải quyết bottleneck</p></div>
+      <div class="vc-item"><h4>Buổi 3 — Tuần 5</h4><p>Review lead pipeline · Script chuyển đổi · Xử lý từ chối thực tế</p></div>
+      <div class="vc-item"><h4>Buổi 4 — Tuần 8</h4><p>Tổng kết 60 ngày · Kế hoạch 90 ngày tiếp · Chiến lược nhân rộng</p></div>
+    </div>
+  </div>
+  <div class="resource-card" style="border-color:rgba(155,89,182,.3)">
+    <div class="rc-icon">✏️</div>
+    <div class="rc-content">
+      <div class="rc-label">VIP EXCLUSIVE</div>
+      <div class="rc-name">Review 4 Bài Viết Trực Tiếp</div>
+      <div class="rc-desc">Gửi 4 bài viết của anh/chị qua Zalo · Nhận feedback chi tiết trong 24h · Sửa theo cá nhân hoá</div>
+      <span class="rc-tag vip-only">💎 VIP Only</span>
+    </div>
+    <div class="rc-actions">
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-go purple">💬 Gửi Bài →</a>
+    </div>
+  </div>
+</div>
+
+<!-- UPGRADE NUDGE (hidden for brand & vip) -->
+<div class="upgrade-card" id="upgrade-card">
+  <div class="uc-title">🔓 Mở Khoá Thêm 5 Tài Liệu Bonus</div>
+  <div class="uc-desc">Nâng cấp lên Brand Builder để nhận: Lịch content 90 ngày · Script pitching · Nghiên cứu thị trường · Group community · 4 buổi Q&A live</div>
+  <a href="broker-brand-builder-checkout.html?tier=brand-builder" class="btn-upgrade">⬆️ Nâng Cấp Brand Builder — 2,997,000đ →</a>
+</div>
+
+<!-- COMMUNITY -->
+<div class="community-card" id="community-card" style="display:none">
+  <div class="cc-text">
+    <h3>👥 Group "Broker HLX Chuyên Nghiệp"</h3>
+    <p>Q&A live 2 lần/tháng · Chia sẻ case study thực · Kết nối đồng nghiệp HLX</p>
+  </div>
+  <a href="https://zalo.me/g/xxxx" target="_blank" class="btn-zalo">🔗 Tham Gia Group →</a>
+</div>
+
+<!-- SUPPORT -->
+<div class="support-strip">
+  <div class="ss-icon">💬</div>
+  <div class="ss-text">Cần hỗ trợ? Nhắn Zalo <strong>0964.827.670</strong> — phản hồi trong 2 tiếng (8h–22h hàng ngày). Hoặc đặt câu hỏi trong group community.</div>
+  <a href="https://zalo.me/0964827670" target="_blank" class="btn-zalo" style="font-size:12px;padding:8px 14px">💬 Zalo Hỗ Trợ</a>
+</div>
+
+</div>
+
+<script>
+const BASE = 'https://yen670-oss.github.io/kit-hlx/';
+
+const MODULES = [
+  {icon:'🧱', num:'Module 1', name:'Nền Móng · Định Vị', days:'Ngày 1–15', color:'#C9A84C', url: BASE+'broker-brand-builder-module1.html', tiers:['starter','brand','vip']},
+  {icon:'✍️', num:'Module 2', name:'Hệ Thống Nội Dung', days:'Ngày 16–30', color:'#27ae60', url: BASE+'broker-brand-builder-module2.html', tiers:['brand','vip']},
+  {icon:'🎯', num:'Module 3', name:'Thu Hút Lead', days:'Ngày 31–45', color:'#8e44ad', url: BASE+'broker-brand-builder-module3.html', tiers:['brand','vip']},
+  {icon:'🚀', num:'Module 4', name:'Chốt & Nhân Rộng', days:'Ngày 46–60', color:'#e74c3c', url: BASE+'broker-brand-builder-module4.html', tiers:['brand','vip']},
+];
+
+const BONUSES = [
+  {icon:'📋', label:'BONUS 1', name:'30 Template Bài Viết HLX', desc:'Copy-paste ngay, không cần viết từ đầu · 5 pillar · 6 bài mỗi pillar', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-module2.html', tiers:['starter','brand','vip']},
+  {icon:'📅', label:'BONUS 3', name:'Lịch Content 90 Ngày', desc:'39 bài FB · 26 Reels · 13 Live · Chủ đề chi tiết từng ngày', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-content-90.html', tiers:['brand','vip']},
+  {icon:'🗂️', label:'BONUS 6', name:'Script Pitching & Xử Lý Từ Chối', desc:'5 script Zalo · 4 bài FB · 5 xử lý từ chối · Chuỗi follow up 5 ngày', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-pitch.html', tiers:['brand','vip']},
+  {icon:'📊', label:'BONUS 7', name:'Nghiên Cứu Thị Trường Brand Broker', desc:'7 tab phân tích · Đối thủ · Chiến lược · Kênh · Lịch content · Community', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'research-personal-brand-broker.html', tiers:['brand','vip']},
+  {icon:'🎤', label:'BONUS 5', name:'4 Buổi Q&A Live (60 ngày)', desc:'Hỏi trực tiếp mỗi 2 tuần · Sửa lỗi real-time · Kết nối cộng đồng', tag:'included', tagText:'✅ Bao Gồm', url:'#', tiers:['brand','vip']},
+  {icon:'🔍', label:'VIP', name:'Audit Profile Cá Nhân Hoá', desc:'Phân tích FB/Zalo/TikTok · Chiến lược content riêng 90 ngày', tag:'vip-only', tagText:'💎 VIP Only', url:'#', tiers:['vip']},
+];
+
+let currentTier = 'starter';
+
+const TIER_DATA = {
+  starter: {
+    icon:'🥉', title:'Gói Starter — Bắt Đầu Hành Trình',
+    desc:'Anh/chị có Module 1 đầy đủ (5 bài học) + 30 template bài viết HLX. Hãy hoàn thành Module 1 trước khi làm bất cứ thứ gì khác.',
+    badge:'starter', badgeText:'🥉 STARTER'
+  },
+  brand: {
+    icon:'🥇', title:'Brand Builder — Bộ Đầy Đủ ⭐',
+    desc:'Anh/chị có toàn bộ 4 module (16 bài học) + 6 bonus tài liệu + Group cộng đồng + 4 buổi Q&A live. Đây là toàn bộ hệ thống cần thiết.',
+    badge:'brand', badgeText:'🥇 BRAND BUILDER'
+  },
+  vip: {
+    icon:'💎', title:'VIP Accelerator — Coaching 1:1',
+    desc:'Anh/chị có mọi thứ của Brand Builder + 4 buổi coaching cá nhân 1:1 + audit profile + chiến lược riêng + hỗ trợ Zalo không giới hạn 60 ngày.',
+    badge:'vip', badgeText:'💎 VIP ACCELERATOR'
+  }
+};
+
+function setTier(tier) {
+  currentTier = tier;
+  ['starter','brand','vip'].forEach(t => {
+    document.getElementById('btn-'+t).classList.toggle('active', t === tier);
+  });
+
+  const td = TIER_DATA[tier];
+  document.querySelector('.tw-icon').textContent = td.icon;
+  document.getElementById('tw-title').textContent = td.title;
+  document.getElementById('tw-desc').textContent = td.desc;
+  const badge = document.getElementById('tw-badge');
+  badge.className = 'tw-badge ' + td.badge;
+  badge.textContent = td.badgeText;
+
+  renderModules(tier);
+  renderBonuses(tier);
+
+  document.getElementById('vip-section').style.display = tier === 'vip' ? 'block' : 'none';
+  document.getElementById('upgrade-card').style.display = tier === 'starter' ? 'block' : 'none';
+  document.getElementById('community-card').style.display = (tier === 'brand' || tier === 'vip') ? 'flex' : 'none';
+}
+
+function renderModules(tier) {
+  // Progress bar
+  const progEl = document.getElementById('prog-modules');
+  progEl.innerHTML = MODULES.map(m => {
+    const open = m.tiers.includes(tier);
+    return `<a href="${open ? m.url : '#'}" target="${open ? '_blank' : '_self'}" class="prog-mod ${open ? '' : 'locked'}">
+      <div class="pm-icon">${m.icon}</div>
+      <div class="pm-num">${m.num}</div>
+      <div class="pm-name">${m.name}</div>
+      <div class="pm-days">${m.days}</div>
+      <div class="pm-status ${open ? 'open' : 'locked-s'}">${open ? '✅ Mở' : '🔒 Khoá'}</div>
+    </a>`;
+  }).join('');
+
+  // Module list
+  const modEl = document.getElementById('modules-grid');
+  modEl.innerHTML = MODULES.map(m => {
+    const open = m.tiers.includes(tier);
+    return `<div class="resource-card ${open ? '' : 'locked'}">
+      <div class="rc-icon">${m.icon}</div>
+      <div class="rc-content">
+        <div class="rc-label" style="color:${m.color}80">${m.num} · ${m.days}</div>
+        <div class="rc-name">${m.name}</div>
+        <div class="rc-desc">${getModDesc(m.num)}</div>
+        <span class="rc-tag ${open ? 'included' : 'locked'}">${open ? '✅ Bao Gồm' : '🔒 Nâng cấp để mở'}</span>
+      </div>
+      <div class="rc-actions">
+        ${open ? `<a href="${m.url}" target="_blank" class="btn-go">📖 Học Ngay →</a>` : '<span style="font-size:12px;color:rgba(232,223,200,.3)">🔒 Khoá</span>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function getModDesc(num) {
+  const d = {
+    'Module 1': 'Định vị thương hiệu · Bio chuẩn 3 nền tảng · Ảnh đại diện · Setup FB/Zalo/TikTok · 5 template',
+    'Module 2': '5 công thức bài viết · Storytelling HLX · Reels 5 phút · Batch content 90\' · 30 template',
+    'Module 3': 'Lead magnet · Zalo OA + nurture 14 ngày · Group community · Livestream 30\' · Đo lường phễu',
+    'Module 4': 'Script chuyển đổi · Giữ ấm lead · Hệ thống referral · Pipeline CRM · Kế hoạch 90 ngày tiếp',
+  };
+  return d[num] || '';
+}
+
+function renderBonuses(tier) {
+  const bonusEl = document.getElementById('bonus-grid');
+  bonusEl.innerHTML = BONUSES.map(b => {
+    const open = b.tiers.includes(tier);
+    const isVipOnly = b.tiers.length === 1 && b.tiers[0] === 'vip';
+    if (isVipOnly && tier !== 'vip') return ''; // hide vip-only items for other tiers
+    return `<div class="resource-card ${open ? '' : 'locked'}">
+      <div class="rc-icon">${b.icon}</div>
+      <div class="rc-content">
+        <div class="rc-label">${b.label}</div>
+        <div class="rc-name">${b.name}</div>
+        <div class="rc-desc">${b.desc}</div>
+        <span class="rc-tag ${b.tag}">${open ? b.tagText : '🔒 Nâng cấp để mở'}</span>
+      </div>
+      <div class="rc-actions">
+        ${open && b.url !== '#' ? `<a href="${b.url}" target="_blank" class="btn-go outline">📖 Xem →</a>` : (open ? '<span style="font-size:12px;color:#2ecc71">✅ Trong Group</span>' : '<span style="font-size:12px;color:rgba(232,223,200,.3)">🔒</span>')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// URL param auto-select
+const urlTier = new URLSearchParams(window.location.search).get('tier') || 'brand';
+const validTiers = ['starter','brand','vip'];
+setTier(validTiers.includes(urlTier) ? urlTier : 'brand');
+</script>
+</body>
+</html>

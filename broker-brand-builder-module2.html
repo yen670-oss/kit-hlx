@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📝 Module 2 — Hệ Thống Nội Dung · Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8;--green:#27ae60}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif}
+.hero{background:linear-gradient(135deg,#071525,#1a4a1a);padding:44px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(39,174,96,.12),transparent 55%)}
+.badge{display:inline-block;background:linear-gradient(135deg,#27ae60,#145a32);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:14px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;background:linear-gradient(135deg,#2ecc71,#fff,#2ecc71);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:8px}
+.hero-sub{font-size:13px;color:rgba(232,223,200,.6);position:relative;z-index:1;max-width:500px;margin:0 auto 20px;line-height:1.7}
+.hero-days{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.3);border:1px solid rgba(39,174,96,.25);border-radius:8px;padding:8px 16px;font-size:12px;color:#2ecc71;font-weight:700;position:relative;z-index:1}
+.lesson-nav{background:rgba(0,0,0,.35);border-bottom:1px solid rgba(39,174,96,.12);padding:0 16px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:99}
+.lesson-nav::-webkit-scrollbar{display:none}
+.ln{flex:none;background:none;border:none;border-bottom:3px solid transparent;color:rgba(232,223,200,.4);font-family:'Be Vietnam Pro',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;cursor:pointer;white-space:nowrap;transition:.15s}
+.ln.active{color:#2ecc71;border-bottom-color:#27ae60}
+.ln:hover:not(.active){color:var(--text)}
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+.panel{display:none}.panel.active{display:block}
+.lesson-head{margin-bottom:24px}
+.lesson-num{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(46,204,113,.55);margin-bottom:6px}
+.lesson-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,28px);font-weight:700;color:#fff;margin-bottom:8px}
+.lesson-desc{font-size:13.5px;color:rgba(232,223,200,.65);line-height:1.7;max-width:580px}
+.lesson-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.meta-tag{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:5px 12px;font-size:11px;color:rgba(232,223,200,.5)}
+.meta-tag span{color:#2ecc71;font-weight:700}
+.progress-bar{background:rgba(0,0,0,.3);border:1px solid rgba(39,174,96,.15);border-radius:10px;padding:14px 16px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.progress-steps{display:flex;gap:4px;flex:1}
+.ps{height:6px;border-radius:3px;flex:1;background:rgba(255,255,255,.08)}
+.ps.done{background:#27ae60}
+.ps.current{background:rgba(39,174,96,.5)}
+.progress-text{font-size:11px;color:rgba(232,223,200,.45);white-space:nowrap}
+.content-section{margin-bottom:28px}
+.cs-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(46,204,113,.5);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cs-label::after{content:'';flex:1;height:1px;background:rgba(39,174,96,.15)}
+.concept{background:linear-gradient(135deg,rgba(27,74,27,.35),rgba(27,74,27,.15));border:1px solid rgba(39,174,96,.2);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.concept h3{font-size:14px;font-weight:700;color:#2ecc71;margin-bottom:8px}
+.concept p{font-size:13px;color:rgba(232,223,200,.8);line-height:1.7}
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px}
+.formula-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;cursor:pointer;transition:.2s}
+.formula-card:hover{border-color:rgba(39,174,96,.3)}
+.formula-num{font-size:22px;font-weight:900;font-family:'Playfair Display',serif;color:#2ecc71;margin-bottom:4px}
+.formula-name{font-size:12px;font-weight:800;color:#fff;margin-bottom:4px}
+.formula-tagline{font-size:11px;color:rgba(232,223,200,.5);line-height:1.4}
+.step-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.step-item{display:flex;gap:12px;align-items:flex-start}
+.step-num{background:linear-gradient(135deg,#27ae60,#145a32);color:#fff;font-size:11px;font-weight:800;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-content h4{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:4px}
+.step-content p{font-size:12.5px;color:rgba(232,223,200,.7);line-height:1.6}
+.example{background:rgba(0,0,0,.3);border-left:3px solid #27ae60;border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:12px}
+.example-label{font-size:10px;font-weight:800;letter-spacing:1px;color:rgba(46,204,113,.55);text-transform:uppercase;margin-bottom:6px}
+.example-content{font-size:13px;color:rgba(232,223,200,.85);line-height:1.7;white-space:pre-wrap}
+.template{background:rgba(0,0,0,.4);border:1px solid rgba(39,174,96,.25);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.template-head{background:rgba(39,174,96,.1);border-bottom:1px solid rgba(39,174,96,.2);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.template-title{font-size:13px;font-weight:800;color:#2ecc71}
+.btn-cp{display:inline-flex;align-items:center;gap:5px;background:#27ae60;color:#fff;font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:11px;padding:7px 14px;border-radius:7px;border:none;cursor:pointer;transition:.2s}
+.btn-cp.ok{background:#22c55e}
+.template-body{padding:14px 16px}
+.template-content{font-size:12.5px;color:rgba(232,223,200,.9);line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif}
+.template-note{font-size:11.5px;color:rgba(232,223,200,.4);margin-top:10px;font-style:italic}
+.copy-src{display:none}
+.checklist{background:var(--card);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.checklist h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:12px}
+.cl-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.cl-item input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:#27ae60}
+.cl-item label{font-size:12.5px;color:rgba(232,223,200,.8);line-height:1.5;cursor:pointer}
+.homework{background:linear-gradient(135deg,#0a2a0a,#1a4a1a);border:1px solid rgba(39,174,96,.3);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.homework h4{font-size:14px;font-weight:700;color:#2ecc71;margin-bottom:10px}
+.homework-list{list-style:none}
+.homework-list li{display:flex;gap:8px;font-size:13px;color:rgba(232,223,200,.8);padding:4px 0;line-height:1.5}
+.homework-list li::before{content:'→';color:#2ecc71;flex-shrink:0}
+.tip-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.tip-box p{font-size:12.5px;color:rgba(232,223,200,.8);line-height:1.6}
+.tip-box strong{color:var(--gl)}
+.next-lesson{background:rgba(27,58,107,.25);border:1px solid rgba(100,150,255,.2);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;margin-top:24px}
+.next-lesson:hover{background:rgba(27,58,107,.35)}
+.nl-text small{font-size:11px;color:rgba(232,223,200,.45);display:block;margin-bottom:3px}
+.nl-text strong{font-size:14px;color:#fff}
+.nl-arrow{color:var(--gl);font-size:20px;flex-shrink:0}
+.nav-back{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 18px;font-size:12.5px;font-weight:700;color:rgba(232,223,200,.6);cursor:pointer;text-decoration:none;margin-bottom:20px}
+.nav-back:hover{color:var(--gl);border-color:rgba(201,168,76,.3)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">✍️ MODULE 2 · HỆ THỐNG NỘI DUNG · BROKER HLX BRAND BUILDER</div>
+  <h1>Module 2: Không Biết<br>Viết Gì — Công Thức<br>3 Bài/Tuần</h1>
+  <p class="hero-sub">5 bài học · Ngày 16–30 · Từ trang giấy trắng → hệ thống content chạy tự động 90 phút mỗi Chủ nhật</p>
+  <div class="hero-days">📅 Ngày 16–30 · 5 Bài Học · 8 Template Sẵn Dùng</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="ln active" onclick="show(0)">Bài 1: 5 Công Thức Bài Viết</button>
+  <button class="ln" onclick="show(1)">Bài 2: Storytelling HLX</button>
+  <button class="ln" onclick="show(2)">Bài 3: Reels 5 Phút</button>
+  <button class="ln" onclick="show(3)">Bài 4: Batch Content 90'</button>
+  <button class="ln" onclick="show(4)">Bài 5: 30 Template Sẵn Dùng</button>
+</div>
+
+<div class="wrap">
+<a href="broker-brand-builder-program.html" class="nav-back">← Về Program Hub</a>
+
+<!-- ═══ BÀI 1 ═══ -->
+<div class="panel active" id="p0">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps current"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 1/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">✍️ MODULE 2 · BÀI 1 · NGÀY 16–18</div>
+    <div class="lesson-title">5 Công Thức Viết Bài FB Cho Broker HLX Cao Cấp</div>
+    <div class="lesson-desc">Hầu hết broker viết bài theo cảm tính — đăng rồi không ai tương tác. 5 công thức này là khung xương mà mọi bài viết chuyên nghiệp đều đi theo. Học 1 lần, dùng mãi mãi.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>40 phút</span></div>
+      <div class="meta-tag">🎯 Output: <span>5 công thức + 5 template</span></div>
+      <div class="meta-tag">📅 Ngày thực hành: <span>Ngày 16–18</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">5 Công Thức Cốt Lõi</div>
+    <div class="formula-grid">
+      <div class="formula-card">
+        <div class="formula-num">01</div>
+        <div class="formula-name">Hook → Story → Offer</div>
+        <div class="formula-tagline">Câu chuyện thực tế dẫn đến CTA</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-num">02</div>
+        <div class="formula-name">Problem → Agitate → Solution</div>
+        <div class="formula-tagline">Bài giải pháp cho nỗi đau khách</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-num">03</div>
+        <div class="formula-name">Fact → Insight → CTA</div>
+        <div class="formula-tagline">Số liệu thị trường + góc nhìn riêng</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-num">04</div>
+        <div class="formula-name">Before → After → Bridge</div>
+        <div class="formula-tagline">Case study khách hàng thực tế</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-num">05</div>
+        <div class="formula-name">Tips List 3–5 điểm</div>
+        <div class="formula-tagline">Kiến thức chia sẻ — build authority</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">Công Thức 01 — Hook · Story · Offer (HSO)</div>
+    <div class="concept">
+      <h3>Dùng khi nào?</h3>
+      <p>Khi anh/chị muốn kể chuyện trải nghiệm thực để dẫn đến lời mời xem nhà/tư vấn. Đây là công thức phổ biến nhất và hiệu quả nhất trên Facebook.</p>
+    </div>
+    <ul class="step-list">
+      <li class="step-item"><div class="step-num">H</div><div class="step-content"><h4>Hook — Câu mở đầu cực mạnh (1–2 dòng)</h4><p>Phải khiến người đọc dừng ngón tay lại. Dùng con số, câu hỏi lạ, hoặc tuyên bố gây sốc nhẹ.</p></div></li>
+      <li class="step-item"><div class="step-num">S</div><div class="step-content"><h4>Story — Câu chuyện 3–5 đoạn</h4><p>Bối cảnh → Vấn đề → Hành động → Kết quả. Cụ thể, có chi tiết thật. Tránh chung chung.</p></div></li>
+      <li class="step-item"><div class="step-num">O</div><div class="step-content"><h4>Offer — Lời mời hành động rõ ràng</h4><p>1 CTA duy nhất. Không nhạt (không "liên hệ để biết thêm"). Cụ thể: "Nhắn mình SĐT để đặt lịch tham quan ngay tuần này."</p></div></li>
+    </ul>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Template HSO — Broker HLX</span>
+        <button class="btn-cp" onclick="cpT('t-hso',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-hso">Tôi vừa đưa một khách xem HLX lần thứ 3 — và lần này họ đặt cọc.
+
+Câu chuyện bắt đầu từ 2 tháng trước.
+
+Chị ấy inbox tôi sau khi thấy bài viết về view biển của tôi. Nói thật, ban đầu tôi nghĩ chỉ là hỏi cho biết. Nhưng tôi vẫn dành 30 phút gửi chị bản phân tích ROI chi tiết — so sánh HLX với 3 dự án cùng tầm giá ở Quảng Ninh.
+
+Lần 1 xem nhà: chị thích nhưng chưa chắc về tài chính.
+Lần 2: tôi dẫn chị gặp chuyên gia tài chính của mình — họ tìm ra combo vay 70% rất hợp lý với thu nhập chị.
+Lần 3: chị đặt cọc căn view biển tầng cao.
+
+Điều tôi học được: khách HLX không cần bị thuyết phục. Họ cần được đồng hành đúng thời điểm.
+
+Anh/chị đang cân nhắc HLX mà chưa biết bắt đầu từ đâu? Nhắn tôi SĐT — tôi sẽ gửi bản phân tích cá nhân hóa trong vòng 24 tiếng, miễn phí.</div>
+        <div class="template-note">✏️ Thay: tên dự án cụ thể, số lần xem, chi tiết thực của anh/chị. Càng cụ thể càng tốt.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">Công Thức 03 — Fact · Insight · CTA (Bài Số Liệu)</div>
+    <div class="concept">
+      <h3>Dùng khi nào?</h3>
+      <p>Khi muốn build authority là "chuyên gia thị trường HLX". Khách hàng tin broker biết số liệu hơn broker chỉ biết chào hàng.</p>
+    </div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Template Fact-Insight-CTA</span>
+        <button class="btn-cp" onclick="cpT('t-fic',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-fic">📊 Số liệu ít người biết về Hạ Long Xanh:
+
+• Tỷ lệ lấp đầy khách sạn tại Hạ Long đạt 78% trong Q1/2026 (nguồn: Sở Du Lịch QN)
+• HLX đang là dự án duy nhất có cả marina + resort + residence trong 1 khuôn viên tại Quảng Ninh
+• Giá thuê ngắn hạn căn studio tại khu tương đương: 1.8–2.5 triệu/đêm
+
+Insight của tôi sau 6 tháng theo dõi thị trường này:
+
+Hạ Long đang có 2 loại khách: (1) người mua để ở/nghỉ dưỡng cuối tuần và (2) người mua để cho thuê. HLX đang phục vụ TỐT cả 2 nhóm — điều mà ít dự án nào làm được.
+
+Anh/chị thuộc nhóm nào? Inbox tôi — tôi có bảng phân tích ROI riêng cho từng profile khách hàng.</div>
+        <div class="template-note">✏️ Cập nhật số liệu thực tế hàng quý. Trích nguồn cụ thể = tin cậy hơn.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">Công Thức 05 — Tips List (Bài Authority)</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Template Tips List HLX</span>
+        <button class="btn-cp" onclick="cpT('t-tips',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-tips">5 điều tôi ước mình biết trước khi tư vấn căn hộ Hạ Long Xanh lần đầu:
+
+1️⃣ View không phải tất cả
+   Khách nhìn view trước, nhưng quyết định mua vì layout. Hãy cho họ xem cả 2 — đừng chỉ dẫn lên tầng cao.
+
+2️⃣ Phân khúc tài chính quan trọng hơn phân khúc giá
+   Khách có 5 tỷ tiền mặt khác hoàn toàn khách vay 70%. Hỏi tài chính trước khi dẫn xem nhà.
+
+3️⃣ Mùa đông Hạ Long = lợi thế cho broker
+   Ít khách tham quan = ít cạnh tranh = khách dễ quyết định hơn khi không có đám đông xung quanh.
+
+4️⃣ Câu chuyện dự án quan trọng hơn thông số kỹ thuật
+   Khách nhớ "căn có view bằng lăng cả buổi sáng" hơn là "tầng 18, diện tích 48m²".
+
+5️⃣ Follow up bằng giá trị, không bằng hỏi thăm
+   Thay vì "anh/chị nghĩ sao rồi?" → gửi 1 bài phân tích mới, 1 video review, 1 so sánh cập nhật.
+
+---
+Broker HLX nào bạn biết cần đọc bài này? Tag họ 👇</div>
+        <div class="template-note">✏️ Đây là dạng bài được chia sẻ nhiều nhất. Kêu gọi tag người khác = viral tự nhiên.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 16–18</h4>
+    <ul class="homework-list">
+      <li>Chọn 1 trong 5 công thức phù hợp nhất với câu chuyện của anh/chị</li>
+      <li>Viết 1 bài hoàn chỉnh theo template — điền thông tin thực của mình vào</li>
+      <li>Đăng lên FB cá nhân, gắn 3–5 hashtag từ bộ hashtag ở Module 1</li>
+      <li>Ghi lại: bao nhiêu like, comment, inbox trong 24h đầu</li>
+    </ul>
+  </div>
+
+  <div class="next-lesson" onclick="show(1)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 2: Storytelling từ trải nghiệm HLX thực tế</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 2 ═══ -->
+<div class="panel" id="p1">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps current"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 2/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">✍️ MODULE 2 · BÀI 2 · NGÀY 19–21</div>
+    <div class="lesson-title">Storytelling Từ Trải Nghiệm HLX Thực Tế — Không Cần Bịa</div>
+    <div class="lesson-desc">Câu chuyện là vũ khí mạnh nhất của broker. Nhưng hầu hết broker nghĩ mình chưa có câu chuyện hay. Sai. Mỗi cuộc gặp khách là một câu chuyện — chỉ cần biết cách kể.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>45 phút</span></div>
+      <div class="meta-tag">🎯 Output: <span>3 câu chuyện cá nhân</span></div>
+      <div class="meta-tag">📅 Ngày thực hành: <span>Ngày 19–21</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">Framework STAR cho Storytelling BĐS</div>
+    <ul class="step-list">
+      <li class="step-item"><div class="step-num">S</div><div class="step-content"><h4>Situation — Bối cảnh (2–3 câu)</h4><p>Ai, ở đâu, khi nào. Đủ để người đọc hình dung mà không lan man.</p></div></li>
+      <li class="step-item"><div class="step-num">T</div><div class="step-content"><h4>Task / Problem — Vấn đề (2–3 câu)</h4><p>Khách gặp trở ngại gì? Anh/chị đối mặt với thử thách nào? Tension = người đọc tiếp tục đọc.</p></div></li>
+      <li class="step-item"><div class="step-num">A</div><div class="step-content"><h4>Action — Hành động (3–4 câu)</h4><p>Anh/chị đã làm gì khác biệt? Chi tiết cụ thể, không chung chung.</p></div></li>
+      <li class="step-item"><div class="step-num">R</div><div class="step-content"><h4>Result + Lesson — Kết quả + Bài học (2–3 câu)</h4><p>Kết quả thực tế + insight người đọc có thể áp dụng ngay.</p></div></li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">3 Góc Kể Chuyện Hiệu Quả Nhất Cho Broker HLX</div>
+    <div class="concept">
+      <h3>Góc 1: Hành Trình Khám Phá HLX</h3>
+      <p>Kể lại lần đầu tiên anh/chị quyết định theo bán HLX. Tại sao? Điều gì khiến anh/chị tin vào dự án này? Đây là câu chuyện xây dựng niềm tin từ sự chân thật.</p>
+    </div>
+    <div class="concept">
+      <h3>Góc 2: Khách Từ Chối Rồi Quay Lại</h3>
+      <p>Câu chuyện khách từ chối ban đầu nhưng sau đó quay lại và mua. Điều gì đã thay đổi? Bài học về kiên nhẫn, về giá trị, về đúng thời điểm.</p>
+    </div>
+    <div class="concept">
+      <h3>Góc 3: Khoảnh Khắc "Aha" Của Khách</h3>
+      <p>Khoảnh khắc khách nhận ra HLX là đúng — dù là khi nhìn view biển, khi ngồi thử sofa ở showroom, khi tính ra con số ROI. Cảm xúc = quyết định mua.</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">Template Story — Khách Từ Chối Rồi Quay Lại</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Template Story Góc 2</span>
+        <button class="btn-cp" onclick="cpT('t-story2',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-story2">Anh ấy từ chối tôi 2 lần.
+
+Lần đầu: "Quảng Ninh xa quá, mình ở Hà Nội đi lại bất tiện."
+Lần hai: "Giá HLX cao, chờ thị trường xuống chút."
+
+Tôi không thuyết phục. Tôi chỉ gửi anh 1 bài phân tích mỗi tháng — những gì đang xảy ra ở HLX, giá thuê ngắn hạn, các tiện ích mới mở.
+
+Sau 4 tháng, anh nhắn lại: "Mình thấy giá không xuống, mà tiện ích HLX đang hoàn thiện rất nhanh. Anh có thể dẫn mình xem không?"
+
+Tuần sau anh đặt cọc căn 2PN view biển.
+
+Anh ấy không bị thuyết phục. Anh ấy tự thuyết phục mình — vì tôi kiên nhẫn cung cấp thông tin đúng lúc thay vì chạy theo chốt sale.
+
+---
+Bài học: Đừng bán. Hãy giáo dục và đồng hành. Khách sẽ tự tìm lại khi đã sẵn sàng.</div>
+        <div class="template-note">✏️ Thay số lần từ chối, lý do từ chối, thời gian chờ, và kết quả thực của anh/chị.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 19–21</h4>
+    <ul class="homework-list">
+      <li>Viết 3 câu mở đầu (hook) cho 3 câu chuyện khác nhau của anh/chị</li>
+      <li>Chọn 1 câu chuyện và hoàn chỉnh theo framework STAR</li>
+      <li>Đọc lại: có ít nhất 1 chi tiết cụ thể trong mỗi đoạn không?</li>
+      <li>Lưu vào Notes điện thoại — đây là "ngân hàng câu chuyện" để dùng dần</li>
+    </ul>
+  </div>
+
+  <div class="next-lesson" onclick="show(2)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 3: Reels/TikTok không cần diễn — 5 phút quay xong</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 3 ═══ -->
+<div class="panel" id="p2">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 3/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">✍️ MODULE 2 · BÀI 3 · NGÀY 22–24</div>
+    <div class="lesson-title">Reels/TikTok Không Cần Diễn — Quay 5 Phút Là Xong</div>
+    <div class="lesson-desc">Video ngắn là kênh reach rộng nhất hiện tại. Nhưng 90% broker không làm vì sợ xấu hổ, sợ nói không hay. Bài này cho anh/chị 3 format video không cần kỹ năng diễn xuất.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>35 phút học + quay thử</span></div>
+      <div class="meta-tag">🎯 Output: <span>1 video đầu tiên đăng được</span></div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">3 Format Video Dễ Nhất Cho Broker HLX</div>
+    <div class="concept"><h3>Format 1: Walkthrough "Đi Cùng Tôi"</h3><p>Vừa đi xem nhà vừa nói chuyện với camera. Không cần kịch bản phức tạp. Chỉ cần: "Hôm nay mình cho các bạn xem căn [loại] tầng [X] view [Y]..." và đi.</p></div>
+    <div class="concept"><h3>Format 2: "Did You Know?" — Thông Tin Bất Ngờ</h3><p>Đứng yên một chỗ, nhìn thẳng vào camera, nói 1 fact thú vị về HLX trong 30–60 giây. Không cần hình ảnh đẹp, chỉ cần nội dung hay.</p></div>
+    <div class="concept"><h3>Format 3: Before/After — Trước và Sau</h3><p>So sánh: HLX trước khi mở bán vs bây giờ. Ảnh tháng 1 vs tháng 6. Progress update cực dễ quay và rất nhiều người xem.</p></div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Script Template — Format "Did You Know?"</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Script 60 Giây — Did You Know</span>
+        <button class="btn-cp" onclick="cpT('t-didyouknow',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-didyouknow">[Mở đầu — 5 giây]
+"Bạn có biết điều này về Hạ Long Xanh không?"
+
+[Fact chính — 15 giây]
+"Đây là dự án duy nhất ở Quảng Ninh có marina ngay trong khuôn viên — tức là bạn có thể đi thuyền từ nhà ra vịnh mà không cần ra bến cảng chung."
+
+[Insight — 15 giây]
+"Điều đó có nghĩa là gì với nhà đầu tư? Khách thuê ngắn hạn sẵn sàng trả thêm 20–30% so với căn hộ view biển thông thường vì trải nghiệm này."
+
+[CTA — 10 giây]
+"Bình luận 'PHÂN TÍCH' nếu bạn muốn tôi gửi bảng ROI chi tiết cho từng loại căn. Miễn phí."</div>
+        <div class="template-note">✏️ Thay fact và con số thực tế. Giữ tổng thời lượng 45–60 giây là tối ưu.</div>
+      </div>
+    </div>
+  </div>
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 22–24</h4>
+    <ul class="homework-list">
+      <li>Chọn 1 trong 3 format trên — dễ nhất với anh/chị</li>
+      <li>Quay 1 video test (không cần đăng ngay) — tập nói trước camera</li>
+      <li>Xem lại video, chú ý: nghe rõ không? Ánh sáng đủ không?</li>
+      <li>Đăng lên Story trước (ít áp lực) — nếu phản hồi tốt thì đăng Reels</li>
+    </ul>
+  </div>
+  <div class="next-lesson" onclick="show(3)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 4: Batch content 90 phút — đủ bài cả tuần</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 4 ═══ -->
+<div class="panel" id="p3">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 4/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">✍️ MODULE 2 · BÀI 4 · NGÀY 25–27</div>
+    <div class="lesson-title">Batch Content 90 Phút Mỗi Chủ Nhật — Đủ Bài Cho Cả Tuần</div>
+    <div class="lesson-desc">Bí quyết của broker có content đều đặn không phải là có nhiều thời gian — mà là có hệ thống. Batch content là làm 1 lần, dùng cả tuần. 90 phút Chủ nhật, không cần làm gì thêm trong tuần.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Đầu tư: <span>90 phút/tuần</span></div>
+      <div class="meta-tag">🎯 Output: <span>3 bài viết + 1 story + lịch đăng sẵn</span></div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Quy Trình Batch 90 Phút</div>
+    <ul class="step-list">
+      <li class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Phút 0–15: Chọn chủ đề tuần này</h4><p>Mở lịch content 90 ngày → xem tuần này cần post gì (Pillar nào, format nào). Chọn đúng 3 chủ đề — không thêm.</p></div></li>
+      <li class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Phút 15–50: Viết 3 caption</h4><p>Mỗi caption dùng 1 template. Điền thông tin thực vào → chỉnh sửa ngắn → xong. Không viết từ đầu, luôn dùng template làm khung.</p></div></li>
+      <li class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Phút 50–70: Chuẩn bị ảnh/video</h4><p>3 bài = 3 ảnh. Ảnh từ thư viện HLX, ảnh tự chụp, hoặc ảnh Canva từ template. 1 video ngắn nếu tuần này có Reels.</p></div></li>
+      <li class="step-item"><div class="step-num">4</div><div class="step-content"><h4>Phút 70–90: Lên lịch đăng</h4><p>Meta Business Suite (lên lịch FB + IG cùng lúc). Zalo thì hẹn giờ bằng tính năng gửi tin nhắn. Xong — cả tuần không cần nghĩ thêm.</p></div></li>
+    </ul>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Lịch Đăng Bài Tối Ưu Cho Broker HLX</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Template Lịch Tuần — Batch Sunday</span>
+        <button class="btn-cp" onclick="cpT('t-batch',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-batch">TUẦN [Số] — Chủ đề: [Tên chủ đề tuần]
+
+📅 Thứ 2 (7h sáng):
+→ Bài: [Tiêu đề bài 1]
+→ Công thức: [HSO / PAS / FIC / BAB / Tips]
+→ Platform: FB cá nhân + Zalo cá nhân
+→ Ảnh: [Mô tả ảnh]
+
+📅 Thứ 4 (12h trưa):
+→ Bài: [Tiêu đề bài 2]
+→ Công thức: [...]
+→ Platform: FB cá nhân + Story
+→ Video: [Không / Có — loại gì]
+
+📅 Thứ 6 (7h tối):
+→ Bài: [Tiêu đề bài 3]
+→ Công thức: [...]
+→ Platform: FB cá nhân + Zalo OA
+→ CTA chính: [...]
+
+🎯 Mục tiêu tuần:
+→ Reach: [...] người
+→ Inbox: [...] người
+→ Appointment: [...] cuộc
+
+✅ Done batch lúc: [giờ] ngày Chủ nhật</div>
+        <div class="template-note">✏️ In ra hoặc lưu vào Notes. Fill vào mỗi Chủ nhật trong 10 phút đầu tiên của batch session.</div>
+      </div>
+    </div>
+  </div>
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 25–27</h4>
+    <ul class="homework-list">
+      <li>Đặt lịch cố định: Chủ nhật [giờ X] = Batch Content Time (block calendar)</li>
+      <li>Làm 1 batch session đầu tiên: viết đủ 3 bài cho tuần tới</li>
+      <li>Lên lịch đăng trên Meta Business Suite ngay trong session đó</li>
+      <li>Dán template Lịch Tuần lên tường/màn hình desktop để nhắc nhở mỗi tuần</li>
+    </ul>
+  </div>
+  <div class="next-lesson" onclick="show(4)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 5: 30 template bài viết HLX sẵn dùng</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 5 ═══ -->
+<div class="panel" id="p4">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div></div>
+    <div class="progress-text">Bài 5/5 · Module 2 Hoàn Thành!</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">✍️ MODULE 2 · BÀI 5 · NGÀY 28–30</div>
+    <div class="lesson-title">Bộ 30 Template Bài Viết HLX — Copy, Điền Tên, Đăng Ngay</div>
+    <div class="lesson-desc">30 template được phân theo 5 pillar — mỗi pillar 6 bài. Điền thông tin thực của anh/chị vào là có bài hoàn chỉnh. Không cần nghĩ, không cần viết từ đầu.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">📋 Số template: <span>5 mẫu đại diện (dùng ngay)</span></div>
+      <div class="meta-tag">🎯 Dùng ngay trong: <span>Batch session đầu tiên</span></div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Template 1 — Chia Sẻ Kiến Thức (Pillar: Hệ Thống)</div>
+    <div class="template">
+      <div class="template-head"><span class="template-title">📋 Bài Chia Sẻ Kiến Thức Thị Trường HLX</span><button class="btn-cp" onclick="cpT('t30-1',this)">📋 Copy</button></div>
+      <div class="template-body"><div class="template-content" id="t30-1">3 câu hỏi khách hay hỏi tôi về Hạ Long Xanh — và câu trả lời thật sự:
+
+❓ "HLX có phù hợp để đầu tư không?"
+→ Phụ thuộc vào mục tiêu. Nếu muốn dòng tiền từ thuê ngắn hạn: CÓ, khu du lịch Hạ Long có nhu cầu thuê cao quanh năm. Nếu muốn tăng giá nhanh: cần chờ thêm 2–3 năm khi hạ tầng hoàn thiện.
+
+❓ "Giá có còn tăng không?"
+→ Tôi không biết chắc — không ai biết chắc. Nhưng tôi thấy: (1) Hạ Long đang được đầu tư hạ tầng mạnh, (2) nguồn cung hạn chế do quy hoạch, (3) nhu cầu du lịch tăng đều. Đây là 3 yếu tố thường đi kèm với tăng giá bền vững.
+
+❓ "Mua bây giờ hay chờ?"
+→ Câu hỏi đúng hơn là: "Tài chính mình đã sẵn sàng chưa?" Nếu đã sẵn sàng và mục tiêu phù hợp — bây giờ luôn tốt hơn chờ thêm.
+
+---
+Bạn đang có câu hỏi nào về HLX chưa được trả lời? Comment bên dưới 👇</div></div>
+    </div>
+    <div class="template">
+      <div class="template-head"><span class="template-title">📋 Bài Case Study Khách Hàng (Before/After)</span><button class="btn-cp" onclick="cpT('t30-2',this)">📋 Copy</button></div>
+      <div class="template-body"><div class="template-content" id="t30-2">6 tháng trước, anh T. nhắn tôi: "Đang có 2 tỷ nhàn rỗi, không biết làm gì."
+
+Anh là dân kinh doanh ở Hà Nội, không rành BĐS, sợ rủi ro.
+
+Tôi không giới thiệu ngay. Tôi hỏi: "Anh cần dòng tiền hàng tháng hay muốn giữ tài sản dài hạn?" Anh nói cả hai.
+
+Tôi gửi anh phân tích 3 kịch bản đầu tư tại HLX: (1) cho thuê ngắn hạn, (2) cho thuê dài hạn, (3) chờ tăng giá bán lại. Với 2 tỷ, kịch bản 1 cho dòng tiền 12–15 triệu/tháng sau khi trừ phí vận hành.
+
+Anh xem nhà 1 lần — quyết định ngay.
+
+Tháng này anh nhắn tôi: căn đang cho thuê đều, khách đặt trước 3 tuần.
+
+---
+Anh/chị có câu hỏi tương tự? Nhắn tôi — tôi làm phân tích miễn phí theo tình huống thực của anh/chị.</div></div>
+    </div>
+    <div class="template">
+      <div class="template-head"><span class="template-title">📋 Bài Giới Thiệu Dự Án (Thực Chiến)</span><button class="btn-cp" onclick="cpT('t30-3',this)">📋 Copy</button></div>
+      <div class="template-body"><div class="template-content" id="t30-3">Hôm nay tôi dẫn team đi xem lại tiến độ HLX — và có vài điều muốn chia sẻ thật lòng:
+
+✅ Điều tôi thích nhất: Tầm nhìn quy hoạch tổng thể — không phải cứ xây xong là hết, mà còn marina, trường học, bệnh viện đang được hoàn thiện từng bước.
+
+✅ Điều ít ai để ý: Chất lượng hoàn thiện nội thất từ chủ đầu tư — không cần đập ra làm lại như nhiều dự án khác.
+
+⚠️ Điều cần lưu ý: Giao thông vào dự án giờ cao điểm vẫn còn hạn chế — nhưng con đường ven biển đang được mở rộng, dự kiến hoàn thành cuối năm.
+
+Nhìn chung: đây là dự án đang trong giai đoạn "đúng thời điểm" — đủ hình thành để xem thực tế, chưa đủ hoàn thiện để giá đạt đỉnh.
+
+DM tôi nếu muốn đặt lịch tham quan thực tế tuần này.</div></div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p>💡 <strong>30 template đầy đủ</strong> được gửi kèm trong kit của anh/chị (file Word + PDF). Mỗi template có 3 phiên bản: ngắn (FB story/Zalo), vừa (FB post tiêu chuẩn), dài (FB bài dài engagement). Dùng đúng phiên bản cho đúng context.</p>
+  </div>
+
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 28–30 · Tổng Kết Module 2</h4>
+    <ul class="homework-list">
+      <li>Batch content đầu tiên: viết 3 bài cho tuần tới dùng template bài này</li>
+      <li>Lên lịch đăng cho cả tuần — xong trước 9h tối Chủ nhật</li>
+      <li>Chụp ảnh "Done!" và chia sẻ vào group cộng đồng</li>
+      <li>Sẵn sàng cho Module 3: Thu hút lead tự nhiên — ngày 31</li>
+    </ul>
+  </div>
+
+  <div class="next-lesson" onclick="window.location.href='broker-brand-builder-module3.html'">
+    <div class="nl-text"><small>Module tiếp theo →</small><strong>Module 3: Thu Hút Lead — Khách Tự Tìm Đến</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+function show(i){
+  document.querySelectorAll('.panel').forEach((p,j)=>{p.classList.toggle('active',j===i)});
+  document.querySelectorAll('.ln').forEach((b,j)=>{b.classList.toggle('active',j===i)});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function cpT(id,btn){
+  const txt=document.getElementById(id).textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>fl(btn));}
+  else{const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);fl(btn);}
+}
+function fl(btn){const o=btn.textContent;btn.textContent='✅ Copied!';btn.classList.add('ok');setTimeout(()=>{btn.textContent=o;btn.classList.remove('ok');},2000);}
+</script>
+</body>
+</html>

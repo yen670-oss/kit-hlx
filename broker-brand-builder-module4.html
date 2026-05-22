@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🚀 Module 4 — Chốt & Nhân Rộng · Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8;--red:#e74c3c}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif}
+.hero{background:linear-gradient(135deg,#071525,#4a0a0a);padding:44px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(231,76,60,.12),transparent 55%)}
+.badge{display:inline-block;background:linear-gradient(135deg,#e74c3c,#922b21);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:14px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;background:linear-gradient(135deg,#f1948a,#fff,#f1948a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:8px}
+.hero-sub{font-size:13px;color:rgba(232,223,200,.6);position:relative;z-index:1;max-width:500px;margin:0 auto 20px;line-height:1.7}
+.hero-days{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.3);border:1px solid rgba(231,76,60,.25);border-radius:8px;padding:8px 16px;font-size:12px;color:#f1948a;font-weight:700;position:relative;z-index:1}
+.lesson-nav{background:rgba(0,0,0,.35);border-bottom:1px solid rgba(231,76,60,.12);padding:0 16px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:99}
+.lesson-nav::-webkit-scrollbar{display:none}
+.ln{flex:none;background:none;border:none;border-bottom:3px solid transparent;color:rgba(232,223,200,.4);font-family:'Be Vietnam Pro',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;cursor:pointer;white-space:nowrap;transition:.15s}
+.ln.active{color:#f1948a;border-bottom-color:#e74c3c}
+.ln:hover:not(.active){color:var(--text)}
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+.panel{display:none}.panel.active{display:block}
+.lesson-head{margin-bottom:24px}
+.lesson-num{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(241,148,138,.55);margin-bottom:6px}
+.lesson-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,28px);font-weight:700;color:#fff;margin-bottom:8px}
+.lesson-desc{font-size:13.5px;color:rgba(232,223,200,.65);line-height:1.7;max-width:580px}
+.lesson-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.meta-tag{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:5px 12px;font-size:11px;color:rgba(232,223,200,.5)}
+.meta-tag span{color:#f1948a;font-weight:700}
+.progress-bar{background:rgba(0,0,0,.3);border:1px solid rgba(231,76,60,.15);border-radius:10px;padding:14px 16px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.progress-steps{display:flex;gap:4px;flex:1}
+.ps{height:6px;border-radius:3px;flex:1;background:rgba(255,255,255,.08)}
+.ps.done{background:#e74c3c}
+.ps.current{background:rgba(231,76,60,.5)}
+.progress-text{font-size:11px;color:rgba(232,223,200,.45);white-space:nowrap}
+.content-section{margin-bottom:28px}
+.cs-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(241,148,138,.5);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cs-label::after{content:'';flex:1;height:1px;background:rgba(231,76,60,.15)}
+.concept{background:linear-gradient(135deg,rgba(74,10,10,.4),rgba(74,10,10,.2));border:1px solid rgba(231,76,60,.2);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.concept h3{font-size:14px;font-weight:700;color:#f1948a;margin-bottom:8px}
+.concept p{font-size:13px;color:rgba(232,223,200,.8);line-height:1.7}
+.step-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.step-item{display:flex;gap:12px;align-items:flex-start}
+.step-num{background:linear-gradient(135deg,#e74c3c,#922b21);color:#fff;font-size:11px;font-weight:800;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-content h4{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:4px}
+.step-content p{font-size:12.5px;color:rgba(232,223,200,.7);line-height:1.6}
+.example{background:rgba(0,0,0,.3);border-left:3px solid #e74c3c;border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:12px}
+.example-label{font-size:10px;font-weight:800;letter-spacing:1px;color:rgba(241,148,138,.55);text-transform:uppercase;margin-bottom:6px}
+.example-content{font-size:13px;color:rgba(232,223,200,.85);line-height:1.7;white-space:pre-wrap}
+.template{background:rgba(0,0,0,.4);border:1px solid rgba(231,76,60,.25);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.template-head{background:rgba(231,76,60,.1);border-bottom:1px solid rgba(231,76,60,.2);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.template-title{font-size:13px;font-weight:800;color:#f1948a}
+.btn-cp{display:inline-flex;align-items:center;gap:5px;background:#e74c3c;color:#fff;font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:11px;padding:7px 14px;border-radius:7px;border:none;cursor:pointer;transition:.2s}
+.btn-cp.ok{background:#22c55e}
+.template-body{padding:14px 16px}
+.template-content{font-size:12.5px;color:rgba(232,223,200,.9);line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif}
+.template-note{font-size:11.5px;color:rgba(232,223,200,.4);margin-top:10px;font-style:italic}
+.checklist{background:var(--card);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.checklist h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:12px}
+.cl-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.cl-item input{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:#e74c3c}
+.cl-item label{font-size:12.5px;color:rgba(232,223,200,.8);line-height:1.5;cursor:pointer}
+.homework{background:linear-gradient(135deg,#2a0a0a,#4a0a0a);border:1px solid rgba(231,76,60,.3);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.homework h4{font-size:14px;font-weight:700;color:#f1948a;margin-bottom:10px}
+.homework-list{list-style:none}
+.homework-list li{display:flex;gap:8px;font-size:13px;color:rgba(232,223,200,.8);padding:4px 0;line-height:1.5}
+.homework-list li::before{content:'→';color:#f1948a;flex-shrink:0}
+.tip-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.tip-box p{font-size:12.5px;color:rgba(232,223,200,.8);line-height:1.6}
+.tip-box strong{color:var(--gl)}
+.congrats{background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(39,174,96,.1));border:2px solid rgba(201,168,76,.4);border-radius:16px;padding:28px;text-align:center;margin-top:24px}
+.congrats h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--gl);margin-bottom:10px}
+.congrats p{font-size:13.5px;color:rgba(232,223,200,.8);line-height:1.7;margin-bottom:16px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),#8b6914);color:#071525;font-weight:800;font-size:13.5px;padding:14px 28px;border-radius:11px;text-decoration:none;cursor:pointer;border:none}
+.next-lesson{background:rgba(27,58,107,.25);border:1px solid rgba(100,150,255,.2);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;margin-top:24px}
+.next-lesson:hover{background:rgba(27,58,107,.35)}
+.nl-text small{font-size:11px;color:rgba(232,223,200,.45);display:block;margin-bottom:3px}
+.nl-text strong{font-size:14px;color:#fff}
+.nl-arrow{color:var(--gl);font-size:20px;flex-shrink:0}
+.nav-back{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 18px;font-size:12.5px;font-weight:700;color:rgba(232,223,200,.6);cursor:pointer;text-decoration:none;margin-bottom:20px}
+.nav-back:hover{color:var(--gl);border-color:rgba(201,168,76,.3)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">🚀 MODULE 4 · CHỐT & NHÂN RỘNG · BROKER HLX BRAND BUILDER</div>
+  <h1>Module 4: Từ Lead<br>→ Giao Dịch<br>→ Referral Tự Động</h1>
+  <p class="hero-sub">5 bài học · Ngày 46–60 · Chuyển đổi follower thành khách, khách thành nguồn referral vô tận</p>
+  <div class="hero-days">📅 Ngày 46–60 · Bài Học Cuối · Hệ Thống Hoàn Chỉnh</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="ln active" onclick="show(0)">Bài 1: Follow → Cuộc Hẹn</button>
+  <button class="ln" onclick="show(1)">Bài 2: Giữ Ấm Lead Chưa Mua</button>
+  <button class="ln" onclick="show(2)">Bài 3: Hệ Thống Referral</button>
+  <button class="ln" onclick="show(3)">Bài 4: Pipeline Theo Dõi</button>
+  <button class="ln" onclick="show(4)">Bài 5: Kế Hoạch 90 Ngày Tiếp</button>
+</div>
+
+<div class="wrap">
+<a href="broker-brand-builder-program.html" class="nav-back">← Về Program Hub</a>
+
+<!-- ═══ BÀI 1 ═══ -->
+<div class="panel active" id="p0">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps current"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 1/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">🚀 MODULE 4 · BÀI 1 · NGÀY 46–48</div>
+    <div class="lesson-title">Chuyển Đổi Follow → Cuộc Hẹn Xem Nhà Tự Nhiên</div>
+    <div class="lesson-desc">Đây là bài kỹ năng quan trọng nhất của toàn chương trình. Content tốt đưa người ta vào phễu — nhưng kỹ năng chuyển đổi inbox mới tạo ra giao dịch thực sự.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>45 phút</span></div>
+      <div class="meta-tag">🎯 Output: <span>3 script chuyển đổi cá nhân hoá</span></div>
+      <div class="meta-tag">📅 Ngày thực hành: <span>Ngày 46–48</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">Nguyên Tắc Vàng — Đừng Bán, Hãy Giúp Họ Quyết Định</div>
+    <div class="concept">
+      <h3>Tại sao hầu hết broker chốt sale thất bại?</h3>
+      <p>Vì họ "bán" quá sớm — khi khách chưa đủ thông tin và chưa tin tưởng đủ. Kết quả: khách cảm thấy bị push → rút lui. Script đúng là không bán — mà giúp khách tự xác định mình đang ở đâu trong hành trình quyết định.</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">3 Bước Chuyển Inbox → Cuộc Hẹn</div>
+    <ul class="step-list">
+      <li class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Xác Định Giai Đoạn Khách Đang Ở (3 câu hỏi)</h4><p>Khách vừa quan tâm / Đang so sánh / Sắp quyết định? Hỏi: "Anh/chị đang tìm hiểu HLX được bao lâu rồi ạ?" — câu trả lời nói lên tất cả.</p></div></li>
+      <li class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Cung Cấp Giá Trị Ngay Lập Tức (Trước Khi Mời Gặp)</h4><p>Gửi 1 thứ gì đó cụ thể: bảng ROI, video căn cụ thể, so sánh 2 căn phù hợp. Họ cảm nhận được giá trị → cuộc hẹn trở nên tự nhiên hơn.</p></div></li>
+      <li class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Mời Gặp Bằng Lý Do Cụ Thể (Không Phải "Để Tư Vấn")</h4><p>Không: "Anh/chị ra xem để mình tư vấn thêm." Đúng: "Mình có 2 căn đang phù hợp với ngân sách anh/chị nói — muốn show anh/chị video 5 phút trước khi quyết định có ra xem không."</p></div></li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">Script Chuyển Đổi — 3 Tình Huống Phổ Biến</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Script — Khách Inbox Hỏi Giá</span>
+        <button class="btn-cp" onclick="cpT('t-script1',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-script1">Khách: "Cho hỏi giá HLX hiện tại bao nhiêu?"
+
+Broker: "Dạ chào anh/chị [Tên nếu biết]! Hiện HLX có nhiều loại căn nên giá dao động khá rộng từ [X] đến [Y] tỷ tùy diện tích và tầng.
+
+Để mình tư vấn đúng hơn, anh/chị đang cân nhắc loại căn nào (studio / 1PN / 2PN) và mục đích chính là để ở hay đầu tư ạ?"
+
+---
+[Khách trả lời]
+---
+
+Broker: "Với thông tin đó, mình thấy có [X căn] đang phù hợp với profile của anh/chị. Mình vừa có video thực tế quay tuần này — anh/chị xem qua 3 phút rồi mình trao đổi thêm nhé?"
+
+[Gửi video]
+
+Broker: "Anh/chị thấy căn nào trong video phù hợp không? Nếu có thì mình sắp xếp lịch ra xem trực tiếp — mình dẫn đi, anh/chị không cần tự tìm."</div>
+        <div class="template-note">✏️ Key: không quote giá ngay. Hỏi trước để personalize → mời xem video → đề nghị gặp.</div>
+      </div>
+    </div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Script — Khách Đang So Sánh Nhiều Dự Án</span>
+        <button class="btn-cp" onclick="cpT('t-script2',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-script2">Khách: "Tôi đang xem thêm dự án [X] và [Y], chưa quyết định."
+
+Broker: "Dạ anh/chị so sánh kỹ là đúng! Mình cũng từng giới thiệu cả 3 dự án đó cho khách — nên biết khá rõ điểm mạnh yếu từng cái.
+
+Điều anh/chị quan tâm nhất khi chọn là gì — tiện ích sống hàng ngày, tiềm năng cho thuê, hay giá trị tăng theo thời gian?"
+
+---
+[Khách trả lời]
+---
+
+Broker: "Với tiêu chí đó, mình sẽ thẳng thắn so sánh HLX và [X]: HLX tốt hơn ở [điểm A, B]. [X] tốt hơn ở [điểm C]. Còn [Y] thì...
+
+Mình có thể làm bảng so sánh 1 trang cho anh/chị không? Điền đúng theo tiêu chí anh/chị vừa nói, để dễ quyết định hơn."</div>
+        <div class="template-note">✏️ Người broker dám nói thật về yếu điểm dự án mình bán sẽ được tin tưởng hơn nhiều so với chỉ ca ngợi.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 46–48</h4>
+    <ul class="homework-list">
+      <li>Review 5 inbox cuối cùng chưa ra hẹn — đánh giá khách đang ở giai đoạn nào</li>
+      <li>Gửi lại 1 giá trị cụ thể (video/bảng ROI) cho từng người chưa phản hồi</li>
+      <li>Áp dụng script chuyển đổi cho inbox mới nhất nhận được hôm nay</li>
+      <li>Mục tiêu: 2 cuộc hẹn xem nhà từ inbox trong tuần này</li>
+    </ul>
+  </div>
+  <div class="next-lesson" onclick="show(1)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 2: Giữ ấm khách HLX chưa mua ngay</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 2 ═══ -->
+<div class="panel" id="p1">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps current"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 2/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">🚀 MODULE 4 · BÀI 2 · NGÀY 49–51</div>
+    <div class="lesson-title">Giữ Ấm Khách HLX Chưa Mua Ngay — Không Để Mất Vào Tay Broker Khác</div>
+    <div class="lesson-desc">80% giao dịch BĐS xảy ra sau lần tiếp xúc thứ 5–12. Phần lớn broker bỏ cuộc sau lần 2–3. Hệ thống giữ ấm tự động giúp anh/chị luôn trong tâm trí khách khi họ sẵn sàng.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Setup: <span>1 tiếng một lần</span></div>
+      <div class="meta-tag">🎯 Output: <span>Pipeline khách đang nuôi dưỡng</span></div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">3 Nhóm Khách Cần Giữ Ấm Khác Nhau</div>
+    <div class="concept"><h3>Nhóm 1: "Đang cân nhắc" (Nóng, 1–3 tháng)</h3><p>Tiếp xúc mỗi 1–2 tuần. Gửi cập nhật thị trường, căn mới phù hợp, case study quyết định mua nhanh. Không push — chỉ nhắc nhở sự hiện diện của anh/chị.</p></div>
+    <div class="concept"><h3>Nhóm 2: "Chờ điều kiện" (Ấm, 3–6 tháng)</h3><p>Tiếp xúc mỗi 2–4 tuần qua Zalo OA broadcast. Cập nhật khi có thay đổi quan trọng: chính sách mới, tiến độ hạ tầng, giá thứ cấp. Hỏi thăm khi có sự kiện (Tết, cuối năm).</p></div>
+    <div class="concept"><h3>Nhóm 3: "Dài hạn" (Nguội, 6–18 tháng)</h3><p>Broadcast Zalo OA hàng tháng. Bài nào hay trên FB tag tên họ vào. Không cần cá nhân hoá nhiều — chỉ cần duy trì "anh/chị vẫn nhớ tôi".</p></div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Template — Tin Nhắn Giữ Ấm Không Gây Khó Chịu</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Tin Nhắn Tháng — Cập Nhật Thị Trường</span>
+        <button class="btn-cp" onclick="cpT('t-warmup',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-warmup">Chào anh/chị [Tên]!
+
+Tháng này HLX có vài điểm cập nhật mình muốn chia sẻ:
+
+🏗️ Tiến độ: [Thông tin tiến độ tháng này]
+💰 Giá thứ cấp: Đang ở mức [X]–[Y]tỷ tùy căn
+📊 Thị trường: [1 insight ngắn về thị trường chung]
+
+Không có gì phải quyết định ngay — mình chỉ muốn anh/chị luôn có thông tin mới nhất.
+
+Anh/chị có câu hỏi gì không ạ? Mình vẫn sẵn sàng tư vấn bất cứ lúc nào 🙏</div>
+        <div class="template-note">✏️ Gửi vào đầu tháng. Không CTA mạnh — chỉ duy trì kết nối. Khách tự liên hệ khi sẵn sàng.</div>
+      </div>
+    </div>
+  </div>
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 49–51</h4>
+    <ul class="homework-list">
+      <li>Liệt kê tất cả lead từ 3 tháng qua — phân loại vào 3 nhóm</li>
+      <li>Gửi tin nhắn giữ ấm cho Nhóm 1 (đang cân nhắc) ngay hôm nay</li>
+      <li>Setup reminder calendar: Nhóm 1 — 2 tuần; Nhóm 2 — tháng; Nhóm 3 — 2 tháng</li>
+      <li>Đặt mục tiêu: ai trong Nhóm 1 có thể chốt trong 30 ngày tới?</li>
+    </ul>
+  </div>
+  <div class="next-lesson" onclick="show(2)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 3: Hệ thống referral — 1 khách hài lòng → 3 khách mới</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 3 ═══ -->
+<div class="panel" id="p2">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 3/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">🚀 MODULE 4 · BÀI 3 · NGÀY 52–54</div>
+    <div class="lesson-title">Hệ Thống Referral — 1 Khách Hài Lòng → 3 Khách Mới</div>
+    <div class="lesson-desc">Referral là kênh lead chất lượng cao nhất và rẻ nhất. Khách được giới thiệu đã có pre-trust — tỷ lệ chốt cao hơn 3–5 lần so với lead lạnh. Bài này xây hệ thống referral chạy tự động.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">🎯 Mục tiêu: <span>3+ referral từ mỗi khách hài lòng</span></div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Quy Trình Referral 3 Bước</div>
+    <ul class="step-list">
+      <li class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Tạo Trải Nghiệm Đáng Được Giới Thiệu</h4><p>Referral chỉ xảy ra khi khách cảm thấy anh/chị đã làm điều gì đó vượt kỳ vọng. Không phải service tốt bình thường — mà là "WOW moment": gửi bộ tài liệu sau mua, hỏi thăm sau 30 ngày nhận nhà, chia sẻ thông tin về quản lý cho thuê.</p></div></li>
+      <li class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Hỏi Referral Đúng Thời Điểm và Đúng Cách</h4><p>Đúng thời điểm: sau khi ký hợp đồng thành công, sau khi giải quyết xong 1 vấn đề cho khách, sau khi khách nói "cảm ơn anh/chị nhiều". Đúng cách: không chung chung "anh/chị giới thiệu giúp mình" — cụ thể: "Anh/chị có ai đang tìm nhà Quảng Ninh không? Mình muốn phục vụ người quen của anh/chị với cùng chất lượng."</p></div></li>
+      <li class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Duy Trì Quan Hệ Sau Bán</h4><p>Hầu hết broker biến mất sau khi ký xong. Đây là lý do khách không giới thiệu. Hỏi thăm tháng 1, tháng 3, tháng 6 sau mua: "Anh/chị ở/cho thuê ổn không? Cần hỗ trợ gì không?" → khách nhớ anh/chị mãi.</p></div></li>
+    </ul>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Template Xin Referral Tự Nhiên</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Script Xin Referral — Sau Giao Dịch Thành Công</span>
+        <button class="btn-cp" onclick="cpT('t-referral',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-referral">Chào anh/chị [Tên]!
+
+Chúc mừng anh/chị đã hoàn tất thủ tục căn HLX. Mình rất vui được đồng hành cùng anh/chị trong quá trình này.
+
+Mình có 1 nhờ nhỏ: Nếu anh/chị có bạn bè / đồng nghiệp đang tìm hiểu BĐS Quảng Ninh, mình rất trân trọng nếu anh/chị giới thiệu. Mình cam kết phục vụ người quen của anh/chị với cùng chất lượng và sự tận tâm như đã làm với anh/chị.
+
+Anh/chị không cần làm gì phức tạp — chỉ cần nhắn số của mình cho họ là đủ. Mình sẽ lo phần còn lại.
+
+Và dù không có referral nào, mình vẫn luôn ở đây hỗ trợ anh/chị về HLX nhé.
+
+Cảm ơn anh/chị rất nhiều! 🙏</div>
+        <div class="template-note">✏️ Gửi trong vòng 48h sau ký hợp đồng. Không gửi quá sớm (ngay khi ký) — đợi cảm xúc tích cực lắng đọng.</div>
+      </div>
+    </div>
+  </div>
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 52–54</h4>
+    <ul class="homework-list">
+      <li>Liệt kê 3–5 khách đã mua / đã hài lòng trong 6 tháng qua</li>
+      <li>Gửi tin nhắn hỏi thăm (không xin referral ngay) — chỉ hỏi "Mọi thứ ổn không?"</li>
+      <li>Sau khi họ phản hồi tích cực → gửi script xin referral</li>
+      <li>Setup: 30 ngày sau mỗi giao dịch thành công → reminder gửi script hỏi thăm</li>
+    </ul>
+  </div>
+  <div class="next-lesson" onclick="show(3)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 4: Pipeline theo dõi khách HLX</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 4 ═══ -->
+<div class="panel" id="p3">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 4/5</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">🚀 MODULE 4 · BÀI 4 · NGÀY 55–57</div>
+    <div class="lesson-title">Pipeline Theo Dõi Khách HLX — Không Để Mất Lead Vì Quên</div>
+    <div class="lesson-desc">Khi lead nhiều hơn, không thể nhớ hết trong đầu. Pipeline đơn giản trong Notes/Excel giúp anh/chị biết mỗi lead đang ở đâu và cần làm gì tiếp theo.</div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Pipeline 5 Giai Đoạn Đơn Giản</div>
+    <ul class="step-list">
+      <li class="step-item"><div class="step-num">A</div><div class="step-content"><h4>Awareness — Mới biết đến (Follow / Comment lần đầu)</h4><p>Action: Gửi lead magnet. Timeline: trong 24h.</p></div></li>
+      <li class="step-item"><div class="step-num">B</div><div class="step-content"><h4>Interest — Đang quan tâm (Đang inbox/hỏi)</h4><p>Action: Chuỗi nurture 7 ngày. Timeline: Liên hệ mỗi 2–3 ngày.</p></div></li>
+      <li class="step-item"><div class="step-num">C</div><div class="step-content"><h4>Consideration — Đang cân nhắc (Đã xem nhà hoặc hỏi giá nghiêm túc)</h4><p>Action: Bảng so sánh + follow up chủ động. Timeline: Liên hệ mỗi 5–7 ngày.</p></div></li>
+      <li class="step-item"><div class="step-num">D</div><div class="step-content"><h4>Decision — Sắp quyết định (Đang xem thêm / đang hỏi gia đình)</h4><p>Action: Xử lý từ chối, cung cấp thêm proof. Timeline: Liên hệ mỗi 2–3 ngày.</p></div></li>
+      <li class="step-item"><div class="step-num">✓</div><div class="step-content"><h4>Closed — Đã mua / Không mua</h4><p>Đã mua: kích hoạt referral system. Không mua: chuyển sang nurture dài hạn.</p></div></li>
+    </ul>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Template Pipeline — Google Sheets / Notes</span>
+        <button class="btn-cp" onclick="cpT('t-pipeline',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-pipeline">PIPELINE KHÁCH HLX — Tháng [X]/2026
+
+TÊN | SĐT | ZALO | GIAI ĐOẠN | NGÂN SÁCH | MỤC TIÊU | CONTACT GẦN NHẤT | ACTION TIẾP THEO | NGÀY FOLLOW UP
+---|---|---|---|---|---|---|---|---
+Nguyễn A | 09xx | Có | C-Cân nhắc | 3–5 tỷ | Đầu tư | 15/05 - Xem nhà | Gửi bảng so sánh 2 căn | 22/05
+Trần B | 09xx | Không | B-Quan tâm | 5+ tỷ | Nghỉ dưỡng | 10/05 - Inbox hỏi giá | Gửi video tour + ROI | 17/05
+Lê C | 09xx | Có | D-Sắp quyết định | 2–3 tỷ | Ở+cho thuê | 18/05 - Q3 khách chờ ý kiến vợ | Gọi điện hỏi thăm | 21/05
+
+---
+KPI THÁNG NÀY:
+→ Tổng pipeline: [Số] lead
+→ Giai đoạn C+D: [Số] — Target chốt: [Số]
+→ Lịch hẹn xem nhà: [Số]
+→ Đã chốt: [Số]</div>
+        <div class="template-note">✏️ Cập nhật pipeline mỗi Thứ 2 sáng — 15 phút. Bất kỳ lead nào không có "ngày follow up" = đang bị bỏ quên.</div>
+      </div>
+    </div>
+  </div>
+  <div class="homework">
+    <h4>📝 Bài Tập Ngày 55–57</h4>
+    <ul class="homework-list">
+      <li>Tạo file pipeline (Google Sheets hoặc Notes) — copy template trên</li>
+      <li>Điền tất cả lead hiện có vào pipeline — phân loại giai đoạn A/B/C/D</li>
+      <li>Xác định: ai đang ở D (sắp quyết định)? → ưu tiên liên hệ trong 24h</li>
+      <li>Set reminder: mỗi Thứ 2 sáng, mở pipeline review 15 phút</li>
+    </ul>
+  </div>
+  <div class="next-lesson" onclick="show(4)">
+    <div class="nl-text"><small>Tiếp theo →</small><strong>Bài 5: Kế hoạch 90 ngày tiếp theo — đừng dừng lại</strong></div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 5 ═══ -->
+<div class="panel" id="p4">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div></div>
+    <div class="progress-text">Bài 5/5 · HOÀN THÀNH CHƯƠNG TRÌNH!</div>
+  </div>
+  <div class="lesson-head">
+    <div class="lesson-num">🚀 MODULE 4 · BÀI 5 · NGÀY 58–60</div>
+    <div class="lesson-title">Kế Hoạch 90 Ngày Tiếp Theo — Hệ Thống Đã Xây Xong, Giờ Nhân Rộng</div>
+    <div class="lesson-desc">60 ngày đầu: xây nền móng. 90 ngày tiếp: thu hoạch. Bài cuối này giúp anh/chị lên kế hoạch cụ thể để không dừng lại sau khi xong chương trình.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>60 phút lập kế hoạch</span></div>
+      <div class="meta-tag">🎯 Output: <span>Kế hoạch 90 ngày tiếp thành văn bản</span></div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Review 60 Ngày — Đo Lường Thực Tế</div>
+    <div class="checklist">
+      <h4>✅ Checklist "Đã Xây Được" Sau 60 Ngày</h4>
+      <div class="cl-item"><input type="checkbox" id="c1"><label for="c1">Profile FB/Zalo/TikTok đã được tối ưu và nhất quán</label></div>
+      <div class="cl-item"><input type="checkbox" id="c2"><label for="c2">Đang đăng đều 3 bài/tuần với hệ thống batch content</label></div>
+      <div class="cl-item"><input type="checkbox" id="c3"><label for="c3">Zalo OA đang có [X] follower</label></div>
+      <div class="cl-item"><input type="checkbox" id="c4"><label for="c4">Group community có [X] thành viên</label></div>
+      <div class="cl-item"><input type="checkbox" id="c5"><label for="c5">Đã làm ít nhất 2 livestream</label></div>
+      <div class="cl-item"><input type="checkbox" id="c6"><label for="c6">Pipeline có ít nhất [X] lead đang nuôi dưỡng</label></div>
+      <div class="cl-item"><input type="checkbox" id="c7"><label for="c7">Đã có ít nhất 1 referral từ khách cũ</label></div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="cs-label">Kế Hoạch 90 Ngày Tiếp — 3 Giai Đoạn</div>
+    <div class="template">
+      <div class="template-head">
+        <span class="template-title">📋 Template Kế Hoạch Tháng 3–6</span>
+        <button class="btn-cp" onclick="cpT('t-plan90',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="t-plan90">KẾ HOẠCH 90 NGÀY TIẾP (Ngày 61–150)
+---
+
+THÁNG 3 (Ngày 61–90): THU HOẠCH ĐỢT 1
+→ Content: Tiếp tục batch Sunday — KHÔNG giảm tần suất
+→ Lead: Mục tiêu [X] lead/tuần (dựa trên tháng 2 thực tế)
+→ Conversion: Focus vào khách đang ở giai đoạn C, D trong pipeline
+→ Referral: Kích hoạt system với 3 khách đã mua / đã hài lòng
+→ Mục tiêu doanh số: [X] giao dịch
+→ KPI đo: Số follower tăng / Inbox/tuần / Lịch hẹn/tuần
+
+THÁNG 4 (Ngày 91–120): NÂNG CẤP 1 KÊNH
+→ Chọn 1 kênh đang tốt nhất → double-down:
+   - Nếu FB tốt: thử chạy page, boost bài hay nhất
+   - Nếu Livestream tốt: tăng lên 2 lần/tuần
+   - Nếu Group tốt: tổ chức buổi offline/tham quan HLX
+→ Giới thiệu thêm 1–2 broker mới vào group → mở rộng network
+→ Thử 1 format content mới chưa làm (podcast voice / carousel / thread)
+
+THÁNG 5–6 (Ngày 121–150): HỆ THỐNG CHẠY TỰ ĐỘNG
+→ Review: kênh nào đang cho lead chất → tiếp tục
+→ Kênh nào không hiệu quả → dừng hoặc tạm dừng
+→ Bắt đầu train 1 nhân viên hoặc part-time content helper nếu có ngân sách
+→ Mục tiêu: 80% thời gian content = không cần nghĩ, chỉ thực thi template
+
+MỤC TIÊU LỚN CUỐI THÁNG 6:
+→ Được biết đến là "người đến HLX cần hỏi" trong cộng đồng broker Quảng Ninh
+→ [X] giao dịch thành công từ inbound lead (không phải telesale)
+→ Pipeline luôn có 20+ lead đang nuôi dưỡng</div>
+        <div class="template-note">✏️ Điền số thực tế của anh/chị vào [X]. In ra và dán lên bàn làm việc.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="congrats">
+    <div style="font-size:48px;margin-bottom:12px">🏆</div>
+    <h3>Anh/Chị Đã Hoàn Thành 60 Ngày!</h3>
+    <p>Từ broker chưa có hệ thống → Broker HLX có brand rõ ràng, content đều đặn, phễu lead tự nhiên, và hệ thống referral. Đây là nền móng để 6–12 tháng tới bứt phá.</p>
+    <p style="margin-top:12px">Hãy chia sẻ kết quả của anh/chị vào group cộng đồng — đây là nguồn cảm hứng tốt nhất cho những broker đang bắt đầu.</p>
+    <a href="broker-brand-builder-program.html" class="btn-primary" style="margin-top:20px">← Về Program Hub</a>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(i){
+  document.querySelectorAll('.panel').forEach((p,j)=>{p.classList.toggle('active',j===i)});
+  document.querySelectorAll('.ln').forEach((b,j)=>{b.classList.toggle('active',j===i)});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function cpT(id,btn){
+  const txt=document.getElementById(id).textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>fl(btn));}
+  else{const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);fl(btn);}
+}
+function fl(btn){const o=btn.textContent;btn.textContent='✅ Copied!';btn.classList.add('ok');setTimeout(()=>{btn.textContent=o;btn.classList.remove('ok');},2000);}
+</script>
+</body>
+</html>
