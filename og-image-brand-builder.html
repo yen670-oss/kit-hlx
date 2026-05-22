@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OG Image — Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#0d1b2a;font-family:'Be Vietnam Pro',sans-serif}
+
+.card{
+  width:1200px;height:630px;
+  background:linear-gradient(145deg,#040d18 0%,#0d1b2a 45%,#0a2540 100%);
+  display:flex;align-items:stretch;position:relative;overflow:hidden;
+}
+
+/* BG GLOW */
+.card::before{
+  content:'';position:absolute;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,.14) 0%,transparent 65%);
+  top:-200px;left:-100px;
+}
+.card::after{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(27,58,107,.35) 0%,transparent 65%);
+  bottom:-150px;right:50px;
+}
+
+/* GOLD ACCENT LINE */
+.accent-left{width:8px;background:linear-gradient(180deg,#C9A84C,#E2C06A 40%,#8b6914);flex-shrink:0;position:relative;z-index:2}
+
+/* LEFT CONTENT */
+.left{flex:1;padding:52px 52px 52px 48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:2}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:7px 18px;margin-bottom:24px;width:fit-content}
+.eyebrow-dot{width:8px;height:8px;background:#C9A84C;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.eyebrow-text{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#E2C06A}
+
+h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:900;line-height:1.15;color:#fff;margin-bottom:22px;max-width:560px}
+h1 .gold{background:linear-gradient(135deg,#E2C06A,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h1 .accent{color:#4FC3F7}
+
+.subtitle{font-size:16px;color:rgba(232,223,200,.65);line-height:1.6;max-width:520px;margin-bottom:32px}
+
+/* BADGES */
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:700;color:rgba(232,223,200,.8);display:flex;align-items:center;gap:6px}
+
+/* BOTTOM ROW */
+.bottom-row{display:flex;align-items:center;gap:24px}
+.price-block{}
+.price-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:4px}
+.price-val{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#E2C06A;line-height:1}
+.price-sub{font-size:12px;color:rgba(232,223,200,.4);margin-top:3px}
+
+.divider-v{width:1px;height:52px;background:rgba(201,168,76,.2)}
+
+.social-proof{}
+.sp-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.sp-lbl{font-size:11.5px;color:rgba(232,223,200,.45);margin-top:2px}
+.sp-row{display:flex;gap:24px}
+.sp-item{text-align:center}
+
+/* RIGHT VISUAL */
+.right{width:300px;flex-shrink:0;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;background:rgba(0,0,0,.2);border-left:1px solid rgba(201,168,76,.1)}
+
+.trophy{font-size:64px;margin-bottom:16px;filter:drop-shadow(0 4px 16px rgba(201,168,76,.5))}
+
+.modules{display:flex;flex-direction:column;gap:10px;width:100%}
+.mod{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.mod-icon{font-size:18px;flex-shrink:0}
+.mod-info{}
+.mod-name{font-size:12px;font-weight:700;color:#fff;line-height:1.2}
+.mod-days{font-size:10.5px;color:rgba(232,223,200,.4);margin-top:1px}
+.mod.gold-border{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.08)}
+.mod.gold-border .mod-name{color:#E2C06A}
+
+.brand-tag{margin-top:20px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,223,200,.3);text-align:center}
+
+/* BOTTOM BAR */
+.bottom-bar{position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#C9A84C,#E2C06A 50%,#C9A84C)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="accent-left"></div>
+
+  <div class="left">
+    <div>
+      <div class="eyebrow">
+        <div class="eyebrow-dot"></div>
+        <span class="eyebrow-text">🏆 Broker HLX Brand Builder · Cohort 1 · 2026</span>
+      </div>
+
+      <h1>60 Ngày Xây <span class="gold">Thương Hiệu</span><br>Broker HLX Được<br>Khách Chủ Động <span class="gold">Tìm Đến</span></h1>
+
+      <p class="subtitle">Hệ thống thực chiến dành riêng cho broker Hạ Long Xanh — template sẵn dùng, lộ trình rõ ràng, bảo hành kết quả 30 ngày.</p>
+
+      <div class="badges">
+        <div class="badge">✅ Không cần telesale</div>
+        <div class="badge">✅ 90 phút/tuần là đủ</div>
+        <div class="badge">✅ Template copy-paste ngay</div>
+        <div class="badge">🛡️ Hoàn tiền 30 ngày</div>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <div class="price-block">
+        <div class="price-label">Early Bird từ</div>
+        <div class="price-val">2,997,000đ</div>
+        <div class="price-sub">Giá gốc 3,997,000đ · Tiết kiệm 1,000,000đ</div>
+      </div>
+      <div class="divider-v"></div>
+      <div class="sp-row">
+        <div class="sp-item">
+          <div class="sp-num">60</div>
+          <div class="sp-lbl">ngày lộ trình</div>
+        </div>
+        <div class="sp-item">
+          <div class="sp-num">30+</div>
+          <div class="sp-lbl">template ngay</div>
+        </div>
+        <div class="sp-item">
+          <div class="sp-num">0</div>
+          <div class="sp-lbl">đối thủ direct</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="trophy">🏆</div>
+    <div class="modules">
+      <div class="mod gold-border">
+        <div class="mod-icon">🧱</div>
+        <div class="mod-info">
+          <div class="mod-name">Module 1: Nền Móng</div>
+          <div class="mod-days">Ngày 1–15 · Định vị · Bio · MXH</div>
+        </div>
+      </div>
+      <div class="mod">
+        <div class="mod-icon">✍️</div>
+        <div class="mod-info">
+          <div class="mod-name">Module 2: Hệ Thống Nội Dung</div>
+          <div class="mod-days">Ngày 16–30 · 3 bài/tuần · Batch 90 phút</div>
+        </div>
+      </div>
+      <div class="mod">
+        <div class="mod-icon">🎯</div>
+        <div class="mod-info">
+          <div class="mod-name">Module 3: Thu Hút Lead</div>
+          <div class="mod-days">Ngày 31–45 · Phễu · Zalo OA · Live</div>
+        </div>
+      </div>
+      <div class="mod">
+        <div class="mod-icon">🚀</div>
+        <div class="mod-info">
+          <div class="mod-name">Module 4: Chốt & Nhân Rộng</div>
+          <div class="mod-days">Ngày 46–60 · Referral · Pipeline</div>
+        </div>
+      </div>
+    </div>
+    <div class="brand-tag">yen670-oss.github.io/kit-hlx</div>
+  </div>
+
+  <div class="bottom-bar"></div>
+</div>
+</body>
+</html>
