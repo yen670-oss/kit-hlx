@@ -264,6 +264,12 @@ body.present .present-nav{display:flex}
       <span class="ni-badge" style="background:rgba(124,58,237,.3);color:#c4b5fd;border-color:rgba(124,58,237,.4)">NEW</span>
     </div>
 
+    <div class="nav-item" id="nav-cnt" onclick="go('cnt')">
+      <span class="ni-emoji">📱</span>
+      <div class="ni-text"><div class="ni-name">Content Hub</div><div class="ni-sub">Posts · Kế hoạch · Series · Script</div></div>
+      <span class="ni-badge">16</span>
+    </div>
+
     <div class="nav-item" id="nav-kit" onclick="go('kit')">
       <span class="ni-emoji">📦</span>
       <div class="ni-text"><div class="ni-name">BDS Mastery Kit</div><div class="ni-sub">4 gói · Bronze→Diamond</div></div>
@@ -763,6 +769,221 @@ Anh/chị xem thông tin chi tiết tại đây: https://yen670-oss.github.io/ki
 
 Còn 8 suất — anh/chị muốn em giữ chỗ không ạ?</div>
         <button class="btn-sm btn-open" style="margin-top:12px" onclick="cpText(this,document.getElementById('classScript').textContent)">📋 Copy Tin Nhắn</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: CONTENT HUB -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-cnt">
+    <div class="panel-head">
+      <div class="ph-eyebrow">📱 NỘI DUNG · ĐÃ SẢN XUẤT</div>
+      <div class="ph-title">Content Hub — Toàn Bộ Hệ Thống Nội Dung</div>
+      <div class="ph-sub">16 tài nguyên content · Posts sẵn dùng · Kế hoạch · Series · Script · Checklist đăng bài</div>
+    </div>
+
+    <!-- STAT ROW -->
+    <div class="stat-row">
+      <div class="stat-card"><span class="stat-num">30+</span><span class="stat-label">Bài đăng sẵn</span></div>
+      <div class="stat-card"><span class="stat-num">90</span><span class="stat-label">Ngày lịch content</span></div>
+      <div class="stat-card"><span class="stat-num">4</span><span class="stat-label">Chiến dịch funnel</span></div>
+      <div class="stat-card"><span class="stat-num">16</span><span class="stat-label">File content</span></div>
+    </div>
+
+    <!-- SECTION 1: ĐĂNG NGAY -->
+    <div class="section-group">
+      <div class="sg-label">⚡ ĐĂNG NGAY — Content Sẵn Sàng Dùng</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/SOCIAL-POST-KIT-HLX.html')" style="border-color:rgba(39,174,96,.2)">
+          <div class="lcard-icon">📲</div>
+          <div class="lcard-body">
+            <div class="lcard-title" style="color:#4ade80">Social Post Kit HLX</div>
+            <div class="lcard-desc">30+ bài đăng đa nền tảng · FB · Zalo · IG · Tiktok · Copy & đăng ngay</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/SOCIAL-POST-KIT-HLX.html" target="_blank" class="btn-sm btn-open">📲 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/kits/shared/30-posts-fb-zalo.html')">
+          <div class="lcard-icon">📝</div>
+          <div class="lcard-body">
+            <div class="lcard-title">30 Posts FB & Zalo</div>
+            <div class="lcard-desc">30 bài viết chia theo chủ đề · Trust · Sản phẩm · Objection · CTA</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/kits/shared/30-posts-fb-zalo.html" target="_blank" class="btn-sm btn-open">📝 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-tu-choi-fb-posts.html')">
+          <div class="lcard-icon">💬</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Posts Xử Lý Từ Chối</div>
+            <div class="lcard-desc">Bài đăng trả lời từng loại từ chối · Copy-paste đăng ngay</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-tu-choi-fb-posts.html" target="_blank" class="btn-sm btn-open">💬 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-post-hub.html')">
+          <div class="lcard-icon">🎁</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift Post Hub</div>
+            <div class="lcard-desc">Bài đăng tặng quà · Lead magnet content · Kéo tương tác</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-post-hub.html" target="_blank" class="btn-sm btn-open">🎁 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: KẾ HOẠCH CONTENT -->
+    <div class="section-group">
+      <div class="sg-label">📅 KẾ HOẠCH CONTENT — Lịch Đăng Bài</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/content-plan-yen.html')" style="border-color:rgba(201,168,76,.2)">
+          <div class="lcard-icon">🗓️</div>
+          <div class="lcard-body">
+            <div class="lcard-title" style="color:#E2C06A">Kế Hoạch Content Yến</div>
+            <div class="lcard-desc">Lịch content cá nhân của Nguyễn Thị Yến · Theo giai đoạn · Theo nền tảng</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/content-plan-yen.html" target="_blank" class="btn-sm btn-open">🗓️ Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-content-90.html')">
+          <div class="lcard-icon">📅</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Lịch Content 90 Ngày BBB</div>
+            <div class="lcard-desc">Kế hoạch 90 ngày cho Broker Brand Builder · Tuần 1-13 · Theo module</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-content-90.html" target="_blank" class="btn-sm btn-open">📅 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/fanpage-kit-content.html')">
+          <div class="lcard-icon">📘</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Content Fanpage BDS Mastery Kit</div>
+            <div class="lcard-desc">Nội dung đăng fanpage bán kit · Awareness → Interest → Decision</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/fanpage-kit-content.html" target="_blank" class="btn-sm btn-open">📘 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/03-CHECKLIST-DANG-BAI.html')">
+          <div class="lcard-icon">✅</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Checklist Đăng Bài Chuẩn</div>
+            <div class="lcard-desc">Quy trình trước · trong · sau khi đăng · Tiêu chí chất lượng</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/03-CHECKLIST-DANG-BAI.html" target="_blank" class="btn-sm btn-open">✅ Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: FUNNEL & CHIẾN DỊCH -->
+    <div class="section-group">
+      <div class="sg-label">🔀 FUNNEL & CHIẾN DỊCH — Content Theo Phễu</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/content-toan-phan-funnel.html')">
+          <div class="lcard-icon">🔀</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Content Toàn Phần Funnel</div>
+            <div class="lcard-desc">Nội dung đầy đủ theo từng bước phễu · TOFU · MOFU · BOFU</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/content-toan-phan-funnel.html" target="_blank" class="btn-sm btn-open">🔀 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/content-tang-qua.html')">
+          <div class="lcard-icon">🎁</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Content Chiến Dịch Tặng Quà</div>
+            <div class="lcard-desc">Script & bài đăng cho từng đợt tặng gift card · Thu lead chất lượng</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/content-tang-qua.html" target="_blank" class="btn-sm btn-open">🎁 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/chien-dich-funnel.html')">
+          <div class="lcard-icon">⚔️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Chiến Dịch Funnel — Timeline</div>
+            <div class="lcard-desc">Phễu marketing đầy đủ · Awareness → Close · Lịch triển khai</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/chien-dich-funnel.html" target="_blank" class="btn-sm btn-open">⚔️ Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/11-CHIEN-DICH-XAM-NHAP-THI-TRUONG.html')">
+          <div class="lcard-icon">🚀</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Chiến Dịch Xâm Nhập Thị Trường</div>
+            <div class="lcard-desc">90 ngày đầu · KPI từng giai đoạn · Nội dung theo timeline</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/11-CHIEN-DICH-XAM-NHAP-THI-TRUONG.html" target="_blank" class="btn-sm btn-open">🚀 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: SERIES & TRUST -->
+    <div class="section-group">
+      <div class="sg-label">📖 SERIES & XÂY TRUST — Nội Dung Dài Hạn</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/12-CONTENT-TRUST-MOI-GIOI-HLX.html')">
+          <div class="lcard-icon">🤝</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Content Xây Trust Môi Giới HLX</div>
+            <div class="lcard-desc">Các dạng content xây niềm tin · Theo từng giai đoạn quan hệ khách</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/12-CONTENT-TRUST-MOI-GIOI-HLX.html" target="_blank" class="btn-sm btn-open">🤝 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/series-broker-hlx.html')">
+          <div class="lcard-icon">📖</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Series Broker HLX</div>
+            <div class="lcard-desc">Series nội dung chuyên sâu · Multi-part · Xây authority dài hạn</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/series-broker-hlx.html" target="_blank" class="btn-sm btn-open">📖 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html')">
+          <div class="lcard-icon">🌱</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Seeding Chuyên Gia</div>
+            <div class="lcard-desc">Kỹ thuật seeding · Tạo social proof · Nhân rộng tương tác tự nhiên</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html" target="_blank" class="btn-sm btn-open">🌱 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/15-SOP-NHAN-VIEN-DANG-BAI.html')">
+          <div class="lcard-icon">👨‍💻</div>
+          <div class="lcard-body">
+            <div class="lcard-title">SOP Nhân Viên Đăng Bài</div>
+            <div class="lcard-desc">Quy trình giao cho nhân viên · Tiêu chuẩn · Bàn giao không cần giải thích</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/15-SOP-NHAN-VIEN-DANG-BAI.html" target="_blank" class="btn-sm btn-open">👨‍💻 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: PITCH & SCRIPT -->
+    <div class="section-group">
+      <div class="sg-label">🎬 SCRIPT & PITCH — Kịch Bản Bán Hàng</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/pitch-card-f1.html')">
+          <div class="lcard-icon">🎤</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Pitch Card F1/F2 — Script + Hook</div>
+            <div class="lcard-desc">3 video scripts · 12 hook cards · 5 Zalo scripts · Bán kit số lượng lớn</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/pitch-card-f1.html" target="_blank" class="btn-sm btn-open">🎤 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-pitch.html')">
+          <div class="lcard-icon">🏆</div>
+          <div class="lcard-body">
+            <div class="lcard-title">BBB Pitch Deck</div>
+            <div class="lcard-desc">Pitch chương trình Broker Brand Builder · Slides · Script trình bày</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-pitch.html" target="_blank" class="btn-sm btn-open">🏆 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/kits/shared/15-script-objection.html')">
+          <div class="lcard-icon">💡</div>
+          <div class="lcard-body">
+            <div class="lcard-title">15 Script Xử Lý Từ Chối</div>
+            <div class="lcard-desc">15 kịch bản · Theo từng loại từ chối · Copy-paste dùng ngay</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/kits/shared/15-script-objection.html" target="_blank" class="btn-sm btn-open">💡 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/06-HUONG-DAN-LINK-LIVE-FEED.html')">
+          <div class="lcard-icon">📡</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Hướng Dẫn Link Live Feed</div>
+            <div class="lcard-desc">Setup live feed · Phân phối content tự động · Quản lý đa kênh</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/06-HUONG-DAN-LINK-LIVE-FEED.html" target="_blank" class="btn-sm btn-open">📡 Mở</a></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1660,12 +1881,13 @@ Anh muốn bắt đầu Starter 5 kit 17,997K thử trước không ạ?</div>
 
 <script>
 const BASE = 'https://yen670-oss.github.io/kit-hlx/';
-const PANELS = ['hlx','bbb','f1','cls','kit','book','gifts','ops','research','links'];
+const PANELS = ['hlx','bbb','f1','cls','cnt','kit','book','gifts','ops','research','links'];
 const TITLES = {
   hlx: '🏠 HLX Project — Hạ Long Xanh',
   bbb: '🏆 Broker Brand Builder — Coaching',
   f1: '🏗️ Team Pack F1/F2 — Bán Kit Số Lượng Lớn',
   cls: '🎓 Brand From Zero — Lớp Học 4 Tuần',
+  cnt: '📱 Content Hub — Toàn Bộ Nội Dung Đã Sản Xuất',
   kit: '📦 BDS Mastery Kit — 4 Gói',
   book: '📚 Broker Pro Book — 15 Chương',
   gifts: '🎁 Quà Tặng & Lead Magnets',
