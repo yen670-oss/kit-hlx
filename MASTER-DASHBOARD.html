@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 Master Dashboard — BDS HLX Project 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & ROOT ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a1628;--bg2:#0d1b2a;--bg3:#112233;
+  --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+  --navy:#1B3A6B;--card:#112233;--text:#e8dfc8;
+  --green:#27ae60;--vip:#7c3aed;
+  --border:rgba(255,255,255,.07);
+  --sb:260px;
+}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+
+/* ===== APP SHELL ===== */
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:var(--sb);flex-shrink:0;
+  background:linear-gradient(180deg,#060f1e,#0a1628);
+  border-right:1px solid rgba(201,168,76,.12);
+  display:flex;flex-direction:column;
+  overflow:hidden;transition:width .3s;
+  z-index:10;
+}
+.sb-logo{padding:18px 16px 14px;border-bottom:1px solid rgba(201,168,76,.1)}
+.sb-logo-badge{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:4px}
+.sb-logo-title{font-family:'Playfair Display',serif;font-size:15px;color:#fff;line-height:1.3;font-weight:700}
+.sb-logo-sub{font-size:10.5px;color:rgba(232,223,200,.4);margin-top:2px}
+
+/* NAV */
+.sb-nav{flex:1;overflow-y:auto;padding:10px 8px;display:flex;flex-direction:column;gap:2px}
+.sb-nav::-webkit-scrollbar{width:3px}
+.sb-nav::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px}
+
+.nav-group-label{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.3);padding:10px 10px 4px;margin-top:4px}
+
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 10px;border-radius:10px;
+  cursor:pointer;transition:.15s;border:1px solid transparent;
+  text-decoration:none;color:inherit;
+}
+.nav-item:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.06)}
+.nav-item.active{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.25)}
+.ni-emoji{font-size:18px;flex-shrink:0;width:28px;text-align:center}
+.ni-text{flex:1;min-width:0}
+.ni-name{font-size:12.5px;font-weight:700;color:#fff;line-height:1.2}
+.ni-sub{font-size:10px;color:rgba(232,223,200,.4);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ni-badge{font-size:9.5px;font-weight:800;background:rgba(255,255,255,.08);color:rgba(232,223,200,.4);border-radius:8px;padding:1px 6px;flex-shrink:0}
+.nav-item.active .ni-badge{background:rgba(201,168,76,.2);color:var(--gl)}
+
+/* SIDEBAR BOTTOM */
+.sb-bottom{padding:10px 8px 14px;border-top:1px solid rgba(255,255,255,.06)}
+.btn-present{
+  width:100%;padding:9px 14px;
+  background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));
+  border:1px solid rgba(201,168,76,.3);border-radius:10px;
+  color:var(--gl);font-size:12px;font-weight:700;
+  cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:.15s;
+}
+.btn-present:hover{background:rgba(201,168,76,.2)}
+.sb-version{font-size:9px;color:rgba(232,223,200,.2);text-align:center;margin-top:8px}
+
+/* ===== MAIN PANEL ===== */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* TOPBAR */
+.topbar{
+  height:50px;flex-shrink:0;
+  background:linear-gradient(90deg,#081220,#0d1b2a);
+  border-bottom:1px solid rgba(201,168,76,.1);
+  display:flex;align-items:center;padding:0 20px;gap:14px;
+}
+.topbar-title{font-family:'Playfair Display',serif;font-size:16px;color:#fff;flex:1}
+.topbar-sub{font-size:11px;color:rgba(232,223,200,.4)}
+.topbar-actions{display:flex;gap:8px}
+.topbar-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  color:rgba(232,223,200,.7);font-size:11px;font-weight:600;
+  padding:5px 12px;border-radius:8px;cursor:pointer;text-decoration:none;
+  font-family:'Be Vietnam Pro',sans-serif;transition:.15s;
+}
+.topbar-btn:hover{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.3);color:var(--gl)}
+.topbar-btn.gold{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gl)}
+
+/* PANEL CONTENT */
+.panel-scroll{flex:1;overflow-y:auto;padding:22px 24px 40px}
+.panel-scroll::-webkit-scrollbar{width:5px}
+.panel-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+
+.panel{display:none}
+.panel.active{display:block}
+
+/* PANEL HEADER */
+.panel-head{margin-bottom:22px}
+.ph-eyebrow{font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.ph-eyebrow::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.15)}
+.ph-title{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:4px}
+.ph-sub{font-size:13px;color:rgba(232,223,200,.5);line-height:1.6}
+
+/* SECTION GROUPS */
+.section-group{margin-bottom:28px}
+.sg-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.4);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sg-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05)}
+
+/* CARD GRIDS */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+
+/* LINK CARD */
+.lcard{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;display:flex;align-items:flex-start;gap:12px;
+  transition:.15s;cursor:pointer;text-decoration:none;color:inherit;
+}
+.lcard:hover{border-color:rgba(201,168,76,.3);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.lcard-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.lcard-body{flex:1;min-width:0}
+.lcard-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.3}
+.lcard-desc{font-size:11.5px;color:rgba(232,223,200,.5);line-height:1.5}
+.lcard-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:5px;border:1px solid}
+.tag-gold{background:rgba(201,168,76,.12);color:var(--gl);border-color:rgba(201,168,76,.25)}
+.tag-green{background:rgba(39,174,96,.1);color:#4ade80;border-color:rgba(39,174,96,.2)}
+.tag-blue{background:rgba(27,58,107,.3);color:#93c5fd;border-color:rgba(100,150,255,.2)}
+.tag-vip{background:rgba(124,58,237,.12);color:#c4b5fd;border-color:rgba(124,58,237,.25)}
+.tag-red{background:rgba(231,76,60,.1);color:#fca5a5;border-color:rgba(231,76,60,.2)}
+
+/* ACTION BUTTONS IN CARDS */
+.lcard-actions{display:flex;gap:6px;margin-top:8px}
+.btn-sm{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:5px 11px;border-radius:7px;text-decoration:none;cursor:pointer;border:none;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.btn-sm:hover{opacity:.85}
+.btn-open{background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a}
+.btn-copy-sm{background:rgba(255,255,255,.08);color:rgba(232,223,200,.7);border:1px solid rgba(255,255,255,.1)}
+.btn-outline{background:transparent;color:rgba(232,223,200,.6);border:1px solid rgba(255,255,255,.12)}
+
+/* STAT CARDS */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:20px}
+.stat-card{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gl);display:block}
+.stat-label{font-size:10.5px;color:rgba(232,223,200,.45);display:block;margin-top:3px}
+
+/* HIGHLIGHT BOX */
+.highlight-box{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.03));border:1.5px solid rgba(201,168,76,.25);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.hb-title{font-family:'Playfair Display',serif;font-size:17px;color:#fff;margin-bottom:6px}
+.hb-body{font-size:13px;color:rgba(232,223,200,.65);line-height:1.7}
+.hb-list{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.hb-item{font-size:12.5px;color:rgba(232,223,200,.7);display:flex;align-items:flex-start;gap:8px}
+.hb-item::before{content:'→';color:var(--gold);flex-shrink:0}
+
+/* RESEARCH CARD */
+.research-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+.rc-eyebrow{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.4);margin-bottom:6px}
+.rc-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+.rc-body{font-size:12.5px;color:rgba(232,223,200,.6);line-height:1.7;margin-bottom:10px}
+.rc-insights{background:rgba(0,0,0,.25);border-radius:8px;padding:12px 14px;margin-bottom:12px}
+.rc-insight{font-size:12px;color:rgba(232,223,200,.7);display:flex;gap:8px;padding:3px 0}
+.rc-insight::before{content:'💡';flex-shrink:0}
+
+/* TIER BADGES */
+.tier-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.tier-chip{font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;border:1.5px solid}
+.tier-core{background:rgba(39,174,96,.1);color:#4ade80;border-color:rgba(39,174,96,.3)}
+.tier-pro{background:rgba(201,168,76,.1);color:var(--gl);border-color:rgba(201,168,76,.3)}
+.tier-vip{background:rgba(124,58,237,.1);color:#c4b5fd;border-color:rgba(124,58,237,.3)}
+.tier-bronze{background:rgba(180,100,50,.1);color:#fdba74;border-color:rgba(180,100,50,.25)}
+.tier-silver{background:rgba(150,150,170,.1);color:#e2e8f0;border-color:rgba(150,150,170,.25)}
+.tier-gold{background:rgba(201,168,76,.12);color:var(--gl);border-color:rgba(201,168,76,.3)}
+.tier-diamond{background:rgba(124,58,237,.1);color:#c4b5fd;border-color:rgba(124,58,237,.25)}
+
+/* RESEARCH TABS */
+.rtab-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.rtab{font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(232,223,200,.55);cursor:pointer;transition:.15s;font-family:'Be Vietnam Pro',sans-serif}
+.rtab:hover{background:rgba(255,255,255,.08);color:rgba(232,223,200,.8)}
+.rtab.active{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.35);color:var(--gl)}
+
+/* PRESENT MODE */
+body.present .sidebar{width:0;overflow:hidden;border:none}
+body.present .topbar{background:linear-gradient(90deg,#060f1e,#0a1628);padding:0 24px}
+body.present .panel-scroll{padding:28px 40px 40px}
+body.present .ph-title{font-size:28px}
+body.present .grid-2{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+body.present .lcard-title{font-size:15px}
+body.present .lcard-desc{font-size:13px}
+body.present .btn-sm{font-size:12.5px;padding:7px 14px}
+
+/* FLOATING PRESENT NAV */
+.present-nav{display:none;position:fixed;bottom:20px;right:20px;z-index:999;background:rgba(10,22,40,.95);border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:10px 14px;gap:8px;align-items:center;backdrop-filter:blur(12px)}
+body.present .present-nav{display:flex}
+.pn-label{font-size:10px;color:rgba(232,223,200,.4);font-weight:700;letter-spacing:1px}
+.pn-btn{font-size:11.5px;font-weight:800;padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:rgba(232,223,200,.8);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.pn-btn:hover{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.3);color:var(--gl)}
+.pn-btn.exit{background:rgba(231,76,60,.1);border-color:rgba(231,76,60,.25);color:#fca5a5}
+
+/* DIVIDER */
+.divider{height:1px;background:rgba(255,255,255,.05);margin:20px 0}
+
+/* COPY TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(39,174,96,.9);color:#fff;font-size:12.5px;font-weight:700;padding:10px 20px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:768px){
+  :root{--sb:220px}
+  .panel-scroll{padding:16px}
+  body.present .panel-scroll{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast">✅ Đã copy!</div>
+
+<!-- ===== APP ===== -->
+<div class="app" id="app">
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-badge">🏆 BDS HLX · 2026</div>
+    <div class="sb-logo-title">Master Dashboard</div>
+    <div class="sb-logo-sub">Toàn bộ dự án — 1 màn hình</div>
+  </div>
+
+  <nav class="sb-nav">
+    <div class="nav-group-label">SẢN PHẨM</div>
+
+    <div class="nav-item active" id="nav-hlx" onclick="go('hlx')">
+      <span class="ni-emoji">🏠</span>
+      <div class="ni-text"><div class="ni-name">HLX Project</div><div class="ni-sub">Hạ Long Xanh</div></div>
+      <span class="ni-badge">6</span>
+    </div>
+
+    <div class="nav-item" id="nav-bbb" onclick="go('bbb')">
+      <span class="ni-emoji">🏆</span>
+      <div class="ni-text"><div class="ni-name">Brand Builder</div><div class="ni-sub">Chương trình đào tạo</div></div>
+      <span class="ni-badge">12</span>
+    </div>
+
+    <div class="nav-item" id="nav-kit" onclick="go('kit')">
+      <span class="ni-emoji">📦</span>
+      <div class="ni-text"><div class="ni-name">BDS Mastery Kit</div><div class="ni-sub">4 gói · Bronze→Diamond</div></div>
+      <span class="ni-badge">8</span>
+    </div>
+
+    <div class="nav-item" id="nav-book" onclick="go('book')">
+      <span class="ni-emoji">📚</span>
+      <div class="ni-text"><div class="ni-name">Broker Pro Book</div><div class="ni-sub">15 chương · 4 phần</div></div>
+      <span class="ni-badge">7</span>
+    </div>
+
+    <div class="nav-group-label">HỆ THỐNG</div>
+
+    <div class="nav-item" id="nav-gifts" onclick="go('gifts')">
+      <span class="ni-emoji">🎁</span>
+      <div class="ni-text"><div class="ni-name">Quà Tặng & Lead</div><div class="ni-sub">10 gift cards · funnel</div></div>
+      <span class="ni-badge">10</span>
+    </div>
+
+    <div class="nav-item" id="nav-ops" onclick="go('ops')">
+      <span class="ni-emoji">📋</span>
+      <div class="ni-text"><div class="ni-name">SOPs & Vận Hành</div><div class="ni-sub">Quy trình · Chiến dịch</div></div>
+      <span class="ni-badge">9</span>
+    </div>
+
+    <div class="nav-group-label">NGHIÊN CỨU</div>
+
+    <div class="nav-item" id="nav-research" onclick="go('research')">
+      <span class="ni-emoji">📊</span>
+      <div class="ni-text"><div class="ni-name">Research Library</div><div class="ni-sub">Thị trường · Đối thủ · Brand</div></div>
+      <span class="ni-badge">8</span>
+    </div>
+
+    <div class="nav-item" id="nav-links" onclick="go('links')">
+      <span class="ni-emoji">🔗</span>
+      <div class="ni-text"><div class="ni-name">Links Live</div><div class="ni-sub">Toàn bộ link đang chạy</div></div>
+      <span class="ni-badge">18</span>
+    </div>
+  </nav>
+
+  <div class="sb-bottom">
+    <button class="btn-present" onclick="togglePresent()">📺 Chế Độ Trình Bày</button>
+    <div class="sb-version">v2.0 · Cohort 1/2026 · github.io/kit-hlx</div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div style="font-size:18px;cursor:pointer;color:rgba(232,223,200,.5)" onclick="togglePresent()" title="Toggle sidebar">☰</div>
+    <div class="topbar-title" id="topbar-title">🏠 HLX Project — Hạ Long Xanh</div>
+    <div class="topbar-actions">
+      <a href="LINKS-LIVE.html" target="_blank" class="topbar-btn">🔗 Links Live</a>
+      <a href="KIT-HUB.html" target="_blank" class="topbar-btn gold">🏠 KIT-HUB</a>
+    </div>
+  </div>
+
+  <div class="panel-scroll">
+
+  <!-- ================================================================ -->
+  <!-- PANEL: HLX PROJECT -->
+  <!-- ================================================================ -->
+  <div class="panel active" id="panel-hlx">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🏠 SẢN PHẨM · HẠ LONG XANH</div>
+      <div class="ph-title">Hạ Long Xanh — Dự Án BĐS Vinhomes</div>
+      <div class="ph-sub">Tài nguyên trình bày dự án · Landing pages cá nhân · Gallery · Phân tích thị trường</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card"><span class="stat-num">2,000+</span><span class="stat-label">Sản phẩm HLX</span></div>
+      <div class="stat-card"><span class="stat-num">24</span><span class="stat-label">Deal/năm mục tiêu</span></div>
+      <div class="stat-card"><span class="stat-num">3 tỷ</span><span class="stat-label">Hoa hồng mục tiêu</span></div>
+      <div class="stat-card"><span class="stat-num">05/2026</span><span class="stat-label">Timeline bàn giao</span></div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">🌐 LANDING PAGES MÔI GIỚI</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html')">
+          <div class="lcard-icon">🏠</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Landing Page HLX — Mặc Định</div>
+            <div class="lcard-desc">Trang giới thiệu dự án HLX chung · Dùng làm base template · Form liên hệ</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-gold">Chia sẻ</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/09-landing-nguyen-thi-yen.html')">
+          <div class="lcard-icon">👩</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Landing — Nguyễn Thị Yến</div>
+            <div class="lcard-desc">Trang landing cá nhân hóa cho môi giới Yến · Brand nâu vàng gold</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-blue">Personal Brand</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/09-landing-nguyen-thi-yen.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/09-landing-nguyen-thi-yen.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/09-landing-to-thi-thuy-ha.html')">
+          <div class="lcard-icon">👩</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Landing — Tô Thị Thùy Hà</div>
+            <div class="lcard-desc">Trang landing cá nhân hóa cho môi giới Hà · Full thông tin dự án HLX</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-blue">Personal Brand</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/09-landing-to-thi-thuy-ha.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/09-landing-to-thi-thuy-ha.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/landing-hlx-personal.html')">
+          <div class="lcard-icon">🎯</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Landing HLX — Personal Style</div>
+            <div class="lcard-desc">Phong cách trình bày personal broker · Tối ưu chuyển đổi · CTA mạnh</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-gold">Cao cấp</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/landing-hlx-personal.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/landing-hlx-personal.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📊 TÀI LIỆU DỰ ÁN</div>
+      <div class="grid-3">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/ANH-HLX-GALLERY.html')">
+          <div class="lcard-icon">🖼️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gallery HLX</div>
+            <div class="lcard-desc">Ảnh phối cảnh · Mặt bằng · Tiện ích dự án</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/ANH-HLX-GALLERY.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/infographic-thi-truong-qn-2026.html')">
+          <div class="lcard-icon">📈</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Infographic Thị Trường 2026</div>
+            <div class="lcard-desc">Số liệu BĐS Quảng Ninh · Xu hướng giá · So sánh phân khúc</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/infographic-thi-truong-qn-2026.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/KHACH-HANG.html')">
+          <div class="lcard-icon">👥</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Danh Sách Khách Hàng</div>
+            <div class="lcard-desc">CRM khách hàng tiềm năng · Follow-up tracker</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/KHACH-HANG.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/he-thong-phan-phoi.html')">
+          <div class="lcard-icon">🏗️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Hệ Thống Phân Phối</div>
+            <div class="lcard-desc">Cơ cấu F0/F1/F2 · Hoa hồng · Quy trình giao dịch</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/he-thong-phan-phoi.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/offer-ecosystem-hlx.html')">
+          <div class="lcard-icon">🔄</div>
+          <div class="lcard-body">
+            <div class="lcard-title">HLX Ecosystem Offer</div>
+            <div class="lcard-desc">Value ladder 3 tầng · Upsell path · Hệ sinh thái sản phẩm</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/offer-ecosystem-hlx.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/13-BAO-CAO-2000-SAN-HLX.html')">
+          <div class="lcard-icon">📋</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Báo Cáo 2000 Sản HLX</div>
+            <div class="lcard-desc">Phân tích toàn bộ quỹ sản phẩm · Phân loại giá · Cơ hội</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/13-BAO-CAO-2000-SAN-HLX.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: BROKER BRAND BUILDER -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-bbb">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🏆 SẢN PHẨM · COACHING PROGRAM</div>
+      <div class="ph-title">Broker Brand Builder — 12 Tuần</div>
+      <div class="ph-sub">3 gói · Cohort 1 khai giảng 01/07/2026 · Giới hạn 15 suất · Xây thương hiệu broker chuyên nghiệp</div>
+    </div>
+
+    <div class="tier-row">
+      <span class="tier-chip tier-core">🎓 Core Group — 4,997,000đ</span>
+      <span class="tier-chip tier-pro">🏆 Brand Pro — 9,997,000đ</span>
+      <span class="tier-chip tier-vip">💎 VIP 1:1 — 19,997,000đ</span>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">💰 BÁN HÀNG</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-sales.html')">
+          <div class="lcard-icon">💰</div>
+          <div class="lcard-body">
+            <div class="lcard-title">BBB Sales Page — Chia Sẻ Cho Broker</div>
+            <div class="lcard-desc">Trang bán chương trình · 3 gói giá · CTA checkout · OG image cho mạng xã hội</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-gold">Chia sẻ</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-sales.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-sales.html')">📋 Copy link</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-checkout.html')">
+          <div class="lcard-icon">🛒</div>
+          <div class="lcard-body">
+            <div class="lcard-title">BBB Checkout — SePay QR</div>
+            <div class="lcard-desc">Thanh toán 3 tier · QR VietQR tự động · Mã giao dịch · SePay webhook</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-blue">SePay</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-checkout.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-checkout.html?tier=brand-builder" target="_blank" class="btn-sm btn-outline">Pro</a>
+              <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-checkout.html?tier=vip" target="_blank" class="btn-sm btn-outline">VIP</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📦 TRANG GIAO KIT — SAU KHI KHÁCH THANH TOÁN</div>
+      <div class="grid-3">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/bbb-core.html')" style="border-color:rgba(39,174,96,.2)">
+          <div class="lcard-icon">🎓</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Core Group — Trang Giao Kit</div>
+            <div class="lcard-desc">12 tuần · 4 module · 5 bonus · 4 Q&A live · 4,997K</div>
+            <div class="lcard-tags"><span class="tag tag-green">📦 Giao</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/bbb-core.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/bbb-core.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/bbb-pro.html')" style="border-color:rgba(201,168,76,.2)">
+          <div class="lcard-icon">🏆</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Brand Pro — Trang Giao Kit</div>
+            <div class="lcard-desc">Core + 2 audit 1:1 · Chiến lược cá nhân · Kit Gold · 9,997K</div>
+            <div class="lcard-tags"><span class="tag tag-gold">📦 Giao</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/bbb-pro.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/bbb-pro.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/bbb-vip.html')" style="border-color:rgba(124,58,237,.2)">
+          <div class="lcard-icon">💎</div>
+          <div class="lcard-body">
+            <div class="lcard-title">VIP 1:1 — Trang Giao Kit</div>
+            <div class="lcard-desc">6 coaching riêng · Review ∞ · Kit Diamond · 19,997K</div>
+            <div class="lcard-tags"><span class="tag tag-vip">📦 Giao</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/bbb-vip.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/bbb-vip.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📚 NỘI DUNG CHƯƠNG TRÌNH</div>
+      <div class="grid-4">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module1.html')">
+          <div class="lcard-icon">🧱</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Module 1</div>
+            <div class="lcard-desc">Nền Móng & Định Vị</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module1.html" target="_blank" class="btn-sm btn-open">Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module2.html')">
+          <div class="lcard-icon">✍️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Module 2</div>
+            <div class="lcard-desc">Hệ Thống Nội Dung</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module2.html" target="_blank" class="btn-sm btn-open">Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module3.html')">
+          <div class="lcard-icon">🎯</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Module 3</div>
+            <div class="lcard-desc">Thu Hút Lead</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module3.html" target="_blank" class="btn-sm btn-open">Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module4.html')">
+          <div class="lcard-icon">🚀</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Module 4</div>
+            <div class="lcard-desc">Chốt & Nhân Rộng</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module4.html" target="_blank" class="btn-sm btn-open">Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-content-90.html')">
+          <div class="lcard-icon">📅</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Lịch Content 90 Ngày</div>
+            <div class="lcard-desc">39 FB · 26 Reels · 13 Live</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-content-90.html" target="_blank" class="btn-sm btn-open">Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-pitch.html')">
+          <div class="lcard-icon">🗂️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Script Pitching</div>
+            <div class="lcard-desc">5 script · 10 từ chối</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-pitch.html" target="_blank" class="btn-sm btn-open">Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-program.html')">
+          <div class="lcard-icon">📊</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Program Hub</div>
+            <div class="lcard-desc">Tổng quan 3 gói</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-program.html" target="_blank" class="btn-sm btn-open">Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: BDS MASTERY KIT -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-kit">
+    <div class="panel-head">
+      <div class="ph-eyebrow">📦 SẢN PHẨM · BDS MASTERY KIT</div>
+      <div class="ph-title">BDS Mastery Kit — Bộ Công Cụ Broker</div>
+      <div class="ph-sub">4 gói · Bronze → Diamond · Công cụ bán hàng hoàn chỉnh cho môi giới HLX</div>
+    </div>
+
+    <div class="tier-row">
+      <span class="tier-chip tier-bronze">🥉 Bronze — 697K</span>
+      <span class="tier-chip tier-silver">🥈 Silver — 1,497K</span>
+      <span class="tier-chip tier-gold">🥇 Gold — 2,997K</span>
+      <span class="tier-chip tier-diamond">💎 Diamond — 4,997K</span>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">💰 BÁN HÀNG & GIAO KIT</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html')">
+          <div class="lcard-icon">🎯</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Landing Page — Mua Kit</div>
+            <div class="lcard-desc">Trang bán BDS Mastery Kit · 4 gói giá · SePay checkout · OG image</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-gold">Chia sẻ</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/checkout.html')">
+          <div class="lcard-icon">🛒</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Kit Checkout — SePay QR</div>
+            <div class="lcard-desc">Thanh toán 4 tier Bronze→Diamond · QR VietQR · Xác nhận tự động</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-blue">SePay</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/checkout.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <a href="https://yen670-oss.github.io/kit-hlx/checkout.html?tier=gold" target="_blank" class="btn-sm btn-outline">Gold</a>
+              <a href="https://yen670-oss.github.io/kit-hlx/checkout.html?tier=diamond" target="_blank" class="btn-sm btn-outline">Diamond</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📁 KIT HUB & TÀI LIỆU TỪNG GÓI</div>
+      <div class="grid-3">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/KIT-HUB.html')">
+          <div class="lcard-icon">🏠</div>
+          <div class="lcard-body">
+            <div class="lcard-title">KIT-HUB — Trung Tâm</div>
+            <div class="lcard-desc">Toàn bộ tài nguyên kit · BBB · Book · Links · Quản lý tổng</div>
+            <div class="lcard-tags"><span class="tag tag-gold">Admin</span></div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/KIT-HUB.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/kits/broker-kit-halong.html')">
+          <div class="lcard-icon">📦</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Broker Kit HaLong</div>
+            <div class="lcard-desc">Kit giao cho broker · Tài nguyên đầy đủ · Branded template</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/kits/broker-kit-halong.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/kits/shared/bang-tinh-roi.html')">
+          <div class="lcard-icon">🧮</div>
+          <div class="lcard-body">
+            <div class="lcard-title">ROI Calculator</div>
+            <div class="lcard-desc">Tính lợi nhuận đầu tư HLX · Tool thuyết phục khách</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/kits/shared/bang-tinh-roi.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/kits/shared/30-posts-fb-zalo.html')">
+          <div class="lcard-icon">✍️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">30 Bài Content FB/Zalo</div>
+            <div class="lcard-desc">Copy-paste ngay · 5 pillar · 30 template đầy đủ</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/kits/shared/30-posts-fb-zalo.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/kits/shared/15-script-objection.html')">
+          <div class="lcard-icon">🗣️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">15 Script Xử Lý Từ Chối</div>
+            <div class="lcard-desc">15 tình huống thực tế · Script chi tiết · Tone chuẩn</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/kits/shared/15-script-objection.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/kits/shared/checklist-phap-ly.html')">
+          <div class="lcard-icon">✅</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Checklist Pháp Lý</div>
+            <div class="lcard-desc">Các điểm pháp lý quan trọng HLX · Tài liệu cần thiết</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/kits/shared/checklist-phap-ly.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: BROKER PRO BOOK -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-book">
+    <div class="panel-head">
+      <div class="ph-eyebrow">📚 SẢN PHẨM · BROKER PRO BOOK</div>
+      <div class="ph-title">Broker Pro Book — 15 Chương</div>
+      <div class="ph-sub">Sách chuyên nghiệp broker HLX · 4 phần · Nền tảng → Kỹ năng → Thu nhập → Nhân rộng</div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📖 TRANG CHỦ & PHẦN TỔNG QUAN</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-index.html')">
+          <div class="lcard-icon">📚</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Broker Pro Book — Trang Chủ</div>
+            <div class="lcard-desc">Index 15 chương · Mục lục · Giao kit qua đây</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-gold">Giao Kit</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-index.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/broker-pro-book-index.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-notes.html')">
+          <div class="lcard-icon">📝</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Notes & Tóm Tắt</div>
+            <div class="lcard-desc">Ghi chú biên tập · Key takeaways từng chương · Review nhanh</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-notes.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📑 4 PHẦN SÁCH</div>
+      <div class="grid-4">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-p1.html')">
+          <div class="lcard-icon">🏗️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Phần 1</div>
+            <div class="lcard-desc">Nền Tảng BĐS · HLX Project · Pháp lý</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-p1.html" target="_blank" class="btn-sm btn-open">Đọc</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-p2.html')">
+          <div class="lcard-icon">🎯</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Phần 2</div>
+            <div class="lcard-desc">Kỹ Năng Bán · Thuyết phục · Chốt deal</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-p2.html" target="_blank" class="btn-sm btn-open">Đọc</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-p3.html')">
+          <div class="lcard-icon">💰</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Phần 3</div>
+            <div class="lcard-desc">Thu Nhập & Hoa Hồng · Roadmap tỷ/năm</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-p3.html" target="_blank" class="btn-sm btn-open">Đọc</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-p4.html')">
+          <div class="lcard-icon">🚀</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Phần 4</div>
+            <div class="lcard-desc">Xây Đội Nhóm · F1/F2 · Scale hệ thống</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-p4.html" target="_blank" class="btn-sm btn-open">Đọc</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📄 CHƯƠNG RIÊNG LẺ</div>
+      <div class="grid-4">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-chapter5.html')">
+          <div class="lcard-icon">📄</div>
+          <div class="lcard-body"><div class="lcard-title">Chương 5</div><div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-chapter5.html" target="_blank" class="btn-sm btn-open">Đọc</a></div></div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/broker-pro-book-chapter6.html')">
+          <div class="lcard-icon">📄</div>
+          <div class="lcard-body"><div class="lcard-title">Chương 6</div><div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-chapter6.html" target="_blank" class="btn-sm btn-open">Đọc</a></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: GIFTS & LEAD MAGNETS -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-gifts">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🎁 HỆ THỐNG · LEAD MAGNETS</div>
+      <div class="ph-title">Quà Tặng & Lead Magnets — Phễu Khách Hàng</div>
+      <div class="ph-sub">10 gift cards · Tặng theo từng giai đoạn phễu · Không tặng hết 1 lần · Dẫn dắt từng bước</div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="hb-title">🎯 Chiến Lược Phễu Quà Tặng</div>
+      <div class="hb-body">Không tặng tất cả cùng lúc — mỗi quà được tặng đúng thời điểm để nuture khách hàng từng bước, tạo ra sự kỳ vọng và giữ engagement liên tục.</div>
+      <div class="hb-list">
+        <div class="hb-item">Giai đoạn 1 (Nhận diện): Tặng gift 1-2 để xây trust ban đầu</div>
+        <div class="hb-item">Giai đoạn 2 (Quan tâm): Tặng gift 3-5 khi khách hỏi thêm</div>
+        <div class="hb-item">Giai đoạn 3 (Quyết định): Tặng gift 6-8 để đẩy vào chốt</div>
+        <div class="hb-item">Giai đoạn 4 (Sau mua): Tặng gift 9-10 để referral</div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">🎁 10 GIFT CARDS</div>
+      <div class="grid-3">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html')">
+          <div class="lcard-icon">🎁</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 1 — 5 Nỗi Đau Môi Giới</div>
+            <div class="lcard-desc">Card đẹp · 5 pain points thực tế · Trigger cảm xúc</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-moi-gioi.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-5-kieu-khach.html')">
+          <div class="lcard-icon">👥</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 2 — 5 Kiểu Khách Hàng</div>
+            <div class="lcard-desc">Phân loại khách · Cách tiếp cận từng type · Script tương ứng</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-5-kieu-khach.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-5-kieu-khach.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-xu-ly-tu-choi.html')">
+          <div class="lcard-icon">💬</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 3 — 10 Tips Xử Lý Từ Chối</div>
+            <div class="lcard-desc">10 tình huống thực tế · Script phản hồi · Copy-paste</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-xu-ly-tu-choi.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-xu-ly-tu-choi.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-tinh-hoa-hong.html')">
+          <div class="lcard-icon">💰</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 4 — Tính Hoa Hồng</div>
+            <div class="lcard-desc">Calculator hoa hồng · Roadmap thu nhập · Mục tiêu tỷ/năm</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-tinh-hoa-hong.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-tinh-hoa-hong.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-hop-tac-moi-gioi.html')">
+          <div class="lcard-icon">🤝</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 5 — Hợp Tác Môi Giới</div>
+            <div class="lcard-desc">Mẫu hợp đồng hợp tác · Điều khoản · Cơ cấu chia sẻ</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-hop-tac-moi-gioi.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-hop-tac-moi-gioi.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-checklist-bao-ve-lead.html')">
+          <div class="lcard-icon">🛡️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 6 — Checklist Bảo Vệ Lead</div>
+            <div class="lcard-desc">Giữ lead không bị cướp · 10 bước bảo vệ · CRM tips</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-checklist-bao-ve-lead.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-checklist-bao-ve-lead.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-chu-san.html')">
+          <div class="lcard-icon">🏗️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 7 — Chủ Sàn / F1</div>
+            <div class="lcard-desc">Dành cho chủ sàn môi giới · Xây đội · Scale hệ thống</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-chu-san.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-chu-san.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-training-roi.html')">
+          <div class="lcard-icon">📈</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 8 — Training ROI</div>
+            <div class="lcard-desc">ROI của việc đào tạo · Số liệu thuyết phục · Lý do mua kit</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-training-roi.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-training-roi.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-tu-choi-fb-posts.html')">
+          <div class="lcard-icon">📝</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift 9 — Posts Xử Lý Từ Chối</div>
+            <div class="lcard-desc">Bài viết FB về xử lý từ chối · Đăng luôn · Tạo trust</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-tu-choi-fb-posts.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a><button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/gift-tu-choi-fb-posts.html')">📋</button></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/gift-post-hub.html')">
+          <div class="lcard-icon">🗂️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Gift Hub — Tổng Hợp Posts</div>
+            <div class="lcard-desc">Tổng hợp tất cả posts theo chủ đề · Tìm nhanh · Copy-paste</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/gift-post-hub.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: SOPs & OPERATIONS -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-ops">
+    <div class="panel-head">
+      <div class="ph-eyebrow">📋 HỆ THỐNG · VẬN HÀNH</div>
+      <div class="ph-title">SOPs & Quy Trình Vận Hành</div>
+      <div class="ph-sub">Checklist · Hướng dẫn · Chiến dịch · SOP nhân viên · Triển khai F1/F2</div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📋 CONTENT & ĐĂNG BÀI</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/03-CHECKLIST-DANG-BAI.html')">
+          <div class="lcard-icon">✅</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Checklist Đăng Bài</div>
+            <div class="lcard-desc">Quy trình đăng bài chuẩn · Checklist trước/sau · Tiêu chí chất lượng</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/03-CHECKLIST-DANG-BAI.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/15-SOP-NHAN-VIEN-DANG-BAI.html')">
+          <div class="lcard-icon">👨‍💻</div>
+          <div class="lcard-body">
+            <div class="lcard-title">SOP Nhân Viên Đăng Bài</div>
+            <div class="lcard-desc">Quy trình cho nhân viên · Bàn giao · Tiêu chuẩn</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/15-SOP-NHAN-VIEN-DANG-BAI.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/06-HUONG-DAN-LINK-LIVE-FEED.html')">
+          <div class="lcard-icon">📡</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Hướng Dẫn Link Live Feed</div>
+            <div class="lcard-desc">Setup link live · Feed quản lý · Phân phối nội dung</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/06-HUONG-DAN-LINK-LIVE-FEED.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/SOCIAL-POST-KIT-HLX.html')">
+          <div class="lcard-icon">📱</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Social Post Kit</div>
+            <div class="lcard-desc">Bộ posts sẵn sàng đăng · Đa nền tảng · HLX theme</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/SOCIAL-POST-KIT-HLX.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">🚀 CHIẾN DỊCH & XÂM NHẬP THỊ TRƯỜNG</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/11-CHIEN-DICH-XAM-NHAP-THI-TRUONG.html')">
+          <div class="lcard-icon">⚔️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Chiến Dịch Xâm Nhập Thị Trường</div>
+            <div class="lcard-desc">90 ngày đầu · Mục tiêu từng giai đoạn · KPI rõ ràng</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/11-CHIEN-DICH-XAM-NHAP-THI-TRUONG.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/12-CONTENT-TRUST-MOI-GIOI-HLX.html')">
+          <div class="lcard-icon">🤝</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Content Trust Môi Giới HLX</div>
+            <div class="lcard-desc">Xây dựng trust với khách · Các dạng content theo funnel</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/12-CONTENT-TRUST-MOI-GIOI-HLX.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html')">
+          <div class="lcard-icon">🌱</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Seeding Chuyên Gia</div>
+            <div class="lcard-desc">Kỹ thuật seeding · Tạo social proof · Đánh giá chuyên gia</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/08-SEEDING-CHUYEN-GIA.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/chien-dich-funnel.html')">
+          <div class="lcard-icon">🔀</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Chiến Dịch Funnel</div>
+            <div class="lcard-desc">Phễu marketing đầy đủ · Awareness → Close · Timeline</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/chien-dich-funnel.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">🏗️ F1/F2 & NHÂN RỘNG</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/14-CHIEN-LUOC-BAN-KIT-CHO-F1-F2.html')">
+          <div class="lcard-icon">🌐</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Chiến Lược Bán Kit Cho F1/F2</div>
+            <div class="lcard-desc">Phân phối qua mạng lưới · Hoa hồng F1/F2 · Quy trình onboard</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/14-CHIEN-LUOC-BAN-KIT-CHO-F1-F2.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/contract-marketing-kit.html')">
+          <div class="lcard-icon">📜</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Hợp Đồng Marketing Kit</div>
+            <div class="lcard-desc">Mẫu hợp đồng Marketer+Closer · Điều khoản · Ký số</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/contract-marketing-kit.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/10-HUONG-DAN-DEPLOY-GITHUB.html')">
+          <div class="lcard-icon">🚀</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Hướng Dẫn Deploy GitHub</div>
+            <div class="lcard-desc">Deploy lên GitHub Pages · Cập nhật · Quản lý domain</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/10-HUONG-DAN-DEPLOY-GITHUB.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/pipeline-products.html')">
+          <div class="lcard-icon">📊</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Pipeline Sản Phẩm</div>
+            <div class="lcard-desc">7 sản phẩm đường ống · Revenue forecast · Roadmap ra mắt</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/pipeline-products.html" target="_blank" class="btn-sm btn-open">🔗 Mở</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: RESEARCH LIBRARY -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-research">
+    <div class="panel-head">
+      <div class="ph-eyebrow">📊 THƯ VIỆN NGHIÊN CỨU</div>
+      <div class="ph-title">Research Library — Dữ Liệu & Phân Tích</div>
+      <div class="ph-sub">6 chủ đề nghiên cứu · Key insights mỗi chủ đề · Link đến báo cáo đầy đủ · Sẵn sàng show khách</div>
+    </div>
+
+    <div class="rtab-bar">
+      <button class="rtab active" onclick="rtab(this,'rt-market')">🏙️ Thị Trường BĐS</button>
+      <button class="rtab" onclick="rtab(this,'rt-competitor')">🔍 Đối Thủ</button>
+      <button class="rtab" onclick="rtab(this,'rt-pain')">💢 Pain Points</button>
+      <button class="rtab" onclick="rtab(this,'rt-brand')">🎯 Brand Broker</button>
+      <button class="rtab" onclick="rtab(this,'rt-revenue')">💰 Revenue 10 Tỷ</button>
+      <button class="rtab" onclick="rtab(this,'rt-training')">📈 Training ROI</button>
+    </div>
+
+    <!-- TAB: THỊ TRƯỜNG -->
+    <div id="rt-market" class="rt-content">
+      <div class="research-card">
+        <div class="rc-eyebrow">NGHIÊN CỨU · THỊ TRƯỜNG BĐS QUẢNG NINH 2026</div>
+        <div class="rc-title">Thị Trường BĐS Hạ Long — Xu Hướng & Cơ Hội</div>
+        <div class="rc-body">Phân tích tổng quan thị trường BĐS Quảng Ninh năm 2026, tập trung vào phân khúc Vinhomes Hạ Long Xanh và cơ hội cho môi giới chuyên nghiệp.</div>
+        <div class="rc-insights">
+          <div class="rc-insight">Vinhomes HLX có 2,000+ sản phẩm — lớn nhất Quảng Ninh — tạo volume giao dịch ổn định dài hạn</div>
+          <div class="rc-insight">Phân khúc cao cấp tăng trưởng 18-22%/năm tại khu vực Hạ Long 2024-2025</div>
+          <div class="rc-insight">Xu hướng: khách đầu tư nội địa (Hà Nội) chiếm 60% — nhóm khách chính cần target</div>
+          <div class="rc-insight">Điểm khác biệt HLX: vị trí vịnh, shophouse, tiện ích 5 sao — lý do mua mạnh nhất</div>
+          <div class="rc-insight">Môi giới chuyên HLX có lợi thế lớn về kiến thức — đây là lý do mua kit & BBB</div>
+        </div>
+        <div class="lcard-actions">
+          <a href="https://yen670-oss.github.io/kit-hlx/infographic-thi-truong-qn-2026.html" target="_blank" class="btn-sm btn-open">📊 Xem Infographic</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/13-BAO-CAO-2000-SAN-HLX.html" target="_blank" class="btn-sm btn-outline">📋 Báo Cáo 2000 Sản</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: ĐỐI THỦ -->
+    <div id="rt-competitor" class="rt-content" style="display:none">
+      <div class="research-card">
+        <div class="rc-eyebrow">NGHIÊN CỨU · PHÂN TÍCH ĐỐI THỦ</div>
+        <div class="rc-title">Phân Tích Đối Thủ — BDS Mastery Kit & HLX</div>
+        <div class="rc-body">Khảo sát và phân tích toàn bộ đối thủ đang chào bán bộ kit bán hàng trong BĐS nói chung và Vinhomes Hạ Long Xanh nói riêng.</div>
+        <div class="rc-insights">
+          <div class="rc-insight">Không có đối thủ trực tiếp bán kit chuyên HLX — thị trường ngách hầu như trống</div>
+          <div class="rc-insight">Đối thủ gần nhất: kit BĐS chung chung, không cá nhân hóa, thiếu landing page & tools</div>
+          <div class="rc-insight">Điểm mạnh của mình: HLX-specific, landing page cá nhân, hệ sinh thái hoàn chỉnh, BBB coaching</div>
+          <div class="rc-insight">Rào cản cạnh tranh: sự kết hợp Kit + Book + BBB + Landing personal tạo hào rộng khó sao chép</div>
+          <div class="rc-insight">Cơ hội: broker HLX đang thiếu công cụ chuyên nghiệp — nhu cầu cao, cung thiếu</div>
+        </div>
+        <div class="lcard-actions">
+          <a href="https://yen670-oss.github.io/kit-hlx/competitor-analysis.html" target="_blank" class="btn-sm btn-open">🔍 Xem Đầy Đủ</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PAIN POINTS -->
+    <div id="rt-pain" class="rt-content" style="display:none">
+      <div class="research-card">
+        <div class="rc-eyebrow">NGHIÊN CỨU · NỖI ĐAU MÔI GIỚI</div>
+        <div class="rc-title">5 Nỗi Đau Lớn Nhất Của Môi Giới HLX</div>
+        <div class="rc-body">Nghiên cứu sâu về pain points của môi giới BĐS — cơ sở để thiết kế bộ kit và chương trình BBB giải quyết đúng vấn đề thực tế.</div>
+        <div class="rc-insights">
+          <div class="rc-insight">Pain 1: Không có thương hiệu cá nhân — bị đồng hóa, khách không nhớ — cần BBB</div>
+          <div class="rc-insight">Pain 2: Thiếu công cụ trình bày dự án chuyên nghiệp — mất khách vào tay đối thủ — cần Kit</div>
+          <div class="rc-insight">Pain 3: Không biết cách xử lý từ chối — close rate thấp — cần Script Objection</div>
+          <div class="rc-insight">Pain 4: Thiếu content đều đặn — mất follow, mất trust — cần Lịch Content 90 ngày</div>
+          <div class="rc-insight">Pain 5: Không có hệ thống — làm việc manh mún, không scale — cần toàn bộ ecosystem</div>
+        </div>
+        <div class="lcard-actions">
+          <a href="https://yen670-oss.github.io/kit-hlx/pain-point-research.html" target="_blank" class="btn-sm btn-open">💢 Nghiên Cứu Đầy Đủ</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/pain-point-f1-f2.html" target="_blank" class="btn-sm btn-outline">Pain F1/F2</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: BRAND BROKER -->
+    <div id="rt-brand" class="rt-content" style="display:none">
+      <div class="research-card">
+        <div class="rc-eyebrow">NGHIÊN CỨU · PERSONAL BRAND BROKER</div>
+        <div class="rc-title">Xây Thương Hiệu Cá Nhân Cho Broker HLX</div>
+        <div class="rc-body">Research 7 tab phân tích về personal branding trong BĐS — benchmark đối thủ broker HLX, chiến lược kênh tối ưu, lịch content đề xuất, community best practices.</div>
+        <div class="rc-insights">
+          <div class="rc-insight">Broker có personal brand kiếm nhiều hơn 3-5x so với broker không có thương hiệu</div>
+          <div class="rc-insight">Facebook vẫn là kênh chính tại Quảng Ninh — ưu tiên FB + Zalo trước TikTok</div>
+          <div class="rc-insight">Tần suất đăng bài tối ưu: 5-7 bài/tuần FB, 3-4 Reels/tuần, 2 Live/tháng</div>
+          <div class="rc-insight">Content pillar: dự án (30%) + kiến thức BĐS (25%) + câu chuyện cá nhân (25%) + social proof (20%)</div>
+          <div class="rc-insight">KPI 3 tháng đầu: 500 follower mới, 50 lead Zalo, 3 cuộc hẹn, 1 deal nhắm đến</div>
+        </div>
+        <div class="lcard-actions">
+          <a href="https://yen670-oss.github.io/kit-hlx/research-personal-brand-broker.html" target="_blank" class="btn-sm btn-open">🎯 Nghiên Cứu Đầy Đủ</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/research-khoa-hoc-mxh.html" target="_blank" class="btn-sm btn-outline">Khoa Học MXH</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: REVENUE 10 TỶ -->
+    <div id="rt-revenue" class="rt-content" style="display:none">
+      <div class="research-card">
+        <div class="rc-eyebrow">LỘ TRÌNH · DOANH THU 10 TỶ/2026</div>
+        <div class="rc-title">Roadmap 10 Tỷ Đồng — 4 Luồng Doanh Thu</div>
+        <div class="rc-body">Kế hoạch chi tiết đạt 10 tỷ VND trong năm 2026 thông qua 4 luồng doanh thu đồng thời, tối ưu chi phí và tối đa hóa leverage từ hệ thống sẵn có.</div>
+        <div class="rc-insights">
+          <div class="rc-insight">Luồng 1 — Kit Sales: 2.5 tỷ · 1,670 kit/năm = 5 kit/ngày · Bronze→Diamond upsell</div>
+          <div class="rc-insight">Luồng 2 — BBB Coaching: 2.5 tỷ · 150-200 học viên/năm · 4 cohort · Margin cao nhất</div>
+          <div class="rc-insight">Luồng 3 — HLX Commission: 3 tỷ · 24 deal/năm = 2 deal/tháng · Avg 125 triệu/deal</div>
+          <div class="rc-insight">Luồng 4 — F1/F2 Network: 2 tỷ · 20 broker active × 5 deal × hoa hồng override</div>
+          <div class="rc-insight">Chi phí tối ưu: 0 chi phí marketing nhờ content organic + F1/F2 mạng lưới tự nhân rộng</div>
+        </div>
+        <div class="lcard-actions">
+          <a href="https://yen670-oss.github.io/kit-hlx/pipeline-products.html" target="_blank" class="btn-sm btn-open">🚀 Pipeline Sản Phẩm</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/offer-ecosystem-hlx.html" target="_blank" class="btn-sm btn-outline">Ecosystem Offer</a>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card" style="border-color:rgba(39,174,96,.2)"><span class="stat-num" style="color:#4ade80">2.5T</span><span class="stat-label">Kit Sales</span></div>
+        <div class="stat-card" style="border-color:rgba(201,168,76,.2)"><span class="stat-num">2.5T</span><span class="stat-label">BBB Coaching</span></div>
+        <div class="stat-card" style="border-color:rgba(27,58,107,.3)"><span class="stat-num" style="color:#93c5fd">3T</span><span class="stat-label">HLX Commission</span></div>
+        <div class="stat-card" style="border-color:rgba(124,58,237,.2)"><span class="stat-num" style="color:#c4b5fd">2T</span><span class="stat-label">F1/F2 Network</span></div>
+      </div>
+    </div>
+
+    <!-- TAB: TRAINING ROI -->
+    <div id="rt-training" class="rt-content" style="display:none">
+      <div class="research-card">
+        <div class="rc-eyebrow">NGHIÊN CỨU · ĐÀO TẠO & ROI</div>
+        <div class="rc-title">ROI Của Đào Tạo & Công Cụ — Số Liệu Toàn Cầu</div>
+        <div class="rc-body">Nghiên cứu toàn cầu về tác động của đào tạo và công cụ bán hàng đối với hiệu suất môi giới — cơ sở thuyết phục khách mua kit và tham gia BBB.</div>
+        <div class="rc-insights">
+          <div class="rc-insight">Broker được đào tạo bài bản có close rate cao hơn 67% so với broker tự học</div>
+          <div class="rc-insight">Công cụ bán hàng chuyên nghiệp giúp tăng 40% tốc độ chốt deal (thời gian từ lead→close)</div>
+          <div class="rc-insight">ROI của training kit: 1 deal HLX ≈ 125 triệu hoa hồng — đủ cover chi phí kit 180 lần</div>
+          <div class="rc-insight">Broker có landing page cá nhân nhận được nhiều lead hơn 3-4x so với broker không có</div>
+          <div class="rc-insight">Số liệu nội bộ: môi giới dùng script xử lý từ chối cải thiện conversion 52% trong 30 ngày</div>
+        </div>
+        <div class="lcard-actions">
+          <a href="https://yen670-oss.github.io/kit-hlx/training-roi-research.html" target="_blank" class="btn-sm btn-open">📈 Nghiên Cứu Đầy Đủ</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/gift-training-roi.html" target="_blank" class="btn-sm btn-outline">Gift Card ROI</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: LINKS LIVE -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-links">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🔗 LINKS LIVE · TOÀN BỘ HỆ THỐNG</div>
+      <div class="ph-title">Links Live — Quản Lý Đường Dẫn</div>
+      <div class="ph-sub">18+ links đang hoạt động · Copy nhanh · Tìm kiếm · Phân nhóm theo sản phẩm</div>
+    </div>
+
+    <div class="highlight-box" style="border-color:rgba(39,174,96,.3);background:linear-gradient(135deg,rgba(39,174,96,.08),rgba(39,174,96,.02))">
+      <div class="hb-title" style="color:#4ade80">🟢 Quick Links — Copy Ngay</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-top:12px">
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.3);border-radius:8px;padding:8px 12px">
+          <span style="font-size:12px;flex:1;color:rgba(232,223,200,.6);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">yen670-oss.github.io/kit-hlx/</span>
+          <button class="btn-sm btn-copy-sm" onclick="cp('https://yen670-oss.github.io/kit-hlx/')">📋</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.3);border-radius:8px;padding:8px 12px">
+          <span style="font-size:12px;flex:1;color:rgba(232,223,200,.6);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">.../09-landing-hlx.html</span>
+          <button class="btn-sm btn-copy-sm" onclick="cp('https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html')">📋</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.3);border-radius:8px;padding:8px 12px">
+          <span style="font-size:12px;flex:1;color:rgba(232,223,200,.6);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">.../broker-brand-builder-sales.html</span>
+          <button class="btn-sm btn-copy-sm" onclick="cp('https://yen670-oss.github.io/kit-hlx/broker-brand-builder-sales.html')">📋</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.3);border-radius:8px;padding:8px 12px">
+          <span style="font-size:12px;flex:1;color:rgba(232,223,200,.6);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">.../broker-pro-book-index.html</span>
+          <button class="btn-sm btn-copy-sm" onclick="cp('https://yen670-oss.github.io/kit-hlx/broker-pro-book-index.html')">📋</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group" style="margin-top:16px">
+      <div class="sg-label">📂 QUẢN LÝ LINKS ĐẦY ĐỦ</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/LINKS-LIVE.html')" style="border-color:rgba(39,174,96,.25)">
+          <div class="lcard-icon">🔗</div>
+          <div class="lcard-body">
+            <div class="lcard-title">LINKS-LIVE — Trang Quản Lý Đầy Đủ</div>
+            <div class="lcard-desc">Tìm kiếm · Copy từng link · Nhóm theo sản phẩm · 18+ links · Mở trong tab mới</div>
+            <div class="lcard-tags"><span class="tag tag-green">🟢 Live</span><span class="tag tag-blue">Admin</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/LINKS-LIVE.html" target="_blank" class="btn-sm btn-open">🔗 Mở LINKS-LIVE</a>
+              <button class="btn-sm btn-copy-sm" onclick="event.stopPropagation();cp('https://yen670-oss.github.io/kit-hlx/LINKS-LIVE.html')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/KIT-HUB.html')" style="border-color:rgba(201,168,76,.2)">
+          <div class="lcard-icon">🏠</div>
+          <div class="lcard-body">
+            <div class="lcard-title">KIT-HUB — Trung Tâm Tài Nguyên</div>
+            <div class="lcard-desc">Tất cả link + tài nguyên · BBB + Kit + Book · Giao kit cho khách · Admin hub</div>
+            <div class="lcard-tags"><span class="tag tag-gold">Admin</span><span class="tag tag-green">🟢 Live</span></div>
+            <div class="lcard-actions">
+              <a href="https://yen670-oss.github.io/kit-hlx/KIT-HUB.html" target="_blank" class="btn-sm btn-open">🔗 Mở KIT-HUB</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /panel-scroll -->
+</main>
+</div><!-- /app -->
+
+<!-- FLOATING PRESENT NAV -->
+<div class="present-nav" id="present-nav">
+  <span class="pn-label">PRESENT</span>
+  <button class="pn-btn" id="pn-prev" onclick="navPresent(-1)">◀ Trước</button>
+  <button class="pn-btn" id="pn-cur" style="font-weight:800;color:var(--gl)">1/8</button>
+  <button class="pn-btn" id="pn-next" onclick="navPresent(1)">Tiếp ▶</button>
+  <button class="pn-btn exit" onclick="togglePresent()">✕ Thoát</button>
+</div>
+
+<script>
+const BASE = 'https://yen670-oss.github.io/kit-hlx/';
+const PANELS = ['hlx','bbb','kit','book','gifts','ops','research','links'];
+const TITLES = {
+  hlx: '🏠 HLX Project — Hạ Long Xanh',
+  bbb: '🏆 Broker Brand Builder — Coaching',
+  kit: '📦 BDS Mastery Kit — 4 Gói',
+  book: '📚 Broker Pro Book — 15 Chương',
+  gifts: '🎁 Quà Tặng & Lead Magnets',
+  ops: '📋 SOPs & Vận Hành',
+  research: '📊 Research Library',
+  links: '🔗 Links Live — Toàn Bộ Hệ Thống',
+};
+let currentPanel = 'hlx';
+let presentMode = false;
+
+function go(id) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(el => el.classList.remove('active'));
+  document.getElementById('nav-'+id).classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+  document.getElementById('topbar-title').textContent = TITLES[id];
+  currentPanel = id;
+  document.querySelector('.panel-scroll').scrollTop = 0;
+  updatePresentNav();
+}
+
+function open_(url) { window.open(url,'_blank'); }
+
+function cp(url) {
+  navigator.clipboard.writeText(url).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  });
+}
+
+// Research tabs
+function rtab(el, id) {
+  document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.rt-content').forEach(c => c.style.display='none');
+  el.classList.add('active');
+  document.getElementById(id).style.display = 'block';
+}
+
+// Present mode
+function togglePresent() {
+  presentMode = !presentMode;
+  document.body.classList.toggle('present', presentMode);
+  updatePresentNav();
+}
+
+function updatePresentNav() {
+  const idx = PANELS.indexOf(currentPanel);
+  document.getElementById('pn-cur').textContent = (idx+1)+'/'+PANELS.length;
+  document.getElementById('pn-prev').disabled = idx === 0;
+  document.getElementById('pn-next').disabled = idx === PANELS.length-1;
+}
+
+function navPresent(dir) {
+  const idx = PANELS.indexOf(currentPanel);
+  const next = idx + dir;
+  if (next >= 0 && next < PANELS.length) go(PANELS[next]);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (presentMode) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navPresent(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navPresent(-1);
+    if (e.key === 'Escape') togglePresent();
+  }
+});
+
+// Init
+go('hlx');
+</script>
+
+</body>
+</html>
