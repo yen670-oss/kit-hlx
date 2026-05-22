@@ -114,28 +114,36 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
   <p class="header-sub">Tất cả tài liệu, bài học và công cụ của anh/chị ở đây · Chọn gói để xem nội dung</p>
 </div>
 
+<!-- DELIVERY PAGE QUICK ACCESS -->
+<div style="background:rgba(0,0,0,.4);border-bottom:1px solid rgba(201,168,76,.1);padding:8px 16px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap">
+  <span style="font-size:11px;color:rgba(232,223,200,.4);align-self:center;font-weight:700;letter-spacing:1px">TRANG GIAO KIT →</span>
+  <a href="bbb-core.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.3);color:#4ade80;font-size:11px;font-weight:700;padding:5px 12px;border-radius:12px;text-decoration:none">🎓 Core Group</a>
+  <a href="bbb-pro.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:11px;font-weight:700;padding:5px 12px;border-radius:12px;text-decoration:none">🏆 Brand Pro</a>
+  <a href="bbb-vip.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.35);color:#c4b5fd;font-size:11px;font-weight:700;padding:5px 12px;border-radius:12px;text-decoration:none">💎 VIP 1:1</a>
+</div>
+
 <!-- TIER SELECTOR -->
 <div class="tier-bar">
-  <button class="tier-btn active" id="btn-starter" onclick="setTier('starter')">🥉 Starter</button>
-  <button class="tier-btn" id="btn-brand" onclick="setTier('brand')">🥇 Brand Builder</button>
-  <button class="tier-btn vip-btn" id="btn-vip" onclick="setTier('vip')">💎 VIP Accelerator</button>
+  <button class="tier-btn active" id="btn-starter" onclick="setTier('starter')">🎓 Core Group</button>
+  <button class="tier-btn" id="btn-brand" onclick="setTier('brand')">🏆 Brand Pro</button>
+  <button class="tier-btn vip-btn" id="btn-vip" onclick="setTier('vip')">💎 VIP 1:1</button>
 </div>
 
 <div class="wrap">
 
 <!-- TIER WELCOME -->
 <div class="tier-welcome" id="tier-welcome">
-  <div class="tw-icon">🥉</div>
+  <div class="tw-icon">🎓</div>
   <div class="tw-content">
-    <h2 id="tw-title">Gói Starter — Bắt Đầu Hành Trình</h2>
-    <p id="tw-desc">Anh/chị có Module 1 đầy đủ (5 bài học) + 30 template bài viết HLX. Đây là nền móng quan trọng nhất — hãy hoàn thành Module 1 trước khi làm bất cứ thứ gì khác.</p>
-    <span class="tw-badge starter" id="tw-badge">🥉 STARTER</span>
+    <h2 id="tw-title">Gói Core Group — Cohort 1/2026</h2>
+    <p id="tw-desc">Anh/chị có toàn bộ 4 module (20 bài học) + Group cộng đồng + 4 buổi Q&A live + Lịch content 90 ngày + Script pitching. Bắt đầu từ Module 1 và học theo thứ tự.</p>
+    <span class="tw-badge starter" id="tw-badge">🎓 CORE GROUP</span>
   </div>
 </div>
 
 <!-- MODULE PROGRESS -->
 <div class="progress-section">
-  <div class="prog-title">📅 Lộ Trình 60 Ngày</div>
+  <div class="prog-title">📅 Lộ Trình 12 Tuần</div>
   <div class="prog-modules" id="prog-modules">
     <!-- filled by JS -->
   </div>
@@ -153,20 +161,22 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 <div id="vip-section" style="display:none">
   <div class="sec-head"><h2>💎 VIP Coaching 1:1</h2></div>
   <div class="vip-coaching">
-    <div class="vc-title">📞 4 Buổi Coaching Cá Nhân — Đặt Lịch Qua Zalo</div>
+    <div class="vc-title">💎 6 Buổi Coaching 1:1 — Đặt Lịch Qua Zalo</div>
     <div class="vc-grid">
-      <div class="vc-item"><h4>Buổi 1 — Tuần 1</h4><p>Review profile & định vị · Audit toàn bộ MXH · Chiến lược cá nhân hoá</p></div>
-      <div class="vc-item"><h4>Buổi 2 — Tuần 3</h4><p>Review content đã đăng · Tối ưu format · Giải quyết bottleneck</p></div>
-      <div class="vc-item"><h4>Buổi 3 — Tuần 5</h4><p>Review lead pipeline · Script chuyển đổi · Xử lý từ chối thực tế</p></div>
-      <div class="vc-item"><h4>Buổi 4 — Tuần 8</h4><p>Tổng kết 60 ngày · Kế hoạch 90 ngày tiếp · Chiến lược nhân rộng</p></div>
+      <div class="vc-item"><h4>Buổi 1 — Tuần 1 (Onboarding)</h4><p>Xây chiến lược 12 tuần cá nhân · Phân tích điểm mạnh · Lập roadmap riêng</p></div>
+      <div class="vc-item"><h4>Buổi 2 — Tuần 3 (Audit Profile)</h4><p>Review profile MXH · Tối ưu bio & ảnh · Xác nhận định vị thương hiệu</p></div>
+      <div class="vc-item"><h4>Buổi 3 — Tuần 5 (Content Review)</h4><p>Review 3-5 bài viết thực · Phân tích engagement · Tối ưu format & hook</p></div>
+      <div class="vc-item"><h4>Buổi 4 — Tuần 8 (Lead Funnel)</h4><p>Kiểm tra phễu lead · Tối ưu Zalo OA · Cải thiện tỷ lệ chuyển đổi</p></div>
+      <div class="vc-item"><h4>Buổi 5 — Tuần 10 (Deal Closing)</h4><p>Review pipeline thực tế · Script chốt cuộc hẹn · Kế hoạch referral 1→3</p></div>
+      <div class="vc-item"><h4>Buổi 6 — Tuần 12 (Tổng Kết)</h4><p>Đánh giá 12 tuần · KPI thực tế · Roadmap 90 ngày tiếp theo</p></div>
     </div>
   </div>
   <div class="resource-card" style="border-color:rgba(155,89,182,.3)">
     <div class="rc-icon">✏️</div>
     <div class="rc-content">
       <div class="rc-label">VIP EXCLUSIVE</div>
-      <div class="rc-name">Review 4 Bài Viết Trực Tiếp</div>
-      <div class="rc-desc">Gửi 4 bài viết của anh/chị qua Zalo · Nhận feedback chi tiết trong 24h · Sửa theo cá nhân hoá</div>
+      <div class="rc-name">Review Bài Viết Không Giới Hạn</div>
+      <div class="rc-desc">Gửi bất kỳ bài viết, profile hay nội dung nào qua Zalo · Nhận feedback chi tiết trong 24h · Suốt 12 tuần</div>
       <span class="rc-tag vip-only">💎 VIP Only</span>
     </div>
     <div class="rc-actions">
@@ -177,9 +187,9 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 
 <!-- UPGRADE NUDGE (hidden for brand & vip) -->
 <div class="upgrade-card" id="upgrade-card">
-  <div class="uc-title">🔓 Mở Khoá Thêm 5 Tài Liệu Bonus</div>
-  <div class="uc-desc">Nâng cấp lên Brand Builder để nhận: Lịch content 90 ngày · Script pitching · Nghiên cứu thị trường · Group community · 4 buổi Q&A live</div>
-  <a href="broker-brand-builder-checkout.html?tier=brand-builder" class="btn-upgrade">⬆️ Nâng Cấp Brand Builder — 2,997,000đ →</a>
+  <div class="uc-title">⭐ Muốn Thêm 2 Buổi Audit 1:1 Cá Nhân?</div>
+  <div class="uc-desc">Nâng lên Brand Pro để nhận: 2 buổi audit profile riêng · Review 2 bài viết trực tiếp · Chiến lược content cá nhân hóa · BDS Mastery Kit Gold · Zalo ưu tiên 90 ngày</div>
+  <a href="broker-brand-builder-checkout.html?tier=brand-builder" class="btn-upgrade">⬆️ Nâng Cấp Brand Pro — 9,997,000đ →</a>
 </div>
 
 <!-- COMMUNITY -->
@@ -204,38 +214,39 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 const BASE = 'https://yen670-oss.github.io/kit-hlx/';
 
 const MODULES = [
-  {icon:'🧱', num:'Module 1', name:'Nền Móng · Định Vị', days:'Ngày 1–15', color:'#C9A84C', url: BASE+'broker-brand-builder-module1.html', tiers:['starter','brand','vip']},
-  {icon:'✍️', num:'Module 2', name:'Hệ Thống Nội Dung', days:'Ngày 16–30', color:'#27ae60', url: BASE+'broker-brand-builder-module2.html', tiers:['brand','vip']},
-  {icon:'🎯', num:'Module 3', name:'Thu Hút Lead', days:'Ngày 31–45', color:'#8e44ad', url: BASE+'broker-brand-builder-module3.html', tiers:['brand','vip']},
-  {icon:'🚀', num:'Module 4', name:'Chốt & Nhân Rộng', days:'Ngày 46–60', color:'#e74c3c', url: BASE+'broker-brand-builder-module4.html', tiers:['brand','vip']},
+  {icon:'🧱', num:'Module 1', name:'Nền Móng · Định Vị', days:'Tuần 1–3', color:'#C9A84C', url: BASE+'broker-brand-builder-module1.html', tiers:['starter','brand','vip']},
+  {icon:'✍️', num:'Module 2', name:'Hệ Thống Nội Dung', days:'Tuần 4–6', color:'#27ae60', url: BASE+'broker-brand-builder-module2.html', tiers:['starter','brand','vip']},
+  {icon:'🎯', num:'Module 3', name:'Thu Hút Lead', days:'Tuần 7–9', color:'#8e44ad', url: BASE+'broker-brand-builder-module3.html', tiers:['starter','brand','vip']},
+  {icon:'🚀', num:'Module 4', name:'Chốt & Nhân Rộng', days:'Tuần 10–12', color:'#e74c3c', url: BASE+'broker-brand-builder-module4.html', tiers:['starter','brand','vip']},
 ];
 
 const BONUSES = [
   {icon:'📋', label:'BONUS 1', name:'30 Template Bài Viết HLX', desc:'Copy-paste ngay, không cần viết từ đầu · 5 pillar · 6 bài mỗi pillar', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-module2.html', tiers:['starter','brand','vip']},
-  {icon:'📅', label:'BONUS 3', name:'Lịch Content 90 Ngày', desc:'39 bài FB · 26 Reels · 13 Live · Chủ đề chi tiết từng ngày', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-content-90.html', tiers:['brand','vip']},
-  {icon:'🗂️', label:'BONUS 6', name:'Script Pitching & Xử Lý Từ Chối', desc:'5 script Zalo · 4 bài FB · 5 xử lý từ chối · Chuỗi follow up 5 ngày', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-pitch.html', tiers:['brand','vip']},
-  {icon:'📊', label:'BONUS 7', name:'Nghiên Cứu Thị Trường Brand Broker', desc:'7 tab phân tích · Đối thủ · Chiến lược · Kênh · Lịch content · Community', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'research-personal-brand-broker.html', tiers:['brand','vip']},
-  {icon:'🎤', label:'BONUS 5', name:'4 Buổi Q&A Live (60 ngày)', desc:'Hỏi trực tiếp mỗi 2 tuần · Sửa lỗi real-time · Kết nối cộng đồng', tag:'included', tagText:'✅ Bao Gồm', url:'#', tiers:['brand','vip']},
-  {icon:'🔍', label:'VIP', name:'Audit Profile Cá Nhân Hoá', desc:'Phân tích FB/Zalo/TikTok · Chiến lược content riêng 90 ngày', tag:'vip-only', tagText:'💎 VIP Only', url:'#', tiers:['vip']},
+  {icon:'📅', label:'BONUS 2', name:'Lịch Content 90 Ngày', desc:'39 bài FB · 26 Reels · 13 Live · Chủ đề chi tiết từng ngày', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-content-90.html', tiers:['starter','brand','vip']},
+  {icon:'🗂️', label:'BONUS 3', name:'Script Pitching & Xử Lý Từ Chối', desc:'5 script Zalo · 4 bài FB · 10 tình huống từ chối · Chuỗi follow up 5 ngày', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'broker-brand-builder-pitch.html', tiers:['starter','brand','vip']},
+  {icon:'📊', label:'BONUS 4', name:'Nghiên Cứu Thị Trường Brand Broker', desc:'7 tab phân tích · Đối thủ · Chiến lược · Kênh · Lịch content · Community', tag:'included', tagText:'✅ Bao Gồm', url: BASE+'research-personal-brand-broker.html', tiers:['starter','brand','vip']},
+  {icon:'🎤', label:'BONUS 5', name:'4 Buổi Q&A Live (12 tuần)', desc:'Hỏi trực tiếp sau mỗi module · Sửa lỗi real-time · Kết nối cộng đồng', tag:'included', tagText:'✅ Bao Gồm', url:'#', tiers:['starter','brand','vip']},
+  {icon:'✍️', label:'PRO', name:'2 Buổi Audit 1:1 + Review Bài Viết', desc:'2 buổi audit profile cá nhân · Review 2 bài viết trực tiếp · Chiến lược cá nhân hóa', tag:'bonus', tagText:'⭐ Brand Pro', url:'#', tiers:['brand','vip']},
+  {icon:'🔍', label:'VIP', name:'6 Buổi Coaching 1:1 + Review Không Giới Hạn', desc:'6 buổi coaching riêng 60 phút · Review bài viết không giới hạn · Chiến lược 100% cá nhân', tag:'vip-only', tagText:'💎 VIP Only', url:'#', tiers:['vip']},
 ];
 
 let currentTier = 'starter';
 
 const TIER_DATA = {
   starter: {
-    icon:'🥉', title:'Gói Starter — Bắt Đầu Hành Trình',
-    desc:'Anh/chị có Module 1 đầy đủ (5 bài học) + 30 template bài viết HLX. Hãy hoàn thành Module 1 trước khi làm bất cứ thứ gì khác.',
-    badge:'starter', badgeText:'🥉 STARTER'
+    icon:'🎓', title:'Core Group — Cohort 1/2026',
+    desc:'Anh/chị có toàn bộ 4 module (20 bài học) + Group cộng đồng + 4 buổi Q&A live + Lịch content 90 ngày + Script pitching. Bắt đầu từ Module 1 và học theo thứ tự.',
+    badge:'starter', badgeText:'🎓 CORE GROUP'
   },
   brand: {
-    icon:'🥇', title:'Brand Builder — Bộ Đầy Đủ ⭐',
-    desc:'Anh/chị có toàn bộ 4 module (16 bài học) + 6 bonus tài liệu + Group cộng đồng + 4 buổi Q&A live. Đây là toàn bộ hệ thống cần thiết.',
-    badge:'brand', badgeText:'🥇 BRAND BUILDER'
+    icon:'🏆', title:'Brand Pro — Tốc Độ x2 ⭐',
+    desc:'Toàn bộ Core Group + 2 buổi audit 1:1 cá nhân + chiến lược content cá nhân hóa + review 2 bài viết trực tiếp + BDS Mastery Kit Gold + Zalo ưu tiên 90 ngày.',
+    badge:'brand', badgeText:'🏆 BRAND PRO'
   },
   vip: {
-    icon:'💎', title:'VIP Accelerator — Coaching 1:1',
-    desc:'Anh/chị có mọi thứ của Brand Builder + 4 buổi coaching cá nhân 1:1 + audit profile + chiến lược riêng + hỗ trợ Zalo không giới hạn 60 ngày.',
-    badge:'vip', badgeText:'💎 VIP ACCELERATOR'
+    icon:'💎', title:'VIP 1:1 — Hoàn Toàn Cá Nhân',
+    desc:'Toàn bộ Brand Pro + 6 buổi coaching riêng 1:1 (60 phút/buổi) + review không giới hạn + BDS Mastery Kit Diamond + chiến lược 100% cá nhân + Zalo VIP 30 phút.',
+    badge:'vip', badgeText:'💎 VIP 1:1'
   }
 };
 

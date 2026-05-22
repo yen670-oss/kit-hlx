@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎓 Core Group — Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8;--green:#27ae60}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#071525,#0d1b2a,#1a3a0a);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(39,174,96,.12),transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(201,168,76,.08),transparent 55%)}
+.tier-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(39,174,96,.2),rgba(39,174,96,.08));border:1px solid rgba(39,174,96,.4);border-radius:20px;padding:6px 18px;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#4ade80;margin-bottom:16px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,40px);font-weight:900;line-height:1.2;background:linear-gradient(135deg,var(--gl),#fff 50%,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:12px}
+.hero-sub{font-size:14px;color:rgba(232,223,200,.65);line-height:1.7;max-width:560px;margin:0 auto 24px;position:relative;z-index:1}
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;position:relative;z-index:1}
+.hs{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 18px;text-align:center}
+.hs-num{font-family:'Playfair Display',serif;font-size:20px;color:var(--gl);font-weight:700;display:block}
+.hs-label{font-size:10px;color:rgba(232,223,200,.5);display:block;margin-top:2px}
+
+/* WELCOME BOX */
+.welcome-box{background:linear-gradient(135deg,rgba(39,174,96,.15),rgba(39,174,96,.05));border:1.5px solid rgba(39,174,96,.3);border-radius:16px;padding:20px 22px;margin-bottom:24px}
+.wb-title{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:8px}
+.wb-text{font-size:13.5px;color:rgba(232,223,200,.75);line-height:1.7}
+.wb-checklist{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.wbc{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(232,223,200,.8)}
+.wbc::before{content:'✅';flex-shrink:0}
+
+/* SCHEDULE */
+.schedule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:8px}
+.week-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px 16px}
+.week-card.active{border-color:rgba(39,174,96,.3)}
+.wk-num{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:4px}
+.wk-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.3}
+.wk-focus{font-size:11.5px;color:rgba(232,223,200,.55);line-height:1.5}
+
+/* SECTION HEADER */
+.sec{padding:36px 0 0}
+.sec-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.15)}
+.sec-title{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:6px}
+.sec-sub{font-size:13px;color:rgba(232,223,200,.55);margin-bottom:18px}
+
+/* MODULE CARDS */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.module-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px;text-decoration:none;transition:.2s;display:block}
+.module-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-2px)}
+.mc-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.mc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.mc-num{font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:3px}
+.mc-title{font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+.mc-lessons{font-size:11.5px;color:rgba(232,223,200,.5);margin-bottom:8px}
+.mc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.mc-tag{font-size:10px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);color:rgba(232,223,200,.55);border-radius:5px;padding:2px 8px}
+.mc-days{font-size:11px;font-weight:700;color:var(--gl);margin-top:8px}
+.btn-go{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-weight:800;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;margin-top:10px;width:100%;justify-content:center}
+.btn-go:hover{opacity:.9}
+.btn-go.green{background:linear-gradient(135deg,#27ae60,#1a8c4a)}
+
+/* BONUS GRID */
+.bonus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.bonus-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:16px}
+.bc-icon{font-size:28px;margin-bottom:8px}
+.bc-label{font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.4);margin-bottom:4px}
+.bc-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.3}
+.bc-desc{font-size:12px;color:rgba(232,223,200,.6);line-height:1.6;margin-bottom:10px}
+
+/* QA SECTION */
+.qa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.qa-card{background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.2);border-radius:12px;padding:16px}
+.qa-num{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#4ade80;margin-bottom:6px}
+.qa-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.qa-desc{font-size:12px;color:rgba(232,223,200,.6);line-height:1.6}
+.qa-date{font-size:11px;color:rgba(232,223,200,.4);margin-top:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:8px}
+
+/* COMMUNITY */
+.community{background:linear-gradient(135deg,rgba(27,58,107,.4),rgba(27,58,107,.2));border:1.5px solid rgba(100,150,255,.2);border-radius:14px;padding:20px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.comm-text h3{font-size:16px;color:#fff;margin-bottom:4px}
+.comm-text p{font-size:13px;color:rgba(232,223,200,.6);line-height:1.6}
+.btn-zalo{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#0068ff,#0052cc);color:#fff;font-weight:800;font-size:13px;padding:11px 20px;border-radius:10px;text-decoration:none;white-space:nowrap}
+
+/* SUPPORT */
+.support{background:rgba(0,0,0,.3);border-radius:12px;padding:18px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px}
+.support-text{flex:1}
+.support-text h4{font-size:14px;color:#fff;margin-bottom:3px}
+.support-text p{font-size:12.5px;color:rgba(232,223,200,.55);line-height:1.5}
+
+/* WRAP */
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
+
+@media(max-width:600px){.schedule-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="tier-badge">🎓 CORE GROUP · COHORT 1 · 2026</div>
+  <h1>Chào Mừng Anh/Chị<br>Đến Broker Brand Builder</h1>
+  <p class="hero-sub">12 tuần · 4 module · 20 bài học thực chiến · Lịch content 90 ngày · Script pitching · Group cộng đồng · 4 buổi Q&A live</p>
+  <div class="hero-stats">
+    <div class="hs"><span class="hs-num">12</span><span class="hs-label">Tuần chương trình</span></div>
+    <div class="hs"><span class="hs-num">20</span><span class="hs-label">Bài học thực chiến</span></div>
+    <div class="hs"><span class="hs-num">90</span><span class="hs-label">Ngày lịch content</span></div>
+    <div class="hs"><span class="hs-num">4</span><span class="hs-label">Buổi Q&A Live</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- WELCOME -->
+<div class="welcome-box">
+  <div class="wb-title">🎉 Gói Core Group — Đã Kích Hoạt Đầy Đủ</div>
+  <div class="wb-text">Anh/chị đã sở hữu toàn bộ hệ thống xây thương hiệu broker HLX. Tất cả 4 module, lịch content 90 ngày, script pitching và group cộng đồng đều đã mở sẵn. Bắt đầu từ Module 1 — hoàn thành trước khi chuyển sang module tiếp theo.</div>
+  <div class="wb-checklist">
+    <div class="wbc">Toàn bộ 4 module (20 bài học) — mở ngay</div>
+    <div class="wbc">Lịch content 90 ngày chi tiết — copy và dùng luôn</div>
+    <div class="wbc">Script pitching & 10 tình huống từ chối — có sẵn</div>
+    <div class="wbc">Group "Broker HLX Chuyên Nghiệp" — tham gia qua Zalo</div>
+    <div class="wbc">4 buổi Q&A Live group — lịch được gửi trong group</div>
+    <div class="wbc">BDS Mastery Kit Silver Pro — link giao trong Zalo</div>
+  </div>
+</div>
+
+<!-- 12-WEEK SCHEDULE -->
+<div class="sec">
+  <div class="sec-label">📅 CHƯƠNG TRÌNH 12 TUẦN</div>
+  <div class="sec-title">Lộ Trình Từng Tuần</div>
+  <div class="sec-sub">Mỗi module = 3 tuần. Hoàn thành theo thứ tự để đạt kết quả tốt nhất.</div>
+  <div class="schedule-grid">
+    <div class="week-card active">
+      <div class="wk-num">🧱 Tuần 1–3</div>
+      <div class="wk-title">Module 1 — Định Vị</div>
+      <div class="wk-focus">Tìm điểm khác biệt · Bio chuẩn · Ảnh đại diện · Setup MXH · Template thương hiệu</div>
+    </div>
+    <div class="week-card">
+      <div class="wk-num">✍️ Tuần 4–6</div>
+      <div class="wk-title">Module 2 — Nội Dung</div>
+      <div class="wk-focus">5 công thức viết bài · Storytelling · Reels không cần diễn · Batch content · 30 template</div>
+    </div>
+    <div class="week-card">
+      <div class="wk-num">🎯 Tuần 7–9</div>
+      <div class="wk-title">Module 3 — Thu Hút Lead</div>
+      <div class="wk-focus">Lead magnet · Zalo OA · Chuỗi nurture · Group community · Livestream · Đo lường phễu</div>
+    </div>
+    <div class="week-card">
+      <div class="wk-num">🚀 Tuần 10–12</div>
+      <div class="wk-title">Module 4 — Chốt & Nhân Rộng</div>
+      <div class="wk-focus">Chuyển follow → hẹn · Giữ ấm lead · Referral · Pipeline · Kế hoạch 90 ngày tiếp</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<div class="sec">
+  <div class="sec-label">📚 4 MODULE THỰC CHIẾN</div>
+  <div class="sec-title">Bài Học — Mở Ngay, Học Theo Thứ Tự</div>
+  <div class="module-grid">
+    <div class="module-card" style="border-color:rgba(201,168,76,.25)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#C9A84C,#8b6914)">🧱</div>
+        <div>
+          <div class="mc-num">Module 1</div>
+          <div class="mc-title">Nền Móng & Định Vị Thương Hiệu</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 1–21</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Điểm khác biệt</span>
+        <span class="mc-tag">Bio chuẩn</span>
+        <span class="mc-tag">Setup MXH</span>
+        <span class="mc-tag">Template brand</span>
+      </div>
+      <div class="mc-days">Bắt đầu đây ↓</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module1.html" target="_blank" class="btn-go">📚 Học Module 1 →</a>
+    </div>
+
+    <div class="module-card" style="border-color:rgba(39,174,96,.2)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#27ae60,#1a8c4a)">✍️</div>
+        <div>
+          <div class="mc-num">Module 2</div>
+          <div class="mc-title">Hệ Thống Nội Dung Liên Tục</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 22–42</div>
+      <div class="mc-tags">
+        <span class="mc-tag">5 công thức bài</span>
+        <span class="mc-tag">Storytelling</span>
+        <span class="mc-tag">Reels TikTok</span>
+        <span class="mc-tag">30 template</span>
+      </div>
+      <div class="mc-days">Hoàn thành Module 1 trước</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module2.html" target="_blank" class="btn-go green">✍️ Học Module 2 →</a>
+    </div>
+
+    <div class="module-card" style="border-color:rgba(142,68,173,.2)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">🎯</div>
+        <div>
+          <div class="mc-num">Module 3</div>
+          <div class="mc-title">Thu Hút Lead Tự Động</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 43–63</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Lead magnet</span>
+        <span class="mc-tag">Zalo OA</span>
+        <span class="mc-tag">Livestream</span>
+        <span class="mc-tag">Phễu chuyển đổi</span>
+      </div>
+      <div class="mc-days">Sau khi có hệ thống content</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module3.html" target="_blank" class="btn-go" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">🎯 Học Module 3 →</a>
+    </div>
+
+    <div class="module-card" style="border-color:rgba(231,76,60,.2)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#e74c3c,#b03a2e)">🚀</div>
+        <div>
+          <div class="mc-num">Module 4</div>
+          <div class="mc-title">Chốt Deal & Nhân Rộng Hệ Thống</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 64–84</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Chốt cuộc hẹn</span>
+        <span class="mc-tag">Giữ ấm lead</span>
+        <span class="mc-tag">Referral 1→3</span>
+        <span class="mc-tag">Pipeline</span>
+      </div>
+      <div class="mc-days">Khi đã có lead vào phễu</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module4.html" target="_blank" class="btn-go" style="background:linear-gradient(135deg,#e74c3c,#b03a2e)">🚀 Học Module 4 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- BONUS MATERIALS -->
+<div class="sec">
+  <div class="sec-label">🎁 TÀI LIỆU BONUS — DÙNG NGAY</div>
+  <div class="sec-title">5 Công Cụ Đi Kèm Chương Trình</div>
+  <div class="bonus-grid">
+    <div class="bonus-card">
+      <div class="bc-icon">📅</div>
+      <div class="bc-label">BONUS 1</div>
+      <div class="bc-title">Lịch Content 90 Ngày</div>
+      <div class="bc-desc">39 bài FB · 26 Reels · 13 Live · Chủ đề chi tiết từng ngày. Copy vào Google Calendar và đăng theo lịch.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-content-90.html" target="_blank" class="btn-go">📅 Xem Lịch Content →</a>
+    </div>
+
+    <div class="bonus-card">
+      <div class="bc-icon">🗂️</div>
+      <div class="bc-label">BONUS 2</div>
+      <div class="bc-title">Script Pitching & Xử Lý Từ Chối</div>
+      <div class="bc-desc">5 script Zalo · 4 bài FB giới thiệu · 10 tình huống từ chối · Chuỗi follow-up 5 ngày. Copy-paste trực tiếp.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-pitch.html" target="_blank" class="btn-go">🗂️ Xem Script →</a>
+    </div>
+
+    <div class="bonus-card">
+      <div class="bc-icon">📊</div>
+      <div class="bc-label">BONUS 3</div>
+      <div class="bc-title">Nghiên Cứu Thị Trường Brand Broker</div>
+      <div class="bc-desc">7 tab phân tích · Đối thủ broker HLX · Chiến lược kênh · Lịch content đề xuất · Community benchmark.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/research-personal-brand-broker.html" target="_blank" class="btn-go">📊 Xem Research →</a>
+    </div>
+
+    <div class="bonus-card">
+      <div class="bc-icon">🏠</div>
+      <div class="bc-label">BONUS 4</div>
+      <div class="bc-title">BDS Mastery Kit Silver Pro</div>
+      <div class="bc-desc">9 tài liệu · ROI Calculator · 30 bài content · Script phản đối · Gallery HLX · Báo cáo thị trường. Link giao qua Zalo.</div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-go green">💬 Nhận Kit Qua Zalo →</a>
+    </div>
+
+    <div class="bonus-card">
+      <div class="bc-icon">📋</div>
+      <div class="bc-label">BONUS 5</div>
+      <div class="bc-title">Broker Pro Book — 15 Chương</div>
+      <div class="bc-desc">Sách chuyên nghiệp broker HLX: nền tảng BĐS, kiến thức dự án, kỹ năng bán, lộ trình thu nhập tỷ/năm.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-index.html" target="_blank" class="btn-go" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">📚 Đọc Sách →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Q&A LIVE -->
+<div class="sec">
+  <div class="sec-label">🎤 4 BUỔI Q&A LIVE GROUP</div>
+  <div class="sec-title">Đặt Câu Hỏi Trực Tiếp — Sửa Lỗi Real-Time</div>
+  <div class="sec-sub">Lịch cụ thể được thông báo trong group. Mỗi buổi 60 phút — hỏi bất cứ điều gì về hành trình xây thương hiệu.</div>
+  <div class="qa-grid">
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 1</div>
+      <div class="qa-title">Tuần 3 — Sau Module 1</div>
+      <div class="qa-desc">Review định vị · Kiểm tra bio · Phản hồi profile MXH · Câu hỏi bài 1–5</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 2</div>
+      <div class="qa-title">Tuần 6 — Sau Module 2</div>
+      <div class="qa-desc">Review bài viết đã đăng · Tối ưu format · Thảo luận content hiệu quả nhất</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 3</div>
+      <div class="qa-title">Tuần 9 — Sau Module 3</div>
+      <div class="qa-desc">Review phễu lead · Cách tối ưu Zalo OA · Case study livestream · Xử lý bottleneck</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 4</div>
+      <div class="qa-title">Tuần 12 — Tổng Kết</div>
+      <div class="qa-desc">Tổng kết 12 tuần · Kế hoạch 90 ngày tiếp · Chiến lược nhân rộng · Q&A tự do</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMUNITY -->
+<div class="sec">
+  <div class="sec-label">👥 CỘNG ĐỒNG</div>
+  <div class="community">
+    <div style="font-size:36px">👥</div>
+    <div class="comm-text" style="flex:1">
+      <h3>Group "Broker HLX Chuyên Nghiệp"</h3>
+      <p>Tham gia group Zalo · Nhận lịch Q&A live · Chia sẻ case study thực · Kết nối đồng nghiệp HLX · Hỗ trợ lẫn nhau trong 12 tuần và sau đó (lifetime access).</p>
+    </div>
+    <a href="https://zalo.me/0964827670" target="_blank" class="btn-zalo">💬 Nhắn Zalo Để Vào Group →</a>
+  </div>
+</div>
+
+<!-- SUPPORT -->
+<div class="sec">
+  <div class="sec-label">💬 HỖ TRỢ</div>
+  <div class="support">
+    <div style="font-size:32px">💬</div>
+    <div class="support-text">
+      <h4>Cần Hỗ Trợ? Nhắn Zalo Trực Tiếp</h4>
+      <p>Phản hồi trong 2 tiếng · 8h–22h hàng ngày · Hoặc đặt câu hỏi trong group để cả cộng đồng cùng trả lời.</p>
+    </div>
+    <a href="https://zalo.me/0964827670" target="_blank" class="btn-zalo">💬 Zalo: 0964.827.670</a>
+  </div>
+</div>
+
+<!-- UPGRADE -->
+<div class="sec" style="padding-bottom:20px">
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.04));border:1.5px solid rgba(201,168,76,.3);border-radius:14px;padding:20px 22px;text-align:center">
+    <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:8px">NÂNG CẤP</div>
+    <div style="font-family:'Playfair Display',serif;font-size:17px;color:#fff;margin-bottom:8px">Muốn Thêm 2 Buổi Audit 1:1 Riêng?</div>
+    <div style="font-size:13px;color:rgba(232,223,200,.6);margin-bottom:14px">Nâng lên <strong style="color:var(--gl)">Brand Pro</strong> để nhận: 2 buổi audit profile cá nhân · Review 2 bài viết trực tiếp · Chiến lược content cá nhân hóa · BDS Mastery Kit Gold · Broker Pro Book đầy đủ · Hỗ trợ Zalo ưu tiên 90 ngày</div>
+    <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-checkout.html?tier=brand-builder" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-weight:800;font-size:13px;padding:12px 24px;border-radius:10px;text-decoration:none">⬆️ Nâng Cấp Brand Pro — 9,997,000đ →</a>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer style="text-align:center;padding:20px;font-size:12px;color:rgba(232,223,200,.3)">
+  Broker HLX Brand Builder · Core Group · Cohort 1/2026 · Hỗ trợ: Zalo 0964.827.670
+</footer>
+
+</body>
+</html>

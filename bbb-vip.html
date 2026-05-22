@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>💎 VIP 1:1 — Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8;--vip:#7c3aed;--vip-light:#c4b5fd}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#071525,#0d1b2a,#1a0a2e);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 60%,rgba(124,58,237,.18),transparent 55%),radial-gradient(ellipse at 80% 30%,rgba(201,168,76,.1),transparent 55%)}
+.tier-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(124,58,237,.12));border:1px solid rgba(124,58,237,.5);border-radius:20px;padding:6px 18px;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--vip-light);margin-bottom:16px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,40px);font-weight:900;line-height:1.2;background:linear-gradient(135deg,var(--vip-light),#fff 50%,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:12px}
+.hero-sub{font-size:14px;color:rgba(232,223,200,.65);line-height:1.7;max-width:640px;margin:0 auto 24px;position:relative;z-index:1}
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;position:relative;z-index:1}
+.hs{background:rgba(0,0,0,.4);border:1px solid rgba(124,58,237,.3);border-radius:10px;padding:10px 18px;text-align:center}
+.hs-num{font-family:'Playfair Display',serif;font-size:20px;color:var(--vip-light);font-weight:700;display:block}
+.hs-label{font-size:10px;color:rgba(232,223,200,.5);display:block;margin-top:2px}
+
+/* WELCOME BOX */
+.welcome-box{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(124,58,237,.05));border:1.5px solid rgba(124,58,237,.4);border-radius:16px;padding:20px 22px;margin-bottom:24px}
+.wb-title{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:8px}
+.wb-text{font-size:13.5px;color:rgba(232,223,200,.75);line-height:1.7}
+.wb-checklist{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.wbc{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(232,223,200,.8)}
+.wbc::before{content:'✅';flex-shrink:0}
+.wbc.vip::before{content:'💎'}
+
+/* SECTION HEADER */
+.sec{padding:36px 0 0}
+.sec-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(196,181,253,.5);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(124,58,237,.2)}
+.sec-title{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:6px}
+.sec-sub{font-size:13px;color:rgba(232,223,200,.55);margin-bottom:18px}
+
+/* COACHING SESSIONS */
+.coach-section{background:linear-gradient(135deg,rgba(124,58,237,.14),rgba(124,58,237,.04));border:2px solid rgba(124,58,237,.4);border-radius:16px;padding:24px 22px;margin-bottom:24px}
+.coach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:18px}
+.coach-card{background:rgba(0,0,0,.35);border:1px solid rgba(124,58,237,.25);border-radius:12px;padding:16px}
+.cc-num{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(196,181,253,.5);margin-bottom:6px}
+.cc-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+.cc-desc{font-size:12.5px;color:rgba(232,223,200,.6);line-height:1.6;margin-bottom:12px}
+.cc-items{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.cc-item{font-size:12px;color:rgba(232,223,200,.7);display:flex;align-items:flex-start;gap:6px}
+.cc-item::before{content:'→';color:var(--vip-light);flex-shrink:0}
+.btn-book{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--vip),#5b21b6);color:#fff;font-weight:800;font-size:12px;padding:9px 18px;border-radius:8px;text-decoration:none;width:100%;justify-content:center}
+.btn-book:hover{opacity:.9}
+
+/* SCHEDULE */
+.schedule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:8px}
+.week-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px 16px}
+.week-card.active{border-color:rgba(124,58,237,.3)}
+.wk-num{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(196,181,253,.5);margin-bottom:4px}
+.wk-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.3}
+.wk-focus{font-size:11.5px;color:rgba(232,223,200,.55);line-height:1.5}
+
+/* MODULE CARDS */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.module-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px;text-decoration:none;transition:.2s;display:block}
+.module-card:hover{border-color:rgba(124,58,237,.3);transform:translateY(-2px)}
+.mc-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.mc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.mc-num{font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(196,181,253,.5);margin-bottom:3px}
+.mc-title{font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+.mc-lessons{font-size:11.5px;color:rgba(232,223,200,.5);margin-bottom:8px}
+.mc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.mc-tag{font-size:10px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);color:rgba(232,223,200,.55);border-radius:5px;padding:2px 8px}
+.mc-days{font-size:11px;font-weight:700;color:var(--vip-light);margin-top:8px}
+.btn-go{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--vip),#5b21b6);color:#fff;font-weight:800;font-size:12px;padding:8px 16px;border-radius:8px;text-decoration:none;margin-top:10px;width:100%;justify-content:center}
+.btn-go:hover{opacity:.9}
+.btn-go.gold{background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a}
+.btn-go.green{background:linear-gradient(135deg,#27ae60,#1a8c4a)}
+
+/* BONUS GRID */
+.bonus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.bonus-card{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.2);border-radius:12px;padding:16px}
+.bonus-card.vip-only{border-color:rgba(124,58,237,.5);background:rgba(124,58,237,.1)}
+.bc-icon{font-size:28px;margin-bottom:8px}
+.bc-label{font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(196,181,253,.4);margin-bottom:4px}
+.bc-vip-badge{font-size:8.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--vip-light);background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.4);border-radius:4px;padding:2px 7px;display:inline-block;margin-bottom:6px}
+.bc-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.3}
+.bc-desc{font-size:12px;color:rgba(232,223,200,.6);line-height:1.6;margin-bottom:10px}
+
+/* QA SECTION */
+.qa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.qa-card{background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.2);border-radius:12px;padding:16px}
+.qa-num{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#4ade80;margin-bottom:6px}
+.qa-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.qa-desc{font-size:12px;color:rgba(232,223,200,.6);line-height:1.6}
+.qa-date{font-size:11px;color:rgba(232,223,200,.4);margin-top:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:8px}
+
+/* COMMUNITY */
+.community{background:linear-gradient(135deg,rgba(27,58,107,.4),rgba(27,58,107,.2));border:1.5px solid rgba(100,150,255,.2);border-radius:14px;padding:20px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.comm-text h3{font-size:16px;color:#fff;margin-bottom:4px}
+.comm-text p{font-size:13px;color:rgba(232,223,200,.6);line-height:1.6}
+.btn-zalo{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#0068ff,#0052cc);color:#fff;font-weight:800;font-size:13px;padding:11px 20px;border-radius:10px;text-decoration:none;white-space:nowrap}
+
+/* SUPPORT */
+.support{background:rgba(0,0,0,.3);border-radius:12px;padding:18px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px}
+.support-text{flex:1}
+.support-text h4{font-size:14px;color:#fff;margin-bottom:3px}
+.support-text p{font-size:12.5px;color:rgba(232,223,200,.55);line-height:1.5}
+
+/* VIP STRATEGY */
+.strategy-box{background:rgba(0,0,0,.35);border:1px solid rgba(124,58,237,.2);border-radius:14px;padding:18px 20px}
+.strat-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.strat-row:last-child{border-bottom:none}
+.strat-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.strat-content h4{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:3px}
+.strat-content p{font-size:12px;color:rgba(232,223,200,.55);line-height:1.5}
+
+/* WRAP */
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
+
+@media(max-width:600px){.schedule-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="tier-badge">💎 VIP 1:1 · COHORT 1 · 2026 · CHỈ 3 SUẤT</div>
+  <h1>Chào Mừng Anh/Chị<br>Đến VIP 1:1 — Hoàn Toàn Cá Nhân</h1>
+  <p class="hero-sub">6 buổi coaching riêng 1:1 · Không giới hạn review · Chiến lược 100% cá nhân · BDS Mastery Kit Diamond · Hỗ trợ Zalo ưu tiên tuyệt đối · Chỉ 3 người/cohort</p>
+  <div class="hero-stats">
+    <div class="hs"><span class="hs-num">6</span><span class="hs-label">Buổi coaching 1:1</span></div>
+    <div class="hs"><span class="hs-num">12</span><span class="hs-label">Tuần chương trình</span></div>
+    <div class="hs"><span class="hs-num">20</span><span class="hs-label">Bài học thực chiến</span></div>
+    <div class="hs"><span class="hs-num">∞</span><span class="hs-label">Review không giới hạn</span></div>
+    <div class="hs"><span class="hs-num">3</span><span class="hs-label">Suất/cohort duy nhất</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- WELCOME -->
+<div class="welcome-box">
+  <div class="wb-title">💎 Gói VIP 1:1 — Trải Nghiệm Hoàn Toàn Cá Nhân</div>
+  <div class="wb-text">Anh/chị đang sở hữu gói cao nhất trong Broker Brand Builder — thiết kế riêng cho broker muốn xây thương hiệu nhanh nhất có thể với sự đồng hành trực tiếp 1:1 trong toàn bộ 12 tuần. Không chia sẻ thời gian, không chờ Q&A group — anh/chị được coach riêng theo tiến độ và điểm yếu thực tế.</div>
+  <div class="wb-checklist">
+    <div class="wbc">Toàn bộ 4 module (20 bài học) — mở ngay</div>
+    <div class="wbc">Lịch content 90 ngày chi tiết — copy và dùng luôn</div>
+    <div class="wbc">Script pitching & 10 tình huống từ chối — có sẵn</div>
+    <div class="wbc">Group "Broker HLX Chuyên Nghiệp" — tham gia qua Zalo</div>
+    <div class="wbc">4 buổi Q&A Live group — lịch gửi trong group</div>
+    <div class="wbc vip">6 buổi coaching 1:1 riêng (60 phút/buổi) — đặt lịch bên dưới</div>
+    <div class="wbc vip">Chiến lược content 100% cá nhân hóa — xây riêng từ buổi 1</div>
+    <div class="wbc vip">Review không giới hạn bài viết, nội dung, profile — suốt 12 tuần</div>
+    <div class="wbc vip">BDS Mastery Kit Diamond (tất cả tài liệu) — link giao trong Zalo</div>
+    <div class="wbc vip">Hỗ trợ Zalo ưu tiên tuyệt đối — phản hồi trong 30 phút</div>
+    <div class="wbc vip">Broker Pro Book đầy đủ 15 chương — mở ngay</div>
+    <div class="wbc vip">Onboarding call ngay hôm nay — nhắn Zalo để đặt lịch</div>
+  </div>
+</div>
+
+<!-- ONBOARDING CALL -->
+<div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(124,58,237,.06));border:2px solid rgba(124,58,237,.5);border-radius:14px;padding:20px 22px;margin-bottom:24px;text-align:center">
+  <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(196,181,253,.6);margin-bottom:8px">💎 BƯỚC ĐẦU TIÊN</div>
+  <div style="font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:8px">Đặt Lịch Onboarding Call Ngay Hôm Nay</div>
+  <div style="font-size:13px;color:rgba(232,223,200,.65);margin-bottom:18px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7">Buổi onboarding 30 phút để: xác nhận mục tiêu · khảo sát điểm mạnh/yếu · lập lịch 6 buổi coaching · xây chiến lược 12 tuần riêng cho anh/chị</div>
+  <a href="https://zalo.me/0964827670" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;font-weight:800;font-size:14px;padding:14px 28px;border-radius:12px;text-decoration:none">💬 Nhắn Zalo — Đặt Onboarding Call →</a>
+</div>
+
+<!-- 6 COACHING SESSIONS -->
+<div class="coach-section">
+  <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(196,181,253,.6);margin-bottom:8px">💎 VIP EXCLUSIVE</div>
+  <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--vip-light);margin-bottom:8px">6 Buổi Coaching 1:1 — Đồng Hành Suốt 12 Tuần</div>
+  <div style="font-size:13px;color:rgba(232,223,200,.6);line-height:1.6">Mỗi buổi 60 phút — chỉ anh/chị và mentor. Không record công khai. Không chia sẻ với ai khác. Nhận xét trực tiếp, phân tích thực và điều chỉnh chiến lược real-time.</div>
+  <div class="coach-grid">
+    <div class="coach-card">
+      <div class="cc-num">💎 Buổi 1 — Onboarding (Tuần 1)</div>
+      <div class="cc-title">Chiến Lược 12 Tuần Cá Nhân</div>
+      <div class="cc-desc">Khảo sát toàn diện: điểm mạnh, phong cách, phân khúc khách. Xây chiến lược 12 tuần riêng cho anh/chị.</div>
+      <div class="cc-items">
+        <div class="cc-item">Phân tích profile hiện tại</div>
+        <div class="cc-item">Xác định USP độc đáo</div>
+        <div class="cc-item">Lập roadmap 12 tuần cá nhân</div>
+        <div class="cc-item">Setup KPI từng giai đoạn</div>
+      </div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-book">📅 Đặt Lịch Buổi 1 →</a>
+    </div>
+    <div class="coach-card">
+      <div class="cc-num">💎 Buổi 2 — Audit Profile (Tuần 3)</div>
+      <div class="cc-title">Review Định Vị & Profile MXH</div>
+      <div class="cc-desc">Sau khi hoàn thành Module 1. Kiểm tra toàn bộ profile, bio, ảnh đại diện, điểm khác biệt thương hiệu.</div>
+      <div class="cc-items">
+        <div class="cc-item">Nhận xét chi tiết từng platform</div>
+        <div class="cc-item">Tối ưu bio & visual brand</div>
+        <div class="cc-item">Xác nhận hoặc điều chỉnh định vị</div>
+        <div class="cc-item">Cập nhật chiến lược content</div>
+      </div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-book">📅 Đặt Lịch Buổi 2 →</a>
+    </div>
+    <div class="coach-card">
+      <div class="cc-num">💎 Buổi 3 — Content Review (Tuần 5)</div>
+      <div class="cc-title">Phân Tích Bài Viết & Điều Chỉnh</div>
+      <div class="cc-desc">Giữa Module 2. Review 3-5 bài viết đã đăng — hook, storytelling, format, engagement rate. Điều chỉnh hướng đi.</div>
+      <div class="cc-items">
+        <div class="cc-item">Review 3-5 bài viết thực chiến</div>
+        <div class="cc-item">Phân tích engagement data</div>
+        <div class="cc-item">Tối ưu content format</div>
+        <div class="cc-item">Xác định format nào hiệu quả nhất</div>
+      </div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-book">📅 Đặt Lịch Buổi 3 →</a>
+    </div>
+    <div class="coach-card">
+      <div class="cc-num">💎 Buổi 4 — Lead Funnel (Tuần 8)</div>
+      <div class="cc-title">Tối Ưu Phễu & Nguồn Lead</div>
+      <div class="cc-desc">Giữa Module 3. Phân tích phễu lead đang chạy — bottleneck ở đâu, tối ưu Zalo OA, cải thiện tỷ lệ chuyển đổi.</div>
+      <div class="cc-items">
+        <div class="cc-item">Kiểm tra toàn bộ phễu lead</div>
+        <div class="cc-item">Xác định điểm rò rỉ chuyển đổi</div>
+        <div class="cc-item">Tối ưu Zalo OA & followup</div>
+        <div class="cc-item">Chiến lược livestream nếu cần</div>
+      </div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-book">📅 Đặt Lịch Buổi 4 →</a>
+    </div>
+    <div class="coach-card">
+      <div class="cc-num">💎 Buổi 5 — Deal Closing (Tuần 10)</div>
+      <div class="cc-title">Chiến Lược Chốt & Giữ Ấm Lead</div>
+      <div class="cc-desc">Module 4. Phân tích pipeline thực tế — lead đang ở giai đoạn nào, chiến lược chốt cuộc hẹn, referral 1→3.</div>
+      <div class="cc-items">
+        <div class="cc-item">Review pipeline lead thực tế</div>
+        <div class="cc-item">Chiến lược follow-up cá nhân hóa</div>
+        <div class="cc-item">Tối ưu script chốt cuộc hẹn</div>
+        <div class="cc-item">Kế hoạch referral 1→3</div>
+      </div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-book">📅 Đặt Lịch Buổi 5 →</a>
+    </div>
+    <div class="coach-card">
+      <div class="cc-num">💎 Buổi 6 — Kế Hoạch Tiếp (Tuần 12)</div>
+      <div class="cc-title">Tổng Kết & Roadmap 90 Ngày Tiếp</div>
+      <div class="cc-desc">Kết thúc cohort. Đánh giá toàn bộ 12 tuần, xác định điểm đã đạt và chưa đạt, lập kế hoạch 90 ngày tiếp theo.</div>
+      <div class="cc-items">
+        <div class="cc-item">Tổng kết KPI 12 tuần</div>
+        <div class="cc-item">Xác định điểm cần cải thiện</div>
+        <div class="cc-item">Lập roadmap 90 ngày tiếp</div>
+        <div class="cc-item">Chiến lược mở rộng và nhân rộng</div>
+      </div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-book">📅 Đặt Lịch Buổi 6 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- PERSONAL STRATEGY -->
+<div class="sec">
+  <div class="sec-label">🎯 CHIẾN LƯỢC 100% CÁ NHÂN — VIP EXCLUSIVE</div>
+  <div class="sec-title">Không Phải Template — Là Kế Hoạch Của Anh/Chị</div>
+  <div class="sec-sub">Được xây từ buổi onboarding — cập nhật sau mỗi buổi coaching theo dữ liệu thực tế.</div>
+  <div class="strategy-box">
+    <div class="strat-row">
+      <div class="strat-icon">🎯</div>
+      <div class="strat-content">
+        <h4>Phân Tích Điểm Mạnh Cá Nhân</h4>
+        <p>Khảo sát phong cách bán hàng, kinh nghiệm, vùng địa lý, mạng lưới quan hệ — xây thương hiệu từ điểm mạnh thực sự, không áp template chung.</p>
+      </div>
+    </div>
+    <div class="strat-row">
+      <div class="strat-icon">👥</div>
+      <div class="strat-content">
+        <h4>Phân Khúc Khách Hàng Riêng</h4>
+        <p>Xác định 1-2 nhóm khách tiềm năng chính của anh/chị — thu nhập, vùng, nhu cầu, kênh tiếp cận — để mọi bài viết đều đúng đối tượng.</p>
+      </div>
+    </div>
+    <div class="strat-row">
+      <div class="strat-icon">📝</div>
+      <div class="strat-content">
+        <h4>Content Angle Không Ai Có</h4>
+        <p>Tìm góc nhìn độc đáo chỉ anh/chị mới có — từ câu chuyện cá nhân, kinh nghiệm thực, quan điểm riêng về thị trường. Không bị trùng với bất kỳ broker nào.</p>
+      </div>
+    </div>
+    <div class="strat-row">
+      <div class="strat-icon">📊</div>
+      <div class="strat-content">
+        <h4>Cập Nhật Thực Tế Sau Mỗi Buổi</h4>
+        <p>Chiến lược không cố định — được điều chỉnh sau mỗi buổi coaching dựa trên dữ liệu reach, lead, engagement thực tế của anh/chị.</p>
+      </div>
+    </div>
+    <div class="strat-row">
+      <div class="strat-icon">🚀</div>
+      <div class="strat-content">
+        <h4>Roadmap Nhân Rộng Sau 12 Tuần</h4>
+        <p>Không dừng ở tuần 12 — buổi coaching cuối xây kế hoạch 90 ngày tiếp theo: mở rộng kênh, tăng đội ngũ, phát triển mạng lưới referral.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 12-WEEK SCHEDULE -->
+<div class="sec">
+  <div class="sec-label">📅 LỊCH TRÌNH 12 TUẦN VIP</div>
+  <div class="sec-title">6 Buổi Coaching Xen Kẽ — Đồng Hành Liên Tục</div>
+  <div class="sec-sub">Mỗi module = 3 tuần. VIP có coaching 1:1 tại mỗi milestone quan trọng.</div>
+  <div class="schedule-grid">
+    <div class="week-card active">
+      <div class="wk-num">💎 Tuần 1–3</div>
+      <div class="wk-title">Module 1 + Coaching #1 & #2</div>
+      <div class="wk-focus">Onboarding call tuần 1 · Định vị · Setup MXH · Audit profile tuần 3</div>
+    </div>
+    <div class="week-card">
+      <div class="wk-num">💎 Tuần 4–6</div>
+      <div class="wk-title">Module 2 + Coaching #3</div>
+      <div class="wk-focus">Hệ thống content · Coaching tuần 5: review bài viết thực · Tối ưu format</div>
+    </div>
+    <div class="week-card">
+      <div class="wk-num">💎 Tuần 7–9</div>
+      <div class="wk-title">Module 3 + Coaching #4</div>
+      <div class="wk-focus">Thu hút lead · Zalo OA · Coaching tuần 8: tối ưu phễu chuyển đổi</div>
+    </div>
+    <div class="week-card">
+      <div class="wk-num">💎 Tuần 10–12</div>
+      <div class="wk-title">Module 4 + Coaching #5 & #6</div>
+      <div class="wk-focus">Chốt deal · Coaching tuần 10 · Tổng kết & roadmap tuần 12</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<div class="sec">
+  <div class="sec-label">📚 4 MODULE THỰC CHIẾN</div>
+  <div class="sec-title">Bài Học — Mở Ngay, Học Theo Thứ Tự</div>
+  <div class="module-grid">
+    <div class="module-card" style="border-color:rgba(201,168,76,.25)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#C9A84C,#8b6914)">🧱</div>
+        <div>
+          <div class="mc-num">Module 1</div>
+          <div class="mc-title">Nền Móng & Định Vị Thương Hiệu</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 1–21</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Điểm khác biệt</span>
+        <span class="mc-tag">Bio chuẩn</span>
+        <span class="mc-tag">Setup MXH</span>
+        <span class="mc-tag">Template brand</span>
+      </div>
+      <div class="mc-days">Bắt đầu đây ↓</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module1.html" target="_blank" class="btn-go gold">📚 Học Module 1 →</a>
+    </div>
+
+    <div class="module-card" style="border-color:rgba(39,174,96,.2)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#27ae60,#1a8c4a)">✍️</div>
+        <div>
+          <div class="mc-num">Module 2</div>
+          <div class="mc-title">Hệ Thống Nội Dung Liên Tục</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 22–42</div>
+      <div class="mc-tags">
+        <span class="mc-tag">5 công thức bài</span>
+        <span class="mc-tag">Storytelling</span>
+        <span class="mc-tag">Reels TikTok</span>
+        <span class="mc-tag">30 template</span>
+      </div>
+      <div class="mc-days">Hoàn thành Module 1 trước</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module2.html" target="_blank" class="btn-go green">✍️ Học Module 2 →</a>
+    </div>
+
+    <div class="module-card" style="border-color:rgba(142,68,173,.2)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">🎯</div>
+        <div>
+          <div class="mc-num">Module 3</div>
+          <div class="mc-title">Thu Hút Lead Tự Động</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 43–63</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Lead magnet</span>
+        <span class="mc-tag">Zalo OA</span>
+        <span class="mc-tag">Livestream</span>
+        <span class="mc-tag">Phễu chuyển đổi</span>
+      </div>
+      <div class="mc-days">Sau khi có hệ thống content</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module3.html" target="_blank" class="btn-go">🎯 Học Module 3 →</a>
+    </div>
+
+    <div class="module-card" style="border-color:rgba(231,76,60,.2)">
+      <div class="mc-header">
+        <div class="mc-icon" style="background:linear-gradient(135deg,#e74c3c,#b03a2e)">🚀</div>
+        <div>
+          <div class="mc-num">Module 4</div>
+          <div class="mc-title">Chốt Deal & Nhân Rộng Hệ Thống</div>
+        </div>
+      </div>
+      <div class="mc-lessons">5 bài học · Ngày 64–84</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Chốt cuộc hẹn</span>
+        <span class="mc-tag">Giữ ấm lead</span>
+        <span class="mc-tag">Referral 1→3</span>
+        <span class="mc-tag">Pipeline</span>
+      </div>
+      <div class="mc-days">Khi đã có lead vào phễu</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-module4.html" target="_blank" class="btn-go" style="background:linear-gradient(135deg,#e74c3c,#b03a2e)">🚀 Học Module 4 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- BONUS MATERIALS -->
+<div class="sec">
+  <div class="sec-label">🎁 TÀI LIỆU BONUS — ĐẦY ĐỦ NHẤT</div>
+  <div class="sec-title">Tất Cả Bonus — Bao Gồm VIP Diamond Exclusive</div>
+  <div class="bonus-grid">
+    <div class="bonus-card">
+      <div class="bc-icon">📅</div>
+      <div class="bc-label">BONUS 1</div>
+      <div class="bc-title">Lịch Content 90 Ngày</div>
+      <div class="bc-desc">39 bài FB · 26 Reels · 13 Live · Chủ đề chi tiết từng ngày. Copy vào Google Calendar và đăng theo lịch.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-content-90.html" target="_blank" class="btn-go">📅 Xem Lịch Content →</a>
+    </div>
+
+    <div class="bonus-card">
+      <div class="bc-icon">🗂️</div>
+      <div class="bc-label">BONUS 2</div>
+      <div class="bc-title">Script Pitching & Xử Lý Từ Chối</div>
+      <div class="bc-desc">5 script Zalo · 4 bài FB giới thiệu · 10 tình huống từ chối · Chuỗi follow-up 5 ngày. Copy-paste trực tiếp.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-pitch.html" target="_blank" class="btn-go">🗂️ Xem Script →</a>
+    </div>
+
+    <div class="bonus-card">
+      <div class="bc-icon">📊</div>
+      <div class="bc-label">BONUS 3</div>
+      <div class="bc-title">Nghiên Cứu Thị Trường Brand Broker</div>
+      <div class="bc-desc">7 tab phân tích · Đối thủ broker HLX · Chiến lược kênh · Lịch content đề xuất · Community benchmark.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/research-personal-brand-broker.html" target="_blank" class="btn-go">📊 Xem Research →</a>
+    </div>
+
+    <div class="bonus-card vip-only">
+      <div class="bc-icon">💎</div>
+      <div class="bc-vip-badge">💎 VIP EXCLUSIVE</div>
+      <div class="bc-label">BONUS 4</div>
+      <div class="bc-title">BDS Mastery Kit Diamond</div>
+      <div class="bc-desc">Toàn bộ tài liệu: Bronze + Silver + Gold + Diamond. ROI nâng cao, pitch deck VIP, CRM, phân tích pháp lý, báo cáo thị trường đầy đủ. Link giao qua Zalo.</div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-go">💬 Nhận Kit Diamond Qua Zalo →</a>
+    </div>
+
+    <div class="bonus-card">
+      <div class="bc-icon">📋</div>
+      <div class="bc-label">BONUS 5</div>
+      <div class="bc-title">Broker Pro Book — 15 Chương</div>
+      <div class="bc-desc">Sách chuyên nghiệp broker HLX: nền tảng BĐS, kiến thức dự án, kỹ năng bán, lộ trình thu nhập tỷ/năm.</div>
+      <a href="https://yen670-oss.github.io/kit-hlx/broker-pro-book-index.html" target="_blank" class="btn-go" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">📚 Đọc Sách →</a>
+    </div>
+
+    <div class="bonus-card vip-only">
+      <div class="bc-icon">✍️</div>
+      <div class="bc-vip-badge">💎 VIP EXCLUSIVE</div>
+      <div class="bc-label">BONUS 6</div>
+      <div class="bc-title">Review Không Giới Hạn</div>
+      <div class="bc-desc">Gửi bất kỳ bài viết, nội dung, profile nào qua Zalo — nhận phân tích chi tiết trong 24h, không giới hạn số lần trong 12 tuần.</div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-go">📝 Gửi Nội Dung Cần Review →</a>
+    </div>
+
+    <div class="bonus-card vip-only">
+      <div class="bc-icon">🎯</div>
+      <div class="bc-vip-badge">💎 VIP EXCLUSIVE</div>
+      <div class="bc-label">BONUS 7</div>
+      <div class="bc-title">Chiến Lược Content 100% Cá Nhân</div>
+      <div class="bc-desc">Xây từ buổi onboarding — không phải template. Cập nhật sau mỗi coaching session dựa trên dữ liệu thực tế của anh/chị.</div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-go">🎯 Nhận Sau Onboarding Call →</a>
+    </div>
+
+    <div class="bonus-card vip-only">
+      <div class="bc-icon">📞</div>
+      <div class="bc-vip-badge">💎 VIP EXCLUSIVE</div>
+      <div class="bc-label">BONUS 8</div>
+      <div class="bc-title">Zalo Ưu Tiên Tuyệt Đối</div>
+      <div class="bc-desc">Tin nhắn VIP được xử lý trong 30 phút. 8h–22h hàng ngày, 7 ngày/tuần trong suốt 12 tuần chương trình.</div>
+      <a href="https://zalo.me/0964827670" target="_blank" class="btn-go">💬 Nhắn Zalo VIP: 0964.827.670 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Q&A LIVE -->
+<div class="sec">
+  <div class="sec-label">🎤 4 BUỔI Q&A LIVE GROUP</div>
+  <div class="sec-title">Thêm Vào Bên Cạnh 6 Coaching 1:1</div>
+  <div class="sec-sub">VIP nhận cả 4 buổi Q&A group + 6 coaching riêng — đây là tổng cộng 10 buổi live trong 12 tuần.</div>
+  <div class="qa-grid">
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 1</div>
+      <div class="qa-title">Tuần 3 — Sau Module 1</div>
+      <div class="qa-desc">Review định vị · Kiểm tra bio · Phản hồi profile MXH · Câu hỏi bài 1–5</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 2</div>
+      <div class="qa-title">Tuần 6 — Sau Module 2</div>
+      <div class="qa-desc">Review bài viết đã đăng · Tối ưu format · Thảo luận content hiệu quả nhất</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 3</div>
+      <div class="qa-title">Tuần 9 — Sau Module 3</div>
+      <div class="qa-desc">Review phễu lead · Cách tối ưu Zalo OA · Case study livestream · Xử lý bottleneck</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-num">🎤 Buổi Q&A 4</div>
+      <div class="qa-title">Tuần 12 — Tổng Kết</div>
+      <div class="qa-desc">Tổng kết 12 tuần · Kế hoạch 90 ngày tiếp · Chiến lược nhân rộng · Q&A tự do</div>
+      <div class="qa-date">📅 Thông báo lịch trong group Zalo</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMUNITY -->
+<div class="sec">
+  <div class="sec-label">👥 CỘNG ĐỒNG</div>
+  <div class="community">
+    <div style="font-size:36px">👥</div>
+    <div class="comm-text" style="flex:1">
+      <h3>Group "Broker HLX Chuyên Nghiệp" — VIP Access</h3>
+      <p>Tham gia group Zalo · Nhận lịch Q&A live · Chia sẻ case study thực · Kết nối đồng nghiệp HLX · Lifetime access. VIP còn được tag ưu tiên trong group khi cần hỗ trợ.</p>
+    </div>
+    <a href="https://zalo.me/0964827670" target="_blank" class="btn-zalo">💬 Nhắn Zalo Để Vào Group →</a>
+  </div>
+</div>
+
+<!-- SUPPORT -->
+<div class="sec">
+  <div class="sec-label">💎 HỖ TRỢ VIP — ƯU TIÊN TUYỆT ĐỐI</div>
+  <div class="support" style="border:1px solid rgba(124,58,237,.3)">
+    <div style="font-size:32px">💎</div>
+    <div class="support-text">
+      <h4>Zalo VIP — Phản Hồi Trong 30 Phút</h4>
+      <p>8h–22h, 7 ngày/tuần · 12 tuần kể từ ngày kích hoạt · Câu hỏi về nội dung, chiến lược, bài viết, phễu, deal closing — tất cả đều được trả lời chi tiết.</p>
+    </div>
+    <a href="https://zalo.me/0964827670" target="_blank" class="btn-zalo" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">💎 Zalo VIP: 0964.827.670</a>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer style="text-align:center;padding:20px;font-size:12px;color:rgba(232,223,200,.3)">
+  Broker HLX Brand Builder · VIP 1:1 · Cohort 1/2026 · Chỉ 3 suất · Hỗ trợ VIP: Zalo 0964.827.670
+</footer>
+
+</body>
+</html>
