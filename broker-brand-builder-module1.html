@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📚 Module 1 — Nền Móng · Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif}
+
+.hero{background:linear-gradient(135deg,#071525,#1B3A6B);padding:44px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(201,168,76,.12),transparent 55%)}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-size:10px;font-weight:800;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:14px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;background:linear-gradient(135deg,var(--gl),#fff,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:8px}
+.hero-sub{font-size:13px;color:rgba(232,223,200,.6);position:relative;z-index:1;max-width:500px;margin:0 auto 20px;line-height:1.7}
+.hero-days{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.25);border-radius:8px;padding:8px 16px;font-size:12px;color:var(--gl);font-weight:700;position:relative;z-index:1}
+
+/* LESSON TABS */
+.lesson-nav{background:rgba(0,0,0,.35);border-bottom:1px solid rgba(201,168,76,.12);padding:0 16px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:99}
+.lesson-nav::-webkit-scrollbar{display:none}
+.ln{flex:none;background:none;border:none;border-bottom:3px solid transparent;color:rgba(232,223,200,.4);font-family:'Be Vietnam Pro',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;cursor:pointer;white-space:nowrap;transition:.15s}
+.ln.active{color:var(--gl);border-bottom-color:var(--gold)}
+.ln:hover:not(.active){color:var(--text)}
+
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+.panel{display:none}.panel.active{display:block}
+
+/* LESSON HEADER */
+.lesson-head{margin-bottom:24px}
+.lesson-num{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.55);margin-bottom:6px}
+.lesson-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,28px);font-weight:700;color:#fff;margin-bottom:8px}
+.lesson-desc{font-size:13.5px;color:rgba(232,223,200,.65);line-height:1.7;max-width:580px}
+.lesson-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.meta-tag{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:5px 12px;font-size:11px;color:rgba(232,223,200,.5)}
+.meta-tag span{color:var(--gl);font-weight:700}
+
+/* PROGRESS */
+.progress-bar{background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:14px 16px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.progress-steps{display:flex;gap:4px;flex:1}
+.ps{height:6px;border-radius:3px;flex:1;background:rgba(255,255,255,.08)}
+.ps.done{background:var(--gold)}
+.ps.current{background:rgba(201,168,76,.5)}
+.progress-text{font-size:11px;color:rgba(232,223,200,.45);white-space:nowrap}
+
+/* CONTENT SECTIONS */
+.content-section{margin-bottom:28px}
+.cs-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cs-label::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.15)}
+
+/* CONCEPT BOX */
+.concept{background:linear-gradient(135deg,rgba(27,58,107,.3),rgba(27,58,107,.15));border:1px solid rgba(100,150,255,.2);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.concept h3{font-size:14px;font-weight:700;color:#9ecfff;margin-bottom:8px}
+.concept p{font-size:13px;color:rgba(232,223,200,.8);line-height:1.7}
+
+/* STEP LIST */
+.step-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.step-item{display:flex;gap:12px;align-items:flex-start}
+.step-num{background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-size:11px;font-weight:800;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-content h4{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:4px}
+.step-content p{font-size:12.5px;color:rgba(232,223,200,.7);line-height:1.6}
+
+/* EXAMPLE BOX */
+.example{background:rgba(0,0,0,.3);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:12px}
+.example-label{font-size:10px;font-weight:800;letter-spacing:1px;color:rgba(226,192,106,.55);text-transform:uppercase;margin-bottom:6px}
+.example-content{font-size:13px;color:rgba(232,223,200,.85);line-height:1.7;white-space:pre-wrap}
+
+/* TEMPLATE BOX */
+.template{background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.25);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.template-head{background:rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.2);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.template-title{font-size:13px;font-weight:800;color:var(--gl)}
+.btn-cp{display:inline-flex;align-items:center;gap:5px;background:var(--gold);color:#0d1b2a;font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:11px;padding:7px 14px;border-radius:7px;border:none;cursor:pointer}
+.btn-cp.ok{background:#22c55e;color:#fff}
+.template-body{padding:14px 16px}
+.template-content{font-size:12.5px;color:rgba(232,223,200,.9);line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif}
+.template-note{font-size:11.5px;color:rgba(232,223,200,.4);margin-top:10px;font-style:italic}
+.copy-src{display:none}
+
+/* CHECKLIST */
+.checklist{background:var(--card);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.checklist h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:12px}
+.cl-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;cursor:pointer}
+.cl-item input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--gold)}
+.cl-item label{font-size:12.5px;color:rgba(232,223,200,.8);line-height:1.5;cursor:pointer}
+
+/* HOMEWORK */
+.homework{background:linear-gradient(135deg,#0a2a0a,#1a4a1a);border:1px solid rgba(39,174,96,.3);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.homework h4{font-size:14px;font-weight:700;color:#2ecc71;margin-bottom:10px}
+.homework-list{list-style:none}
+.homework-list li{display:flex;gap:8px;font-size:13px;color:rgba(232,223,200,.8);padding:4px 0;line-height:1.5}
+.homework-list li::before{content:'→';color:#2ecc71;flex-shrink:0}
+
+/* WARNING */
+.warning{background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.2);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.warning p{font-size:12.5px;color:rgba(232,223,200,.75);line-height:1.6}
+.warning strong{color:#e74c3c}
+
+/* NEXT LESSON */
+.next-lesson{background:rgba(27,58,107,.25);border:1px solid rgba(100,150,255,.2);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+.next-lesson:hover{background:rgba(27,58,107,.35)}
+.nl-text small{font-size:11px;color:rgba(232,223,200,.45);display:block;margin-bottom:3px}
+.nl-text strong{font-size:14px;color:#fff}
+.nl-arrow{color:var(--gl);font-size:20px;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">📚 MODULE 1 · NỀN MÓNG · BROKER HLX BRAND BUILDER</div>
+  <h1>Module 1: Định Vị<br>Để Được Nhớ Đến</h1>
+  <p class="hero-sub">5 bài học · 15 ngày · Từ profile chưa ai biết → Broker HLX được nhận diện rõ ràng</p>
+  <div class="hero-days">📅 Ngày 1–15 · 5 Bài Học · 5 Template Sẵn Dùng</div>
+</div>
+
+<!-- LESSON NAV -->
+<div class="lesson-nav">
+  <button class="ln active" onclick="show(0)">Bài 1: Lợi Thế Cá Nhân</button>
+  <button class="ln" onclick="show(1)">Bài 2: Bio Chuẩn</button>
+  <button class="ln" onclick="show(2)">Bài 3: Hình Ảnh</button>
+  <button class="ln" onclick="show(3)">Bài 4: Tối Ưu 3 Nền Tảng</button>
+  <button class="ln" onclick="show(4)">Bài 5: Template Thương Hiệu</button>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ BÀI 1 ═══ -->
+<div class="panel active" id="p0">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps current"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 1/5</div>
+  </div>
+
+  <div class="lesson-head">
+    <div class="lesson-num">📚 MODULE 1 · BÀI 1 · NGÀY 1–3</div>
+    <div class="lesson-title">Tìm Lợi Thế Cạnh Tranh Cá Nhân của Broker HLX</div>
+    <div class="lesson-desc">Hàng trăm broker cùng bán HLX — khách hàng chọn ai? Bài này giúp anh/chị tìm ra điều làm anh/chị khác biệt hoàn toàn. Không cần bịa đặt — chỉ cần đào sâu vào những gì anh/chị đã có.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>45 phút</span></div>
+      <div class="meta-tag">📋 Output: <span>1 trang "Lý do chọn tôi"</span></div>
+      <div class="meta-tag">📅 Ngày: <span>1–3</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">💡 KHÁI NIỆM CỐT LÕI</div>
+    <div class="concept">
+      <h3>Differentiation Point — Điểm Khác Biệt Thật Sự</h3>
+      <p>Khách hàng không chọn broker giỏi nhất. Họ chọn broker <strong>phù hợp nhất với hoàn cảnh của họ</strong> — và người mà họ <strong>tin tưởng nhất</strong>.<br><br>Điểm khác biệt của anh/chị không cần là "tốt hơn tất cả". Chỉ cần <strong>rõ ràng, nhớ được, và thật</strong>.</p>
+    </div>
+    <div class="warning">
+      <p><strong>⚠️ Lỗi phổ biến nhất:</strong> Nói "Tôi tư vấn tận tâm, chuyên nghiệp, có kinh nghiệm" — đây là những gì tất cả 500 broker kia cũng nói. Khách nghe xong không nhớ ai.</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📝 QUY TRÌNH 5 BƯỚC TÌM ĐIỂM KHÁC BIỆT</div>
+    <ul class="step-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Liệt kê câu chuyện cá nhân gắn với HLX</h4>
+          <p>Điều gì dẫn anh/chị đến với HLX? Lần đầu đến HLX cảm giác thế nào? Điều gì khiến anh/chị tin vào dự án này? Viết ra — không cần chỉnh sửa.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Liệt kê kỹ năng/kiến thức đặc biệt</h4>
+          <p>Anh/chị biết gì mà hầu hết broker khác không biết? (Khu vực cụ thể, loại khách hàng đặc biệt, kiến trúc, đầu tư, cho thuê, v.v.)</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Tìm loại khách hàng anh/chị phục vụ tốt nhất</h4>
+          <p>Khách mua để ở? Đầu tư? Cho thuê? Người từ Hà Nội? Gia đình trẻ? Người muốn nghỉ dưỡng? Chọn 1 nhóm để tập trung.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Tìm overlap giữa 3 điều trên</h4>
+          <p>Giao điểm của (câu chuyện cá nhân) + (kỹ năng đặc biệt) + (loại khách hàng) = Điểm khác biệt của anh/chị.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Diễn đạt thành 1 câu đơn giản</h4>
+          <p>Công thức: "Tôi giúp [ai] [làm gì] tại HLX mà không cần [nỗi đau phổ biến]"</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📖 VÍ DỤ THỰC TẾ</div>
+    <div class="example">
+      <div class="example-label">Ví dụ 1 — Broker chuyên gia đầu tư</div>
+      <div class="example-content">❌ Generic: "Tôi là broker chuyên nghiệp tư vấn BĐS HLX"
+
+✅ Cụ thể: "Tôi giúp nhà đầu tư từ Hà Nội chọn đúng căn HLX cho thuê được ngay từ tháng thứ 2 — không cần biết gì về thị trường Quảng Ninh"</div>
+    </div>
+    <div class="example">
+      <div class="example-label">Ví dụ 2 — Broker chuyên gia gia đình</div>
+      <div class="example-content">❌ Generic: "Tôi tư vấn mọi loại căn hộ tại HLX"
+
+✅ Cụ thể: "Tôi giúp gia đình có trẻ nhỏ tìm căn hộ HLX phù hợp với ngân sách thực — không bị 'hoa mắt' bởi quá nhiều lựa chọn"</div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE — WORKSHEET TÌM ĐIỂM KHÁC BIỆT</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">📋 Worksheet: Tìm Lợi Thế Cạnh Tranh Cá Nhân</div>
+        <button class="btn-cp" onclick="cpT('wb1',this)">📋 Copy Template</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="wb1">WORKSHEET: TÌM LỢI THẾ CẠNH TRANH CÁ NHÂN
+(Điền vào, đừng suy nghĩ quá — viết điều đầu tiên xuất hiện trong đầu)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BƯỚC 1: CÂU CHUYỆN CÁ NHÂN VỚI HLX
+• Điều gì dẫn tôi đến với HLX?
+→ [Viết 2-3 câu]
+
+• Lần đầu đến HLX cảm giác thế nào?
+→ [Viết 2-3 câu]
+
+• Điều tôi YÊU THÍCH nhất ở HLX là?
+→ [Viết 1 câu]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BƯỚC 2: KỸ NĂNG ĐẶC BIỆT CỦA TÔI
+• Tôi biết điều gì về HLX mà hầu hết broker không biết?
+→ [Viết 2-3 điểm]
+
+• Khách hàng hay khen tôi về điều gì?
+→ [Viết 1-2 điểm]
+
+• Tôi giỏi nhất ở khía cạnh nào của việc bán HLX?
+→ [Viết 1 điểm]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BƯỚC 3: LOẠI KHÁCH HÀNG TÔI PHỤC VỤ TỐT NHẤT
+Khoanh tròn: Đầu tư / Để ở / Cho thuê / Nghỉ dưỡng
+Khách từ đâu: Hà Nội / HCM / Quảng Ninh / Khác
+Đặc điểm: Gia đình / Cặp đôi trẻ / Investor chuyên nghiệp / Người về hưu
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BƯỚC 4: ĐIỂM GIAO NHAU
+Tôi + [kỹ năng đặc biệt] + [loại khách] = ?
+→ [Viết 1 câu mô tả]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BƯỚC 5: CÂU ĐỊNH VỊ CỦA TÔI
+Công thức: "Tôi giúp [AI] [LÀM GÌ] tại HLX mà không cần [NỖI ĐAU]"
+→ Tôi giúp _______ _______ tại HLX mà không cần _______</div>
+        <div class="template-note">💡 Điền xong → dùng câu bước 5 làm bio và tagline trên tất cả nền tảng</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>✅ Bài Tập Về Nhà — Ngày 1–3</h4>
+    <ul class="homework-list">
+      <li>Điền hoàn chỉnh Worksheet tìm lợi thế cạnh tranh (30 phút)</li>
+      <li>Viết 3 phiên bản câu định vị khác nhau → chọn 1 cái hay nhất</li>
+      <li>Hỏi 2-3 khách cũ: "Điều gì khiến anh/chị quyết định chọn tôi?" → ghi lại câu trả lời thực tế</li>
+    </ul>
+  </div>
+
+  <div class="next-lesson" onclick="show(1)">
+    <div class="nl-text">
+      <small>Bài tiếp theo →</small>
+      <strong>Bài 2: Viết Bio Chuẩn Cho FB, Zalo, TikTok</strong>
+    </div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 2 ═══ -->
+<div class="panel" id="p1">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps current"></div><div class="ps"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 2/5</div>
+  </div>
+
+  <div class="lesson-head">
+    <div class="lesson-num">📚 MODULE 1 · BÀI 2 · NGÀY 3–5</div>
+    <div class="lesson-title">Viết Bio Chuẩn Cho FB, Zalo, TikTok</div>
+    <div class="lesson-desc">Bio là ấn tượng đầu tiên — khách hàng đọc trong 3 giây và quyết định follow hay không. Bài này viết bio sẵn cho 3 nền tảng, copy-paste và điền thông tin của anh/chị vào.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>30 phút</span></div>
+      <div class="meta-tag">📋 Output: <span>3 bio hoàn chỉnh</span></div>
+      <div class="meta-tag">📅 Ngày: <span>3–5</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">💡 NGUYÊN TẮC VIẾT BIO BROKER</div>
+    <div class="concept">
+      <h3>Bio chuẩn = Ai + Giúp gì + Bằng chứng + CTA</h3>
+      <p>Mỗi bio phải trả lời 4 câu hỏi trong 3 giây:<br>
+      1. <strong>Anh/chị là ai?</strong> (Chuyên gia gì, tại đâu)<br>
+      2. <strong>Giúp được gì?</strong> (Kết quả cụ thể cho khách)<br>
+      3. <strong>Có bằng chứng gì?</strong> (Con số, thành tích, thời gian)<br>
+      4. <strong>Tôi phải làm gì tiếp theo?</strong> (CTA rõ ràng)</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE BIO — FACEBOOK CÁ NHÂN</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">📘 Bio Facebook — Phần "Giới Thiệu"</div>
+        <button class="btn-cp" onclick="cpT('bio-fb',this)">📋 Copy Bio FB</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="bio-fb">Chuyên gia tư vấn BĐS Hạ Long Xanh 🏝️
+Giúp [đầu tư/gia đình/khách nghỉ dưỡng] tìm căn HLX phù hợp — không mất thời gian, không bị nhiễu thông tin.
+
+✅ [X] năm kinh nghiệm bán BĐS Vinhomes
+✅ [X]+ khách hàng đã tư vấn thành công
+✅ Thành thạo thị trường Quảng Ninh + HLX
+
+📌 Chia sẻ hàng tuần: Thị trường HLX · Tips đầu tư · Câu chuyện thực tế
+
+👇 Muốn nhận tài liệu miễn phí → Nhắn tin "TÀI LIỆU"</div>
+        <div class="template-note">💡 Điền vào []: loại khách hàng anh/chị chuyên về, số năm kinh nghiệm, số khách đã tư vấn</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE BIO — ZALO</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">💚 Bio Zalo — Phần Giới Thiệu</div>
+        <button class="btn-cp" onclick="cpT('bio-zalo',this)">📋 Copy Bio Zalo</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="bio-zalo">[Tên] | Broker BĐS Hạ Long Xanh
+
+Giúp anh/chị tìm căn HLX phù hợp ngân sách + mục tiêu — tư vấn trung thực, không ép buộc.
+
+📍 Chuyên: [Loại khách hàng — vd: Đầu tư cho thuê / Gia đình muốn nghỉ dưỡng]
+📊 Kinh nghiệm: [X] năm tại thị trường Quảng Ninh
+🏆 Đã hỗ trợ: [X]+ khách hàng thành công
+
+🎁 Nhắn "QUÀ" để nhận bộ tài liệu HLX miễn phí</div>
+        <div class="template-note">💡 Zalo bio ngắn hơn FB — tập trung vào CTA nhận quà tặng</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE BIO — TIKTOK</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">🎵 Bio TikTok — 80 Ký Tự</div>
+        <button class="btn-cp" onclick="cpT('bio-tiktok',this)">📋 Copy Bio TikTok</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="bio-tiktok">Broker HLX | Tips mua nhà thật 🏝️
+[X] năm bán Vinhomes Hạ Long
+👇 Nhận tài liệu miễn phí</div>
+        <div class="template-note">💡 TikTok bio giới hạn 80 ký tự — ngắn gọn, rõ niche, có CTA</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE — TÊN HIỂN THỊ CHUẨN</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">👤 Tên Hiển Thị Trên Các Nền Tảng</div>
+        <button class="btn-cp" onclick="cpT('displayname',this)">📋 Copy Tên</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="displayname">CÔNG THỨC TÊN HIỂN THỊ:
+[Tên thật] + [Chức danh ngắn gọn]
+
+Ví dụ:
+• Nguyễn Văn A | Broker HLX
+• Lan Phương — Chuyên Gia BĐS Hạ Long Xanh
+• Minh Tú 🏝️ Broker HLX Vinhomes
+
+NGUYÊN TẮC:
+✅ Có tên thật (tạo trust)
+✅ Có "HLX" hoặc "Hạ Long Xanh" (để tìm kiếm dễ)
+✅ Ngắn gọn (dưới 30 ký tự)
+❌ Tránh: số điện thoại, địa chỉ, quá nhiều emoji</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>✅ Bài Tập Về Nhà — Ngày 3–5</h4>
+    <ul class="homework-list">
+      <li>Copy 3 template bio → điền thông tin cá nhân → cập nhật FB, Zalo, TikTok ngay hôm nay</li>
+      <li>Đổi tên hiển thị theo công thức chuẩn trên cả 3 nền tảng</li>
+      <li>Screenshot profile trước và sau → lưu lại để so sánh sau 30 ngày</li>
+    </ul>
+  </div>
+
+  <div class="next-lesson" onclick="show(2)">
+    <div class="nl-text">
+      <small>Bài tiếp theo →</small>
+      <strong>Bài 3: Ảnh Đại Diện & Ảnh Bìa Chuyên Nghiệp</strong>
+    </div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 3 ═══ -->
+<div class="panel" id="p2">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div><div class="ps"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 3/5</div>
+  </div>
+
+  <div class="lesson-head">
+    <div class="lesson-num">📚 MODULE 1 · BÀI 3 · NGÀY 6–8</div>
+    <div class="lesson-title">Ảnh Đại Diện & Ảnh Bìa Chuyên Nghiệp Không Cần Chụp Studio</div>
+    <div class="lesson-desc">Ảnh profile là ấn tượng đầu tiên trước cả bio. Bài này hướng dẫn chụp ảnh đại diện chuyên nghiệp bằng điện thoại và thiết kế ảnh bìa đơn giản mà hiệu quả.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>60 phút</span></div>
+      <div class="meta-tag">📋 Output: <span>Ảnh đại diện + ảnh bìa mới</span></div>
+      <div class="meta-tag">📅 Ngày: <span>6–8</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📸 CHECKLIST ẢNH ĐẠI DIỆN</div>
+    <div class="checklist">
+      <h4>✅ Ảnh Đại Diện Chuẩn Broker HLX</h4>
+      <div class="cl-item"><input type="checkbox"><label>Mặt rõ nét, không bị mờ hay tối — chiếm 70-80% khung ảnh</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Trang phục: Áo sơ mi hoặc vest nhẹ (không nhất thiết phải là vest 3 mảnh)</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Nền ảnh: Trắng, be, hoặc ảnh thực tế tại dự án HLX</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Biểu cảm: Mỉm cười tự nhiên — không cứng nhắc, không quá nghiêm</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Ánh sáng: Chụp gần cửa sổ ban ngày (không cần đèn chuyên nghiệp)</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Không selfie — nhờ người khác chụp hoặc dùng tripod + hẹn giờ</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Ảnh vuông (1:1) hoặc dọc (4:5) — tối thiểu 800×800px</label></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE NỘI DUNG ẢNH BÌA FACEBOOK</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">🖼️ Hướng Dẫn Thiết Kế Ảnh Bìa (Dùng Canva)</div>
+        <button class="btn-cp" onclick="cpT('cover-guide',this)">📋 Copy Hướng Dẫn</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="cover-guide">HƯỚNG DẪN TẠO ẢNH BÌA FACEBOOK BẰNG CANVA (MIỄN PHÍ)
+
+Kích thước: 820 × 312 px
+
+NỘI DUNG CẦN CÓ TRÊN ẢNH BÌA:
+
+1. ẢNH NỀN
+→ Ảnh phối cảnh HLX đẹp (lấy từ bộ 45 ảnh HLX chính thức trong kit)
+→ Hoặc ảnh thực tế anh/chị đã chụp tại dự án
+
+2. OVERLAY TỐI NHẸ
+→ Lớp màu tối 30-40% opacity để chữ dễ đọc
+
+3. TEXT CHÍNH (lớn, dễ đọc)
+→ "[Tên] | Broker BĐS Hạ Long Xanh"
+
+4. TEXT PHỤ (nhỏ hơn)
+→ "Tư vấn [loại khách] · [X] năm kinh nghiệm"
+
+5. CTA (góc phải hoặc dưới)
+→ "Nhắn tin để được tư vấn miễn phí"
+
+6. LOGO VINHOMES (nếu được phép)
+→ Thêm nhỏ góc phải
+
+MÀU SẮC GỢI Ý:
+→ Text: Trắng (#FFFFFF) hoặc vàng gold (#C9A84C)
+→ Background overlay: Navy (#1B3A6B) 40% opacity
+
+FONT GỢI Ý (Canva):
+→ Heading: Playfair Display hoặc Cormorant
+→ Body: Be Vietnam Pro hoặc Montserrat</div>
+        <div class="template-note">💡 Truy cập canva.com → Tạo thiết kế → Facebook Cover → Dùng hướng dẫn này</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>✅ Bài Tập Về Nhà — Ngày 6–8</h4>
+    <ul class="homework-list">
+      <li>Chụp ảnh đại diện mới theo checklist (nhờ người thân chụp giúp)</li>
+      <li>Thiết kế ảnh bìa FB trên Canva theo template hướng dẫn</li>
+      <li>Cập nhật ảnh lên tất cả nền tảng + Story thông báo "Profile mới"</li>
+    </ul>
+  </div>
+
+  <div class="next-lesson" onclick="show(3)">
+    <div class="nl-text">
+      <small>Bài tiếp theo →</small>
+      <strong>Bài 4: Tối Ưu 3 Nền Tảng Từ A–Z</strong>
+    </div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 4 ═══ -->
+<div class="panel" id="p3">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div><div class="ps"></div></div>
+    <div class="progress-text">Bài 4/5</div>
+  </div>
+
+  <div class="lesson-head">
+    <div class="lesson-num">📚 MODULE 1 · BÀI 4 · NGÀY 9–12</div>
+    <div class="lesson-title">Tối Ưu 3 Nền Tảng Quan Trọng Nhất Từ A–Z</div>
+    <div class="lesson-desc">Facebook, Zalo và Zalo OA là 3 kênh quan trọng nhất cho broker HLX. Bài này là checklist chi tiết cho từng nền tảng — làm theo đúng thứ tự, không bỏ qua bước nào.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>90 phút (30 phút mỗi nền tảng)</span></div>
+      <div class="meta-tag">📋 Output: <span>3 nền tảng tối ưu hoàn chỉnh</span></div>
+      <div class="meta-tag">📅 Ngày: <span>9–12</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📘 CHECKLIST — FACEBOOK CÁ NHÂN</div>
+    <div class="checklist">
+      <h4>✅ 10 Điều Cần Làm Trên FB Cá Nhân</h4>
+      <div class="cl-item"><input type="checkbox"><label>Ảnh đại diện mới (đã chụp bài 3)</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Ảnh bìa mới với thông tin thương hiệu (đã thiết kế bài 3)</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Tên hiển thị: [Tên] | Broker HLX</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Phần "Giới thiệu": Điền bio chuẩn (bài 2)</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Featured Posts: Ghim 3 bài đại diện (1 giới thiệu + 1 thực chiến + 1 testimonial)</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Cài đặt Privacy: Bài viết public, thông tin cá nhân riêng tư</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Bật nút "Theo dõi" để người lạ có thể follow mà không cần kết bạn</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Mục "Công việc": Điền đầy đủ chức danh + công ty</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Ảnh album "HLX": Tạo album ảnh dự án HLX riêng</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Xóa hoặc ẩn các bài cũ không liên quan đến thương hiệu</label></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">💚 CHECKLIST — ZALO CÁ NHÂN + ZALO OA</div>
+    <div class="checklist">
+      <h4>✅ Zalo Cá Nhân — 5 Điều Cần Làm</h4>
+      <div class="cl-item"><input type="checkbox"><label>Ảnh đại diện + Ảnh bìa đồng nhất với FB</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Bio Zalo: Điền theo template bài 2</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Story Zalo: Đăng Story ít nhất 1 lần/ngày</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Mục "Nhật ký": Đăng ít nhất 3 bài trước khi mời ai vào xem</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Nhắn tin cá nhân 10 broker HLX đầu tiên để mời vào nhóm</label></div>
+    </div>
+    <div class="checklist" style="margin-top:12px">
+      <h4>✅ Zalo OA — Setup Cơ Bản</h4>
+      <div class="cl-item"><input type="checkbox"><label>Tạo Zalo OA: oa.zalo.me → Đăng ký tài khoản → Loại: "Cá nhân"</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Tên OA: "[Tên] — Broker HLX"</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Ảnh đại diện + Ảnh bìa đồng nhất với FB</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Tin nhắn chào mừng tự động: Dùng template bên dưới</label></div>
+      <div class="cl-item"><input type="checkbox"><label>Bật broadcast: Cho phép gửi tin đến tất cả follower</label></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE — TIN NHẮN WELCOME ZALO OA TỰ ĐỘNG</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">💚 Welcome Message — Zalo OA</div>
+        <button class="btn-cp" onclick="cpT('zalo-welcome',this)">📋 Copy Welcome Message</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="zalo-welcome">Chào mừng [Tên người dùng]! 👋
+
+Mình là [Tên anh/chị] — broker chuyên tư vấn BĐS Hạ Long Xanh.
+
+Tại đây mình chia sẻ hàng tuần:
+📊 Cập nhật thị trường HLX mới nhất
+💡 Tips đầu tư + mua nhà thực chiến
+🎁 Tài liệu miễn phí cho broker & nhà đầu tư
+
+---
+
+🎁 QUÀ TẶNG NGAY:
+Nhắn "QUAI" để nhận bộ "10 Tip Xử Lý Từ Chối Hiệu Quả" — dành riêng cho broker HLX.
+
+Hoặc nhắn "HLX" để nhận báo cáo thị trường Hạ Long Xanh mới nhất.
+
+---
+
+Anh/chị quan tâm đến HLX theo hướng nào?
+A. Mua để ở
+B. Mua để đầu tư / cho thuê
+C. Tìm hiểu thị trường
+
+Reply A, B hoặc C — mình sẽ gửi thêm thông tin phù hợp! 🙏</div>
+        <div class="template-note">💡 Tin nhắn này được gửi tự động khi ai đó follow Zalo OA của anh/chị</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>✅ Bài Tập Về Nhà — Ngày 9–12</h4>
+    <ul class="homework-list">
+      <li>Tick hoàn thành toàn bộ checklist Facebook (30 phút)</li>
+      <li>Tối ưu Zalo cá nhân + Setup Zalo OA (30 phút)</li>
+      <li>Cài welcome message tự động cho Zalo OA (15 phút)</li>
+      <li>Chia sẻ Story trên FB + Zalo: "Profile mới — đã sẵn sàng chia sẻ giá trị!"</li>
+    </ul>
+  </div>
+
+  <div class="next-lesson" onclick="show(4)">
+    <div class="nl-text">
+      <small>Bài tiếp theo →</small>
+      <strong>Bài 5: Bộ Template Thương Hiệu Cá Nhân HLX</strong>
+    </div>
+    <div class="nl-arrow">→</div>
+  </div>
+</div>
+
+<!-- ═══ BÀI 5 ═══ -->
+<div class="panel" id="p4">
+  <div class="progress-bar">
+    <div class="progress-steps"><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps done"></div><div class="ps current"></div></div>
+    <div class="progress-text">Bài 5/5 — Hoàn thành Module 1 🎉</div>
+  </div>
+
+  <div class="lesson-head">
+    <div class="lesson-num">📚 MODULE 1 · BÀI 5 · NGÀY 13–15</div>
+    <div class="lesson-title">Bộ Template Thương Hiệu — Copy Paste & Dùng Ngay</div>
+    <div class="lesson-desc">Tổng hợp tất cả template từ Module 1 thành 1 bộ hoàn chỉnh. Dùng những template này mỗi khi cần giới thiệu bản thân, nhắn tin khách hàng hoặc cập nhật profile.</div>
+    <div class="lesson-meta">
+      <div class="meta-tag">⏱️ Thời gian: <span>15 phút — Copy paste ngay</span></div>
+      <div class="meta-tag">📋 Output: <span>Bộ template hoàn chỉnh</span></div>
+      <div class="meta-tag">📅 Ngày: <span>13–15</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE 1 — TỰ GIỚI THIỆU NHANH (30 GIÂY)</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">🗣️ Giới Thiệu Miệng — Sự Kiện, Gặp Mặt</div>
+        <button class="btn-cp" onclick="cpT('intro30',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="intro30">Mình là [Tên] — broker chuyên tư vấn BĐS Hạ Long Xanh.
+
+Mình chủ yếu giúp [loại khách: đầu tư/gia đình/người muốn nghỉ dưỡng] tìm căn HLX phù hợp mà không mất nhiều thời gian research.
+
+Hiện mình có tài liệu miễn phí về thị trường HLX — nếu anh/chị quan tâm, mình gửi Zalo nhé!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE 2 — TIN NHẮN GIỚI THIỆU BẢN THÂN ZALO/FB</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">💬 Tin Nhắn Đầu Tiên Với Khách Mới</div>
+        <button class="btn-cp" onclick="cpT('intro-msg',this)">📋 Copy</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="intro-msg">Chào [Tên khách] ạ! Mình là [Tên] — broker chuyên BĐS Hạ Long Xanh.
+
+Anh/chị có thể gặp mình qua [sự kiện/group/bài post] — mình muốn gửi lời chào và cảm ơn vì đã kết nối.
+
+Nếu anh/chị đang quan tâm đến HLX — dù là để ở, đầu tư hay tìm hiểu thêm — mình rất vui được chia sẻ thông tin thực tế từ góc độ người đang làm việc trực tiếp tại dự án.
+
+Không có nghĩa vụ gì cả — mình chỉ muốn được kết nối với người cùng quan tâm đến HLX 🙏</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE 3 — CAPTION BÀI GIỚI THIỆU ĐẦU TIÊN TRÊN FB</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">📝 Bài Đăng Đầu Tiên Trên FB</div>
+        <button class="btn-cp" onclick="cpT('first-post',this)">📋 Copy Bài FB</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="first-post">Nếu chúng ta chưa quen — cho mình tự giới thiệu.
+
+Mình là [Tên] — [X] năm bán BĐS, và [X] năm gắn bó với Vinhomes Hạ Long Xanh.
+
+Điều làm mình đến với HLX là [câu chuyện ngắn cá nhân — 2-3 câu thật lòng].
+
+Tại đây mình chia sẻ những gì mình biết thật sự từ công việc thực tế:
+📊 Thị trường HLX diễn biến thế nào
+💡 Tips chọn căn phù hợp với từng mục tiêu
+📋 Case study khách thành công và bài học thực tế
+
+Không có gì để bán trong bài này — chỉ muốn được quen biết với những anh/chị quan tâm đến HLX 🙏
+
+👋 Anh/chị đang tìm hiểu HLX với mục tiêu gì? Comment bên dưới nhé!
+
+#BrokerHLX #HạLongXanh #VinhomesHạLong #ThươngHiệuBroker</div>
+        <div class="template-note">💡 Điền câu chuyện cá nhân thật vào phần [  ] — đây là phần quan trọng nhất, không được để generic</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="cs-label">📋 TEMPLATE 4 — HASHTAG CHUẨN CHO BROKER HLX</div>
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">#️⃣ Bộ Hashtag Theo Chủ Đề</div>
+        <button class="btn-cp" onclick="cpT('hashtags',this)">📋 Copy Hashtag</button>
+      </div>
+      <div class="template-body">
+        <div class="template-content" id="hashtags">HASHTAG BÀI VỀ HLX/DỰ ÁN:
+#HạLongXanh #VinhomesHạLong #BDSHL #BĐSQuảngNinh #BrokerHLX
+
+HASHTAG BÀI VỀ ĐẦU TƯ:
+#ĐầuTưBĐS #NhàĐầuTưThôngMinh #BĐSBiển #BĐSNghỉDưỡng
+
+HASHTAG BÀI VỀ THƯƠNG HIỆU BROKER:
+#ThươngHiệuBroker #BrokerChuyênNghiệp #XâyThươngHiệu #PersonalBranding
+
+HASHTAG BÀI CHUNG:
+#BrokerHLX #MôiGiớiChuyênNghiệp #TưVấnBĐS #BĐSHạLong
+
+GỢI Ý SỬ DỤNG:
+→ Mỗi bài dùng 5-10 hashtag (không spam 30 cái)
+→ Mix 3-4 hashtag niche + 2-3 hashtag chung
+→ Tạo hashtag cá nhân riêng: #[TênAnh]BrokerHLX</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homework">
+    <h4>🎉 Hoàn Thành Module 1 — Tổng Kết Bài Tập</h4>
+    <ul class="homework-list">
+      <li>Đăng bài giới thiệu đầu tiên (Template 3) lên FB → đây là milestone quan trọng!</li>
+      <li>Lưu bộ template này vào Notes điện thoại để tiện dùng</li>
+      <li>Chụp màn hình profile FB + Zalo mới → lưu vào album "Trước/Sau"</li>
+      <li>Chuẩn bị: Module 2 sẽ dạy anh/chị viết 3 bài/tuần — xem trước chủ đề bài đăng đầu tiên</li>
+    </ul>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#0a2a0a,#1a4a1a);border:2px solid #27ae60;border-radius:14px;padding:20px 22px;text-align:center;">
+    <div style="font-size:28px;margin-bottom:8px">🎉</div>
+    <div style="font-family:'Playfair Display',serif;font-size:18px;color:#2ecc71;font-weight:700;margin-bottom:8px">Chúc mừng hoàn thành Module 1!</div>
+    <p style="font-size:13px;color:rgba(232,223,200,.7);line-height:1.6">Anh/chị đã có nền tảng vững chắc: Profile tối ưu · Bio chuẩn · Hình ảnh chuyên nghiệp · 3 nền tảng sẵn sàng.<br><br>Module 2 tiếp theo: <strong style="color:#fff">Hệ Thống Nội Dung — 3 Bài/Tuần Không Hết Chủ Đề</strong></p>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const panels=document.querySelectorAll('.panel');
+const tabs=document.querySelectorAll('.ln');
+function show(i){panels.forEach((p,idx)=>p.classList.toggle('active',idx===i));tabs.forEach((t,idx)=>t.classList.toggle('active',idx===i));window.scrollTo({top:0,behavior:'smooth'});}
+function cpT(id,btn){
+  const txt=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;btn.textContent='✅ Đã Copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  }).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✅ Đã Copy!';setTimeout(()=>{btn.textContent='📋 Copy';},2000);});
+}
+</script>
+</body>
+</html>

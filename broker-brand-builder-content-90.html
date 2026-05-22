@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📅 Lịch Content 90 Ngày — Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif}
+
+.hero{background:linear-gradient(135deg,#071525,#1B3A6B,#0d2a1a);padding:44px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(201,168,76,.1),transparent 55%)}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-size:10px;font-weight:800;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:14px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(20px,4.5vw,34px);font-weight:900;background:linear-gradient(135deg,var(--gl),#fff,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:10px}
+.hero-sub{font-size:13px;color:rgba(232,223,200,.6);position:relative;z-index:1;margin-bottom:22px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;position:relative;z-index:1}
+.stat{background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:10px 18px;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:20px;color:var(--gl);font-weight:700}
+.stat-label{font-size:10px;color:rgba(232,223,200,.5);margin-top:2px}
+
+/* LEGEND */
+.legend{background:rgba(0,0,0,.3);border-bottom:1px solid rgba(201,168,76,.1);padding:12px 20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.lg{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px}
+.lg-post{background:rgba(24,119,242,.2);color:#60a5fa;border:1px solid rgba(24,119,242,.3)}
+.lg-reel{background:rgba(254,44,85,.2);color:#f87171;border:1px solid rgba(254,44,85,.3)}
+.lg-story{background:rgba(201,168,76,.15);color:var(--gl);border:1px solid rgba(201,168,76,.25)}
+.lg-live{background:rgba(39,174,96,.2);color:#4ade80;border:1px solid rgba(39,174,96,.3)}
+.lg-zalo{background:rgba(0,130,243,.2);color:#60b4f8;border:1px solid rgba(0,130,243,.3)}
+.lg-off{background:rgba(255,255,255,.05);color:rgba(232,223,200,.35);border:1px solid rgba(255,255,255,.08)}
+
+/* FILTER TABS */
+.filter-bar{background:rgba(0,0,0,.35);border-bottom:1px solid rgba(201,168,76,.12);padding:0 20px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:99}
+.filter-bar::-webkit-scrollbar{display:none}
+.fb{flex:none;background:none;border:none;border-bottom:3px solid transparent;color:rgba(232,223,200,.4);font-family:'Be Vietnam Pro',sans-serif;font-size:12px;font-weight:700;padding:12px 16px;cursor:pointer;white-space:nowrap;transition:.15s}
+.fb.active{color:var(--gl);border-bottom-color:var(--gold)}
+.fb:hover:not(.active){color:var(--text)}
+
+.wrap{max-width:900px;margin:0 auto;padding:28px 16px 60px}
+
+/* MONTH HEADER */
+.month-head{background:linear-gradient(135deg,rgba(27,58,107,.4),rgba(27,58,107,.2));border:1px solid rgba(100,150,255,.2);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.month-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#9ecfff}
+.month-goal{font-size:12px;color:rgba(232,223,200,.55);line-height:1.5}
+
+/* WEEK BLOCK */
+.week-block{margin-bottom:22px}
+.week-head{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gl);background:rgba(201,168,76,.08);border-radius:8px;padding:8px 14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.week-theme{font-size:10.5px;color:rgba(232,223,200,.5);font-weight:400;letter-spacing:0;text-transform:none}
+
+/* DAY ROW */
+.day-row{display:grid;grid-template-columns:70px 1fr auto;gap:10px;align-items:start;margin-bottom:8px;background:var(--card);border-radius:10px;padding:12px 14px}
+.day-row.off-day{background:rgba(0,0,0,.15);opacity:.5}
+.day-label{font-size:11px;font-weight:800;color:rgba(232,223,200,.5);text-transform:uppercase}
+.day-tasks{display:flex;flex-direction:column;gap:5px}
+.task-item{display:flex;gap:8px;align-items:flex-start}
+.task-type{font-size:10px;font-weight:800;padding:2px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.t-post{background:rgba(24,119,242,.2);color:#60a5fa}
+.t-reel{background:rgba(254,44,85,.2);color:#f87171}
+.t-story{background:rgba(201,168,76,.15);color:var(--gl)}
+.t-live{background:rgba(39,174,96,.2);color:#4ade80}
+.t-zalo{background:rgba(0,130,243,.2);color:#60b4f8}
+.task-text{font-size:12.5px;color:rgba(232,223,200,.85);line-height:1.5}
+.task-text strong{color:#fff}
+.pillar-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.p-mindset{background:#C9A84C}
+.p-thucchien{background:#27ae60}
+.p-hethong{background:#8e44ad}
+.p-hlx{background:#1abc9c}
+.p-ketqua{background:#e74c3c}
+
+.btn-cp{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.25);color:var(--gl);font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;white-space:nowrap;align-self:flex-start;flex-shrink:0}
+.btn-cp.ok{background:rgba(39,174,96,.2);border-color:rgba(39,174,96,.3);color:#4ade80}
+.copy-src{display:none}
+
+/* PILLAR LEGEND */
+.pillar-legend{background:rgba(0,0,0,.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pillar-legend-title{font-size:10px;font-weight:700;color:rgba(232,223,200,.4);text-transform:uppercase;letter-spacing:1px;margin-right:4px}
+.pl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(232,223,200,.6)}
+.pl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+.panel{display:none}.panel.active{display:block}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">📅 LỊCH CONTENT 90 NGÀY · BROKER HLX BRAND BUILDER</div>
+  <h1>Lịch Nội Dung 90 Ngày<br>Broker HLX Chuyên Nghiệp</h1>
+  <p class="hero-sub">Chủ đề chi tiết từng ngày · Copy paste topic · Batch content Chủ nhật · 90 phút/tuần là đủ</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">39</div><div class="stat-label">Bài FB/Zalo</div></div>
+    <div class="stat"><div class="stat-num">26</div><div class="stat-label">Reels/Video</div></div>
+    <div class="stat"><div class="stat-num">13</div><div class="stat-label">Livestream</div></div>
+    <div class="stat"><div class="stat-num">90</div><div class="stat-label">Ngày lộ trình</div></div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="lg lg-post">📝 Bài FB</div>
+  <div class="lg lg-reel">🎬 Reel/Video</div>
+  <div class="lg lg-story">📸 Story</div>
+  <div class="lg lg-live">🔴 Livestream</div>
+  <div class="lg lg-zalo">💬 Zalo OA</div>
+</div>
+
+<div class="filter-bar">
+  <button class="fb active" onclick="showMonth(0)">📅 Tháng 1 — Nền Móng</button>
+  <button class="fb" onclick="showMonth(1)">📅 Tháng 2 — Authority</button>
+  <button class="fb" onclick="showMonth(2)">📅 Tháng 3 — Monetize</button>
+  <button class="fb" onclick="showMonth(3)">📋 Xem Toàn Bộ</button>
+</div>
+
+<div class="wrap">
+
+<div class="pillar-legend">
+  <span class="pillar-legend-title">Trụ cột:</span>
+  <div class="pl-item"><div class="pl-dot p-mindset"></div>Mindset Broker</div>
+  <div class="pl-item"><div class="pl-dot p-thucchien"></div>Thực Chiến HLX</div>
+  <div class="pl-item"><div class="pl-dot p-hethong"></div>Hệ Thống Content</div>
+  <div class="pl-item"><div class="pl-dot p-hlx"></div>Hạ Long Xanh</div>
+  <div class="pl-item"><div class="pl-dot p-ketqua"></div>Kết Quả Thực</div>
+</div>
+
+<!-- THÁNG 1 -->
+<div class="panel active" id="m0">
+
+<div class="month-head">
+  <div>
+    <div class="month-label">📅 THÁNG 1 · Ngày 1–30</div>
+    <div class="month-goal">🎯 Mục tiêu: 500 người biết anh/chị là ai · Tối ưu profile · Bắt đầu đăng bài · Seed community 50 người</div>
+  </div>
+</div>
+
+<!-- TUẦN 1 -->
+<div class="week-block">
+<div class="week-head">📅 TUẦN 1 · Ngày 1–7 <span class="week-theme">Chủ đề: Tối ưu nền tảng & bài đầu tiên</span></div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 2<br><small>Ngày 1</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Bài giới thiệu: "Tôi là ai và tại sao tôi bán HLX"</strong><br>Kể câu chuyện cá nhân — điều gì dẫn anh/chị đến với HLX, mục tiêu 1 năm</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story: Hậu trường tối ưu profile mới — khuyến khích mọi người ghé thăm</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: "Chào mừng! Tuần này mình sẽ chia sẻ bí quyết [chủ đề 1]"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d1',this)">📋 Copy</button>
+  <div class="copy-src" id="d1">NỘI DUNG NGÀY 1 — THỨ 2
+
+📝 BÀI FB: "Tôi là ai và tại sao tôi bán HLX"
+Chủ đề: Giới thiệu bản thân + câu chuyện cá nhân
+Hướng dẫn: Kể điều gì dẫn anh/chị đến với HLX, điểm khác biệt, mục tiêu 1 năm
+Pillar: Mindset Broker
+
+📸 STORY: Hậu trường tối ưu profile mới
+
+💬 ZALO: Broadcast chào mừng tuần mới</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 3<br><small>Ngày 2</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">2 Stories: Ảnh dự án HLX view đẹp + hỏi follower "Anh/chị thích view nào nhất?"</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Nhắn tin cá nhân: Mời 10 broker HLX vào nhóm "Broker HLX Chuyên Nghiệp"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d2',this)">📋 Copy</button>
+  <div class="copy-src" id="d2">NỘI DUNG NGÀY 2 — THỨ 3
+
+📸 STORY (2 stories):
+- Story 1: Ảnh dự án HLX view đẹp
+- Story 2: Poll "Anh/chị thích view biển hay view vườn ở HLX?"
+
+💬 ZALO CÁ NHÂN: Nhắn tin mời 10 broker HLX vào nhóm cộng đồng</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 4<br><small>Ngày 3</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>"1 điều tôi ước biết trước khi bán HLX"</strong><br>60 giây · Quay bằng điện thoại · Nền là ảnh/video dự án</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story: Countdown "Thứ 6 tôi sẽ live lần đầu — anh/chị quan tâm đến chủ đề gì?"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d3',this)">📋 Copy</button>
+  <div class="copy-src" id="d3">NỘI DUNG NGÀY 3 — THỨ 4
+
+🎬 REEL (60 giây):
+Tiêu đề: "1 điều tôi ước biết trước khi bán HLX"
+Gợi ý nội dung: Câu chuyện sai lầm đầu tiên → bài học → áp dụng ngay
+Format: Tự quay, nền ảnh/video HLX, phụ đề đầy đủ
+
+📸 STORY: Thông báo livestream thứ 6</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 5<br><small>Ngày 4</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hlx"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"3 lý do HLX là cơ hội không nên bỏ lỡ năm 2026"</strong><br>Dùng data thị trường + góc nhìn cá nhân của broker</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: Share bài FB vừa đăng + kêu gọi vào nhóm</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d4',this)">📋 Copy</button>
+  <div class="copy-src" id="d4">NỘI DUNG NGÀY 4 — THỨ 5
+
+📝 BÀI FB: "3 lý do HLX là cơ hội không nên bỏ lỡ năm 2026"
+- Lý do 1: Vị trí địa lý + hạ tầng đang đầu tư
+- Lý do 2: Giá so với các dự án biển tương đương
+- Lý do 3: Tiềm năng cho thuê + khai thác du lịch
+Pillar: Hạ Long Xanh
+
+💬 ZALO: Broadcast share bài FB + CTA vào nhóm</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 6<br><small>Ngày 5</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text"><strong>LIVESTREAM đầu tiên: "Góc nhìn thực tế từ broker HLX"</strong><br>30 phút · Kịch bản: Giới thiệu 5' → Nội dung 20' → Q&A 5'</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story trước live: "Tôi sắp live! Join ngay" · Story sau: Cảm ơn người đã xem</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d5',this)">📋 Copy</button>
+  <div class="copy-src" id="d5">NỘI DUNG NGÀY 5 — THỨ 6
+
+🔴 LIVESTREAM (30 phút):
+Tiêu đề: "Góc nhìn thực tế từ broker HLX — Hỏi gì tôi cũng trả lời"
+Kịch bản:
+- 0-5': Chào mừng + giới thiệu bản thân + chủ đề hôm nay
+- 5-25': Nội dung chính (chọn 1: Thị trường HLX 2026 / Kinh nghiệm đầu tiên bán HLX)
+- 25-30': Q&A + CTA vào nhóm Zalo
+
+📸 STORY:
+- Trước live: Thông báo đang live
+- Sau live: Cảm ơn + recap điểm quan trọng</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 7<br><small>Ngày 6</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>Highlight từ buổi live: "3 điểm quan trọng nhất hôm qua"</strong><br>Clip ngắn 30-60 giây từ buổi livestream</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story: Hậu trường cuối tuần — chuẩn bị nội dung tuần sau</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d6',this)">📋 Copy</button>
+  <div class="copy-src" id="d6">NỘI DUNG NGÀY 6 — THỨ 7
+
+🎬 REEL: Highlight từ livestream hôm qua
+- Cắt clip 30-60s phần hay nhất
+- Thêm caption tóm tắt 3 điểm quan trọng
+
+📸 STORY: Hậu trường + batch content tuần sau</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Chủ Nhật<br><small>Ngày 7</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"Tuần đầu tiên xây thương hiệu broker — những gì tôi học được"</strong><br>Reflection + bài học + kêu gọi tham gia cùng</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: Gửi tài liệu miễn phí đầu tiên cho thành viên nhóm</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d7',this)">📋 Copy</button>
+  <div class="copy-src" id="d7">NỘI DUNG NGÀY 7 — CHỦ NHẬT
+
+📝 BÀI FB: "Tuần đầu tiên xây thương hiệu broker — những gì tôi học được"
+- Tóm tắt hành trình tuần 1
+- 3 bài học cụ thể
+- CTA: "Anh/chị đang ở đâu trong hành trình này?"
+Pillar: Mindset Broker
+
+💬 ZALO BROADCAST: Gửi tài liệu miễn phí cho nhóm
+Nội dung: "Tặng anh/chị [tên tài liệu] — dùng được ngay hôm nay"
+
+⏱️ BATCH CONTENT: Dành 90 phút lên kế hoạch tuần 2</div>
+</div>
+</div>
+
+<!-- TUẦN 2 -->
+<div class="week-block">
+<div class="week-head">📅 TUẦN 2 · Ngày 8–14 <span class="week-theme">Chủ đề: Xây credibility & hệ thống content</span></div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 2<br><small>Ngày 8</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"Câu chuyện: Khách đầu tiên tôi chốt tại HLX"</strong><br>Storytelling chi tiết — vấn đề khách gặp → cách anh/chị giải quyết → kết quả</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story: "Bạn có biết loại khách này không?" → Dẫn vào bài</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d8',this)">📋 Copy</button>
+  <div class="copy-src" id="d8">NGÀY 8 — THỨ 2
+
+📝 FB STORYTELLING: "Câu chuyện: Khách đầu tiên tôi chốt tại HLX"
+Format: Problem → Struggle → Solution → Result
+Kết thúc bằng bài học có thể áp dụng ngay
+
+📸 STORY: Dẫn vào bài FB bằng câu hỏi gợi tò mò</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 3<br><small>Ngày 9</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>"Broker HLX làm gì mỗi sáng trong 30 phút đầu tiên?"</strong><br>Vlog format nhẹ nhàng · Quay routine buổi sáng thực tế</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: Tip nhỏ về cách viết bio broker chuẩn</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d9',this)">📋 Copy</button>
+  <div class="copy-src" id="d9">NGÀY 9 — THỨ 3
+
+🎬 REEL: "Broker HLX làm gì mỗi sáng trong 30 phút đầu tiên?"
+- Quay thực tế routine check market, đọc tin, chuẩn bị
+- Thêm text overlay từng bước
+- CTA: Follow để xem thêm tips thực chiến
+
+💬 ZALO: Tip nhỏ về cách tối ưu bio broker</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 4<br><small>Ngày 10</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hlx"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"5 câu hỏi khách hay hỏi về HLX — và câu trả lời thật"</strong><br>Giải đáp thắc mắc phổ biến · Thể hiện expertise</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story poll: "Anh/chị đang gặp khó khăn nào khi bán HLX?"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d10',this)">📋 Copy</button>
+  <div class="copy-src" id="d10">NGÀY 10 — THỨ 4
+
+📝 FB Q&A FORMAT: "5 câu hỏi khách hay hỏi về HLX"
+Q1: Giá HLX hiện tại bao nhiêu?
+Q2: Pháp lý có vấn đề gì không?
+Q3: Cho thuê được bao nhiêu/tháng?
+Q4: Khi nào bàn giao?
+Q5: Nên mua loại căn nào?
+→ Trả lời thật, trung thực, có data cụ thể
+
+📸 STORY POLL: Thu thập pain point của broker</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 5<br><small>Ngày 11</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-ketqua"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"Before/After: Profile broker trước và sau khi tối ưu"</strong><br>Chia sẻ quá trình thay đổi cụ thể · Bài học rút ra</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: Gửi checklist tối ưu profile broker cho thành viên nhóm</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d11',this)">📋 Copy</button>
+  <div class="copy-src" id="d11">NGÀY 11 — THỨ 5
+
+📝 FB BEFORE/AFTER: Profile broker trước và sau tối ưu
+- Chụp màn hình profile cũ vs mới (hoặc mô tả chi tiết)
+- 5 điều đã thay đổi cụ thể
+- Kết quả: Tương tác tăng bao nhiêu %?
+Pillar: Kết Quả Thực
+
+💬 ZALO: Gửi "Checklist 10 điều cần kiểm tra trên profile broker"</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 6<br><small>Ngày 12</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text"><strong>"Xây thương hiệu broker từ 0 — Tôi đang làm gì mỗi tuần?"</strong><br>Hỏi đáp thực chiến · Chia sẻ behind the scenes</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Stories cả ngày: Chuẩn bị live → Đang live → Recap sau live</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d12',this)">📋 Copy</button>
+  <div class="copy-src" id="d12">NGÀY 12 — THỨ 6
+
+🔴 LIVESTREAM: "Xây thương hiệu broker từ 0 — Tôi đang làm gì?"
+Kịch bản:
+- 0-3': Chào + điểm qua tuần vừa rồi
+- 3-20': Chia sẻ quy trình batch content 90 phút/tuần của mình
+- 20-28': Q&A: Mọi người đang gặp khó gì?
+- 28-30': CTA vào nhóm + hẹn live tuần sau
+
+📸 STORY SERIES: Chuẩn bị → Đang live → Recap</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 7<br><small>Ngày 13</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>"Sai lầm số 1 broker HLX mắc phải khi đăng bài"</strong><br>Pain point mạnh · Giải pháp cụ thể trong 60 giây</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story cuối tuần: Cảm ơn mọi người đã theo dõi tuần 2</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d13',this)">📋 Copy</button>
+  <div class="copy-src" id="d13">NGÀY 13 — THỨ 7
+
+🎬 REEL: "Sai lầm số 1 broker HLX mắc phải khi đăng bài"
+Format: Hook → Sai lầm (cụ thể) → Hậu quả → Cách sửa → CTA
+Ví dụ sai lầm: Chỉ đăng ảnh dự án + giá → không có chuyện người, không có lý do để tương tác
+
+📸 STORY: Tổng kết tuần 2 nhẹ nhàng</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Chủ Nhật<br><small>Ngày 14</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"Mindset quan trọng nhất của broker chuyên nghiệp"</strong><br>Bài viết giá trị sâu · Triết lý nghề nghiệp cá nhân</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: Gửi tổng kết nội dung 2 tuần + kế hoạch tuần 3</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d14',this)">📋 Copy</button>
+  <div class="copy-src" id="d14">NGÀY 14 — CHỦ NHẬT
+
+📝 FB: "Mindset quan trọng nhất của broker chuyên nghiệp"
+Gợi ý: "Khách không mua từ người bán giỏi — họ mua từ người họ tin tưởng"
+→ Khai thác sâu triết lý này với ví dụ thực tế từ HLX
+
+💬 ZALO: Tổng kết 2 tuần + teaser tuần 3
+
+⏱️ BATCH CONTENT TUẦN 3: 90 phút chuẩn bị nội dung</div>
+</div>
+</div>
+
+<!-- TUẦN 3 -->
+<div class="week-block">
+<div class="week-head">📅 TUẦN 3 · Ngày 15–21 <span class="week-theme">Chủ đề: Hệ thống thu lead tự nhiên</span></div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 2<br><small>Ngày 15</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"Tại sao tôi ngừng telesale và dùng phương pháp này thay thế"</strong><br>Câu chuyện chuyển đổi · Kết quả cụ thể trước và sau</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: Tip "Cách viết bài FB để khách hỏi mua thay vì phải gọi cho họ"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d15',this)">📋 Copy</button>
+  <div class="copy-src" id="d15">NGÀY 15 — THỨ 2
+
+📝 FB: "Tại sao tôi ngừng telesale và dùng phương pháp này"
+Hook: "Tháng [X] tôi gọi 200 cuộc/ngày. Tháng [Y] tôi không gọi cuộc nào — mà vẫn có 5 cuộc hẹn xem nhà"
+→ Kể hành trình chuyển đổi sang content + community marketing
+
+💬 ZALO: Tip về cách viết bài pull marketing thay vì push</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 3<br><small>Ngày 16</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>"Quy trình 5 bước từ người lạ → khách mua nhà"</strong><br>Animation text + voice over đơn giản</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story: Chia sẻ tin nhắn inbox tự nhiên (che tên) từ khách</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d16',this)">📋 Copy</button>
+  <div class="copy-src" id="d16">NGÀY 16 — THỨ 3
+
+🎬 REEL: "Quy trình 5 bước: Người lạ → Khách mua nhà"
+Bước 1: Thấy bài viết → Tương tác
+Bước 2: Vào profile → Ấn Follow
+Bước 3: Nhận quà tặng → Tin tưởng hơn
+Bước 4: Inbox hỏi → Cuộc hẹn
+Bước 5: Xem nhà → Ký hợp đồng
+
+📸 STORY: Social proof — chia sẻ tin nhắn inbox thật (ẩn tên khách)</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 4<br><small>Ngày 17</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hlx"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"HLX có gì mà các dự án khác không có? — Góc nhìn của người bán 1 năm"</strong><br>So sánh khách quan · Điểm độc đáo thực sự của HLX</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story series: 5 ảnh tiện ích HLX với caption ngắn từng cái</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d17',this)">📋 Copy</button>
+  <div class="copy-src" id="d17">NGÀY 17 — THỨ 4
+
+📝 FB: "HLX có gì mà dự án khác không có?"
+Cấu trúc:
+- Vị trí đắc địa (so sánh cụ thể)
+- Hệ sinh thái Vinhomes (uy tín)
+- Tiện ích đặc biệt (liệt kê)
+- Cộng đồng cư dân (chất lượng)
+→ Kết bằng: "Đây là lý do tôi chọn bán HLX dài hạn"
+
+📸 STORY SERIES: Ảnh + caption tiện ích HLX</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 5<br><small>Ngày 18</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-ketqua"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"Case study: Khách từ chối 3 lần — rồi mua"</strong><br>Storytelling xử lý từ chối thực tế · Bài học cụ thể</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Broadcast: Tặng quà "10 tip xử lý từ chối" cho nhóm</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d18',this)">📋 Copy</button>
+  <div class="copy-src" id="d18">NGÀY 18 — THỨ 5
+
+📝 FB CASE STUDY: "Khách từ chối 3 lần — rồi mua"
+Kể câu chuyện thật (hoặc dựa trên thật):
+- Lần từ chối 1: "Đắt quá" → Anh/chị đã làm gì?
+- Lần từ chối 2: "Để nghĩ thêm" → Tiếp theo?
+- Lần từ chối 3: "Vợ/chồng chưa đồng ý" → Xử lý?
+- Kết quả: Chốt thành công → Bài học
+
+💬 ZALO: Gửi link quà "10 Tip Xử Lý Từ Chối" cho cả nhóm</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 6<br><small>Ngày 19</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text"><strong>"Q&A: Hỏi gì về HLX tôi cũng trả lời thật"</strong><br>Live chủ đề mở · Thu thập câu hỏi trước bằng story</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-story">📸 Story</div><div class="task-text">Story: Thu câu hỏi trước live + Thông báo live bắt đầu</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d19',this)">📋 Copy</button>
+  <div class="copy-src" id="d19">NGÀY 19 — THỨ 6
+
+🔴 LIVESTREAM: Q&A Thực Chiến HLX
+- Trước live: Story thu câu hỏi từ mọi người
+- Trong live: Trả lời từng câu hỏi thật, không né tránh
+- Cuối live: Mời vào nhóm Zalo để nhận tip hàng tuần miễn phí
+
+📸 STORY: Thu câu hỏi + thông báo live</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Thứ 7+CN<br><small>Ngày 20–21</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>"3 thói quen mà broker thành công làm khác người bình thường"</strong></div></div>
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"3 tuần xây thương hiệu — Điều tôi thấy khác biệt nhất"</strong><br>Reflection + số liệu thực · Tương tác tăng bao nhiêu</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">Batch content tuần 4 + Gửi tổng kết 3 tuần cho nhóm</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d20',this)">📋 Copy</button>
+  <div class="copy-src" id="d20">NGÀY 20-21 — THỨ 7 & CHỦ NHẬT
+
+🎬 REEL: "3 thói quen broker thành công làm khác"
+- Thói quen 1: [cụ thể]
+- Thói quen 2: [cụ thể]
+- Thói quen 3: [cụ thể]
+
+📝 FB: Tổng kết 3 tuần — con số thực tế
+- Tương tác tăng X%
+- Số người theo dõi mới
+- Số inbox nhận được
+- Bài học quan trọng nhất
+
+💬 ZALO: Tổng kết + teaser tháng 2
+
+⏱️ BATCH CONTENT: Chuẩn bị tuần 4 (90 phút)</div>
+</div>
+</div>
+
+<!-- TUẦN 4 -->
+<div class="week-block">
+<div class="week-head">📅 TUẦN 4 · Ngày 22–30 <span class="week-theme">Chủ đề: Monetize nhẹ + consolidate community</span></div>
+
+<div class="day-row">
+  <div class="day-label">T2–T7<br><small>Ngày 22–28</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Bài 22:</strong> "Công thức viết bài FB mà khách hàng thực sự đọc hết"</div></div>
+    <div class="task-item"><div class="pillar-dot p-hlx"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>Ngày 23:</strong> "Tour ảo HLX — 60 giây khám phá dự án"</div></div>
+    <div class="task-item"><div class="pillar-dot p-ketqua"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Bài 25:</strong> "Kết quả tháng đầu tiên: Những con số thật"</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text"><strong>Ngày 26:</strong> "Recap tháng 1 + Kế hoạch tháng 2 của tôi"</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>Ngày 27:</strong> "Cách tôi batch 1 tuần content trong 90 phút"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d22',this)">📋 Copy</button>
+  <div class="copy-src" id="d22">TUẦN 4 — NGÀY 22-28
+
+BÀI 22 (Thứ 2): "Công thức viết bài FB mà khách hàng thực sự đọc hết"
+→ Hook → Body (3 điểm) → CTA cụ thể
+
+REEL 23 (Thứ 3): Tour ảo HLX 60 giây
+→ Quay video walk-through dự án với voice over
+
+BÀI 25 (Thứ 5): "Kết quả tháng đầu tiên"
+→ Data thực: followers tăng, inbox, leads
+
+LIVE 26 (Thứ 6): Recap tháng 1 + kế hoạch tháng 2
+
+REEL 27 (Thứ 7): Batch content 90 phút
+→ Quay process thực tế, có timestamps</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Chủ Nhật<br><small>Ngày 30</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>"30 ngày xây thương hiệu broker — Điều thay đổi lớn nhất"</strong><br>Bài milestone quan trọng · Review đầy đủ + CTA mời cộng đồng</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('d30',this)">📋 Copy</button>
+  <div class="copy-src" id="d30">NGÀY 30 — MILESTONE
+
+📝 FB ĐẶC BIỆT: "30 ngày xây thương hiệu broker HLX"
+Cấu trúc bài milestone:
+- Tôi bắt đầu từ đâu (trạng thái ngày 1)
+- 3 thách thức lớn nhất
+- 3 kết quả bất ngờ nhất
+- Con số cụ thể (followers, inbox, leads)
+- Điều sẽ làm khác đi nếu bắt đầu lại
+- CTA: "Anh/chị có muốn bắt đầu hành trình này cùng tôi không?"
+
+→ Đây là bài để pitch nhẹ chương trình/cộng đồng</div>
+</div>
+</div>
+</div>
+
+<!-- THÁNG 2 -->
+<div class="panel" id="m1">
+<div class="month-head">
+  <div>
+    <div class="month-label">📅 THÁNG 2 · Ngày 31–60</div>
+    <div class="month-goal">🎯 Mục tiêu: Tạo authority — được nhận diện là "người của HLX" · Thu 50 testimonial · Mở video + TikTok</div>
+  </div>
+</div>
+
+<div class="week-block">
+<div class="week-head">📅 TUẦN 5–6 · Ngày 31–45 <span class="week-theme">Chủ đề: Authority Content + Video Format</span></div>
+
+<div class="day-row">
+  <div class="day-label">Tuần 5<br><small>Ngày 31–35</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Ngày 31:</strong> "5 điều broker HLX mới vào nghề thường bị nhầm"</div></div>
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-reel">🎬 Reel+TikTok</div><div class="task-text"><strong>Ngày 32:</strong> "POV: Ngày làm việc của broker HLX" — Vlog day-in-life</div></div>
+    <div class="task-item"><div class="pillar-dot p-hlx"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Ngày 33:</strong> "Phân tích: Căn nào ở HLX đáng mua nhất 2026?"</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text"><strong>Ngày 35:</strong> Workshop mini "Setup profile broker trong 1 tiếng"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('t5',this)">📋 Copy Tuần 5</button>
+  <div class="copy-src" id="t5">TUẦN 5 — NGÀY 31-35
+
+NGÀY 31 (Thứ 2): Bài FB "5 điều broker HLX mới hay bị nhầm"
+NGÀY 32 (Thứ 3): Reel + TikTok "Day in life of broker HLX"
+NGÀY 33 (Thứ 4): Bài FB phân tích "Căn nào ở HLX đáng mua nhất 2026?"
+NGÀY 34 (Thứ 5): Story + Zalo — Chia sẻ case study khách mua thành công
+NGÀY 35 (Thứ 6): LIVE Workshop "Setup profile broker trong 1 tiếng"
+→ Làm thực tế ngay trên live, cùng làm với người xem</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Tuần 6<br><small>Ngày 36–42</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-ketqua"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Ngày 36:</strong> "Testimonial: Broker [Tên] áp dụng hệ thống — Kết quả sau 2 tuần"</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text"><strong>Ngày 38:</strong> "Tôi xây group Zalo 100 người trong 2 tuần như thế nào?"</div></div>
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Ngày 40:</strong> "Broker muốn thành công: Đừng bán dự án, hãy bán giấc mơ"</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text"><strong>Ngày 42:</strong> "Hỏi đáp về community building và lead generation"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('t6',this)">📋 Copy Tuần 6</button>
+  <div class="copy-src" id="t6">TUẦN 6 — NGÀY 36-42
+
+NGÀY 36: Testimonial broker trong cộng đồng
+NGÀY 37: Story Q&A + Zalo tip
+NGÀY 38: Reel "Xây group 100 người trong 2 tuần"
+NGÀY 39: Zalo broadcast bài học tuần
+NGÀY 40: Bài FB sâu về mindset "Bán giấc mơ thay vì bán dự án"
+NGÀY 41: Reel TikTok soft pitch nhẹ
+NGÀY 42: LIVE Q&A về community + lead gen</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Tuần 7–8<br><small>Ngày 43–60</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Chủ đề tuần 7:</strong> Nuture — Giữ ấm lead chưa mua · Script Zalo follow up · Case study chuyển đổi chậm</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Chủ đề tuần 8:</strong> Referral system · Khách giới thiệu khách · Milestone 60 ngày · Soft pitch chương trình</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text">2 livestream: Workshop "Zalo nuture tự động" + "Review 60 ngày + hỏi đáp"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('t7',this)">📋 Copy Tuần 7–8</button>
+  <div class="copy-src" id="t7">TUẦN 7 (NGÀY 43-49) — NUTURE CONTENT
+Bài 44: "Script Zalo follow up khách chưa mua"
+Bài 46: "Case study: Khách quyết định sau 3 tháng theo dõi"
+Reel 45: "3 lỗi phổ biến khi follow up khách BĐS"
+Live 49: Workshop "Zalo OA nuture tự động"
+
+TUẦN 8 (NGÀY 50-60) — REFERRAL + MONETIZE
+Bài 50: "Khách giới thiệu khách — Tôi làm điều này thế nào"
+Bài 53: "Hệ thống referral của broker chuyên nghiệp"
+Reel 55: "Kết quả 60 ngày xây thương hiệu"
+Live 56: Review 60 ngày + Hỏi đáp
+Bài 60: MILESTONE — "60 ngày: Từ broker vô danh đến [kết quả]"</div>
+</div>
+</div>
+</div>
+
+<!-- THÁNG 3 -->
+<div class="panel" id="m2">
+<div class="month-head">
+  <div>
+    <div class="month-label">📅 THÁNG 3 · Ngày 61–90</div>
+    <div class="month-goal">🎯 Mục tiêu: Monetize — Ra doanh thu từ coaching, workshop, referral · Scale TikTok · B2B đầu tiên</div>
+  </div>
+</div>
+
+<div class="week-block">
+<div class="week-head">📅 TUẦN 9–10 · Ngày 61–75 <span class="week-theme">Chủ đề: Đẩy mạnh conversion + mở rộng nền tảng</span></div>
+
+<div class="day-row">
+  <div class="day-label">Tuần 9–10<br><small>Ngày 61–75</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-ketqua"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Series Testimonial:</strong> Mỗi tuần 2 câu chuyện thành công từ cộng đồng — social proof mạnh</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 Reel+TikTok</div><div class="task-text"><strong>TikTok đẩy mạnh:</strong> 1 video/ngày — format "1 tip broker" ngắn 30 giây</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text"><strong>Workshop mở đầu:</strong> "Xây thương hiệu broker 0 đồng — Workshop 90 phút" → pitch chương trình cuối</div></div>
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>B2B content:</strong> Bài về lợi ích đào tạo cho sàn BĐS → mở rộng sang pitch sàn HLX</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('t9',this)">📋 Copy Tuần 9–10</button>
+  <div class="copy-src" id="t9">TUẦN 9-10 — NGÀY 61-75
+
+TRỌNG TÂM:
+1. Đăng 2 testimonial/tuần từ người học trong community
+2. TikTok: 1 video/ngày — format "1 tip broker HLX" (30 giây)
+3. Workshop live 90 phút — pitch chương trình cuối
+4. Bắt đầu content B2B về đào tạo team sàn
+
+LIVE WORKSHOP:
+Tiêu đề: "Xây Thương Hiệu Broker Không Tốn Tiền — Workshop 90 Phút"
+Cấu trúc:
+- 60': Nội dung thực chiến
+- 20': Q&A
+- 10': Giới thiệu chương trình đầy đủ</div>
+</div>
+</div>
+
+<div class="week-block">
+<div class="week-head">📅 TUẦN 11–13 · Ngày 76–90 <span class="week-theme">Chủ đề: Scale + Milestone 90 ngày</span></div>
+
+<div class="day-row">
+  <div class="day-label">Tuần 11–13<br><small>Ngày 76–90</small></div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text">Tiếp tục 3 bài/tuần theo 5 trụ cột · Xen kẽ testimonial + case study</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text">2 reel/tuần — bắt đầu test format phỏng vấn broker thành công</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text">3 livestream còn lại + 1 live đặc biệt "Milestone 90 ngày" với Q&A mở</div></div>
+    <div class="task-item"><div class="pillar-dot p-ketqua"></div><div class="task-type t-post">📝 FB</div><div class="task-text"><strong>Ngày 90 — MILESTONE:</strong> "90 ngày xây thương hiệu broker HLX — Con số thật, câu chuyện thật"</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('t11',this)">📋 Copy Tuần 11–13</button>
+  <div class="copy-src" id="t11">TUẦN 11-13 — NGÀY 76-90
+
+CÔNG THỨC MỖI TUẦN (giữ nguyên):
+- Thứ 2: Bài FB dài (storytelling/case study)
+- Thứ 3: Reel + Zalo tip
+- Thứ 4: Bài FB ngắn (tip cụ thể) hoặc Reel
+- Thứ 5: Zalo broadcast + Story
+- Thứ 6: LIVESTREAM (1 trong 3 tuần cuối)
+- Thứ 7: Reel tổng kết/highlight
+- CN: Bài FB mindset + Batch content tuần sau
+
+BÀI NGÀY 90 — MILESTONE ĐẶC BIỆT:
+"90 ngày xây thương hiệu broker HLX"
+→ Số follower tăng X
+→ Số inbox nhận được
+→ Số lead chất lượng
+→ Số giao dịch từ inbound
+→ Bài học lớn nhất
+→ Bước tiếp theo: Kế hoạch 90 ngày 2</div>
+</div>
+</div>
+</div>
+
+<!-- XEM TOÀN BỘ -->
+<div class="panel" id="m3">
+<div class="month-head">
+  <div>
+    <div class="month-label">📋 TỔNG QUAN 90 NGÀY</div>
+    <div class="month-goal">Lộ trình 3 tháng · Tháng 1: Nền móng → Tháng 2: Authority → Tháng 3: Monetize</div>
+  </div>
+</div>
+
+<div class="week-block">
+<div class="week-head">📊 TÓM TẮT TOÀN BỘ</div>
+
+<div class="day-row">
+  <div class="day-label">Tháng 1<br>Ngày 1–30</div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-mindset"></div><div class="task-type t-post">📝 FB</div><div class="task-text">12 bài FB (3/tuần): Giới thiệu, storytelling, tips, Q&A, milestone 30 ngày</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 Reel</div><div class="task-text">8 video ngắn: Routine, sai lầm, quy trình, tips 60 giây</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text">4 livestream (thứ 6 hàng tuần): 30 phút mỗi buổi</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-zalo">💬 Zalo</div><div class="task-text">3 broadcast/tuần + nhắn tin cá nhân mời nhóm</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('sum1',this)">📋 Copy Tóm Tắt T1</button>
+  <div class="copy-src" id="sum1">THÁNG 1 (Ngày 1-30) — NỀN MÓNG
+Mục tiêu: 500 người biết anh/chị là ai
+
+Nội dung:
+- 12 bài FB dài (3/tuần)
+- 8 video ngắn/Reel
+- 4 livestream thứ 6 (30 phút)
+- 3 Zalo broadcast/tuần
+- Stories hàng ngày
+
+Chủ đề chính:
+Tuần 1: Giới thiệu + profile setup
+Tuần 2: Credibility + hệ thống content
+Tuần 3: Thu lead tự nhiên
+Tuần 4: Tổng kết + milestone 30 ngày</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Tháng 2<br>Ngày 31–60</div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-thucchien"></div><div class="task-type t-post">📝 FB</div><div class="task-text">12 bài FB: Testimonials, authority content, phân tích chuyên sâu</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 TikTok+Reel</div><div class="task-text">Thêm TikTok: 3-4 video/tuần · Day-in-life, interview format</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text">4 livestream: Workshop format (60-90 phút) · Sâu hơn, có cấu trúc</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('sum2',this)">📋 Copy Tóm Tắt T2</button>
+  <div class="copy-src" id="sum2">THÁNG 2 (Ngày 31-60) — AUTHORITY
+Mục tiêu: Được nhận diện là "chuyên gia HLX"
+
+Nội dung:
+- 12 bài FB (3/tuần) — testimonial + phân tích sâu
+- 8-12 video (thêm TikTok)
+- 4 workshop live (60-90 phút)
+- Zalo nuture sequence
+
+Chủ đề chính:
+Tuần 5-6: Authority content + TikTok mở rộng
+Tuần 7: Nuture content + follow up system
+Tuần 8: Referral + milestone 60 ngày</div>
+</div>
+
+<div class="day-row">
+  <div class="day-label">Tháng 3<br>Ngày 61–90</div>
+  <div class="day-tasks">
+    <div class="task-item"><div class="pillar-dot p-ketqua"></div><div class="task-type t-post">📝 FB</div><div class="task-text">12 bài FB: Conversion content · Workshop pitch · B2B content · Milestone 90 ngày</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-reel">🎬 TikTok</div><div class="task-text">TikTok 1/ngày (thứ 2-6) · Scale reach · Phỏng vấn broker thành công</div></div>
+    <div class="task-item"><div class="pillar-dot p-hethong"></div><div class="task-type t-live">🔴 Live</div><div class="task-text">Workshop trả phí nhẹ + Live milestone 90 ngày đặc biệt</div></div>
+  </div>
+  <button class="btn-cp" onclick="cp('sum3',this)">📋 Copy Tóm Tắt T3</button>
+  <div class="copy-src" id="sum3">THÁNG 3 (Ngày 61-90) — MONETIZE
+Mục tiêu: Doanh thu từ coaching, workshop, kit
+
+Nội dung:
+- 12 bài FB — conversion focus
+- TikTok scale lên 1 video/ngày
+- Workshop live có pitch sản phẩm
+- Milestone 90 ngày — bài lớn nhất
+
+Doanh thu mục tiêu:
+- Kit: 30 kit × 497K = 15M
+- Coaching 1:1: 5 người × 2-5M = 10-25M
+- Workshop: 20 người × 500K-1M = 10-20M
+- Tổng: 35-60M tháng 3</div>
+</div>
+</div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const panels=document.querySelectorAll('.panel');
+const tabs=document.querySelectorAll('.fb');
+function showMonth(i){panels.forEach((p,idx)=>p.classList.toggle('active',idx===i));tabs.forEach((t,idx)=>t.classList.toggle('active',idx===i));}
+function cp(id,btn){
+  const txt=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;btn.textContent='✅ Đã Copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  }).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✅ Đã Copy!';setTimeout(()=>{btn.textContent='📋 Copy';},2000);});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>💬 Script Pitching — Early Bird Broker Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be Vietnam Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--card:#112233;--text:#e8dfc8}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif}
+
+.hero{background:linear-gradient(135deg,#1a0a0a,#2a0f0f,#1B3A6B);padding:40px 24px 30px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(201,168,76,.1),transparent 55%)}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--gold),#8b6914);color:#0d1b2a;font-size:10px;font-weight:800;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:14px;position:relative;z-index:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,30px);font-weight:900;background:linear-gradient(135deg,var(--gl),#fff,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1;margin-bottom:8px}
+.hero-sub{font-size:12.5px;color:rgba(232,223,200,.6);position:relative;z-index:1;max-width:480px;margin:0 auto 18px;line-height:1.7}
+.hero-kpis{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;position:relative;z-index:1}
+.kpi{background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:8px 14px;font-size:11px;color:var(--gl);font-weight:700}
+
+.nav-bar{background:rgba(0,0,0,.35);border-bottom:1px solid rgba(201,168,76,.12);padding:0 16px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:99}
+.nav-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:none;background:none;border:none;border-bottom:3px solid transparent;color:rgba(232,223,200,.4);font-family:'Be Vietnam Pro',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;cursor:pointer;white-space:nowrap;transition:.15s}
+.tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+
+.wrap{max-width:800px;margin:0 auto;padding:24px 16px 60px}
+.panel{display:none}.panel.active{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:center;gap:10px;margin:24px 0 12px}
+.sh h2{font-family:'Playfair Display',serif;font-size:15px;color:#fff;white-space:nowrap}
+.sh::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+
+/* SCRIPT CARD */
+.script-card{background:var(--card);border-radius:14px;overflow:hidden;margin-bottom:16px;border:1px solid rgba(201,168,76,.12)}
+.sc-head{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sc-title{font-size:13.5px;font-weight:800;color:#fff}
+.sc-meta{font-size:11px;color:rgba(232,223,200,.45);margin-top:3px}
+.sc-badge{font-size:10px;font-weight:800;padding:3px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.badge-warm{background:rgba(39,174,96,.2);color:#4ade80;border:1px solid rgba(39,174,96,.3)}
+.badge-cold{background:rgba(201,168,76,.15);color:var(--gl);border:1px solid rgba(201,168,76,.25)}
+.badge-fb{background:rgba(24,119,242,.2);color:#60a5fa;border:1px solid rgba(24,119,242,.3)}
+.badge-group{background:rgba(142,68,173,.2);color:#c084fc;border:1px solid rgba(142,68,173,.3)}
+.badge-followup{background:rgba(192,57,43,.2);color:#f87171;border:1px solid rgba(192,57,43,.3)}
+
+.sc-body{padding:16px 18px}
+.sc-guide{font-size:11.5px;color:rgba(232,223,200,.5);background:rgba(0,0,0,.2);border-radius:8px;padding:10px 14px;margin-bottom:12px;line-height:1.6}
+.sc-guide strong{color:var(--gl)}
+.sc-text{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;font-size:13px;color:rgba(232,223,200,.9);line-height:1.8;white-space:pre-wrap;margin-bottom:10px;font-family:'Be Vietnam Pro',sans-serif}
+.sc-tip{font-size:11.5px;color:rgba(232,223,200,.45);font-style:italic;margin-bottom:10px;padding:8px 12px;background:rgba(201,168,76,.05);border-radius:6px;border-left:3px solid rgba(201,168,76,.3)}
+.btn-cp{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#0d1b2a;font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:12px;padding:8px 16px;border-radius:8px;border:none;cursor:pointer}
+.btn-cp.ok{background:#22c55e;color:#fff}
+
+/* FUNNEL TAG */
+.funnel-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.ftag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px}
+.f-tofu{background:rgba(99,102,241,.2);color:#a5b4fc;border:1px solid rgba(99,102,241,.3)}
+.f-mofu{background:rgba(245,158,11,.2);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
+.f-bofu{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+
+/* OBJECTION HANDLER */
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:16px}
+.obj-card{background:var(--card);border-radius:12px;padding:16px 18px;border-left:3px solid var(--red)}
+.obj-q{font-size:12.5px;font-weight:700;color:#f87171;margin-bottom:8px}
+.obj-a{font-size:12.5px;color:rgba(232,223,200,.85);line-height:1.6;white-space:pre-wrap}
+
+.copy-src{display:none}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">💬 SCRIPT PITCHING · EARLY BIRD · BROKER HLX BRAND BUILDER</div>
+  <h1>Bộ Script Mời Early Bird<br>Broker Brand Builder</h1>
+  <p class="hero-sub">15 script Zalo + FB sẵn dùng · Mời warm leads · Cold outreach · Bài post announcement · Xử lý từ chối · Copy paste ngay</p>
+  <div class="hero-kpis">
+    <div class="kpi">5 Script Zalo Ấm</div>
+    <div class="kpi">3 Script Zalo Lạnh</div>
+    <div class="kpi">4 Bài Post FB</div>
+    <div class="kpi">5 Xử Lý Từ Chối</div>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="tab-btn active" onclick="show(0)">💬 Zalo Cá Nhân</button>
+  <button class="tab-btn" onclick="show(1)">📱 Bài Post FB</button>
+  <button class="tab-btn" onclick="show(2)">👥 Group & Community</button>
+  <button class="tab-btn" onclick="show(3)">🛡️ Xử Lý Từ Chối</button>
+  <button class="tab-btn" onclick="show(4)">📋 Follow Up</button>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ TAB 0: ZALO CÁ NHÂN ═══ -->
+<div class="panel active" id="p0">
+
+<div class="sh"><h2>💬 Script Zalo Cá Nhân — Broker Đã Biết (Warm)</h2></div>
+
+<!-- Script 1 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Script #1 — Mời Trực Tiếp (Ngắn & Thẳng)</div>
+      <div class="sc-meta">Dùng cho: Broker đã follow/quen biết · Tỉ lệ phản hồi cao nhất</div>
+    </div>
+    <span class="sc-badge badge-warm">🟢 WARM</span>
+  </div>
+  <div class="sc-body">
+    <div class="funnel-row"><span class="ftag f-bofu">⚡ BOFU — Mời mua ngay</span></div>
+    <div class="sc-guide">Gửi vào buổi sáng (8-9h) hoặc chiều (5-6h). Đừng gửi quá dài — script này hiệu quả vì ngắn gọn và có CTA rõ ràng.</div>
+    <div class="sc-text" id="s1">Chào [Tên], mình đang mở đăng ký cohort 1 chương trình "Broker HLX Brand Builder" — 60 ngày xây thương hiệu cá nhân dành riêng cho broker HLX.
+
+Mình đang mời 20 người đầu tiên với giá early bird 1,497K (giá thường 1,997K).
+
+Anh/chị có muốn mình gửi thông tin chi tiết không ạ?</div>
+    <div class="sc-tip">💡 Đừng hỏi "Anh/chị có quan tâm không?" — hãy hỏi "Có muốn mình gửi thêm không?" để tạo micro-commitment</div>
+    <button class="btn-cp" onclick="cp('s1',this)">📋 Copy Script #1</button>
+    <div class="copy-src" id="s1-src">Chào [Tên], mình đang mở đăng ký cohort 1 chương trình "Broker HLX Brand Builder" — 60 ngày xây thương hiệu cá nhân dành riêng cho broker HLX.
+
+Mình đang mời 20 người đầu tiên với giá early bird 1,497K (giá thường 1,997K).
+
+Anh/chị có muốn mình gửi thông tin chi tiết không ạ?</div>
+  </div>
+</div>
+
+<!-- Script 2 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Script #2 — Story-Led Pitch (Dẫn bằng câu chuyện)</div>
+      <div class="sc-meta">Dùng cho: Broker biết anh/chị đang xây thương hiệu · Sau khi đã đăng vài bài</div>
+    </div>
+    <span class="sc-badge badge-warm">🟢 WARM</span>
+  </div>
+  <div class="sc-body">
+    <div class="funnel-row"><span class="ftag f-mofu">🔥 MOFU — Nuture + pitch</span></div>
+    <div class="sc-text" id="s2">Chào [Tên]! Mình thấy anh/chị hay theo dõi bài của mình về xây thương hiệu broker HLX.
+
+Tháng vừa rồi mình đã áp dụng hệ thống này — từ 0 inbox/tuần → bây giờ có 8-12 người chủ động hỏi mình mỗi tuần mà không gọi điện hay chạy ads.
+
+Mình đang đóng gói thành chương trình 60 ngày dành riêng cho broker HLX. Cohort 1 chỉ 20 người, giá early bird 1,497K.
+
+Anh/chị muốn mình giới thiệu cụ thể hơn không ạ?</div>
+    <div class="sc-tip">💡 Điền số liệu thực của anh/chị vào (X inbox/tuần → Y inbox/tuần). Con số thật luôn thuyết phục hơn con số giả định.</div>
+    <button class="btn-cp" onclick="cp('s2-src',this)">📋 Copy Script #2</button>
+    <div class="copy-src" id="s2-src">Chào [Tên]! Mình thấy anh/chị hay theo dõi bài của mình về xây thương hiệu broker HLX.
+
+Tháng vừa rồi mình đã áp dụng hệ thống này — từ 0 inbox/tuần → bây giờ có 8-12 người chủ động hỏi mình mỗi tuần mà không gọi điện hay chạy ads.
+
+Mình đang đóng gói thành chương trình 60 ngày dành riêng cho broker HLX. Cohort 1 chỉ 20 người, giá early bird 1,497K.
+
+Anh/chị muốn mình giới thiệu cụ thể hơn không ạ?</div>
+  </div>
+</div>
+
+<!-- Script 3 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Script #3 — Pain-Led Pitch (Dẫn bằng nỗi đau)</div>
+      <div class="sc-meta">Dùng cho: Broker hay than về việc khó có lead · Biết rõ pain point của họ</div>
+    </div>
+    <span class="sc-badge badge-warm">🟢 WARM</span>
+  </div>
+  <div class="sc-body">
+    <div class="funnel-row"><span class="ftag f-tofu">🌱 TOFU — Khơi pain → pitch</span></div>
+    <div class="sc-text" id="s3">Chào [Tên], lần trước anh/chị có chia sẻ là đang khó tìm lead chất lượng cho HLX, không muốn telesale mà cũng chưa biết cách khác.
+
+Mình vừa hoàn thiện chương trình "Broker HLX Brand Builder" — 60 ngày dạy cách xây thương hiệu để khách tự tìm đến, không cần telesale, không cần ads.
+
+Anh/chị có muốn mình giải thích cụ thể cách hoạt động không ạ?</div>
+    <div class="sc-tip">💡 Nhắc lại đúng pain point họ đã nói với anh/chị trước đó — cho thấy anh/chị lắng nghe và giải pháp này dành riêng cho họ.</div>
+    <button class="btn-cp" onclick="cp('s3-src',this)">📋 Copy Script #3</button>
+    <div class="copy-src" id="s3-src">Chào [Tên], lần trước anh/chị có chia sẻ là đang khó tìm lead chất lượng cho HLX, không muốn telesale mà cũng chưa biết cách khác.
+
+Mình vừa hoàn thiện chương trình "Broker HLX Brand Builder" — 60 ngày dạy cách xây thương hiệu để khách tự tìm đến, không cần telesale, không cần ads.
+
+Anh/chị có muốn mình giải thích cụ thể cách hoạt động không ạ?</div>
+  </div>
+</div>
+
+<div class="sh"><h2>🧊 Script Zalo — Broker Chưa Quen (Cold)</h2></div>
+
+<!-- Script 4 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Script #4 — Cold Outreach Chuẩn</div>
+      <div class="sc-meta">Dùng cho: Broker trong group môi giới HLX chưa từng nói chuyện</div>
+    </div>
+    <span class="sc-badge badge-cold">🟡 COLD</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-guide">Giai đoạn 1: Tặng quà, không pitch. Giai đoạn 2 (sau 3-5 ngày nếu họ tham gia): Mới pitch chương trình</div>
+    <div class="sc-text" id="s4">Chào [Tên] ạ! Mình thấy anh/chị cũng đang hoạt động trong mảng BĐS Hạ Long.
+
+Mình đang chia sẻ miễn phí bộ tài liệu "10 Tip Xử Lý Từ Chối Hiệu Quả" dành riêng cho broker HLX — thực chiến, dùng được ngay.
+
+Anh/chị có muốn mình gửi link nhận không ạ?</div>
+    <div class="sc-tip">💡 Bước 1 chỉ tặng quà — KHÔNG pitch chương trình ngay. Cho họ nhận giá trị trước → build trust → mới pitch sau 3-5 ngày.</div>
+    <button class="btn-cp" onclick="cp('s4-src',this)">📋 Copy Script #4</button>
+    <div class="copy-src" id="s4-src">Chào [Tên] ạ! Mình thấy anh/chị cũng đang hoạt động trong mảng BĐS Hạ Long.
+
+Mình đang chia sẻ miễn phí bộ tài liệu "10 Tip Xử Lý Từ Chối Hiệu Quả" dành riêng cho broker HLX — thực chiến, dùng được ngay.
+
+Anh/chị có muốn mình gửi link nhận không ạ?</div>
+  </div>
+</div>
+
+<!-- Script 5 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Script #5 — Cold → Warm (Sau khi nhận quà)</div>
+      <div class="sc-meta">Dùng cho: Sau khi họ nhận quà tặng miễn phí (3-5 ngày sau script #4)</div>
+    </div>
+    <span class="sc-badge badge-warm">🟢 WARM UP</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="s5">Chào [Tên], không biết anh/chị đã đọc tài liệu chưa ạ? Tip nào anh/chị thấy hữu ích nhất?
+
+Nhân tiện mình cũng đang mở cohort 1 chương trình 60 ngày xây thương hiệu dành riêng cho broker HLX — bao gồm toàn bộ hệ thống content, template bài viết và cách thu lead không cần ads.
+
+Early bird còn [X] suất với giá 1,497K. Anh/chị có muốn tìm hiểu thêm không ạ?</div>
+    <div class="sc-tip">💡 Hỏi về quà trước — đây là opening conversation tự nhiên. Sau đó mới giới thiệu chương trình một cách liền mạch.</div>
+    <button class="btn-cp" onclick="cp('s5-src',this)">📋 Copy Script #5</button>
+    <div class="copy-src" id="s5-src">Chào [Tên], không biết anh/chị đã đọc tài liệu chưa ạ? Tip nào anh/chị thấy hữu ích nhất?
+
+Nhân tiện mình cũng đang mở cohort 1 chương trình 60 ngày xây thương hiệu dành riêng cho broker HLX — bao gồm toàn bộ hệ thống content, template bài viết và cách thu lead không cần ads.
+
+Early bird còn [X] suất với giá 1,497K. Anh/chị có muốn tìm hiểu thêm không ạ?</div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══ TAB 1: BÀI POST FB ═══ -->
+<div class="panel" id="p1">
+
+<div class="sh"><h2>📱 Bài Post FB — Announcement Early Bird</h2></div>
+
+<!-- FB Post 1 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Bài FB #1 — Announcement chính thức (Dài · Storytelling)</div>
+      <div class="sc-meta">Đăng khi: Mở đăng ký · Giờ đăng tốt: Sáng 8-9h hoặc tối 8-9h</div>
+    </div>
+    <span class="sc-badge badge-fb">📘 FB POST</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="fb1">6 tháng trước, tôi đăng bài mà không ai tương tác.
+
+Không phải vì tôi viết dở. Không phải vì dự án HLX không tốt.
+
+Mà vì khách hàng không biết tôi là ai.
+
+Tôi bắt đầu xây thương hiệu cá nhân — từ việc tối ưu profile, viết đúng loại bài, livestream hàng tuần và tặng tài liệu có giá trị.
+
+Kết quả sau 2 tháng:
+→ Từ 0 inbox/tuần → 8-12 người chủ động nhắn tin mỗi tuần
+→ Không telesale thêm lần nào
+→ Không chạy đồng quảng cáo nào
+
+Hệ thống này hoạt động. Và tôi muốn dạy cho broker HLX khác cách làm.
+
+---
+
+🎯 BROKER HLX BRAND BUILDER — COHORT 1
+
+Chương trình 60 ngày xây thương hiệu cá nhân cho broker Hạ Long Xanh:
+
+MODULE 1: Định vị — profile chuẩn, bio rõ ràng, hình ảnh chuyên nghiệp
+MODULE 2: Hệ thống content — 3 bài/tuần, batch 90 phút/Chủ nhật
+MODULE 3: Thu lead tự nhiên — community, quà tặng, livestream
+MODULE 4: Chuyển đổi — từ follow → xem nhà → ký hợp đồng
+
+Bao gồm: 30 template bài viết HLX + lịch content 90 ngày + 4 buổi Q&A live + group cộng đồng lifetime + BDS Mastery Kit
+
+EARLY BIRD: 20 người đầu tiên — 1,497,000đ (giá gốc 1,997,000đ)
+
+👉 Comment "BRAND" hoặc inbox mình để nhận thông tin chi tiết.
+
+---
+
+P.S: Cohort 1 giới hạn 20 người. Sau khi đủ — giá tăng và đóng đăng ký.
+
+#BrokerHLX #ThươngHiệuCáNhân #HạLongXanh #BrokerBrandBuilder</div>
+    <button class="btn-cp" onclick="cp('fb1',this)">📋 Copy Bài FB #1</button>
+  </div>
+</div>
+
+<!-- FB Post 2 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Bài FB #2 — Urgency Post (Ngắn · Countdown)</div>
+      <div class="sc-meta">Đăng khi: Sau 3-5 ngày · Khi còn 10 suất · Tạo urgency tự nhiên</div>
+    </div>
+    <span class="sc-badge badge-fb">📘 FB POST</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="fb2">🔴 Cập nhật: Còn [X]/20 suất Early Bird
+
+Cohort 1 "Broker HLX Brand Builder" đã có [20-X] broker đăng ký.
+
+Nếu anh/chị đang phân vân — đây là 3 câu hỏi nhanh:
+
+✅ Anh/chị có muốn khách tự tìm đến thay vì phải gọi điện lạnh?
+✅ Anh/chị có thể dành 90 phút mỗi tuần Chủ nhật?
+✅ Anh/chị bán hoặc sẽ bán BĐS Hạ Long Xanh?
+
+Nếu cả 3 đều Yes → Chương trình này dành cho anh/chị.
+
+Early bird kết thúc khi đủ [X] suất còn lại.
+
+👉 Inbox "MUỐN ĐĂNG KÝ" hoặc click link bio.
+
+#BrokerHLX #EarlyBird</div>
+    <button class="btn-cp" onclick="cp('fb2',this)">📋 Copy Bài FB #2</button>
+  </div>
+</div>
+
+<!-- FB Post 3 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Bài FB #3 — Testimonial/Social Proof Post</div>
+      <div class="sc-meta">Đăng khi: Sau khi có 3-5 người đăng ký và chia sẻ cảm nhận</div>
+    </div>
+    <span class="sc-badge badge-fb">📘 FB POST</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="fb3">Hôm qua anh [Tên] nhắn mình:
+
+"[Trích dẫn phản hồi thực từ người đăng ký — ví dụ: Mình đã áp dụng tip profile trong module 1, sau 1 tuần có 5 người inbox hỏi về HLX mà mình không chủ động tìm họ]"
+
+Đây là phản hồi thật từ người đã tham gia cohort 1 "Broker HLX Brand Builder".
+
+---
+
+Chương trình đang còn [X] suất early bird với giá 1,497K.
+
+Nếu anh/chị muốn biết thêm → inbox mình hoặc truy cập link trong bio.
+
+#BrokerHLX #ThươngHiệuBroker #Testimonial</div>
+    <button class="btn-cp" onclick="cp('fb3',this)">📋 Copy Bài FB #3</button>
+  </div>
+</div>
+
+<!-- FB Post 4 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Bài FB #4 — "Cuối Cùng" (Last Chance)</div>
+      <div class="sc-meta">Đăng khi: Còn 2-3 suất cuối · Tạo FOMO mạnh</div>
+    </div>
+    <span class="sc-badge badge-fb">📘 FB POST</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="fb4">⚠️ 2 suất early bird cuối cùng.
+
+Cohort 1 "Broker HLX Brand Builder" gần đủ 20 người.
+
+2 suất cuối với giá 1,497K — sau đó chương trình đóng lại để tập trung cho người đã đăng ký.
+
+Cohort 2 (nếu có) sẽ mở với giá 1,997K.
+
+Nếu anh/chị đã nghĩ đến việc đăng ký — đây là lần cuối với giá này.
+
+👉 Inbox "ĐĂNG KÝ" ngay hôm nay.
+
+#BrokerHLX #LastChance</div>
+    <button class="btn-cp" onclick="cp('fb4',this)">📋 Copy Bài FB #4</button>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══ TAB 2: GROUP ═══ -->
+<div class="panel" id="p2">
+
+<div class="sh"><h2>👥 Script Seeding Group Môi Giới</h2></div>
+
+<!-- Group Script 1 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Group Script #1 — Chia sẻ giá trị trước (TOFU)</div>
+      <div class="sc-meta">Đăng trong: Nhóm môi giới HLX, nhóm BĐS Quảng Ninh · Không pitch ngay</div>
+    </div>
+    <span class="sc-badge badge-group">👥 GROUP</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-guide"><strong>Nguyên tắc:</strong> Đăng bài giá trị vào nhóm → người quan tâm inbox → pitch 1:1. KHÔNG bao giờ pitch thẳng trong group vì dễ bị xóa bài.</div>
+    <div class="sc-text" id="g1">Góc nhìn: Tại sao broker HLX giỏi vẫn không có lead?
+
+Tháng vừa rồi tôi nói chuyện với 20 broker đang bán HLX. 18/20 người gặp cùng 1 vấn đề:
+
+Không phải thiếu kỹ năng. Không phải dự án không tốt.
+
+Mà là khách hàng không biết họ tồn tại.
+
+3 dấu hiệu cho thấy anh/chị đang vô hình với khách:
+1. Đăng bài mà chỉ bạn bè like xã giao
+2. Phụ thuộc 100% vào telesale hoặc group spamming
+3. Không có lý do gì để khách chọn anh/chị thay vì 100 broker khác cùng bán HLX
+
+Giải pháp không phải là chạy ads nhiều hơn.
+
+Giải pháp là xây thương hiệu cá nhân — để khách biết anh/chị là ai trước khi họ cần mua.
+
+Ai đang gặp tình huống này? Comment bên dưới, mình sẽ chia sẻ cách mình đã làm.</div>
+    <div class="sc-tip">💡 Kết thúc bằng câu hỏi mở để kéo comment. Người comment → inbox 1:1 → pitch chương trình</div>
+    <button class="btn-cp" onclick="cp('g1',this)">📋 Copy Group Script #1</button>
+  </div>
+</div>
+
+<!-- Group Script 2 -->
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Group Script #2 — Chia sẻ case study (MOFU)</div>
+      <div class="sc-meta">Đăng sau Script #1 (3-5 ngày) · Sau khi đã có tương tác từ bài trước</div>
+    </div>
+    <span class="sc-badge badge-group">👥 GROUP</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="g2">Update: Broker đồng nghiệp của tôi áp dụng hệ thống xây thương hiệu — kết quả sau 3 tuần
+
+Anh [Tên/ẩn tên] bắt đầu:
+→ Profile chưa tối ưu
+→ 0 inbox tự nhiên/tuần
+→ 100% lead từ telesale
+
+Sau 3 tuần áp dụng hệ thống:
+→ Profile tối ưu + Bio rõ ràng
+→ 7 inbox tự nhiên trong tuần thứ 3
+→ 2 cuộc hẹn xem nhà không cần gọi điện
+
+Anh ấy làm gì khác?
+✅ Đăng 3 bài/tuần theo đúng format
+✅ Tặng 1 tài liệu có giá trị cho người inbox
+✅ Livestream 30 phút mỗi thứ 6
+
+Đơn giản. Nhưng cần làm đúng và nhất quán.
+
+Anh/chị nào muốn tôi chia sẻ cụ thể hơn → comment hoặc inbox nhé.</div>
+    <button class="btn-cp" onclick="cp('g2',this)">📋 Copy Group Script #2</button>
+  </div>
+</div>
+
+<!-- Zalo OA Broadcast -->
+<div class="sh"><h2>📡 Zalo OA Broadcast — Gửi Cho Toàn Bộ Nhóm</h2></div>
+
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Zalo OA Broadcast — Thông Báo Early Bird</div>
+      <div class="sc-meta">Gửi khi: Mở đăng ký · Gửi vào 8h sáng hoặc 8h tối</div>
+    </div>
+    <span class="sc-badge badge-group">📡 ZALO OA</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="oa1">📣 TIN NHẮN QUAN TRỌNG — ĐỌC TRƯỚC KHI BỎ QUA
+
+Mình vừa mở đăng ký chương trình mà nhiều anh/chị đã hỏi:
+
+🎯 BROKER HLX BRAND BUILDER — 60 Ngày Xây Thương Hiệu
+
+Dành riêng cho broker đang bán Hạ Long Xanh:
+✅ Hệ thống xây thương hiệu từng bước
+✅ 30 template bài viết copy-paste ngay
+✅ Cách thu lead không cần telesale/ads
+✅ Group cộng đồng broker HLX lifetime
+
+Early bird: 1,497K (20 suất — hết là hết)
+
+👉 Reply "ĐĂNG KÝ" để mình gửi link hoặc truy cập:
+[Link sales page]
+
+Cohort bắt đầu khi đủ 20 người ✌️</div>
+    <button class="btn-cp" onclick="cp('oa1',this)">📋 Copy Broadcast</button>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══ TAB 3: XỬ LÝ TỪ CHỐI ═══ -->
+<div class="panel" id="p3">
+
+<div class="sh"><h2>🛡️ Xử Lý Từ Chối — 5 Tình Huống Phổ Biến</h2></div>
+
+<div class="obj-grid">
+  <div class="obj-card">
+    <div class="obj-q">❓ "Giá hơi cao với tôi lúc này"</div>
+    <div class="obj-a" id="obj1">Mình hiểu anh/chị. Thực ra mình cũng suy nghĩ nhiều trước khi đưa ra mức giá này.
+
+Nhưng mình tính thế này: Nếu hệ thống này giúp anh/chị chốt thêm 1 căn HLX — hoa hồng đủ mua lại chương trình này 15-20 lần.
+
+Còn nếu không thấy kết quả trong 30 ngày đầu — mình hoàn 100% tiền, không hỏi thêm.
+
+Vậy thật ra rủi ro là 0 với anh/chị. Anh/chị muốn thử không?</div>
+    <button class="btn-cp" onclick="cp('obj1',this)" style="margin-top:8px">📋 Copy</button>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❓ "Tôi bận lắm, không có thời gian"</div>
+    <div class="obj-a" id="obj2">Đây là lý do mình thiết kế batch 90 phút/tuần.
+
+Mỗi Chủ nhật anh/chị dành 90 phút → cả tuần có 3 bài FB + Zalo + Stories tự động.
+
+Không cần ngồi viết mỗi ngày. Không cần online mọi lúc.
+
+Thực ra broker bận nhất lại càng cần hệ thống này — vì không có thời gian telesale từng người một.
+
+Mình có thể chia sẻ quy trình batch content cho anh/chị xem thử không?</div>
+    <button class="btn-cp" onclick="cp('obj2',this)" style="margin-top:8px">📋 Copy</button>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❓ "Tôi không biết viết lách, học có được không?"</div>
+    <div class="obj-a" id="obj3">Đây chính xác là lý do mình cung cấp 30 template bài viết copy-paste.
+
+Anh/chị không cần viết từ đầu. Chỉ cần mở template → điền tên dự án + câu chuyện cá nhân vào → đăng.
+
+Mình có học viên từng nói "tôi ghét viết lách" — nhưng sau 2 tuần dùng template, họ đăng đều 3 bài/tuần và nhận được inbox tự nhiên đầu tiên.
+
+Anh/chị có muốn mình gửi 1 template mẫu để xem trước không?</div>
+    <button class="btn-cp" onclick="cp('obj3',this)" style="margin-top:8px">📋 Copy</button>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❓ "Để tôi suy nghĩ thêm"</div>
+    <div class="obj-a" id="obj4">Hoàn toàn hợp lý! Anh/chị muốn mình gửi gì để đọc trước khi quyết định?
+
+Mình có thể gửi:
+→ Nội dung chi tiết 4 module
+→ Danh sách 30 template bài viết (xem thử trước)
+→ Câu chuyện của 1-2 broker đã tham gia
+
+Early bird hiện còn [X] suất — mình sẽ ưu tiên giữ 1 suất cho anh/chị nếu anh/chị thông báo lại trong 24h nhé!</div>
+    <button class="btn-cp" onclick="cp('obj4',this)" style="margin-top:8px">📋 Copy</button>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❓ "Tôi đã thử nhiều khóa học rồi, không thấy hiệu quả"</div>
+    <div class="obj-a" id="obj5">Mình hiểu — đây là lo ngại hoàn toàn có lý.
+
+2 điều khác biệt của chương trình này:
+
+1. Dành riêng 100% cho broker HLX — không phải khóa học chung chung về marketing
+
+2. Template sẵn dùng ngay — không phải lý thuyết mà không biết áp dụng thế nào
+
+Và quan trọng nhất: Bảo hành 30 ngày hoàn 100% nếu anh/chị làm đúng mà không thấy kết quả.
+
+Anh/chị đã thử khóa học nào trước đây? Mình muốn hiểu để giải thích tại sao cái này khác.</div>
+    <button class="btn-cp" onclick="cp('obj5',this)" style="margin-top:8px">📋 Copy</button>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══ TAB 4: FOLLOW UP ═══ -->
+<div class="panel" id="p4">
+
+<div class="sh"><h2>📋 Chuỗi Follow Up — 5 Ngày</h2></div>
+
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Follow Up Ngày 1 — Gửi ngay sau khi họ nói "để suy nghĩ"</div>
+      <div class="sc-meta">Gửi trong vòng 1-2 giờ sau cuộc trò chuyện</div>
+    </div>
+    <span class="sc-badge badge-followup">📋 FOLLOW UP D1</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="fu1">Chào [Tên]! Mình gửi thêm thông tin để anh/chị tiện tham khảo:
+
+📋 Chi tiết chương trình: [Link sales page]
+🎁 Template mẫu để xem trước: [Link template]
+👥 Group cộng đồng broker HLX: [Link group]
+
+Anh/chị đọc xong có câu hỏi gì thì inbox mình nhé. Mình luôn online từ 8h-20h.
+
+Early bird hiện còn [X] suất. Mình sẽ giữ 1 suất cho anh/chị đến [ngày mai/ngày kia] 🙏</div>
+    <button class="btn-cp" onclick="cp('fu1',this)">📋 Copy Follow Up D1</button>
+  </div>
+</div>
+
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Follow Up Ngày 3 — Value-Add</div>
+      <div class="sc-meta">Gửi 3 ngày sau · Tặng thêm giá trị, không thúc ép</div>
+    </div>
+    <span class="sc-badge badge-followup">📋 FOLLOW UP D3</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="fu3">Chào [Tên]! Hôm nay mình có 1 tip nhỏ muốn chia sẻ riêng với anh/chị:
+
+[Tip thực chiến ngắn — ví dụ: "Một câu hỏi đơn giản có thể thay đổi cách khách nhìn nhận anh/chị: Thay vì hỏi 'Anh chị có muốn mua nhà ở HLX không?', thử hỏi 'Anh/chị đang tìm loại căn hộ như thế nào?'"]
+
+Chương trình của mình có đầy những tip kiểu này nhưng dành riêng cho HLX và có template sẵn để áp dụng ngay.
+
+Anh/chị có cập nhật gì về việc tham gia không ạ?</div>
+    <button class="btn-cp" onclick="cp('fu3',this)">📋 Copy Follow Up D3</button>
+  </div>
+</div>
+
+<div class="script-card">
+  <div class="sc-head">
+    <div>
+      <div class="sc-title">Follow Up Ngày 5 — Final Urgency</div>
+      <div class="sc-meta">Gửi ngày thứ 5 · Lần cuối cùng — sau đó không nhắc lại</div>
+    </div>
+    <span class="sc-badge badge-followup">📋 FOLLOW UP D5</span>
+  </div>
+  <div class="sc-body">
+    <div class="sc-text" id="fu5">Chào [Tên], đây là tin nhắn cuối mình nhắc về chương trình.
+
+Early bird còn [X] suất và sắp đóng.
+
+Nếu anh/chị chưa sẵn sàng lần này — hoàn toàn không sao. Mình sẽ thông báo khi cohort 2 mở (giá 1,997K).
+
+Nếu anh/chị muốn giữ giá early bird — inbox mình trong hôm nay nhé!
+
+Dù thế nào — cảm ơn anh/chị đã lắng nghe. Chúc anh/chị tuần mới tốt lành 🙏</div>
+    <div class="sc-tip">💡 Tin nhắn cuối phải nhẹ nhàng và không áp lực. "Đây là lần cuối" tạo urgency tự nhiên mà không gây khó chịu.</div>
+    <button class="btn-cp" onclick="cp('fu5',this)">📋 Copy Follow Up D5</button>
+  </div>
+</div>
+
+<div class="sh"><h2>📊 Quy Trình 5 Ngày Follow Up</h2></div>
+<div class="script-card">
+  <div class="sc-body">
+    <div class="sc-text" id="fu-flow">QUY TRÌNH FOLLOW UP 5 NGÀY
+
+Ngày 0 (Ngay sau cuộc trò chuyện):
+→ Gửi link sales page + template mẫu
+→ Báo số suất còn lại
+→ Hỏi có câu hỏi gì không
+
+Ngày 1-2 (Chờ tự nhiên):
+→ Không nhắn tin — để họ đọc và suy nghĩ
+
+Ngày 3 (Value-add):
+→ Gửi 1 tip thực chiến không liên quan đến việc mua
+→ Cuối mới hỏi nhẹ về quyết định
+
+Ngày 4 (Chờ):
+→ Không nhắn tin
+
+Ngày 5 (Final):
+→ Tin nhắn cuối — nhẹ nhàng, không áp lực
+→ Sau đó KHÔNG nhắc thêm về chương trình
+
+Nguyên tắc: Tối đa 3 lần follow up. Nhiều hơn = spam = mất trust mãi mãi.</div>
+    <button class="btn-cp" onclick="cp('fu-flow',this)">📋 Copy Quy Trình</button>
+  </div>
+</div>
+
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const panels=document.querySelectorAll('.panel');
+const tabs=document.querySelectorAll('.tab-btn');
+function show(i){panels.forEach((p,idx)=>p.classList.toggle('active',idx===i));tabs.forEach((t,idx)=>t.classList.toggle('active',idx===i));}
+function cp(id,btn){
+  const el=document.getElementById(id);
+  const txt=el.innerText||el.textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;btn.textContent='✅ Đã Copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  }).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✅ Đã Copy!';setTimeout(()=>{btn.textContent='📋 Copy';},2000);});
+}
+</script>
+</body>
+</html>
