@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🛡️ Protection Kit — Bộ Bảo Vệ Tài Sản Số</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a1628;--bg2:#0d1b2a;
+  --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+  --card:#0f1e30;--text:#e8dfc8;
+  --green:#27ae60;--vip:#7c3aed;
+  --red:#e74c3c;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
+
+/* TOPBAR */
+.topbar{background:rgba(10,22,40,.98);border-bottom:1px solid rgba(201,168,76,.18);padding:11px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:15px;color:#fff;font-weight:700;flex:1}
+.topbar-logo span{color:var(--gl);font-weight:600;font-size:13px;margin-left:6px}
+.tb-btn{font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:rgba(232,223,200,.7);cursor:pointer;text-decoration:none;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.tb-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* SIDEBAR LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 48px)}
+.sidebar{width:220px;flex-shrink:0;background:rgba(0,0,0,.3);border-right:1px solid rgba(255,255,255,.06);padding:16px 10px;position:sticky;top:48px;height:calc(100vh - 48px);overflow-y:auto}
+.sb-group{font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.35);padding:10px 10px 5px;margin-top:6px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;cursor:pointer;border:1px solid transparent;margin-bottom:2px;transition:.15s;user-select:none}
+.sb-item:hover{background:rgba(255,255,255,.05)}
+.sb-item.active{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.2)}
+.sb-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+.sb-label{font-size:12.5px;font-weight:700;color:rgba(232,223,200,.8)}
+.sb-item.active .sb-label{color:#fff}
+.sb-badge{font-size:9.5px;font-weight:800;background:rgba(255,255,255,.07);color:rgba(232,223,200,.35);border-radius:6px;padding:1px 7px;margin-left:auto;flex-shrink:0}
+.sb-item.active .sb-badge{background:rgba(201,168,76,.15);color:var(--gl)}
+
+/* MAIN */
+.main{flex:1;padding:24px 28px 60px;min-width:0}
+.panel{display:none}
+.panel.active{display:block}
+
+/* PANEL HEADER */
+.ph-eyebrow{font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.45);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.ph-eyebrow::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.12)}
+.ph-title{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:6px}
+.ph-sub{font-size:13px;color:rgba(232,223,200,.45);line-height:1.6;margin-bottom:24px}
+
+/* SNIPPET CARD */
+.snippet{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.sn-head{display:flex;align-items:center;padding:12px 16px;background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.06);gap:10px}
+.sn-icon{font-size:18px;flex-shrink:0}
+.sn-title{font-size:13px;font-weight:800;color:#fff;flex:1}
+.sn-tag{font-size:10px;font-weight:800;padding:2px 9px;border-radius:6px;flex-shrink:0}
+.tag-head{background:rgba(27,58,107,.3);color:#93c5fd;border:1px solid rgba(100,150,255,.2)}
+.tag-body{background:rgba(201,168,76,.1);color:var(--gl);border:1px solid rgba(201,168,76,.2)}
+.tag-js{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.tag-ps{background:rgba(124,58,237,.1);color:#c4b5fd;border:1px solid rgba(124,58,237,.2)}
+.tag-all{background:rgba(39,174,96,.1);color:#4ade80;border:1px solid rgba(39,174,96,.2)}
+
+.sn-desc{padding:10px 16px;font-size:12.5px;color:rgba(232,223,200,.5);border-bottom:1px solid rgba(255,255,255,.04);line-height:1.6}
+
+.sn-code{padding:0}
+pre{margin:0;padding:16px 18px;font-family:'Courier New',monospace;font-size:12px;color:rgba(232,223,200,.85);line-height:1.7;overflow-x:auto;white-space:pre;background:rgba(0,0,0,.3)}
+.code-kw{color:#c4b5fd}
+.code-str{color:#86efac}
+.code-cm{color:rgba(232,223,200,.3);font-style:italic}
+.code-attr{color:#93c5fd}
+.code-val{color:#fbbf24}
+
+.sn-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid rgba(255,255,255,.05);gap:8px;flex-wrap:wrap}
+.sn-where{font-size:11.5px;color:rgba(232,223,200,.35)}
+.sn-where strong{color:rgba(232,223,200,.55)}
+.copy-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;padding:7px 16px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gl);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.copy-btn:hover{background:rgba(201,168,76,.2)}
+
+/* STEP GUIDE */
+.steps{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.step{display:flex;gap:14px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px 16px;align-items:flex-start}
+.step-num{width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,.15);border:1.5px solid rgba(201,168,76,.3);color:var(--gl);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{flex:1}
+.step-title{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:4px}
+.step-desc{font-size:12.5px;color:rgba(232,223,200,.55);line-height:1.6}
+.step-code{font-family:monospace;font-size:12px;background:rgba(0,0,0,.3);border-radius:6px;padding:4px 10px;color:#fbbf24;margin-top:6px;display:inline-block;word-break:break-all}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.cl-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(232,223,200,.7);padding:8px 12px;background:rgba(0,0,0,.15);border-radius:8px;border:1px solid rgba(255,255,255,.05)}
+.cl-item input[type=checkbox]{margin-top:2px;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0;cursor:pointer}
+.cl-item label{cursor:pointer;line-height:1.5}
+.cl-item label strong{color:rgba(232,223,200,.9)}
+
+/* INFO BOX */
+.info-box{border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13px;line-height:1.7}
+.info-gold{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);color:rgba(232,223,200,.75)}
+.info-green{background:rgba(39,174,96,.06);border:1px solid rgba(39,174,96,.18);color:rgba(232,223,200,.75)}
+.info-red{background:rgba(231,76,60,.06);border:1px solid rgba(231,76,60,.18);color:#fca5a5}
+.info-box strong{color:#fff}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(39,174,96,.92);color:#fff;font-size:12.5px;font-weight:700;padding:9px 20px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:700px){
+  .sidebar{display:none}
+  .main{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">🛡️ Protection Kit <span>· Bộ Bảo Vệ Tài Sản Số · Tái Sử Dụng Cho Mọi Dự Án</span></div>
+  <a href="token-manager.html" target="_blank" class="tb-btn">🔐 Token Manager</a>
+  <a href="terms.html" target="_blank" class="tb-btn">📋 Terms</a>
+  <a href="MASTER-DASHBOARD.html" class="tb-btn">← Dashboard</a>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-group">Snippet</div>
+  <div class="sb-item active" onclick="go('overview',this)"><span class="sb-icon">🗺️</span><span class="sb-label">Tổng Quan</span></div>
+  <div class="sb-item" onclick="go('meta',this)"><span class="sb-icon">🏷️</span><span class="sb-label">Copyright Meta</span><span class="sb-badge">&lt;head&gt;</span></div>
+  <div class="sb-item" onclick="go('footer',this)"><span class="sb-icon">📄</span><span class="sb-label">Footer Copyright</span><span class="sb-badge">&lt;body&gt;</span></div>
+  <div class="sb-item" onclick="go('anticopy',this)"><span class="sb-icon">🚫</span><span class="sb-label">Anti-Copy JS</span><span class="sb-badge">JS</span></div>
+  <div class="sb-item" onclick="go('tokengate',this)"><span class="sb-icon">🔐</span><span class="sb-label">Token Gate</span><span class="sb-badge">JS</span></div>
+  <div class="sb-group">Công Cụ</div>
+  <div class="sb-item" onclick="go('batch',this)"><span class="sb-icon">⚡</span><span class="sb-label">Batch Script</span><span class="sb-badge">PS1</span></div>
+  <div class="sb-item" onclick="go('checklist',this)"><span class="sb-icon">✅</span><span class="sb-label">Checklist Dự Án</span></div>
+  <div class="sb-group">Tài Nguyên</div>
+  <div class="sb-item" onclick="go('tokens',this)"><span class="sb-icon">🎫</span><span class="sb-label">Token Manager</span></div>
+  <div class="sb-item" onclick="go('terms',this)"><span class="sb-icon">⚖️</span><span class="sb-label">Terms Template</span></div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ===== OVERVIEW ===== -->
+<div class="panel active" id="panel-overview">
+  <div class="ph-eyebrow">🛡️ PROTECTION KIT · MODULE TÁI SỬ DỤNG</div>
+  <div class="ph-title">Bộ Bảo Vệ Tài Sản Số</div>
+  <div class="ph-sub">5 lớp bảo vệ · Copy-paste vào bất kỳ dự án HTML nào · Không phụ thuộc framework</div>
+
+  <div class="info-box info-gold">
+    <strong>Cách sử dụng module này:</strong> Chọn từng snippet bên trái → Copy → Paste vào dự án mới. Mỗi snippet độc lập, không phụ thuộc nhau. Có thể dùng tất cả hoặc từng phần tuỳ nhu cầu.
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">🏷️ Copyright Meta — Paste vào &lt;head&gt;</div>
+        <div class="step-desc">Khai báo tác giả và bản quyền cho tất cả trang. Google và các bot sẽ nhận diện quyền sở hữu. Phát sinh hiệu lực pháp lý ngay từ khi deploy.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">📄 Footer Copyright — Paste trước &lt;/body&gt;</div>
+        <div class="step-desc">Hiển thị thông báo bản quyền cho người dùng. Kèm link Terms of Use. Deterrent tâm lý — người thấy thường do dự trước khi copy.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">🚫 Anti-Copy JS — Dành cho Sales/Pitch page</div>
+        <div class="step-desc">Disable chuột phải, Ctrl+U/S/A, F12, phát hiện DevTools. Dùng cho trang sales, không dùng cho hub admin (sẽ block cả anh dùng).</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">🔐 Token Gate — Dành cho Delivery/Gated page</div>
+        <div class="step-desc">Chặn truy cập trang giao kit nếu không có token hợp lệ. Mỗi khách nhận 1 token riêng qua Token Manager. Redirect về sales page nếu không có token.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">⚡ Batch Script — Áp dụng hàng loạt</div>
+        <div class="step-desc">PowerShell script xử lý toàn bộ folder HTML cùng lúc. Copy script → chạy 1 lần → tất cả file được bảo vệ. Dùng khi có project mới với nhiều file.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box info-green">
+    <strong>Dùng nhanh:</strong> Dự án mới → Chạy Batch Script (layer 1+2) → Thêm Anti-Copy vào sales page (layer 3) → Thêm Token Gate vào delivery page (layer 4). Xong. Mỗi layer mất &lt;5 phút.
+  </div>
+</div>
+
+<!-- ===== META ===== -->
+<div class="panel" id="panel-meta">
+  <div class="ph-eyebrow">🏷️ SNIPPET 1 · &lt;HEAD&gt;</div>
+  <div class="ph-title">Copyright Meta Tags</div>
+  <div class="ph-sub">Paste vào trong &lt;head&gt;, ngay sau &lt;meta charset="UTF-8"&gt;. Áp dụng cho tất cả trang. Thay [TÊN] và [NĂM] theo dự án.</div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">📌</span>
+      <span class="sn-title">Meta Copyright Cơ Bản</span>
+      <span class="sn-tag tag-head">&lt;head&gt;</span>
+    </div>
+    <div class="sn-desc">Khai báo tác giả, bản quyền và ngăn search engine index trang gated. Thay thế [TÊN TÁC GIẢ], [NĂM], [THƯƠNG HIỆU] theo dự án của anh.</div>
+    <pre id="code-meta">&lt;!-- ===== COPYRIGHT META ===== --&gt;
+&lt;<span class="code-attr">meta</span> <span class="code-attr">name</span>=<span class="code-str">"author"</span> <span class="code-attr">content</span>=<span class="code-str">"[TÊN TÁC GIẢ] · [THƯƠNG HIỆU]"</span>&gt;
+&lt;<span class="code-attr">meta</span> <span class="code-attr">name</span>=<span class="code-str">"copyright"</span> <span class="code-attr">content</span>=<span class="code-str">"© [NĂM] [TÊN TÁC GIẢ]. Bản quyền được bảo hộ."</span>&gt;
+&lt;<span class="code-attr">meta</span> <span class="code-attr">name</span>=<span class="code-str">"robots"</span> <span class="code-attr">content</span>=<span class="code-str">"noindex, nofollow"</span>&gt; <span class="code-cm">&lt;!-- Bỏ dòng này nếu muốn Google index --&gt;</span>
+&lt;<span class="code-attr">meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:site_name"</span> <span class="code-attr">content</span>=<span class="code-str">"[THƯƠNG HIỆU]"</span>&gt;</pre>
+    <div class="sn-footer">
+      <span class="sn-where">Vị trí: <strong>&lt;head&gt;</strong> · sau &lt;meta charset&gt;</span>
+      <button class="copy-btn" onclick="copyCode('code-meta',this)">📋 Copy Snippet</button>
+    </div>
+  </div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">🎯</span>
+      <span class="sn-title">Phiên Bản Dự Án Hiện Tại — BDS Mastery Kit</span>
+      <span class="sn-tag tag-head">&lt;head&gt;</span>
+    </div>
+    <pre id="code-meta-bds">&lt;!-- ===== COPYRIGHT META ===== --&gt;
+&lt;<span class="code-attr">meta</span> <span class="code-attr">name</span>=<span class="code-str">"author"</span> <span class="code-attr">content</span>=<span class="code-str">"BDS Mastery Kit · Nguyễn Thị Yến"</span>&gt;
+&lt;<span class="code-attr">meta</span> <span class="code-attr">name</span>=<span class="code-str">"copyright"</span> <span class="code-attr">content</span>=<span class="code-str">"© 2026 BDS Mastery Kit · Nguyễn Thị Yến. Bản quyền được bảo hộ."</span>&gt;
+&lt;<span class="code-attr">meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:site_name"</span> <span class="code-attr">content</span>=<span class="code-str">"BDS Mastery Kit"</span>&gt;</pre>
+    <div class="sn-footer">
+      <span class="sn-where">Dự án: <strong>BDS Mastery Kit 2026</strong> · Đã áp dụng cho 76 files</span>
+      <button class="copy-btn" onclick="copyCode('code-meta-bds',this)">📋 Copy Dự Án Hiện Tại</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="panel" id="panel-footer">
+  <div class="ph-eyebrow">📄 SNIPPET 2 · &lt;BODY&gt;</div>
+  <div class="ph-title">Footer Copyright</div>
+  <div class="ph-sub">Paste ngay trước &lt;/body&gt;. Hiển thị thông báo bản quyền cuối trang cho người dùng thấy.</div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">🔒</span>
+      <span class="sn-title">Footer Copyright Chuẩn — Tái Sử Dụng</span>
+      <span class="sn-tag tag-body">&lt;/body&gt;</span>
+    </div>
+    <div class="sn-desc">Thay [TÊN], [NĂM], [THƯƠNG HIỆU], [LINK TERMS] theo dự án. Giữ nguyên style dark để đồng bộ với mọi trang tối.</div>
+    <pre id="code-footer">&lt;!-- ===== COPYRIGHT FOOTER ===== --&gt;
+&lt;<span class="code-attr">div</span> <span class="code-attr">style</span>=<span class="code-str">"background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.06);
+  padding:14px 20px;text-align:center;
+  font-family:'Be Vietnam Pro',Arial,sans-serif;
+  font-size:11px;color:rgba(255,255,255,.25);line-height:1.8"</span>&gt;
+  &amp;copy; [NĂM] [THƯƠNG HIỆU] &amp;middot; [TÊN TÁC GIẢ]&lt;<span class="code-attr">br</span>&gt;
+  Bản quyền được bảo hộ theo Luật SHTT Việt Nam.
+  Nghiêm cấm sao chép dưới bất kỳ hình thức nào.&lt;<span class="code-attr">br</span>&gt;
+  &lt;<span class="code-attr">a</span> <span class="code-attr">href</span>=<span class="code-str">"terms.html"</span>
+     <span class="code-attr">style</span>=<span class="code-str">"color:rgba(201,168,76,.4);text-decoration:none"</span>&gt;
+    Điều Khoản Sử Dụng
+  &lt;/<span class="code-attr">a</span>&gt;
+&lt;/<span class="code-attr">div</span>&gt;</pre>
+    <div class="sn-footer">
+      <span class="sn-where">Vị trí: <strong>trước &lt;/body&gt;</strong> · cuối mọi trang</span>
+      <button class="copy-btn" onclick="copyCode('code-footer',this)">📋 Copy Snippet</button>
+    </div>
+  </div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">🎯</span>
+      <span class="sn-title">Phiên Bản BDS Mastery Kit — Đã Deploy</span>
+      <span class="sn-tag tag-body">&lt;/body&gt;</span>
+    </div>
+    <pre id="code-footer-bds">&lt;!-- ===== COPYRIGHT FOOTER ===== --&gt;
+&lt;<span class="code-attr">div</span> <span class="code-attr">style</span>=<span class="code-str">"background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.06);
+  padding:14px 20px;text-align:center;
+  font-family:'Be Vietnam Pro',Arial,sans-serif;
+  font-size:11px;color:rgba(255,255,255,.25);line-height:1.8"</span>&gt;
+  &amp;copy; 2026 BDS Mastery Kit &amp;middot; Nguyễn Thị Yến&lt;<span class="code-attr">br</span>&gt;
+  Bản quyền được bảo hộ theo Luật SHTT Việt Nam.
+  Nghiêm cấm sao chép dưới bất kỳ hình thức nào.&lt;<span class="code-attr">br</span>&gt;
+  &lt;<span class="code-attr">a</span> <span class="code-attr">href</span>=<span class="code-str">"terms.html"</span>
+     <span class="code-attr">style</span>=<span class="code-str">"color:rgba(201,168,76,.4);text-decoration:none"</span>&gt;Điều Khoản Sử Dụng&lt;/<span class="code-attr">a</span>&gt;
+&lt;/<span class="code-attr">div</span>&gt;</pre>
+    <div class="sn-footer">
+      <span class="sn-where">Đã áp dụng: <strong>76 files · kit-hlx</strong></span>
+      <button class="copy-btn" onclick="copyCode('code-footer-bds',this)">📋 Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANTI-COPY ===== -->
+<div class="panel" id="panel-anticopy">
+  <div class="ph-eyebrow">🚫 SNIPPET 3 · JAVASCRIPT</div>
+  <div class="ph-title">Anti-Copy Protection JS</div>
+  <div class="ph-sub">Paste trước &lt;/body&gt; trên các trang sales/pitch. KHÔNG dùng cho hub admin — sẽ block luôn chính anh.</div>
+
+  <div class="info-box info-red">
+    <strong>⚠️ Chỉ dùng cho:</strong> Sales page, landing page công khai, pitch card gửi cho khách. KHÔNG paste vào Dashboard, KIT-HUB, RESEARCH-HUB — các trang admin cần dùng tự do.
+  </div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">🚫</span>
+      <span class="sn-title">Anti-Copy Full Protection</span>
+      <span class="sn-tag tag-js">JS</span>
+    </div>
+    <div class="sn-desc">Vô hiệu hóa: chuột phải · Ctrl+U/S/A · F12 · DevTools. Khi phát hiện DevTools → xóa trắng nội dung trang và hiện thông báo bảo vệ.</div>
+    <pre id="code-anticopy">&lt;!-- ===== ANTI-COPY PROTECTION ===== --&gt;
+&lt;<span class="code-kw">script</span>&gt;
+(<span class="code-kw">function</span>(){
+  <span class="code-cm">// 1. Disable right-click</span>
+  document.addEventListener(<span class="code-str">'contextmenu'</span>, <span class="code-kw">function</span>(e){
+    e.preventDefault();
+  });
+
+  <span class="code-cm">// 2. Disable keyboard shortcuts</span>
+  document.addEventListener(<span class="code-str">'keydown'</span>, <span class="code-kw">function</span>(e){
+    <span class="code-cm">// Block: Ctrl+U (source), Ctrl+S (save), Ctrl+A (select all)</span>
+    <span class="code-kw">if</span>(e.ctrlKey &amp;&amp; [<span class="code-str">'u'</span>,<span class="code-str">'s'</span>,<span class="code-str">'a'</span>].includes(e.key.toLowerCase())){
+      e.preventDefault(); <span class="code-kw">return false</span>;
+    }
+    <span class="code-cm">// Block: F12, Ctrl+Shift+I/J/C (DevTools)</span>
+    <span class="code-kw">if</span>(e.key === <span class="code-str">'F12'</span>){ e.preventDefault(); <span class="code-kw">return false</span>; }
+    <span class="code-kw">if</span>(e.ctrlKey &amp;&amp; e.shiftKey &amp;&amp; [<span class="code-str">'i'</span>,<span class="code-str">'j'</span>,<span class="code-str">'c'</span>].includes(e.key.toLowerCase())){
+      e.preventDefault(); <span class="code-kw">return false</span>;
+    }
+  });
+
+  <span class="code-cm">// 3. Detect DevTools open → clear page</span>
+  <span class="code-kw">var</span> devtools = { open: <span class="code-kw">false</span> };
+  setInterval(<span class="code-kw">function</span>(){
+    <span class="code-kw">var</span> t = <span class="code-kw">new</span> Date();
+    debugger; <span class="code-cm">// Pauses if DevTools open</span>
+    <span class="code-kw">if</span>(<span class="code-kw">new</span> Date() - t &gt; 100 &amp;&amp; !devtools.open){
+      devtools.open = <span class="code-kw">true</span>;
+      document.body.innerHTML =
+        <span class="code-str">'&lt;div style="display:flex;align-items:center;justify-content:center;'</span> +
+        <span class="code-str">'height:100vh;background:#0a1628;color:#E2C06A;'</span> +
+        <span class="code-str">'font-family:sans-serif;text-align:center;padding:40px"&gt;'</span> +
+        <span class="code-str">'&lt;div&gt;&lt;div style="font-size:48px;margin-bottom:20px"&gt;🛡️&lt;/div&gt;'</span> +
+        <span class="code-str">'&lt;div style="font-size:22px;font-weight:bold;margin-bottom:12px"&gt;'</span> +
+        <span class="code-str">'Nội dung được bảo vệ&lt;/div&gt;'</span> +
+        <span class="code-str">'&lt;div style="font-size:13px;opacity:.6"&gt;'</span> +
+        <span class="code-str">'© 2026 [THƯƠNG HIỆU] · [TÊN TÁC GIẢ]&lt;br&gt;'</span> +
+        <span class="code-str">'Nghiêm cấm sao chép dưới mọi hình thức&lt;/div&gt;'</span> +
+        <span class="code-str">'&lt;/div&gt;&lt;/div&gt;'</span>;
+    }
+  }, 1000);
+})();
+&lt;/<span class="code-kw">script</span>&gt;</pre>
+    <div class="sn-footer">
+      <span class="sn-where">Vị trí: <strong>trước &lt;/body&gt;</strong> · sales/pitch pages chỉ</span>
+      <button class="copy-btn" onclick="copyCode('code-anticopy',this)">📋 Copy Snippet</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOKEN GATE ===== -->
+<div class="panel" id="panel-tokengate">
+  <div class="ph-eyebrow">🔐 SNIPPET 4 · JAVASCRIPT</div>
+  <div class="ph-title">Token Gate — Bảo Vệ Trang Giao Kit</div>
+  <div class="ph-sub">Paste vào &lt;head&gt; sau charset. Người không có token hợp lệ sẽ bị redirect về sales page. Mỗi khách nhận 1 link riêng kèm token.</div>
+
+  <div class="info-box info-green">
+    <strong>Cách dùng:</strong> Định nghĩa danh sách VALID_TOKENS → deploy → Khi giao kit, gửi khách link dạng <code style="color:var(--gl);background:rgba(0,0,0,.3);padding:2px 8px;border-radius:4px">page.html?t=TOKEN123</code>
+  </div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">🔐</span>
+      <span class="sn-title">Token Gate — Template Tái Sử Dụng</span>
+      <span class="sn-tag tag-js">JS</span>
+    </div>
+    <div class="sn-desc">Thay SALES_PAGE_URL và VALID_TOKENS theo dự án. Mỗi token là 1 chuỗi unique — có thể dùng tên khách, mã đơn hàng, hoặc code random.</div>
+    <pre id="code-tokengate">&lt;!-- ===== TOKEN GATE ===== --&gt;
+&lt;<span class="code-kw">script</span>&gt;
+(<span class="code-kw">function</span>(){
+  <span class="code-cm">// ─── CONFIG: Thay đổi theo dự án ─────────────────────</span>
+  <span class="code-kw">var</span> SALES_PAGE = <span class="code-str">'ten-sales-page.html'</span>; <span class="code-cm">// Redirect nếu không có token</span>
+  <span class="code-kw">var</span> VALID = [
+    <span class="code-str">'TOKEN001'</span>, <span class="code-str">'TOKEN002'</span>, <span class="code-str">'TOKEN003'</span>,
+    <span class="code-cm">// Thêm token tại đây...</span>
+  ];
+  <span class="code-cm">// ─────────────────────────────────────────────────────</span>
+
+  <span class="code-kw">var</span> params = <span class="code-kw">new</span> URLSearchParams(window.location.search);
+  <span class="code-kw">var</span> token  = (params.get(<span class="code-str">'t'</span>) || params.get(<span class="code-str">'token'</span>) || <span class="code-str">''</span>).toUpperCase();
+  <span class="code-kw">var</span> session = sessionStorage.getItem(<span class="code-str">'kit_access'</span>);
+
+  <span class="code-cm">// Skip gate for localhost/file (admin preview)</span>
+  <span class="code-kw">var</span> host = window.location.hostname;
+  <span class="code-kw">var</span> isLocal = (host === <span class="code-str">'localhost'</span> || host === <span class="code-str">''</span> || host === <span class="code-str">'127.0.0.1'</span>);
+
+  <span class="code-kw">if</span>(!isLocal &amp;&amp; !session &amp;&amp; !VALID.includes(token)){
+    window.location.href = SALES_PAGE;
+    <span class="code-kw">return</span>;
+  }
+  <span class="code-kw">if</span>(token) sessionStorage.setItem(<span class="code-str">'kit_access'</span>, <span class="code-str">'1'</span>);
+})();
+&lt;/<span class="code-kw">script</span>&gt;</pre>
+    <div class="sn-footer">
+      <span class="sn-where">Vị trí: <strong>&lt;head&gt;</strong> · sau charset · delivery pages</span>
+      <button class="copy-btn" onclick="copyCode('code-tokengate',this)">📋 Copy Snippet</button>
+    </div>
+  </div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">🎯</span>
+      <span class="sn-title">Phiên Bản BDS Mastery Kit — 30 Tokens</span>
+      <span class="sn-tag tag-js">JS</span>
+    </div>
+    <pre id="code-tokengate-bds">&lt;!-- ===== TOKEN GATE ===== --&gt;
+&lt;<span class="code-kw">script</span>&gt;
+(<span class="code-kw">function</span>(){
+  <span class="code-kw">var</span> VALID = [
+    <span class="code-cm">// CORE GROUP (15 tokens)</span>
+    <span class="code-str">'CORE2026A'</span>,<span class="code-str">'CORE2026B'</span>,<span class="code-str">'CORE2026C'</span>,<span class="code-str">'CORE2026D'</span>,<span class="code-str">'CORE2026E'</span>,
+    <span class="code-str">'CORE2026F'</span>,<span class="code-str">'CORE2026G'</span>,<span class="code-str">'CORE2026H'</span>,<span class="code-str">'CORE2026I'</span>,<span class="code-str">'CORE2026J'</span>,
+    <span class="code-str">'CORE2026K'</span>,<span class="code-str">'CORE2026L'</span>,<span class="code-str">'CORE2026M'</span>,<span class="code-str">'CORE2026N'</span>,<span class="code-str">'CORE2026O'</span>,
+    <span class="code-cm">// BRAND PRO (10 tokens)</span>
+    <span class="code-str">'PRO2026A'</span>,<span class="code-str">'PRO2026B'</span>,<span class="code-str">'PRO2026C'</span>,<span class="code-str">'PRO2026D'</span>,<span class="code-str">'PRO2026E'</span>,
+    <span class="code-str">'PRO2026F'</span>,<span class="code-str">'PRO2026G'</span>,<span class="code-str">'PRO2026H'</span>,<span class="code-str">'PRO2026I'</span>,<span class="code-str">'PRO2026J'</span>,
+    <span class="code-cm">// VIP 1:1 (5 tokens)</span>
+    <span class="code-str">'VIP2026A'</span>,<span class="code-str">'VIP2026B'</span>,<span class="code-str">'VIP2026C'</span>,<span class="code-str">'VIP2026D'</span>,<span class="code-str">'VIP2026E'</span>
+  ];
+  <span class="code-kw">var</span> params = <span class="code-kw">new</span> URLSearchParams(window.location.search);
+  <span class="code-kw">var</span> token  = (params.get(<span class="code-str">'t'</span>) || <span class="code-str">''</span>).toUpperCase();
+  <span class="code-kw">var</span> host   = window.location.hostname;
+  <span class="code-kw">var</span> isLocal = (host===<span class="code-str">'localhost'</span>||host===<span class="code-str">''</span>||host===<span class="code-str">'127.0.0.1'</span>);
+  <span class="code-kw">if</span>(!isLocal &amp;&amp; !sessionStorage.getItem(<span class="code-str">'kit_access'</span>) &amp;&amp; !VALID.includes(token)){
+    window.location.href=<span class="code-str">'broker-brand-builder-sales.html'</span>; <span class="code-kw">return</span>;
+  }
+  <span class="code-kw">if</span>(token) sessionStorage.setItem(<span class="code-str">'kit_access'</span>,<span class="code-str">'1'</span>);
+})();
+&lt;/<span class="code-kw">script</span>&gt;</pre>
+    <div class="sn-footer">
+      <span class="sn-where">Áp dụng: <strong>bbb-core · bbb-pro · bbb-vip</strong></span>
+      <button class="copy-btn" onclick="copyCode('code-tokengate-bds',this)">📋 Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BATCH SCRIPT ===== -->
+<div class="panel" id="panel-batch">
+  <div class="ph-eyebrow">⚡ CÔNG CỤ · POWERSHELL</div>
+  <div class="ph-title">Batch Script — Áp Dụng Hàng Loạt</div>
+  <div class="ph-sub">Copy script → Mở PowerShell → Paste → Enter. Tự động thêm copyright meta + footer vào tất cả file HTML trong folder chỉ định.</div>
+
+  <div class="info-box info-gold">
+    <strong>Cách chạy:</strong> Nhấn <code style="color:var(--gl);background:rgba(0,0,0,.3);padding:2px 8px;border-radius:4px">Win + X</code> → Windows PowerShell → Paste script → Thay đường dẫn → Enter
+  </div>
+
+  <div class="snippet">
+    <div class="sn-head">
+      <span class="sn-icon">⚡</span>
+      <span class="sn-title">Batch Copyright Script — PowerShell</span>
+      <span class="sn-tag tag-ps">PowerShell</span>
+    </div>
+    <div class="sn-desc">Xử lý tất cả .html trong folder. Tự động skip file đã có copyright. Thay $dir, $author, $year, $brand theo dự án mới.</div>
+    <pre id="code-batch"><span class="code-cm"># ─── CONFIG ───────────────────────────────────────</span>
+$dir    = <span class="code-str">"C:\Users\ADMIN\Desktop\TEN-DU-AN"</span>  <span class="code-cm"># Thay đường dẫn</span>
+$author = <span class="code-str">"[TÊN TÁC GIẢ]"</span>
+$brand  = <span class="code-str">"[THƯƠNG HIỆU]"</span>
+$year   = <span class="code-str">"2026"</span>
+<span class="code-cm"># ──────────────────────────────────────────────────</span>
+
+$metaBlock = <span class="code-str">@"
+
+  &lt;meta name="author" content="$brand · $author"&gt;
+  &lt;meta name="copyright" content="© $year $brand · $author. Bản quyền được bảo hộ."&gt;
+"@</span>
+
+$footerHtml = <span class="code-str">@"
+
+&lt;div style="background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.06);
+  padding:14px 20px;text-align:center;font-size:11px;
+  font-family:sans-serif;color:rgba(255,255,255,.25)"&gt;
+  © $year $brand · $author · Nghiêm cấm sao chép dưới mọi hình thức.&lt;br&gt;
+  &lt;a href="terms.html" style="color:rgba(201,168,76,.4);text-decoration:none"&gt;
+    Điều Khoản Sử Dụng&lt;/a&gt;
+&lt;/div&gt;
+"@</span>
+
+$files = Get-ChildItem -Path $dir -Filter <span class="code-str">"*.html"</span>
+$done = 0
+
+<span class="code-kw">foreach</span> ($file <span class="code-kw">in</span> $files) {
+    $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
+    $changed = $false
+
+    <span class="code-kw">if</span> ($content -notmatch <span class="code-str">'name="copyright"'</span>) {
+        $content = $content -replace <span class="code-str">'(&lt;meta charset=[''"]UTF-8[''"]&gt;)'</span>, <span class="code-str">"`$1$metaBlock"</span>
+        $changed = $true
+    }
+    <span class="code-kw">if</span> ($content -notmatch <span class="code-str">'Nghiêm cấm sao chép'</span>) {
+        $content = $content -replace <span class="code-str">'&lt;/body&gt;'</span>, <span class="code-str">"$footerHtml`n&lt;/body&gt;"</span>
+        $changed = $true
+    }
+    <span class="code-kw">if</span> ($changed) {
+        [System.IO.File]::WriteAllText($file.FullName, $content, [System.Text.Encoding]::UTF8)
+        $done++
+    }
+}
+Write-Host <span class="code-str">"✅ Hoàn tất: $done files đã được bảo vệ"</span></pre>
+    <div class="sn-footer">
+      <span class="sn-where">Chạy: <strong>PowerShell (Win+X)</strong> · Thay $dir trước khi chạy</span>
+      <button class="copy-btn" onclick="copyCode('code-batch',this)">📋 Copy Script</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHECKLIST ===== -->
+<div class="panel" id="panel-checklist">
+  <div class="ph-eyebrow">✅ CHECKLIST · DỰ ÁN MỚI</div>
+  <div class="ph-title">Checklist Bảo Vệ Dự Án</div>
+  <div class="ph-sub">Tick từng mục khi triển khai dự án mới. Trạng thái được lưu trong phiên làm việc.</div>
+
+  <div class="info-box info-gold" style="margin-bottom:20px">Checklist này tự lưu trong trình duyệt. Mỗi dự án mới có thể tick lại từ đầu.</div>
+
+  <div style="margin-bottom:20px">
+    <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(39,174,96,.6);margin-bottom:10px">🔴 Làm ngay (30 phút đầu)</div>
+    <div class="checklist">
+      <div class="cl-item"><input type="checkbox" id="c1" onchange="saveCheck()"><label for="c1">Thêm <strong>copyright meta tags</strong> vào &lt;head&gt; tất cả trang HTML</label></div>
+      <div class="cl-item"><input type="checkbox" id="c2" onchange="saveCheck()"><label for="c2">Thêm <strong>footer copyright</strong> trước &lt;/body&gt; tất cả trang</label></div>
+      <div class="cl-item"><input type="checkbox" id="c3" onchange="saveCheck()"><label for="c3">Chạy <strong>Batch Script</strong> cho tất cả file hiện có trong folder</label></div>
+      <div class="cl-item"><input type="checkbox" id="c4" onchange="saveCheck()"><label for="c4">Thêm <strong>anti-copy JS</strong> vào sales page / landing page công khai</label></div>
+      <div class="cl-item"><input type="checkbox" id="c5" onchange="saveCheck()"><label for="c5">Deploy <strong>terms.html</strong> — trang điều khoản sử dụng</label></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px">
+    <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:10px">🟡 Tuần đầu</div>
+    <div class="checklist">
+      <div class="cl-item"><input type="checkbox" id="c6" onchange="saveCheck()"><label for="c6">Thiết lập <strong>Token Gate</strong> cho delivery/gated pages</label></div>
+      <div class="cl-item"><input type="checkbox" id="c7" onchange="saveCheck()"><label for="c7">Setup <strong>Token Manager</strong> — điền token, phân gói</label></div>
+      <div class="cl-item"><input type="checkbox" id="c8" onchange="saveCheck()"><label for="c8">Gắn watermark <strong>tên/brand</strong> vào script và framework chính</label></div>
+      <div class="cl-item"><input type="checkbox" id="c9" onchange="saveCheck()"><label for="c9">Đặt tên framework: <strong>"Mô Hình [Tên] / [Brand]"</strong></label></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px">
+    <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(124,58,237,.6);margin-bottom:10px">🟢 Tháng đầu</div>
+    <div class="checklist">
+      <div class="cl-item"><input type="checkbox" id="c10" onchange="saveCheck()"><label for="c10">Đăng ký <strong>nhãn hiệu thương hiệu</strong> tại Cục SHTT</label></div>
+      <div class="cl-item"><input type="checkbox" id="c11" onchange="saveCheck()"><label for="c11">Thu thập <strong>testimonial</strong> đầu tiên từ khách hàng — không thể làm giả</label></div>
+      <div class="cl-item"><input type="checkbox" id="c12" onchange="saveCheck()"><label for="c12">Gắn <strong>khuôn mặt/giọng nói</strong> vào content video — personal brand bất khả sao chép</label></div>
+      <div class="cl-item"><input type="checkbox" id="c13" onchange="saveCheck()"><label for="c13">Xây <strong>community gắn tên brand</strong> (Telegram/Facebook group)</label></div>
+    </div>
+  </div>
+
+  <div style="text-align:right;margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
+    <button class="copy-btn" onclick="resetChecks()" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:rgba(232,223,200,.4)">↺ Reset</button>
+    <button class="copy-btn" onclick="checkAll()">✅ Tick Tất Cả</button>
+  </div>
+</div>
+
+<!-- ===== TOKENS PAGE ===== -->
+<div class="panel" id="panel-tokens">
+  <div class="ph-eyebrow">🎫 CÔNG CỤ · QUẢN LÝ TOKEN</div>
+  <div class="ph-title">Token Manager</div>
+  <div class="ph-sub">Mở Token Manager để giao kit cho khách. Mỗi khách nhận 1 link riêng kèm token — không thể chia sẻ.</div>
+  <div class="info-box info-green" style="margin-bottom:20px">
+    <strong>Quy trình giao kit:</strong> Khách thanh toán → Mở Token Manager → Chọn token FREE đúng gói → Copy Link → Gửi Zalo → Đánh dấu "Đã Dùng"
+  </div>
+  <div style="text-align:center;padding:30px 0">
+    <a href="token-manager.html" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a;font-weight:800;font-size:16px;padding:16px 36px;border-radius:12px;text-decoration:none">
+      🔐 Mở Token Manager
+    </a>
+    <div style="font-size:12px;color:rgba(232,223,200,.3);margin-top:12px">15 Core · 10 Pro · 5 VIP · Lưu trạng thái tự động</div>
+  </div>
+</div>
+
+<!-- ===== TERMS PAGE ===== -->
+<div class="panel" id="panel-terms">
+  <div class="ph-eyebrow">⚖️ TÀI NGUYÊN · PHÁP LÝ</div>
+  <div class="ph-title">Terms of Use Template</div>
+  <div class="ph-sub">Trang điều khoản sử dụng đầy đủ — đã deploy. Mở để xem hoặc dùng làm template cho dự án khác.</div>
+  <div style="text-align:center;padding:30px 0">
+    <a href="terms.html" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);color:rgba(232,223,200,.8);font-weight:800;font-size:15px;padding:14px 32px;border-radius:12px;text-decoration:none">
+      ⚖️ Mở Trang Terms of Use
+    </a>
+    <div style="font-size:12px;color:rgba(232,223,200,.3);margin-top:12px">Luật SHTT VN 2022 · Chính sách hoàn tiền · Xử lý vi phạm</div>
+  </div>
+  <div class="info-box info-gold">
+    <strong>Khi dùng cho dự án mới:</strong> Mở <code style="color:var(--gl)">terms.html</code> → Ctrl+S lưu bản copy → Thay tên tác giả, thương hiệu, liên hệ → Deploy lên hosting mới. Cấu trúc pháp lý giữ nguyên, không cần viết lại.
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function go(id, el) {
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+function copyCode(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Get plain text (strip HTML tags from syntax highlighting)
+  const txt = el.innerText || el.textContent;
+  navigator.clipboard.writeText(txt.trim()).then(() => {
+    const old = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    showToast('✅ Đã copy snippet!');
+    setTimeout(() => btn.textContent = old, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = txt.trim();
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('✅ Đã copy!');
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// Checklist persistence
+function saveCheck() {
+  const state = {};
+  document.querySelectorAll('.cl-item input').forEach(cb => {
+    state[cb.id] = cb.checked;
+  });
+  localStorage.setItem('protection_checklist', JSON.stringify(state));
+}
+function loadChecks() {
+  const state = JSON.parse(localStorage.getItem('protection_checklist') || '{}');
+  Object.keys(state).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.checked = state[id];
+  });
+}
+function resetChecks() {
+  document.querySelectorAll('.cl-item input').forEach(cb => cb.checked = false);
+  localStorage.removeItem('protection_checklist');
+}
+function checkAll() {
+  document.querySelectorAll('.cl-item input').forEach(cb => cb.checked = true);
+  saveCheck();
+}
+
+loadChecks();
+</script>
+</body>
+</html>
