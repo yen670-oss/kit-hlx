@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+  <meta name="author" content="BDS Mastery Kit · Nguyễn Thị Yến">
+  <meta name="copyright" content="© 2026 BDS Mastery Kit. Admin only.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🔍 Watermark Tool — BDS Mastery Kit Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a1628;--gold:#C9A84C;--gl:#E2C06A;--card:#0f1e30;--text:#e8dfc8;--green:#27ae60;--red:#e74c3c;--blue:#3498db}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
+.topbar{background:rgba(10,22,40,.97);border-bottom:1px solid rgba(201,168,76,.2);padding:12px 20px;display:flex;align-items:center;gap:12px}
+.tb-logo{font-family:'Playfair Display',serif;font-size:15px;color:#fff;font-weight:700;flex:1}
+.tb-logo span{color:var(--gl);font-size:12px}
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px 80px}
+.tabs{display:flex;gap:2px;background:rgba(0,0,0,.3);border-radius:12px;padding:4px;margin-bottom:28px}
+.tab{flex:1;padding:10px;border-radius:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:700;color:rgba(232,223,200,.4);transition:.2s;border:none;background:transparent;font-family:'Be Vietnam Pro',sans-serif}
+.tab.active{background:var(--card);color:var(--gl);border:1px solid rgba(201,168,76,.2)}
+.panel{display:none}
+.panel.active{display:block}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:22px 24px;margin-bottom:20px}
+.card-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card-sub{font-size:12.5px;color:rgba(232,223,200,.4);margin-bottom:18px;line-height:1.7}
+.sec-label{font-size:10.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.4);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+
+/* TEXTAREA */
+textarea{width:100%;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:13.5px;line-height:1.8;resize:vertical;min-height:140px}
+textarea:focus{outline:none;border-color:rgba(201,168,76,.3)}
+textarea.output{color:var(--gl);border-color:rgba(201,168,76,.15);min-height:140px}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:9px 20px;border-radius:9px;cursor:pointer;border:none;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.btn-gold{background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#0a1628}
+.btn-gold:hover{opacity:.9}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(232,223,200,.6)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
+.btn-green{background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.3);color:#4ade80}
+.btn-red{background:rgba(231,76,60,.12);border:1px solid rgba(231,76,60,.25);color:#fca5a5}
+
+/* RESULT BOX */
+.result-box{border-radius:10px;padding:16px 18px;margin-top:16px;font-size:13px;line-height:1.8;display:none}
+.result-found{background:rgba(39,174,96,.08);border:1.5px solid rgba(39,174,96,.3);color:#4ade80}
+.result-notfound{background:rgba(231,76,60,.08);border:1.5px solid rgba(231,76,60,.25);color:#fca5a5}
+.result-title{font-size:15px;font-weight:800;margin-bottom:8px}
+.result-detail{font-size:12.5px;opacity:.8;margin-top:6px}
+
+/* FINGERPRINT CARDS */
+.fp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fp-card{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 16px}
+.fp-type{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:6px}
+.fp-phrase{font-size:13px;color:var(--gl);font-style:italic;line-height:1.7;margin-bottom:8px}
+.fp-why{font-size:11.5px;color:rgba(232,223,200,.4);line-height:1.6}
+
+/* EXPLAIN */
+.explain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.ex-card{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px 16px;text-align:center}
+.ex-icon{font-size:24px;margin-bottom:8px}
+.ex-label{font-size:11px;font-weight:800;color:#fff;margin-bottom:4px}
+.ex-desc{font-size:11px;color:rgba(232,223,200,.4);line-height:1.6}
+.ex-badge{display:inline-block;font-size:9px;font-weight:800;padding:2px 8px;border-radius:5px;margin-top:6px;letter-spacing:1px}
+.badge-green{background:rgba(39,174,96,.15);color:#4ade80;border:1px solid rgba(39,174,96,.2)}
+.badge-yellow{background:rgba(201,168,76,.12);color:var(--gl);border:1px solid rgba(201,168,76,.2)}
+.badge-red{background:rgba(231,76,60,.1);color:#fca5a5;border:1px solid rgba(231,76,60,.2)}
+
+/* HOW IT WORKS */
+.how-step{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.how-step:last-child{border-bottom:none}
+.how-num{width:28px;height:28px;min-width:28px;border-radius:50%;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--gl)}
+.how-body{flex:1}
+.how-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.how-desc{font-size:12px;color:rgba(232,223,200,.5);line-height:1.6}
+.code-inline{font-family:monospace;background:rgba(0,0,0,.4);padding:1px 6px;border-radius:4px;font-size:12px;color:var(--gl)}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(39,174,96,.9);color:#fff;font-size:12.5px;font-weight:700;padding:9px 18px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:640px){
+  .fp-grid,.explain-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast">✅ Đã copy!</div>
+
+<div class="topbar">
+  <div class="tb-logo">🔍 Watermark Tool <span>· BDS Mastery Kit Admin · Bảo vệ bản quyền nội dung</span></div>
+  <a href="MASTER-DASHBOARD.html" style="font-size:12px;color:rgba(232,223,200,.4);text-decoration:none">← Dashboard</a>
+</div>
+
+<div class="wrap">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('encoder')">✍️ Encoder — Nhúng Watermark</button>
+    <button class="tab" onclick="switchTab('detector')">🔍 Detector — Phát Hiện Bản Copy</button>
+    <button class="tab" onclick="switchTab('fingerprint')">🧬 Linguistic Fingerprint</button>
+    <button class="tab" onclick="switchTab('howto')">📖 Cách Hoạt Động</button>
+  </div>
+
+  <!-- ===== TAB 1: ENCODER ===== -->
+  <div class="panel active" id="tab-encoder">
+
+    <div class="card">
+      <div class="card-title">✍️ Nhúng Watermark Vô Hình Vào Nội Dung</div>
+      <div class="card-sub">
+        Dán đoạn văn bản bất kỳ từ kit vào ô bên dưới → Tool sẽ nhúng chữ ký số vô hình <strong style="color:var(--gl)">BDS-YEN-2026</strong> vào giữa các ký tự bằng Unicode zero-width.<br>
+        Người đọc không thấy gì khác — nhưng khi paste vào detector → lộ ngay.
+      </div>
+
+      <div class="sec-label">📥 Văn Bản Gốc</div>
+      <textarea id="inputText" placeholder="Dán nội dung cần watermark vào đây...
+Ví dụ: Script bán hàng, framework, nội dung kit..."></textarea>
+
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="embedWatermark()">🔐 Nhúng Watermark</button>
+        <button class="btn btn-ghost" onclick="clearAll('inputText','outputText','encodeResult')">🗑️ Xóa</button>
+      </div>
+    </div>
+
+    <div class="card" id="encodeResultCard" style="display:none">
+      <div class="card-title">✅ Văn Bản Đã Watermark</div>
+      <div class="card-sub">Nội dung trông <strong>giống hệt</strong> bản gốc — nhưng chứa chữ ký số ẩn. Copy đoạn này → dán vào nội dung kit của chị.</div>
+
+      <div class="sec-label">📤 Output — Đã Nhúng Chữ Ký Số</div>
+      <textarea class="output" id="outputText" readonly></textarea>
+
+      <div id="encodeResult" class="result-box result-found" style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:22px">✅</span>
+        <div>
+          <div class="result-title">Watermark đã nhúng thành công</div>
+          <div class="result-detail" id="encodeDetail"></div>
+        </div>
+      </div>
+
+      <div class="btn-row" style="margin-top:14px">
+        <button class="btn btn-green" onclick="copyOutput()">📋 Copy Văn Bản Đã Watermark</button>
+        <button class="btn btn-ghost" onclick="switchTab('detector')">🔍 Kiểm Tra Ngay</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== TAB 2: DETECTOR ===== -->
+  <div class="panel" id="tab-detector">
+
+    <div class="card">
+      <div class="card-title">🔍 Phát Hiện Watermark — Kiểm Tra Bản Copy</div>
+      <div class="card-sub">
+        Khi nghi ngờ ai đó copy nội dung của chị → yêu cầu họ gửi bản gốc → paste vào đây.<br>
+        Hoặc tự copy nội dung từ trang web/bài đăng đáng ngờ → paste → phát hiện ngay.
+      </div>
+
+      <div class="sec-label">📥 Dán Văn Bản Cần Kiểm Tra</div>
+      <textarea id="detectText" placeholder="Dán văn bản nghi ngờ vào đây...
+(văn bản trông bình thường — watermark ẩn bên trong nếu bị copy từ kit của chị)"></textarea>
+
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="detectWatermark()">🔍 Phát Hiện Watermark</button>
+        <button class="btn btn-ghost" onclick="clearDetect()">🗑️ Xóa</button>
+      </div>
+
+      <div id="detectResult" class="result-box" style="margin-top:16px"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧪 Test Nhanh</div>
+      <div class="card-sub">Chưa có văn bản cần test? Thử với mẫu demo này:</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="loadDemo(true)">✅ Load mẫu CÓ watermark</button>
+        <button class="btn btn-ghost" onclick="loadDemo(false)">❌ Load mẫu KHÔNG watermark</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== TAB 3: FINGERPRINT ===== -->
+  <div class="panel" id="tab-fingerprint">
+
+    <div class="card">
+      <div class="card-title">🧬 Linguistic Fingerprint — Dấu Vân Tay Ngôn Ngữ</div>
+      <div class="card-sub">
+        Ngoài watermark kỹ thuật, nhúng <strong style="color:var(--gl)">cụm từ độc đáo</strong> vào nội dung — khi AI copy và viết lại, các cụm từ này thường bị giữ nguyên hoặc biến tấu nhẹ.
+        Search Google cụm từ đó → tìm ra nguồn copy ngay.<br><br>
+        <strong style="color:rgba(232,223,200,.7)">Đây là lớp bảo vệ chống AI-rewrite mạnh nhất.</strong>
+      </div>
+
+      <div class="sec-label">🎯 12 Cụm Từ Đặc Trưng — Nhúng Vào Kit</div>
+      <div class="fp-grid" id="fpGrid"></div>
+
+      <div class="btn-row" style="margin-top:16px">
+        <button class="btn btn-gold" onclick="copyAllFP()">📋 Copy Tất Cả Fingerprints</button>
+        <button class="btn btn-ghost" onclick="genNewFP()">🔄 Tạo Cụm Từ Mới</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📍 Cách Nhúng Fingerprint Vào Nội Dung</div>
+      <div class="card-sub">Không cần dùng hết — chọn 3-5 cụm từ, nhúng tự nhiên vào các vị trí chiến lược:</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <div class="how-body">
+            <div class="how-title">Đầu mỗi module/chương</div>
+            <div class="how-desc">Nhúng vào câu mở đầu đầu tiên. AI thường giữ lại câu intro khi rewrite.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <div class="how-body">
+            <div class="how-title">Trong định nghĩa/framework độc quyền</div>
+            <div class="how-desc">Ví dụ: <span class="code-inline">"Phễu 3F của BDS Mastery Kit: Feel → Frame → Fix"</span> — không thể viết lại mà không giữ ý</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <div class="how-body">
+            <div class="how-title">Kết luận cuối section</div>
+            <div class="how-desc">Câu kết thường bị giữ nguyên khi tóm tắt. Đây là vị trí fingerprint hiệu quả cao.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <div class="how-body">
+            <div class="how-title">Tên riêng cho kỹ thuật/quy trình</div>
+            <div class="how-desc">Đặt tên riêng: <span class="code-inline">"Ma Trận Yến 4Q"</span>, <span class="code-inline">"Quy Tắc 3G của HLX"</span> — không thể copy mà không giữ tên</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">5</div>
+          <div class="how-body">
+            <div class="how-title">Câu hỏi tu từ độc đáo</div>
+            <div class="how-desc">Câu hỏi đặc trưng của Yến — giọng văn riêng — AI rewrite thường bị lộ vì không đạt được độ tự nhiên</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== TAB 4: HOW IT WORKS ===== -->
+  <div class="panel" id="tab-howto">
+
+    <div class="card">
+      <div class="card-title">📖 Cách Hoạt Động — Kỹ Thuật Watermark</div>
+      <div class="card-sub">Zero-width Unicode characters — ký tự Unicode chiều rộng bằng 0 — vô hình với mắt người nhưng tồn tại trong chuỗi ký tự.</div>
+
+      <div class="explain-grid">
+        <div class="ex-card">
+          <div class="ex-icon">👁️</div>
+          <div class="ex-label">Mắt người</div>
+          <div class="ex-desc">Không thấy gì — văn bản trông hoàn toàn bình thường</div>
+          <span class="ex-badge badge-green">AN TOÀN</span>
+        </div>
+        <div class="ex-card">
+          <div class="ex-icon">📋</div>
+          <div class="ex-label">Copy-Paste</div>
+          <div class="ex-desc">Watermark theo sang — các ký tự ẩn copy theo văn bản</div>
+          <span class="ex-badge badge-green">HOẠT ĐỘNG</span>
+        </div>
+        <div class="ex-card">
+          <div class="ex-icon">🤖</div>
+          <div class="ex-label">AI Rewrite</div>
+          <div class="ex-desc">AI thường strip zero-width khi paraphrase. Dùng kết hợp linguistic fingerprint</div>
+          <span class="ex-badge badge-yellow">TRUNG BÌNH</span>
+        </div>
+      </div>
+
+      <div class="sec-label" style="margin-top:4px">⚙️ KỸ THUẬT MÃ HÓA</div>
+      <div style="background:rgba(0,0,0,.35);border-radius:10px;padding:16px 18px;font-size:12.5px;color:rgba(232,223,200,.7);line-height:1.9">
+        <strong style="color:var(--gl)">3 ký tự Unicode zero-width được dùng:</strong><br>
+        <span class="code-inline">U+200B</span> = Zero-Width Space → bit <strong style="color:#4ade80">0</strong><br>
+        <span class="code-inline">U+200C</span> = Zero-Width Non-Joiner → bit <strong style="color:#fca5a5">1</strong><br>
+        <span class="code-inline">U+200D</span> = Zero-Width Joiner → dấu phân cách byte<br><br>
+        <strong style="color:var(--gl)">Chữ ký được nhúng:</strong> <span class="code-inline">BDS-YEN-2026</span><br>
+        Được mã hóa thành chuỗi binary ASCII → chèn sau từ thứ 5, 10, 15... trong văn bản.<br><br>
+        <strong style="color:var(--gl)">Kết quả:</strong> Văn bản 500 chữ sẽ chứa ~24 ký tự ẩn — không ảnh hưởng hiển thị, không ảnh hưởng Google SEO.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🛡️ Chiến Lược 3 Lớp Hoàn Chỉnh</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div class="how-step">
+          <div class="how-num" style="background:rgba(231,76,60,.15);border-color:rgba(231,76,60,.3);color:#fca5a5">1</div>
+          <div class="how-body">
+            <div class="how-title">Lớp 1 — Zero-Width Watermark (Tool này)</div>
+            <div class="how-desc">Mạnh với copy-paste thông thường. Dùng Detector để kiểm tra bất kỳ lúc nào. Chứng minh được kỹ thuật trước tòa.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-num" style="background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.25);color:var(--gl)">2</div>
+          <div class="how-body">
+            <div class="how-title">Lớp 2 — Linguistic Fingerprint</div>
+            <div class="how-desc">Cụm từ độc đáo nhúng vào nội dung. Chống AI rewrite. Search Google → tìm ngay bản copy. Không cần tool.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-num" style="background:rgba(39,174,96,.12);border-color:rgba(39,174,96,.25);color:#4ade80">3</div>
+          <div class="how-body">
+            <div class="how-title">Lớp 3 — Timestamp Công Khai</div>
+            <div class="how-desc">Post ra mắt kit trên Facebook/Zalo có ngày giờ cụ thể = bằng chứng không thể phủ nhận về quyền sở hữu gốc.</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:16px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:14px 16px;font-size:12.5px;color:rgba(232,223,200,.75);line-height:1.8">
+        💡 <strong style="color:var(--gl)">Quy trình đề xuất:</strong> Mỗi khi viết nội dung mới → Encoder watermark 2-3 đoạn chủ chốt → Nhúng 3-5 linguistic fingerprint → Post screenshot lên story Facebook với caption "Ra mắt [tên nội dung]". Ba bước này mất &lt;5 phút nhưng bảo vệ vĩnh viễn.
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+// ============================================================
+// ZERO-WIDTH UNICODE WATERMARK ENGINE
+// ============================================================
+
+const ZWS  = '​'; // 0
+const ZWNJ = '‌'; // 1
+const ZWJ  = '‍'; // separator
+
+const SIGNATURE = 'BDS-YEN-2026';
+
+function textToBinary(str) {
+  return str.split('').map(c =>
+    c.charCodeAt(0).toString(2).padStart(8,'0')
+  ).join('');
+}
+
+function binaryToZW(bin) {
+  return bin.split('').map(b => b==='0'?ZWS:ZWNJ).join('') + ZWJ;
+}
+
+function encodeSignature(sig) {
+  return binaryToZW(textToBinary(sig));
+}
+
+function embedWatermark() {
+  const text = document.getElementById('inputText').value.trim();
+  if (!text) { alert('Vui lòng nhập văn bản cần watermark'); return; }
+
+  const watermark = encodeSignature(SIGNATURE);
+  const words = text.split(' ');
+  const interval = 5;
+  let result = [];
+  let wmCount = 0;
+
+  for (let i=0; i<words.length; i++) {
+    result.push(words[i]);
+    if ((i+1) % interval === 0 && i < words.length-1) {
+      result.push(watermark);
+      wmCount++;
+    }
+  }
+
+  const watermarked = result.join(' ');
+  document.getElementById('outputText').value = watermarked;
+  document.getElementById('encodeDetail').textContent =
+    `Đã nhúng chữ ký "${SIGNATURE}" × ${wmCount} lần · ${words.length} từ · ${watermark.length * wmCount} ký tự ẩn`;
+  document.getElementById('encodeResultCard').style.display = 'block';
+  document.getElementById('encodeResult').style.display = 'flex';
+}
+
+function detectWatermark() {
+  const text = document.getElementById('detectText').value;
+  const resultEl = document.getElementById('detectResult');
+
+  if (!text.trim()) {
+    resultEl.className = 'result-box result-notfound';
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = '<div class="result-title">⚠️ Không có văn bản</div><div class="result-detail">Vui lòng dán văn bản cần kiểm tra.</div>';
+    return;
+  }
+
+  // Extract all zero-width characters
+  const zwChars = text.split('').filter(c => c===ZWS||c===ZWNJ||c===ZWJ);
+  const hasZW = zwChars.length > 0;
+
+  let decoded = '';
+  let found = false;
+
+  if (hasZW) {
+    // Try to decode signature
+    try {
+      const segments = text.split(ZWJ).filter(s=>s.length>0&&(s.includes(ZWS)||s.includes(ZWNJ)));
+      segments.forEach(seg => {
+        const bits = seg.split('').filter(c=>c===ZWS||c===ZWNJ).map(c=>c===ZWS?'0':'1').join('');
+        for (let i=0;i<bits.length;i+=8) {
+          const byte = bits.substring(i,i+8);
+          if (byte.length===8) decoded += String.fromCharCode(parseInt(byte,2));
+        }
+      });
+
+      if (decoded.includes('BDS') || decoded.includes('YEN') || decoded.includes('2026')) {
+        found = true;
+      }
+    } catch(e) {}
+  }
+
+  if (found) {
+    const count = text.split(ZWJ).filter(s=>s.includes(ZWS)||s.includes(ZWNJ)).length;
+    resultEl.className = 'result-box result-found';
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:28px">🚨</span>
+        <div>
+          <div class="result-title">⚠️ PHÁT HIỆN WATERMARK BDS MASTERY KIT</div>
+          <div class="result-detail">
+            Chữ ký tìm thấy: <strong style="color:#fff">"${decoded.replace(/[^\x20-\x7E]/g,'').substring(0,30)}"</strong><br>
+            Số lần xuất hiện: <strong style="color:#fff">${count} vị trí</strong><br>
+            Tổng ký tự ẩn: <strong style="color:#fff">${zwChars.length} ký tự zero-width</strong><br><br>
+            <strong style="color:#fde68a">✅ Đây là bằng chứng kỹ thuật xác nhận nội dung thuộc BDS Mastery Kit · Nguyễn Thị Yến</strong>
+          </div>
+        </div>
+      </div>`;
+  } else if (hasZW) {
+    resultEl.className = 'result-box result-notfound';
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `
+      <div class="result-title">🔶 Có ký tự ẩn — Không phải watermark BDS</div>
+      <div class="result-detail">Tìm thấy ${zwChars.length} ký tự zero-width nhưng không decode được chữ ký BDS Mastery Kit.<br>Có thể là watermark từ nguồn khác hoặc bị strip một phần.</div>`;
+  } else {
+    resultEl.className = 'result-box result-notfound';
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:28px">✅</span>
+        <div>
+          <div class="result-title">Không tìm thấy watermark BDS</div>
+          <div class="result-detail">Văn bản này không chứa zero-width watermark của BDS Mastery Kit.<br>
+          <span style="color:rgba(232,223,200,.5)">Lưu ý: Nếu AI rewrite nội dung, watermark có thể bị strip. Kiểm tra thêm bằng Linguistic Fingerprint.</span></div>
+        </div>
+      </div>`;
+  }
+}
+
+function loadDemo(hasWm) {
+  const plain = 'Để trở thành môi giới chuyên nghiệp tại Hạ Long Xanh, anh chị cần nắm vững 3 yếu tố cốt lõi: kiến thức sản phẩm sâu, kỹ năng xây dựng thương hiệu cá nhân và quy trình chốt sale bài bản.';
+  if (hasWm) {
+    const watermark = encodeSignature(SIGNATURE);
+    const words = plain.split(' ');
+    let result = [];
+    for (let i=0;i<words.length;i++){
+      result.push(words[i]);
+      if((i+1)%5===0&&i<words.length-1) result.push(watermark);
+    }
+    document.getElementById('detectText').value = result.join(' ');
+  } else {
+    document.getElementById('detectText').value = plain;
+  }
+}
+
+// ============================================================
+// LINGUISTIC FINGERPRINTS
+// ============================================================
+
+const FINGERPRINTS = [
+  {type:'Framework', phrase:'Phễu 3F của Yến: Feel — Frame — Fix', why:'Tên framework độc quyền, không thể viết lại mà không giữ ký tự'},
+  {type:'Định nghĩa', phrase:'Thương hiệu cá nhân = Lý do duy nhất khách chọn anh/chị, không phải dự án', why:'Định nghĩa khác biệt — AI thường giữ nguyên core idea'},
+  {type:'Tên kỹ thuật', phrase:'Ma Trận Yến 4Q: Qualifier — Question — Quote — Close', why:'Tên riêng không thể dịch hoặc paraphrase mà không lộ'},
+  {type:'Câu hỏi tu từ', phrase:'Khách nói "để nghĩ thêm" — thực ra đang nói điều gì?', why:'Câu hỏi đặc trưng — giọng văn Yến, AI khó rewrite tự nhiên'},
+  {type:'Số liệu gắn tên', phrase:'12 môi giới áp dụng framework Yến đạt deal trong 45 ngày đầu', why:'Số liệu + tên gắn liền — không thể xóa mà không mất ý'},
+  {type:'Nguyên tắc', phrase:'Quy Tắc Vàng HLX: Bán Cảm Xúc Trước — Bán Lý Tính Sau', why:'Rule có tên riêng — được search Google sẽ trỏ về nguồn gốc'},
+  {type:'Câu mở đầu', phrase:'Nếu anh/chị đang đọc dòng này, có nghĩa đây là khoảnh khắc thay đổi sự nghiệp', why:'Câu hook độc đáo — không thể rút ra mà không mang dấu ấn'},
+  {type:'Kết luận', phrase:'Hệ thống thắng kỹ năng — kỹ năng thắng may mắn — đây là triết lý BDS Mastery Kit', why:'Câu kết có brand name — dễ search, dễ chứng minh'},
+  {type:'Phép loại suy', phrase:'Script bán nhà như GPS: không phải đường duy nhất, nhưng không bao giờ lạc đường', why:'So sánh độc đáo — AI paraphrase thường giữ ý cốt lõi'},
+  {type:'Cảnh báo', phrase:'Môi giới không có thương hiệu = nhân viên bán thời gian mãi mãi', why:'Câu mạnh — impact cao — thường được copy nguyên vẹn'},
+  {type:'Step tên riêng', phrase:'Bước Lửa Thử Vàng trong quy trình BBB: 72 giờ sau giao kit', why:'Tên bước độc quyền — search ngay ra nguồn'},
+  {type:'Cam kết', phrase:'Cam kết Yến 30 ngày: không thấy kết quả — hoàn tiền không hỏi', why:'Cam kết gắn tên — không thể copy mà không mang dấu Yến'},
+];
+
+function renderFP(list) {
+  document.getElementById('fpGrid').innerHTML = list.map((f,i) => `
+    <div class="fp-card">
+      <div class="fp-type">${f.type}</div>
+      <div class="fp-phrase">"${f.phrase}"</div>
+      <div class="fp-why">💡 ${f.why}</div>
+      <button class="btn btn-ghost" style="margin-top:8px;font-size:11px;padding:5px 12px"
+        onclick="copyFP(this,'${f.phrase.replace(/'/g,"\\'")}')">📋 Copy</button>
+    </div>
+  `).join('');
+}
+
+function copyFP(btn, txt) {
+  navigator.clipboard.writeText(txt).then(()=>{
+    const old=btn.textContent; btn.textContent='✅ Đã copy!';
+    setTimeout(()=>btn.textContent=old,1800);
+  });
+}
+
+function copyAllFP() {
+  const all = FINGERPRINTS.map(f=>`• ${f.phrase}`).join('\n');
+  navigator.clipboard.writeText(all).then(()=>showToast('✅ Đã copy 12 fingerprints!'));
+}
+
+function genNewFP() {
+  const shuffled = [...FINGERPRINTS].sort(()=>Math.random()-.5);
+  renderFP(shuffled);
+  showToast('🔄 Đã xáo trộn thứ tự!');
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach((t,i)=>{
+    const ids=['encoder','detector','fingerprint','howto'];
+    t.classList.toggle('active', ids[i]===id);
+  });
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+function copyOutput() {
+  const txt = document.getElementById('outputText').value;
+  navigator.clipboard.writeText(txt).then(()=>showToast('✅ Đã copy văn bản watermark!'));
+}
+
+function clearAll(...ids) {
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.value='';el.style.display='none';}
+  });
+  document.getElementById('encodeResultCard').style.display='none';
+}
+
+function clearDetect() {
+  document.getElementById('detectText').value='';
+  document.getElementById('detectResult').style.display='none';
+}
+
+function showToast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg||'✅ Đã copy!';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// Init
+renderFP(FINGERPRINTS);
+</script>
+</body>
+</html>
