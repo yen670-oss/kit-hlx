@@ -143,6 +143,12 @@
       <div class="tt-price">2.997.000đ</div>
       <div class="tt-items">12 tài liệu</div>
     </div>
+    <div class="tier-tab" onclick="selectTier('diamond')">
+      <div class="tt-emoji">💎</div>
+      <div class="tt-name">Diamond All-Access</div>
+      <div class="tt-price">4.997.000đ</div>
+      <div class="tt-items">All + Priority</div>
+    </div>
   </div>
 
   <!-- CHECKOUT CARD -->
@@ -332,6 +338,11 @@ const TIERS = {
     emoji: '🥇', label: 'GOLD TEAM', name: 'BDS Mastery Kit — Gold Team',
     price: '2.997.000', amount: 2997000, rawAmount: 2997000,
     code: 'GOLD_KIT', items: ['🧮 ROI Calculator','📋 Checklist đăng bài','📊 Báo cáo thị trường','⚖️ Checklist pháp lý','📱 30 bài FB/Zalo','📸 Gallery 45 ảnh','🛡️ 15 Script phản đối','🎯 Social Post Kit','🏢 Báo cáo 2000 sàn','📅 Trust 8 tuần','📋 SOP nhân viên','🚀 Chiến dịch xâm nhập']
+  },
+  diamond: {
+    emoji: '💎', label: 'DIAMOND ALL-ACCESS', name: 'BDS Mastery Kit — Diamond All-Access',
+    price: '4.997.000', amount: 4997000, rawAmount: 4997000,
+    code: 'DIAMOND_KIT', items: ['💎 Toàn bộ Gold Team (12 tài liệu)','📚 Broker Pro Book (15 chương)','🏆 Broker Brand Builder Core Group','🎙️ 1 buổi onboarding 1:1 (30 phút)','📞 Hỗ trợ Zalo ưu tiên 60 ngày','🔄 Update miễn phí trọn đời']
   }
 };
 
@@ -344,7 +355,7 @@ function selectTier(tier) {
 
   // Update tabs
   document.querySelectorAll('.tier-tab').forEach((el, i) => {
-    el.classList.toggle('active', ['bronze','silver','gold'][i] === tier);
+    el.classList.toggle('active', ['bronze','silver','gold','diamond'][i] === tier);
   });
 
   // Update summary
