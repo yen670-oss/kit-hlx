@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Team Pack F1/F2 — Trang Bị Cả Đội · BDS Mastery Kit</title>
+<meta property="og:title" content="Team Pack F1/F2 — Trang Bị Cả Đội · BDS Mastery Kit">
+<meta property="og:description" content="Mua kit số lượng lớn cho team F2 — giảm đến 42% · Tặng Brand Pro cho F1 · Onboarding cả team trong 3 ngày">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a1628;--bg2:#0d1b2a;--bg3:#0f2035;
+  --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+  --navy:#1B3A6B;--card:#0f1e30;--text:#e8dfc8;
+  --green:#27ae60;--vip:#7c3aed;--red:#e74c3c;
+  --border:rgba(255,255,255,.07);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+
+/* ===== HEADER NAV ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,.15);padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Playfair Display',serif;font-size:15px;color:#fff;font-weight:700}
+.nav-logo span{color:var(--gl)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a;font-weight:800;font-size:13px;padding:8px 20px;border-radius:10px;text-decoration:none;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+.nav-cta:hover{opacity:.9}
+
+/* ===== HERO ===== */
+.hero{padding:120px 24px 80px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.08) 0%,transparent 60%)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:30px;margin-bottom:20px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);color:#fff;font-weight:900;line-height:1.15;margin-bottom:18px;max-width:800px;margin-left:auto;margin-right:auto}
+.hero-title .gold{color:var(--gl)}
+.hero-sub{font-size:clamp(15px,2.5vw,18px);color:rgba(232,223,200,.65);max-width:600px;margin:0 auto 32px;line-height:1.7}
+.hero-cta-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a;font-weight:800;font-size:16px;padding:16px 36px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s;display:inline-block}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(232,223,200,.8);font-size:15px;font-weight:700;padding:15px 28px;border-radius:12px;text-decoration:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s;display:inline-block}
+.btn-secondary:hover{background:rgba(255,255,255,.1)}
+.hero-trust{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.hero-trust-item{display:flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(232,223,200,.5);font-weight:600}
+
+/* ===== STATS BAR ===== */
+.stats-bar{background:rgba(0,0,0,.3);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);padding:28px 24px}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--gl);display:block;font-weight:700}
+.stat-label{font-size:12px;color:rgba(232,223,200,.45);margin-top:3px;display:block}
+
+/* ===== SECTION COMMON ===== */
+.section{padding:70px 24px}
+.section-inner{max-width:900px;margin:0 auto}
+.section-inner.wide{max-width:1100px}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:10px;display:block}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,36px);color:#fff;margin-bottom:14px;line-height:1.25}
+.section-sub{font-size:15px;color:rgba(232,223,200,.55);line-height:1.7;max-width:620px}
+
+/* ===== PAIN ===== */
+.pain-section{background:var(--bg2)}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:36px}
+.pain-card{background:rgba(231,76,60,.05);border:1px solid rgba(231,76,60,.15);border-radius:14px;padding:20px 22px}
+.pain-icon{font-size:26px;margin-bottom:10px;display:block}
+.pain-title{font-size:15px;font-weight:700;color:#fca5a5;margin-bottom:7px}
+.pain-body{font-size:13px;color:rgba(232,223,200,.6);line-height:1.65}
+.pain-stat{font-size:20px;font-weight:800;color:var(--red);margin-top:8px;display:block}
+
+/* ===== SOLUTION ===== */
+.solution-box{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border:1.5px solid rgba(201,168,76,.2);border-radius:18px;padding:28px 32px;margin-top:30px}
+.sol-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:24px}
+.sol-step{text-align:center;padding:16px}
+.sol-step-num{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.15);border:1.5px solid rgba(201,168,76,.3);color:var(--gl);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.sol-step-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px}
+.sol-step-body{font-size:12.5px;color:rgba(232,223,200,.5)}
+
+/* ===== PACKAGES ===== */
+.packages-section{background:var(--bg3)}
+.pack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:36px}
+
+.pack-card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.pack-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.pack-card.featured{border-color:rgba(201,168,76,.4);box-shadow:0 0 0 1px rgba(201,168,76,.1),0 8px 32px rgba(201,168,76,.1)}
+.pack-card.agency{border-color:rgba(124,58,237,.4)}
+
+.pack-head{padding:22px 24px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.pack-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.badge-starter{background:rgba(39,174,96,.12);color:#4ade80;border:1px solid rgba(39,174,96,.25)}
+.badge-growth{background:rgba(201,168,76,.12);color:var(--gl);border:1px solid rgba(201,168,76,.3)}
+.badge-agency{background:rgba(124,58,237,.12);color:#c4b5fd;border:1px solid rgba(124,58,237,.3)}
+.popular-tag{display:inline-block;background:var(--gold);color:#0d1b2a;font-size:9.5px;font-weight:800;padding:3px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+
+.pack-name{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:5px;font-weight:700}
+.pack-tagline{font-size:13px;color:rgba(232,223,200,.5)}
+.pack-kit-count{display:flex;align-items:baseline;gap:6px;margin-top:14px}
+.kit-num{font-family:'Playfair Display',serif;font-size:40px;color:var(--gl);font-weight:700;line-height:1}
+.kit-label{font-size:13px;color:rgba(232,223,200,.5)}
+.kit-bonus{font-size:12.5px;color:#4ade80;font-weight:700;margin-top:3px}
+
+.pack-price-block{padding:16px 24px;background:rgba(0,0,0,.2);border-bottom:1px solid rgba(255,255,255,.05)}
+.price-retail{font-size:12px;color:rgba(232,223,200,.35);text-decoration:line-through}
+.price-main{font-family:'Playfair Display',serif;font-size:28px;color:#fff;font-weight:700;margin:3px 0}
+.price-per{font-size:12px;color:rgba(232,223,200,.45)}
+.price-save{display:inline-block;background:rgba(39,174,96,.12);color:#4ade80;border:1px solid rgba(39,174,96,.2);font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;margin-top:5px}
+
+.pack-body{padding:20px 24px;flex:1}
+.pack-includes-title{font-size:10.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.4);margin-bottom:12px}
+.pack-item{display:flex;gap:9px;margin-bottom:9px;font-size:13px;color:rgba(232,223,200,.7);align-items:flex-start}
+.pack-item::before{content:'✓';color:var(--gold);flex-shrink:0;font-weight:800;margin-top:1px}
+.pack-item.bonus{color:rgba(226,192,106,.75)}
+.pack-item.bonus::before{content:'🎁';font-size:12px}
+.pack-item.exclusive{color:#c4b5fd}
+.pack-item.exclusive::before{content:'⭐';font-size:12px}
+
+.pack-footer{padding:18px 24px;border-top:1px solid rgba(255,255,255,.06)}
+.pack-cta{display:block;text-align:center;padding:14px;border-radius:12px;font-weight:800;font-size:15px;text-decoration:none;cursor:pointer;border:none;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.cta-starter{background:rgba(39,174,96,.15);border:1.5px solid rgba(39,174,96,.35);color:#4ade80}
+.cta-starter:hover{background:rgba(39,174,96,.25)}
+.cta-growth{background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a}
+.cta-growth:hover{opacity:.9}
+.cta-agency{background:rgba(124,58,237,.15);border:1.5px solid rgba(124,58,237,.4);color:#c4b5fd}
+.cta-agency:hover{background:rgba(124,58,237,.25)}
+.pack-payment{text-align:center;font-size:11.5px;color:rgba(232,223,200,.3);margin-top:8px}
+
+/* ===== VALUE STACK ===== */
+.value-table{margin-top:36px}
+.vt-row{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.05);gap:16px}
+.vt-row:first-child{background:rgba(201,168,76,.06);border-radius:12px 12px 0 0}
+.vt-row.total{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:0 0 12px 12px;font-weight:700}
+.vt-icon{font-size:20px;flex-shrink:0;width:30px;text-align:center}
+.vt-name{flex:1;font-size:13.5px;color:rgba(232,223,200,.8)}
+.vt-value{font-size:13.5px;font-weight:700;color:var(--gl);white-space:nowrap}
+.vt-row.total .vt-name{font-size:14.5px;color:#fff}
+.vt-row.total .vt-value{font-size:16px}
+.vt-price-reveal{text-align:center;margin-top:24px;background:rgba(201,168,76,.06);border:1.5px solid rgba(201,168,76,.25);border-radius:16px;padding:24px 28px}
+.vpr-label{font-size:12px;color:rgba(232,223,200,.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+.vpr-price{font-family:'Playfair Display',serif;font-size:38px;color:#fff;font-weight:700;margin:6px 0}
+.vpr-save{color:#4ade80;font-weight:800;font-size:14px}
+
+/* ===== ROI ===== */
+.roi-section{background:var(--bg2)}
+.roi-calc{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:28px 32px;margin-top:30px}
+.roi-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.roi-row:last-child{border:none}
+.roi-label{font-size:14px;color:rgba(232,223,200,.65)}
+.roi-val{font-size:16px;font-weight:800;color:#fff}
+.roi-val.green{color:#4ade80}
+.roi-val.gold{color:var(--gl)}
+.roi-conclusion{margin-top:20px;background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.2);border-radius:12px;padding:16px 20px;font-size:14px;color:rgba(232,223,200,.8);line-height:1.6}
+.roi-conclusion strong{color:#4ade80}
+
+/* ===== GUARANTEE ===== */
+.guarantee-box{background:rgba(39,174,96,.06);border:1.5px solid rgba(39,174,96,.2);border-radius:18px;padding:32px 36px;display:flex;gap:24px;align-items:flex-start;margin-top:30px}
+.guarantee-icon{font-size:48px;flex-shrink:0}
+.guarantee-title{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:10px}
+.guarantee-body{font-size:14px;color:rgba(232,223,200,.65);line-height:1.7}
+
+/* ===== FAQ ===== */
+.faq-list{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.faq-q{padding:18px 22px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:14.5px;font-weight:700;color:#fff;user-select:none}
+.faq-q:hover{background:rgba(255,255,255,.03)}
+.faq-chevron{color:var(--gl);font-size:16px;transition:.2s;flex-shrink:0;margin-left:12px}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 22px 18px;font-size:13.5px;color:rgba(232,223,200,.6);line-height:1.7;border-top:1px solid rgba(255,255,255,.05)}
+.faq-item.open .faq-a{display:block}
+
+/* ===== URGENCY ===== */
+.urgency-section{background:linear-gradient(135deg,rgba(231,76,60,.08),rgba(231,76,60,.03));border-top:1px solid rgba(231,76,60,.15);border-bottom:1px solid rgba(231,76,60,.15);padding:40px 24px;text-align:center}
+.urgency-title{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:10px}
+.urgency-body{font-size:14px;color:rgba(232,223,200,.6);max-width:500px;margin:0 auto 24px}
+.slot-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.slot-badge{background:rgba(0,0,0,.3);border:1px solid;border-radius:12px;padding:10px 18px;text-align:center}
+.slot-badge.starter{border-color:rgba(39,174,96,.3)}
+.slot-badge.growth{border-color:rgba(201,168,76,.35)}
+.slot-badge.agency{border-color:rgba(124,58,237,.3)}
+.sb-name{font-size:11px;font-weight:700;color:rgba(232,223,200,.5);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px}
+.sb-count{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;display:block}
+.sb-count.starter{color:#4ade80}
+.sb-count.growth{color:var(--gl)}
+.sb-count.agency{color:#c4b5fd}
+.sb-label{font-size:11px;color:rgba(232,223,200,.35);display:block}
+
+/* ===== FINAL CTA ===== */
+.final-section{padding:80px 24px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.06) 0%,transparent 60%)}
+.final-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);color:#fff;margin-bottom:14px}
+.final-sub{font-size:15px;color:rgba(232,223,200,.55);max-width:520px;margin:0 auto 32px;line-height:1.7}
+.final-options{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.zalo-btn{background:linear-gradient(135deg,#0068ff,#0052cc);color:#fff;font-weight:800;font-size:16px;padding:16px 32px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:.15s}
+.zalo-btn:hover{opacity:.9;transform:translateY(-1px)}
+.ps-text{margin-top:40px;font-size:13px;color:rgba(232,223,200,.35);max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* ===== FOOTER ===== */
+.footer{background:rgba(0,0,0,.4);border-top:1px solid rgba(255,255,255,.06);padding:24px;text-align:center;font-size:12px;color:rgba(232,223,200,.25)}
+.footer a{color:rgba(201,168,76,.5);text-decoration:none}
+
+/* ===== COMPARISON TABLE ===== */
+.compare-table{width:100%;border-collapse:collapse;margin-top:30px;font-size:13.5px}
+.compare-table th{padding:12px 16px;background:rgba(0,0,0,.4);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.5);text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+.compare-table th:first-child{border-radius:12px 0 0 0}
+.compare-table th:last-child{border-radius:0 12px 0 0}
+.compare-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);color:rgba(232,223,200,.7);vertical-align:middle}
+.compare-table tr:last-child td{border:none}
+.compare-table tr:hover td{background:rgba(255,255,255,.02)}
+.compare-table .check{color:#4ade80;font-weight:800}
+.compare-table .cross{color:rgba(232,223,200,.2)}
+.compare-table .highlight-col{background:rgba(201,168,76,.05)}
+.price-cell{font-family:'Playfair Display',serif;font-size:18px;color:#fff;font-weight:700}
+
+@media(max-width:640px){
+  .guarantee-box{flex-direction:column;gap:14px}
+  .compare-table{font-size:12px}
+  .compare-table td,.compare-table th{padding:10px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">BDS Mastery Kit <span>· Team Pack</span></div>
+  <a href="https://zalo.me/0912345678" class="nav-cta">💬 Tư Vấn Zalo</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-badge">🏆 Dành Riêng Cho F1 Team Leader</div>
+  <h1 class="hero-title">
+    Trang Bị <span class="gold">Cả Đội F2</span> Trong 3 Ngày —<br>
+    Không Cần Train Từng Người
+  </h1>
+  <p class="hero-sub">Mua kit số lượng lớn cho team, tiết kiệm đến <strong>42%</strong> · Tặng Brand Pro cho F1 · Onboarding toàn đội cùng lúc · Bắt đầu ngay từ ngày đầu</p>
+  <div class="hero-cta-group">
+    <a href="#packages" class="btn-primary">📦 Xem 3 Gói Team Pack</a>
+    <a href="#roi" class="btn-secondary">📊 Tính ROI cho Team</a>
+  </div>
+  <div class="hero-trust">
+    <div class="hero-trust-item">✓ Thiết kế riêng cho F1/F2 BĐS cao cấp</div>
+    <div class="hero-trust-item">✓ Onboarding cả team trong 3 ngày</div>
+    <div class="hero-trust-item">✓ Cam kết 30 ngày hoàn tiền</div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><span class="stat-num">3 ngày</span><span class="stat-label">Toàn team vào guồng</span></div>
+    <div><span class="stat-num">42%</span><span class="stat-label">Tiết kiệm gói Agency</span></div>
+    <div><span class="stat-num">25 kit</span><span class="stat-label">Nhận được khi mua 20</span></div>
+    <div><span class="stat-num">1 deal</span><span class="stat-label">Cover toàn bộ chi phí kit</span></div>
+  </div>
+</div>
+
+<!-- ===== PAIN ===== -->
+<section class="section pain-section">
+  <div class="section-inner">
+    <span class="eyebrow">Vấn Đề Thực Tế</span>
+    <h2 class="section-title">Đội F2 Thiếu Hệ Thống —<br>F1 Chịu Hậu Quả</h2>
+    <p class="section-sub">Môi giới giỏi hay dở không phải do thiếu cố gắng. Mà do thiếu hệ thống. Và đó là lý do F1 không scale được.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">⏳</span>
+        <div class="pain-title">Onboard F2 mới mất 3-6 tuần</div>
+        <div class="pain-body">F1 phải train tay đôi, mỗi người một cách, không có chuẩn chung. Mỗi F2 mới là một vòng lặp mệt mỏi.</div>
+        <span class="pain-stat">2-6 tuần/người</span>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">💸</span>
+        <div class="pain-title">F2 mất deal vì không có script</div>
+        <div class="pain-body">Khách hỏi — F2 không biết trả lời. Khách từ chối — F2 không biết xử lý. Deal rơi vào tay đội khác.</div>
+        <span class="pain-stat">50-150 triệu/deal</span>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">📉</span>
+        <div class="pain-title">F2 không có personal brand</div>
+        <div class="pain-body">Không có hồ sơ chuyên nghiệp, không có content, không có lead riêng. Phụ thuộc hoàn toàn vào F1 giới thiệu.</div>
+        <span class="pain-stat">70% lead bị mất</span>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🔄</span>
+        <div class="pain-title">Tỷ lệ turnover F2 cao</div>
+        <div class="pain-body">F2 không thấy kết quả sau 1-2 tháng → bỏ việc. F1 lại tuyển người mới, lại train từ đầu. Vòng lặp vô tận.</div>
+        <span class="pain-stat">60% F2 rời trong 3 tháng</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section class="section">
+  <div class="section-inner">
+    <span class="eyebrow">Giải Pháp</span>
+    <h2 class="section-title">1 Hệ Thống · Toàn Bộ Đội<br>Vào Guồng Trong 3 Ngày</h2>
+    <p class="section-sub">BDS Mastery Kit được thiết kế để F2 tự học và tự triển khai — F1 chỉ cần giám sát kết quả.</p>
+    <div class="solution-box">
+      <div class="sol-steps">
+        <div class="sol-step">
+          <div class="sol-step-num">1</div>
+          <div class="sol-step-title">Ngày 1 · Nhận Kit</div>
+          <div class="sol-step-body">F1 thanh toán → nhận link tất cả suất → phân phối cho team F2</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">2</div>
+          <div class="sol-step-title">Ngày 2 · Onboarding Chung</div>
+          <div class="sol-step-body">Buổi Zoom setup cả team · Script · Hồ sơ · Lịch content · Mục tiêu</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">3</div>
+          <div class="sol-step-title">Ngày 3 · F2 Tự Chạy</div>
+          <div class="sol-step-body">Mỗi F2 có kit riêng · Content plan · Script sẵn · Tự đăng bài theo lịch</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">4</div>
+          <div class="sol-step-title">Tháng 1-3 · F1 Theo Dõi</div>
+          <div class="sol-step-body">Dashboard KPI · Review hàng tháng · Điều chỉnh chiến lược · Scale</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PACKAGES ===== -->
+<section class="section packages-section" id="packages">
+  <div class="section-inner wide">
+    <span class="eyebrow">3 Gói Team Pack</span>
+    <h2 class="section-title">Chọn Gói Phù Hợp Với Team Của Anh</h2>
+    <p class="section-sub">Càng mua nhiều, càng tiết kiệm · Càng lớn, càng nhiều quyền lợi F1</p>
+
+    <div class="pack-grid">
+
+      <!-- STARTER -->
+      <div class="pack-card">
+        <div class="pack-head">
+          <div class="pack-badge badge-starter">🥉 Team Starter</div>
+          <div class="pack-name">Starter Pack</div>
+          <div class="pack-tagline">"Trang bị đội nhỏ · Bắt đầu đúng cách"</div>
+          <div class="pack-kit-count">
+            <span class="kit-num">5</span>
+            <div><span class="kit-label">Kit Core Group cho F2</span><br><span class="kit-bonus">+ Tặng 1 kit thêm (tổng 6)</span></div>
+          </div>
+        </div>
+        <div class="pack-price-block">
+          <div class="price-retail">Giá lẻ: 24,985,000đ</div>
+          <div class="price-main">17,997,000đ</div>
+          <div class="price-per">≈ 3,599K/kit · Tiết kiệm 28%</div>
+          <div class="price-save">💰 Tiết kiệm 6,988,000đ</div>
+        </div>
+        <div class="pack-body">
+          <div class="pack-includes-title">Bao gồm</div>
+          <div class="pack-item">5 kit Core Group đầy đủ cho F2</div>
+          <div class="pack-item">20 bài học · 4 module hệ thống</div>
+          <div class="pack-item">Script bán hàng · xử lý từ chối sẵn</div>
+          <div class="pack-item">Content library 90 ngày</div>
+          <div class="pack-item">Hồ sơ cá nhân chuyên nghiệp</div>
+          <div class="pack-item bonus">Tặng 1 kit thứ 6 miễn phí</div>
+          <div class="pack-item bonus">Onboarding Zoom 60' cho cả team</div>
+          <div class="pack-item bonus">Kit Quản Lý Đội Nhóm cho F1</div>
+          <div class="pack-item bonus">Telegram hỗ trợ 90 ngày</div>
+        </div>
+        <div class="pack-footer">
+          <a href="https://zalo.me/0912345678" class="pack-cta cta-starter">💬 Đăng Ký Gói Starter</a>
+          <div class="pack-payment">Thanh toán 1 lần hoặc 2 đợt · Chuyển khoản</div>
+        </div>
+      </div>
+
+      <!-- GROWTH -->
+      <div class="pack-card featured">
+        <div class="pack-head">
+          <div class="pack-badge badge-growth">🏆 Team Growth <span class="popular-tag">PHỔ BIẾN</span></div>
+          <div class="pack-name">Growth Pack</div>
+          <div class="pack-tagline">"Nhân đôi doanh thu · Đội vận hành độc lập"</div>
+          <div class="pack-kit-count">
+            <span class="kit-num">10</span>
+            <div><span class="kit-label">Kit Core Group cho F2</span><br><span class="kit-bonus">+ Tặng 2 kit (tổng 12) + Brand Pro F1</span></div>
+          </div>
+        </div>
+        <div class="pack-price-block">
+          <div class="price-retail">Giá lẻ: 59,967,000đ</div>
+          <div class="price-main" style="color:var(--gl)">39,997,000đ</div>
+          <div class="price-per">≈ 3,636K/kit F2 · Brand Pro F1 miễn phí</div>
+          <div class="price-save">💰 Tiết kiệm 19,970,000đ (33% OFF)</div>
+        </div>
+        <div class="pack-body">
+          <div class="pack-includes-title">Tất cả Starter +</div>
+          <div class="pack-item">10 kit Core Group cho F2</div>
+          <div class="pack-item bonus">1 Brand Pro (9,997K) miễn phí cho F1</div>
+          <div class="pack-item bonus">Tặng 2 kit thêm — reserve cho F2 mới</div>
+          <div class="pack-item bonus">Workshop 3h cho toàn team (Zoom)</div>
+          <div class="pack-item bonus">Content Strategy phối hợp 12 tuần</div>
+          <div class="pack-item bonus">Monthly Review 3 lần · KPI dashboard</div>
+          <div class="pack-item exclusive">Lịch content phân chia niche không trùng</div>
+          <div class="pack-item exclusive">Hashtag strategy riêng cho từng F2</div>
+        </div>
+        <div class="pack-footer">
+          <a href="https://zalo.me/0912345678" class="pack-cta cta-growth">💬 Đăng Ký Gói Growth</a>
+          <div class="pack-payment">1 lần / 3 đợt (14,997K × 3) · Ưu tiên slot</div>
+        </div>
+      </div>
+
+      <!-- AGENCY -->
+      <div class="pack-card agency">
+        <div class="pack-head">
+          <div class="pack-badge badge-agency">💎 Agency Master</div>
+          <div class="pack-name">Agency Pack</div>
+          <div class="pack-tagline">"Vũ trang cả agency · Quyền phân phối"</div>
+          <div class="pack-kit-count">
+            <span class="kit-num">20</span>
+            <div><span class="kit-label">Kit Core + 5 tặng = 25 kit</span><br><span class="kit-bonus">+ Brand Pro ×2 + Revenue Share 15%</span></div>
+          </div>
+        </div>
+        <div class="pack-price-block">
+          <div class="price-retail">Giá lẻ: 119,934,000đ</div>
+          <div class="price-main" style="color:#c4b5fd">69,997,000đ</div>
+          <div class="price-per">≈ 3,181K/kit · 2 Brand Pro miễn phí · 42% OFF</div>
+          <div class="price-save">💰 Tiết kiệm 49,937,000đ</div>
+        </div>
+        <div class="pack-body">
+          <div class="pack-includes-title">Tất cả Growth +</div>
+          <div class="pack-item">20 kit Core Group + 5 tặng = 25 kit</div>
+          <div class="pack-item bonus">2 Brand Pro (19,994K) miễn phí cho quản lý</div>
+          <div class="pack-item bonus">VIP Strategy Day 1:1 với F1 (6h)</div>
+          <div class="pack-item bonus">White-label content pack (50 templates)</div>
+          <div class="pack-item bonus">Đào tạo 2 Trainer Nội Bộ cho agency</div>
+          <div class="pack-item exclusive">Revenue Share 15% — bán kit cho network</div>
+          <div class="pack-item exclusive">Exclusive theo tỉnh (chỉ 2 agency)</div>
+          <div class="pack-item exclusive">Ưu tiên cohort mới · Không tăng giá</div>
+        </div>
+        <div class="pack-footer">
+          <a href="https://zalo.me/0912345678" class="pack-cta cta-agency">💬 Đăng Ký Gói Agency</a>
+          <div class="pack-payment">1 lần / 3 đợt (24,997K × 3) · Ký biên bản</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON TABLE ===== -->
+<section class="section">
+  <div class="section-inner wide">
+    <span class="eyebrow">So Sánh Chi Tiết</span>
+    <h2 class="section-title">Quyền Lợi Đầy Đủ</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Quyền Lợi</th>
+          <th>🥉 Starter</th>
+          <th class="highlight-col">🏆 Growth</th>
+          <th>💎 Agency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Kit Core Group F2</td><td>5 kit</td><td class="highlight-col">10 kit</td><td>20 kit</td></tr>
+        <tr><td>Kit tặng thêm</td><td>+1 kit</td><td class="highlight-col">+2 kit</td><td>+5 kit</td></tr>
+        <tr><td>Tổng kit nhận</td><td>6</td><td class="highlight-col"><strong>12</strong></td><td><strong>25</strong></td></tr>
+        <tr><td>Brand Pro cho F1</td><td class="cross">—</td><td class="highlight-col"><span class="check">✓ 1 suất</span></td><td><span class="check">✓ 2 suất</span></td></tr>
+        <tr><td>Onboarding session</td><td>Zoom 60'</td><td class="highlight-col">Workshop 3h</td><td>VIP Day 6h</td></tr>
+        <tr><td>Monthly review</td><td class="cross">—</td><td class="highlight-col"><span class="check">✓ 3 lần</span></td><td><span class="check">✓ Unlimited</span></td></tr>
+        <tr><td>Content Strategy phối hợp</td><td class="cross">—</td><td class="highlight-col"><span class="check">✓ 12 tuần</span></td><td><span class="check">✓ 24 tuần</span></td></tr>
+        <tr><td>White-label templates</td><td class="cross">—</td><td class="highlight-col cross">—</td><td><span class="check">✓ 50 templates</span></td></tr>
+        <tr><td>Trainer nội bộ</td><td class="cross">—</td><td class="highlight-col cross">—</td><td><span class="check">✓ 2 người</span></td></tr>
+        <tr><td>Revenue Share</td><td class="cross">—</td><td class="highlight-col cross">—</td><td><span class="check">✓ 15%</span></td></tr>
+        <tr><td>Exclusive territory</td><td class="cross">—</td><td class="highlight-col cross">—</td><td><span class="check">✓ Theo tỉnh</span></td></tr>
+        <tr style="background:rgba(0,0,0,.2)">
+          <td><strong>GIÁ</strong></td>
+          <td><span class="price-cell">17,997K</span></td>
+          <td class="highlight-col"><span class="price-cell" style="color:var(--gl)">39,997K</span></td>
+          <td><span class="price-cell" style="color:#c4b5fd">69,997K</span></td>
+        </tr>
+        <tr>
+          <td>Tiết kiệm so với lẻ</td>
+          <td>28%</td>
+          <td class="highlight-col"><strong>33%</strong></td>
+          <td><strong>42%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== VALUE STACK ===== -->
+<section class="section" style="background:var(--bg2)" id="value">
+  <div class="section-inner">
+    <span class="eyebrow">Giá Trị Thực Tế</span>
+    <h2 class="section-title">Gói Growth — Bóc Tách Từng Thứ</h2>
+    <p class="section-sub">Đây là những gì anh thực sự nhận được — và giá trị thực tế của từng hạng mục</p>
+    <div class="value-table">
+      <div class="vt-row"><span class="vt-icon">📦</span><span class="vt-name">10× Kit Core Group (mỗi kit 4,997K)</span><span class="vt-value">49,970,000đ</span></div>
+      <div class="vt-row"><span class="vt-icon">🏆</span><span class="vt-name">1× Brand Pro cho F1 (giá lẻ 9,997K)</span><span class="vt-value">9,997,000đ</span></div>
+      <div class="vt-row"><span class="vt-icon">📦</span><span class="vt-name">2× Kit tặng thêm (cho F2 reserve)</span><span class="vt-value">9,994,000đ</span></div>
+      <div class="vt-row"><span class="vt-icon">💻</span><span class="vt-name">Workshop Kickoff 3h (Zoom toàn team)</span><span class="vt-value">5,000,000đ</span></div>
+      <div class="vt-row"><span class="vt-icon">📅</span><span class="vt-name">Content Strategy phối hợp 12 tuần</span><span class="vt-value">4,000,000đ</span></div>
+      <div class="vt-row"><span class="vt-icon">📊</span><span class="vt-name">Monthly Performance Review × 3 lần</span><span class="vt-value">3,000,000đ</span></div>
+      <div class="vt-row total"><span class="vt-icon">📈</span><span class="vt-name">Tổng giá trị nhận được</span><span class="vt-value">81,961,000đ</span></div>
+    </div>
+    <div class="vt-price-reveal">
+      <div class="vpr-label">Giá Team Pack Growth</div>
+      <div class="vpr-price">39,997,000đ</div>
+      <div class="vpr-save">✓ Tiết kiệm 41,964,000đ · Nhận 2.05× giá trị so với tiền bỏ ra</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROI ===== -->
+<section class="section roi-section" id="roi">
+  <div class="section-inner">
+    <span class="eyebrow">ROI Calculator</span>
+    <h2 class="section-title">1 Deal Đủ Cover Cả Gói Kit</h2>
+    <p class="section-sub">Anh không cần tin vào con số trên giấy. Hãy tự tính theo thực tế.</p>
+    <div class="roi-calc">
+      <div class="roi-row">
+        <span class="roi-label">Hoa hồng trung bình 1 deal BĐS HLX</span>
+        <span class="roi-val gold">80,000,000đ</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Số F2 trong team Growth Pack</span>
+        <span class="roi-val">12 người</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Mục tiêu: mỗi F2 thêm 1 deal/quý nhờ kit</span>
+        <span class="roi-val">12 deals/quý</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Doanh thu thêm từ team (12 × 80tr)</span>
+        <span class="roi-val green">960,000,000đ</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Chi phí Growth Pack</span>
+        <span class="roi-val" style="color:#fca5a5">39,997,000đ</span>
+      </div>
+      <div class="roi-row" style="border:none;padding-top:16px">
+        <span class="roi-label" style="font-weight:800;color:#fff;font-size:16px">ROI thuần</span>
+        <span class="roi-val green" style="font-size:22px;font-family:'Playfair Display',serif">24× — 2,300%</span>
+      </div>
+    </div>
+    <div class="roi-conclusion">
+      <strong>Kết luận đơn giản:</strong> Nếu cả team F2 chỉ cần close thêm <strong>1 deal thêm/quý</strong> nhờ script và hệ thống từ kit — anh đã thu hồi gần <strong>24 lần tiền đầu tư</strong>. Và với 12 người, 1 deal thêm/quý mỗi người không phải kỳ vọng cao — đó là <em>tiêu chuẩn tối thiểu</em>.
+    </div>
+  </div>
+</section>
+
+<!-- ===== GUARANTEE ===== -->
+<section class="section">
+  <div class="section-inner">
+    <span class="eyebrow">Cam Kết</span>
+    <h2 class="section-title">Anh Không Có Gì Để Mất</h2>
+    <div class="guarantee-box">
+      <div class="guarantee-icon">🛡️</div>
+      <div>
+        <div class="guarantee-title">Cam Kết 30 Ngày Đội Nhóm Vào Guồng</div>
+        <div class="guarantee-body">
+          Nếu sau <strong>30 ngày</strong>, toàn bộ team F2 chưa setup được hồ sơ cá nhân, chưa có lịch đăng bài và chưa dùng được script — chúng tôi hoàn lại <strong>100% không hỏi thêm câu nào</strong>.<br><br>
+          Tại sao dám cam kết? Vì kit được thiết kế để bắt đầu trong 3 ngày. Nếu sau 30 ngày vẫn chưa chạy được — đó là lỗi của chúng tôi, không phải của anh.<br><br>
+          <em style="color:rgba(232,223,200,.4)">* Áp dụng khi tham gia đầy đủ buổi onboarding. Không áp dụng nếu team không tham gia buổi kickoff.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <span class="eyebrow">Câu Hỏi Thường Gặp</span>
+    <h2 class="section-title">Anh Đang Thắc Mắc Điều Gì?</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">F2 có trình độ khác nhau — kit có phù hợp không? <span class="faq-chevron">▼</span></div>
+        <div class="faq-a">Kit được thiết kế cho cả người mới (F2 vừa vào nghề) lẫn người có kinh nghiệm (cần hệ thống hóa). Module 1 giành cho người mới — Module 3-4 giành cho người có base. F2 có thể học theo tốc độ riêng.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">F2 cần có thiết bị/kỹ năng gì không? <span class="faq-chevron">▼</span></div>
+        <div class="faq-a">Chỉ cần smartphone + tài khoản mạng xã hội (Facebook/Zalo/TikTok). Không cần máy tính xịn, không cần kỹ năng thiết kế. Kit bao gồm hướng dẫn tạo ảnh bằng Canva miễn phí.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Tôi có thể thêm kit cho F2 mới vào sau không? <span class="faq-chevron">▼</span></div>
+        <div class="faq-a">Có. Gói Growth tặng 2 kit reserve — anh có thể giữ để cấp cho F2 mới tuyển trong vòng 60 ngày. Nếu cần thêm sau đó, anh mua bổ sung theo giá ưu đãi của gói đã đăng ký (không cần mua lẻ).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Buổi onboarding diễn ra như thế nào? <span class="faq-chevron">▼</span></div>
+        <div class="faq-a">Gói Starter: Zoom 60' — hướng dẫn từng bước setup, phân công F2, đặt KPI. Gói Growth: Workshop 3h — setup + content strategy + phân chia khu vực. Gói Agency: VIP Day 6h — lên kế hoạch toàn diện 6 tháng cho agency.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Revenue Share trong Agency Pack hoạt động thế nào? <span class="faq-chevron">▼</span></div>
+        <div class="faq-a">Agency được cấp link giới thiệu riêng. Khi bất kỳ ai mua kit qua link đó — agency nhận 15% hoa hồng ngay sau khi thanh toán xác nhận. Không giới hạn số người giới thiệu, không cần xin phép từng lần.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Thanh toán có được chia nhỏ không? <span class="faq-chevron">▼</span></div>
+        <div class="faq-a">Có. Starter: 1 lần hoặc 2 đợt. Growth: 1 lần hoặc 3 đợt × 13,997K. Agency: 1 lần hoặc 3 đợt × 23,997K. Đợt sau cách đợt trước 45 ngày. Kit được mở ngay sau đợt 1.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Tôi đang bán dự án khác, không phải HLX — có dùng được không? <span class="faq-chevron">▼</span></div>
+        <div class="faq-a">Framework, script xử lý từ chối, hệ thống content và personal brand đều áp dụng được cho bất kỳ dự án BĐS nào. Chỉ phần case study và thông tin dự án là HLX-specific — anh có thể thay bằng dự án mình đang bán.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== URGENCY ===== -->
+<section class="urgency-section">
+  <div class="section-inner" style="max-width:700px;margin:0 auto">
+    <h2 class="urgency-title">⚠️ Slot Cohort 1/2026 Có Giới Hạn</h2>
+    <p class="urgency-body">Chúng tôi giới hạn số lượng Team Pack để đảm bảo chất lượng onboarding cho từng đội. Đăng ký sớm để giữ chỗ với giá hiện tại.</p>
+    <div class="slot-badges">
+      <div class="slot-badge starter">
+        <span class="sb-name">Starter Pack</span>
+        <span class="sb-count starter">3</span>
+        <span class="sb-label">slot còn lại</span>
+      </div>
+      <div class="slot-badge growth">
+        <span class="sb-name">Growth Pack</span>
+        <span class="sb-count growth">2</span>
+        <span class="sb-label">slot còn lại</span>
+      </div>
+      <div class="slot-badge agency">
+        <span class="sb-name">Agency Pack</span>
+        <span class="sb-count agency">1</span>
+        <span class="sb-label">slot toàn tỉnh</span>
+      </div>
+    </div>
+    <a href="https://zalo.me/0912345678" class="btn-primary" style="font-size:15px">💬 Giữ Chỗ Qua Zalo</a>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-section" id="contact">
+  <div class="section-inner" style="max-width:600px">
+    <h2 class="final-title">Team Anh Xứng Đáng Có<br>Hệ Thống Tốt Hơn</h2>
+    <p class="final-sub">Đừng để F2 tiếp tục mò mẫm không có hướng. 1 buổi Zoom onboarding sẽ thay đổi hoàn toàn cách đội anh vận hành.</p>
+    <div class="final-options">
+      <a href="https://zalo.me/0912345678" class="zalo-btn">💬 Nhắn Zalo Tư Vấn Gói</a>
+      <a href="broker-brand-builder-sales.html" class="btn-secondary">🔗 Xem BBB Individual Kit</a>
+    </div>
+    <p class="ps-text">
+      <strong style="color:rgba(232,223,200,.5)">P.S.</strong> Nếu anh đang phân vân — hãy bắt đầu từ câu hỏi đơn giản: "Team F2 của tôi hiện đang onboard mất bao lâu?" Nếu câu trả lời là hơn 1 tuần — Team Pack đã đáng tiền chỉ từ bước đó.
+    </p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div>BDS Mastery Kit · Thiết kế cho môi giới BĐS cao cấp Việt Nam</div>
+  <div style="margin-top:6px">
+    <a href="KIT-HUB.html">Kit Hub</a> · <a href="MASTER-DASHBOARD.html">Dashboard</a> · <a href="broker-brand-builder-sales.html">BBB Cá Nhân</a>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+// smooth scroll offset for fixed nav
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){e.preventDefault();window.scrollTo({top:target.offsetTop-70,behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>

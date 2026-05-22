@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pitch Card F1/F2 — Team Pack · BDS Mastery Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a1628;--bg2:#0d1b2a;
+  --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+  --navy:#1B3A6B;--card:#0f1e30;--text:#e8dfc8;
+  --green:#27ae60;--vip:#7c3aed;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* ===== TOPBAR ===== */
+.topbar{background:rgba(10,22,40,.97);border-bottom:1px solid rgba(201,168,76,.15);padding:11px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:14px;color:#fff;font-weight:700;flex:1}
+.topbar-logo span{color:var(--gl);font-size:12px;font-weight:600;margin-left:6px}
+.tb-btn{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:8px;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s;text-decoration:none}
+.tb-print{background:rgba(255,255,255,.07);color:rgba(232,223,200,.7);border:1px solid rgba(255,255,255,.12)}
+.tb-print:hover{background:rgba(255,255,255,.12)}
+.tb-zalo{background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a}
+.tb-zalo:hover{opacity:.9}
+
+/* ===== TABS ===== */
+.tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.3);overflow-x:auto}
+.tab{padding:13px 22px;font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;color:rgba(232,223,200,.45);white-space:nowrap;transition:.15s;user-select:none;flex-shrink:0}
+.tab:hover{color:rgba(232,223,200,.8)}
+.tab.active{color:var(--gl);border-bottom-color:var(--gold)}
+
+.view{display:none;padding:24px 20px 40px}
+.view.active{display:block}
+.inner{max-width:960px;margin:0 auto}
+
+/* ===== PITCH CARD ===== */
+.pitch-header{text-align:center;margin-bottom:28px;padding:28px 20px;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.1),transparent 60%)}
+.pitch-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:14px}
+.pitch-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);color:#fff;font-weight:900;line-height:1.2;margin-bottom:10px}
+.pitch-sub{font-size:14px;color:rgba(232,223,200,.55);max-width:550px;margin:0 auto}
+
+.pack-trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-bottom:24px}
+.pc{background:var(--card);border-radius:16px;overflow:hidden;border:1.5px solid rgba(255,255,255,.07);transition:.2s}
+.pc:hover{transform:translateY(-2px)}
+.pc.starter{border-color:rgba(39,174,96,.3)}
+.pc.growth{border-color:rgba(201,168,76,.4);box-shadow:0 0 0 1px rgba(201,168,76,.1)}
+.pc.agency{border-color:rgba(124,58,237,.35)}
+
+.pc-head{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.pc-emoji{font-size:26px;margin-bottom:8px;display:block}
+.pc-name{font-family:'Playfair Display',serif;font-size:19px;color:#fff;font-weight:700;margin-bottom:3px}
+.pc-tag{font-size:11px;color:rgba(232,223,200,.45)}
+.pc-kits{display:flex;align-items:baseline;gap:5px;margin-top:10px}
+.pc-knum{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;line-height:1}
+.pc-knum.green{color:#4ade80}
+.pc-knum.gold{color:var(--gl)}
+.pc-knum.purple{color:#c4b5fd}
+.pc-klabel{font-size:12px;color:rgba(232,223,200,.4)}
+
+.pc-price{padding:12px 18px;background:rgba(0,0,0,.2);border-bottom:1px solid rgba(255,255,255,.05)}
+.pc-price-old{font-size:11px;color:rgba(232,223,200,.3);text-decoration:line-through}
+.pc-price-main{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:700;margin:2px 0}
+.pc-price-per{font-size:11px;color:rgba(232,223,200,.4)}
+.pc-save{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:20px;margin-top:4px}
+.save-green{background:rgba(39,174,96,.1);color:#4ade80;border:1px solid rgba(39,174,96,.2)}
+.save-gold{background:rgba(201,168,76,.1);color:var(--gl);border:1px solid rgba(201,168,76,.25)}
+.save-purple{background:rgba(124,58,237,.1);color:#c4b5fd;border:1px solid rgba(124,58,237,.25)}
+
+.pc-items{padding:14px 18px;flex:1}
+.pc-item{display:flex;gap:7px;font-size:12.5px;color:rgba(232,223,200,.65);margin-bottom:7px;align-items:flex-start}
+.pc-item.b::before{content:'🎁';font-size:11px;flex-shrink:0;margin-top:1px}
+.pc-item.c::before{content:'✓';color:var(--gold);font-weight:800;flex-shrink:0}
+.pc-item.s::before{content:'⭐';font-size:11px;flex-shrink:0;margin-top:1px}
+.pc-item.b{color:rgba(226,192,106,.7)}
+.pc-item.s{color:#c4b5fd}
+
+.pc-cta{margin:14px 18px 18px}
+.pc-cta-btn{display:block;text-align:center;padding:11px;border-radius:10px;font-weight:800;font-size:13.5px;cursor:pointer;text-decoration:none;transition:.15s}
+.cta-g{background:rgba(39,174,96,.12);border:1.5px solid rgba(39,174,96,.3);color:#4ade80}
+.cta-go{background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a}
+.cta-p{background:rgba(124,58,237,.12);border:1.5px solid rgba(124,58,237,.3);color:#c4b5fd}
+
+/* Compare strip */
+.compare-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:16px}
+.cs-item{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px 16px;text-align:center}
+.cs-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gl);display:block}
+.cs-label{font-size:11px;color:rgba(232,223,200,.4);margin-top:3px;display:block}
+
+/* ROI mini */
+.roi-mini{background:linear-gradient(135deg,rgba(39,174,96,.07),rgba(39,174,96,.02));border:1px solid rgba(39,174,96,.18);border-radius:16px;padding:20px 24px;margin-top:24px}
+.roi-mini-title{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:14px}
+.roi-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.roi-row:last-child{border:none;padding-top:12px}
+.roi-lbl{color:rgba(232,223,200,.6)}
+.roi-val{font-weight:700;color:#fff}
+.roi-val.gold{color:var(--gl)}
+.roi-val.green{color:#4ade80;font-size:16px;font-family:'Playfair Display',serif}
+.roi-val.red{color:#fca5a5}
+
+/* Guarantee mini */
+.guarantee-mini{background:rgba(39,174,96,.06);border:1px solid rgba(39,174,96,.15);border-radius:14px;padding:16px 20px;margin-top:16px;display:flex;gap:14px;align-items:flex-start}
+.gm-icon{font-size:30px;flex-shrink:0}
+.gm-title{font-size:14px;font-weight:700;color:#4ade80;margin-bottom:5px}
+.gm-body{font-size:12.5px;color:rgba(232,223,200,.6);line-height:1.6}
+
+/* ===== VIDEO SCRIPT TAB ===== */
+.script-section{margin-bottom:28px}
+.script-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:10px;display:block}
+.script-title{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:6px}
+.script-sub{font-size:13px;color:rgba(232,223,200,.45);margin-bottom:20px;line-height:1.6}
+
+.script-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.stab{font-size:12px;font-weight:700;padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(232,223,200,.5);cursor:pointer;transition:.15s;font-family:'Be Vietnam Pro',sans-serif}
+.stab:hover{background:rgba(255,255,255,.09);color:rgba(232,223,200,.9)}
+.stab.active{background:rgba(201,168,76,.13);border-color:rgba(201,168,76,.35);color:var(--gl)}
+
+.sview{display:none}
+.sview.active{display:block}
+
+.script-block{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.sb-meta{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.06)}
+.sb-title{font-size:12px;font-weight:800;color:rgba(232,223,200,.7);display:flex;align-items:center;gap:8px}
+.sb-timing{font-size:11px;color:rgba(232,223,200,.3);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:2px 9px}
+.copy-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 12px;border-radius:7px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gl);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.copy-btn:hover{background:rgba(201,168,76,.2)}
+.sb-content{padding:16px 18px;font-size:13.5px;color:rgba(232,223,200,.75);line-height:1.8;white-space:pre-wrap}
+.sb-content .cue{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gl);font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:5px;margin:0 3px;vertical-align:middle}
+.sb-content .hook{color:#fff;font-weight:700;font-size:15px}
+.sb-content .cta-txt{color:#4ade80;font-weight:700}
+.sb-content .note{color:rgba(232,223,200,.35);font-size:12px;font-style:italic}
+.sb-note{background:rgba(0,0,0,.2);padding:10px 16px;font-size:12px;color:rgba(232,223,200,.35);border-top:1px solid rgba(255,255,255,.05);line-height:1.5}
+
+/* Hook cards */
+.hook-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:14px}
+.hook-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px}
+.hook-num{font-size:10px;font-weight:800;letter-spacing:1px;color:rgba(226,192,106,.4);margin-bottom:8px;display:block}
+.hook-text{font-size:13.5px;color:rgba(232,223,200,.8);line-height:1.6;margin-bottom:10px}
+.hook-note{font-size:11.5px;color:rgba(232,223,200,.35);font-style:italic}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(39,174,96,.92);color:#fff;font-size:12.5px;font-weight:700;padding:10px 20px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media print{
+  .topbar,.tabs{display:none!important}
+  .view{display:block!important;padding:0}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast">✅ Đã copy!</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">Pitch Card F1/F2 <span>· Team Pack · BDS Mastery Kit</span></div>
+  <button class="tb-btn tb-print" onclick="window.print()">🖨️ In / PDF</button>
+  <a href="team-pack-f1.html" target="_blank" class="tb-btn" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(232,223,200,.7)">🔗 Sales Page</a>
+  <a href="https://zalo.me/0912345678" class="tb-btn tb-zalo">💬 Zalo</a>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('pitch',this)">📦 Pitch Card · 3 Gói</div>
+  <div class="tab" onclick="switchTab('video',this)">🎬 Script Video 60 Giây</div>
+  <div class="tab" onclick="switchTab('hooks',this)">⚡ Hook TikTok/Reels</div>
+  <div class="tab" onclick="switchTab('zalo',this)">💬 Script Zalo F1</div>
+</div>
+
+<!-- ===== VIEW: PITCH CARD ===== -->
+<div class="view active" id="view-pitch">
+  <div class="inner">
+
+    <div class="pitch-header">
+      <div class="pitch-badge">🏆 Dành Cho F1 Team Leader · BDS Mastery Kit</div>
+      <h1 class="pitch-title">Team Pack — Trang Bị Toàn Đội F2<br>Tiết Kiệm Đến 42%</h1>
+      <p class="pitch-sub">Mua kit số lượng lớn · Onboarding cả team 3 ngày · Tặng Brand Pro F1 · Revenue Share</p>
+    </div>
+
+    <!-- 3 PACKS -->
+    <div class="pack-trio">
+
+      <!-- STARTER -->
+      <div class="pc starter">
+        <div class="pc-head">
+          <span class="pc-emoji">🥉</span>
+          <div class="pc-name">Starter Pack</div>
+          <div class="pc-tag">Team 3-7 F2 · Bắt đầu đúng cách</div>
+          <div class="pc-kits">
+            <span class="pc-knum green">6</span>
+            <span class="pc-klabel">kit nhận được<br>(5 mua + 1 tặng)</span>
+          </div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-price-old">Lẻ: 24,985,000đ</div>
+          <div class="pc-price-main">17,997,000đ</div>
+          <div class="pc-price-per">≈ 3,599K/kit</div>
+          <span class="pc-save save-green">Tiết kiệm 28%</span>
+        </div>
+        <div class="pc-items">
+          <div class="pc-item c">5 kit Core Group đầy đủ</div>
+          <div class="pc-item c">Script bán hàng + xử lý từ chối</div>
+          <div class="pc-item c">Content library 90 ngày</div>
+          <div class="pc-item b">+1 kit tặng thêm</div>
+          <div class="pc-item b">Onboarding Zoom 60'</div>
+          <div class="pc-item b">Kit Quản Lý Đội Nhóm F1</div>
+          <div class="pc-item b">Telegram 90 ngày</div>
+        </div>
+        <div class="pc-cta">
+          <a href="https://zalo.me/0912345678" class="pc-cta-btn cta-g">💬 Đăng Ký Gói Starter</a>
+        </div>
+      </div>
+
+      <!-- GROWTH -->
+      <div class="pc growth">
+        <div class="pc-head">
+          <span class="pc-emoji">🏆</span>
+          <div class="pc-name">Growth Pack <span style="background:var(--gold);color:#0d1b2a;font-size:9px;font-weight:800;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:5px">PHỔ BIẾN</span></div>
+          <div class="pc-tag">Team 8-15 F2 · Nhân đôi doanh thu</div>
+          <div class="pc-kits">
+            <span class="pc-knum gold">12</span>
+            <span class="pc-klabel">kit nhận được<br>(10 mua + 2 tặng)</span>
+          </div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-price-old">Lẻ: 59,967,000đ</div>
+          <div class="pc-price-main" style="color:var(--gl)">39,997,000đ</div>
+          <div class="pc-price-per">≈ 3,636K/kit · Brand Pro F1 miễn phí</div>
+          <span class="pc-save save-gold">Tiết kiệm 33% + 9,997K Brand Pro</span>
+        </div>
+        <div class="pc-items">
+          <div class="pc-item c">Tất cả trong Starter Pack</div>
+          <div class="pc-item c">10 kit Core Group cho F2</div>
+          <div class="pc-item b">Brand Pro (9,997K) cho F1</div>
+          <div class="pc-item b">+2 kit tặng cho F2 mới</div>
+          <div class="pc-item b">Workshop 3h toàn team</div>
+          <div class="pc-item b">Content Strategy phối hợp 12 tuần</div>
+          <div class="pc-item b">Monthly Review × 3 lần</div>
+        </div>
+        <div class="pc-cta">
+          <a href="https://zalo.me/0912345678" class="pc-cta-btn cta-go">💬 Đăng Ký Gói Growth</a>
+        </div>
+      </div>
+
+      <!-- AGENCY -->
+      <div class="pc agency">
+        <div class="pc-head">
+          <span class="pc-emoji">💎</span>
+          <div class="pc-name">Agency Pack</div>
+          <div class="pc-tag">Agency 15-30+ F2 · Revenue Share</div>
+          <div class="pc-kits">
+            <span class="pc-knum purple">25</span>
+            <span class="pc-klabel">kit nhận được<br>(20 mua + 5 tặng)</span>
+          </div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-price-old">Lẻ: 119,934,000đ</div>
+          <div class="pc-price-main" style="color:#c4b5fd">69,997,000đ</div>
+          <div class="pc-price-per">≈ 3,181K/kit · 2 Brand Pro miễn phí · 42% OFF</div>
+          <span class="pc-save save-purple">Tiết kiệm 42% + Revenue Share 15%</span>
+        </div>
+        <div class="pc-items">
+          <div class="pc-item c">Tất cả trong Growth Pack</div>
+          <div class="pc-item c">25 kit tổng cộng (20+5)</div>
+          <div class="pc-item b">2 Brand Pro miễn phí cho quản lý</div>
+          <div class="pc-item b">VIP Strategy Day 6h</div>
+          <div class="pc-item b">White-label 50 templates</div>
+          <div class="pc-item s">Revenue Share 15% ongoing</div>
+          <div class="pc-item s">Exclusive theo tỉnh</div>
+        </div>
+        <div class="pc-cta">
+          <a href="https://zalo.me/0912345678" class="pc-cta-btn cta-p">💬 Đăng Ký Gói Agency</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARE STRIP -->
+    <div class="compare-strip">
+      <div class="cs-item"><span class="cs-num">3 ngày</span><span class="cs-label">Toàn team vào guồng</span></div>
+      <div class="cs-item"><span class="cs-num">42%</span><span class="cs-label">Tiết kiệm gói Agency</span></div>
+      <div class="cs-item"><span class="cs-num">24×</span><span class="cs-label">ROI nếu thêm 1 deal/quý</span></div>
+      <div class="cs-item"><span class="cs-num">30</span><span class="cs-label">Ngày cam kết hoàn tiền</span></div>
+    </div>
+
+    <!-- ROI MINI -->
+    <div class="roi-mini">
+      <div class="roi-mini-title">📊 ROI Đơn Giản — Gói Growth</div>
+      <div class="roi-row"><span class="roi-lbl">Hoa hồng 1 deal BĐS HLX</span><span class="roi-val gold">80,000,000đ</span></div>
+      <div class="roi-row"><span class="roi-lbl">Số F2 nhận kit</span><span class="roi-val">12 người</span></div>
+      <div class="roi-row"><span class="roi-lbl">Mỗi F2 thêm 1 deal/quý → 12 deals</span><span class="roi-val">960,000,000đ</span></div>
+      <div class="roi-row"><span class="roi-lbl">Chi phí Growth Pack</span><span class="roi-val red">39,997,000đ</span></div>
+      <div class="roi-row" style="border:none"><span class="roi-lbl" style="font-weight:700;color:#fff">ROI thuần</span><span class="roi-val green">24× — 2,300%</span></div>
+    </div>
+
+    <!-- GUARANTEE MINI -->
+    <div class="guarantee-mini">
+      <div class="gm-icon">🛡️</div>
+      <div>
+        <div class="gm-title">Cam Kết 30 Ngày — Đội Vào Guồng Hoặc Hoàn Tiền</div>
+        <div class="gm-body">Sau 30 ngày nếu team F2 chưa setup được hồ sơ, chưa có lịch đăng bài và chưa dùng script — hoàn 100% không hỏi. Bắt đầu trong 3 ngày, không phải 3 tháng.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== VIEW: VIDEO SCRIPT ===== -->
+<div class="view" id="view-video">
+  <div class="inner">
+    <span class="script-label">Script Video · TikTok / Reels / YouTube Shorts</span>
+    <h2 class="script-title">Script 60 Giây — Team Pack F1</h2>
+    <p class="script-sub">3 phiên bản để A/B test · Mỗi script targeting một pain point khác nhau · Copy và quay ngay</p>
+
+    <div class="script-tabs">
+      <div class="stab active" onclick="switchScript('v1',this)">🎬 V1 · Pain "Onboard Mệt"</div>
+      <div class="stab" onclick="switchScript('v2',this)">🎬 V2 · Pain "Deal Rơi"</div>
+      <div class="stab" onclick="switchScript('v3',this)">🎬 V3 · Aspirational "Scale"</div>
+    </div>
+
+    <!-- V1 -->
+    <div class="sview active" id="sv-v1">
+      <div class="script-block">
+        <div class="sb-meta">
+          <span class="sb-title">🎬 V1 — "Onboard Cả Đội Trong 3 Ngày" · <span style="color:rgba(232,223,200,.35);font-weight:500">Target: F1 đang mệt với việc train F2</span></span>
+          <span class="sb-timing">⏱️ ~60 giây</span>
+        </div>
+        <div class="sb-content" id="sc-v1"><span class="cue">[0-3s · Hook]</span>
+<span class="hook">Anh/chị đang mất BAO NHIÊU TUẦN để train 1 F2 mới?</span>
+
+<span class="cue">[4-8s · Pain]</span>
+Nếu câu trả lời là hơn 1 tuần — anh đang lãng phí thời gian và tiền hoa hồng mỗi ngày.
+
+<span class="cue">[9-18s · Problem]</span>
+Team F2 không có hồ sơ chuẩn. Không có script bán hàng. Không biết cách xử lý từ chối.
+Kết quả: khách hỏi — F2 lúng túng. Khách từ chối — F2 bỏ cuộc. Deal rơi vào đội khác.
+
+<span class="cue">[19-30s · Solution]</span>
+Tôi vừa xây xong BDS Mastery Kit — bộ hệ thống đầy đủ cho môi giới BĐS cao cấp.
+Script sẵn. Content plan sẵn. Hồ sơ chuẩn sẵn. F2 học và chạy được trong 3 ngày.
+
+<span class="cue">[31-45s · Offer]</span>
+Tôi đang mở gói Team Pack dành riêng cho F1:
+Mua 5 kit — giảm 28%, tặng 1 kit thêm, cộng onboarding Zoom cho cả đội.
+Mua 10 kit — giảm 33%, tặng Brand Pro cho F1, workshop 3h.
+Mua 20 kit — giảm 42%, thêm Revenue Share 15% khi giới thiệu.
+
+<span class="cue">[46-55s · Urgency]</span>
+Cohort 1/2026 chỉ còn 5 slot. Agency Pack chỉ 1 suất toàn tỉnh.
+
+<span class="cue">[56-60s · CTA]</span>
+<span class="cta-txt">Nhắn "TEAM" vào Zalo bên dưới để tôi tư vấn gói phù hợp cho đội anh.</span>
+<span class="note">[Chỉ vào link Zalo trong bio/comment]</span></div>
+        <div class="sb-note">💡 Quay theo format dọc 9:16 · Khuôn mặt chiếm 60% frame · Dùng text overlay tại các cue · Nền: văn phòng hoặc background neutral</div>
+        <div class="sb-meta" style="justify-content:flex-end;padding:10px 16px">
+          <button class="copy-btn" onclick="copyScript('sc-v1')">📋 Copy Toàn Bộ Script</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- V2 -->
+    <div class="sview" id="sv-v2">
+      <div class="script-block">
+        <div class="sb-meta">
+          <span class="sb-title">🎬 V2 — "Deal Rơi Vì F2 Không Có Script" · <span style="color:rgba(232,223,200,.35);font-weight:500">Target: F1 đang mất deal vì team yếu</span></span>
+          <span class="sb-timing">⏱️ ~60 giây</span>
+        </div>
+        <div class="sb-content" id="sc-v2"><span class="cue">[0-3s · Hook]</span>
+<span class="hook">Tuần trước đội F2 của tôi để rơi 2 deal vì không biết xử lý từ chối.</span>
+
+<span class="cue">[4-12s · Story]</span>
+Khách nói "để tôi suy nghĩ thêm" — F2 đáp "ok anh/chị nhé!"
+Khách nói "giá cao quá" — F2 không biết phản hồi gì.
+Mỗi deal như vậy là 50-150 triệu đi thẳng vào tay đội đối thủ.
+
+<span class="cue">[13-22s · Root Cause]</span>
+Không phải F2 thiếu cố gắng. Là họ THIẾU HỆ THỐNG.
+Không có script chuẩn để xử lý từ chối. Không có quy trình follow-up. Không có personal brand để khách tin tưởng từ đầu.
+
+<span class="cue">[23-35s · Solution]</span>
+Tôi đã giải quyết vấn đề này bằng BDS Mastery Kit — Team Pack.
+Toàn bộ đội nhận kit cùng lúc. Script xử lý 10 tình huống từ chối phổ biến nhất.
+Content plan 90 ngày. Hồ sơ cá nhân chuẩn. Onboarding 1 buổi — cả team vào guồng.
+
+<span class="cue">[36-48s · Offer]</span>
+3 gói tuỳ quy mô team:
+🥉 5 kit — 17,997K (3,599K/kit · tặng 1 kit thêm)
+🏆 10 kit — 39,997K (Brand Pro cho F1 miễn phí)
+💎 20 kit — 69,997K (42% off · Revenue Share 15%)
+
+<span class="cue">[49-57s · Guarantee + Urgency]</span>
+Cam kết 30 ngày: team vào guồng hoặc hoàn tiền 100%.
+Chỉ còn 3 slot Starter và 1 slot Agency.
+
+<span class="cue">[58-60s · CTA]</span>
+<span class="cta-txt">Comment "TEAM" để tôi gửi bảng giá chi tiết.</span></div>
+        <div class="sb-note">💡 Hook bằng storytelling thật sẽ viral hơn · Quay tại hiện trường thực tế (văn phòng, đang làm việc) · Không cần perfect — authentic beats polished</div>
+        <div class="sb-meta" style="justify-content:flex-end;padding:10px 16px">
+          <button class="copy-btn" onclick="copyScript('sc-v2')">📋 Copy Toàn Bộ Script</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- V3 -->
+    <div class="sview" id="sv-v3">
+      <div class="script-block">
+        <div class="sb-meta">
+          <span class="sb-title">🎬 V3 — "Scale Đội Nhóm" · <span style="color:rgba(232,223,200,.35);font-weight:500">Target: F1 muốn nhân rộng đội</span></span>
+          <span class="sb-timing">⏱️ ~60 giây</span>
+        </div>
+        <div class="sb-content" id="sc-v3"><span class="cue">[0-3s · Hook mạnh]</span>
+<span class="hook">Bí quyết để onboard 10 F2 mới trong 3 ngày — không cần train tay đôi.</span>
+
+<span class="cue">[4-14s · Dream Outcome]</span>
+Hãy tưởng tượng: thứ 2 bạn giao kit cho cả đội.
+Thứ 3: buổi onboarding Zoom — mọi người setup hồ sơ, nhận script, lên lịch content.
+Thứ 4: F2 đã bắt đầu đăng bài. Bạn chỉ cần theo dõi KPI.
+
+Không còn phải ngồi train từng người. Không còn mỗi F2 mới là bắt đầu lại từ đầu.
+
+<span class="cue">[15-28s · System]</span>
+Đây là cách tôi xây đội nhóm có hệ thống bằng BDS Mastery Kit.
+Kit gồm: script bán hàng, content plan 90 ngày, hồ sơ chuẩn, checklist onboarding.
+F2 tự học. F1 tự scale. Không cần micromanage.
+
+<span class="cue">[29-42s · Offer với ROI]</span>
+Gói Team Pack dành cho F1:
+5 kit: 17,997K — tiết kiệm 28%, tặng onboarding chung
+10 kit: 39,997K — tặng Brand Pro cho F1 + workshop 3h
+20 kit: 69,997K — Revenue Share 15% + exclusive territory
+
+ROI: 1 deal thêm/quý/F2 × 12 người × 80 triệu = gần 1 tỷ doanh thu thêm.
+Chi phí kit: 40 triệu. Đó là 24 lần đầu tư.
+
+<span class="cue">[43-52s · Credibility]</span>
+Kit được thiết kế riêng cho môi giới BĐS cao cấp — script cụ thể, case study thực tế, không phải lý thuyết chung chung.
+
+<span class="cue">[53-60s · CTA]</span>
+<span class="cta-txt">Nhắn "SCALE" vào Zalo hoặc link bio để nhận bảng so sánh 3 gói.</span>
+<span class="note">[Point to CTA in bio]</span></div>
+        <div class="sb-note">💡 Script aspirational này phù hợp quay dạng "talking head" hoặc voiceover + B-roll đội nhóm đang làm việc · Dùng text caption mỗi bullet point</div>
+        <div class="sb-meta" style="justify-content:flex-end;padding:10px 16px">
+          <button class="copy-btn" onclick="copyScript('sc-v3')">📋 Copy Toàn Bộ Script</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTION NOTES -->
+    <div class="script-block" style="margin-top:20px">
+      <div class="sb-meta"><span class="sb-title">🎥 Ghi Chú Sản Xuất Video</span></div>
+      <div class="sb-content" id="sc-notes"><strong style="color:#fff">Format:</strong> Dọc 9:16 · 1080×1920px · 60 giây max
+<strong style="color:#fff">Quay:</strong> Khuôn mặt chiếm 60-70% frame · Nhìn thẳng camera · Ánh sáng phía trước
+<strong style="color:#fff">Caption:</strong> Text overlay tại mỗi con số quan trọng (17,997K / 3 ngày / 24×)
+<strong style="color:#fff">Hook A/B test:</strong> Quay 3 phiên bản hook khác nhau, đăng cùng script — so sánh view 24h đầu
+<strong style="color:#fff">CTA chiến lược:</strong>
+  - TikTok: Comment keyword → DM tự động (nếu có ManyChat)
+  - Reels: "Link bio" → team-pack-f1.html
+  - YouTube Shorts: "Pinned comment" với link tư vấn Zalo
+
+<strong style="color:#fff">Tần suất đăng:</strong> 1 video/ngày trong 7 ngày đầu · Mix 3 script V1/V2/V3
+<strong style="color:#fff">Kênh ưu tiên:</strong> TikTok (viral potential) → Reels (F1 network) → Zalo feed</div>
+      <div class="sb-meta" style="justify-content:flex-end;padding:10px 16px">
+        <button class="copy-btn" onclick="copyScript('sc-notes')">📋 Copy Notes</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== VIEW: HOOKS ===== -->
+<div class="view" id="view-hooks">
+  <div class="inner">
+    <span class="script-label">Hook Library · TikTok / Reels / Facebook</span>
+    <h2 class="script-title">30 Hook Mở Đầu Video</h2>
+    <p class="script-sub">Dùng 3 giây đầu để giữ chân xem tiếp · Test nhiều hook cùng 1 script · Chọn hook có retention cao nhất</p>
+
+    <div class="hook-grid">
+      <div class="hook-card"><span class="hook-num">HOOK 01 · Pain Direct</span><div class="hook-text">"Anh/chị đang train F2 mất BAO NHIÊU TUẦN?"</div><div class="hook-note">Best cho: F1 đang bị pain điểm onboard</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 02 · Loss Aversion</span><div class="hook-text">"Đội tôi đã mất 2 deal tuần này vì F2 không có script."</div><div class="hook-note">Best cho: F1 đang bị mất deal</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 03 · Curiosity</span><div class="hook-text">"Bí quyết để 10 F2 mới vào guồng trong 3 ngày."</div><div class="hook-note">Best cho: F1 muốn scale nhanh</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 04 · Contrast</span><div class="hook-text">"Đội A train F2 mất 6 tuần. Đội B mất 3 ngày. Sự khác biệt là gì?"</div><div class="hook-note">Best cho: So sánh cạnh tranh</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 05 · Question</span><div class="hook-text">"F2 của anh đang có bao nhiêu lead tự kéo về mỗi tuần?"</div><div class="hook-note">Best cho: F1 biết F2 không có lead</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 06 · Số liệu shock</span><div class="hook-text">"60% F2 BĐS bỏ việc trong 3 tháng đầu. Đây là lý do thật sự."</div><div class="hook-note">Best cho: F1 bị turnover cao</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 07 · Result first</span><div class="hook-text">"Tôi vừa onboard 10 F2 cùng lúc — mà chỉ mất 1 buổi."</div><div class="hook-note">Best cho: Testimonial style</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 08 · Mistake</span><div class="hook-text">"Sai lầm lớn nhất của F1 khi xây đội nhóm BĐS."</div><div class="hook-note">Best cho: Educational content</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 09 · ROI</span><div class="hook-text">"40 triệu đầu tư — 960 triệu doanh thu thêm. Tôi làm thế nào?"</div><div class="hook-note">Best cho: Business-minded F1</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 10 · Exclusive</span><div class="hook-text">"Gói này chỉ dành cho F1 — và chỉ còn 1 slot toàn tỉnh."</div><div class="hook-note">Best cho: Agency Pack targeting</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 11 · Nỗi đau cụ thể</span><div class="hook-text">"Khách nói 'để tôi suy nghĩ' — F2 của anh trả lời thế nào?"</div><div class="hook-note">Best cho: Sales skill hook</div></div>
+      <div class="hook-card"><span class="hook-num">HOOK 12 · Vision</span><div class="hook-text">"Đội F2 chạy được không cần anh micromanage — có thể không?"</div><div class="hook-note">Best cho: Scale aspirational</div></div>
+    </div>
+    <div style="text-align:right;margin-top:16px">
+      <button class="copy-btn" onclick="copyAllHooks()">📋 Copy Tất Cả 12 Hook</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VIEW: ZALO SCRIPT ===== -->
+<div class="view" id="view-zalo">
+  <div class="inner">
+    <span class="script-label">Script Nhắn Tin · Zalo / Messenger</span>
+    <h2 class="script-title">Kịch Bản Tiếp Cận F1</h2>
+    <p class="script-sub">5 bước từ làm quen → chốt deal · Copy và customize tên/số liệu theo từng F1</p>
+
+    <div class="script-block">
+      <div class="sb-meta"><span class="sb-title">📱 Tin nhắn 1 — Mở đầu · Đặt câu hỏi</span><span class="sb-timing">Ngày 1</span></div>
+      <div class="sb-content" id="zalo-1">Chào anh [TÊN], em [TÊN EM] đây ạ — mình đang cùng phân phối HLX / [dự án chung].
+
+Em muốn hỏi anh 1 câu nhanh: anh đang có bao nhiêu F2 trong team và onboard mỗi người mất khoảng bao lâu ạ?
+
+Em đang có 1 giải pháp khá thú vị cho vấn đề này muốn chia sẻ với anh.</div>
+      <div class="sb-meta" style="justify-content:flex-end;padding:8px 16px">
+        <button class="copy-btn" onclick="copyScript('zalo-1')">📋 Copy</button>
+      </div>
+    </div>
+
+    <div class="script-block">
+      <div class="sb-meta"><span class="sb-title">📱 Tin nhắn 2 — Sau khi anh ấy reply</span><span class="sb-timing">Ngày 1-2</span></div>
+      <div class="sb-content" id="zalo-2">Dạ em hiểu rồi anh, [X tuần/người] là khá bình thường với hầu hết F1 — nhưng nếu có 10 F2 là đã mất [X × 10] tuần rồi ạ.
+
+Em vừa xong bộ BDS Mastery Kit — thiết kế riêng cho môi giới BĐS cao cấp. Script, content plan, hồ sơ — F2 học và chạy được trong 3 ngày.
+
+Em đang có gói Team Pack dành cho F1: mua 5-10-20 kit cùng lúc giảm 28-42%, tặng thêm kit và anh nhận Brand Pro miễn phí.
+
+Anh cho em gửi bảng chi tiết vào đây được không ạ?</div>
+      <div class="sb-meta" style="justify-content:flex-end;padding:8px 16px">
+        <button class="copy-btn" onclick="copyScript('zalo-2')">📋 Copy</button>
+      </div>
+    </div>
+
+    <div class="script-block">
+      <div class="sb-meta"><span class="sb-title">📱 Tin nhắn 3 — Gửi pitch card</span><span class="sb-timing">Ngày 2</span></div>
+      <div class="sb-content" id="zalo-3">Anh ơi, em gửi anh link pitch card tóm tắt 3 gói nhé:
+👉 [LINK pitch-card-f1.html]
+
+Anh xem thử — nếu có câu hỏi gì em trả lời ngay ạ.
+
+Nhanh nhất là gói Growth (10 kit): anh nhận ngay Brand Pro cho mình + workshop cả đội trong tuần này.
+
+ROI đơn giản: team anh chỉ cần thêm 1 deal/quý nhờ kit = 40 triệu đầu tư → gần 1 tỷ thêm.</div>
+      <div class="sb-meta" style="justify-content:flex-end;padding:8px 16px">
+        <button class="copy-btn" onclick="copyScript('zalo-3')">📋 Copy</button>
+      </div>
+    </div>
+
+    <div class="script-block">
+      <div class="sb-meta"><span class="sb-title">📱 Tin nhắn 4 — Follow up sau 48h</span><span class="sb-timing">Ngày 3-4</span></div>
+      <div class="sb-content" id="zalo-4">Anh ơi em check lại — anh có xem được pitch card chưa ạ?
+
+Lý do em nhắn lại là: slot Cohort 1/2026 em đang chỉ còn [X] suất Growth Pack. Anh đăng ký sớm thì còn kịp onboarding trong tháng này.
+
+Nếu anh muốn thử trước — em có thể offer gói Starter 5 kit trước, anh xem team chạy thế nào rồi mình nâng lên Growth sau cũng được ạ.</div>
+      <div class="sb-meta" style="justify-content:flex-end;padding:8px 16px">
+        <button class="copy-btn" onclick="copyScript('zalo-4')">📋 Copy</button>
+      </div>
+    </div>
+
+    <div class="script-block">
+      <div class="sb-meta"><span class="sb-title">📱 Tin nhắn 5 — Xử lý từ chối "đắt"</span><span class="sb-timing">Khi bị từ chối giá</span></div>
+      <div class="sb-content" id="zalo-5">Em hiểu anh ạ — 40 triệu không phải số nhỏ.
+
+Nhưng anh thử tính thế này: 1 deal BĐS HLX = 80 triệu hoa hồng. Nếu kit giúp team anh close thêm được 1 deal — là đã gấp đôi tiền đầu tư rồi ạ.
+
+Với 12 F2 nhận kit (Growth Pack) — nếu chỉ cần 1/12 người close thêm 1 deal/quý — ROI đã là 2× rồi.
+
+Còn nếu tất cả 12 người mỗi người thêm 1 deal — là 960 triệu doanh thu thêm/quý ạ.
+
+Anh muốn bắt đầu từ gói nhỏ hơn trước không — Starter 5 kit là 17,997K, anh thử trước rồi mình nâng lên ạ?</div>
+      <div class="sb-meta" style="justify-content:flex-end;padding:8px 16px">
+        <button class="copy-btn" onclick="copyScript('zalo-5')">📋 Copy</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function switchTab(id,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('view-'+id).classList.add('active');
+}
+function switchScript(id,el){
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.sview').forEach(v=>v.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sv-'+id).classList.add('active');
+}
+function copyScript(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  const txt=el.innerText||el.textContent;
+  navigator.clipboard.writeText(txt.trim()).then(()=>showToast()).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=txt.trim();document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);showToast();
+  });
+}
+function copyAllHooks(){
+  const hooks=document.querySelectorAll('.hook-card .hook-text');
+  const txt=[...hooks].map((h,i)=>`HOOK ${String(i+1).padStart(2,'0')}: ${h.textContent.trim()}`).join('\n');
+  navigator.clipboard.writeText(txt).then(()=>showToast()).catch(()=>{});
+}
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+</script>
+</body>
+</html>
