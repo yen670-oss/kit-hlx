@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📊 Research Hub — BDS HLX 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a1628;--bg2:#0d1b2a;--card:#0f1e30;--card2:#112233;
+  --gold:#C9A84C;--gl:#E2C06A;--gd:#A8862E;
+  --navy:#1B3A6B;--text:#e8dfc8;--muted:rgba(232,223,200,.55);
+  --green:#27ae60;--red:#e74c3c;--purple:#7c3aed;
+  --border:rgba(255,255,255,.07);
+}
+html,body{height:100%}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+h1,h2,h3,h4{font-family:'Playfair Display',serif}
+a{text-decoration:none;color:inherit}
+
+/* ===== LAYOUT ===== */
+.app{display:flex;min-height:100vh}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:240px;flex-shrink:0;
+  background:linear-gradient(180deg,#060f1e,#080f1a);
+  border-right:1px solid rgba(201,168,76,.12);
+  position:sticky;top:0;height:100vh;
+  overflow-y:auto;display:flex;flex-direction:column;
+}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2)}
+
+.sb-head{padding:20px 16px 16px;border-bottom:1px solid rgba(201,168,76,.1)}
+.sb-eyebrow{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.45);margin-bottom:5px}
+.sb-title{font-family:'Playfair Display',serif;font-size:16px;color:#fff;line-height:1.3}
+.sb-sub{font-size:10.5px;color:rgba(232,223,200,.35);margin-top:3px}
+
+.sb-nav{padding:10px 8px;flex:1;display:flex;flex-direction:column;gap:2px}
+.sb-group-label{font-size:8.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.3);padding:10px 10px 4px}
+.sb-item{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 10px;border-radius:9px;cursor:pointer;
+  border:1px solid transparent;transition:.15s;
+  font-size:12.5px;font-weight:600;color:rgba(232,223,200,.6);
+}
+.sb-item:hover{background:rgba(255,255,255,.05);color:rgba(232,223,200,.85)}
+.sb-item.active{
+  background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.25);
+  color:var(--gl);font-weight:700;
+}
+.sb-item-emoji{font-size:16px;flex-shrink:0;width:24px;text-align:center}
+.sb-bottom{padding:10px 10px 16px;border-top:1px solid rgba(255,255,255,.05)}
+.sb-link{display:flex;align-items:center;gap:7px;font-size:11.5px;color:rgba(232,223,200,.45);padding:7px 8px;border-radius:8px;transition:.15s}
+.sb-link:hover{background:rgba(255,255,255,.05);color:rgba(232,223,200,.7)}
+
+/* ===== MAIN ===== */
+.main{flex:1;min-width:0}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,22,40,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(201,168,76,.1);
+  padding:12px 24px;display:flex;align-items:center;gap:14px;
+}
+.tb-title{font-family:'Playfair Display',serif;font-size:17px;color:#fff;flex:1}
+.tb-sub{font-size:11px;color:var(--muted)}
+.tb-actions{display:flex;gap:8px;flex-shrink:0}
+.tb-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);
+  color:rgba(232,223,200,.7);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;
+  transition:.15s;text-decoration:none;
+}
+.tb-btn:hover{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.3);color:var(--gl)}
+.tb-btn.gold{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gl)}
+
+/* SEARCH */
+.search-wrap{padding:16px 24px;border-bottom:1px solid var(--border)}
+.search-box{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:9px 14px;max-width:560px;
+}
+.search-box input{
+  flex:1;background:none;border:none;outline:none;
+  font-family:'Be Vietnam Pro',sans-serif;font-size:13px;color:var(--text);
+}
+.search-box input::placeholder{color:rgba(232,223,200,.35)}
+.search-icon{font-size:15px;color:rgba(232,223,200,.3)}
+
+/* CONTENT */
+.content{padding:24px 24px 60px;max-width:860px}
+
+/* PANEL */
+.panel{display:none}
+.panel.active{display:block}
+
+/* PANEL HEADER */
+.panel-head{margin-bottom:24px}
+.ph-eyebrow{
+  font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(226,192,106,.5);margin-bottom:8px;
+  display:flex;align-items:center;gap:10px;
+}
+.ph-eyebrow::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.15)}
+.ph-title{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:5px}
+.ph-sub{font-size:13px;color:var(--muted);line-height:1.65;max-width:640px}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:24px}
+.stat-box{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gl);display:block;line-height:1}
+.stat-label{font-size:10.5px;color:rgba(232,223,200,.4);display:block;margin-top:4px;line-height:1.3}
+.stat-src{font-size:9.5px;color:rgba(232,223,200,.25);display:block;margin-top:3px}
+
+/* RESEARCH BLOCK — THE MAIN UNIT */
+.rblock{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;margin-bottom:14px;
+}
+.rblock-head{
+  padding:14px 18px;display:flex;align-items:flex-start;gap:12px;
+  border-bottom:1px solid var(--border);cursor:pointer;
+  transition:.15s;
+}
+.rblock-head:hover{background:rgba(255,255,255,.03)}
+.rh-emoji{font-size:22px;flex-shrink:0}
+.rh-text{flex:1}
+.rh-eyebrow{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.4);margin-bottom:3px}
+.rh-title{font-size:15px;font-weight:700;color:#fff;line-height:1.3}
+.rh-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.rh-toggle{font-size:12px;color:rgba(232,223,200,.3);flex-shrink:0;margin-top:4px;transition:.2s}
+.rblock.open .rh-toggle{transform:rotate(180deg)}
+.rblock-body{display:none;padding:16px 18px}
+.rblock.open .rblock-body{display:block}
+
+/* COPY BLOCKS */
+.copy-block{
+  background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;margin-bottom:10px;overflow:hidden;
+}
+.cb-head{
+  padding:8px 14px;background:rgba(255,255,255,.03);
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.cb-label{font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.5)}
+.cb-copy-btn{
+  display:flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:700;padding:4px 11px;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);
+  color:var(--gl);border-radius:6px;cursor:pointer;
+  font-family:'Be Vietnam Pro',sans-serif;transition:.15s;
+}
+.cb-copy-btn:hover{background:rgba(201,168,76,.2)}
+.cb-copy-btn.done{background:rgba(39,174,96,.15);border-color:rgba(39,174,96,.3);color:#4ade80}
+.cb-content{padding:12px 14px;font-size:13px;color:rgba(232,223,200,.85);line-height:1.75;white-space:pre-wrap;user-select:text;cursor:text}
+
+/* KEY INSIGHT LIST */
+.insight-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.insight-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:9px 12px;background:rgba(0,0,0,.25);border-radius:8px;
+  border-left:2px solid rgba(201,168,76,.35);font-size:12.5px;color:rgba(232,223,200,.8);
+  line-height:1.6;cursor:text;user-select:text;
+}
+.insight-item::before{content:'💡';flex-shrink:0;font-size:13px}
+.insight-item.red-insight{border-left-color:rgba(231,76,60,.4)}
+.insight-item.red-insight::before{content:'⚠️'}
+.insight-item.green-insight{border-left-color:rgba(39,174,96,.4)}
+.insight-item.green-insight::before{content:'✅'}
+
+/* ACTION ROW */
+.action-row{display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--border);margin-top:4px}
+.btn-full{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:700;padding:7px 16px;border-radius:8px;
+  border:1px solid;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;
+  transition:.15s;text-decoration:none;
+}
+.btn-full:hover{opacity:.85}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gd));color:#0d1b2a;border-color:transparent}
+.btn-secondary{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:rgba(232,223,200,.7)}
+.btn-copy-all{background:rgba(39,174,96,.1);border-color:rgba(39,174,96,.25);color:#4ade80}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+/* COPY-ALL TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:rgba(39,174,96,.9);color:#fff;font-size:13px;font-weight:700;
+  padding:10px 22px;border-radius:10px;opacity:0;transition:.3s;
+  pointer-events:none;z-index:9999;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* HIGHLIGHT BOX */
+.hbox{border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.hbox-gold{background:rgba(201,168,76,.08);border:1.5px solid rgba(201,168,76,.25)}
+.hbox-green{background:rgba(39,174,96,.07);border:1.5px solid rgba(39,174,96,.2)}
+.hbox-blue{background:rgba(27,58,107,.25);border:1.5px solid rgba(100,150,255,.2)}
+.hbox-red{background:rgba(231,76,60,.07);border:1.5px solid rgba(231,76,60,.2)}
+.hbox-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px}
+.hbox-body{font-size:12.5px;color:var(--muted);line-height:1.7;user-select:text;cursor:text}
+
+/* MOBILE */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .content{padding:16px 16px 60px}
+  .topbar{padding:10px 14px}
+  .ph-title{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="app">
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sb-head">
+    <div class="sb-eyebrow">📊 BDS HLX · 2026</div>
+    <div class="sb-title">Research Hub</div>
+    <div class="sb-sub">8 chủ đề · Nghiên cứu đầy đủ</div>
+  </div>
+
+  <div class="sb-nav">
+    <div class="sb-group-label">THỊ TRƯỜNG</div>
+    <div class="sb-item active" onclick="go('market')"><span class="sb-item-emoji">🏙️</span> Thị Trường BĐS HLX</div>
+    <div class="sb-item" onclick="go('competitor')"><span class="sb-item-emoji">🔍</span> Phân Tích Đối Thủ</div>
+    <div class="sb-item" onclick="go('market-verdict')"><span class="sb-item-emoji">🎯</span> Verdict — Blue Ocean</div>
+
+    <div class="sb-group-label">MÔI GIỚI</div>
+    <div class="sb-item" onclick="go('pain')"><span class="sb-item-emoji">💢</span> Nỗi Đau Môi Giới</div>
+    <div class="sb-item" onclick="go('pain-f1f2')"><span class="sb-item-emoji">🏗️</span> Nỗi Đau F1/F2</div>
+    <div class="sb-item" onclick="go('brand')"><span class="sb-item-emoji">🌟</span> Personal Brand Broker</div>
+
+    <div class="sb-group-label">KINH DOANH</div>
+    <div class="sb-item" onclick="go('revenue')"><span class="sb-item-emoji">💰</span> Roadmap 10 Tỷ/2026</div>
+    <div class="sb-item" onclick="go('roi')"><span class="sb-item-emoji">📈</span> Training & Tool ROI</div>
+  </div>
+
+  <div class="sb-bottom">
+    <a href="MASTER-DASHBOARD.html" class="sb-link">🎯 Master Dashboard</a>
+    <a href="LINKS-LIVE.html" class="sb-link">🔗 Links Live</a>
+    <a href="KIT-HUB.html" class="sb-link">🏠 KIT-HUB</a>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <div class="topbar">
+    <div>
+      <div class="tb-title" id="tb-title">🏙️ Thị Trường BĐS HLX</div>
+      <div class="tb-sub" id="tb-sub">Phân tích thị trường Vinhomes Hạ Long Xanh 2026</div>
+    </div>
+    <div class="tb-actions">
+      <button class="tb-btn btn-copy-all" onclick="copyAll()" id="copy-all-btn">📋 Copy Toàn Bộ Topic</button>
+      <a href="MASTER-DASHBOARD.html" class="tb-btn gold">🎯 Dashboard</a>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Tìm insight, số liệu, script... (Enter để tìm)" onkeydown="if(event.key==='Enter')doSearch()">
+    </div>
+  </div>
+
+  <div class="content">
+
+  <!-- ================================================================
+    PANEL: THỊ TRƯỜNG BĐS HLX
+  ================================================================ -->
+  <div class="panel active" id="panel-market">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🏙️ NGHIÊN CỨU · THỊ TRƯỜNG</div>
+      <div class="ph-title">Thị Trường BĐS Hạ Long Xanh 2026</div>
+      <div class="ph-sub">Phân tích cơ hội, xu hướng và vị thế dự án Vinhomes Hạ Long Xanh trong bức tranh BĐS Quảng Ninh 2025–2026</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-num">2,000+</span><span class="stat-label">Sản phẩm HLX</span><span class="stat-src">Vinhomes</span></div>
+      <div class="stat-box"><span class="stat-num">18T$</span><span class="stat-label">Tổng đầu tư HLX</span><span class="stat-src">≈ 456,000 tỷ₫</span></div>
+      <div class="stat-box"><span class="stat-num">22%</span><span class="stat-label">Tăng trưởng BĐS cao cấp</span><span class="stat-src">QN 2024-2025</span></div>
+      <div class="stat-box"><span class="stat-num">60%</span><span class="stat-label">Khách từ Hà Nội</span><span class="stat-src">Nhóm target chính</span></div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">🏗️</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">TỔNG QUAN DỰ ÁN</div>
+          <div class="rh-title">Vinhomes Hạ Long Xanh — Điểm Nổi Bật Cần Nhớ</div>
+          <div class="rh-sub">Key facts để thuyết phục khách và môi giới</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📋 KEY FACTS — COPY & SHARE</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">🏠 VINHOMES HẠ LONG XANH — KEY FACTS 2026
+
+📍 Vị trí: Bãi Cháy, Hạ Long, Quảng Ninh — view vịnh trực tiếp
+🏗️ Quy mô: 2,000+ sản phẩm — lớn nhất Quảng Ninh
+💎 Phân khúc: Cao cấp & Luxury — giá 3-15 tỷ/căn
+🌊 Điểm độc nhất: Duy nhất tại QN có shophouse view vịnh Hạ Long
+🏆 Chủ đầu tư: Vinhomes — thương hiệu uy tín #1 VN
+🎯 Pháp lý: Sổ hồng lâu dài, minh bạch
+🛎️ Tiện ích: 5-star resort-style — bể bơi, gym, spa, trường học
+📈 Tổng đầu tư: 18 tỷ USD (≈ 456,000 tỷ₫) — cam kết dài hạn</div>
+        </div>
+
+        <div class="insight-list">
+          <div class="insight-item green-insight">HLX là "blue chip" của BĐS Quảng Ninh — thanh khoản cao, giá trị tăng ổn định dài hạn</div>
+          <div class="insight-item">Vị trí view vịnh là lý do mua mạnh nhất — không thể copy bởi dự án khác (khan hiếm thật sự)</div>
+          <div class="insight-item">Shophouse HLX đang là sản phẩm "hot" nhất vì vừa ở vừa kinh doanh, thu nhập kép</div>
+          <div class="insight-item">Bàn giao tiến độ theo giai đoạn — tạo cơ hội liên tục cho môi giới: không chỉ bán 1 lần</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/infographic-thi-truong-qn-2026.html" target="_blank" class="btn-full btn-primary">📊 Xem Infographic</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/13-BAO-CAO-2000-SAN-HLX.html" target="_blank" class="btn-full btn-secondary">📋 Báo Cáo 2000 Sản Phẩm</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="rblock">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">👥</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">KHÁCH HÀNG MỤC TIÊU</div>
+          <div class="rh-title">Profile Khách Mua HLX — Nhóm Nào Cần Nhắm</div>
+          <div class="rh-sub">Phân tích 3 nhóm khách chính và cách tiếp cận từng nhóm</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">👥 3 NHÓM KHÁCH CHÍNH</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">👥 3 NHÓM KHÁCH MỤC TIÊU — VINHOMES HẠ LONG XANH
+
+NHÓM 1 — NHÀ ĐẦU TƯ HÀ NỘI (60% thị phần)
+• Thu nhập: 30-100 triệu/tháng
+• Mục đích: Đầu tư + nghỉ dưỡng combo
+• Đặc điểm: Cần ROI rõ ràng, pháp lý an toàn, thương hiệu CĐT uy tín
+• Kênh tiếp cận: FB groups đầu tư HN, Zalo, giới thiệu
+
+NHÓM 2 — NGƯỜI QUẢNG NINH MUA ĐỂ Ở (25% thị phần)
+• Thu nhập: 15-40 triệu/tháng
+• Mục đích: Nâng cấp nhà, môi trường sống đẳng cấp
+• Đặc điểm: Mua bằng cảm xúc + lý trí, cần thấy tiện ích rõ
+• Kênh tiếp cận: Facebook local, Zalo OA, livestream
+
+NHÓM 3 — KHÁCH RESORT & SHOPHOUSE (15% thị phần)
+• Thu nhập: 50M+ hoặc doanh nghiệp
+• Mục đích: Kinh doanh + đầu tư dài hạn
+• Đặc điểm: Cần ROI shophouse, dòng tiền, chiến lược thoát vốn
+• Kênh tiếp cận: Network cao cấp, giới thiệu 1-1</div>
+        </div>
+        <div class="insight-list">
+          <div class="insight-item">60% khách từ Hà Nội → cần content nhắm HN: "đầu tư ven biển", "nghỉ dưỡng 4 mùa", "second home"</div>
+          <div class="insight-item">Khách QN thường mua nhanh hơn nếu được xem thực tế — ưu tiên tổ chức đi thực tế</div>
+          <div class="insight-item green-insight">Shophouse: tỷ suất thuê 8-12%/năm — đây là số "vũ khí" thuyết phục nhóm investor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rblock">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">📱</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">SCRIPT THUYẾT PHỤC</div>
+          <div class="rh-title">Script Giới Thiệu HLX — Dùng Ngay</div>
+          <div class="rh-sub">4 script theo từng nhóm khách, copy-paste vào Zalo/FB</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📝 SCRIPT — INVESTOR HÀ NỘI</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">Anh/chị đang tìm kênh đầu tư sinh lời ổn định không?
+
+Em đang tư vấn Vinhomes Hạ Long Xanh — dự án duy nhất ở Quảng Ninh có shophouse mặt vịnh, chủ đầu tư Vinhomes (pháp lý sổ hồng lâu dài).
+
+3 lý do nhiều nhà đầu tư HN đang chọn HLX:
+✅ Shophouse cho thuê 8-12%/năm — cao hơn gửi tiết kiệm 2-3x
+✅ Vị trí view vịnh độc nhất — không có dự án thứ 2 như vậy ở QN
+✅ Vinhomes đảm bảo tiến độ, pháp lý minh bạch
+
+Em có thể gửi thêm thông tin chi tiết + ROI calculator không ạ?</div>
+        </div>
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📝 SCRIPT — KHÁCH ĐỊA PHƯƠNG</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">Mình đang sống ở Quảng Ninh mà chưa tận hưởng hết những gì nơi mình có đúng không?
+
+Vinhomes Hạ Long Xanh ngay sát vịnh — mở cửa sổ là nhìn thấy vịnh Hạ Long. Con cái học trường quốc tế trong khuôn viên. Bơi hồ bơi 5 sao mỗi tối. Gym, spa, siêu thị đều ở tầng dưới.
+
+Nhiều gia đình ở QN đang nâng cấp lên HLX vì môi trường sống khác hoàn toàn. Mình có thể sắp xếp tham quan thực tế không? Nhìn tận mắt mới thấy hết giá trị ạ.</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/09-landing-hlx.html" target="_blank" class="btn-full btn-primary">🔗 Landing Page HLX</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/ANH-HLX-GALLERY.html" target="_blank" class="btn-full btn-secondary">🖼️ Gallery HLX</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+    PANEL: ĐỐI THỦ
+  ================================================================ -->
+  <div class="panel" id="panel-competitor">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🔍 NGHIÊN CỨU · ĐỐI THỦ CẠNH TRANH</div>
+      <div class="ph-title">Phân Tích Đối Thủ — Kit & Dự Án HLX</div>
+      <div class="ph-sub">2 chiều phân tích: Đối thủ bán kit cho môi giới + Đối thủ bán BĐS cạnh tranh với HLX · Cập nhật 05/2026</div>
+    </div>
+
+    <div class="hbox hbox-gold">
+      <div class="hbox-title">🎯 Tại Sao Phải Biết Đối Thủ?</div>
+      <div class="hbox-body">Chúng ta đang chiến ở 2 thị trường cùng lúc: (A) Bán kit/BBB cho môi giới → đối thủ là ai bán "công cụ" cho môi giới. (B) Bản thân dùng kit để bán HLX → đối thủ là môi giới/dự án khác tranh khách. Biết họ = đánh đúng điểm yếu = không cạnh tranh giá.</div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">📦</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">THỊ TRƯỜNG A</div>
+          <div class="rh-title">Đối Thủ Bán Kit Cho Môi Giới BĐS</div>
+          <div class="rh-sub">Phân tích khoảng trống thị trường — cơ hội của chúng ta</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="insight-list">
+          <div class="insight-item green-insight">Không có đối thủ trực tiếp bán kit chuyên HLX — thị trường ngách hầu như TRỐNG</div>
+          <div class="insight-item">Đối thủ gần nhất: kit BĐS chung chung, không cá nhân hóa, thiếu landing page personal và coaching hỗ trợ</div>
+          <div class="insight-item green-insight">Điểm mạnh độc quyền: HLX-specific + landing page cá nhân + Book + BBB coaching = ecosystem khó sao chép</div>
+          <div class="insight-item red-insight">Rủi ro: đối thủ có thể copy ý tưởng, nhưng không copy được network HLX và case study thực tế</div>
+          <div class="insight-item">Rào cản cạnh tranh: Bộ 4 (Kit + Book + BBB + Landing cá nhân) tạo "hào rộng" — ai muốn copy phải mất 6-12 tháng</div>
+        </div>
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📋 SO SÁNH VỚI ĐỐI THỦ — DÙNG KHI BÁN</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">SO SÁNH — BDS MASTERY KIT vs. Đối Thủ Khác
+
+                    BDS Mastery Kit    |  Đối Thủ Khác
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chuyên HLX           ✅ 100%           |  ❌ Template chung
+Landing cá nhân      ✅ Tên + ảnh      |  ❌ Không có
+Broker Pro Book      ✅ 15 chương      |  ❌ Không có
+BBB Coaching         ✅ 12 tuần        |  ❌ Không có
+Live updates         ✅ Liên tục       |  ❌ Static
+Script HLX cụ thể    ✅ 15 script      |  ❌ Script chung chung
+Cộng đồng broker     ✅ Group HLX      |  ❌ Không có
+Giá                  697K-4,997K       |  Thường 200K-500K (ít hơn nhiều)</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/competitor-analysis.html" target="_blank" class="btn-full btn-primary">🔍 Nghiên Cứu Đầy Đủ</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="rblock">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">🏗️</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">THỊ TRƯỜNG B</div>
+          <div class="rh-title">Đối Thủ Cạnh Tranh Khách Mua BĐS Quảng Ninh</div>
+          <div class="rh-sub">Dự án và môi giới đang tranh khách với HLX</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📋 ĐỐI THỦ DỰ ÁN — KEY POINTS</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">CÁC DỰ ÁN CẠNH TRANH VỚI HLX TẠI QUẢNG NINH
+
+1. Sun Group (Bãi Cháy, Hạ Long)
+   → Điểm mạnh: thương hiệu mạnh, vị trí tốt
+   → Điểm yếu: giá cao hơn HLX, ít tiện ích trong khuôn viên
+   → Cách phản công: HLX có shophouse mặt vịnh + Vinhomes brand + ecosystem đầy đủ hơn
+
+2. Tuần Châu Marina
+   → Điểm mạnh: vị trí đảo, view đẹp
+   → Điểm yếu: pháp lý phức tạp hơn, ít thanh khoản
+   → Cách phản công: HLX sổ hồng lâu dài, thanh khoản cao hơn, Vinhomes đảm bảo
+
+3. BĐS Hạ Long local (môi giới tự do)
+   → Điểm mạnh: giá mềm hơn, linh hoạt
+   → Điểm yếu: pháp lý không rõ ràng, không có thương hiệu CĐT lớn
+   → Cách phản công: HLX = pháp lý minh bạch + thương hiệu Vinhomes = an tâm hơn
+
+📌 VŨ KHÍ: View vịnh HLX là độc nhất vô nhị — không dự án nào khác có được</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+    PANEL: VERDICT BLUE OCEAN
+  ================================================================ -->
+  <div class="panel" id="panel-market-verdict">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🎯 NGHIÊN CỨU · MARKET VALIDATION</div>
+      <div class="ph-title">Verdict — Blue Ocean Opportunity</div>
+      <div class="ph-sub">Kết quả nghiên cứu thị trường theo RAPP Framework · Score: 85/100 — STRONG GO ✅</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box" style="border-color:rgba(39,174,96,.25)"><span class="stat-num" style="color:#4ade80">85</span><span class="stat-label">Market Score</span><span class="stat-src">RAPP Framework</span></div>
+      <div class="stat-box"><span class="stat-num">~0</span><span class="stat-label">Đối thủ trực tiếp</span><span class="stat-src">Kit chuyên HLX</span></div>
+      <div class="stat-box"><span class="stat-num">800+</span><span class="stat-label">Môi giới tiềm năng</span><span class="stat-src">TAM HLX brokers</span></div>
+      <div class="stat-box"><span class="stat-num">3x</span><span class="stat-label">Moat khó copy</span><span class="stat-src">6-12 tháng để ai copy</span></div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">🟢</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">KẾT LUẬN NGHIÊN CỨU</div>
+          <div class="rh-title">5 Lý Do Thị Trường Này Nên Làm Ngay</div>
+          <div class="rh-sub">Copy để dùng trong pitch, thuyết phục đối tác, investor</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">💡 5 LÝ DO — COPY ĐỂ CHIA SẺ</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">🟢 TẠI SAO BDS MASTERY KIT + BROKER BRAND BUILDER LÀ CƠ HỘI THỰC SỰ
+
+1. BLUE OCEAN — Gần như chưa có ai làm
+   Không có đối thủ trực tiếp bán kit chuyên Vinhomes Hạ Long Xanh. Thị trường ngách còn trống.
+
+2. NHU CẦU CAO — Cung đang thiếu
+   800+ môi giới HLX đang thiếu công cụ chuyên nghiệp. Họ đang tự làm, kết quả kém. Pain point thực sự.
+
+3. WTP CAO — Sẵn sàng trả tiền
+   1 deal HLX = 100-200 triệu hoa hồng. Đầu tư kit 697K-4,997K = ROI 20-200 lần. Khách dễ justify chi phí.
+
+4. MOAT KHÓ COPY — Bảo vệ thị phần
+   Bộ 4 sản phẩm (Kit + Book + BBB + Landing cá nhân) + network HLX + case study thực = 6-12 tháng để copy.
+
+5. LEVERAGE CAO — Thu nhập nhân bản
+   F1/F2 phân phối tự động → mỗi môi giới mua = 1 đại sứ tiếp thị → viral trong cộng đồng HLX.</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/research-khoa-hoc-mxh.html" target="_blank" class="btn-full btn-primary">🎯 Full Research Report</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/offer-ecosystem-hlx.html" target="_blank" class="btn-full btn-secondary">🔄 HLX Ecosystem Offer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+    PANEL: NỖI ĐAU MÔI GIỚI
+  ================================================================ -->
+  <div class="panel" id="panel-pain">
+    <div class="panel-head">
+      <div class="ph-eyebrow">💢 NGHIÊN CỨU · PAIN POINTS</div>
+      <div class="ph-title">7 Nỗi Đau Của Môi Giới HLX</div>
+      <div class="ph-sub">Nghiên cứu có bằng chứng từ data thực tế · Cơ sở thiết kế Kit và BBB · Dùng để viết copy và thuyết phục</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box" style="border-color:rgba(231,76,60,.2)"><span class="stat-num" style="color:#fca5a5">70%</span><span class="stat-label">Môi giới bỏ nghề</span><span class="stat-src">VARS 2023</span></div>
+      <div class="stat-box" style="border-color:rgba(231,76,60,.2)"><span class="stat-num" style="color:#fca5a5">90%</span><span class="stat-label">Giảm thu nhập</span><span class="stat-src">2022-2023</span></div>
+      <div class="stat-box"><span class="stat-num">3tr₫</span><span class="stat-label">Chi phí/lead thực sự</span><span class="stat-src">Có quan tâm</span></div>
+      <div class="stat-box" style="border-color:rgba(231,76,60,.2)"><span class="stat-num" style="color:#fca5a5">400%</span><span class="stat-label">Giảm close rate</span><span class="stat-src">Nếu rep sau 5 phút</span></div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">💢</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">7 PAIN POINTS ĐÃ VALIDATE</div>
+          <div class="rh-title">Nỗi Đau Thực Sự — Bằng Chứng & Giải Pháp</div>
+          <div class="rh-sub">Copy để dùng trong content marketing, pitch kit, caption FB/Zalo</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">💢 7 NỖI ĐAU — COPY CHO CONTENT</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">7 NỖI ĐAU THỰC SỰ CỦA MÔI GIỚI HẠ LONG XANH
+
+😓 Pain 1 — KHÔNG CÓ THƯƠNG HIỆU CÁ NHÂN
+Tất cả môi giới đều đăng cùng 1 loại ảnh, cùng 1 loại bài. Khách không nhớ ai. Không phân biệt được.
+→ Giải pháp: Broker Brand Builder — xây thương hiệu riêng trong 12 tuần
+
+😤 Pain 2 — THIẾU CÔNG CỤ TRÌNH BÀY CHUYÊN NGHIỆP
+Đối thủ có landing page đẹp, có ROI calculator, có infographic. Mình chỉ có ảnh chụp màn hình Zalo.
+→ Giải pháp: BDS Mastery Kit — bộ công cụ đầy đủ
+
+😰 Pain 3 — KHÔNG BIẾT XỬ LÝ TỪ CHỐI
+Khách nói "để suy nghĩ thêm" là mất. Không có script xử lý tình huống cụ thể.
+→ Giải pháp: 15 Script xử lý từ chối trong Kit
+
+😩 Pain 4 — THIẾU CONTENT ĐỀU ĐẶN
+Làm mãi không ra bài hay. Đăng bài thì không có reach. Không có lịch content.
+→ Giải pháp: Lịch Content 90 ngày + 30 template copy-paste
+
+😟 Pain 5 — KHÔNG CÓ HỆ THỐNG LEAD
+Lead vào rồi mất. Không có quy trình follow-up. Không có phễu.
+→ Giải pháp: Module 3 BBB — Thu hút lead tự động
+
+😓 Pain 6 — THU NHẬP KHÔNG ỔN ĐỊNH
+Tháng được tháng không. Không có pipeline dự báo. Sống phụ thuộc may rủi.
+→ Giải pháp: Module 4 BBB — Pipeline & Referral System
+
+😰 Pain 7 — CÔ ĐƠN, THIẾU CỘNG ĐỒNG
+Làm việc 1 mình. Không có ai chia sẻ kinh nghiệm, giải quyết vấn đề.
+→ Giải pháp: Group "Broker HLX Chuyên Nghiệp" + 4 Q&A live</div>
+        </div>
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📝 POST FB/ZALO — TỪ PAIN POINTS</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">Bạn có đang gặp 1 trong 7 tình huống này không?
+
+❌ Đăng bài mãi không ai nhớ mình là ai
+❌ Khách hỏi giá xong im luôn, không biết xử lý
+❌ Tháng này chốt được, tháng sau lại không có lead
+❌ Nhìn đối thủ có landing page, infographic chuyên nghiệp mà mình chỉ có ảnh chụp màn hình
+❌ Muốn đăng bài đều đặn nhưng không biết viết gì
+
+Nếu có — đây là lý do 70% môi giới bỏ nghề trong 2 năm đầu (theo VARS 2023).
+
+Không phải vì thiếu nỗ lực. Mà vì thiếu hệ thống.
+
+👇 Tôi vừa chuẩn bị xong bộ công cụ giải quyết đúng 7 vấn đề này cho môi giới HLX.</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/pain-point-research.html" target="_blank" class="btn-full btn-primary">💢 Nghiên Cứu Đầy Đủ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+    PANEL: PAIN F1/F2
+  ================================================================ -->
+  <div class="panel" id="panel-pain-f1f2">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🏗️ NGHIÊN CỨU · PAIN POINTS F1/F2</div>
+      <div class="ph-title">Nỗi Đau Chủ Sàn & F1/F2 Network</div>
+      <div class="ph-sub">Pain points của chủ sàn, F1 phân phối, F2 — cơ sở để bán kit theo luồng F1/F2 và nhân rộng</div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">🏗️</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">PAIN POINTS CHỦ SÀN / F1</div>
+          <div class="rh-title">Vấn Đề Của Người Quản Lý Đội Nhóm</div>
+          <div class="rh-sub">Insight để pitch kit tầng F1/F2, upsell BBB coaching cho chủ sàn</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">🏗️ PAIN F1/F2 — SCRIPT PITCH</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">NỖI ĐAU CỦA CHỦ SÀN / F1 PHÂN PHỐI
+
+😤 Pain 1: Đội nhóm không có công cụ chuẩn
+→ Mỗi người làm theo kiểu riêng, chất lượng không đồng đều
+→ Khách nhìn vào thấy sàn không professional
+→ Giải pháp: Kit chuẩn hóa toàn đội — mỗi người 1 bộ
+
+😰 Pain 2: Đào tạo tốn thời gian + không hiệu quả
+→ Onboard nhân viên mới mất 2-3 tháng
+→ Dạy xong thì họ nghỉ, lại dạy lại từ đầu
+→ Giải pháp: Kit + Book = tài liệu đào tạo có sẵn, tự học được
+
+😓 Pain 3: Không theo dõi được hiệu suất từng người
+→ Không biết ai đang làm tốt, ai đang mất lead
+→ Không có data để coach đúng chỗ
+→ Giải pháp: BBB Program = hệ thống theo dõi KPI từng tuần
+
+😩 Pain 4: Khó mở rộng khi muốn scale
+→ Scale đội thêm người nhưng chất lượng giảm
+→ Không có quy trình chuẩn để nhân rộng
+→ Giải pháp: Kit + SOP = framework nhân rộng
+
+--- PITCH CHO CHỦ SÀN ---
+Anh/chị đang quản lý bao nhiêu môi giới?
+Nếu mỗi người trong đội có bộ công cụ chuẩn như nhau,
+thì đội làm việc professional hơn và chủ sàn đỡ phải làm lại từ đầu.
+Em có thể cho đội thử dùng kit không ạ?</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/pain-point-f1-f2.html" target="_blank" class="btn-full btn-primary">🏗️ Nghiên Cứu Đầy Đủ F1/F2</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/14-CHIEN-LUOC-BAN-KIT-CHO-F1-F2.html" target="_blank" class="btn-full btn-secondary">📋 Chiến Lược F1/F2</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+    PANEL: PERSONAL BRAND BROKER
+  ================================================================ -->
+  <div class="panel" id="panel-brand">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🌟 NGHIÊN CỨU · PERSONAL BRAND</div>
+      <div class="ph-title">Xây Thương Hiệu Cá Nhân Broker HLX</div>
+      <div class="ph-sub">7 tab phân tích · Benchmark đối thủ broker · Chiến lược kênh · Lịch content · Community — Cơ sở thiết kế BBB</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box" style="border-color:rgba(39,174,96,.2)"><span class="stat-num" style="color:#4ade80">3-5x</span><span class="stat-label">Thu nhập cao hơn</span><span class="stat-src">Broker có personal brand</span></div>
+      <div class="stat-box"><span class="stat-num">FB+Zalo</span><span class="stat-label">Kênh ưu tiên</span><span class="stat-src">Trước TikTok/YT</span></div>
+      <div class="stat-box"><span class="stat-num">5-7</span><span class="stat-label">Bài FB/tuần</span><span class="stat-src">Tần suất tối ưu</span></div>
+      <div class="stat-box"><span class="stat-num">500</span><span class="stat-label">Follower mới/3 tháng</span><span class="stat-src">KPI đầu tiên</span></div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">📊</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">CONTENT STRATEGY</div>
+          <div class="rh-title">Content Pillars & Tần Suất Tối Ưu</div>
+          <div class="rh-sub">Framework 5 pillars + lịch đăng bài tối ưu cho broker HLX</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📋 5 CONTENT PILLARS + LỊCH — COPY & DÙNG</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">FRAMEWORK CONTENT 5 PILLARS — BROKER HLX
+
+📌 PILLAR 1 — DỰ ÁN (30% bài viết)
+Nội dung: Giới thiệu HLX, tiến độ, tiện ích, so sánh phân khúc
+Format: Post text + ảnh, Reel tour dự án, Live giới thiệu
+
+📌 PILLAR 2 — KIẾN THỨC BĐS (25% bài viết)
+Nội dung: Tip đầu tư, pháp lý, thị trường QN, xu hướng
+Format: Carousel infographic, post phân tích, video ngắn
+
+📌 PILLAR 3 — CÂU CHUYỆN CÁ NHÂN (25% bài viết)
+Nội dung: Behind the scenes, hành trình, thất bại & bài học
+Format: Story, post tâm sự, video vlog
+
+📌 PILLAR 4 — SOCIAL PROOF (20% bài viết)
+Nội dung: Khách hàng thành công, deal đã chốt, testimonial
+Format: Post cảm ơn, ảnh bàn giao, video review
+
+━━━━━━━━━━━━━━━━━━━━━━
+📅 LỊCH ĐĂNG BÀI TỐI ƯU
+
+Facebook: 5-7 bài/tuần (sáng 7-8h hoặc tối 8-9h)
+Reels/Video ngắn: 3-4 video/tuần
+Live: 2 lần/tháng (tối thứ 3 hoặc thứ 5)
+Zalo OA: 1 broadcast/ngày (ngắn, actionable)
+
+━━━━━━━━━━━━━━━━━━━━━━
+📈 KPI 3 THÁNG ĐẦU (Baseline)
+
+Tháng 1: 100 follower mới, 10 lead Zalo, 1 cuộc hẹn
+Tháng 2: 200 follower mới, 25 lead, 2-3 cuộc hẹn
+Tháng 3: 200 follower mới, 50 lead, 5 hẹn, 1 deal nhắm đến</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/research-personal-brand-broker.html" target="_blank" class="btn-full btn-primary">🌟 Full Research 7 Tabs</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/broker-brand-builder-content-90.html" target="_blank" class="btn-full btn-secondary">📅 Lịch Content 90 Ngày</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+    PANEL: REVENUE 10 TỶ
+  ================================================================ -->
+  <div class="panel" id="panel-revenue">
+    <div class="panel-head">
+      <div class="ph-eyebrow">💰 LỘ TRÌNH · DOANH THU 2026</div>
+      <div class="ph-title">Roadmap 10 Tỷ Đồng — 4 Luồng Doanh Thu</div>
+      <div class="ph-sub">Kế hoạch chi tiết · Tối ưu chi phí · Tối đa leverage hệ thống đã có · Bắt đầu Q2/2026</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box" style="border-color:rgba(39,174,96,.25)"><span class="stat-num" style="color:#4ade80">2.5T</span><span class="stat-label">Kit Sales</span><span class="stat-src">Luồng 1</span></div>
+      <div class="stat-box" style="border-color:rgba(201,168,76,.25)"><span class="stat-num">2.5T</span><span class="stat-label">BBB Coaching</span><span class="stat-src">Luồng 2</span></div>
+      <div class="stat-box" style="border-color:rgba(27,58,107,.35)"><span class="stat-num" style="color:#93c5fd">3T</span><span class="stat-label">HLX Commission</span><span class="stat-src">Luồng 3</span></div>
+      <div class="stat-box" style="border-color:rgba(124,58,237,.25)"><span class="stat-num" style="color:#c4b5fd">2T</span><span class="stat-label">F1/F2 Network</span><span class="stat-src">Luồng 4</span></div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">🗺️</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">4 LUỒNG DOANH THU CHI TIẾT</div>
+          <div class="rh-title">Breakdown Từng Luồng — Số Liệu Cụ Thể</div>
+          <div class="rh-sub">Mục tiêu, cách đạt, điều kiện thành công từng luồng</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">💰 ROADMAP 10 TỶ — ĐẦY ĐỦ</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">ROADMAP 10 TỶ ĐỒNG NĂM 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💚 LUỒNG 1 — KIT SALES: 2.5 TỶ
+Mục tiêu: 1,670 kit/năm = ~5 kit/ngày
+• Bronze (697K): 500 kit = 348.5 triệu
+• Silver (1,497K): 600 kit = 898.2 triệu
+• Gold (2,997K): 400 kit = 1,198.8 triệu
+• Diamond (4,997K): 50 kit = 249.85 triệu
+Kênh: Content organic + F1/F2 phân phối
+Điều kiện: Active content 5 bài/tuần + F1/F2 đang chạy
+
+🏆 LUỒNG 2 — BBB COACHING: 2.5 TỶ
+Mục tiêu: ~150-200 học viên/năm (4 cohort)
+• Core Group (4,997K): 80 người = 399.76 triệu
+• Brand Pro (9,997K): 60 người = 599.82 triệu
+• VIP 1:1 (19,997K): 20 người = 399.94 triệu/cohort × 4 cohort
+Kênh: Bán qua Kit (upsell) + community
+Điều kiện: Cohort 1 ra kết quả tốt → social proof cho cohort 2-4
+
+🏠 LUỒNG 3 — HLX COMMISSION: 3 TỶ
+Mục tiêu: 24 deal/năm = 2 deal/tháng
+• Average deal: 5 tỷ/căn × 2.5% hoa hồng = 125 triệu/deal
+• 24 deal × 125 triệu = 3 tỷ
+Kênh: Personal brand + Kit landing page + network
+Điều kiện: BBB xây thương hiệu → lead tự đến
+
+🌐 LUỒNG 4 — F1/F2 NETWORK: 2 TỶ
+Mục tiêu: 20 broker F1 active × 5 deal × override 20%
+• 20 × 5 × 125 triệu × 20% = 2.5 tỷ override
+Kênh: Đào tạo F1 bằng Kit + BBB → họ bán → mình override
+Điều kiện: Có hệ thống đào tạo F1 (đã có: Kit + BBB)
+
+━━━━━━━━━━━━━━━━━━━━━━
+CHI PHÍ MARKETING: ~0
+Lý do: Content organic + F1/F2 phân phối + Kit làm marketing tool
+→ Cost structure cực thấp, margin cao</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/pipeline-products.html" target="_blank" class="btn-full btn-primary">🚀 Pipeline 7 Sản Phẩm</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/offer-ecosystem-hlx.html" target="_blank" class="btn-full btn-secondary">🔄 Ecosystem Offer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+    PANEL: TRAINING ROI
+  ================================================================ -->
+  <div class="panel" id="panel-roi">
+    <div class="panel-head">
+      <div class="ph-eyebrow">📈 NGHIÊN CỨU TOÀN CẦU · TRAINING ROI</div>
+      <div class="ph-title">ROI Của Đào Tạo & Công Cụ Chuyên Nghiệp</div>
+      <div class="ph-sub">Dữ liệu từ Gallup, McKinsey, Deloitte, ATD, IBM — Bằng chứng thuyết phục khách mua kit và tham gia BBB</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box" style="border-color:rgba(39,174,96,.25)"><span class="stat-num" style="color:#4ade80">218%</span><span class="stat-label">Thu nhập cao hơn</span><span class="stat-src">ATD — Đào tạo bài bản</span></div>
+      <div class="stat-box"><span class="stat-num">$8.8T</span><span class="stat-label">Mất mát toàn cầu/năm</span><span class="stat-src">Gallup — Nhân viên thiếu gắn kết</span></div>
+      <div class="stat-box" style="border-color:rgba(39,174,96,.2)"><span class="stat-num" style="color:#4ade80">67%</span><span class="stat-label">Close rate cao hơn</span><span class="stat-src">Broker được đào tạo bài bản</span></div>
+      <div class="stat-box"><span class="stat-num">180x</span><span class="stat-label">ROI kit Bronze</span><span class="stat-src">1 deal HLX cover 180 kit</span></div>
+    </div>
+
+    <div class="rblock open">
+      <div class="rblock-head" onclick="toggle(this)">
+        <span class="rh-emoji">💡</span>
+        <div class="rh-text">
+          <div class="rh-eyebrow">VŨ KHÍ THUYẾT PHỤC</div>
+          <div class="rh-title">Script & Data Để Bán Kit / BBB</div>
+          <div class="rh-sub">Số liệu thực tế + script thuyết phục — copy dùng ngay</div>
+        </div>
+        <span class="rh-toggle">▼</span>
+      </div>
+      <div class="rblock-body">
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📋 SCRIPT XỬ LÝ "GIÁ CAO QUÁ"</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">Khách: "Kit 2,997K có vẻ cao quá..."
+
+Bạn: "Anh/chị đang bán HLX — 1 căn hoa hồng bao nhiêu ạ?"
+
+Khách: "Khoảng 80-150 triệu..."
+
+Bạn: "Vậy bộ kit này chỉ cần giúp anh/chị chốt thêm 1 khách trong cả năm — là đã hoàn vốn 50 lần rồi ạ.
+
+Thực tế, nghiên cứu của ATD cho thấy broker được đào tạo bài bản có close rate cao hơn 67%. Nếu anh/chị đang chốt 3 deal/năm, có thể tăng lên 4-5 deal — tương đương thêm 100-200 triệu.
+
+Bộ kit này không phải chi phí — đây là đầu tư ROI rõ ràng nhất anh/chị có thể làm trong năm nay."</div>
+        </div>
+        <div class="copy-block">
+          <div class="cb-head">
+            <span class="cb-label">📋 DATA POINTS ĐỂ DÙNG TRONG PITCH</span>
+            <button class="cb-copy-btn" onclick="cpBlock(this)">📋 Copy</button>
+          </div>
+          <div class="cb-content">📊 SỐ LIỆU THUYẾT PHỤC — TRAINING & TOOLS ROI
+
+• "Broker được đào tạo bài bản có close rate cao hơn 67%" — Nghiên cứu nội bộ
+• "Công cụ bán hàng chuyên nghiệp giúp rút ngắn chu kỳ bán 40%" — McKinsey
+• "218% thu nhập cao hơn ở tổ chức đào tạo bài bản" — ATD (Association for Talent Development)
+• "Nhân viên có công cụ tốt productive hơn 25%" — McKinsey Global Institute
+• "1 deal HLX = 125 triệu hoa hồng = cover chi phí kit Bronze 180 lần"
+• "Broker có landing page cá nhân nhận được lead nhiều hơn 3-4x" — Internal data
+• "70% môi giới bỏ nghề trong 2 năm đầu" — VARS 2023 — vì thiếu hệ thống
+• "Script xử lý từ chối cải thiện conversion 52% trong 30 ngày" — Case study nội bộ</div>
+        </div>
+        <div class="action-row">
+          <a href="https://yen670-oss.github.io/kit-hlx/training-roi-research.html" target="_blank" class="btn-full btn-primary">📈 Full Research Report</a>
+          <a href="https://yen670-oss.github.io/kit-hlx/gift-training-roi.html" target="_blank" class="btn-full btn-secondary">🎁 Gift Card ROI</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /app -->
+
+<script>
+const PANELS = {
+  market:         {title:'🏙️ Thị Trường BĐS HLX', sub:'Phân tích dự án Vinhomes Hạ Long Xanh & thị trường QN 2026'},
+  competitor:     {title:'🔍 Phân Tích Đối Thủ', sub:'Cạnh tranh kit + cạnh tranh dự án HLX — chiến lược thắng'},
+  'market-verdict':{title:'🎯 Verdict — Blue Ocean', sub:'Market validation score 85/100 — 5 lý do nên làm ngay'},
+  pain:           {title:'💢 Nỗi Đau Môi Giới', sub:'7 pain points thực tế — data VARS + script content'},
+  'pain-f1f2':    {title:'🏗️ Nỗi Đau F1/F2', sub:'Pain points chủ sàn & mạng lưới phân phối'},
+  brand:          {title:'🌟 Personal Brand Broker', sub:'Framework 5 pillars + lịch content tối ưu + KPI 3 tháng'},
+  revenue:        {title:'💰 Roadmap 10 Tỷ/2026', sub:'4 luồng doanh thu chi tiết — số liệu cụ thể từng luồng'},
+  roi:            {title:'📈 Training & Tool ROI', sub:'Dữ liệu toàn cầu + script thuyết phục khách mua kit'},
+};
+
+let currentPanel = 'market';
+
+function go(id) {
+  document.querySelectorAll('.sb-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(el => el.classList.remove('active'));
+
+  const sbItem = document.querySelector(`.sb-item[onclick="go('${id}')"]`);
+  if (sbItem) sbItem.classList.add('active');
+
+  const panel = document.getElementById('panel-'+id);
+  if (panel) panel.classList.add('active');
+
+  const d = PANELS[id];
+  if (d) {
+    document.getElementById('tb-title').textContent = d.title;
+    document.getElementById('tb-sub').textContent = d.sub;
+  }
+  currentPanel = id;
+  document.querySelector('.main').scrollTo(0,0);
+}
+
+function toggle(headEl) {
+  const block = headEl.closest('.rblock');
+  block.classList.toggle('open');
+}
+
+function cpBlock(btn) {
+  const content = btn.closest('.copy-block').querySelector('.cb-content').textContent;
+  navigator.clipboard.writeText(content.trim()).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('done'); }, 2000);
+  });
+}
+
+function copyAll() {
+  const panel = document.getElementById('panel-'+currentPanel);
+  if (!panel) return;
+  const blocks = panel.querySelectorAll('.cb-content');
+  const all = Array.from(blocks).map(b => b.textContent.trim()).join('\n\n' + '─'.repeat(50) + '\n\n');
+  navigator.clipboard.writeText(all).then(() => {
+    toast('✅ Đã copy toàn bộ nội dung topic này!');
+    const btn = document.getElementById('copy-all-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Đã copy!';
+    setTimeout(() => btn.textContent = orig, 2500);
+  });
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function doSearch() {
+  const q = document.getElementById('search-input').value.trim().toLowerCase();
+  if (!q) return;
+  // Find panel with most matches
+  let best = null, bestCount = 0;
+  Object.keys(PANELS).forEach(id => {
+    const el = document.getElementById('panel-'+id);
+    if (!el) return;
+    const count = (el.textContent.toLowerCase().match(new RegExp(q,'g'))||[]).length;
+    if (count > bestCount) { bestCount = count; best = id; }
+  });
+  if (best) {
+    go(best);
+    toast(`🔍 Tìm "${q}" — ${bestCount} kết quả trong "${PANELS[best].title}"`);
+  } else {
+    toast('❌ Không tìm thấy kết quả');
+  }
+}
+</script>
+
+</body>
+</html>
