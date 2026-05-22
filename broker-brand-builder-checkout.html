@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đăng Ký — Broker HLX Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--nd:#071525;--green:#16a34a;--green-l:#dcfce7;--red:#dc2626;--card:#112233;--text:#e8dfc8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Be Vietnam Pro',sans-serif;background:#f0f2f5;color:#1a1a2e;min-height:100vh}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#040d18,#0d1b2a,#1B3A6B);padding:22px 24px 20px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(201,168,76,.15),transparent 60%)}
+.header-back{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:4px;z-index:1}
+.header-back:hover{color:var(--gl)}
+.header-brand{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px;position:relative;z-index:1}
+.header h1{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:4px;position:relative;z-index:1}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,.55);position:relative;z-index:1}
+.header-steps{display:flex;justify-content:center;gap:6px;margin-top:14px;position:relative;z-index:1}
+.hs{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.4)}
+.hs.done{color:var(--gl)}
+.hs-num{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;flex-shrink:0}
+.hs-sep{color:rgba(255,255,255,.2);font-size:10px}
+
+.wrap{max-width:700px;margin:0 auto;padding:20px 16px 80px}
+
+/* URGENCY STRIP */
+.urgency-strip{background:linear-gradient(135deg,#3a0a0a,#7c1010);border-radius:10px;padding:10px 16px;text-align:center;font-size:12.5px;font-weight:700;color:#ff8080;margin-bottom:20px}
+.urgency-strip span{color:#fff}
+
+/* TIER TABS */
+.tier-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.tier-tab{background:#fff;border:2px solid #e5e2d8;border-radius:12px;padding:12px 10px;text-align:center;cursor:pointer;transition:.2s;position:relative}
+.tier-tab:hover{border-color:#C9A84C;transform:translateY(-1px)}
+.tier-tab.active{border-color:#C9A84C;background:linear-gradient(135deg,#fffbeb,#fef9e7);box-shadow:0 4px 16px rgba(201,168,76,.2)}
+.tier-tab.active::after{content:'✓';position:absolute;top:6px;right:8px;font-size:11px;font-weight:900;color:#C9A84C}
+.tt-emoji{font-size:20px;margin-bottom:4px}
+.tt-name{font-weight:800;font-size:11.5px;color:#071525;margin-bottom:2px;line-height:1.2}
+.tt-eb{font-size:12px;font-weight:800;color:#C9A84C;margin-bottom:1px}
+.tt-regular{font-size:10.5px;color:#9ca3af;text-decoration:line-through}
+.tt-save{font-size:10px;color:#16a34a;font-weight:700;background:#dcfce7;border-radius:6px;padding:1px 6px;margin-top:3px;display:inline-block}
+.tier-tab.vip-tab.active{border-color:#7c3aed;background:linear-gradient(135deg,#faf5ff,#f3e8ff)}
+.tier-tab.vip-tab.active::after{color:#7c3aed}
+.tier-tab.vip-tab{border-color:#ddd6fe}
+.tier-tab.vip-tab:hover{border-color:#7c3aed}
+
+/* CHECKOUT CARD */
+.checkout-card{background:#fff;border-radius:16px;border:1px solid #e5e2d8;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+
+/* PRODUCT SUMMARY */
+.product-summary{padding:22px 22px 18px;border-bottom:1px solid #f3f0e8}
+.ps-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.ps-tier{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(27,58,107,.5);margin-bottom:5px}
+.ps-name{font-family:'Playfair Display',serif;font-size:17px;color:#071525;line-height:1.3}
+.ps-price-block{text-align:right;flex-shrink:0}
+.ps-price-eb{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#C9A84C;line-height:1}
+.ps-price-label{font-size:10px;color:#9ca3af;margin-top:2px}
+.ps-price-regular{font-size:11.5px;color:#9ca3af;text-decoration:line-through;margin-top:2px}
+.ps-items{display:flex;flex-wrap:wrap;gap:6px}
+.ps-item{font-size:11px;background:#f3f0e8;color:#374151;padding:4px 10px;border-radius:8px;font-weight:600}
+.ps-item.highlight{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+
+/* FORM SECTION */
+.form-section{padding:20px 22px;border-bottom:1px solid #f3f0e8}
+.section-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.section-label::before{content:'';display:inline-block;width:3px;height:14px;background:#C9A84C;border-radius:2px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+label{font-size:12px;font-weight:700;color:#374151}
+.req{color:#dc2626}
+input,select{width:100%;border:1.5px solid #e5e2d8;border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:inherit;color:#1a1a2e;outline:none;transition:.2s;background:#fff}
+input:focus,select:focus{border-color:#C9A84C;box-shadow:0 0 0 3px rgba(201,168,76,.12)}
+input::placeholder{color:#d1cfc8}
+.input-hint{font-size:11px;color:#9ca3af;margin-top:3px}
+@media(max-width:480px){.form-grid{grid-template-columns:1fr}}
+
+/* PAYMENT SECTION */
+.payment-section{padding:20px 22px}
+.steps-mini{display:flex;gap:0;margin-bottom:20px;background:#f9f8f5;border-radius:10px;overflow:hidden}
+.step-mini{flex:1;padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-right:1px solid #e5e2d8;display:flex;align-items:center;justify-content:center;gap:4px}
+.step-mini:last-child{border-right:none}
+.step-mini.active-step{background:#071525;color:#E2C06A}
+.step-num-mini{width:18px;height:18px;border-radius:50%;background:currentColor;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0}
+.step-mini.active-step .step-num-mini{background:#E2C06A;color:#071525}
+.step-mini:not(.active-step) .step-num-mini{background:#d1d5db;color:#fff}
+
+/* QR BLOCK */
+.qr-block{background:#f9f8f5;border-radius:12px;padding:20px;text-align:center;margin-bottom:16px}
+.qr-amount{font-family:'Playfair Display',serif;font-size:28px;color:#071525;font-weight:700}
+.qr-sublabel{font-size:11.5px;color:#9ca3af;margin-bottom:16px}
+.qr-img{width:200px;height:200px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.12);margin-bottom:14px;border:4px solid #fff}
+.qr-hint{font-size:12px;color:#6b7280;line-height:1.6;margin-bottom:14px}
+
+/* BANK INFO */
+.bank-info{background:#fff;border:1px solid #e5e2d8;border-radius:10px;overflow:hidden;margin-bottom:14px}
+.bi-row{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:1px solid #f3f0e8}
+.bi-row:last-child{border-bottom:none}
+.bi-label{font-size:11.5px;color:#9ca3af;font-weight:600;flex-shrink:0}
+.bi-right{display:flex;align-items:center;gap:8px}
+.bi-value{font-size:13px;font-weight:700;color:#071525}
+.bi-copy{background:none;border:1px solid #e5e2d8;border-radius:6px;padding:3px 9px;font-size:11px;color:#1B3A6B;cursor:pointer;font-family:inherit;font-weight:700;transition:.2s;white-space:nowrap}
+.bi-copy:hover{background:#f3f0e8}
+.bi-copy.ok{background:#dcfce7;border-color:#86efac;color:#16a34a}
+
+/* MEMO BOX */
+.memo-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.memo-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.memo-lbl{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#92400e}
+.btn-copy-memo{background:#071525;color:#E2C06A;border:none;border-radius:6px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.btn-copy-memo:hover{background:#1B3A6B}
+.btn-copy-memo.ok{background:#16a34a;color:#fff}
+.memo-val{font-family:monospace;font-size:15px;font-weight:800;color:#78350f;margin-bottom:4px;word-break:break-all}
+.memo-hint{font-size:11.5px;color:#a16207;line-height:1.5}
+
+/* CONFIRM */
+.confirm-box{background:#dcfce7;border:1.5px solid #86efac;border-radius:10px;padding:14px 16px}
+.confirm-box p{font-size:13px;color:#166534;line-height:1.7}
+.confirm-box strong{color:#16a34a}
+
+/* KIT ACCESS CARD */
+.kit-access{background:linear-gradient(135deg,#071525,#1B3A6B);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+.ka-title{font-family:'Playfair Display',serif;font-size:15px;color:var(--gl);margin-bottom:4px}
+.ka-sub{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:16px}
+.ka-items{display:flex;flex-direction:column;gap:8px}
+.ka-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px}
+.ka-icon{font-size:18px;flex-shrink:0}
+.ka-text{flex:1}
+.ka-name{font-size:12.5px;font-weight:700;color:#fff;margin-bottom:1px}
+.ka-desc{font-size:11px;color:rgba(255,255,255,.45)}
+.ka-badge{font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;flex-shrink:0;white-space:nowrap}
+.ka-badge.included{background:rgba(39,174,96,.2);color:#2ecc71;border:1px solid rgba(39,174,96,.3)}
+.ka-badge.locked{background:rgba(255,255,255,.08);color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.1)}
+.ka-note{font-size:11.5px;color:rgba(255,255,255,.4);margin-top:12px;text-align:center;line-height:1.6}
+
+/* PAYMENT PLAN CARD */
+.payment-plan{background:#f9f8f5;border:1px solid #e5e2d8;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none}
+.pp-title{font-size:12px;font-weight:700;color:#374151;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.pp-options{display:flex;flex-direction:column;gap:8px}
+.pp-option{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:#fff;border-radius:8px;border:1.5px solid #e5e2d8;cursor:pointer;transition:.2s}
+.pp-option.selected{border-color:#C9A84C;background:#fffbeb}
+.pp-left{font-size:12.5px;font-weight:700;color:#071525}
+.pp-right{font-size:12px;color:#6b7280}
+
+/* SUPPORT */
+.support-card{background:linear-gradient(135deg,#071525,#1B3A6B);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.sc-text h3{font-family:'Playfair Display',serif;font-size:14px;color:var(--gl);margin-bottom:3px}
+.sc-text p{font-size:12px;color:rgba(255,255,255,.55)}
+.btn-zalo{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#071525;font-weight:800;font-size:12.5px;padding:10px 18px;border-radius:9px;text-decoration:none;white-space:nowrap}
+.btn-zalo:hover{opacity:.9}
+
+/* TRUST */
+.trust-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:#6b7280}
+
+/* GUARANTEE STRIP */
+.guarantee-strip{background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.gs-icon{font-size:22px;flex-shrink:0}
+.gs-text{font-size:12.5px;color:#166534;line-height:1.5}
+
+footer{background:#071525;padding:14px;text-align:center}
+footer p{font-size:11.5px;color:rgba(255,255,255,.3)}
+footer strong{color:var(--gl)}
+
+@media(max-width:480px){
+  .tier-tabs{grid-template-columns:1fr}
+  .ps-top{flex-direction:column}
+  .ps-price-block{text-align:left}
+  .steps-mini{flex-direction:column}
+  .step-mini{border-right:none;border-bottom:1px solid #e5e2d8}
+  .step-mini:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <a href="broker-brand-builder-sales.html" class="header-back">← Quay lại</a>
+  <div class="header-brand">🏆 Broker HLX Brand Builder · Cohort 1</div>
+  <h1>Hoàn Tất Đăng Ký</h1>
+  <div class="header-sub">Điền thông tin · Chuyển khoản · Nhận kit trong 15 phút</div>
+  <div class="header-steps">
+    <div class="hs done"><div class="hs-num">1</div> Chọn gói</div>
+    <div class="hs-sep">›</div>
+    <div class="hs done"><div class="hs-num">2</div> Điền thông tin</div>
+    <div class="hs-sep">›</div>
+    <div class="hs done"><div class="hs-num">3</div> Thanh toán</div>
+    <div class="hs-sep">›</div>
+    <div class="hs"><div class="hs-num">4</div> Nhận kit</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- URGENCY -->
+  <div class="urgency-strip">
+    🔥 Early Bird còn <span>17/20 suất</span> — Giá tăng lên sau khi đủ 20 người · <span>Đăng ký bây giờ để giữ giá</span>
+  </div>
+
+  <!-- TIER SELECTOR -->
+  <div class="tier-tabs">
+    <div class="tier-tab" id="tab-starter" onclick="selectTier('starter')">
+      <div class="tt-emoji">🥉</div>
+      <div class="tt-name">Starter</div>
+      <div class="tt-eb">1,997,000đ</div>
+      <div class="tt-regular">2,497,000đ</div>
+      <div class="tt-save">Tiết kiệm 500K</div>
+    </div>
+    <div class="tier-tab" id="tab-brand-builder" onclick="selectTier('brand-builder')">
+      <div class="tt-emoji">🥇</div>
+      <div class="tt-name">Brand Builder</div>
+      <div class="tt-eb" style="color:#C9A84C">2,997,000đ</div>
+      <div class="tt-regular">3,997,000đ</div>
+      <div class="tt-save">Tiết kiệm 1,000K ⭐</div>
+    </div>
+    <div class="tier-tab vip-tab" id="tab-vip" onclick="selectTier('vip')">
+      <div class="tt-emoji">💎</div>
+      <div class="tt-name">VIP Accelerator</div>
+      <div class="tt-eb" style="color:#7c3aed">5,997,000đ</div>
+      <div class="tt-regular">7,997,000đ</div>
+      <div class="tt-save" style="background:#ede9fe;color:#7c3aed">Tiết kiệm 2,000K</div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT CARD -->
+  <div class="checkout-card">
+
+    <!-- PRODUCT SUMMARY -->
+    <div class="product-summary">
+      <div class="ps-top">
+        <div>
+          <div class="ps-tier" id="tier-label">🥇 BRAND BUILDER — PHỔ BIẾN NHẤT</div>
+          <div class="ps-name" id="product-name">Broker HLX Brand Builder — Xây Thương Hiệu Toàn Bộ</div>
+        </div>
+        <div class="ps-price-block">
+          <div class="ps-price-eb" id="product-price-eb">2,997,000đ</div>
+          <div class="ps-price-label">Early Bird</div>
+          <div class="ps-price-regular" id="product-price-regular">3,997,000đ regular</div>
+        </div>
+      </div>
+      <div class="ps-items" id="product-items"></div>
+    </div>
+
+    <!-- CUSTOMER FORM -->
+    <div class="form-section">
+      <div class="section-label">Thông Tin Đăng Ký</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Họ & Tên <span class="req">*</span></label>
+          <input type="text" id="f-name" placeholder="Nguyễn Thị A" oninput="updateMemo()">
+        </div>
+        <div class="form-group">
+          <label>Số Điện Thoại <span class="req">*</span></label>
+          <input type="tel" id="f-phone" placeholder="09xx xxx xxx" oninput="updateMemo()">
+        </div>
+        <div class="form-group">
+          <label>Số Zalo <span class="req">*</span></label>
+          <input type="tel" id="f-zalo" placeholder="Số Zalo để nhận kit" oninput="updateMemo()">
+          <span class="input-hint">Kit sẽ được gửi qua số Zalo này</span>
+        </div>
+        <div class="form-group">
+          <label>Link FB Cá Nhân</label>
+          <input type="url" id="f-fb" placeholder="facebook.com/ten-cua-ban">
+          <span class="input-hint">Tuỳ chọn — để audit profile</span>
+        </div>
+        <div class="form-group full">
+          <label>Kinh Nghiệm Bán HLX</label>
+          <select id="f-exp">
+            <option value="">— Chọn —</option>
+            <option>Đang tìm hiểu / chưa có giao dịch</option>
+            <option>1–5 giao dịch</option>
+            <option>6–15 giao dịch</option>
+            <option>Trên 15 giao dịch</option>
+          </select>
+          <span class="input-hint">Giúp tôi chuẩn bị kit phù hợp nhất cho anh/chị</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="payment-section">
+      <div class="section-label">Thanh Toán</div>
+
+      <!-- STEP INDICATOR -->
+      <div class="steps-mini">
+        <div class="step-mini active-step"><div class="step-num-mini">1</div> Quét QR / chuyển khoản</div>
+        <div class="step-mini"><div class="step-num-mini">2</div> Chụp màn hình</div>
+        <div class="step-mini"><div class="step-num-mini">3</div> Nhắn Zalo xác nhận</div>
+        <div class="step-mini"><div class="step-num-mini">4</div> Nhận kit &lt;15 phút</div>
+      </div>
+
+      <!-- VIP PAYMENT PLAN (hidden unless vip) -->
+      <div class="payment-plan" id="payment-plan-vip">
+        <div class="pp-title">💳 Chọn hình thức thanh toán (VIP)</div>
+        <div class="pp-options">
+          <div class="pp-option selected" onclick="selectPayPlan('full', this)">
+            <div class="pp-left">💰 Thanh toán 1 lần</div>
+            <div class="pp-right" style="color:#C9A84C;font-weight:700">5,997,000đ</div>
+          </div>
+          <div class="pp-option" onclick="selectPayPlan('split2', this)">
+            <div class="pp-left">📅 Chia 2 lần (lần 1 bây giờ)</div>
+            <div class="pp-right">3,099,000đ × 2</div>
+          </div>
+          <div class="pp-option" onclick="selectPayPlan('split3', this)">
+            <div class="pp-left">📅 Chia 3 lần (lần 1 bây giờ)</div>
+            <div class="pp-right">2,099,000đ × 3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QR BLOCK -->
+      <div class="qr-block">
+        <div class="qr-amount" id="qr-amount">2,997,000đ</div>
+        <div class="qr-sublabel">Số tiền chuyển khoản (Early Bird)</div>
+        <img id="qr-image"
+          src="https://qr.sepay.vn/img?acc=0021000437656&bank=Vietcombank&amount=2997000&des=BBB_BRAND&template=compact"
+          alt="QR Thanh Toán Brand Builder"
+          class="qr-img"
+          onerror="this.style.display='none';document.getElementById('qr-fallback').style.display='flex'"
+        >
+        <div id="qr-fallback" style="display:none;width:200px;height:200px;border-radius:12px;border:2px dashed #e5e2d8;align-items:center;justify-content:center;flex-direction:column;gap:8px;margin:0 auto 14px;font-size:12px;color:#9ca3af;text-align:center">
+          <span style="font-size:28px">📱</span>
+          Dùng thông tin<br>ngân hàng bên dưới
+        </div>
+        <div class="qr-hint">📱 Mở app ngân hàng → Chuyển tiền → Quét QR<br>Số tiền & nội dung tự điền — chỉ thêm tên bạn vào</div>
+
+        <!-- BANK INFO -->
+        <div class="bank-info">
+          <div class="bi-row">
+            <span class="bi-label">Ngân hàng</span>
+            <span class="bi-value">Vietcombank</span>
+          </div>
+          <div class="bi-row">
+            <span class="bi-label">Số tài khoản</span>
+            <div class="bi-right">
+              <span class="bi-value">0021000437656</span>
+              <button class="bi-copy" onclick="cp('0021000437656',this)">Copy</button>
+            </div>
+          </div>
+          <div class="bi-row">
+            <span class="bi-label">Chủ tài khoản</span>
+            <span class="bi-value">NGUYEN THI YEN</span>
+          </div>
+          <div class="bi-row">
+            <span class="bi-label">Số tiền</span>
+            <div class="bi-right">
+              <span class="bi-value" id="amount-display">2,997,000đ</span>
+              <button class="bi-copy" id="btn-copy-amount" onclick="cpAmount(this)">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEMO -->
+      <div class="memo-box">
+        <div class="memo-top">
+          <div class="memo-lbl">✍️ Nội dung chuyển khoản</div>
+          <button class="btn-copy-memo" id="btn-memo" onclick="cpMemo(this)">📋 Copy</button>
+        </div>
+        <div class="memo-val" id="memo-preview">BBB_BRAND [Tên bạn]</div>
+        <div class="memo-hint">Điền tên ở phần "Thông tin đăng ký" → nội dung sẽ tự cập nhật</div>
+      </div>
+
+      <!-- CONFIRM -->
+      <div class="confirm-box">
+        <p>✅ Sau khi chuyển khoản — nhắn Zalo <strong>0964.827.670</strong> kèm:<br>
+        1️⃣ Ảnh chụp màn hình xác nhận giao dịch<br>
+        2️⃣ Tên đã điền + gói đăng ký<br><br>
+        Kit sẽ được gửi trong <strong>15 phút</strong> (8h–22h hàng ngày)</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GUARANTEE -->
+  <div class="guarantee-strip">
+    <div class="gs-icon">🛡️</div>
+    <div class="gs-text">
+      <strong style="color:#166534">Bảo hành 30 ngày hoàn 100% tiền</strong> — Nếu anh/chị áp dụng đúng hệ thống mà không thấy profile tăng trưởng sau 30 ngày.
+    </div>
+  </div>
+
+  <!-- KIT ACCESS PREVIEW -->
+  <div class="kit-access" id="kit-access-section">
+    <div class="ka-title">📦 Anh/Chị Sẽ Nhận Được</div>
+    <div class="ka-sub">Sau khi xác nhận thanh toán — tất cả được gửi qua Zalo</div>
+    <div class="ka-items" id="kit-items"></div>
+    <div class="ka-note" id="kit-note">Tất cả tài liệu có thể truy cập ngay trên điện thoại — không cần cài đặt</div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div class="support-card">
+    <div class="sc-text">
+      <h3>💬 Cần Hỗ Trợ?</h3>
+      <p>Nhắn Zalo — phản hồi trong 30 phút. Không cần đợi.</p>
+    </div>
+    <a href="https://zalo.me/0964827670" target="_blank" class="btn-zalo">💬 Zalo 0964.827.670 →</a>
+  </div>
+
+  <!-- TRUST -->
+  <div class="trust-row">
+    <div class="trust-item">🔒 Thanh toán an toàn qua Vietcombank</div>
+    <div class="trust-item">⚡ Giao kit trong 15 phút</div>
+    <div class="trust-item">🔄 Hỗ trợ sau mua 30 ngày</div>
+    <div class="trust-item">🛡️ Bảo hành hoàn tiền 100%</div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Broker HLX Brand Builder · <strong>Nguyễn Thị Yến</strong> · 📞 0964.827.670 · anhomehanoi@gmail.com · Cohort 1 · 2026</p>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════
+const BANK_ACCOUNT = '0021000437656';
+const BANK_NAME    = 'Vietcombank';
+// ══════════════════════════════════════════════════
+
+const BASE_URL = 'https://yen670-oss.github.io/kit-hlx/';
+
+const TIERS = {
+  'starter': {
+    emoji: '🥉',
+    label: '🥉 STARTER — BẮT ĐẦU',
+    name: 'Broker HLX Brand Builder — Gói Starter',
+    priceEB: '1,997,000đ', priceReg: '1,997,000đ → 2,497,000đ regular',
+    amount: 1997000,
+    code: 'BBB_STARTER',
+    items: ['🎓 4 module · 16 bài học', '📋 30 template bài viết HLX', '📄 PDF hướng dẫn từng bài'],
+    kitItems: [
+      {icon:'🎓', name:'Module 1: Nền Tảng Thương Hiệu', desc:'16 bài học video + PDF thực chiến', url: BASE_URL + 'broker-brand-builder-module1.html', status:'included'},
+      {icon:'📋', name:'30 Template Bài Viết HLX', desc:'Copy-paste ngay — không cần viết từ đầu', url:'#', status:'included'},
+      {icon:'📄', name:'PDF Hướng Dẫn Từng Bài', desc:'In ra hoặc xem trên điện thoại', url:'#', status:'included'},
+      {icon:'👥', name:'Group Cộng Đồng Broker HLX', desc:'Nâng cấp lên Brand Builder để mở khoá', url:'#', status:'locked'},
+      {icon:'📅', name:'Lịch Content 90 Ngày', desc:'Nâng cấp lên Brand Builder để mở khoá', url:'#', status:'locked'},
+    ],
+    note: '💡 Nâng cấp lên Brand Builder để nhận thêm 5 bonus trị giá 14,000,000đ',
+    payPlan: false
+  },
+  'brand-builder': {
+    emoji: '🥇',
+    label: '🥇 BRAND BUILDER — PHỔ BIẾN NHẤT ⭐',
+    name: 'Broker HLX Brand Builder — Gói Đầy Đủ',
+    priceEB: '2,997,000đ', priceReg: '2,997,000đ → 3,997,000đ regular',
+    amount: 2997000,
+    code: 'BBB_BRAND',
+    items: ['🎓 4 module · 16 bài học', '📋 30 template bài viết HLX', '🎙️ Script livestream + Zalo 14 ngày', '📅 Lịch content 90 ngày chi tiết', '👥 Group cộng đồng lifetime', '🎤 4 buổi Q&A live 60 ngày', '🗂️ BDS Mastery Kit hoàn chỉnh', '🛡️ Bảo hành 30 ngày hoàn tiền'],
+    kitItems: [
+      {icon:'🎓', name:'Module 1: Nền Tảng Thương Hiệu', desc:'Định vị · Bio chuẩn · Ảnh đại diện · Setup MXH', url: BASE_URL + 'broker-brand-builder-module1.html', status:'included'},
+      {icon:'📅', name:'Lịch Content 90 Ngày', desc:'Kế hoạch đăng bài chi tiết từng ngày x3 tháng', url: BASE_URL + 'broker-brand-builder-content-90.html', status:'included'},
+      {icon:'🗂️', name:'Script Pitch & Xử Lý Từ Chối', desc:'Kịch bản Zalo · FB Post · Group · Follow Up', url: BASE_URL + 'broker-brand-builder-pitch.html', status:'included'},
+      {icon:'📊', name:'Nghiên Cứu Thị Trường Brand Broker', desc:'7 tab phân tích chiến lược · Đối thủ · GO', url: BASE_URL + 'research-personal-brand-broker.html', status:'included'},
+      {icon:'👥', name:'Group Cộng Đồng "Broker HLX Chuyên Nghiệp"', desc:'Tham gia lifetime · Q&A live 2 lần/tháng', url:'#', status:'included'},
+      {icon:'🎤', name:'4 Buổi Q&A Live (60 ngày)', desc:'Hỏi trực tiếp · Sửa lỗi real-time · Kết nối đồng nghiệp', url:'#', status:'included'},
+    ],
+    note: '🎉 Bao gồm toàn bộ nội dung — sử dụng ngay trên điện thoại hoặc máy tính',
+    payPlan: false
+  },
+  'vip': {
+    emoji: '💎',
+    label: '💎 VIP ACCELERATOR — 1:1 COACHING',
+    name: 'Broker HLX Brand Builder — VIP 1:1',
+    priceEB: '5,997,000đ', priceReg: '5,997,000đ → 7,997,000đ regular',
+    amount: 5997000,
+    code: 'BBB_VIP',
+    items: ['✅ Toàn bộ Brand Builder', '📞 4 buổi coaching 1:1 (60 phút/buổi)', '🔍 Audit profile cá nhân hoá', '📋 Chiến lược content riêng 90 ngày', '✏️ Review + sửa 4 bài viết trực tiếp', '💬 Hỗ trợ Zalo không giới hạn 60 ngày'],
+    kitItems: [
+      {icon:'🎓', name:'Module 1: Nền Tảng Thương Hiệu', desc:'Đầy đủ như Brand Builder + audit cá nhân', url: BASE_URL + 'broker-brand-builder-module1.html', status:'included'},
+      {icon:'📅', name:'Lịch Content 90 Ngày', desc:'Lịch chung + chiến lược riêng cho profile của anh/chị', url: BASE_URL + 'broker-brand-builder-content-90.html', status:'included'},
+      {icon:'🗂️', name:'Script Pitch & Xử Lý Từ Chối', desc:'Toàn bộ kịch bản + customise theo phong cách cá nhân', url: BASE_URL + 'broker-brand-builder-pitch.html', status:'included'},
+      {icon:'📞', name:'4 Buổi Coaching 1:1 (60 phút/buổi)', desc:'Đặt lịch ngay sau khi đăng ký · Zalo cá nhân', url:'#', status:'included'},
+      {icon:'🔍', name:'Audit Profile Cá Nhân Hoá', desc:'Phân tích FB/Zalo/TikTok · Chỉnh sửa trực tiếp', url:'#', status:'included'},
+      {icon:'💬', name:'Hỗ Trợ Zalo Không Giới Hạn 60 Ngày', desc:'Hỏi bất cứ lúc nào · Trả lời trong 2 tiếng', url:'#', status:'included'},
+    ],
+    note: '🚀 Dành cho broker muốn kết quả nhanh nhất — có người đồng hành trong 60 ngày đầu',
+    payPlan: true
+  }
+};
+
+let currentTier = 'brand-builder';
+let currentPayPlan = 'full';
+
+function selectTier(tier) {
+  currentTier = tier;
+  const t = TIERS[tier];
+
+  // Update tabs
+  ['starter','brand-builder','vip'].forEach(k => {
+    document.getElementById('tab-' + k).classList.toggle('active', k === tier);
+  });
+
+  // Update summary
+  document.getElementById('tier-label').textContent = t.label;
+  document.getElementById('product-name').textContent = t.name;
+  document.getElementById('product-price-eb').textContent = t.priceEB;
+  document.getElementById('product-price-regular').textContent = t.priceReg;
+  document.getElementById('product-price-eb').style.color = tier === 'vip' ? '#7c3aed' : '#C9A84C';
+
+  // Items
+  const itemsEl = document.getElementById('product-items');
+  itemsEl.innerHTML = t.items.map(i => `<span class="ps-item">${i}</span>`).join('');
+
+  // QR & amount
+  const amount = t.amount;
+  document.getElementById('qr-amount').textContent = t.priceEB;
+  document.getElementById('amount-display').textContent = t.priceEB;
+  document.getElementById('qr-image').src = `https://qr.sepay.vn/img?acc=${BANK_ACCOUNT}&bank=${BANK_NAME}&amount=${amount}&des=${t.code}&template=compact`;
+  document.getElementById('qr-image').alt = `QR ${t.label} ${t.priceEB}`;
+  document.getElementById('qr-image').style.display = 'block';
+  document.getElementById('qr-fallback').style.display = 'none';
+
+  // Payment plan
+  const ppEl = document.getElementById('payment-plan-vip');
+  ppEl.style.display = t.payPlan ? 'block' : 'none';
+  currentPayPlan = 'full';
+
+  // Kit access
+  renderKitItems(t);
+
+  // Memo
+  updateMemo();
+}
+
+function selectPayPlan(plan, el) {
+  currentPayPlan = plan;
+  document.querySelectorAll('.pp-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const t = TIERS[currentTier];
+  let amt = t.amount;
+  if(plan === 'split2') amt = 3099000;
+  if(plan === 'split3') amt = 2099000;
+  const fmtAmt = amt.toLocaleString('vi-VN') + 'đ';
+  document.getElementById('qr-amount').textContent = fmtAmt + (plan !== 'full' ? ' (lần 1)' : '');
+  document.getElementById('amount-display').textContent = fmtAmt;
+  document.getElementById('qr-image').src = `https://qr.sepay.vn/img?acc=${BANK_ACCOUNT}&bank=${BANK_NAME}&amount=${amt}&des=${t.code}_L1&template=compact`;
+  updateMemo();
+}
+
+function renderKitItems(t) {
+  const el = document.getElementById('kit-items');
+  el.innerHTML = t.kitItems.map(k => `
+    <div class="ka-item">
+      <div class="ka-icon">${k.icon}</div>
+      <div class="ka-text">
+        <div class="ka-name">${k.name}</div>
+        <div class="ka-desc">${k.desc}</div>
+      </div>
+      <span class="ka-badge ${k.status}">${k.status === 'included' ? '✅ Bao gồm' : '🔒 Khoá'}</span>
+    </div>
+  `).join('');
+  document.getElementById('kit-note').textContent = t.note;
+}
+
+function updateMemo() {
+  const name = (document.getElementById('f-name').value || '').trim();
+  const t = TIERS[currentTier];
+  const suffix = currentPayPlan !== 'full' ? '_L1' : '';
+  const memoCode = t.code + suffix;
+  const memoVal = name ? `${memoCode} ${name}` : `${memoCode} [Tên bạn]`;
+  document.getElementById('memo-preview').textContent = memoVal;
+}
+
+function cpMemo(btn) {
+  const name = (document.getElementById('f-name').value || '').trim();
+  const t = TIERS[currentTier];
+  const suffix = currentPayPlan !== 'full' ? '_L1' : '';
+  const memo = name ? `${t.code}${suffix} ${name}` : `${t.code}${suffix}`;
+  cpRaw(memo, btn, '📋 Copy');
+}
+
+function cpAmount(btn) {
+  const t = TIERS[currentTier];
+  let amt = t.amount;
+  if(currentPayPlan === 'split2') amt = 3099000;
+  if(currentPayPlan === 'split3') amt = 2099000;
+  cpRaw(String(amt), btn, 'Copy');
+}
+
+function cp(text, btn) { cpRaw(text, btn, 'Copy'); }
+
+function cpRaw(text, btn, orig) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => flash(btn, orig));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); flash(btn, orig);
+  }
+}
+
+function flash(btn, orig) {
+  const wasText = btn.textContent;
+  btn.textContent = '✅ Copied!';
+  btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = orig || wasText; btn.classList.remove('ok'); }, 2000);
+}
+
+// ── Init from URL param ──
+const urlParam = new URLSearchParams(window.location.search).get('tier') || 'brand-builder';
+const validTiers = ['starter','brand-builder','vip'];
+selectTier(validTiers.includes(urlParam) ? urlParam : 'brand-builder');
+</script>
+</body>
+</html>
