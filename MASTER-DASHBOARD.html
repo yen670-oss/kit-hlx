@@ -258,6 +258,12 @@ body.present .present-nav{display:flex}
       <span class="ni-badge">3</span>
     </div>
 
+    <div class="nav-item" id="nav-class" onclick="go('class')">
+      <span class="ni-emoji">🎓</span>
+      <div class="ni-text"><div class="ni-name">Brand From Zero</div><div class="ni-sub">Lớp học · 4 tuần · 8 buổi</div></div>
+      <span class="ni-badge">NEW</span>
+    </div>
+
     <div class="nav-item" id="nav-kit" onclick="go('kit')">
       <span class="ni-emoji">📦</span>
       <div class="ni-text"><div class="ni-name">BDS Mastery Kit</div><div class="ni-sub">4 gói · Bronze→Diamond</div></div>
@@ -632,6 +638,122 @@ body.present .present-nav{display:flex}
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- PANEL: BRAND FROM ZERO CLASS -->
+  <!-- ================================================================ -->
+  <div class="panel" id="panel-class">
+    <div class="panel-head">
+      <div class="ph-eyebrow">🎓 LỚP HỌC · BRAND FROM ZERO</div>
+      <div class="ph-title">Brand From Zero — Lớp Học 4 Tuần</div>
+      <div class="ph-sub">8 buổi live · Tối đa 20 người · Khai giảng tháng 7/2026 · 3 gói học phí</div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">🔗 TRANG SẢN PHẨM</div>
+      <div class="grid-2">
+        <div class="lcard" onclick="open_('https://yen670-oss.github.io/kit-hlx/bbb-class.html')" style="border-color:rgba(201,168,76,.25)">
+          <div class="lcard-icon">🎓</div>
+          <div class="lcard-body">
+            <div class="lcard-title" style="color:#E2C06A">Sales Page — Brand From Zero</div>
+            <div class="lcard-desc">Trang đăng ký lớp học · 3 gói học phí · Chương trình chi tiết · CTA Zalo</div>
+            <div class="lcard-actions"><a href="https://yen670-oss.github.io/kit-hlx/bbb-class.html" target="_blank" class="btn-sm btn-open">🎓 Mở Trang</a></div>
+          </div>
+        </div>
+        <div class="lcard">
+          <div class="lcard-icon">📋</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Link Chia Sẻ Cho Khách</div>
+            <div class="lcard-desc">Copy link → gửi Zalo cho khách tiềm năng · Không cần giải thích thêm</div>
+            <div class="lcard-actions"><button class="btn-sm btn-open" onclick="cpText(this,'https://yen670-oss.github.io/kit-hlx/bbb-class.html')">📋 Copy Link</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">📊 TỔNG QUAN KHOÁ HỌC</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
+        <div style="background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;color:#c4b5fd">4</div>
+          <div style="font-size:11px;color:rgba(232,223,200,.4);margin-top:2px">Tuần học</div>
+        </div>
+        <div style="background:rgba(219,39,119,.07);border:1px solid rgba(219,39,119,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;color:#f9a8d4">8</div>
+          <div style="font-size:11px;color:rgba(232,223,200,.4);margin-top:2px">Buổi live 90'</div>
+        </div>
+        <div style="background:rgba(8,145,178,.07);border:1px solid rgba(8,145,178,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;color:#67e8f9">20</div>
+          <div style="font-size:11px;color:rgba(232,223,200,.4);margin-top:2px">Người tối đa</div>
+        </div>
+        <div style="background:rgba(5,150,105,.07);border:1px solid rgba(5,150,105,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;color:#6ee7b7">T7</div>
+          <div style="font-size:11px;color:rgba(232,223,200,.4);margin-top:2px">Khai giảng 2026</div>
+        </div>
+        <div style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:#E2C06A">7.9M</div>
+          <div style="font-size:11px;color:rgba(232,223,200,.4);margin-top:2px">Từ Standard</div>
+        </div>
+        <div style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:#E2C06A">20M</div>
+          <div style="font-size:11px;color:rgba(232,223,200,.4);margin-top:2px">Tối đa/lớp</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">💰 GÓI HỌC PHÍ</div>
+      <div class="grid-2">
+        <div class="lcard">
+          <div class="lcard-icon">📘</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Standard — 7,997K</div>
+            <div class="lcard-desc">8 buổi live · Recording 60 ngày · Nhóm hỗ trợ · Bài tập · Lịch content 30 ngày</div>
+          </div>
+        </div>
+        <div class="lcard" style="border-color:rgba(201,168,76,.25)">
+          <div class="lcard-icon">⭐</div>
+          <div class="lcard-body">
+            <div class="lcard-title" style="color:#E2C06A">Pro — 12,997K ← Phổ biến nhất</div>
+            <div class="lcard-desc">Standard + Kit Core (4,997K) + 1 buổi review cá nhân 45' với Yến</div>
+          </div>
+        </div>
+        <div class="lcard">
+          <div class="lcard-icon">💎</div>
+          <div class="lcard-body">
+            <div class="lcard-title">VIP — 19,997K</div>
+            <div class="lcard-desc">Standard + Kit Brand Pro (9,997K) + 3 buổi 1:1 riêng với Yến (45'/buổi)</div>
+          </div>
+        </div>
+        <div class="lcard">
+          <div class="lcard-icon">🗓️</div>
+          <div class="lcard-body">
+            <div class="lcard-title">Chương Trình 4 Tuần</div>
+            <div class="lcard-desc">T1: Foundation · T2: Content · T3: System · T4: Launch — Ra lớp có sản phẩm thật</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-group">
+      <div class="sg-label">💬 SCRIPT PITCH LỚP HỌC — GỬI ZALO</div>
+      <div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 20px">
+        <div style="font-size:12px;color:rgba(232,223,200,.4);margin-bottom:10px">Tin nhắn mời tham gia lớp học:</div>
+        <div id="classScript" style="font-size:13.5px;color:rgba(232,223,200,.75);line-height:1.9;white-space:pre-wrap">Anh/chị ơi, em đang mở lớp học "Brand From Zero" — 4 tuần thực chiến xây thương hiệu cá nhân cho người bán hàng.
+
+Không phải lý thuyết — em dạy đúng phương pháp em đã tự đi qua để từ người bán hàng vô hình trở thành người được khách tìm đến.
+
+8 buổi live · Tối đa 20 người · Khai giảng tháng 7
+→ Học phí từ 7,997K
+
+Anh/chị xem thông tin chi tiết tại đây: https://yen670-oss.github.io/kit-hlx/bbb-class.html
+
+Còn 8 suất — anh/chị muốn em giữ chỗ không ạ?</div>
+        <button class="btn-sm btn-open" style="margin-top:12px" onclick="cpText(this,document.getElementById('classScript').textContent)">📋 Copy Tin Nhắn</button>
+      </div>
+    </div>
+
   </div>
 
   <!-- ================================================================ -->
@@ -1526,11 +1648,12 @@ Anh muốn bắt đầu Starter 5 kit 17,997K thử trước không ạ?</div>
 
 <script>
 const BASE = 'https://yen670-oss.github.io/kit-hlx/';
-const PANELS = ['hlx','bbb','f1','kit','book','gifts','ops','research','links'];
+const PANELS = ['hlx','bbb','f1','class','kit','book','gifts','ops','research','links'];
 const TITLES = {
   hlx: '🏠 HLX Project — Hạ Long Xanh',
   bbb: '🏆 Broker Brand Builder — Coaching',
   f1: '🏗️ Team Pack F1/F2 — Bán Kit Số Lượng Lớn',
+  class: '🎓 Brand From Zero — Lớp Học 4 Tuần',
   kit: '📦 BDS Mastery Kit — 4 Gói',
   book: '📚 Broker Pro Book — 15 Chương',
   gifts: '🎁 Quà Tặng & Lead Magnets',
