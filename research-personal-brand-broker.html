@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🔍 Research: Chuyên Gia Personal Branding Broker BĐS — HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d1b2a;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;
+  --red:#c0392b;--green:#27ae60;--purple:#8e44ad;--teal:#1abc9c;
+  --card:#112233;--text:#e8dfc8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#071525,#1B3A6B,#2a0a0a);
+  padding:52px 24px 40px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(201,168,76,.1) 0%,transparent 60%),
+              radial-gradient(ellipse at 70% 50%,rgba(192,57,43,.08) 0%,transparent 60%);
+}
+.badge{
+  display:inline-block;background:linear-gradient(135deg,var(--gold),#8b6914);
+  color:#0d1b2a;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 16px;border-radius:20px;margin-bottom:16px;position:relative;z-index:1;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,4.5vw,36px);font-weight:900;line-height:1.2;
+  background:linear-gradient(135deg,var(--gl),#fff,var(--gl));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  position:relative;z-index:1;margin-bottom:10px;
+}
+.hero-sub{font-size:13.5px;color:rgba(232,223,200,.65);max-width:520px;margin:0 auto 24px;position:relative;z-index:1;line-height:1.7;}
+.hero-kpis{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;position:relative;z-index:1;}
+.kpi{background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:12px 20px;text-align:center;min-width:110px;}
+.kpi-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gl);display:block;}
+.kpi-label{font-size:10.5px;color:rgba(232,223,200,.5);margin-top:2px;}
+
+/* NAV TABS */
+.nav-bar{background:rgba(0,0,0,.35);border-bottom:1px solid rgba(201,168,76,.15);padding:0 20px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:99;}
+.nav-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:none;background:none;border:none;border-bottom:3px solid transparent;color:rgba(232,223,200,.45);font-family:'Be Vietnam Pro',sans-serif;font-size:12px;font-weight:700;padding:14px 18px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.tab-btn.active{color:var(--gl);border-bottom-color:var(--gold);}
+.tab-btn:hover:not(.active){color:var(--text);}
+
+.wrap{max-width:860px;margin:0 auto;padding:32px 20px 60px;}
+
+/* PANELS */
+.panel{display:none}.panel.active{display:block}
+
+/* SECTION HEADING */
+.sh{display:flex;align-items:center;gap:10px;margin:28px 0 14px;}
+.sh h2{font-family:'Playfair Display',serif;font-size:16px;color:#fff;white-space:nowrap;}
+.sh::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+
+/* CARD BASE */
+.card{background:var(--card);border:1px solid rgba(201,168,76,.15);border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+.card-tag{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(226,192,106,.55);margin-bottom:8px;}
+
+/* VERDICT BOX */
+.verdict{background:linear-gradient(135deg,#0a2a0a,#1a4a1a);border:2px solid #27ae60;border-radius:16px;padding:22px 24px;margin-bottom:24px;}
+.verdict h3{font-size:18px;font-weight:800;color:#2ecc71;margin-bottom:14px;}
+.verdict-list{list-style:none;}
+.verdict-list li{display:flex;gap:10px;font-size:13.5px;color:rgba(232,223,200,.85);padding:5px 0;line-height:1.6;}
+.verdict-list li::before{content:'✅';flex-shrink:0;}
+.risk-list li::before{content:'⚠️';flex-shrink:0;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px;}
+th{background:rgba(201,168,76,.15);color:var(--gl);font-weight:700;padding:10px 12px;text-align:left;font-size:11.5px;}
+td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(232,223,200,.8);vertical-align:top;line-height:1.5;}
+tr:hover td{background:rgba(255,255,255,.03);}
+.tag-good{background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.3);color:#2ecc71;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;}
+.tag-bad{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#e74c3c;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;}
+.tag-gold{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gl);padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;}
+
+/* POSITIONING MATRIX */
+.matrix{background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:20px;font-family:monospace;font-size:12px;line-height:1.8;color:rgba(232,223,200,.8);overflow-x:auto;white-space:pre;}
+
+/* POSITIONING STATEMENT */
+.ps-box{background:linear-gradient(135deg,#1a1040,#2a1a60);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 22px;margin-bottom:16px;}
+.ps-box p{font-family:'Playfair Display',serif;font-size:16px;color:#fff;line-height:1.7;font-style:italic;}
+
+/* BRAND NAME TABLE */
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px;}
+.brand-opt{background:rgba(27,58,107,.25);border:1px solid rgba(100,150,255,.2);border-radius:10px;padding:14px 16px;}
+.brand-opt .bo-label{font-size:10px;font-weight:700;letter-spacing:1px;color:#9ecfff;text-transform:uppercase;margin-bottom:6px;}
+.brand-opt .bo-val{font-size:13.5px;font-weight:700;color:#fff;}
+
+/* PHASE CARDS */
+.phase{background:var(--card);border-radius:14px;padding:20px 22px;margin-bottom:14px;border-left:4px solid var(--gold);}
+.phase.p2{border-left-color:var(--green);}
+.phase.p3{border-left-color:var(--purple);}
+.phase-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.25);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--gl);margin-bottom:10px;}
+.phase.p2 .phase-badge{background:rgba(39,174,96,.15);border-color:rgba(39,174,96,.25);color:#2ecc71;}
+.phase.p3 .phase-badge{background:rgba(142,68,173,.15);border-color:rgba(142,68,173,.25);color:#9b59b6;}
+
+/* CHANNEL CARDS */
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px;}
+.ch-card{background:rgba(0,0,0,.25);border-radius:12px;padding:16px 18px;border-top:3px solid var(--gold);}
+.ch-card.fb{border-top-color:#1877f2;}
+.ch-card.zalo{border-top-color:#0082f3;}
+.ch-card.tiktok{border-top-color:#fe2c55;}
+.ch-card.yt{border-top-color:#ff0000;}
+.ch-name{font-size:13px;font-weight:800;color:#fff;margin-bottom:10px;}
+.ch-row{display:flex;justify-content:space-between;font-size:12px;color:rgba(232,223,200,.7);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.ch-row:last-child{border:none;}
+.ch-row span:last-child{color:var(--gl);font-weight:700;}
+
+/* PILLAR GRID */
+.pillar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
+@media(max-width:600px){.pillar-grid{grid-template-columns:repeat(2,1fr);}}
+.pillar{background:rgba(0,0,0,.3);border-radius:12px;padding:14px 12px;text-align:center;}
+.pillar-pct{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gl);display:block;}
+.pillar-name{font-size:11px;font-weight:700;color:#fff;margin:4px 0 6px;line-height:1.3;}
+.pillar-desc{font-size:10.5px;color:rgba(232,223,200,.55);line-height:1.4;}
+
+/* REVENUE TABLE */
+.rev-total{background:linear-gradient(135deg,#1a2a10,#2a4a1a);border:2px solid #27ae60;border-radius:12px;padding:16px 20px;text-align:center;margin-top:14px;}
+.rev-total-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#2ecc71;}
+.rev-total-label{font-size:12px;color:rgba(232,223,200,.6);margin-top:4px;}
+
+/* WEEK 1 PLAN */
+.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;}
+.day-card{background:rgba(0,0,0,.25);border-radius:10px;padding:14px 16px;border-left:3px solid var(--gold);}
+.day-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gl);margin-bottom:6px;}
+.day-task{font-size:12.5px;color:rgba(232,223,200,.85);line-height:1.5;}
+
+/* COMMUNITY SECTION */
+.comm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+.comm-card{background:rgba(0,0,0,.25);border-radius:12px;padding:16px 18px;}
+.comm-icon{font-size:24px;margin-bottom:8px;}
+.comm-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;}
+.comm-desc{font-size:12px;color:rgba(232,223,200,.65);line-height:1.5;}
+
+/* CONTENT CALENDAR */
+.cal-week{margin-bottom:20px;}
+.cal-week-head{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gl);background:rgba(201,168,76,.1);border-radius:8px;padding:8px 14px;margin-bottom:10px;}
+.cal-row{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;}
+.cal-day{font-size:11px;font-weight:700;color:rgba(232,223,200,.5);min-width:60px;padding-top:2px;}
+.cal-items{display:flex;flex-wrap:wrap;gap:6px;}
+.cal-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;}
+.ct-post{background:rgba(24,119,242,.2);color:#60a5fa;border:1px solid rgba(24,119,242,.3);}
+.ct-reel{background:rgba(254,44,85,.2);color:#f87171;border:1px solid rgba(254,44,85,.3);}
+.ct-story{background:rgba(201,168,76,.15);color:var(--gl);border:1px solid rgba(201,168,76,.25);}
+.ct-zalo{background:rgba(0,130,243,.2);color:#60b4f8;border:1px solid rgba(0,130,243,.3);}
+.ct-live{background:rgba(39,174,96,.2);color:#4ade80;border:1px solid rgba(39,174,96,.3);}
+
+/* COPY BUTTON */
+.btn-cp{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#0d1b2a;font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:12px;padding:8px 16px;border-radius:8px;border:none;cursor:pointer;margin-top:10px;}
+.btn-cp.ok{background:#22c55e;color:#fff;}
+
+/* SCRIPT BOX */
+.script-box{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 16px;font-size:13px;color:rgba(232,223,200,.9);line-height:1.7;white-space:pre-wrap;margin-top:8px;}
+
+/* HIDDEN SRC */
+.copy-src{display:none;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">🔍 NGHIÊN CỨU THỊ TRƯỜNG · PERSONAL BRANDING · BDS HLX</div>
+  <h1>Chuyên Gia Personal Branding<br>Cho Broker BĐS Hạ Long Xanh</h1>
+  <p class="hero-sub">Phân tích đối thủ · Định vị cá nhân · Chiến lược 6 tháng · Kế hoạch kênh & nội dung · Dự báo doanh thu</p>
+  <div class="hero-kpis">
+    <div class="kpi"><span class="kpi-num">0</span><div class="kpi-label">Đối thủ trực tiếp<br>cùng phân khúc</div></div>
+    <div class="kpi"><span class="kpi-num">500–1K</span><div class="kpi-label">Broker HLX<br>tiềm năng</div></div>
+    <div class="kpi"><span class="kpi-num">75–130M</span><div class="kpi-label">Doanh thu dự báo<br>6 tháng đầu (VNĐ)</div></div>
+    <div class="kpi"><span class="kpi-num">✅ GO</span><div class="kpi-label">Phán quyết<br>thị trường</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <button class="tab-btn active" onclick="show(0)">🏢 Đối Thủ</button>
+  <button class="tab-btn" onclick="show(1)">🎯 Định Vị</button>
+  <button class="tab-btn" onclick="show(2)">📅 Chiến Lược</button>
+  <button class="tab-btn" onclick="show(3)">📡 Kênh & Tần Suất</button>
+  <button class="tab-btn" onclick="show(4)">📝 Lịch Nội Dung</button>
+  <button class="tab-btn" onclick="show(5)">👥 Xây Community</button>
+  <button class="tab-btn" onclick="show(6)">💰 Thị Trường & GO</button>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════ TAB 0: ĐỐI THỦ ═══════ -->
+<div class="panel active" id="p0">
+  <div class="sh"><h2>🏢 Bức Tranh Cạnh Tranh Toàn Thị Trường</h2></div>
+
+  <div class="card">
+    <div class="card-tag">📊 PHÂN TÍCH 5 ĐỐI THỦ CHÍNH</div>
+    <table>
+      <tr><th>#</th><th>Tên / Đơn vị</th><th>Hình thức</th><th>Điểm mạnh</th><th>Điểm yếu — CƠ HỘI CHO ANH</th></tr>
+      <tr>
+        <td style="color:var(--gl);font-weight:700">1</td>
+        <td><strong>Unica</strong><br><small style="color:rgba(232,223,200,.5)">Vũ Huế</small></td>
+        <td>Nền tảng khóa học online</td>
+        <td>Brand lớn, nhiều khóa, SEO mạnh</td>
+        <td><span class="tag-bad">Quá rộng</span> Không tập trung BĐS, không cá nhân hoá, không có câu chuyện thực chiến</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gl);font-weight:700">2</td>
+        <td><strong>M-Master</strong><br><small style="color:rgba(232,223,200,.5)">Nguyễn Văn Minh</small></td>
+        <td>B2B Academy — đào tạo công ty</td>
+        <td>Đã train 20+ công ty BĐS lớn</td>
+        <td><span class="tag-bad">Chỉ B2B</span> Không có cộng đồng broker cá nhân, ít nội dung public, không gắn với dự án cụ thể</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gl);font-weight:700">3</td>
+        <td><strong>Eagle Academy</strong></td>
+        <td>Học viện BĐS hệ thống</td>
+        <td>Bài bản, nhiều trainer, khóa học đa dạng</td>
+        <td><span class="tag-bad">Thiếu face</span> Không có 1 gương mặt dẫn đầu cá nhân, content khô khan, không storytelling</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gl);font-weight:700">4</td>
+        <td><strong>VCB Group</strong></td>
+        <td>Training nội bộ / đóng</td>
+        <td>Mạng lưới phân phối rộng</td>
+        <td><span class="tag-bad">Đóng hoàn toàn</span> Không tiếp cận broker bên ngoài, không tạo cộng đồng mở</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gl);font-weight:700">5</td>
+        <td><strong>Võ Đỗ Khiêm</strong></td>
+        <td>Cá nhân — kỹ năng bán hàng</td>
+        <td>Video TikTok/FB hiệu quả, có fanbase</td>
+        <td><span class="tag-bad">Quá chung chung</span> Nói về sales tổng quát, không chuyên BĐS cao cấp, không gắn HLX cụ thể</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <h3>🎯 Phán quyết khoảng trắng thị trường</h3>
+    <ul class="verdict-list">
+      <li><strong>KHÔNG CÓ AI</strong> đang làm đúng vị trí anh muốn chiếm: Chuyên gia cá nhân về personal branding cho broker BĐS — đặc biệt dự án cao cấp như Hạ Long Xanh</li>
+      <li>Thị trường đang được phục vụ bởi <strong>công ty/học viện</strong> — không phải bởi <strong>1 cá nhân có câu chuyện thực chiến từ HLX</strong></li>
+      <li>Pricing thị trường: 1.3M–3M/khóa → anh hoàn toàn có thể positioning ở 2–5M với coaching cá nhân hóa</li>
+      <li>Barrier to entry thấp: chỉ cần <strong>content + community</strong> — anh đã có sản phẩm, đã có kiến thức HLX thực chiến</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">💡 INSIGHT CHIẾN LƯỢC TỪ ĐỐI THỦ</div>
+    <table>
+      <tr><th>Điều đối thủ đang làm</th><th>Bài học cho anh</th></tr>
+      <tr><td>Unica tập trung SEO + nền tảng lớn</td><td>Anh không thể thắng SEO → thắng bằng <strong>cộng đồng + câu chuyện cá nhân</strong></td></tr>
+      <tr><td>M-Master chỉ B2B, không public content</td><td>Anh <strong>public content hàng ngày</strong> → broker tìm đến anh trước khi họ cần</td></tr>
+      <tr><td>Eagle Academy không có gương mặt</td><td>Anh trở thành <strong>gương mặt dẫn đầu</strong> của phân khúc HLX — 1 người, 1 thương hiệu</td></tr>
+      <tr><td>Võ Đỗ Khiêm làm video ngắn hiệu quả</td><td>Copy format video ngắn nhưng <strong>niche hoá 100% về HLX</strong></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════ TAB 1: ĐỊNH VỊ ═══════ -->
+<div class="panel" id="p1">
+  <div class="sh"><h2>🎯 Định Vị Thương Hiệu Cá Nhân</h2></div>
+
+  <div class="card">
+    <div class="card-tag">💬 POSITIONING STATEMENT — CÂU KHẲNG ĐỊNH THƯƠNG HIỆU</div>
+    <div class="ps-box">
+      <p>"Tôi không dạy lý thuyết bán hàng.<br>
+      Tôi dạy broker HLX cách trở thành người<br>
+      mà khách hàng chủ động tìm đến —<br>
+      trước khi họ cần mua bất động sản."</p>
+    </div>
+    <button class="btn-cp" onclick="cp('ps-src',this)">📋 Copy Câu Định Vị</button>
+    <div class="copy-src" id="ps-src">Tôi không dạy lý thuyết bán hàng.
+Tôi dạy broker HLX cách trở thành người mà khách hàng chủ động tìm đến — trước khi họ cần mua bất động sản.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">📐 MA TRẬN ĐỊNH VỊ SO VỚI ĐỐI THỦ</div>
+    <div class="matrix">                  CÁ NHÂN HOÁ CAO
+                        │
+                        │  ← ANH ở đây
+                        │  (Cá nhân + Chuyên ngành BĐS cao cấp HLX)
+         CHUNG ──────────┼────────────── CHUYÊN NGÀNH BĐS
+                        │
+             Unica    Eagle    M-Master
+             (Chung + Cá nhân hoá thấp)
+                        │
+                  CÁ NHÂN HOÁ THẤP</div>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">🏷️ TÊN THƯƠNG HIỆU — 4 HƯỚNG GỢI Ý</div>
+    <div class="brand-grid">
+      <div class="brand-opt">
+        <div class="bo-label">⭐ Khuyến nghị</div>
+        <div class="bo-val">[Tên anh]<br>Chuyên gia Xây Thương Hiệu Broker</div>
+      </div>
+      <div class="brand-opt">
+        <div class="bo-label">💡 Concept mạnh</div>
+        <div class="bo-val">BrokerBrand Studio</div>
+      </div>
+      <div class="brand-opt">
+        <div class="bo-label">🏝️ Gắn HLX</div>
+        <div class="bo-val">HLX Broker Academy</div>
+      </div>
+      <div class="brand-opt">
+        <div class="bo-label">👥 Cộng đồng</div>
+        <div class="bo-val">Broker Chuyên Nghiệp Việt Nam</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:rgba(232,223,200,.55);margin-top:14px;">⭐ Gợi ý: Dùng tên thật + tagline để dễ SEO và tạo authority cá nhân. Khi có thể thay thế tên thương hiệu, khách hàng sẽ gọi thẳng tên anh.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">📝 BIO CHUẨN — DÙNG CHO PROFILE FB / ZALO / TIKTOK</div>
+    <div class="script-box" id="bio-src">Chuyên gia xây dựng thương hiệu cá nhân cho Broker BĐS Hạ Long Xanh
+
+✅ Đã giúp broker HLX thu hút lead không cần chạy quảng cáo
+✅ Tác giả BDS Mastery Kit — bộ công cụ bán hàng thực chiến
+✅ 3 bài/tuần về branding, nội dung & kỹ năng bán BĐS cao cấp
+
+👇 Nhận KIT miễn phí → [link]</div>
+    <button class="btn-cp" onclick="cp('bio-src',this)">📋 Copy Bio</button>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">🎁 GÓC ĐỘ NỘI DUNG KHÁC BIỆT — NÓI ĐIỀU ĐỐI THỦ KHÔNG NÓI</div>
+    <table>
+      <tr><th>Đối thủ nói về</th><th>Anh nói về</th></tr>
+      <tr><td>Kỹ năng đàm phán chung</td><td>Cách broker HLX viết 1 bài FB thu hút 50 người hỏi mua</td></tr>
+      <tr><td>Quy trình bán hàng tổng quát</td><td>Câu chuyện thực tế: broker A từ 0 lead → 3 giao dịch/tháng sau 60 ngày</td></tr>
+      <tr><td>Lý thuyết marketing bất động sản</td><td>Template content HLX copy-paste đăng ngay hôm nay</td></tr>
+      <tr><td>Ôn thi chứng chỉ môi giới</td><td>Xây thương hiệu để khách tự tìm đến — không cần lạnh lùng telesale</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════ TAB 2: CHIẾN LƯỢC ═══════ -->
+<div class="panel" id="p2">
+  <div class="sh"><h2>📅 Chiến Lược Phát Triển Theo Giai Đoạn</h2></div>
+
+  <div class="phase">
+    <div class="phase-badge">📅 GIAI ĐOẠN 1 · Tháng 1–2 · Đặt Nền Móng</div>
+    <p style="font-size:13px;color:rgba(232,223,200,.65);margin-bottom:14px;"><strong style="color:var(--gl)">Mục tiêu:</strong> 500 người biết anh là ai — "à người hay viết về broker HLX đó"</p>
+    <table>
+      <tr><th>Việc cần làm</th><th>Chi tiết thực hiện</th><th>KPI</th></tr>
+      <tr><td>Tối ưu profile FB cá nhân</td><td>Ảnh đại diện chuyên nghiệp · Bio rõ ràng · Featured posts về HLX</td><td>100% hoàn thành tuần 1</td></tr>
+      <tr><td>Lập Facebook Page</td><td>Tên page = brand name · Danh mục: Huấn luyện viên kinh doanh · Ảnh bìa có câu tagline</td><td>Tuần 1</td></tr>
+      <tr><td>Lập Zalo OA</td><td>Channel chính để nuôi dưỡng broker · Welcome message tự động</td><td>Tuần 2</td></tr>
+      <tr><td>Đăng 3 bài/tuần FB</td><td>100% nội dung thực chiến từ HLX · Dùng series đã có sẵn</td><td>24 bài/2 tháng</td></tr>
+      <tr><td>Seed community đầu tiên</td><td>Mời 50–100 broker HLX vào nhóm Zalo · Nhắn tin cá nhân 1:1</td><td>100 thành viên</td></tr>
+    </table>
+  </div>
+
+  <div class="phase p2">
+    <div class="phase-badge">📅 GIAI ĐOẠN 2 · Tháng 3–4 · Tạo Authority</div>
+    <p style="font-size:13px;color:rgba(232,223,200,.65);margin-bottom:14px;"><strong style="color:#2ecc71">Mục tiêu:</strong> Được nhận diện là "người của HLX" — broker nhắc tên anh trong nhóm</p>
+    <table>
+      <tr><th>Việc cần làm</th><th>Chi tiết</th><th>KPI</th></tr>
+      <tr><td>Series video ngắn</td><td>"Broker HLX làm gì mỗi sáng để có lead?" · 60–90 giây · Quay bằng điện thoại</td><td>2 video/tuần</td></tr>
+      <tr><td>Livestream hàng tuần</td><td>Thứ 4 hoặc thứ 6 · 30 phút · Q&A thực chiến · Có chủ đề cụ thể</td><td>1 live/tuần</td></tr>
+      <tr><td>Xuất hiện tại sự kiện HLX</td><td>Chụp ảnh tại sự kiện · Story + bài viết về trải nghiệm thực tế</td><td>2 sự kiện/tháng</td></tr>
+      <tr><td>Ra lead magnet mạnh</td><td>Kit xây thương hiệu broker cơ bản (đã có) · Đẩy mạnh tặng miễn phí</td><td>200 người nhận</td></tr>
+      <tr><td>Thu thập 50 testimonial</td><td>Broker áp dụng được gì → chụp màn hình → post lên</td><td>50 case study</td></tr>
+    </table>
+  </div>
+
+  <div class="phase p3">
+    <div class="phase-badge">📅 GIAI ĐOẠN 3 · Tháng 5–6 · Monetize</div>
+    <p style="font-size:13px;color:rgba(232,223,200,.65);margin-bottom:14px;"><strong style="color:#9b59b6">Mục tiêu:</strong> Doanh thu đầu tiên từ đào tạo & tư vấn cá nhân</p>
+    <table>
+      <tr><th>Sản phẩm</th><th>Giá</th><th>Mục tiêu/tháng</th><th>Doanh thu</th></tr>
+      <tr><td>Kit thương hiệu broker (đã có)</td><td>299K–499K</td><td>30 kit</td><td>~10M</td></tr>
+      <tr><td>Coaching 1:1 cá nhân</td><td>2–5 triệu/người/tháng</td><td>5 người</td><td>~15M</td></tr>
+      <tr><td>Workshop nhóm 1 ngày</td><td>500K–1 triệu/người</td><td>20 người/lần</td><td>~15M</td></tr>
+      <tr><td>B2B: Đào tạo team sàn BĐS</td><td>10–30 triệu/hợp đồng</td><td>1 hợp đồng/quý</td><td>~10–30M</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════ TAB 3: KÊNH & TẦN SUẤT ═══════ -->
+<div class="panel" id="p3">
+  <div class="sh"><h2>📡 Các Kênh & Tần Suất Xuất Hiện</h2></div>
+
+  <div class="ch-grid">
+    <div class="ch-card fb">
+      <div class="ch-name">🔵 Facebook — Kênh số 1</div>
+      <div class="ch-row"><span>Bài dài storytelling</span><span>3 bài/tuần</span></div>
+      <div class="ch-row"><span>Reels / Video ngắn</span><span>2 video/tuần</span></div>
+      <div class="ch-row"><span>Story hậu trường</span><span>5 story/tuần</span></div>
+      <div class="ch-row"><span>Livestream Q&A</span><span>1 buổi/tuần</span></div>
+      <div class="ch-row" style="color:var(--gl);font-weight:700;border-top:1px solid rgba(201,168,76,.2);margin-top:6px;padding-top:8px;"><span>Tổng xuất hiện</span><span>10–11 lần/tuần</span></div>
+    </div>
+    <div class="ch-card zalo">
+      <div class="ch-name">🟢 Zalo OA — Kênh chuyển đổi</div>
+      <div class="ch-row"><span>Broadcast bài học</span><span>3 lần/tuần</span></div>
+      <div class="ch-row"><span>Gửi quà tặng mới</span><span>2 lần/tháng</span></div>
+      <div class="ch-row"><span>Offer coaching/khóa học</span><span>2 lần/tháng</span></div>
+      <div class="ch-row"><span>Tin nhắn cá nhân 1:1</span><span>Hàng ngày</span></div>
+      <div class="ch-row" style="color:#60b4f8;font-weight:700;border-top:1px solid rgba(0,130,243,.2);margin-top:6px;padding-top:8px;"><span>Mục đích chính</span><span>Nuture → Convert</span></div>
+    </div>
+    <div class="ch-card tiktok">
+      <div class="ch-name">🎵 TikTok — Từ tháng 3</div>
+      <div class="ch-row"><span>"1 tip xây thương hiệu"</span><span>1 video/ngày</span></div>
+      <div class="ch-row"><span>POV ngày làm việc HLX</span><span>3 video/tuần</span></div>
+      <div class="ch-row"><span>Duet/Stitch broker nổi tiếng</span><span>1 video/tuần</span></div>
+      <div class="ch-row" style="color:#f87171;font-weight:700;border-top:1px solid rgba(254,44,85,.2);margin-top:6px;padding-top:8px;"><span>Mục đích chính</span><span>Reach mới</span></div>
+    </div>
+    <div class="ch-card yt">
+      <div class="ch-name">📺 YouTube — Từ tháng 4</div>
+      <div class="ch-row"><span>Vlog thực chiến HLX</span><span>1 video/tuần</span></div>
+      <div class="ch-row"><span>Phỏng vấn broker thành công</span><span>2 video/tháng</span></div>
+      <div class="ch-row" style="color:#f87171;font-weight:700;border-top:1px solid rgba(255,0,0,.2);margin-top:6px;padding-top:8px;"><span>Mục đích chính</span><span>SEO + Authority</span></div>
+    </div>
+  </div>
+
+  <div class="sh"><h2>🏛️ 5 Trụ Cột Nội Dung</h2></div>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <span class="pillar-pct">20%</span>
+      <div class="pillar-name">MINDSET BROKER</div>
+      <div class="pillar-desc">Tư duy chuyên nghiệp, vượt từ chối, thành công dài hạn</div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-pct">25%</span>
+      <div class="pillar-name">THỰC CHIẾN HLX</div>
+      <div class="pillar-desc">Case study thật, câu chuyện thật từ dự án HLX</div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-pct">25%</span>
+      <div class="pillar-name">HỆ THỐNG NỘI DUNG</div>
+      <div class="pillar-desc">Cách viết bài, chụp ảnh, tạo content broker chuyên nghiệp</div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-pct">20%</span>
+      <div class="pillar-name">HẠ LONG XANH</div>
+      <div class="pillar-desc">Tại sao HLX là cơ hội, phân tích thị trường, lợi thế địa phương</div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-pct">10%</span>
+      <div class="pillar-name">KẾT QUẢ THỰC</div>
+      <div class="pillar-desc">Before/After broker áp dụng, testimonial, doanh số thật</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">⏰ QUY TẮC 70-20-10 — TỶ LỆ CONTENT MỖI TUẦN</div>
+    <table>
+      <tr><th>Loại</th><th>%</th><th>Mô tả</th><th>Ví dụ cụ thể</th></tr>
+      <tr><td><span class="tag-gold">GIÁ TRỊ</span></td><td>70%</td><td>Dạy, chia sẻ, giúp broker làm được việc</td><td>5 tip viết bio broker chuẩn SEO · Cách chụp ảnh HLX đẹp bằng điện thoại</td></tr>
+      <tr><td><span class="tag-good">TƯƠNG TÁC</span></td><td>20%</td><td>Hỏi, thăm dò, kích hoạt cộng đồng</td><td>"Bạn đang gặp khó khăn gì nhất khi xây thương hiệu?" · Poll FB</td></tr>
+      <tr><td><span class="tag-bad">CHUYỂN ĐỔI</span></td><td>10%</td><td>Giới thiệu sản phẩm/dịch vụ một cách tự nhiên</td><td>Share link kit · Thông báo workshop · Testimonial</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════ TAB 4: LỊCH NỘI DUNG ═══════ -->
+<div class="panel" id="p4">
+  <div class="sh"><h2>📝 Lịch Nội Dung Tuần Mẫu</h2></div>
+
+  <div class="cal-week">
+    <div class="cal-week-head">🗓️ TUẦN 1–2 (GIAI ĐOẠN NỀN MÓNG) — TẬP TRUNG FB + ZALO</div>
+    <div class="cal-row"><div class="cal-day">Thứ 2</div><div class="cal-items"><span class="cal-tag ct-post">📝 FB Bài dài: Câu chuyện broker HLX</span><span class="cal-tag ct-story">📸 Story: Hậu trường buổi sáng</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 3</div><div class="cal-items"><span class="cal-tag ct-zalo">💬 Zalo: Broadcast tip ngắn</span><span class="cal-tag ct-story">📸 Story: Dự án HLX</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 4</div><div class="cal-items"><span class="cal-tag ct-reel">🎬 FB Reel: 1 tip xây thương hiệu</span><span class="cal-tag ct-story">📸 Story: Q&A nhỏ</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 5</div><div class="cal-items"><span class="cal-tag ct-post">📝 FB Bài: Số liệu / data thị trường HLX</span><span class="cal-tag ct-zalo">💬 Zalo: Gợi ý đọc bài FB</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 6</div><div class="cal-items"><span class="cal-tag ct-live">🔴 Livestream 30 phút: Q&A thực chiến</span><span class="cal-tag ct-story">📸 Story: Chuẩn bị live</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 7</div><div class="cal-items"><span class="cal-tag ct-reel">🎬 FB Reel: Tổng kết tuần / 1 bài học</span><span class="cal-tag ct-story">📸 Story: Weekend hậu trường</span></div></div>
+    <div class="cal-row"><div class="cal-day">CN</div><div class="cal-items"><span class="cal-tag ct-post">📝 FB: Bài cảm hứng / mindset tuần mới</span><span class="cal-tag ct-zalo">💬 Zalo: Gửi bài học weekend</span></div></div>
+  </div>
+
+  <div class="cal-week">
+    <div class="cal-week-head">🗓️ TUẦN 5–8 (GIAI ĐOẠN AUTHORITY) — THÊM TIKTOK + TĂNG LIVE</div>
+    <div class="cal-row"><div class="cal-day">Thứ 2</div><div class="cal-items"><span class="cal-tag ct-post">📝 FB Storytelling dài</span><span class="cal-tag ct-reel">🎵 TikTok: Tip #1</span><span class="cal-tag ct-story">📸 3 Stories</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 3</div><div class="cal-items"><span class="cal-tag ct-zalo">💬 Zalo Broadcast</span><span class="cal-tag ct-reel">🎵 TikTok: Tip #2</span><span class="cal-tag ct-story">📸 Story hậu trường</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 4</div><div class="cal-items"><span class="cal-tag ct-reel">🎬 FB Reel</span><span class="cal-tag ct-reel">🎵 TikTok: POV ngày làm việc</span><span class="cal-tag ct-live">🔴 Live mini 20 phút</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 5</div><div class="cal-items"><span class="cal-tag ct-post">📝 FB: Case study broker thành công</span><span class="cal-tag ct-reel">🎵 TikTok: Tip #3</span><span class="cal-tag ct-zalo">💬 Zalo: Testimonial</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 6</div><div class="cal-items"><span class="cal-tag ct-live">🔴 Livestream chính 30 phút</span><span class="cal-tag ct-reel">🎵 TikTok: Tip #4</span></div></div>
+    <div class="cal-row"><div class="cal-day">Thứ 7</div><div class="cal-items"><span class="cal-tag ct-reel">🎬 FB Reel tổng kết</span><span class="cal-tag ct-reel">🎵 TikTok: Duet/Stitch</span><span class="cal-tag ct-story">📸 Stories</span></div></div>
+    <div class="cal-row"><div class="cal-day">CN</div><div class="cal-items"><span class="cal-tag ct-post">📝 FB: Bài cảm hứng + soft pitch</span><span class="cal-tag ct-zalo">💬 Zalo: Offer nhẹ</span></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">⏱️ QUY TRÌNH BATCH CONTENT CUỐI TUẦN — 90 PHÚT/TUẦN</div>
+    <table>
+      <tr><th>Thời gian</th><th>Việc làm</th></tr>
+      <tr><td>Phút 0–15</td><td>Review tuần vừa qua: bài nào reach tốt nhất → lấy cảm hứng viết tiếp</td></tr>
+      <tr><td>Phút 15–45</td><td>Viết 3 bài FB cho tuần tới (dùng templates đã có)</td></tr>
+      <tr><td>Phút 45–65</td><td>Quay 2 video ngắn (TikTok/Reel) — dùng 1 concept, quay 2 angle</td></tr>
+      <tr><td>Phút 65–80</td><td>Lên lịch đăng bài qua Buffer/Meta Business Suite</td></tr>
+      <tr><td>Phút 80–90</td><td>Soạn Zalo broadcast cho 3 ngày trong tuần</td></tr>
+    </table>
+    <p style="font-size:12px;color:rgba(232,223,200,.5);margin-top:10px;">→ 90 phút batch mỗi Chủ nhật → 3 bài/tuần → 144 bài/năm → thương hiệu được xây tự động</p>
+  </div>
+</div>
+
+<!-- ═══════ TAB 5: COMMUNITY ═══════ -->
+<div class="panel" id="p5">
+  <div class="sh"><h2>👥 Xây Dựng Cộng Đồng Broker HLX</h2></div>
+
+  <div class="comm-grid">
+    <div class="comm-card">
+      <div class="comm-icon">💬</div>
+      <div class="comm-title">Nhóm Zalo "Broker HLX Chuyên Nghiệp"</div>
+      <div class="comm-desc">Nhóm chính để nuôi dưỡng · Giới hạn 500 thành viên · Rules rõ ràng · Anh là admin/leader · Đăng 1 bài/ngày</div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">📘</div>
+      <div class="comm-title">FB Group "Broker HLX Network"</div>
+      <div class="comm-desc">Group FB mở để thu hút mới · Cho phép member post · Thảo luận về thị trường HLX · Không bán hàng ồ ạt</div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">🎙️</div>
+      <div class="comm-title">Live Hàng Tuần</div>
+      <div class="comm-desc">30 phút mỗi thứ 4/6 · Có chủ đề cụ thể · Luôn để Q&A 10 phút cuối · Record → đăng lại FB/TikTok</div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">🏆</div>
+      <div class="comm-title">Spotlight Broker Thành Công</div>
+      <div class="comm-desc">Mỗi tuần 1 broker được feature · Chia sẻ câu chuyện thành công · Social proof tự nhiên · Họ sẽ share cho network</div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">🎁</div>
+      <div class="comm-title">Drip Quà Tặng Cho Thành Viên</div>
+      <div class="comm-desc">Gửi 1 tool/template mỗi tuần miễn phí · Giữ chân và tạo thói quen nhận giá trị từ anh · Tăng dần trust</div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">📅</div>
+      <div class="comm-title">Challenge 7 Ngày</div>
+      <div class="comm-desc">"7 ngày tối ưu profile broker" · Người tham gia post kết quả mỗi ngày · Viral tự nhiên · Thu email/SĐT</div>
+    </div>
+  </div>
+
+  <div class="sh"><h2>📋 Script Mời Broker Vào Nhóm</h2></div>
+  <div class="card">
+    <div class="card-tag">💬 SCRIPT ZALO — MỜI BROKER ĐÃ BIẾT VÀO NHÓM</div>
+    <div class="script-box" id="inv1-src">Chào [Tên broker], mình đang lập 1 nhóm nhỏ dành riêng cho anh chị đang bán HLX — chuyên chia sẻ content thực chiến, template viết bài và kinh nghiệm xây thương hiệu cá nhân. Hoàn toàn miễn phí.
+
+Mình tặng luôn bộ "10 Tip Xử Lý Từ Chối HLX" ngay khi vào nhóm.
+
+Anh/chị có muốn mình thêm vào không ạ?</div>
+    <button class="btn-cp" onclick="cp('inv1-src',this)">📋 Copy Script</button>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">💬 SCRIPT ZALO — MỜI BROKER LẠNH (CHƯA QUEN)</div>
+    <div class="script-box" id="inv2-src">Chào anh/chị [Tên], mình thấy anh/chị cũng đang hoạt động trong mảng BĐS Hạ Long. Mình đang vận hành 1 nhóm "Broker HLX Chuyên Nghiệp" — chia sẻ miễn phí các công cụ bán hàng, content mẫu và kinh nghiệm thực chiến từ HLX.
+
+Hiện nhóm có [X] anh/chị đang hoạt động. Anh/chị có muốn tham gia không ạ? Mình sẽ gửi luôn 1 tài liệu miễn phí khi vào.</div>
+    <button class="btn-cp" onclick="cp('inv2-src',this)">📋 Copy Script</button>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">📌 NỘI QUY NHÓM — PASTE VÀO GHIM NHÓM</div>
+    <div class="script-box" id="rules-src">📌 NỘI QUY NHÓM "BROKER HLX CHUYÊN NGHIỆP"
+
+Nhóm này dành cho ai?
+→ Broker đang bán hoặc muốn bán BĐS Hạ Long Xanh
+→ Muốn xây thương hiệu cá nhân và có lead tự nhiên
+
+Chúng ta chia sẻ gì?
+✅ Kinh nghiệm thực chiến từ HLX
+✅ Template content, script bán hàng
+✅ Cơ hội hợp tác giữa các thành viên
+
+Không được làm gì?
+❌ Spam quảng cáo, seeding không liên quan
+❌ Chia sẻ thông tin sai lệch về dự án
+❌ Tiêu cực, gây chia rẽ trong nhóm
+
+Admin: [Tên anh] — Chuyên gia xây thương hiệu broker BĐS</div>
+    <button class="btn-cp" onclick="cp('rules-src',this)">📋 Copy Nội Quy</button>
+  </div>
+</div>
+
+<!-- ═══════ TAB 6: THỊ TRƯỜNG & GO ═══════ -->
+<div class="panel" id="p6">
+  <div class="sh"><h2>💰 Sizing Thị Trường & Dự Báo Doanh Thu</h2></div>
+
+  <div class="card">
+    <div class="card-tag">📊 TỔNG QUAN CƠ HỘI THỊ TRƯỜNG</div>
+    <table>
+      <tr><th>Chỉ số</th><th>Ước tính</th><th>Ghi chú</th></tr>
+      <tr><td>Broker BĐS Việt Nam có chứng chỉ</td><td>~400.000 người</td><td>TAM tổng</td></tr>
+      <tr><td>Broker đang bán dự án cao cấp</td><td>~15.000–20.000</td><td>SAM có thể reach</td></tr>
+      <tr><td>Broker khu vực HLX + Quảng Ninh</td><td>~500–1.000</td><td>SOM — thị trường thực chiến</td></tr>
+      <tr><td>% sẵn sàng trả phí học thương hiệu</td><td>~10–15%</td><td>~50–150 khách tiềm năng</td></tr>
+      <tr><td><strong>Khách hàng tiềm năng năm đầu</strong></td><td><strong>50–150 người</strong></td><td><span class="tag-gold">SOM thực tế</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">💵 DỰ BÁO DOANH THU 6 THÁNG ĐẦU</div>
+    <table>
+      <tr><th>Tháng</th><th>Kênh chính</th><th>Doanh thu ước tính</th></tr>
+      <tr><td>Tháng 1–2</td><td>Kit + Lead magnet seeding</td><td>5–10 triệu/tháng</td></tr>
+      <tr><td>Tháng 3–4</td><td>Kit + Coaching 1:1 đầu tiên</td><td>20–40 triệu/tháng</td></tr>
+      <tr><td>Tháng 5–6</td><td>Workshop nhóm + B2B đầu tiên</td><td>50–80 triệu/tháng</td></tr>
+    </table>
+    <div class="rev-total">
+      <div class="rev-total-num">75 – 130 triệu VNĐ</div>
+      <div class="rev-total-label">Doanh thu dự báo tổng 6 tháng đầu · Giả định triển khai đúng chiến lược</div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <h3>✅ PHÁN QUYẾT: GO — VÀO THỊ TRƯỜNG NGAY</h3>
+    <ul class="verdict-list">
+      <li><strong>ĐỐI THỦ TRỰC TIẾP = 0</strong> — Không ai chiếm đúng vị trí này trên thị trường</li>
+      <li><strong>LỢI THẾ THỰC CHIẾN</strong> — Anh có kiến thức + trải nghiệm HLX mà không ai có thể sao chép</li>
+      <li><strong>SẢN PHẨM ĐÃ CÓ</strong> — Kit đang bán = demand đã được validate, không cần test từ đầu</li>
+      <li><strong>THỊ TRƯỜNG TĂNG TRƯỞNG</strong> — BĐS cao cấp Quảng Ninh bùng nổ 2025–2026</li>
+      <li><strong>BARRIER TO ENTRY THẤP</strong> — Chỉ cần content + community, không cần vốn lớn</li>
+    </ul>
+    <p style="font-size:12px;color:rgba(232,223,200,.5);margin-top:14px;"><strong style="color:#e74c3c">Rủi ro cần theo dõi:</strong></p>
+    <ul class="verdict-list risk-list" style="margin-top:6px;">
+      <li>Học viện lớn (Eagle, M-Master) có thể copy mô hình nếu thành công — cần xây community trước khi họ kịp phản ứng</li>
+      <li>BĐS thị trường đóng băng ảnh hưởng tâm lý broker → giải pháp: nội dung về mindset vượt khủng hoảng</li>
+      <li>Cần 3–6 tháng kiên trì trước khi thấy kết quả rõ ràng — đừng bỏ cuộc ở tháng 2</li>
+    </ul>
+  </div>
+
+  <div class="sh"><h2>🗺️ Bản Đồ Hành Động Tuần 1</h2></div>
+  <div class="week-grid">
+    <div class="day-card">
+      <div class="day-label">Thứ 2</div>
+      <div class="day-task">Tối ưu profile FB cá nhân + Viết lại Bio theo template đã có</div>
+    </div>
+    <div class="day-card">
+      <div class="day-label">Thứ 3</div>
+      <div class="day-task">Lập Zalo OA + Cài welcome message tự động + Mời 20 broker đầu tiên</div>
+    </div>
+    <div class="day-card">
+      <div class="day-label">Thứ 4</div>
+      <div class="day-task">Đăng Bài 1 series #BrokerHLX (đã có sẵn) + Ghim comment link tài liệu</div>
+    </div>
+    <div class="day-card">
+      <div class="day-label">Thứ 5</div>
+      <div class="day-task">Nhắn tin cá nhân 10 broker HLX đang quen → mời vào nhóm Zalo</div>
+    </div>
+    <div class="day-card">
+      <div class="day-label">Thứ 6</div>
+      <div class="day-task">Đăng Bài 2 series + Đăng Story hậu trường + Live mini 15 phút đầu tiên</div>
+    </div>
+    <div class="day-card">
+      <div class="day-label">Thứ 7</div>
+      <div class="day-task">Batch content tuần 2 (90 phút) + Lên lịch tự động bằng Meta Business</div>
+    </div>
+    <div class="day-card">
+      <div class="day-label">Chủ nhật</div>
+      <div class="day-task">Review tuần · Đo lường reach/tương tác · Điều chỉnh kế hoạch tuần 2</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const panels = document.querySelectorAll('.panel');
+const tabs = document.querySelectorAll('.tab-btn');
+function show(i){
+  panels.forEach((p,idx)=>{p.classList.toggle('active',idx===i);});
+  tabs.forEach((t,idx)=>{t.classList.toggle('active',idx===i);});
+}
+function cp(id,btn){
+  const txt = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;btn.textContent='✅ Đã Copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    const orig=btn.textContent;btn.textContent='✅ Đã Copy!';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('ok');},2000);
+  });
+}
+</script>
+</body>
+</html>
