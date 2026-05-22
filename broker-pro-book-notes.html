@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BROKER PRO — Notes Cần Bổ Sung Thực Tế</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1b2a;--sur:#112236;--sur2:#162d45;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--txt:#e8e8e8;--mut:#a0aab8;--grn:#27ae60;--red:#e74c3c;--bdr:rgba(201,168,76,0.2)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.8}
+@media print{body{background:#fff;color:#111}.no-print{display:none}.note-row{break-inside:avoid}}
+.top-bar{position:sticky;top:0;z-index:99;background:rgba(13,27,42,.96);border-bottom:1px solid var(--bdr);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(8px)}
+.top-bar a{color:var(--gold);font-family:'Playfair Display',serif;font-size:14px;text-decoration:none}
+.top-bar .links{display:flex;gap:16px;align-items:center}
+.top-bar .links a{color:var(--mut);font-size:13px;text-decoration:none}
+.top-bar .links a:hover{color:var(--gold)}
+.btn-sm{background:var(--gold);color:#0d1b2a;border:none;padding:6px 14px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+.hero{background:linear-gradient(135deg,#0d1b2a,#1B3A6B);padding:60px 32px;text-align:center;border-bottom:3px solid var(--gold)}
+.hero-tag{display:inline-block;background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);color:#e74c3c;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,38px);color:#fff;margin-bottom:12px}
+.hero p{color:var(--mut);font-size:15px;max-width:560px;margin:0 auto}
+.wrap{max-width:860px;margin:0 auto;padding:48px 28px}
+/* Progress */
+.progress-bar{background:var(--sur);border:1px solid var(--bdr);border-radius:14px;padding:24px 28px;margin-bottom:36px}
+.progress-bar h3{font-family:'Playfair Display',serif;color:#fff;font-size:18px;margin-bottom:16px}
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:580px){.prog-grid{grid-template-columns:1fr}}
+.prog-item{text-align:center;background:var(--sur2);border-radius:10px;padding:16px}
+.prog-num{font-size:28px;font-weight:700;font-family:'Playfair Display',serif}
+.prog-num.red{color:#e74c3c}
+.prog-num.gold{color:var(--gold)}
+.prog-num.grn{color:#2ecc71}
+.prog-lbl{font-size:12px;color:var(--mut);margin-top:4px}
+/* Filter */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.filter-btn{background:var(--sur);border:1px solid var(--bdr);color:var(--mut);padding:7px 16px;border-radius:20px;font-size:13px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{background:var(--gold);color:#0d1b2a;border-color:var(--gold)}
+/* Note sections */
+.part-header{display:flex;align-items:center;gap:12px;margin:36px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.part-header h2{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold)}
+.part-tag{display:inline-block;padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+/* Note Row */
+.note-row{background:var(--sur2);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:18px 20px;margin:10px 0;transition:border-color .2s}
+.note-row:hover{border-color:rgba(201,168,76,.3)}
+.note-row.done{opacity:.5;border-color:rgba(39,174,96,.3);background:rgba(39,174,96,.03)}
+.note-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.note-id{display:inline-block;background:var(--navy);color:var(--gold);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;flex-shrink:0;font-family:monospace}
+.note-title{font-weight:700;color:#fff;font-size:15px;flex:1}
+.note-badges{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.badge.hi{background:rgba(231,76,60,.2);color:#e74c3c}
+.badge.mid{background:rgba(243,156,18,.2);color:#f39c12}
+.badge.low{background:rgba(52,152,219,.2);color:#3498db}
+.badge.done{background:rgba(39,174,96,.2);color:#2ecc71}
+.note-chapter{font-size:12px;color:var(--mut);margin-bottom:8px}
+.note-desc{font-size:13px;color:var(--mut);line-height:1.7;margin-bottom:12px}
+/* Answer area */
+.answer-area{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:14px;min-height:80px;position:relative}
+.answer-area.filled{border-color:rgba(39,174,96,.3)}
+.answer-placeholder{color:rgba(255,255,255,.2);font-size:13px;font-style:italic;position:absolute;top:14px;left:14px;pointer-events:none}
+.answer-input{width:100%;background:transparent;border:none;color:#fff;font-size:13px;font-family:'Be Vietnam Pro',sans-serif;line-height:1.7;resize:vertical;min-height:70px;outline:none}
+.note-actions{display:flex;gap:8px;margin-top:10px}
+.action-btn{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--mut);font-size:12px;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s}
+.action-btn:hover{border-color:var(--gold);color:var(--gold)}
+.action-btn.mark-done{border-color:rgba(39,174,96,.3);color:#2ecc71}
+.action-btn.mark-done:hover{background:rgba(39,174,96,.1)}
+/* Tips */
+.tip-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:16px 20px;margin:24px 0}
+.tip-box h4{color:var(--gold);font-size:14px;margin-bottom:8px}
+.tip-box p{color:var(--mut);font-size:13px;margin:0}
+/* Footer */
+.footer{text-align:center;padding:40px 28px;border-top:1px solid var(--bdr);margin-top:48px}
+.footer .ft{font-family:'Playfair Display',serif;color:var(--gold);font-size:18px;margin-bottom:6px}
+.footer p{color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<div class="top-bar no-print">
+  <a href="broker-pro-book-index.html">📚 BROKER PRO</a>
+  <div class="links">
+    <a href="broker-pro-book-p1.html">Phần I</a>
+    <a href="broker-pro-book-p2.html">Phần II</a>
+    <a href="broker-pro-book-p3.html">Phần III</a>
+    <a href="broker-pro-book-p4.html">Phần IV</a>
+    <button class="btn-sm" onclick="window.print()">🖨️ In PDF</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Cần Bổ Sung</div>
+  <h1>📋 File Notes — Tất Cả Chỗ Cần Điền Thực Tế</h1>
+  <p>20 notes được đánh dấu trong toàn bộ sách. Điền thông tin thực tế vào đây — sách sẽ trở nên độc đáo và có giá trị nhất thị trường.</p>
+</div>
+
+<div class="wrap">
+
+<div class="progress-bar">
+  <h3>📊 Tiến Độ Bổ Sung</h3>
+  <div class="prog-grid">
+    <div class="prog-item"><div class="prog-num red" id="cnt-todo">20</div><div class="prog-lbl">Cần Điền</div></div>
+    <div class="prog-item"><div class="prog-num gold" id="cnt-high">8</div><div class="prog-lbl">Ưu Tiên Cao</div></div>
+    <div class="prog-item"><div class="prog-num grn" id="cnt-done">0</div><div class="prog-lbl">Đã Hoàn Thành</div></div>
+  </div>
+</div>
+
+<div class="tip-box">
+  <h4>💡 Gợi Ý: Điền Theo Thứ Tự Ưu Tiên</h4>
+  <p><strong>Ưu tiên CAO (đỏ)</strong>: Ảnh hưởng trực tiếp đến chất lượng tư vấn — điền trước. <strong>Ưu tiên TRUNG BÌNH (vàng)</strong>: Bổ sung để sách đầy đủ hơn. <strong>Ưu tiên THẤP (xanh)</strong>: Thêm điểm nhấn cá nhân, làm sau.</p>
+</div>
+
+<div class="filter-bar no-print">
+  <button class="filter-btn active" onclick="filterNotes('all')">Tất Cả (20)</button>
+  <button class="filter-btn" onclick="filterNotes('hi')">🔴 Ưu Tiên Cao (8)</button>
+  <button class="filter-btn" onclick="filterNotes('mid')">🟡 Trung Bình (8)</button>
+  <button class="filter-btn" onclick="filterNotes('low')">🔵 Thấp (4)</button>
+  <button class="filter-btn" onclick="filterNotes('done')">✅ Đã Xong</button>
+</div>
+
+<!-- PHẦN I NOTES -->
+<div class="part-header">
+  <h2>Phần I — Nền Tảng BĐS</h2>
+  <span class="part-tag" style="background:rgba(52,152,219,.2);color:#3498db">Chương 1–4</span>
+</div>
+
+<div class="note-row" data-priority="low">
+  <div class="note-top">
+    <span class="note-id">P1-1</span>
+    <span class="note-title">Số Liệu Thị Trường BĐS Hiện Tại</span>
+    <div class="note-badges"><span class="badge low">Thấp</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 1 — §1.1 Thị Trường BĐS Việt Nam</div>
+  <div class="note-desc">Bổ sung số liệu thị trường hiện tại: tổng giá trị giao dịch BĐS VN năm 20XX, tốc độ tăng trưởng, số lượng dự án đang triển khai trên cả nước. Nguồn gợi ý: Bộ Xây dựng, CBRE Vietnam Report.</div>
+  <div class="answer-area">
+    <div class="answer-placeholder">Điền thông tin thực tế vào đây...</div>
+    <textarea class="answer-input" placeholder=""></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+    <button class="action-btn" onclick="clearNote(this)">🗑️ Xóa</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P1-2</span>
+    <span class="note-title">Nhận Định Pha Thị Trường Hiện Tại</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 1 — §1.3 Chu Kỳ Thị Trường</div>
+  <div class="note-desc">Thị trường BĐS hiện tại đang ở giai đoạn nào trong chu kỳ (Phục hồi/Tăng trưởng/Đỉnh/Điều chỉnh)? Bằng chứng: giao dịch, lãi suất, số dự án mở bán mới, chỉ số hấp thụ thị trường quý gần nhất.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Ví dụ: Năm 2025, thị trường đang ở giai đoạn Phục Hồi vì... lãi suất giảm từ X% xuống Y%... số giao dịch tăng Z%..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+    <button class="action-btn" onclick="clearNote(this)">🗑️ Xóa</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P1-3</span>
+    <span class="note-title">Luật Đất Đai 2024 — Điểm Quan Trọng Nhất</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 2 — §2.2 Luật Đất Đai 2024</div>
+  <div class="note-desc">5–7 điểm thay đổi quan trọng nhất của Luật Đất đai 2024 ảnh hưởng trực tiếp đến giao dịch BĐS và quyền lợi của broker/khách hàng. Nguồn: Cổng thông tin Chính phủ, Bộ TN&MT, tư vấn luật sư BĐS.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="1. [Điểm thay đổi 1]&#10;2. [Điểm thay đổi 2]&#10;3. [Điểm thay đổi 3]&#10;..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+    <button class="action-btn" onclick="clearNote(this)">🗑️ Xóa</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P1-4</span>
+    <span class="note-title">Pháp Lý Condotel Quảng Ninh Hiện Tại</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 2 — §2.4 Pháp Lý BĐS Nghỉ Dưỡng</div>
+  <div class="note-desc">Tình trạng pháp lý condotel tại Quảng Ninh/Hạ Long hiện tại: dự án nào đã được cấp sổ, dự án nào đang vướng, quy định mới nhất của Sở TN&MT Quảng Ninh về condotel.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Tình trạng condotel HLX tính đến [tháng/năm]:&#10;- Loại SP [A]: Đã được cấp sổ loại [X], thời hạn [Y] năm&#10;- Loại SP [B]: Đang trong quá trình..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+    <button class="action-btn" onclick="clearNote(this)">🗑️ Xóa</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P1-5</span>
+    <span class="note-title">Chi Phí Xây Dựng & Giá Đất Hạ Long</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 3 — §3.1 Phương Pháp Định Giá</div>
+  <div class="note-desc">Chi phí xây dựng thực tế tại khu vực Hạ Long/Quảng Ninh năm 20XX (đồng/m²) theo loại công trình. Giá đất tham khảo theo từng vị trí trong thành phố Hạ Long.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Chi phí xây dựng Hạ Long (năm [X]):&#10;- Nhà cấp 4: ___tr/m²&#10;- Nhà 2–3 tầng: ___tr/m²&#10;- Biệt thự: ___tr/m²&#10;&#10;Giá đất tham khảo Hạ Long:&#10;- Trung tâm TP: ___–___tr/m²&#10;- Khu HLX: ___–___tr/m²"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+    <button class="action-btn" onclick="clearNote(this)">🗑️ Xóa</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P1-6</span>
+    <span class="note-title">Lãi Suất Vay Mua BĐS Hiện Tại</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 3 — §3.2 Đòn Bẩy Tài Chính</div>
+  <div class="note-desc">Lãi suất vay mua BĐS hiện tại của các ngân hàng đối tác Vinhomes: Vietcombank, BIDV, VPBank, Techcombank. Cả lãi suất ưu đãi giai đoạn đầu và lãi suất thả nổi sau ưu đãi.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Lãi suất mua BĐS (tháng [X]/năm [Y]):&#10;- Vietcombank: ___% ưu đãi ___ năm → thả nổi ___%&#10;- BIDV: ___% ưu đãi ___ năm → thả nổi ___%&#10;- VPBank: ___% ...&#10;- Techcombank: ___% ..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+    <button class="action-btn" onclick="clearNote(this)">🗑️ Xóa</button>
+  </div>
+</div>
+
+<!-- PHẦN II NOTES -->
+<div class="part-header">
+  <h2>Phần II — Hạ Long Xanh</h2>
+  <span class="part-tag" style="background:rgba(39,174,96,.2);color:#2ecc71">Chương 5–8</span>
+</div>
+
+<div class="note-row" data-priority="low">
+  <div class="note-top">
+    <span class="note-id">P2-1</span>
+    <span class="note-title">Số Liệu Kinh Tế Quảng Ninh</span>
+    <div class="note-badges"><span class="badge low">Thấp</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 5 — §5.1 Quảng Ninh Chuyển Mình</div>
+  <div class="note-desc">GDP Quảng Ninh hiện tại, lượng khách du lịch Hạ Long/năm, số chuyến bay quốc tế sân bay Vân Đồn/tuần, xếp hạng PCI tỉnh. Nguồn: UBND Quảng Ninh, Sở Du lịch.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="- GDP Quảng Ninh năm [X]: ___ tỷ đồng&#10;- Khách du lịch Hạ Long: ___ triệu lượt/năm&#10;- Chuyến bay quốc tế Vân Đồn: ___/tuần&#10;- Xếp hạng PCI: ___/63 tỉnh thành"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P2-2</span>
+    <span class="note-title">Tiến Độ Hạ Tầng Giao Thông</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 5 — §5.1 + Lợi Thế ③</div>
+  <div class="note-desc">Tiến độ và thời gian di chuyển thực tế: cao tốc Hà Nội–Hạ Long, cầu Bạch Đằng, sân bay Vân Đồn. Dự án hạ tầng nào đang thi công, dự kiến hoàn thành năm nào?</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="- Cao tốc HN–Hạ Long: hoàn thành [năm], thời gian di chuyển [X] giờ&#10;- Cầu Bạch Đằng: hoàn thành [năm], rút ngắn đường từ HP ___ phút&#10;- Dự án hạ tầng đang thi công: [tên], hoàn thành dự kiến [năm]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P2-3</span>
+    <span class="note-title">Thông Tin Dự Án HLX — Brochure Chính Thức</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 5 — §5.3 Tổng Quan Sản Phẩm</div>
+  <div class="note-desc">Từ brochure chính thức: tổng diện tích dự án, số lượng sản phẩm từng loại (căn hộ/biệt thự/shophouse), tên các phân khu, tiến độ bàn giao, đơn vị quản lý vận hành, giá bán cụ thể.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Vinhomes Hạ Long Xanh:&#10;- Tổng diện tích: ___ ha&#10;- Căn hộ: ___ căn (___–___m², ___–___ tỷ)&#10;- Biệt thự: ___ căn (___–___m², ___–___ tỷ)&#10;- Shophouse: ___ căn (___–___m², ___–___ tỷ)&#10;- Phân khu: [tên 1], [tên 2], [tên 3]&#10;- Tiến độ bàn giao: Q[X]/[năm]&#10;- Quản lý vận hành: [đơn vị]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P2-4</span>
+    <span class="note-title">So Sánh Đối Thủ Thực Tế</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 5 — §5.5 So Sánh Đối Thủ</div>
+  <div class="note-desc">Thông tin đối thủ thực tế: giá bán cụ thể (Sun Group HLX, BIM Group, dự án khác), chính sách bán hàng hiện tại, điểm mạnh/yếu từ góc nhìn thực tế trên thị trường của anh/chị.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Sun Group HLX:&#10;- Sản phẩm: [loại]&#10;- Giá: ___–___ tỷ&#10;- Chính sách: [mô tả]&#10;- Điểm mạnh so HLX: [...]&#10;- Điểm yếu: [...]&#10;&#10;BIM Group:&#10;- [tương tự]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P2-5</span>
+    <span class="note-title">Chi Phí Vận Hành Thực Tế & Giá Cho Thuê Airbnb</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 6 — §6.2 Năm Chi Phí Ẩn</div>
+  <div class="note-desc">Phí quản lý tòa nhà Vinhomes HLX thực tế (đồng/m²/tháng). Giá cho thuê Airbnb/Booking căn 1PN/2PN/3PN tại Hạ Long (cao điểm/thấp điểm). Occupancy rate thực tế từ kinh nghiệm hoặc chủ sở hữu đang cho thuê.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Phí quản lý Vinhomes HLX: ___đ/m²/tháng&#10;&#10;Giá Airbnb Hạ Long (kiểm tra tháng [X]):&#10;- Căn 1PN: cao điểm ___đ/đêm | thấp điểm ___đ/đêm&#10;- Căn 2PN: cao điểm ___đ/đêm | thấp điểm ___đ/đêm&#10;- Căn 3PN: cao điểm ___đ/đêm | thấp điểm ___đ/đêm&#10;&#10;Occupancy thực tế (nguồn [...]): ___% mùa cao, ___% mùa thấp, ___% bình quân năm"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="low">
+  <div class="note-top">
+    <span class="note-id">P2-6</span>
+    <span class="note-title">Kênh Mạng Xã Hội BĐS HLX</span>
+    <div class="note-badges"><span class="badge low">Thấp</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 7 — §7.3 Kênh Tìm Kiếm Khách</div>
+  <div class="note-desc">Facebook Groups BĐS Hạ Long tên cụ thể và số thành viên hiện tại. Hashtag TikTok phổ biến nhất về HLX/Hạ Long BĐS. Kênh YouTube đang review HLX có nhiều view nhất.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Facebook Groups (tính đến [tháng]):&#10;1. [Tên group]: ___ thành viên&#10;2. [Tên group]: ___ thành viên&#10;&#10;Hashtag TikTok phổ biến: #[...], #[...], #[...]&#10;&#10;YouTube channels: [tên], [views gần nhất]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P2-7</span>
+    <span class="note-title">Chính Sách Vay Ngân Hàng Đối Tác HLX</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 8 — FAQ "Có Thể Vay Ngân Hàng Không?"</div>
+  <div class="note-desc">Tên ngân hàng đối tác hiện tại, lãi suất ưu đãi cụ thể, thời gian ân hạn gốc, điều kiện vay, hạn mức tối đa (%), thủ tục hồ sơ cần chuẩn bị.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Ngân hàng đối tác Vinhomes HLX (cập nhật [tháng/năm]):&#10;1. [Ngân hàng A]: cho vay đến ___%, lãi ưu đãi ___% trong ___ năm&#10;2. [Ngân hàng B]: ...&#10;&#10;Hồ sơ cần chuẩn bị: CMND, hộ khẩu, sao kê lương ___ tháng, ..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P2-8</span>
+    <span class="note-title">Scripts Thực Tế Từ Kinh Nghiệm Bán HLX</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 8 — §8.5 Câu Hỏi Khó Nhất</div>
+  <div class="note-desc">5–10 câu hỏi/tình huống khó thực tế từ kinh nghiệm bán HLX chưa có trong danh sách. Mỗi câu: tình huống + script trả lời đã dùng và hiệu quả (kết quả như thế nào).</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Tình huống 1: [Khách nói...]&#10;Script: [Anh/chị trả lời...]&#10;Kết quả: [...]&#10;&#10;Tình huống 2: ..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<!-- PHẦN III NOTES -->
+<div class="part-header">
+  <h2>Phần III — Kỹ Năng Broker</h2>
+  <span class="part-tag" style="background:rgba(142,68,173,.2);color:#9b59b6">Chương 9–13</span>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P3-1</span>
+    <span class="note-title">Case Study 90 Ngày Đầu Của Anh/Chị</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 9 — §9.3 Tháng 3 Chốt Deal</div>
+  <div class="note-desc">Anh/chị đã mất bao lâu để có deal đầu tiên? Tuần đó làm gì khác biệt? Bài học quan trọng nhất trong 90 ngày đầu? Đây là phần sẽ tạo kết nối cảm xúc mạnh nhất với người đọc mới vào nghề.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Deal đầu tiên của tôi:&#10;- Mất [X] tuần/tháng&#10;- Khách hàng: [mô tả ẩn danh]&#10;- Điều quyết định: [...]&#10;- Bài học lớn nhất: [...]&#10;- Lời khuyên cho người mới: [...]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P3-2</span>
+    <span class="note-title">Bài Học Content BĐS Từ Thực Tế</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 10 — §10.2 Content Strategy</div>
+  <div class="note-desc">Anh/chị đang dùng mạng xã hội nào hiệu quả nhất? Bài post nào từng viral hoặc tạo nhiều leads nhất? 3 bài học về content BĐS từ thực tế của anh/chị (kể cả những điều không hiệu quả).</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Kênh hiệu quả nhất: [...]&#10;&#10;Bài post viral nhất:&#10;- Chủ đề: [...]&#10;- Format: [...]&#10;- Kết quả: ___ reach, ___ leads&#10;&#10;3 bài học:&#10;1. [...]&#10;2. [...]&#10;3. [...]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P3-3</span>
+    <span class="note-title">Hiệu Quả Kênh Marketing Thực Tế</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 11 — §11.3 Kênh Paid</div>
+  <div class="note-desc">Kênh nào mang lại leads tốt nhất cho anh/chị? Chi phí per lead thực tế? Tỷ lệ chuyển đổi từ lead → site visit → deal theo từng kênh (FB Ads, organic, referral, cold call).</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Kênh Facebook Ads:&#10;- CPL (cost per lead): ___đ&#10;- Leads → Site visit: ___% (cứ ___ leads = ___ visit)&#10;- Site visit → Deal: ___%&#10;&#10;Kênh Referral:&#10;- CPL: ~0&#10;- Tỷ lệ chốt: ___%&#10;&#10;Cold outreach: ..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P3-4</span>
+    <span class="note-title">Objections Thực Tế Khi Bán HLX + Scripts</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 12 — §12.3 Xử Lý Objections</div>
+  <div class="note-desc">5–10 objections thực tế anh/chị hay gặp khi bán HLX mà chưa có trong sách + script xử lý đã dùng hiệu quả. ĐÂY LÀ PHẦN LÀM CHO SÁCH ĐỘC ĐÁO NHẤT thị trường.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder='Objection 1: "[Khách nói gì...]"&#10;Script: "Dạ [anh/chị trả lời...]"&#10;Tỷ lệ xử lý thành công: ___%&#10;&#10;Objection 2: "..."&#10;Script: "..."&#10;...'></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P3-5</span>
+    <span class="note-title">Commission & Thu Nhập Thực Tế HLX</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 13 — §13.1 Quản Lý Tài Chính</div>
+  <div class="note-desc">Mức commission thực tế tại HLX theo từng loại sản phẩm (% và số tiền cụ thể). Anh/chị mất bao lâu để đạt thu nhập ổn định? Lời khuyên tài chính thực tế cho broker mới vào nghề.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Commission HLX (tính đến [tháng/năm]):&#10;- Căn hộ: ___% = ___–___tr/căn&#10;- Biệt thự: ___% = ___–___tr/căn&#10;- Shophouse: ___% = ___–___tr/căn&#10;&#10;Thời gian đạt thu nhập ổn định 30–50tr/tháng: ___ tháng&#10;&#10;Lời khuyên tài chính: [...]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<!-- PHẦN IV NOTES -->
+<div class="part-header">
+  <h2>Phần IV — Công Cụ & Phụ Lục</h2>
+  <span class="part-tag" style="background:rgba(201,168,76,.2);color:var(--gold)">Chương 14–15 + Phụ Lục</span>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P4-1</span>
+    <span class="note-title">Template CRM Thực Tế Của Anh/Chị</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 14 — §14.1 CRM Tracker</div>
+  <div class="note-desc">Anh/chị đang dùng công cụ CRM nào? Excel, Notion, hay app chuyên dụng? Chia sẻ template CRM thực tế để người đọc có thể copy và sử dụng ngay. Screenshot nếu có thể.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="CRM tôi đang dùng: [tên công cụ]&#10;Lý do chọn: [...]&#10;&#10;Link template (nếu có): [...]&#10;&#10;Trường quan trọng nhất trong CRM của tôi: [...]"></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="hi">
+  <div class="note-top">
+    <span class="note-id">P4-2</span>
+    <span class="note-title">Script Book Thực Tế — Scripts Đã Kiểm Chứng</span>
+    <div class="note-badges"><span class="badge hi">Cao ★</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 14 — §14.3 Script Book</div>
+  <div class="note-desc">5–7 scripts thực tế đã được kiểm chứng của anh/chị. Bao gồm cả scripts không hiệu quả và lý do thất bại — điều này sẽ làm cho sách chân thực và có giá trị nhất. Ghi rõ tỷ lệ thành công của từng script.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder='Script tôi dùng hiệu quả nhất khi gọi điện cold:&#10;"[Nội dung script...]"&#10;Tỷ lệ chuyển đổi: ___% (cứ ___ cuộc gọi = ___ cuộc hẹn)&#10;&#10;Script tôi từng dùng và thất bại:&#10;"[Nội dung...]"&#10;Lý do thất bại: [...]&#10;...'></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="low">
+  <div class="note-top">
+    <span class="note-id">P4-3</span>
+    <span class="note-title">Content Ideas Thực Tế Từ Kinh Nghiệm</span>
+    <div class="note-badges"><span class="badge low">Thấp</span></div>
+  </div>
+  <div class="note-chapter">📖 Chương 15 — Content Calendar 30 Ngày</div>
+  <div class="note-desc">Bài post nào từng viral hoặc tạo nhiều leads nhất? Chủ đề gì khách hàng HLX hay hỏi mà chưa có trong danh sách 30 ngày? Thêm 5–10 ý tưởng content thực tế.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Bài post viral nhất của tôi:&#10;- Chủ đề: [...]&#10;- Hook: [dòng đầu tiên...]&#10;- Kết quả: ___ tương tác, ___ leads&#10;&#10;5 chủ đề content thêm vào lịch 30 ngày:&#10;1. [...]&#10;2. [...]&#10;..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P4-4</span>
+    <span class="note-title">Thuật Ngữ BĐS Đặc Thù HLX/Quảng Ninh</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Phụ Lục A — Glossary</div>
+  <div class="note-desc">Thuật ngữ chuyên ngành BĐS HLX/nghỉ dưỡng mà anh/chị thường gặp trong thực tế nhưng chưa có trong danh sách. Đặc biệt thuật ngữ từ hợp đồng, pháp lý đặc thù Quảng Ninh.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Thuật ngữ 1: [Tên]&#10;Định nghĩa: [Giải thích ngắn gọn]&#10;&#10;Thuật ngữ 2: ..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<div class="note-row" data-priority="mid">
+  <div class="note-top">
+    <span class="note-id">P4-5</span>
+    <span class="note-title">Đơn Vị Hỗ Trợ Thực Tế Tại Hạ Long</span>
+    <div class="note-badges"><span class="badge mid">Trung Bình</span></div>
+  </div>
+  <div class="note-chapter">📖 Phụ Lục B — Checklist Pháp Lý</div>
+  <div class="note-desc">Văn phòng công chứng uy tín tại Hạ Long. Văn phòng đăng ký đất đai cần nộp hồ sơ khi mua HLX. Danh sách ngân hàng đối tác cho vay kèm địa chỉ/số điện thoại liên hệ. Đơn vị quản lý cho thuê Airbnb tại Hạ Long.</div>
+  <div class="answer-area">
+    <textarea class="answer-input" placeholder="Công chứng uy tín Hạ Long:&#10;1. [Tên VP]: [địa chỉ] — [SĐT]&#10;2. [Tên VP]: [địa chỉ] — [SĐT]&#10;&#10;VP Đăng ký đất đai HLX thuộc:&#10;[Địa chỉ nộp hồ sơ] — [SĐT]&#10;&#10;Đơn vị quản lý cho thuê Airbnb tại HL:&#10;1. [Tên]: [liên hệ]&#10;2. ..."></textarea>
+  </div>
+  <div class="note-actions no-print">
+    <button class="action-btn mark-done" onclick="markDone(this)">✅ Đánh Dấu Xong</button>
+  </div>
+</div>
+
+<!-- Summary -->
+<div style="background:linear-gradient(135deg,var(--navy),rgba(201,168,76,.15));border:2px solid var(--gold);border-radius:14px;padding:28px;margin-top:40px;text-align:center">
+  <h3 style="font-family:'Playfair Display',serif;color:var(--gold);font-size:20px;margin-bottom:12px">Sau Khi Điền Đủ 20 Notes</h3>
+  <p style="color:var(--mut);font-size:14px;max-width:500px;margin:0 auto 20px">Sách của anh/chị sẽ trở thành tài liệu BĐS HLX DUY NHẤT trên thị trường kết hợp: kiến thức hệ thống + số liệu thực tế địa phương + kinh nghiệm thực chiến của người trong nghề.</p>
+  <a href="broker-pro-book-index.html" style="display:inline-block;background:var(--gold);color:#0d1b2a;padding:12px 24px;border-radius:8px;font-weight:700;text-decoration:none;font-size:14px">← Về Trang Chủ Sách</a>
+</div>
+
+</div>
+<div class="footer">
+  <div class="ft">BROKER PRO — Notes Tracker</div>
+  <p>20 vị trí cần bổ sung số liệu và kinh nghiệm thực tế</p>
+</div>
+
+<script>
+function filterNotes(priority){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.note-row').forEach(row=>{
+    if(priority==='all'){row.style.display='block';return}
+    if(priority==='done'){row.style.display=row.classList.contains('done')?'block':'none';return}
+    const p=row.dataset.priority;
+    row.style.display=(p===priority&&!row.classList.contains('done'))?'block':'none';
+  });
+}
+function markDone(btn){
+  const row=btn.closest('.note-row');
+  row.classList.toggle('done');
+  btn.textContent=row.classList.contains('done')?'↩️ Bỏ Đánh Dấu':'✅ Đánh Dấu Xong';
+  updateCounts();
+}
+function clearNote(btn){
+  btn.closest('.note-row').querySelector('.answer-input').value='';
+}
+function updateCounts(){
+  const done=document.querySelectorAll('.note-row.done').length;
+  const total=document.querySelectorAll('.note-row').length;
+  document.getElementById('cnt-done').textContent=done;
+  document.getElementById('cnt-todo').textContent=total-done;
+}
+</script>
+</body>
+</html>

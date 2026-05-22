@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BROKER PRO — Phần IV: Công Cụ & Template + Phụ Lục</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Be+Vietnam Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1b2a;--sur:#112236;--sur2:#162d45;--gold:#C9A84C;--gl:#E2C06A;--navy:#1B3A6B;--txt:#e8e8e8;--mut:#a0aab8;--grn:#27ae60;--red:#e74c3c;--bdr:rgba(201,168,76,0.2)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Be Vietnam Pro',sans-serif;font-size:16px;line-height:1.8}
+@media print{body{background:#fff;color:#111}.no-print{display:none}}
+.top-bar{position:sticky;top:0;z-index:99;background:rgba(13,27,42,.96);border-bottom:1px solid var(--bdr);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(8px)}
+.top-bar a{color:var(--gold);font-family:'Playfair Display',serif;font-size:14px;text-decoration:none}
+.top-bar .links{display:flex;gap:16px;align-items:center}
+.top-bar .links a{color:var(--mut);font-size:13px;text-decoration:none}
+.top-bar .links a:hover,.top-bar .links a.active{color:var(--gold)}
+.btn-sm{background:var(--gold);color:#0d1b2a;border:none;padding:6px 14px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+.book-hero{background:linear-gradient(135deg,#0d1b2a,#2a1a0a 50%,#1B3A6B);padding:70px 32px;text-align:center;border-bottom:3px solid var(--gold)}
+.part-badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid var(--bdr);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:20px}
+.book-hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,44px);color:#fff;line-height:1.25;margin-bottom:12px}
+.book-hero h1 span{color:var(--gl)}
+.book-hero p{color:var(--mut);font-size:15px;max-width:560px;margin:0 auto}
+.ch-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px}
+.ch-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:13px;padding:6px 14px;border-radius:16px;text-decoration:none;transition:all .2s}
+.ch-btn:hover{background:var(--gold);color:#0d1b2a;border-color:var(--gold)}
+.wrap{max-width:800px;margin:0 auto;padding:52px 28px}
+.ch-section{margin-bottom:80px;padding-bottom:60px;border-bottom:1px solid var(--bdr)}
+.ch-section:last-child{border-bottom:none}
+.ch-header{background:linear-gradient(135deg,var(--sur),#2a1a0a);border:1px solid rgba(201,168,76,.4);border-radius:14px;padding:28px 32px;margin-bottom:32px}
+.ch-num{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gl);margin-bottom:8px}
+.ch-title{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,30px);color:#fff;margin-bottom:8px}
+.ch-desc{color:var(--mut);font-size:14px}
+h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin:36px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--bdr)}
+h4{font-size:16px;color:#fff;margin:24px 0 10px;font-weight:700}
+h4::before{content:'▸ ';color:var(--gold)}
+p{margin-bottom:14px;color:var(--txt)}
+strong{color:#fff}
+ul,ol{padding-left:20px;margin:10px 0 14px}
+li{margin-bottom:6px;color:var(--mut)}
+li strong{color:#fff}
+blockquote{border-left:4px solid var(--gold);background:var(--sur);padding:16px 20px;border-radius:0 10px 10px 0;margin:20px 0;font-style:italic;color:var(--gl)}
+.note{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0}
+.note-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.note p{color:#d4b96a;margin:0;font-size:13px}
+.box{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:22px 26px;margin:20px 0}
+.box.grn{border-color:rgba(39,174,96,.4);background:rgba(39,174,96,.05)}
+.box.gold{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+@media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{background:var(--sur);border:1px solid var(--bdr);border-radius:10px;padding:18px}
+.card .ic{font-size:24px;margin-bottom:8px}
+.card h5{color:var(--gold);font-size:14px;margin-bottom:6px}
+.card p{color:var(--mut);font-size:13px;margin:0}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+th{background:var(--navy);color:var(--gold);padding:10px 12px;text-align:left;border:1px solid rgba(255,255,255,.08)}
+td{padding:10px 12px;border:1px solid rgba(255,255,255,.06);color:var(--txt)}
+tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+/* Template Box */
+.tpl{background:var(--sur2);border:1px solid var(--bdr);border-radius:12px;padding:24px;margin:16px 0}
+.tpl-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tpl-label::before{content:'📋'}
+.tpl-body{font-family:monospace;font-size:13px;color:#b0c4d8;line-height:1.8;white-space:pre-wrap;background:rgba(0,0,0,.2);padding:16px;border-radius:8px}
+/* Day Plan */
+.day-block{background:var(--sur2);border-left:3px solid var(--gold);padding:14px 18px;margin:10px 0;border-radius:0 8px 8px 0}
+.day-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.day-topic{font-size:15px;color:#fff;font-weight:700;margin-bottom:4px}
+.day-desc{font-size:13px;color:var(--mut)}
+/* Glossary */
+.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:580px){.glossary-grid{grid-template-columns:1fr}}
+.g-item{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);border-right:1px solid rgba(255,255,255,.05)}
+.g-item:nth-child(even){border-right:none}
+.g-term{font-weight:700;color:var(--gold);font-size:14px}
+.g-def{font-size:13px;color:var(--mut);margin-top:2px}
+/* Checklist big */
+.big-check{list-style:none;padding:0}
+.big-check li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px}
+.big-check li::before{content:'☐';color:var(--gold);font-size:16px;flex-shrink:0}
+/* CRM table */
+.crm-row{display:grid;grid-template-columns:28px 1fr 100px 100px 120px 1fr;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;align-items:center}
+.crm-row.header{background:var(--navy);font-weight:700;color:var(--gold);border-radius:8px 8px 0 0}
+.crm-row:last-child{border-bottom:none}
+@media(max-width:700px){.crm-row{grid-template-columns:1fr 1fr;gap:6px}}
+.part-nav{display:flex;justify-content:space-between;align-items:center;background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:20px 24px;margin-top:48px;gap:12px;flex-wrap:wrap}
+.part-nav a{text-decoration:none;color:var(--mut);font-size:14px}
+.part-nav a:hover{color:var(--gold)}
+.part-nav .pn-title{font-family:'Playfair Display',serif;color:#fff;font-size:16px}
+.footer{text-align:center;padding:40px 28px;border-top:1px solid var(--bdr);margin-top:48px}
+.footer .ft{font-family:'Playfair Display',serif;color:var(--gold);font-size:18px;margin-bottom:6px}
+.footer p{color:var(--mut);font-size:13px}
+/* Copy btn */
+.copy-btn{background:rgba(52,152,219,.15);border:1px solid rgba(52,152,219,.3);color:#3498db;font-size:11px;padding:3px 8px;border-radius:5px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .2s;margin-left:8px}
+.copy-btn:hover{background:rgba(52,152,219,.25)}
+</style>
+</head>
+<body>
+<div class="top-bar no-print">
+  <a href="broker-pro-book-index.html">📚 BROKER PRO</a>
+  <div class="links">
+    <a href="broker-pro-book-p1.html">Phần I</a>
+    <a href="broker-pro-book-p2.html">Phần II</a>
+    <a href="broker-pro-book-p3.html">Phần III</a>
+    <a href="broker-pro-book-p4.html" class="active">Phần IV + Phụ Lục</a>
+    <a href="broker-pro-book-notes.html">📋 Notes</a>
+    <button class="btn-sm" onclick="window.print()">🖨️ PDF</button>
+  </div>
+</div>
+
+<div class="book-hero">
+  <div class="part-badge">Phần IV — Công Cụ & Template</div>
+  <h1>Bộ Công Cụ<br><span>Broker Chuyên Nghiệp</span></h1>
+  <p>Templates CRM, content calendar 30 ngày, bộ glossary 60+ thuật ngữ và checklist pháp lý thực chiến</p>
+  <div class="ch-nav">
+    <a href="#ch14" class="ch-btn">Ch14: Bộ Công Cụ</a>
+    <a href="#ch15" class="ch-btn">Ch15: Content 30 Ngày</a>
+    <a href="#appendix" class="ch-btn">Phụ Lục: Glossary</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════════════ CHƯƠNG 14 ═══════════════ -->
+<div class="ch-section" id="ch14">
+<div class="ch-header">
+  <div class="ch-num">Chương 14</div>
+  <div class="ch-title">Bộ Công Cụ Broker Chuyên Nghiệp</div>
+  <div class="ch-desc">CRM tracker, script book, presentation checklist, bảng ROI tư vấn — sẵn sàng dùng ngay</div>
+</div>
+
+<h3>14.1 CRM Tracker — Quản Lý Khách Hàng</h3>
+<p>Một broker quản lý 50–100 khách hàng mà không có CRM giống như đang đi trong bóng tối. Đây là template CRM tối giản nhưng đủ dùng:</p>
+
+<div class="box" style="overflow-x:auto">
+<div class="crm-row header">
+  <div>#</div><div>Tên Khách</div><div>Nhóm</div><div>Giai Đoạn</div><div>Follow-up</div><div>Ghi Chú</div>
+</div>
+<div class="crm-row">
+  <div style="color:var(--gold)">1</div><div>Anh Minh (HN)</div><div style="color:#3498db">Đầu tư</div><div style="color:var(--gold)">C - Cân nhắc</div><div style="color:#e74c3c">15/06</div><div style="color:var(--mut)">Hot button: ROI. Đang so sánh Sun Group</div>
+</div>
+<div class="crm-row">
+  <div style="color:var(--gold)">2</div><div>Chị Lan (HCM)</div><div style="color:#2ecc71">2nd Home</div><div style="color:#2ecc71">D - Quyết định</div><div style="color:#e74c3c">18/06</div><div style="color:var(--mut)">Đã xem thực tế, đang chờ chồng đồng ý</div>
+</div>
+<div class="crm-row">
+  <div style="color:var(--gold)">3</div><div>Anh Tuấn (HN)</div><div style="color:#9b59b6">Lướt sóng</div><div style="color:#a0aab8">B - Quan tâm</div><div style="color:#f39c12">25/06</div><div style="color:var(--mut)">Hỏi về suất ngoại giao, chưa xem thực tế</div>
+</div>
+<div class="crm-row" style="background:rgba(255,255,255,.02)">
+  <div style="color:var(--mut);font-style:italic" colspan="6">... (thêm hàng cho mỗi khách hàng mới)</div>
+</div>
+</div>
+
+<div class="note"><div class="note-lbl">✏️ Note #P4-1</div><p>Anh/chị đang dùng công cụ CRM nào? Excel, Notion, hay app chuyên dụng? Chia sẻ template CRM thực tế của anh/chị để người đọc có thể copy và sử dụng ngay.</p></div>
+
+<h3>14.2 Template Bảng ROI Tư Vấn Khách</h3>
+<div class="tpl">
+<div class="tpl-label">Template Bảng Phân Tích ROI — In Ra Mang Theo Khi Gặp Khách</div>
+<div class="tpl-body">
+BÁO CÁO PHÂN TÍCH ĐẦU TƯ
+Khách hàng: _______________   Ngày: ___/___/____
+Sản phẩm: Căn hộ ___ PN | Phân khu: _____ | Tầng: ___
+
+A. THÔNG TIN SẢN PHẨM
+├─ Giá bán:                          _________đ
+├─ Vốn tự có (____%):               _________đ
+└─ Vay ngân hàng (____%):            _________đ @ _____% lãi/năm
+
+B. DOANH THU CHO THUÊ (ƯỚC TÍNH)
+├─ Giá thuê cao điểm/đêm:           ___________đ
+├─ Giá thuê thấp điểm/đêm:          ___________đ
+├─ Occupancy ước tính:               _____% / năm
+└─ Doanh thu gộp/năm:               +___________đ
+
+C. CHI PHÍ VẬN HÀNH
+├─ Platform fee (~15–18%):           −___________đ
+├─ Phí quản lý tòa nhà:             −___________đ
+├─ Chi phí dọn dẹp (~8%):           −___________đ
+├─ Thuế cho thuê (10%):             −___________đ
+├─ Sửa chữa, bảo trì:              −___________đ
+└─ Lãi vay (nếu có):               −___________đ
+
+D. KẾT QUẢ
+├─ Thu nhập ròng/năm:               +___________đ
+├─ Net Yield (trên giá mua):         _____%
+├─ Tăng giá trị ước tính (7%/năm): +___________đ
+├─ Tổng ROI:                         ~_____% / năm
+└─ Thời gian hoàn vốn ước tính:     _____ năm
+
+Ghi chú: Số liệu trên là ước tính dựa trên dữ liệu thị trường.
+Thực tế có thể khác biệt tùy điều kiện vận hành.
+</div>
+</div>
+
+<h3>14.3 Script Book — 10 Tình Huống Quan Trọng Nhất</h3>
+
+<h4>Script 1: Cuộc Gọi Lần Đầu (Cold/Warm Call)</h4>
+<div class="tpl">
+<div class="tpl-label">Script Gọi Điện Lần Đầu</div>
+<div class="tpl-body">
+"Dạ, em chào anh/chị [Tên]. Em là [Tên], broker BĐS chuyên HLX — Vinhomes Hạ Long Xanh.
+Anh/chị có [1–2 phút] để em chia sẻ không ạ?
+
+Em liên hệ vì [nguồn: anh X giới thiệu / anh/chị có để lại thông tin / anh/chị đang quan tâm HLX].
+Em không gọi để pitch hàng — em muốn hỏi anh/chị đang tìm kiếm cơ hội BĐS như thế nào,
+để em xem có thể hỗ trợ được gì không.
+
+Anh/chị hiện tại đang quan tâm đến BĐS mục đích gì ạ — đầu tư hay nghỉ dưỡng?"
+</div>
+</div>
+
+<h4>Script 2: Follow-Up Sau Site Visit</h4>
+<div class="tpl">
+<div class="tpl-label">Tin Nhắn Follow-Up Trong 24h</div>
+<div class="tpl-body">
+"Dạ anh/chị [Tên], em [Tên] đây ạ!
+Cảm ơn anh/chị đã dành thời gian tham quan HLX hôm [ngày] cùng em.
+
+Em muốn chia sẻ thêm 2 điều:
+1. [Thông tin mới nhất về sản phẩm anh/chị quan tâm]
+2. [Câu hỏi/điều anh/chị chưa rõ — em trả lời ngắn gọn]
+
+Ngoài ra em vừa được biết căn [tầng/view] anh/chị thích đang có [thông tin cụ thể].
+Anh/chị có muốn em giữ thông tin và cập nhật không ạ?"
+</div>
+</div>
+
+<h4>Script 3: Xin Referral Sau Khi Khách Mua</h4>
+<div class="tpl">
+<div class="tpl-label">Xin Referral — 2 Tuần Sau Ký HĐ</div>
+<div class="tpl-body">
+"Dạ anh/chị [Tên], em [Tên] đây ạ!
+Em gọi để check-in — mọi thứ sau khi ký hợp đồng có ổn không ạ?
+[Nghe phản hồi, giải quyết nếu có vấn đề]
+
+Anh/chị ơi, nếu trong circle của anh/chị có ai đang tìm kiếm
+cơ hội đầu tư BĐS tương tự — em rất vui được hỗ trợ họ.
+Anh/chị giới thiệu được sẽ là vinh hạnh lớn cho em ạ.
+Và em sẽ chăm sóc người anh/chị giới thiệu tốt như với anh/chị ạ."
+</div>
+</div>
+
+<div class="note"><div class="note-lbl">✏️ Note #P4-2</div><p>Bổ sung script book thực tế của anh/chị: 5–7 script đã được kiểm chứng, hiệu quả thực tế. Bao gồm cả những script không hiệu quả và lý do thất bại — điều này sẽ làm cho sách trở nên chân thực và có giá trị nhất.</p></div>
+
+<h3>14.4 Checklist Site Visit — Chuẩn Bị Trước Khi Đưa Khách Đi</h3>
+<ul class="big-check">
+  <li><strong>Tài liệu:</strong> Brochure bản màu, bảng ROI, bảng so sánh đối thủ, bản đồ phân khu</li>
+  <li><strong>Căn hộ mẫu:</strong> Đặt lịch trước, biết giờ mở cửa, biết tên nhân viên dự án</li>
+  <li><strong>Thông tin cập nhật:</strong> Giá hiện tại, chính sách thanh toán mới nhất, tiến độ xây dựng</li>
+  <li><strong>Logistics:</strong> Đặt xe, biết thời gian di chuyển từ Hà Nội/HCM, có số HLX direct</li>
+  <li><strong>Discovery prep:</strong> Ôn lại thông tin khách — mục tiêu, ngân sách, hot button</li>
+  <li><strong>Follow-up ready:</strong> Đã chuẩn bị sẵn tin nhắn follow-up gửi trong 24h sau</li>
+</ul>
+</div>
+
+<!-- ═══════════════ CHƯƠNG 15 ═══════════════ -->
+<div class="ch-section" id="ch15">
+<div class="ch-header">
+  <div class="ch-num">Chương 15</div>
+  <div class="ch-title">Content Calendar 30 Ngày Cho Broker HLX</div>
+  <div class="ch-desc">30 ý tưởng nội dung sẵn sàng đăng — chủ đề, hook, format và lịch đăng bài tối ưu</div>
+</div>
+
+<h3>15.1 Tuần 1 — Xây Nhận Diện</h3>
+
+<div class="day-block">
+  <div class="day-label">Ngày 1 — Thứ 2</div>
+  <div class="day-topic">Giới Thiệu Bản Thân Như Một Chuyên Gia HLX</div>
+  <div class="day-desc"><strong>Hook:</strong> "Tôi đã tốn 6 tháng để hiểu được tại sao Hạ Long Xanh khác với mọi dự án BĐS tôi từng thấy..." | <strong>Format:</strong> Text + 3 ảnh thực tế | <strong>Đăng:</strong> 8:00 sáng</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 2 — Thứ 3</div>
+  <div class="day-topic">Tại Sao HLX Là Blue Ocean Cho Nhà Đầu Tư</div>
+  <div class="day-desc"><strong>Hook:</strong> "3 lý do tôi chọn BĐS Hạ Long thay vì Đà Nẵng hay Phú Quốc" | <strong>Format:</strong> Carousel 5 slide | <strong>Đăng:</strong> 12:00 trưa</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 3 — Thứ 4</div>
+  <div class="day-topic">Sai Lầm Phổ Biến Nhất Khi Mua BĐS Nghỉ Dưỡng</div>
+  <div class="day-desc"><strong>Hook:</strong> "Khách hàng của tôi suýt mất 500 triệu vì không biết điều này..." | <strong>Format:</strong> Video 60s (talking head) | <strong>Đăng:</strong> 7:00 tối</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 4 — Thứ 5</div>
+  <div class="day-topic">Câu Hỏi Cộng Đồng — Poll Tương Tác</div>
+  <div class="day-desc"><strong>Hook:</strong> "Anh/chị hay mắc lỗi nào hơn khi đầu tư BĐS?" (Poll A: Vội vàng quyết định / B: Chờ quá lâu) | <strong>Format:</strong> Poll Facebook | <strong>Đăng:</strong> 12:00 trưa</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 5 — Thứ 6</div>
+  <div class="day-topic">Tour Căn Hộ Mẫu HLX — Thực Tế</div>
+  <div class="day-desc"><strong>Hook:</strong> "Đây là căn hộ 2PN view Vịnh Hạ Long giá [___] tỷ — xem thực tế trước khi quyết định" | <strong>Format:</strong> Video tour 90s–3 phút | <strong>Đăng:</strong> 8:00 sáng</div>
+</div>
+
+<h3>15.2 Tuần 2 — Xây Chuyên Môn</h3>
+
+<div class="day-block">
+  <div class="day-label">Ngày 8 — Thứ 2</div>
+  <div class="day-topic">Giải Thích Gross Yield vs Net Yield Đơn Giản</div>
+  <div class="day-desc"><strong>Hook:</strong> "Broker nào nói cho thuê HLX 10–12%/năm mà không giải thích này là đang làm hại anh/chị..." | <strong>Format:</strong> Carousel giải thích với số liệu</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 9 — Thứ 3</div>
+  <div class="day-topic">Condotel vs Căn Hộ Chung Cư — Khác Nhau Thế Nào?</div>
+  <div class="day-desc"><strong>Hook:</strong> "Nhiều người mua condotel nghĩ là mua nhà — đây là sự khác biệt broker phải biết..." | <strong>Format:</strong> Text + infographic</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 10 — Thứ 4</div>
+  <div class="day-topic">Case Study — Khách Hàng Của Tôi Kiếm Được Gì?</div>
+  <div class="day-desc"><strong>Hook:</strong> "Anh X mua căn HLX 3 năm trước, giờ tình trạng như thế này..." | <strong>Format:</strong> Story + số liệu (ẩn tên khách)</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 11 — Thứ 5</div>
+  <div class="day-topic">10 Điều Kiểm Tra Trước Khi Mua BĐS</div>
+  <div class="day-desc"><strong>Hook:</strong> "Save bài này — checklist 10 điểm giúp anh/chị tránh mua nhầm BĐS" | <strong>Format:</strong> Carousel 11 slides (cover + 10 điểm)</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 12 — Thứ 6</div>
+  <div class="day-topic">View Buổi Sáng Từ HLX — Lifestyle Content</div>
+  <div class="day-desc"><strong>Hook:</strong> "Thức dậy và nhìn ra Vịnh Hạ Long mỗi sáng — đây có phải cuộc sống mà anh/chị muốn không?" | <strong>Format:</strong> Video/Reel đẹp mắt, nhạc nhẹ</div>
+</div>
+
+<h3>15.3 Tuần 3 — Xây Tin Tưởng</h3>
+
+<div class="day-block">
+  <div class="day-label">Ngày 15 — Thứ 2</div>
+  <div class="day-topic">Câu Hỏi Pháp Lý Thường Gặp Nhất</div>
+  <div class="day-desc"><strong>Hook:</strong> "Câu hỏi tôi nhận nhiều nhất: Sổ đỏ HLX lâu dài không? Đây là câu trả lời..." | <strong>Format:</strong> Video 2 phút giải thích</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 16 — Thứ 3</div>
+  <div class="day-topic">Rủi Ro Tôi Luôn Nói Thật Với Khách</div>
+  <div class="day-desc"><strong>Hook:</strong> "Tôi sẽ mất deal nếu nói điều này — nhưng đây là rủi ro anh/chị PHẢI biết khi mua HLX" | <strong>Format:</strong> Text dài, thành thật</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 17 — Thứ 4</div>
+  <div class="day-topic">Testimonial Khách Hàng</div>
+  <div class="day-desc"><strong>Hook:</strong> Quote từ khách hàng thực về trải nghiệm làm việc với anh/chị | <strong>Format:</strong> Quote card + ảnh căn hộ</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 18 — Thứ 5</div>
+  <div class="day-topic">Hành Trình Của Tôi — Từ ___ Đến Broker HLX</div>
+  <div class="day-desc"><strong>Hook:</strong> Câu chuyện cá nhân về lý do chọn BĐS Hạ Long | <strong>Format:</strong> Long-form story, chân thật</div>
+</div>
+
+<h3>15.4 Tuần 4 — Chuyển Đổi</h3>
+
+<div class="day-block">
+  <div class="day-label">Ngày 22 — Thứ 2</div>
+  <div class="day-topic">So Sánh: Gửi Tiết Kiệm vs HLX — Số Liệu Thực</div>
+  <div class="day-desc"><strong>Hook:</strong> "2 tỷ gửi ngân hàng 6% vs 2 tỷ mua HLX cho thuê — sau 10 năm ai thắng?" | <strong>Format:</strong> Infographic so sánh</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 23 — Thứ 3</div>
+  <div class="day-topic">Thông Báo: Chỉ Còn ___ Căn View Biển Tốt</div>
+  <div class="day-desc"><strong>Hook:</strong> Cập nhật thực tế về tình trạng hàng tồn — chỉ đăng khi thông tin chính xác | <strong>Format:</strong> Text ngắn + CTA rõ ràng</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 25 — Thứ 5</div>
+  <div class="day-topic">Livestream: Tư Vấn Đầu Tư HLX — Q&A Trực Tiếp</div>
+  <div class="day-desc"><strong>Hook:</strong> "Hỏi tôi bất cứ điều gì về đầu tư HLX — không filter, không PR" | <strong>Format:</strong> Facebook/Zalo Live 30–60 phút</div>
+</div>
+<div class="day-block">
+  <div class="day-label">Ngày 30 — Cuối Tháng</div>
+  <div class="day-topic">Review Thị Trường BĐS Hạ Long Tháng Này</div>
+  <div class="day-desc"><strong>Hook:</strong> "Tháng [X]: giao dịch, giá, xu hướng — tôi tóm tắt trong 5 phút" | <strong>Format:</strong> Video hoặc bài viết phân tích</div>
+</div>
+
+<div class="note"><div class="note-lbl">✏️ Note #P4-3</div><p>Bổ sung: bài post nào của anh/chị từng viral hoặc tạo nhiều leads nhất? Chủ đề gì khách hàng HLX hay hỏi nhất mà anh/chị chưa thấy trong danh sách trên?</p></div>
+</div>
+
+<!-- ═══════════════ PHỤ LỤC ═══════════════ -->
+<div class="ch-section" id="appendix">
+<div class="ch-header" style="background:linear-gradient(135deg,var(--sur),#1a1a0a)">
+  <div class="ch-num">Phụ Lục</div>
+  <div class="ch-title">Glossary — 60+ Thuật Ngữ BĐS Cần Biết</div>
+  <div class="ch-desc">Tra cứu nhanh các thuật ngữ pháp lý, tài chính và nghiệp vụ trong ngành BĐS Việt Nam</div>
+</div>
+
+<h3>A — Pháp Lý & Giấy Tờ</h3>
+<div class="box" style="padding:0;overflow:hidden">
+<div class="glossary-grid">
+<div class="g-item"><div class="g-term">Sổ đỏ (GCNQSDĐ)</div><div class="g-def">Giấy chứng nhận quyền sử dụng đất — màu đỏ, cấp cho đất ở và đất nông nghiệp</div></div>
+<div class="g-item"><div class="g-term">Sổ hồng (GCNQSHNƠ)</div><div class="g-def">Giấy chứng nhận quyền sở hữu nhà ở — màu hồng, cấp cho căn hộ và nhà ở</div></div>
+<div class="g-item"><div class="g-term">HĐMB</div><div class="g-def">Hợp đồng mua bán — văn bản pháp lý giao dịch BĐS, bắt buộc công chứng</div></div>
+<div class="g-item"><div class="g-term">HĐDC</div><div class="g-def">Hợp đồng đặt cọc — xác nhận việc đặt cọc trước khi ký HĐMB chính thức</div></div>
+<div class="g-item"><div class="g-term">Condotel</div><div class="g-def">Căn hộ khách sạn — loại hình BĐS du lịch, thường có thời hạn sở hữu 50 năm</div></div>
+<div class="g-item"><div class="g-term">Shophouse</div><div class="g-def">Nhà phố thương mại — tầng dưới kinh doanh, tầng trên để ở hoặc cho thuê</div></div>
+<div class="g-item"><div class="g-term">Pháp lý 1/500</div><div class="g-def">Bản đồ quy hoạch chi tiết tỷ lệ 1/500 — xác định rõ lô đất và công trình cụ thể</div></div>
+<div class="g-item"><div class="g-term">Quy hoạch treo</div><div class="g-def">Đất nằm trong quy hoạch nhưng chưa thực hiện — gây khó khăn cho giao dịch</div></div>
+<div class="g-item"><div class="g-term">Thế chấp ngân hàng</div><div class="g-def">Dùng BĐS làm tài sản đảm bảo cho khoản vay — cần giải chấp trước khi bán</div></div>
+<div class="g-item"><div class="g-term">Giải chấp</div><div class="g-def">Thủ tục giải phóng tài sản khỏi thế chấp ngân hàng sau khi trả hết nợ</div></div>
+</div>
+</div>
+
+<h3>B — Tài Chính & Đầu Tư</h3>
+<div class="box" style="padding:0;overflow:hidden">
+<div class="glossary-grid">
+<div class="g-item"><div class="g-term">Gross Yield</div><div class="g-def">Tỷ suất lợi nhuận gộp — doanh thu cho thuê / giá mua × 100%, chưa trừ chi phí</div></div>
+<div class="g-item"><div class="g-term">Net Yield</div><div class="g-def">Tỷ suất lợi nhuận ròng — (doanh thu - chi phí) / giá mua × 100%, con số thực tế</div></div>
+<div class="g-item"><div class="g-term">Cap Rate</div><div class="g-def">Tỷ suất vốn hóa — thu nhập ròng / giá trị tài sản, dùng để định giá BĐS đầu tư</div></div>
+<div class="g-item"><div class="g-term">Cash-on-Cash Return</div><div class="g-def">Lợi nhuận trên vốn tự có — dòng tiền ròng / vốn tự có × 100%, quan trọng khi vay</div></div>
+<div class="g-item"><div class="g-term">LTV (Loan-to-Value)</div><div class="g-def">Tỷ lệ vay/giá trị tài sản — thường ngân hàng cho vay tối đa 70–80% LTV</div></div>
+<div class="g-item"><div class="g-term">Occupancy Rate</div><div class="g-def">Tỷ lệ lấp đầy phòng — số đêm có khách / tổng số đêm × 100%</div></div>
+<div class="g-item"><div class="g-term">Lãi suất thả nổi</div><div class="g-def">Lãi suất thay đổi theo thị trường sau hết thời gian ưu đãi cố định</div></div>
+<div class="g-item"><div class="g-term">Đòn bẩy tài chính</div><div class="g-def">Sử dụng vốn vay để tăng quy mô đầu tư — khuếch đại cả lợi nhuận lẫn rủi ro</div></div>
+<div class="g-item"><div class="g-term">Stress test</div><div class="g-def">Kiểm tra khả năng chịu đựng nếu lãi suất tăng 2–3% — đảm bảo an toàn tài chính</div></div>
+<div class="g-item"><div class="g-term">Break-even</div><div class="g-def">Điểm hòa vốn — thời gian cần để thu hồi toàn bộ vốn đầu tư ban đầu</div></div>
+</div>
+</div>
+
+<h3>C — Thuật Ngữ Nghiệp Vụ Broker</h3>
+<div class="box" style="padding:0;overflow:hidden">
+<div class="glossary-grid">
+<div class="g-item"><div class="g-term">Commission</div><div class="g-def">Hoa hồng môi giới — thường 2–5% giá trị giao dịch, do CĐT hoặc bên bán chi trả</div></div>
+<div class="g-item"><div class="g-term">Lead</div><div class="g-def">Khách hàng tiềm năng có thể liên hệ — quan tâm đến sản phẩm nhưng chưa mua</div></div>
+<div class="g-item"><div class="g-term">Hot lead</div><div class="g-def">Khách có nhu cầu cao, ngân sách sẵn, muốn mua trong 30 ngày</div></div>
+<div class="g-item"><div class="g-term">Qualified lead</div><div class="g-def">Khách đã được xác nhận có nhu cầu, ngân sách, và thẩm quyền quyết định</div></div>
+<div class="g-item"><div class="g-term">Pipeline</div><div class="g-def">Danh sách khách đang ở các giai đoạn khác nhau trong quá trình mua</div></div>
+<div class="g-item"><div class="g-term">CRM</div><div class="g-def">Customer Relationship Management — hệ thống quản lý quan hệ khách hàng</div></div>
+<div class="g-item"><div class="g-term">Discovery call</div><div class="g-def">Cuộc gọi/gặp mặt đầu tiên để khám phá nhu cầu khách hàng</div></div>
+<div class="g-item"><div class="g-term">Objection</div><div class="g-def">Lý do từ chối hoặc nghi ngờ của khách hàng — cần được xử lý thuyết phục</div></div>
+<div class="g-item"><div class="g-term">Referral</div><div class="g-def">Khách hàng được giới thiệu từ khách hàng cũ — chất lượng cao, chi phí thấp</div></div>
+<div class="g-item"><div class="g-term">Site visit</div><div class="g-def">Chuyến tham quan thực tế dự án — giai đoạn quan trọng nhất trong quá trình bán</div></div>
+<div class="g-item"><div class="g-term">FOMO</div><div class="g-def">Fear Of Missing Out — tâm lý sợ bỏ lỡ cơ hội, trigger mua hàng mạnh nhất</div></div>
+<div class="g-item"><div class="g-term">Override</div><div class="g-def">Hoa hồng từ deals của nhân viên dưới quyền — thu nhập của team leader/giám đốc</div></div>
+</div>
+</div>
+
+<div class="note"><div class="note-lbl">✏️ Note #P4-4</div><p>Bổ sung thêm thuật ngữ chuyên ngành BĐS HLX/nghỉ dưỡng mà anh/chị thường gặp trong thực tế nhưng chưa có trong danh sách trên. Đặc biệt là thuật ngữ từ hợp đồng, pháp lý Quảng Ninh.</p></div>
+
+<h3>Phụ Lục B — Checklist Pháp Lý Khi Mua HLX</h3>
+<ul class="big-check">
+  <li><strong>Sổ đỏ/hồng:</strong> Kiểm tra nguyên bản, đúng người đứng tên, diện tích khớp thực tế</li>
+  <li><strong>Quy hoạch:</strong> Tra trên hệ thống quy hoạch Quảng Ninh — đất không nằm trong quy hoạch</li>
+  <li><strong>Thế chấp:</strong> Kiểm tra tại Văn phòng đăng ký đất đai — không có thế chấp ngân hàng còn hiệu lực</li>
+  <li><strong>Hợp đồng mua bán:</strong> Đọc kỹ điều khoản bàn giao, phạt chậm, điều khoện gia hạn</li>
+  <li><strong>Tiến độ xây dựng:</strong> Xác nhận mốc bàn giao chính thức từ bộ phận kinh doanh Vinhomes</li>
+  <li><strong>Chính sách thanh toán:</strong> Hiểu rõ % từng đợt, ngày đến hạn, phạt trễ thanh toán</li>
+  <li><strong>Phí quản lý:</strong> Biết rõ phí quản lý/tháng, cách tính, ai thu</li>
+  <li><strong>Cam kết lợi nhuận (nếu có):</strong> Đọc kỹ điều khoản, thời hạn cam kết, điều kiện áp dụng</li>
+  <li><strong>Quyền cho thuê:</strong> Xác nhận được phép cho thuê ngắn hạn trong nội quy tòa nhà</li>
+  <li><strong>Công chứng:</strong> HĐMB phải được công chứng tại Văn phòng công chứng uy tín</li>
+</ul>
+
+<div class="note"><div class="note-lbl">✏️ Note #P4-5</div><p>Bổ sung: Văn phòng công chứng uy tín tại Hạ Long, Quảng Ninh. Văn phòng đăng ký đất đai cụ thể cần nộp hồ sơ khi mua HLX. Danh sách ngân hàng đối tác cho vay mua HLX kèm địa chỉ/số điện thoại liên hệ.</p></div>
+
+</div><!-- /appendix -->
+
+<div class="part-nav">
+  <a href="broker-pro-book-p3.html">← Phần III: Broker Pro</a>
+  <div style="text-align:center">
+    <div style="font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px">Trung tâm</div>
+    <a href="broker-pro-book-index.html" class="pn-title">↑ Trang Chủ Sách</a>
+  </div>
+</div>
+
+</div>
+<div class="footer">
+  <div class="ft">BROKER PRO — Hành Trình Từ 0 Đến Thu Nhập 200 Triệu/Năm</div>
+  <p>Phần IV: Công Cụ & Template | Chương 14–15 + Phụ Lục</p>
+</div>
+</body>
+</html>
