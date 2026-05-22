@@ -1,0 +1,573 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+  <meta name="author" content="BDS Mastery Kit · Nguyen Thi Yen">
+  <meta name="copyright" content="(c) 2026 BDS Mastery Kit · Nguyen Thi Yen. Ban quyen duoc bao ho.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hợp Đồng Hợp Tác Marketing — BDS Mastery Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1a1a2e;
+  --gold:#b8860b;
+  --gold-light:#d4a017;
+  --accent:#1B3A6B;
+  --rule:#d0c9b8;
+  --bg:#fdfbf7;
+  --paper:#ffffff;
+  --muted:#6b6560;
+  --danger:#8b2020;
+  --success:#1a5c2e;
+}
+html{font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Be Vietnam Pro',sans-serif;
+  font-weight:400;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── SCREEN LAYOUT ── */
+.page-wrap{
+  max-width:860px;margin:0 auto;
+  padding:40px 20px 80px;
+}
+
+/* ── TOP ACTIONS (screen only) ── */
+.top-actions{
+  display:flex;justify-content:flex-end;gap:12px;
+  margin-bottom:32px;
+}
+.btn-action{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:8px;
+  font-family:'Be Vietnam Pro',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer;
+  border:none;transition:.2s;text-decoration:none;
+}
+.btn-print{background:var(--accent);color:#fff}
+.btn-print:hover{background:#0d2a55}
+.btn-dl{background:var(--gold);color:#fff}
+.btn-dl:hover{background:#9a7008}
+
+/* ── DOCUMENT PAPER ── */
+.doc{
+  background:var(--paper);
+  border:1px solid #e0d8cc;
+  border-radius:4px;
+  box-shadow:0 4px 40px rgba(0,0,0,.08);
+  padding:72px 80px;
+}
+@media(max-width:640px){.doc{padding:40px 28px}}
+
+/* ── HEADER ── */
+.doc-header{text-align:center;margin-bottom:48px;padding-bottom:32px;border-bottom:2px solid var(--gold)}
+.doc-seal{
+  display:inline-block;
+  width:64px;height:64px;
+  background:linear-gradient(135deg,var(--gold),#8b6914);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+  margin:0 auto 20px;
+  box-shadow:0 4px 16px rgba(184,134,11,.3);
+}
+.doc-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;
+  color:var(--ink);
+  letter-spacing:.5px;
+  line-height:1.4;
+  margin-bottom:8px;
+}
+.doc-subtitle{font-size:13px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.doc-meta{
+  display:flex;justify-content:center;gap:32px;
+  margin-top:20px;flex-wrap:wrap;
+}
+.doc-meta-item{font-size:13px;color:var(--muted)}
+.doc-meta-item strong{color:var(--ink);font-weight:600}
+
+/* ── PARTY CARDS ── */
+.party-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+@media(max-width:580px){.party-grid{grid-template-columns:1fr}}
+.party-card{
+  border:1px solid var(--rule);
+  border-top:3px solid var(--gold);
+  border-radius:6px;
+  padding:20px;
+}
+.party-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:10px;display:block;
+}
+.party-name{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:8px}
+.party-field{
+  font-size:12px;color:var(--muted);
+  padding:4px 0;border-bottom:1px dashed #e0d8cc;
+  display:flex;gap:8px;
+}
+.party-field:last-child{border-bottom:none}
+.party-field .fl{min-width:90px;font-weight:500;color:var(--ink)}
+.party-field .fv{color:var(--muted);font-style:italic}
+
+/* ── HEADINGS ── */
+.part-header{
+  background:linear-gradient(135deg,var(--accent),#0d2040);
+  color:#fff;
+  padding:10px 20px;
+  margin:40px -80px 28px;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+@media(max-width:640px){.part-header{margin:40px -28px 28px}}
+
+.art{margin-bottom:28px}
+.art-title{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;
+  color:var(--accent);
+  margin-bottom:12px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:10px;
+}
+.art-title::before{
+  content:'';display:inline-block;
+  width:4px;height:18px;
+  background:var(--gold);border-radius:2px;
+}
+.art-body{font-size:14px;line-height:1.9;color:#2a2a3a}
+.art-body p{margin-bottom:10px}
+.art-body p:last-child{margin-bottom:0}
+
+/* ── CLAUSE ITEMS ── */
+.clause{
+  padding-left:20px;margin-bottom:10px;
+  position:relative;font-size:14px;color:#2a2a3a;line-height:1.85;
+}
+.clause::before{
+  content:attr(data-n);
+  position:absolute;left:0;
+  color:var(--gold);font-weight:700;font-size:12px;
+}
+
+/* ── TABLES ── */
+.ct{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.ct th{
+  background:var(--accent);color:#fff;
+  padding:10px 14px;text-align:left;font-weight:600;font-size:12px;letter-spacing:.5px;
+}
+.ct td{
+  padding:10px 14px;border-bottom:1px solid #e8e2d8;color:#2a2a3a;
+  vertical-align:top;
+}
+.ct tr:last-child td{border-bottom:none}
+.ct tr:nth-child(even) td{background:#faf8f4}
+.ct .center{text-align:center}
+.ok{color:var(--success);font-weight:700}
+.no{color:var(--danger);font-weight:700}
+.warn-cell{color:#8b5e00;font-weight:600}
+
+/* ── HIGHLIGHT BOXES ── */
+.box{border-radius:6px;padding:18px 22px;margin:16px 0;font-size:13.5px;line-height:1.85}
+.box-warning{background:#fff8e6;border-left:4px solid #e0a800;color:#5a3e00}
+.box-danger{background:#fff0f0;border-left:4px solid var(--danger);color:#4a1010}
+.box-info{background:#eef4ff;border-left:4px solid var(--accent);color:#0d2040}
+.box-quote{
+  background:#faf8f4;border:1px solid var(--rule);border-radius:6px;
+  padding:20px 24px;margin:16px 0;
+  font-style:italic;font-size:13.5px;color:#3a3530;
+}
+.box-quote .bq-label{
+  font-style:normal;font-size:10px;font-weight:700;letter-spacing:2px;
+  color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:block;
+}
+.box-quote .bq-item{
+  display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;
+}
+.box-quote .bq-item::before{content:'✅';font-style:normal;flex-shrink:0;margin-top:1px}
+
+/* ── PENALTY TABLE ── */
+.penalty-block{margin:16px 0}
+
+/* ── APPENDIX ── */
+.appendix-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.appendix-table th{background:#f0ebe0;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;border:1px solid var(--rule)}
+.appendix-table td{padding:12px;border:1px solid var(--rule);vertical-align:middle}
+.appendix-table .fill-line{border-bottom:1px dashed #aaa;display:inline-block;width:100%;min-height:20px}
+
+/* ── SIGNATURE BLOCK ── */
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:20px}
+@media(max-width:500px){.sig-grid{grid-template-columns:1fr;gap:28px}}
+.sig-block{border:1px solid var(--rule);border-top:3px solid var(--accent);border-radius:6px;padding:22px}
+.sig-party{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:4px}
+.sig-role{font-size:12px;color:var(--muted);margin-bottom:20px}
+.sig-stamp{
+  height:80px;border:1px dashed #c0b8a8;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  color:#c0b8a8;font-size:11px;letter-spacing:1px;
+  margin-bottom:12px;
+}
+.sig-name{display:flex;flex-direction:column;gap:8px}
+.sig-line{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.sig-line .sl{min-width:70px;font-weight:500;color:var(--ink)}
+.sig-line .sv{flex:1;border-bottom:1px dashed #bbb;padding-bottom:2px;color:var(--muted);font-style:italic}
+
+/* ── FOOTER ── */
+.doc-footer{
+  text-align:center;margin-top:48px;padding-top:24px;
+  border-top:1px solid var(--rule);
+  font-size:11px;color:#b0a898;letter-spacing:.5px;
+}
+.doc-footer span{color:var(--gold)}
+
+/* ── PRINT STYLES ── */
+@media print{
+  body{background:#fff;font-size:13px}
+  .page-wrap{padding:0;max-width:100%}
+  .top-actions{display:none}
+  .doc{
+    box-shadow:none;border:none;
+    padding:0;
+    /* A4 page will be set by browser */
+  }
+  .part-header{margin:36px 0 24px;padding:8px 16px}
+  @page{margin:2cm 2.5cm;size:A4}
+  .party-grid{page-break-inside:avoid}
+  .sig-grid{page-break-inside:avoid}
+  .art{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- TOP ACTIONS (screen only) -->
+  <div class="top-actions">
+    <button class="btn-action btn-print" onclick="window.print()">🖨️ In / Xuất PDF</button>
+  </div>
+
+  <!-- DOCUMENT PAPER -->
+  <div class="doc">
+
+    <!-- HEADER -->
+    <div class="doc-header">
+      <div class="doc-seal">⚖️</div>
+      <div class="doc-title">HỢP ĐỒNG HỢP TÁC MARKETING<br>VÀ BẢO MẬT THÔNG TIN</div>
+      <div class="doc-subtitle">Marketing Partnership &amp; Confidentiality Agreement</div>
+      <div class="doc-meta">
+        <div class="doc-meta-item">Số HĐ: <strong>HĐ-MKT-____/2025</strong></div>
+        <div class="doc-meta-item">Ngày ký: <strong>___/___/2025</strong></div>
+        <div class="doc-meta-item">Sản phẩm: <strong>BDS Mastery Kit</strong></div>
+      </div>
+    </div>
+
+    <!-- PARTIES -->
+    <div class="part-header">I — THÔNG TIN CÁC BÊN</div>
+    <div class="party-grid">
+      <div class="party-card">
+        <span class="party-label">Bên A — Chủ sở hữu sản phẩm</span>
+        <div class="party-name">___________________________</div>
+        <div class="party-field"><span class="fl">CMND/CCCD</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Địa chỉ</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Điện thoại</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Email</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Ngân hàng</span><span class="fv">_____________________</span></div>
+      </div>
+      <div class="party-card">
+        <span class="party-label">Bên B — Đối tác Marketing</span>
+        <div class="party-name">___________________________</div>
+        <div class="party-field"><span class="fl">CMND/MST</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Địa chỉ</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Điện thoại</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Email</span><span class="fv">_____________________</span></div>
+        <div class="party-field"><span class="fl">Ngân hàng</span><span class="fv">_____________________</span></div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;font-style:italic">Bên A và Bên B sau đây được gọi chung là "Các Bên" và mỗi bên là "Bên".</p>
+
+    <!-- PART II: SCOPE -->
+    <div class="part-header">II — MỤC ĐÍCH VÀ PHẠM VI HỢP TÁC</div>
+
+    <div class="art">
+      <div class="art-title">Điều 1 — Đối tượng hợp đồng</div>
+      <div class="art-body">
+        <div class="clause" data-n="1.1">Hợp đồng này quy định các điều khoản để Bên B được tiếp cận, sử dụng và phân phối tài nguyên thuộc <strong>BDS Mastery Kit</strong> ("Sản phẩm") của Bên A nhằm mục đích marketing và bán hàng trong phạm vi được ủy quyền.</div>
+        <div class="clause" data-n="1.2">Sản phẩm bao gồm nhưng không giới hạn: bộ kit tài liệu bán hàng cho môi giới BĐS Vinhomes Hạ Long Xanh, hệ thống landing page và trang bàn giao kit, tài liệu training và báo cáo nghiên cứu, chuỗi quà tặng drip sequence (Gift #1–#7), script bán hàng, mẫu Zalo, content mạng xã hội, và toàn bộ tài nguyên kỹ thuật số liên quan.</div>
+        <div class="clause" data-n="1.3">Bên A cam kết bàn giao đầy đủ tài nguyên sau khi Hợp đồng có hiệu lực và Bên B hoàn thành nghĩa vụ quy định tại Điều 4.</div>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="art-title">Điều 2 — Phạm vi ủy quyền sử dụng</div>
+      <div class="art-body">
+        <div class="clause" data-n="2.1">Quyền và giới hạn sử dụng của Bên B:</div>
+        <table class="ct">
+          <thead>
+            <tr>
+              <th>Hoạt động</th>
+              <th class="center">Cho phép</th>
+              <th>Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Sử dụng nội bộ, học tập, nghiên cứu</td><td class="center ok">✅</td><td>Không giới hạn</td></tr>
+            <tr><td>Chạy quảng cáo FB Ads, TikTok Ads, Google Ads</td><td class="center ok">✅</td><td>Theo hướng dẫn Bên A</td></tr>
+            <tr><td>Đăng bài organic trên mạng xã hội</td><td class="center ok">✅</td><td>Có thể điều chỉnh format</td></tr>
+            <tr><td>Gửi tài liệu cho khách hàng tiềm năng</td><td class="center ok">✅</td><td>Chỉ link do Bên A cấp</td></tr>
+            <tr><td>Sử dụng trong sự kiện, workshop nội bộ</td><td class="center ok">✅</td><td>Thông báo trước 3 ngày</td></tr>
+            <tr><td>Chỉnh sửa nội dung tài liệu</td><td class="center warn-cell">⚠️</td><td>Cần phê duyệt bằng văn bản</td></tr>
+            <tr><td>Đặt logo/thương hiệu riêng lên tài liệu</td><td class="center no">❌</td><td>Không được phép</td></tr>
+            <tr><td>Bán lại / cho thuê tài nguyên cho bên thứ ba</td><td class="center no">❌</td><td>Nghiêm cấm</td></tr>
+            <tr><td>Sao chép và phân phối độc lập</td><td class="center no">❌</td><td>Nghiêm cấm</td></tr>
+          </tbody>
+        </table>
+        <div class="clause" data-n="2.2">Phạm vi lãnh thổ: <strong>___________________________</strong> (mặc định: toàn quốc Việt Nam).</div>
+        <div class="clause" data-n="2.3">Thời hạn ủy quyền: từ ngày ký đến ngày <strong>___/___/______</strong>, có thể gia hạn bằng phụ lục có chữ ký hai bên.</div>
+      </div>
+    </div>
+
+    <!-- PART III: NDA -->
+    <div class="part-header">III — ĐIỀU KHOẢN BẢO MẬT THÔNG TIN (NDA)</div>
+
+    <div class="art">
+      <div class="art-title">Điều 3 — Thông tin mật</div>
+      <div class="art-body">
+        <div class="clause" data-n="3.1">"Thông tin mật" bao gồm toàn bộ thông tin Bên A tiết lộ cho Bên B, gồm: <em>(a) Tài sản trí tuệ</em> — toàn bộ nội dung, framework, script, template; <em>(b) Thông tin kỹ thuật</em> — code, cấu trúc website, quy trình tự động hóa; <em>(c) Dữ liệu khách hàng</em> — danh sách leads, thông tin giao dịch; <em>(d) Chiến lược kinh doanh</em> — kế hoạch phát triển, pricing, roadmap; <em>(e) Thông tin tài chính</em> — doanh thu, hoa hồng, cơ cấu chi phí; <em>(f) Đối tác và nhà cung cấp.</em></div>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="art-title">Điều 4 — Nghĩa vụ bảo mật của Bên B</div>
+      <div class="art-body">
+        <p style="margin-bottom:14px">Bên B cam kết:</p>
+        <div class="box box-info">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:10px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">(a)</span> Không tiết lộ Thông tin mật cho bất kỳ bên thứ ba nào khi chưa có sự đồng ý bằng văn bản của Bên A.</div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">(b)</span> Chỉ sử dụng Thông tin mật vì mục đích thực hiện hợp đồng này.</div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">(c)</span> Bảo vệ Thông tin mật với mức độ cẩn trọng ít nhất tương đương bảo vệ thông tin mật của chính mình, không thấp hơn mức cẩn trọng hợp lý.</div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">(d)</span> Chỉ chia sẻ cho nhân viên/cộng tác viên trong phạm vi "cần biết để thực hiện công việc" và buộc họ chịu nghĩa vụ bảo mật tương đương.</div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">(e)</span> Thông báo cho Bên A trong vòng <strong>24 giờ</strong> nếu phát hiện hoặc nghi ngờ rò rỉ Thông tin mật.</div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">(f)</span> Không lưu trữ Thông tin mật trên hệ thống đám mây công cộng hoặc thiết bị không được bảo mật.</div>
+          </div>
+        </div>
+        <div class="clause" style="margin-top:14px" data-n="4.2"><strong>Ngoại lệ:</strong> Nghĩa vụ bảo mật không áp dụng với thông tin đã thuộc phạm vi công khai trước khi nhận từ Bên A; Bên B đã biết hợp pháp trước khi ký; hoặc được cơ quan nhà nước có thẩm quyền yêu cầu (phải thông báo Bên A trước).</div>
+        <div class="clause" data-n="4.3"><strong>Thời hạn bảo mật:</strong> Vĩnh viễn — bao gồm cả sau khi hợp đồng hết hạn hoặc bị chấm dứt.</div>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="art-title">Điều 5 — Không cạnh tranh (Non-Compete)</div>
+      <div class="art-body">
+        <div class="clause" data-n="5.1">Trong thời hạn hợp đồng và <strong>12 tháng sau khi chấm dứt</strong>, Bên B cam kết không: phát triển/bán/phân phối sản phẩm tương tự BDS Mastery Kit; tiếp cận khách hàng/đối tác của Bên A để cạnh tranh trực tiếp; hợp tác với đối thủ cạnh tranh trong phân khúc bộ kit/công cụ cho môi giới BĐS.</div>
+        <div class="clause" data-n="5.2">Phạm vi địa lý: <strong>___________________________</strong></div>
+      </div>
+    </div>
+
+    <!-- PART IV: THIRD PARTY -->
+    <div class="part-header">IV — ĐIỀU KHOẢN CHO PHÉP BÊN THỨ BA SỬ DỤNG</div>
+
+    <div class="art">
+      <div class="art-title">Điều 6 — Ủy quyền sử dụng có kiểm soát</div>
+      <div class="art-body">
+        <div class="clause" data-n="6.1">Bên B được phép ủy quyền cho bên thứ ba ("Người dùng cuối") tiếp cận một phần tài nguyên <strong>CHỈ KHI</strong> đáp ứng đồng thời:</div>
+        <table class="ct">
+          <thead><tr><th>Điều kiện</th><th>Yêu cầu</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Mục đích</strong></td><td>Chỉ để xem, học tập, sử dụng cá nhân — không phân phối lại</td></tr>
+            <tr><td><strong>Phương thức</strong></td><td>Thông qua link do Bên A cấp phép chính thức</td></tr>
+            <tr><td><strong>Số lượng</strong></td><td>Không vượt quá ______ người dùng cuối/tháng</td></tr>
+            <tr><td><strong>Nhận diện</strong></td><td>Bên B phải có danh sách người dùng, cung cấp khi Bên A yêu cầu</td></tr>
+            <tr><td><strong>Giám sát</strong></td><td>Bên B chịu trách nhiệm pháp lý đầy đủ về hành vi người dùng cuối</td></tr>
+          </tbody>
+        </table>
+        <div class="clause" data-n="6.2">Bên B phải yêu cầu Người dùng cuối xác nhận (Zalo/email/form) các điều khoản sau trước khi cấp quyền truy cập:</div>
+
+        <div class="box box-quote">
+          <span class="bq-label">⚖️ Điều khoản sử dụng — Người dùng cuối</span>
+          <div class="bq-item">Tôi chỉ sử dụng tài liệu cho mục đích cá nhân và công việc của chính tôi.</div>
+          <div class="bq-item">Tôi không sao chép, chụp màn hình để chia sẻ công khai.</div>
+          <div class="bq-item">Tôi không chia sẻ link/tài liệu cho người khác khi chưa được phép.</div>
+          <div class="bq-item">Tôi hiểu tài liệu này thuộc bản quyền của Bên A và được bảo vệ theo pháp luật.</div>
+          <div class="bq-item">Tôi cam kết không sử dụng thông tin này để xây dựng sản phẩm cạnh tranh.</div>
+          <div style="margin-top:14px;font-style:normal;font-size:12px;color:var(--muted)">
+            <strong>Họ tên:</strong> _________________ &nbsp;&nbsp;
+            <strong>SĐT:</strong> _________________ &nbsp;&nbsp;
+            <strong>Ngày:</strong> ___/___/______
+          </div>
+        </div>
+
+        <div class="clause" data-n="6.3">Bên B phải thu hồi quyền truy cập của Người dùng cuối trong vòng <strong>48 giờ</strong> kể từ khi: Hợp đồng giữa Các Bên chấm dứt; Bên A yêu cầu bằng văn bản; hoặc Người dùng cuối vi phạm điều khoản sử dụng.</div>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="art-title">Điều 7 — Cấm chia sẻ không kiểm soát</div>
+      <div class="art-body">
+        <div class="clause" data-n="7.1">Bên B nghiêm cấm thực hiện hoặc cho phép: đăng tài liệu lên nhóm Facebook công khai, diễn đàn, group Telegram mở; chia sẻ link truy cập dưới dạng post public trên mạng xã hội; gửi tài liệu qua email hàng loạt không có xác nhận người nhận; upload lên Google Drive/Dropbox chế độ "Ai có link đều xem được".</div>
+        <div class="box box-danger">
+          <strong>⚠️ Vi phạm Điều 7 được xem là vi phạm nghiêm trọng.</strong> Bên A có quyền chấm dứt hợp đồng ngay lập tức và áp dụng điều khoản phạt theo Điều 9.
+        </div>
+      </div>
+    </div>
+
+    <!-- PART V: FINANCE -->
+    <div class="part-header">V — ĐIỀU KHOẢN TÀI CHÍNH</div>
+
+    <div class="art">
+      <div class="art-title">Điều 8 — Hoa hồng và thanh toán</div>
+      <div class="art-body">
+        <div class="clause" data-n="8.1">Tỷ lệ hoa hồng: Bên B được hưởng <strong>______%</strong> trên mỗi giao dịch thành công do Bên B giới thiệu và xác nhận.</div>
+        <div class="clause" data-n="8.2">Phương thức xác nhận doanh thu: <strong>___________________________</strong></div>
+        <div class="clause" data-n="8.3">Chu kỳ thanh toán: Ngày <strong>___</strong> hàng tháng, thanh toán cho doanh thu tháng trước đã được xác nhận.</div>
+        <div class="clause" data-n="8.4">Phương thức: Chuyển khoản ngân hàng về tài khoản Bên B đã đăng ký trong hợp đồng.</div>
+      </div>
+    </div>
+
+    <!-- PART VI: PENALTIES -->
+    <div class="part-header">VI — XỬ LÝ VI PHẠM VÀ CHẤM DỨT HỢP ĐỒNG</div>
+
+    <div class="art">
+      <div class="art-title">Điều 9 — Chế tài vi phạm</div>
+      <div class="art-body">
+        <p style="margin-bottom:10px;font-weight:600">Vi phạm bảo mật (Điều 3, 4, 5):</p>
+        <table class="ct">
+          <thead><tr><th>Mức độ vi phạm</th><th>Chế tài</th></tr></thead>
+          <tbody>
+            <tr><td>Lần đầu, vô ý</td><td>Cảnh cáo + 48h khắc phục</td></tr>
+            <tr><td>Lần hai hoặc cố ý</td><td>Phạt <strong>5.000.000 VNĐ</strong> + đình chỉ quyền truy cập</td></tr>
+            <tr><td>Rò rỉ gây thiệt hại thực tế</td><td>Bồi thường toàn bộ thiệt hại + phạt <strong>20.000.000 VNĐ</strong></td></tr>
+            <tr><td>Cạnh tranh trực tiếp (vi phạm Điều 5)</td><td>Phạt <strong>50.000.000 VNĐ</strong> + chấm dứt ngay</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:16px 0 10px;font-weight:600">Vi phạm quyền sử dụng bên thứ ba (Điều 6, 7):</p>
+        <table class="ct">
+          <thead><tr><th>Mức độ vi phạm</th><th>Chế tài</th></tr></thead>
+          <tbody>
+            <tr><td>Chia sẻ không kiểm soát</td><td>Phạt <strong>10.000.000 VNĐ</strong>/lần vi phạm</td></tr>
+            <tr><td>Bán lại/phân phối trái phép</td><td>Phạt <strong>30.000.000 VNĐ</strong> + chấm dứt ngay</td></tr>
+            <tr><td>Gây thiệt hại uy tín Bên A</td><td>Bồi thường theo mức thiệt hại thực tế được xác định</td></tr>
+          </tbody>
+        </table>
+        <div class="box box-warning" style="margin-top:14px">Các khoản phạt không loại trừ quyền yêu cầu bồi thường thiệt hại thực tế của Bên A theo quy định pháp luật.</div>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="art-title">Điều 10 — Chấm dứt hợp đồng</div>
+      <div class="art-body">
+        <div class="clause" data-n="10.1"><strong>Chấm dứt có thông báo:</strong> Mỗi bên có thể chấm dứt hợp đồng bằng văn bản thông báo trước <strong>30 ngày</strong>.</div>
+        <div class="clause" data-n="10.2"><strong>Chấm dứt ngay lập tức</strong> (không cần thông báo) khi: Bên B vi phạm nghiêm trọng bảo mật; Bên B phá sản hoặc mất khả năng thanh toán; Bên B cạnh tranh trực tiếp với Bên A; Bên B tạo điều kiện cho vi phạm bản quyền lan rộng.</div>
+        <div class="clause" data-n="10.3"><strong>Hậu quả pháp lý:</strong> Bên B xóa/trả lại toàn bộ tài nguyên trong <strong>72 giờ</strong>; thu hồi quyền truy cập của tất cả Người dùng cuối; nghĩa vụ bảo mật tiếp tục <strong>vĩnh viễn</strong>; nghĩa vụ không cạnh tranh tiếp tục <strong>12 tháng</strong>.</div>
+      </div>
+    </div>
+
+    <!-- PART VII: GENERAL -->
+    <div class="part-header">VII — ĐIỀU KHOẢN CHUNG</div>
+
+    <div class="art">
+      <div class="art-title">Điều 11 — Giải quyết tranh chấp</div>
+      <div class="art-body">
+        <div class="clause" data-n="11.1">Các bên ưu tiên giải quyết tranh chấp bằng thương lượng thiện chí trong vòng <strong>15 ngày làm việc</strong>.</div>
+        <div class="clause" data-n="11.2">Nếu thương lượng không thành, tranh chấp được giải quyết tại <strong>Tòa án nhân dân có thẩm quyền tại TP. ___________</strong> theo pháp luật Việt Nam.</div>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="art-title">Điều 12 — Hiệu lực và điều khoản chung</div>
+      <div class="art-body">
+        <div class="clause" data-n="12.1">Hợp đồng có hiệu lực từ ngày ký kết.</div>
+        <div class="clause" data-n="12.2">Mọi sửa đổi, bổ sung phải được lập thành phụ lục có chữ ký của cả hai bên.</div>
+        <div class="clause" data-n="12.3">Hợp đồng được lập thành <strong>02 bản</strong> có giá trị pháp lý như nhau, mỗi bên giữ <strong>01 bản</strong>.</div>
+        <div class="clause" data-n="12.4">Nếu bất kỳ điều khoản nào bị coi là vô hiệu theo pháp luật, các điều khoản còn lại vẫn có hiệu lực đầy đủ.</div>
+      </div>
+    </div>
+
+    <!-- SIGNATURES -->
+    <div class="part-header">KÝ KẾT</div>
+    <p style="font-size:13.5px;margin-bottom:24px;color:#3a3530">Các Bên đã đọc, hiểu và đồng ý với toàn bộ nội dung Hợp đồng này. Bằng chữ ký dưới đây, mỗi bên xác nhận cam kết thực hiện đúng và đầy đủ các nghĩa vụ của mình.</p>
+
+    <div class="sig-grid">
+      <div class="sig-block">
+        <div class="sig-party">Bên A</div>
+        <div class="sig-role">Chủ sở hữu sản phẩm / Licensor</div>
+        <div class="sig-stamp">Ký tên &amp; Đóng dấu (nếu có)</div>
+        <div class="sig-name">
+          <div class="sig-line"><span class="sl">Họ tên:</span><span class="sv"></span></div>
+          <div class="sig-line"><span class="sl">Ngày:</span><span class="sv">___/___/2025</span></div>
+        </div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-party">Bên B</div>
+        <div class="sig-role">Đối tác Marketing / Licensee</div>
+        <div class="sig-stamp">Ký tên &amp; Đóng dấu (nếu có)</div>
+        <div class="sig-name">
+          <div class="sig-line"><span class="sl">Họ tên:</span><span class="sv"></span></div>
+          <div class="sig-line"><span class="sl">Ngày:</span><span class="sv">___/___/2025</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPENDIX A -->
+    <div class="part-header">PHỤ LỤC A — DANH SÁCH TÀI NGUYÊN BÀN GIAO</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;font-style:italic">Điền tại thời điểm bàn giao thực tế. Bảng này trở thành biên bản bàn giao chính thức sau khi có chữ ký xác nhận của hai bên.</p>
+    <table class="appendix-table">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Tài nguyên</th>
+          <th>Link / File</th>
+          <th style="width:110px">Ngày bàn giao</th>
+          <th style="width:100px">Xác nhận</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Hub bàn giao kit</td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>2</td><td>Landing page bán kit</td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>3</td><td>Chuỗi Gift Drip #1–#7</td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>4</td><td>Nội dung FB / Zalo</td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>5</td><td>Nghiên cứu thị trường</td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>6</td><td>Phân tích đối thủ cạnh tranh</td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>7</td><td>Script bán hàng / Xử lý từ chối</td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>8</td><td><span class="fill-line"></span></td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>9</td><td><span class="fill-line"></span></td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+        <tr><td>10</td><td><span class="fill-line"></span></td><td><span class="fill-line"></span></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="sig-grid" style="margin-top:24px">
+      <div class="sig-block">
+        <div class="sig-party">Bên A xác nhận bàn giao</div>
+        <div class="sig-stamp" style="height:60px">Ký tên</div>
+        <div class="sig-line" style="margin-top:8px"><span class="sl">Ngày:</span><span class="sv">___/___/2025</span></div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-party">Bên B xác nhận nhận đủ</div>
+        <div class="sig-stamp" style="height:60px">Ký tên</div>
+        <div class="sig-line" style="margin-top:8px"><span class="sl">Ngày:</span><span class="sv">___/___/2025</span></div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      <strong>BDS Mastery Kit</strong> · Hợp đồng hợp tác marketing · Bảo mật &amp; bản quyền<br>
+      <span>⚖️ Template tham khảo — Nên nhờ luật sư rà soát trước khi ký chính thức</span>
+    </div>
+
+  </div><!-- /doc -->
+</div><!-- /page-wrap -->
+
+<!-- ===== COPYRIGHT ===== -->
+<div style="background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.06);padding:14px 20px;text-align:center;font-family:'Be Vietnam Pro',Arial,sans-serif;font-size:11px;color:rgba(255,255,255,.25)">
+  &copy; 2026 BDS Mastery Kit &middot; Nguyen Thi Yen &middot; Ban quyen duoc bao ho theo Luat SHTT Viet Nam.<br>
+  Nghiem cam sao chep, phan phoi, tai tao duoi bat ky hinh thuc nao khi chua co su dong y bang van ban.<br>
+  <a href="terms.html" style="color:rgba(201,168,76,.4);text-decoration:none">Dieu Khoan Su Dung</a>
+</div>
+</body>
+</html>

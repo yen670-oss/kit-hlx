@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+  <meta name="author" content="BDS Mastery Kit · Nguyễn Thị Yến">
+  <meta name="copyright" content="© 2026 BDS Mastery Kit. Admin only.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🔐 Token Manager — BDS Mastery Kit Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a1628;--gold:#C9A84C;--gl:#E2C06A;--card:#0f1e30;--text:#e8dfc8;--green:#27ae60;--vip:#7c3aed}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
+.topbar{background:rgba(10,22,40,.97);border-bottom:1px solid rgba(201,168,76,.2);padding:12px 20px;display:flex;align-items:center;gap:12px}
+.tb-logo{font-family:'Playfair Display',serif;font-size:15px;color:#fff;font-weight:700;flex:1}
+.tb-logo span{color:var(--gl);font-size:12px}
+.wrap{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+.section{margin-bottom:32px}
+.sec-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(226,192,106,.5);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+
+/* TOKEN CARDS */
+.tier-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.ttab{padding:8px 18px;border-radius:10px;border:1.5px solid;font-size:12.5px;font-weight:700;cursor:pointer;transition:.15s;font-family:'Be Vietnam Pro',sans-serif}
+.ttab.core{background:rgba(39,174,96,.08);border-color:rgba(39,174,96,.3);color:#4ade80}
+.ttab.pro{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.3);color:var(--gl)}
+.ttab.vip{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.3);color:#c4b5fd}
+.ttab.active{opacity:1;filter:brightness(1.3)}
+
+.token-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.token-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;transition:.2s}
+.token-card:hover{border-color:rgba(201,168,76,.2)}
+.token-card.used{opacity:.45;border-color:rgba(255,255,255,.04)}
+.tc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tc-name{font-size:13px;font-weight:700;color:#fff}
+.tc-status{font-size:10px;font-weight:800;padding:2px 9px;border-radius:6px}
+.status-free{background:rgba(39,174,96,.12);color:#4ade80;border:1px solid rgba(39,174,96,.2)}
+.status-used{background:rgba(255,255,255,.06);color:rgba(232,223,200,.3);border:1px solid rgba(255,255,255,.07)}
+.tc-token{font-family:monospace;font-size:13px;color:var(--gl);background:rgba(0,0,0,.3);border-radius:6px;padding:6px 10px;letter-spacing:1px;margin-bottom:10px;display:block}
+.tc-link{font-size:11px;color:rgba(232,223,200,.4);font-family:monospace;word-break:break-all;margin-bottom:10px;display:block}
+.tc-note{font-size:11.5px;color:rgba(232,223,200,.35);min-height:20px}
+.tc-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:5px 11px;border-radius:7px;cursor:pointer;border:1px solid;font-family:'Be Vietnam Pro',sans-serif;transition:.15s}
+.btn-copy{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.25);color:var(--gl)}
+.btn-copy:hover{background:rgba(201,168,76,.2)}
+.btn-mark{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:rgba(232,223,200,.5)}
+.btn-mark:hover{background:rgba(255,255,255,.1)}
+.btn-unmark{background:rgba(39,174,96,.1);border-color:rgba(39,174,96,.2);color:#4ade80}
+.btn-copylink{background:rgba(27,58,107,.3);border-color:rgba(100,150,255,.2);color:#93c5fd}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:24px}
+.stat{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;text-align:center}
+.stat-n{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--gl);display:block}
+.stat-l{font-size:11px;color:rgba(232,223,200,.4);margin-top:2px;display:block}
+
+/* ADD NOTE FORM */
+.add-note-area{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:6px 10px;font-size:12px;color:rgba(232,223,200,.7);font-family:'Be Vietnam Pro',sans-serif;resize:none;width:100%;min-height:36px}
+.add-note-area:focus{outline:none;border-color:rgba(201,168,76,.3)}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(39,174,96,.9);color:#fff;font-size:12.5px;font-weight:700;padding:9px 18px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="toast" id="toast">✅ Đã copy!</div>
+
+<div class="topbar">
+  <div class="tb-logo">🔐 Token Manager <span>· BDS Mastery Kit Admin · Chỉ dùng nội bộ</span></div>
+  <a href="MASTER-DASHBOARD.html" style="font-size:12px;color:rgba(232,223,200,.4);text-decoration:none">← Dashboard</a>
+</div>
+
+<div class="wrap">
+
+  <div class="section">
+    <div class="sec-title">📊 Tổng Quan Token</div>
+    <div class="stats-row" id="statsRow"></div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">🎫 Quản Lý Token Theo Gói</div>
+    <div class="tier-tabs">
+      <button class="ttab core active" onclick="filterTier('core',this)">🎓 Core Group</button>
+      <button class="ttab pro" onclick="filterTier('pro',this)">🏆 Brand Pro</button>
+      <button class="ttab vip" onclick="filterTier('vip',this)">💎 VIP 1:1</button>
+    </div>
+    <div class="token-grid" id="tokenGrid"></div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">📋 Hướng Dẫn Giao Kit</div>
+    <div style="background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px 22px;font-size:13.5px;color:rgba(232,223,200,.65);line-height:1.9">
+      <strong style="color:#fff;display:block;margin-bottom:10px">Quy trình giao link kit cho khách sau thanh toán:</strong>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div><span style="color:var(--gl);font-weight:800">Bước 1:</span> Chọn token chưa dùng (status: FREE) đúng gói khách mua</div>
+        <div><span style="color:var(--gl);font-weight:800">Bước 2:</span> Click <strong>📋 Copy Link</strong> → tự động tạo URL có token</div>
+        <div><span style="color:var(--gl);font-weight:800">Bước 3:</span> Nhắn link qua Zalo cho khách, ghi chú tên khách vào ô Note</div>
+        <div><span style="color:var(--gl);font-weight:800">Bước 4:</span> Click <strong>✓ Đánh dấu đã dùng</strong> để theo dõi</div>
+      </div>
+      <div style="margin-top:16px;padding:12px 14px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15);border-radius:8px;font-size:12.5px">
+        💡 <strong style="color:var(--gl)">Lưu ý:</strong> Mỗi token chỉ dùng cho 1 khách. Token bị chia sẻ → vô hiệu hóa không hoàn lại.<br>
+        Tất cả thay đổi được lưu vào localStorage của trình duyệt này.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const BASE = 'https://yen670-oss.github.io/kit-hlx/';
+
+const TOKENS = {
+  core: [
+    {id:'CORE2026A',label:'Core A'}, {id:'CORE2026B',label:'Core B'},
+    {id:'CORE2026C',label:'Core C'}, {id:'CORE2026D',label:'Core D'},
+    {id:'CORE2026E',label:'Core E'}, {id:'CORE2026F',label:'Core F'},
+    {id:'CORE2026G',label:'Core G'}, {id:'CORE2026H',label:'Core H'},
+    {id:'CORE2026I',label:'Core I'}, {id:'CORE2026J',label:'Core J'},
+    {id:'CORE2026K',label:'Core K'}, {id:'CORE2026L',label:'Core L'},
+    {id:'CORE2026M',label:'Core M'}, {id:'CORE2026N',label:'Core N'},
+    {id:'CORE2026O',label:'Core O'},
+  ],
+  pro: [
+    {id:'PRO2026A',label:'Pro A'}, {id:'PRO2026B',label:'Pro B'},
+    {id:'PRO2026C',label:'Pro C'}, {id:'PRO2026D',label:'Pro D'},
+    {id:'PRO2026E',label:'Pro E'}, {id:'PRO2026F',label:'Pro F'},
+    {id:'PRO2026G',label:'Pro G'}, {id:'PRO2026H',label:'Pro H'},
+    {id:'PRO2026I',label:'Pro I'}, {id:'PRO2026J',label:'Pro J'},
+  ],
+  vip: [
+    {id:'VIP2026A',label:'VIP A'}, {id:'VIP2026B',label:'VIP B'},
+    {id:'VIP2026C',label:'VIP C'}, {id:'VIP2026D',label:'VIP D'},
+    {id:'VIP2026E',label:'VIP E'},
+  ]
+};
+
+const PAGE_MAP = {
+  core: 'bbb-core.html',
+  pro:  'bbb-pro.html',
+  vip:  'bbb-vip.html'
+};
+
+let currentTier = 'core';
+
+function getState() {
+  return JSON.parse(localStorage.getItem('kit_tokens') || '{}');
+}
+function saveState(s) {
+  localStorage.setItem('kit_tokens', JSON.stringify(s));
+}
+
+function renderStats() {
+  const state = getState();
+  let html = '';
+  const tiers = ['core','pro','vip'];
+  const labels = {core:'🎓 Core Group', pro:'🏆 Brand Pro', vip:'💎 VIP 1:1'};
+  let totalFree=0, totalUsed=0;
+  tiers.forEach(t => {
+    const all = TOKENS[t].length;
+    const used = TOKENS[t].filter(tk => state[tk.id]?.used).length;
+    const free = all - used;
+    totalFree += free; totalUsed += used;
+    html += `<div class="stat"><span class="stat-n">${free}/${all}</span><span class="stat-l">${labels[t]}<br>còn trống</span></div>`;
+  });
+  html += `<div class="stat"><span class="stat-n">${totalUsed}</span><span class="stat-l">Đã giao</span></div>`;
+  html += `<div class="stat"><span class="stat-n">${totalFree}</span><span class="stat-l">Còn trống</span></div>`;
+  document.getElementById('statsRow').innerHTML = html;
+}
+
+function renderGrid(tier) {
+  const state = getState();
+  const tokens = TOKENS[tier];
+  const page = PAGE_MAP[tier];
+  let html = '';
+  tokens.forEach(tk => {
+    const s = state[tk.id] || {};
+    const used = !!s.used;
+    const note = s.note || '';
+    const url = `${BASE}${page}?t=${tk.id}`;
+    html += `<div class="token-card${used?' used':''}" id="tc-${tk.id}">
+      <div class="tc-top">
+        <span class="tc-name">${tk.label}</span>
+        <span class="tc-status ${used?'status-used':'status-free'}">${used?'✓ ĐÃ DÙNG':'FREE'}</span>
+      </div>
+      <code class="tc-token">${tk.id}</code>
+      <code class="tc-link">${url}</code>
+      <textarea class="add-note-area" placeholder="Tên khách / ghi chú..."
+        onchange="saveNote('${tk.id}',this.value)">${note}</textarea>
+      <div class="tc-actions">
+        <button class="btn btn-copy" onclick="copyText('${tk.id}')">📋 Copy Token</button>
+        <button class="btn btn-copylink" onclick="copyLink('${url}','${tk.id}')">🔗 Copy Link</button>
+        ${used
+          ? `<button class="btn btn-unmark" onclick="toggleUsed('${tk.id}',false)">↩ Đặt Lại</button>`
+          : `<button class="btn btn-mark" onclick="toggleUsed('${tk.id}',true)">✓ Đánh Dấu Dùng</button>`
+        }
+      </div>
+    </div>`;
+  });
+  document.getElementById('tokenGrid').innerHTML = html;
+}
+
+function filterTier(tier, el) {
+  currentTier = tier;
+  document.querySelectorAll('.ttab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderGrid(tier);
+}
+
+function saveNote(id, val) {
+  const s = getState();
+  if (!s[id]) s[id] = {};
+  s[id].note = val;
+  saveState(s);
+}
+
+function toggleUsed(id, used) {
+  const s = getState();
+  if (!s[id]) s[id] = {};
+  s[id].used = used;
+  saveState(s);
+  renderGrid(currentTier);
+  renderStats();
+}
+
+function copyText(id) {
+  navigator.clipboard.writeText(id).then(()=>showToast('✅ Đã copy token!'));
+}
+
+function copyLink(url, id) {
+  navigator.clipboard.writeText(url).then(()=>{
+    showToast('🔗 Đã copy link giao kit!');
+    // Auto-mark as suggested
+    const card = document.getElementById('tc-'+id);
+    if (card) card.style.boxShadow = '0 0 0 2px rgba(201,168,76,.4)';
+    setTimeout(()=>{if(card)card.style.boxShadow='';},2000);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg || '✅ Đã copy!';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// Init
+renderStats();
+renderGrid('core');
+</script>
+</body>
+</html>

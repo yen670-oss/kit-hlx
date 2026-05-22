@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+  <meta name="author" content="BDS Mastery Kit · Nguyen Thi Yen">
+  <meta name="copyright" content="(c) 2026 BDS Mastery Kit · Nguyen Thi Yen. Ban quyen duoc bao ho.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Broker HLX Brand Builder — 60 Ngày Xây Thương Hiệu, Khách Chủ Động Tìm Đến</title>
 
@@ -660,6 +662,42 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 function toggleFaq(el){
   el.classList.toggle('open');
 }
+</script>
+
+<!-- ===== COPYRIGHT ===== -->
+<div style="background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.06);padding:14px 20px;text-align:center;font-family:'Be Vietnam Pro',Arial,sans-serif;font-size:11px;color:rgba(255,255,255,.25)">
+  &copy; 2026 BDS Mastery Kit &middot; Nguyen Thi Yen &middot; Ban quyen duoc bao ho theo Luat SHTT Viet Nam.<br>
+  Nghiem cam sao chep, phan phoi, tai tao duoi bat ky hinh thuc nao khi chua co su dong y bang van ban.<br>
+  <a href="terms.html" style="color:rgba(201,168,76,.4);text-decoration:none">Dieu Khoan Su Dung</a>
+</div>
+
+<!-- ===== ANTI-COPY PROTECTION ===== -->
+<script>
+(function(){
+  // Disable right-click
+  document.addEventListener('contextmenu',function(e){e.preventDefault();});
+  // Disable Ctrl+U (view source), Ctrl+S (save), Ctrl+A (select all), F12
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey && ['u','s','a'].includes(e.key.toLowerCase())){e.preventDefault();return false;}
+    if(e.key==='F12'){e.preventDefault();return false;}
+    if(e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())){e.preventDefault();return false;}
+  });
+  // Detect devtools open
+  var devtools={open:false};
+  setInterval(function(){
+    var t=new Date();
+    debugger;
+    if(new Date()-t>100){
+      if(!devtools.open){
+        devtools.open=true;
+        document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a1628;color:#E2C06A;font-family:sans-serif;font-size:20px;text-align:center;padding:40px">' +
+        '<div><div style="font-size:48px;margin-bottom:20px">🛡️</div>' +
+        '<div style="font-size:24px;font-weight:bold;margin-bottom:12px">Nội dung được bảo vệ</div>' +
+        '<div style="font-size:14px;opacity:.6">© 2026 BDS Mastery Kit · Nguyễn Thị Yến<br>Nghiêm cấm sao chép dưới mọi hình thức</div></div></div>';
+      }
+    }
+  },1000);
+})();
 </script>
 </body>
 </html>
