@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nỗi Đau Người Mua BĐS — Hạ Long Xanh Buyer Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a1628;
+  --card: #0f1e30;
+  --card2: #13243a;
+  --gold: #C9A84C;
+  --gl: #E2C06A;
+  --text: #e8eaf0;
+  --muted: #8fa3b8;
+  --red: #e05555;
+  --green: #4caf82;
+  --blue: #4a90d9;
+  --purple: #8b5cf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* TOP NAV */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,22,40,.97);
+  border-bottom: 1px solid rgba(201,168,76,.2);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(8px);
+}
+.back-btn {
+  background: rgba(201,168,76,.15);
+  border: 1px solid rgba(201,168,76,.4);
+  color: var(--gl);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s;
+}
+.back-btn:hover { background: rgba(201,168,76,.25); }
+.nav-title { font-family: 'Playfair Display', serif; color: var(--gl); font-size: 16px; }
+.nav-mode {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.mode-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.15);
+  color: var(--muted);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .2s;
+}
+.mode-btn.active {
+  background: rgba(201,168,76,.2);
+  border-color: var(--gold);
+  color: var(--gl);
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0a1628 0%, #0d1f35 50%, #0a1628 100%);
+  border-bottom: 1px solid rgba(201,168,76,.15);
+  padding: 56px 24px 48px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(201,168,76,.12);
+  border: 1px solid rgba(201,168,76,.3);
+  color: var(--gl);
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 44px);
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+.hero h1 span { color: var(--gl); }
+.hero p {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 640px;
+  margin: 0 auto 28px;
+}
+.data-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.ds-item {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: 12px 20px;
+  text-align: center;
+}
+.ds-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--gl);
+  display: block;
+}
+.ds-label { font-size: 11px; color: var(--muted); }
+
+/* TABS */
+.view-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 16px 24px;
+  background: var(--card);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  justify-content: center;
+}
+.vt-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.1);
+  color: var(--muted);
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .2s;
+}
+.vt-btn.active {
+  background: rgba(201,168,76,.18);
+  border-color: var(--gold);
+  color: var(--gl);
+  font-weight: 600;
+}
+
+/* MAIN CONTENT */
+.main { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
+
+/* SECTION TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.st-icon { font-size: 22px; }
+.st-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #fff;
+}
+.st-text p { font-size: 13px; color: var(--muted); }
+
+/* PAIN CARD */
+.pain-grid { display: flex; flex-direction: column; gap: 20px; }
+
+.pain-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.pain-card:hover { border-color: rgba(201,168,76,.25); }
+
+.pc-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px 16px;
+  cursor: pointer;
+  user-select: none;
+}
+.pc-num {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.pc-num.general { background: rgba(74,144,217,.2); color: #4a90d9; border: 1px solid rgba(74,144,217,.4); }
+.pc-num.hlx { background: rgba(201,168,76,.2); color: var(--gl); border: 1px solid rgba(201,168,76,.4); }
+.pc-num.red { background: rgba(224,85,85,.2); color: var(--red); border: 1px solid rgba(224,85,85,.4); }
+
+.pc-meta { flex: 1; }
+.pc-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: 50px;
+  margin-bottom: 6px;
+}
+.pc-tag.general { background: rgba(74,144,217,.15); color: #4a90d9; }
+.pc-tag.hlx { background: rgba(201,168,76,.15); color: var(--gl); }
+.pc-tag.red { background: rgba(224,85,85,.15); color: var(--red); }
+
+.pc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.pc-quote {
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+}
+.pc-quote::before { content: '"'; }
+.pc-quote::after { content: '"'; }
+
+.pc-toggle {
+  font-size: 18px;
+  color: var(--muted);
+  transition: transform .3s;
+}
+.pain-card.open .pc-toggle { transform: rotate(180deg); }
+
+/* PAIN BODY */
+.pc-body {
+  display: none;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.pain-card.open .pc-body { display: block; }
+
+.pc-body-inner { padding: 0 24px 24px; }
+
+/* Data row */
+.data-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.dr-item {
+  background: var(--card2);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+  flex: 1;
+  min-width: 140px;
+}
+.dr-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--gl);
+  display: block;
+}
+.dr-label { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.dr-source {
+  font-size: 10px;
+  color: rgba(143,163,184,.5);
+  margin-top: 2px;
+  display: block;
+}
+
+/* View panels */
+.view-panel { display: none; }
+.view-panel.active { display: block; }
+
+/* Buyer view */
+.buyer-block {
+  margin-top: 16px;
+}
+.bb-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.bb-content {
+  background: rgba(74,144,217,.07);
+  border: 1px solid rgba(74,144,217,.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.bb-content ul { padding-left: 18px; }
+.bb-content li { margin-bottom: 6px; }
+.bb-content strong { color: var(--gl); }
+
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.checklist li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* Broker view */
+.broker-block {
+  margin-top: 16px;
+}
+.broker-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.script-box {
+  background: rgba(201,168,76,.06);
+  border: 1px solid rgba(201,168,76,.2);
+  border-radius: 10px;
+  padding: 16px;
+  position: relative;
+}
+.script-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  opacity: .7;
+}
+.script-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(201,168,76,.15);
+  border: 1px solid rgba(201,168,76,.3);
+  color: var(--gl);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .2s;
+}
+.copy-btn:hover { background: rgba(201,168,76,.25); }
+.copy-btn.copied { color: var(--green); border-color: var(--green); background: rgba(76,175,130,.1); }
+
+.objection-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+@media(max-width:600px) { .objection-row { grid-template-columns: 1fr; } }
+
+.obj-card {
+  background: var(--card2);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.obj-q {
+  font-size: 12px;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.obj-a {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* HLX SECTION */
+.hlx-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 32px 0 24px;
+}
+.hlx-divider::before,
+.hlx-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,.3), transparent);
+}
+.hlx-divider span {
+  background: rgba(201,168,76,.12);
+  border: 1px solid rgba(201,168,76,.3);
+  color: var(--gl);
+  padding: 4px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* SUMMARY TABLE */
+.summary-table {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+.st-title {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #fff;
+}
+.st-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 80px;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  transition: background .15s;
+}
+.st-row:hover { background: rgba(255,255,255,.02); }
+.st-row.header {
+  background: var(--card2);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.st-cell {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+.st-cell:first-child { color: var(--muted); justify-content: center; }
+.urgency-dot {
+  width: 8px; height: 8px; border-radius: 50%; margin-right: 4px;
+}
+.u-high { background: var(--red); }
+.u-mid { background: var(--gold); }
+.u-low { background: var(--green); }
+
+/* FOOTER NOTE */
+.footer-note {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.footer-note strong { color: var(--gl); }
+
+/* PRINT HIDE */
+@media print {
+  .top-nav, .view-tabs, .mode-btn, .copy-btn { display: none !important; }
+  .pc-body { display: block !important; }
+  body { background: #fff; color: #222; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="MASTER-DASHBOARD.html" class="back-btn">← Dashboard</a>
+  <span class="nav-title">🏡 Nỗi Đau Người Mua BĐS</span>
+  <div class="nav-mode">
+    <button class="mode-btn active" id="mode-buyer" onclick="setMode('buyer')">👤 Góc Người Mua</button>
+    <button class="mode-btn" id="mode-broker" onclick="setMode('broker')">🎯 Script Môi Giới</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">📊 Research · Real Data · 2024–2026</div>
+  <h1>9 Nỗi Đau Lớn Nhất<br>Của <span>Người Mua BĐS</span></h1>
+  <p>Dữ liệu thực từ VARS, VnExpress, Cafef, Tienphong. Mỗi nỗi đau kèm script xử lý để broker tạo niềm tin và chốt deal.</p>
+  <div class="data-strip">
+    <div class="ds-item">
+      <span class="ds-num">70–80%</span>
+      <span class="ds-label">giao dịch BĐS khó<br>vì vấn đề pháp lý</span>
+    </div>
+    <div class="ds-item">
+      <span class="ds-num">100tr+</span>
+      <span class="ds-label">giá/m² chung cư HN<br>2025–2026</span>
+    </div>
+    <div class="ds-item">
+      <span class="ds-num">1/3</span>
+      <span class="ds-label">giới trẻ chọn thuê<br>thay vì mua</span>
+    </div>
+    <div class="ds-item">
+      <span class="ds-num">40–50%</span>
+      <span class="ds-label">thanh khoản condotel<br>vs 70–80% căn hộ</span>
+    </div>
+  </div>
+</section>
+
+<!-- VIEW TABS -->
+<div class="view-tabs">
+  <button class="vt-btn active" id="vt-buyer" onclick="setView('buyer')">👤 Người Mua Đọc Gì</button>
+  <button class="vt-btn" id="vt-broker" onclick="setView('broker')">🎯 Broker Nói Gì</button>
+  <button class="vt-btn" id="vt-both" onclick="setView('both')">⚡ Xem Cả 2</button>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SECTION: 7 NỖI ĐAU CHUNG -->
+  <div class="section-title">
+    <span class="st-icon">🏘️</span>
+    <div class="st-text">
+      <h2>7 Nỗi Đau Chung — Người Mua BĐS Bất Kỳ</h2>
+      <p>Áp dụng cho mọi phân khúc: chung cư, nhà phố, nghỉ dưỡng, đất nền</p>
+    </div>
+  </div>
+
+  <div class="pain-grid">
+
+    <!-- PAIN 1: Pháp lý -->
+    <div class="pain-card" id="p1">
+      <div class="pc-header" onclick="toggle('p1')">
+        <div class="pc-num general">01</div>
+        <div class="pc-meta">
+          <span class="pc-tag general">Pháp Lý</span>
+          <div class="pc-title">Sợ Mua Phải Đất/Nhà Dính Pháp Lý</div>
+          <div class="pc-quote">Nhỡ mua xong mới biết dự án không đủ pháp lý, tiền mất tật mang thì sao?</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">70–80%</span>
+              <span class="dr-label">giao dịch BĐS gặp khó vì vấn đề pháp lý</span>
+              <span class="dr-source">VARS / tapchitaichinh.vn 2024</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">2021–2023</span>
+              <span class="dr-label">hàng loạt dự án "bất động" — condotel không có sổ</span>
+              <span class="dr-source">VnExpress.net</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">Luật 2024</span>
+              <span class="dr-label">Luật Đất Đai + Kinh Doanh BĐS mới — thị trường tái cấu trúc</span>
+              <span class="dr-source">Quốc Hội Việt Nam</span>
+            </div>
+          </div>
+
+          <!-- BUYER VIEW -->
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">🛡️ Checklist Pháp Lý Người Mua Cần Biết</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li>Yêu cầu xem <strong>Giấy phép xây dựng</strong> và <strong>Quyết định giao đất</strong></li>
+                  <li>Kiểm tra dự án có <strong>thế chấp ngân hàng không</strong> (tra cứu tại Bộ TN&MT)</li>
+                  <li>Xác nhận chủ đầu tư đã <strong>hoàn thành nghĩa vụ tài chính với Nhà nước</strong></li>
+                  <li>Hỏi rõ <strong>thời hạn cấp sổ hồng/sổ đỏ</strong> sau khi bàn giao</li>
+                  <li>Đọc kỹ <strong>hợp đồng mua bán</strong> — không ký hợp đồng đặt cọc mà không có điều khoản hoàn tiền</li>
+                  <li>Ưu tiên dự án đã <strong>mở bán theo đúng Luật Kinh Doanh BĐS 2024</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- BROKER VIEW -->
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script Xử Lý — Nỗi Lo Pháp Lý</div>
+              <div class="script-box">
+                <div class="script-label">Câu mở đầu khi khách hỏi pháp lý</div>
+                <button class="copy-btn" onclick="cp(this,'s1')">Copy</button>
+                <div class="script-text" id="s1">Anh/chị lo đúng chỗ rồi — đây là câu hỏi thông minh nhất mà người mua nên hỏi. Theo báo cáo VARS, 70–80% giao dịch BĐS gặp vướng mắc vì pháp lý, và hầu hết người mua không hỏi câu này từ đầu.
+
+Để anh/chị yên tâm, em sẽ cung cấp ngay:
+① Quyết định giao đất + Giấy phép xây dựng của dự án
+② Xác nhận từ Sở TN&MT về tình trạng thế chấp
+③ Tiến độ cấp sổ hồng theo cam kết hợp đồng
+
+Anh/chị muốn em gửi file tài liệu pháp lý trước để xem qua không?</div>
+              </div>
+              <div class="objection-row">
+                <div class="obj-card">
+                  <div class="obj-q">"Tôi nghe dự án nghỉ dưỡng hay bị không có sổ lắm"</div>
+                  <div class="obj-a">Đúng giai đoạn 2018–2022. Nhưng Luật BĐS 2024 đã quy định rõ điều kiện mở bán — dự án phải đủ điều kiện trước khi ký HĐ với khách. Em cho anh/chị xem giấy tờ để tự đánh giá nhé.</div>
+                </div>
+                <div class="obj-card">
+                  <div class="obj-q">"Sợ mua rồi không có sổ"</div>
+                  <div class="obj-a">Điều khoản trong HĐ ghi rõ: nếu không cấp sổ đúng hạn, chủ đầu tư bồi thường X%/năm. Anh/chị muốn em đọc cụ thể điều khoản đó không?</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 2: Tài chính / Lãi suất -->
+    <div class="pain-card" id="p2">
+      <div class="pc-header" onclick="toggle('p2')">
+        <div class="pc-num general">02</div>
+        <div class="pc-meta">
+          <span class="pc-tag general">Tài Chính</span>
+          <div class="pc-title">Gánh Nặng Vay Vốn & Lãi Suất Tăng</div>
+          <div class="pc-quote">Mua xong lỡ lãi suất tăng, trả không nổi, ngân hàng xiết nhà thì chết.</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">100tr+/m²</span>
+              <span class="dr-label">giá chung cư Hà Nội TB 2025–2026</span>
+              <span class="dr-source">Cafef.vn / Savills Vietnam</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">+3–4%</span>
+              <span class="dr-label">lãi suất vay mua nhà dự báo tăng 2026</span>
+              <span class="dr-source">VnExpress tài chính</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">1/3</span>
+              <span class="dr-label">giới trẻ VN chọn thuê thay vì mua</span>
+              <span class="dr-source">VnExpress.net khảo sát 2024</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">💰 Tính Toán Trước Khi Vay</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li>Quy tắc vàng: <strong>tổng tiền trả nợ ≤ 30% thu nhập hàng tháng</strong></li>
+                  <li>Tính theo lãi suất <strong>cao nhất có thể</strong> (scenario xấu nhất), không tính theo mức ưu đãi ban đầu</li>
+                  <li>Để dành <strong>6 tháng tiền trả nợ khẩn cấp</strong> trước khi ký HĐ</li>
+                  <li>Hỏi ngân hàng: <strong>lãi suất cố định vs thả nổi</strong>, sau ưu đãi là bao nhiêu?</li>
+                  <li>Nếu vay để đầu tư: dòng tiền từ căn nhà phải <strong>dương sau khi trừ lãi vay + phí quản lý</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script Xử Lý — Nỗi Lo Tài Chính</div>
+              <div class="script-box">
+                <div class="script-label">Khi khách lo không đủ tiền / sợ lãi suất</div>
+                <button class="copy-btn" onclick="cp(this,'s2')">Copy</button>
+                <div class="script-text" id="s2">Em hiểu lo lắng này — và thực ra đây là dấu hiệu tốt: anh/chị đang suy nghĩ tài chính nghiêm túc trước khi quyết định.
+
+Hãy cùng tính thật nhanh nhé:
+• Thu nhập hộ gia đình anh/chị: ___/tháng
+• An toàn: trả nợ tối đa 30% = ___/tháng
+• Với mức đó, anh/chị vay được khoảng ___tỷ trong 20 năm
+
+Ngoài ra, dự án này có phương án thanh toán linh hoạt:
+- Vay ngân hàng đối tác, lãi suất ưu đãi ___% năm đầu
+- Thanh toán theo tiến độ — không phải đóng 1 lần
+
+Anh/chị muốn em gặp chuyên viên tài chính ngân hàng đối tác để mình tính chính xác không?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 3: Môi giới không tin tưởng -->
+    <div class="pain-card" id="p3">
+      <div class="pc-header" onclick="toggle('p3')">
+        <div class="pc-num red">03</div>
+        <div class="pc-meta">
+          <span class="pc-tag red">Lòng Tin</span>
+          <div class="pc-title">Không Tin Môi Giới — Sợ Bị Lừa</div>
+          <div class="pc-quote">Môi giới nào cũng nói hay, nhưng mục đích cuối cùng là bán được hàng, chứ không quan tâm đến mình.</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">Khan hiếm giả</span>
+              <span class="dr-label">tạo áp lực "chỉ còn X suất" để thúc ép quyết định nhanh</span>
+              <span class="dr-source">thienkhoi.com phân tích 2024</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">200–500tr</span>
+              <span class="dr-label">tiền đặt cọc bị chiếm đoạt qua hợp đồng cọc giả mạo</span>
+              <span class="dr-source">thienkhoi.com / baogiaothong</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">Thông tin sai</span>
+              <span class="dr-label">thổi giá, che giấu quy hoạch lộ giới, sai diện tích thực</span>
+              <span class="dr-source">VnExpress / Cafef</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">🔍 5 Dấu Hiệu Nhận Biết Môi Giới Đáng Tin</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li>Chủ động chỉ ra <strong>điểm yếu / rủi ro của sản phẩm</strong>, không chỉ ưu điểm</li>
+                  <li>Cung cấp tài liệu pháp lý <strong>trước khi hỏi</strong>, không đợi khách đòi</li>
+                  <li>Không tạo áp lực "hôm nay mới có giá này" hoặc "chỉ còn X suất"</li>
+                  <li>Cho thời gian anh/chị <strong>tham khảo luật sư / người thân</strong> trước khi ký</li>
+                  <li>Có thông tin liên hệ rõ ràng, không mất hút sau khi ký HĐ</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script Xây Dựng Lòng Tin</div>
+              <div class="script-box">
+                <div class="script-label">Mở đầu cuộc gặp — đặt khung tin tưởng</div>
+                <button class="copy-btn" onclick="cp(this,'s3')">Copy</button>
+                <div class="script-text" id="s3">Em muốn nói thật với anh/chị ngay từ đầu: em ở đây để giúp anh/chị ra quyết định đúng — dù quyết định đó là mua hay không mua căn này.
+
+Thị trường BĐS có nhiều người chơi không tốt, em biết điều đó. Nên hôm nay em sẽ làm ngược lại: em sẽ nói cho anh/chị nghe những điểm yếu và rủi ro của sản phẩm trước.
+
+Nếu sau khi nghe xong anh/chị thấy phù hợp, mình đi tiếp. Nếu không phù hợp, em sẽ tư vấn sản phẩm khác hoặc thời điểm khác. Deal không?</div>
+              </div>
+              <div class="objection-row">
+                <div class="obj-card">
+                  <div class="obj-q">"Môi giới nào cũng nói vậy"</div>
+                  <div class="obj-a">Anh/chị nói đúng — và cách duy nhất để phân biệt là hành động. Em xin phép gửi anh/chị hồ sơ pháp lý + 3 rủi ro thực của dự án này. Sau đó anh/chị tự đánh giá nhé.</div>
+                </div>
+                <div class="obj-card">
+                  <div class="obj-q">"Sợ đặt cọc xong mất tiền"</div>
+                  <div class="obj-a">Hợp lý lắm. Chúng ta sẽ không ký hợp đồng cọc riêng — chỉ ký HĐ chính thức với đơn vị phân phối được ủy quyền. Em cho anh/chị xem giấy ủy quyền ngay bây giờ nhé.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 4: Tiến độ bàn giao -->
+    <div class="pain-card" id="p4">
+      <div class="pc-header" onclick="toggle('p4')">
+        <div class="pc-num general">04</div>
+        <div class="pc-meta">
+          <span class="pc-tag general">Tiến Độ</span>
+          <div class="pc-title">Lo Dự Án Chậm Bàn Giao / Bỏ Hoang</div>
+          <div class="pc-quote">Ký xong mà dự án kéo dài 5–7 năm, tiền bỏ ra mà không được dùng.</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">2018–2023</span>
+              <span class="dr-label">nhiều dự án đình hoãn do vướng pháp lý + thị trường đóng băng</span>
+              <span class="dr-source">VNREA / Cafef</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">Penalty clause</span>
+              <span class="dr-label">HĐ mua bán phải có điều khoản phạt bồi thường nếu chậm bàn giao</span>
+              <span class="dr-source">Luật Kinh Doanh BĐS 2023</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">📋 Checklist Đánh Giá Tiến Độ Dự Án</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li>Kiểm tra <strong>lịch sử các dự án trước</strong> của chủ đầu tư — có bàn giao đúng hạn không?</li>
+                  <li>Tỷ lệ <strong>giải phóng mặt bằng hiện tại</strong> là bao nhiêu %?</li>
+                  <li>HĐ có <strong>điều khoản phạt chậm tiến độ</strong> (thường 0.05%/ngày trên giá trị HĐ)</li>
+                  <li>Nguồn vốn chủ đầu tư: vốn tự có, vay ngân hàng, hay huy động từ khách hàng?</li>
+                  <li>Ưu tiên mua giai đoạn dự án <strong>đã xây xong phần thô</strong> hoặc sắp bàn giao</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script Xử Lý — Lo Tiến Độ</div>
+              <div class="script-box">
+                <div class="script-label">Khi khách hỏi về tiến độ bàn giao</div>
+                <button class="copy-btn" onclick="cp(this,'s4')">Copy</button>
+                <div class="script-text" id="s4">Lo tiến độ là đúng — thị trường 2018–2023 có quá nhiều bài học đau. Nhưng để anh/chị có thể so sánh khách quan, em chia sẻ 3 điểm cụ thể:
+
+① Tiến độ GPMB hiện tại: [X]% — tức là phần khó nhất đã xong
+② Chủ đầu tư đã hoàn thành [tên dự án trước] đúng tiến độ tháng [M/Y]
+③ HĐ mua bán có điều khoản: nếu chậm bàn giao, hoàn tiền cọc + phạt 8%/năm
+
+Anh/chị muốn em gửi HĐ mẫu để đọc điều khoản bảo vệ quyền lợi người mua không?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 5: Chi phí ẩn -->
+    <div class="pain-card" id="p5">
+      <div class="pc-header" onclick="toggle('p5')">
+        <div class="pc-num general">05</div>
+        <div class="pc-meta">
+          <span class="pc-tag general">Chi Phí</span>
+          <div class="pc-title">Sợ Có Chi Phí Ẩn Sau Khi Mua</div>
+          <div class="pc-quote">Giá niêm yết là 3 tỷ nhưng ký xong mới biết còn phí này phí kia, tổng đội lên 3.5 tỷ.</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">8–12%</span>
+              <span class="dr-label">thuế + phí phát sinh khi mua BĐS (thuế TNCN, phí công chứng, đăng ký)</span>
+              <span class="dr-source">Tổng hợp từ thực tế giao dịch</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">+15–20%</span>
+              <span class="dr-label">chi phí bảo trì BĐS ven biển so với nội đô</span>
+              <span class="dr-source">imperiaholiday.com.vn</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">💸 Các Khoản Phí Mua BĐS Cần Biết</div>
+              <div class="bb-content">
+                <ul>
+                  <li style="margin-bottom:8px"><strong>Thuế TNCN người bán:</strong> 2% giá trị HĐ (thường người mua chịu khi thỏa thuận)</li>
+                  <li style="margin-bottom:8px"><strong>Lệ phí trước bạ:</strong> 0.5% giá trị đất + nhà</li>
+                  <li style="margin-bottom:8px"><strong>Phí công chứng:</strong> 0.1–0.3% giá trị HĐ</li>
+                  <li style="margin-bottom:8px"><strong>Phí môi giới:</strong> 1–2% (thường chủ đầu tư trả)</li>
+                  <li style="margin-bottom:8px"><strong>Phí quản lý hàng tháng:</strong> 15–25k/m²/tháng</li>
+                  <li style="margin-bottom:8px"><strong>Phí bảo trì công trình:</strong> 2% giá trị căn (đóng 1 lần lúc nhận nhà)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script Minh Bạch Chi Phí</div>
+              <div class="script-box">
+                <div class="script-label">Chủ động liệt kê chi phí thay vì chờ khách hỏi</div>
+                <button class="copy-btn" onclick="cp(this,'s5')">Copy</button>
+                <div class="script-text" id="s5">Em muốn anh/chị biết tổng chi phí thực sự trước khi quyết định. Với căn [giá niêm yết X tỷ], tổng chi phí phát sinh sẽ khoảng:
+
+• Giá niêm yết: [X] tỷ
+• Thuế + phí trước bạ + công chứng: ~[Y] triệu
+• Phí bảo trì 2%: ~[Z] triệu (đóng khi nhận nhà)
+• Phí quản lý: ~[N] triệu/năm
+
+→ Tổng chi phí năm đầu: ~[Tổng] tỷ
+
+Anh/chị thấy như vậy vẫn nằm trong ngân sách không?
+
+(Lưu ý: trong thị trường BĐS, anh nào tư vấn không nói đến phần này là anh đó đang che thông tin — em nói trước để anh/chị không bị bất ngờ.)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 6: FOMO / Quyết định sai -->
+    <div class="pain-card" id="p6">
+      <div class="pc-header" onclick="toggle('p6')">
+        <div class="pc-num red">06</div>
+        <div class="pc-meta">
+          <span class="pc-tag red">Tâm Lý</span>
+          <div class="pc-title">FOMO Mua Sai — Hối Hận Sau Quyết Định</div>
+          <div class="pc-quote">Lỡ mua đắt hơn mình có thể chờ, hoặc mua xong thấy căn khác tốt hơn mà không biết.</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">FOMO</span>
+              <span class="dr-label">"Sợ bỏ lỡ" — đây là vũ khí số 1 bị môi giới xấu lạm dụng để thúc đẩy quyết định nhanh</span>
+              <span class="dr-source">Phân tích hành vi NTD</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">72 giờ</span>
+              <span class="dr-label">quy tắc "ngủ một giấc" — các quyết định lớn nên suy nghĩ tối thiểu 72h</span>
+              <span class="dr-source">Behavioral Economics</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">🧠 Framework Quyết Định Không Hối Hận</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li>Không quyết định trong buổi xem nhà đầu tiên — <strong>quy tắc 72h</strong></li>
+                  <li>Hỏi: <strong>"Nếu tôi không mua căn này, điều tệ nhất là gì?"</strong> — nếu câu trả lời không rõ ràng, chưa đến lúc mua</li>
+                  <li>So sánh <strong>ít nhất 3 sản phẩm</strong> cùng phân khúc trước khi ký</li>
+                  <li>Xác định rõ: mua để ở hay đầu tư? <strong>Tiêu chí khác nhau hoàn toàn</strong></li>
+                  <li>Không bao giờ quyết định vì <strong>"chỉ còn X suất"</strong> — đây luôn là chiêu tâm lý</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script Ngược — Đừng Tạo Pressure</div>
+              <div class="script-box">
+                <div class="script-label">Tạo lòng tin bằng cách nói ngược với môi giới thường</div>
+                <button class="copy-btn" onclick="cp(this,'s6')">Copy</button>
+                <div class="script-text" id="s6">Em không muốn anh/chị mua vì áp lực. Em muốn anh/chị mua vì anh/chị thấy đây là quyết định đúng.
+
+Vì vậy, thay vì nói "chỉ còn X suất", em sẽ nói thật: hiện tại còn [số thực tế] sản phẩm. Và nếu anh/chị cần thêm thời gian để suy nghĩ — hoàn toàn ổn.
+
+Những gì em cần anh/chị trả lời trước khi quyết định:
+① Anh/chị mua để ở hay đầu tư? → tiêu chí chọn khác nhau
+② Ngân sách thực sự là bao nhiêu? → không phải "tối đa chịu được"
+③ Timeline sử dụng? → ảnh hưởng đến chọn giai đoạn bàn giao
+
+Sau khi anh/chị trả lời 3 câu này, em mới biết căn này có phù hợp hay không.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 7: Sau khi mua không ai bảo vệ -->
+    <div class="pain-card" id="p7">
+      <div class="pc-header" onclick="toggle('p7')">
+        <div class="pc-num general">07</div>
+        <div class="pc-meta">
+          <span class="pc-tag general">Hậu Mãi</span>
+          <div class="pc-title">Mua Xong Môi Giới Biến Mất — Không Ai Bảo Vệ</div>
+          <div class="pc-quote">Ký hợp đồng xong, gọi môi giới không bắt máy. Có vấn đề cũng không biết hỏi ai.</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">Phổ biến</span>
+              <span class="dr-label">môi giới chỉ tập trung trước bán, ít chăm sóc sau giao dịch</span>
+              <span class="dr-source">Khảo sát chất lượng dịch vụ BĐS VN</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">CRM</span>
+              <span class="dr-label">chỉ ~15% môi giới cá nhân có hệ thống chăm sóc khách hàng sau bán</span>
+              <span class="dr-source">Ước tính ngành</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">✅ Quyền Lợi Người Mua Sau Ký HĐ</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li>Yêu cầu <strong>đầu mối liên hệ chính thức</strong> từ chủ đầu tư (không chỉ số điện thoại môi giới)</li>
+                  <li>Tham gia <strong>nhóm cư dân/chủ sở hữu</strong> của dự án để cập nhật thông tin</li>
+                  <li>Lưu hợp đồng + biên lai thanh toán <strong>bản gốc và bản scan</strong></li>
+                  <li>Biết số hotline <strong>Ban Quản Lý dự án</strong> để phản ánh trực tiếp</li>
+                  <li>Kiểm tra: môi giới có cam kết hỗ trợ sau bán không? (ghi vào HĐ dịch vụ)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script Cam Kết Hậu Mãi</div>
+              <div class="script-box">
+                <div class="script-label">Phân biệt mình với môi giới "biến sau ký"</div>
+                <button class="copy-btn" onclick="cp(this,'s7')">Copy</button>
+                <div class="script-text" id="s7">Em muốn cam kết rõ một điều: ký HĐ xong, em vẫn ở đây.
+
+Cụ thể sau khi anh/chị mua:
+✓ Em là đầu mối liên hệ cho mọi vấn đề phát sinh với chủ đầu tư
+✓ Em cập nhật tiến độ dự án định kỳ mỗi [X tháng]
+✓ Nếu có tranh chấp, em là người đứng ra hỗ trợ anh/chị trước
+✓ Khi anh/chị muốn bán lại, em ưu tiên tìm người mua trong network của em
+
+Anh/chị có thể lưu số em và gọi bất cứ lúc nào sau này. Đây không phải hứa hẹn — đây là cách em xây dựng sự nghiệp lâu dài bằng uy tín.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pain-grid general -->
+
+  <!-- HLX DIVIDER -->
+  <div class="hlx-divider"><span>⚓ Đặc Thù Hạ Long Xanh</span></div>
+
+  <div class="section-title">
+    <span class="st-icon">🌊</span>
+    <div class="st-text">
+      <h2>2 Nỗi Đau Riêng — Người Mua Dự Án HLX</h2>
+      <p>Nghỉ dưỡng ven biển có rủi ro đặc thù — biết trước, xử lý chủ động</p>
+    </div>
+  </div>
+
+  <div class="pain-grid">
+
+    <!-- PAIN 8: Thanh khoản + Mùa vụ -->
+    <div class="pain-card" id="p8">
+      <div class="pc-header" onclick="toggle('p8')">
+        <div class="pc-num hlx">H1</div>
+        <div class="pc-meta">
+          <span class="pc-tag hlx">HLX Specific</span>
+          <div class="pc-title">Thanh Khoản Thấp & Mùa Vụ Bất Định</div>
+          <div class="pc-quote">Nếu cần tiền mà muốn bán, có bán được không? Mùa thấp điểm thì căn bỏ trống ai chịu phí?</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">40–50%</span>
+              <span class="dr-label">thanh khoản condotel nghỉ dưỡng vs 70–80% căn hộ thường</span>
+              <span class="dr-source">imperiaholiday.com.vn</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">80–90%</span>
+              <span class="dr-label">công suất cao điểm hè (6–8) vs 30–40% thấp điểm (1–3)</span>
+              <span class="dr-source">tienphong.vn / Savills Hospitality</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">+15–20%</span>
+              <span class="dr-label">chi phí bảo trì BĐS ven biển (ăn mòn, độ ẩm) so với nội đô</span>
+              <span class="dr-source">imperiaholiday.com.vn</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">🌊 Hiểu Đúng Về BĐS Nghỉ Dưỡng Trước Khi Mua</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li>BĐS nghỉ dưỡng <strong>thanh khoản thấp hơn căn hộ thường</strong> — không phải để mua-bán nhanh mà để giữ dài hạn</li>
+                  <li>Doanh thu phụ thuộc <strong>mùa du lịch + chất lượng vận hành</strong> của đơn vị quản lý</li>
+                  <li>Tìm hiểu kỹ: <strong>đơn vị vận hành là ai</strong>? Track record thực của họ?</li>
+                  <li>Chi phí bảo trì ven biển <strong>cao hơn 15–20%</strong> — tính vào kế hoạch tài chính</li>
+                  <li>Chỉ phù hợp nếu: không cần thanh khoản nhanh + horizon đầu tư 5–10 năm</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script — Xử Lý Rủi Ro Thanh Khoản HLX</div>
+              <div class="script-box">
+                <div class="script-label">Nói thật về thanh khoản — tạo uy tín</div>
+                <button class="copy-btn" onclick="cp(this,'s8')">Copy</button>
+                <div class="script-text" id="s8">Anh/chị hỏi hay lắm — và em sẽ nói thật: BĐS nghỉ dưỡng thanh khoản thấp hơn căn hộ thường. Đây là sự thật của phân khúc, không riêng HLX.
+
+Tức là: nếu anh/chị cần bán nhanh trong 1–2 năm, phân khúc này không phải lựa chọn tốt nhất.
+
+Tuy nhiên, HLX phù hợp nếu anh/chị:
+✓ Có horizon 5–10 năm — HLX đang trong giai đoạn hình thành, giá sẽ tăng khi hoàn thiện hạ tầng
+✓ Muốn dòng tiền từ cho thuê khai thác (không cần bán)
+✓ Dùng như tài sản tích lũy + có nơi nghỉ dưỡng cá nhân
+
+Anh/chị đang kỳ vọng mục tiêu nào? Em sẽ tư vấn phù hợp hơn.</div>
+              </div>
+              <div class="objection-row">
+                <div class="obj-card">
+                  <div class="obj-q">"Mùa thấp điểm thì ai chịu phí quản lý?"</div>
+                  <div class="obj-a">Đây là câu hỏi quan trọng. Hợp đồng thuê nguyên căn (guaranteed revenue) vs revenue sharing — 2 mô hình khác nhau hoàn toàn. Anh/chị muốn nghe phân tích chi tiết không?</div>
+                </div>
+                <div class="obj-card">
+                  <div class="obj-q">"Biển làm hỏng nhanh, chi phí bảo trì cao không?"</div>
+                  <div class="obj-a">Thực tế ven biển cao hơn 15–20% so với nội đô. Nhưng đơn vị vận hành chịu chi phí này theo HĐ — không phải chủ sở hữu. Em cho anh/chị xem mô hình phân chia chi phí cụ thể nhé.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN 9: Tiến độ dài hạn + Cam kết lợi nhuận -->
+    <div class="pain-card" id="p9">
+      <div class="pc-header" onclick="toggle('p9')">
+        <div class="pc-num hlx">H2</div>
+        <div class="pc-meta">
+          <span class="pc-tag hlx">HLX Specific</span>
+          <div class="pc-title">Tiến Độ 2036 & Cam Kết Lợi Nhuận Thực Tế</div>
+          <div class="pc-quote">Dự án đến 2036 mới xong — đó là 10 năm. Còn cam kết 8–12% năm có thật không hay chỉ trên giấy?</div>
+        </div>
+        <span class="pc-toggle">▼</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-body-inner">
+          <div class="data-row">
+            <div class="dr-item">
+              <span class="dr-num">4,100 ha</span>
+              <span class="dr-label">tổng diện tích Hạ Long Xanh — siêu dự án lớn nhất miền Bắc</span>
+              <span class="dr-source">Báo Quảng Ninh / BQL KKT</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">75%</span>
+              <span class="dr-label">GPMB toàn dự án (Hà An đơn vị triển khai chỉ 81%)</span>
+              <span class="dr-source">Báo Quảng Ninh 12/2025</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">18 tỷ USD</span>
+              <span class="dr-label">tổng vốn đầu tư, khởi công chính thức 12/2025</span>
+              <span class="dr-source">VnExpress / BQL KKT Quảng Ninh</span>
+            </div>
+            <div class="dr-item">
+              <span class="dr-num">8–12%</span>
+              <span class="dr-label">cam kết lợi nhuận/năm — mức thị trường; kết quả thực phụ thuộc vận hành</span>
+              <span class="dr-source">Phân tích ngành condotel VN</span>
+            </div>
+          </div>
+
+          <div class="view-panel buyer-view active">
+            <div class="buyer-block">
+              <div class="bb-label">📊 Đánh Giá Thực Tế Dự Án HLX</div>
+              <div class="bb-content">
+                <ul class="checklist">
+                  <li><strong>Quy mô 4,100ha + 18 tỷ USD</strong> — đây là dự án có tầm cỡ quốc gia, không phải dự án nhỏ lẻ</li>
+                  <li>Khởi công 12/2025 với GPMB 75% — <strong>rủi ro đình hoãn thấp hơn</strong> so với dự án mới lên kế hoạch</li>
+                  <li>Cam kết 8–12%/năm: hỏi rõ <strong>có đảm bảo tối thiểu không</strong>? Hay chỉ là dự báo?</li>
+                  <li>Shophouse HLX dự kiến <strong>80tr/m²</strong>; so sánh: Vinhomes Ocean Park tăng 120% từ mở bán → upside đầu tư rõ ràng</li>
+                  <li>Phù hợp nhất nếu: <strong>mua giai đoạn sớm</strong>, giữ 5–10 năm, không cần thanh khoản ngay</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-panel broker-view">
+            <div class="broker-block">
+              <div class="broker-label">🎯 Script — Xử Lý Nghi Ngờ Về Tiến Độ & Cam Kết HLX</div>
+              <div class="script-box">
+                <div class="script-label">Biến nghi ngờ thành sức mạnh của offer</div>
+                <button class="copy-btn" onclick="cp(this,'s9')">Copy</button>
+                <div class="script-text" id="s9">Câu hỏi của anh/chị rất đúng — và đây là lý do em thích làm việc với những khách hàng tư duy như anh/chị.
+
+Về tiến độ: HLX là siêu dự án 4,100ha, 18 tỷ USD — loại dự án mà Nhà nước cam kết đích thân đồng hành. Khởi công chính thức 12/2025 với 75% GPMB xong. Đây không phải dự án mạo hiểm — đây là dự án dài hơi.
+
+Về cam kết 8–12%: Em phân biệt 2 loại:
+① Guaranteed return: CĐT trả tiền thuê cố định dù khai thác tốt hay không → an toàn
+② Revenue sharing: anh/chị nhận % doanh thu thực → tiềm năng cao hơn, nhưng biến động
+
+Em xem lại HĐ để xác nhận dự án này thuộc loại nào và nói chính xác với anh/chị nhé.
+
+Một điểm tham khảo: Vinhomes Ocean Park mở bán giá X, nay đã tăng 120%. HLX đang ở giai đoạn mà VOP từng ở — anh/chị mua sớm hay chờ giá đã chạy?</div>
+              </div>
+              <div class="objection-row">
+                <div class="obj-card">
+                  <div class="obj-q">"Đến 2036 còn lâu lắm, ai biết khi đó thế nào"</div>
+                  <div class="obj-a">Đúng là dài hạn. Nhưng các giai đoạn đầu tiên bàn giao sớm hơn — năm 2028–2030. Anh/chị xem timeline cụ thể: giai đoạn nào phù hợp với kế hoạch của anh/chị nhất?</div>
+                </div>
+                <div class="obj-card">
+                  <div class="obj-q">"Cam kết lợi nhuận có thực không hay chỉ quảng cáo?"</div>
+                  <div class="obj-a">Câu hỏi hay. Có 2 loại: guaranteed (CĐT trả cố định) và projection (dự báo). Em xem lại HĐ mẫu và nói chính xác loại nào — trong 10 phút. Anh/chị đợi em một chút nhé.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pain-grid HLX -->
+
+  <!-- SUMMARY TABLE -->
+  <div class="summary-table">
+    <div class="st-title">📋 Tổng Hợp — 9 Nỗi Đau & Mức Độ Ưu Tiên</div>
+    <div class="st-row header">
+      <div class="st-cell">#</div>
+      <div class="st-cell">Nỗi Đau</div>
+      <div class="st-cell">Data Chứng Minh</div>
+      <div class="st-cell">Mức Độ</div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">1</div>
+      <div class="st-cell">Sợ pháp lý — dự án không đủ điều kiện</div>
+      <div class="st-cell">70–80% giao dịch gặp vấn đề pháp lý (VARS)</div>
+      <div class="st-cell"><span class="urgency-dot u-high"></span>Cao</div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">2</div>
+      <div class="st-cell">Gánh nặng vay vốn & lãi suất leo thang</div>
+      <div class="st-cell">Giá chung cư 100tr+/m², lãi tăng 3–4% (Cafef)</div>
+      <div class="st-cell"><span class="urgency-dot u-high"></span>Cao</div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">3</div>
+      <div class="st-cell">Không tin môi giới — sợ bị lừa</div>
+      <div class="st-cell">Đặt cọc 200–500tr bị chiếm đoạt (thienkhoi.com)</div>
+      <div class="st-cell"><span class="urgency-dot u-high"></span>Cao</div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">4</div>
+      <div class="st-cell">Lo dự án chậm tiến độ / bỏ hoang</div>
+      <div class="st-cell">Nhiều dự án đình hoãn 2018–2023 (VNREA)</div>
+      <div class="st-cell"><span class="urgency-dot u-mid"></span>Trung</div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">5</div>
+      <div class="st-cell">Chi phí ẩn sau khi mua</div>
+      <div class="st-cell">Thuế + phí phát sinh 8–12% giá trị HĐ</div>
+      <div class="st-cell"><span class="urgency-dot u-mid"></span>Trung</div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">6</div>
+      <div class="st-cell">FOMO & quyết định sai dưới áp lực</div>
+      <div class="st-cell">Chiêu "khan hiếm giả" phổ biến trong ngành</div>
+      <div class="st-cell"><span class="urgency-dot u-mid"></span>Trung</div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">7</div>
+      <div class="st-cell">Mua xong môi giới biến mất</div>
+      <div class="st-cell">~85% môi giới không có hệ thống hậu mãi</div>
+      <div class="st-cell"><span class="urgency-dot u-mid"></span>Trung</div>
+    </div>
+    <div class="st-row" style="background:rgba(201,168,76,.04)">
+      <div class="st-cell" style="color:var(--gl)">H1</div>
+      <div class="st-cell"><strong style="color:var(--gl)">HLX:</strong> Thanh khoản thấp & mùa vụ bất định</div>
+      <div class="st-cell">Condotel 40–50% vs căn hộ 70–80% (imperiaholiday)</div>
+      <div class="st-cell"><span class="urgency-dot u-high"></span>Cao</div>
+    </div>
+    <div class="st-row" style="background:rgba(201,168,76,.04)">
+      <div class="st-cell" style="color:var(--gl)">H2</div>
+      <div class="st-cell"><strong style="color:var(--gl)">HLX:</strong> Tiến độ 10 năm & cam kết lợi nhuận</div>
+      <div class="st-cell">75% GPMB; khởi công 12/2025; 18 tỷ USD</div>
+      <div class="st-cell"><span class="urgency-dot u-high"></span>Cao</div>
+    </div>
+  </div>
+
+  <!-- FOOTER NOTE -->
+  <div class="footer-note">
+    <strong>Nguồn dữ liệu:</strong> VARS (Hội Môi Giới BĐS Việt Nam) · VnExpress.net · Cafef.vn · Tienphong.vn · imperiaholiday.com.vn · thienkhoi.com · Báo Quảng Ninh · Savills Vietnam · BQL Khu Kinh Tế Quảng Ninh · Luật Kinh Doanh BĐS 2023–2024.<br>
+    Tất cả số liệu thu thập 2024–2026. Cập nhật theo chu kỳ quý.
+  </div>
+
+</main>
+
+<script>
+// GLOBAL VIEW STATE
+let currentView = 'buyer';
+
+function setView(v) {
+  currentView = v;
+  document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('vt-' + v).classList.add('active');
+
+  document.querySelectorAll('.pain-card').forEach(card => {
+    const buyerPanels = card.querySelectorAll('.buyer-view');
+    const brokerPanels = card.querySelectorAll('.broker-view');
+    if (v === 'buyer') {
+      buyerPanels.forEach(p => p.classList.add('active'));
+      brokerPanels.forEach(p => p.classList.remove('active'));
+    } else if (v === 'broker') {
+      buyerPanels.forEach(p => p.classList.remove('active'));
+      brokerPanels.forEach(p => p.classList.add('active'));
+    } else {
+      buyerPanels.forEach(p => p.classList.add('active'));
+      brokerPanels.forEach(p => p.classList.add('active'));
+    }
+  });
+
+  // Sync top mode buttons
+  document.getElementById('mode-buyer').classList.toggle('active', v === 'buyer');
+  document.getElementById('mode-broker').classList.toggle('active', v === 'broker');
+}
+
+function setMode(m) {
+  setView(m);
+}
+
+function toggle(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+  // Apply current view to newly opened card
+  if (card.classList.contains('open')) {
+    const buyerPanels = card.querySelectorAll('.buyer-view');
+    const brokerPanels = card.querySelectorAll('.broker-view');
+    if (currentView === 'buyer') {
+      buyerPanels.forEach(p => p.classList.add('active'));
+      brokerPanels.forEach(p => p.classList.remove('active'));
+    } else if (currentView === 'broker') {
+      buyerPanels.forEach(p => p.classList.remove('active'));
+      brokerPanels.forEach(p => p.classList.add('active'));
+    } else {
+      buyerPanels.forEach(p => p.classList.add('active'));
+      brokerPanels.forEach(p => p.classList.add('active'));
+    }
+  }
+}
+
+function cp(btn, id) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Đã copy';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Open first card by default
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => toggle('p1'), 200);
+});
+</script>
+</body>
+</html>
