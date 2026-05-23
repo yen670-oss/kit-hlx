@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Hub — Lớp Brand From Zero | BDS Mastery Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a1628;--card:#0f1e30;--card2:#13243a;
+  --gold:#C9A84C;--gl:#E2C06A;
+  --teal:#2dd4bf;--purple:#a78bfa;--rose:#fb7185;
+  --green:#4ade80;--blue:#38bdf8;
+  --text:#e8eaf0;--muted:#8899aa;--border:#1e3048;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:0 18px;height:50px;flex-wrap:nowrap}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);font-weight:700;white-space:nowrap}
+.topbar-badge{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.topbar-tabs{display:flex;gap:4px;flex:1;justify-content:center;overflow-x:auto}
+.topbar-tabs::-webkit-scrollbar{display:none}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
+.tab-btn.active,.tab-btn:hover{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.4);color:var(--gold)}
+.btn-back{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:11px;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.btn-back:hover{border-color:var(--gold);color:var(--gold)}
+
+/* LAYOUT */
+.container{max-width:920px;margin:0 auto;padding:36px 18px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+.sec-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);font-weight:700;line-height:1.2;margin-bottom:10px}
+.sec-sub{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:28px}
+
+/* PHASES */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:32px}
+.ph-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden}
+.ph-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.ph-card.ph1::before{background:linear-gradient(90deg,var(--blue),#818cf8)}
+.ph-card.ph2::before{background:linear-gradient(90deg,var(--gold),var(--gl))}
+.ph-card.ph3::before{background:linear-gradient(90deg,var(--rose),#fb923c)}
+.ph-label{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.ph1 .ph-label{color:var(--blue)}
+.ph2 .ph-label{color:var(--gold)}
+.ph3 .ph-label{color:var(--rose)}
+.ph-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
+.ph-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.ph-count{margin-top:10px;font-size:11px;font-weight:700}
+.ph1 .ph-count{color:var(--blue)}
+.ph2 .ph-count{color:var(--gold)}
+.ph3 .ph-count{color:var(--rose)}
+
+/* TL */
+.tl-bar{display:flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:28px}
+.tl-seg{flex:1;padding:12px 10px;text-align:center;border-right:1px solid var(--border);background:var(--card)}
+.tl-seg:last-child{border-right:none}
+.tl-seg .wk{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tl-seg .nm{font-size:12px;font-weight:700;color:#fff}
+.tl-seg .cnt{font-size:10px;color:var(--muted)}
+.tl-seg.hl{background:rgba(201,168,76,.08)}
+.tl-seg.hl .wk{color:var(--gold)}
+
+/* POST CARDS */
+.phase-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:7px 0;margin-bottom:14px;border-bottom:1px solid var(--border)}
+.ph1-lbl{color:var(--blue)}
+.ph2-lbl{color:var(--gold)}
+.ph3-lbl{color:var(--rose)}
+
+.post-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:18px;overflow:hidden;transition:border-color .2s}
+.post-card:hover{border-color:rgba(201,168,76,.2)}
+.post-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
+.post-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1}
+.post-num{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:rgba(201,168,76,.12);color:var(--gold);flex-shrink:0}
+.tag{font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:4px}
+.tag-plat{background:rgba(255,255,255,.05);color:var(--muted)}
+.tag-tofu{background:rgba(56,189,248,.1);color:var(--blue)}
+.tag-mofu{background:rgba(201,168,76,.1);color:var(--gold)}
+.tag-bofu{background:rgba(251,113,133,.1);color:var(--rose)}
+.post-info .ptitle{font-size:13px;font-weight:700;color:#fff}
+.post-info .psub{font-size:11px;color:var(--muted);font-style:italic}
+.copy-btn{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);font-size:11px;font-weight:700;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.copy-btn:hover{background:rgba(201,168,76,.18)}
+.copy-btn.ok{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.3);color:var(--green)}
+
+.post-bd{padding:16px}
+.post-txt{font-size:13.5px;color:var(--text);line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.post-note{margin-top:12px;padding:9px 12px;background:rgba(255,255,255,.03);border-left:2px solid var(--border);border-radius:0 8px 8px 0;font-size:11.5px;color:var(--muted);line-height:1.6}
+.post-note b{color:var(--text)}
+
+/* CLASS CONTENT */
+.sess-blk{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:24px;overflow:hidden}
+.sess-hd{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:14px}
+.sess-emoji{font-size:30px;flex-shrink:0}
+.sess-hd-info{flex:1}
+.sess-wk{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.sess-ttl{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:3px}
+.sess-sub{font-size:12px;color:var(--muted)}
+.sess-dur{font-size:10px;color:var(--muted);background:rgba(255,255,255,.05);padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;align-self:flex-start}
+.sess-bd{padding:18px 20px}
+.sess-bd h4{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin:18px 0 10px}
+.sess-bd h4:first-child{margin-top:0}
+.sess-bd p{font-size:13.5px;color:var(--muted);line-height:1.8;margin-bottom:10px}
+.sess-bd ul,.sess-bd ol{padding-left:18px;margin-bottom:14px}
+.sess-bd li{font-size:13.5px;color:var(--muted);line-height:1.8;margin-bottom:5px}
+.sess-bd li b{color:var(--text)}
+.callout{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);border-radius:10px;padding:13px 16px;margin:14px 0;font-size:13.5px;color:var(--gl);line-height:1.7}
+.callout-teal{background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.18);border-radius:10px;padding:13px 16px;margin:14px 0;font-size:13.5px;color:var(--teal);line-height:1.7}
+.callout-purple{background:rgba(167,139,250,.05);border:1px solid rgba(167,139,250,.18);border-radius:10px;padding:13px 16px;margin:14px 0;font-size:13.5px;color:var(--purple);line-height:1.7}
+.ex-box{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:16px;margin:10px 0}
+.ex-box .ex-tag{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:7px}
+.ex-box h5{font-size:13px;font-weight:700;color:#fff;margin-bottom:8px}
+.ex-box p,.ex-box li{font-size:13px;color:var(--muted);line-height:1.7}
+.ex-box ul{padding-left:16px}
+.script-box{border:1px solid rgba(167,139,250,.2);border-radius:10px;padding:16px;margin:10px 0;font-size:13px;color:var(--text);line-height:1.85;background:rgba(15,30,48,.6)}
+.script-box .sc-lbl{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
+.script-box em{color:var(--muted)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:36px 0}
+
+/* SCRIPTS TAB */
+.hook-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:24px 0}
+.hook-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.hook-card h4{font-size:13px;font-weight:800;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.hook-card .formula{background:var(--card2);border-radius:8px;padding:12px 14px;font-size:12.5px;color:var(--text);line-height:1.7;margin-bottom:10px;font-family:monospace}
+.hook-card .example{font-size:12px;color:var(--muted);line-height:1.6;font-style:italic}
+.hook-card .example b{color:var(--gl)}
+
+@media(max-width:600px){
+  .tl-bar{flex-direction:column}
+  .tl-seg{border-right:none;border-bottom:1px solid var(--border);text-align:left;display:flex;gap:12px;align-items:center}
+  .tl-seg:last-child{border-bottom:none}
+  .sess-hd{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-logo">🎓 Class Content</span>
+  <span class="topbar-badge">Brand From Zero</span>
+  <div class="topbar-tabs">
+    <button class="tab-btn active" onclick="sw('seeding')">📢 Seeding Posts</button>
+    <button class="tab-btn" onclick="sw('class')">📖 Nội Dung Lớp</button>
+    <button class="tab-btn" onclick="sw('hooks')">🎬 Hook & Script</button>
+  </div>
+  <a href="bbb-class.html" target="_blank" class="btn-back">🎓 Sales Page</a>
+  <a href="MASTER-DASHBOARD.html" class="btn-back">← DB</a>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- TAB 1: SEEDING POSTS                         -->
+<!-- ════════════════════════════════════════════ -->
+<div id="tab-seeding" class="tab-panel active">
+<div class="container">
+  <div class="sec-tag">Chiến Dịch Thu Hút Học Viên</div>
+  <h1 class="sec-title">12 Seeding Posts — Brand From Zero</h1>
+  <p class="sec-sub">Facebook & Zalo · 3 giai đoạn · Sẵn sàng copy · Không cần ads — chỉ cần đăng đều</p>
+
+  <div class="phases">
+    <div class="ph-card ph1">
+      <div class="ph-label">Phase 1 · Tuần -2</div>
+      <div class="ph-title">🌱 Gieo Hạt Tâm Thức</div>
+      <div class="ph-desc">Chia sẻ 4 khái niệm như nội dung giáo dục thuần túy. Chưa nhắc lớp. Xây trust trước.</div>
+      <div class="ph-count">📝 6 bài · Thứ 2, 4, 6</div>
+    </div>
+    <div class="ph-card ph2">
+      <div class="ph-label">Phase 2 · Tuần -1</div>
+      <div class="ph-title">🔥 Warm-Up & Thông Báo</div>
+      <div class="ph-desc">Thông báo lớp. Chia sẻ câu chuyện làm kit. Preview curriculum. Xử lý từ chối trước.</div>
+      <div class="ph-count">📝 4 bài · Thứ 2, 3, 5, 7</div>
+    </div>
+    <div class="ph-card ph3">
+      <div class="ph-label">Phase 3 · Launch</div>
+      <div class="ph-title">⏰ Chốt Slot & Đóng</div>
+      <div class="ph-desc">Slot còn lại. Ngày cuối đăng ký. FOMO thật — không phải FOMO giả.</div>
+      <div class="ph-count">📝 2 bài · Thứ 4 & 7</div>
+    </div>
+  </div>
+
+  <div class="tl-bar">
+    <div class="tl-seg hl"><div class="wk">Tuần -2</div><div class="nm">Gieo Hạt</div><div class="cnt">Bài 1–6</div></div>
+    <div class="tl-seg"><div class="wk">Tuần -1</div><div class="nm">Warm-Up</div><div class="cnt">Bài 7–10</div></div>
+    <div class="tl-seg"><div class="wk">Launch</div><div class="nm">Chốt Slot</div><div class="cnt">Bài 11–12</div></div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-label ph1-lbl">⬤ PHASE 1 · GIEO HẠT · Bài 1–6 · Mỗi tuần đăng Thứ 2, 4, 6</div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">1</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-tofu">TOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Câu chuyện: Tôi ngừng cố "giỏi nhất"</div>
+          <div class="psub">Trụ Cột: Vị Thế · Thứ 2 tuần đầu</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p1')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p1">Có một giai đoạn tôi cứ nghĩ mình cần phải "giỏi nhất" mới có tư cách chia sẻ.
+
+Học thêm khoá này. Đọc thêm sách kia. Chờ thêm vài năm kinh nghiệm nữa.
+
+Và trong lúc chờ "đủ giỏi" — tôi đã bỏ qua rất nhiều cơ hội giúp người khác bằng đúng những gì tôi đã đi qua.
+
+Rồi tôi đọc được một câu thay đổi cách tôi nhìn nghề này mãi mãi:
+
+"Bạn không cần là chuyên gia số 1. Bạn chỉ cần đã đi qua đoạn đường mà người kia đang đứng — và đi trước họ vài bước."
+
+Tôi nhớ lại: Tôi đã từng không biết viết bài như thế nào. Không biết tiếp cận khách mà không bị từ chối. Không có hệ thống gì cả.
+
+Giờ tôi đã có — dù chưa hoàn hảo.
+
+Và đó là đủ để tôi có thể giúp người đang ở chỗ tôi từng đứng.
+
+Anh/chị đang chờ điều gì để bắt đầu xây thương hiệu của mình?
+
+#môigiớiBDS #thươnghiệucánhân #bắtđầutừhômnay</div>
+      <div class="post-note"><b>Ghi chú:</b> Không nhắc lớp học. Câu hỏi cuối → đo phản hồi. Ai comment nhiều = học viên tiềm năng → reply trực tiếp họ.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">2</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-tofu">TOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Tại sao 2 người cùng script, 1 chốt 5/10 còn lại 1/10?</div>
+          <div class="psub">Trụ Cột: Tần Số · Thứ 4 tuần đầu</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p2')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p2">Một câu hỏi tôi từng không giải thích được:
+
+Tại sao 2 người cùng script, cùng sản phẩm, cùng dự án — một người chốt 5/10 cuộc gọi, người kia chốt 1/10?
+
+Lúc đầu tôi nghĩ chắc người kia may mắn hơn. Hoặc thông minh hơn.
+
+Nhưng không phải vậy.
+
+Tôi để ý: khi gọi điện vì "sợ hết tháng không đủ chỉ tiêu" → khách hàng nghe ra ngay. Họ cảm được sự cấp bách đó dù tôi không nói ra.
+
+Còn khi gọi với suy nghĩ "Tôi đang giúp người này tìm đúng nơi cho gia đình họ" → cuộc gọi diễn ra hoàn toàn khác. Khách nói nhiều hơn. Hỏi nhiều hơn. Tin tưởng hơn.
+
+Người ta gọi đây là "tần số" — thứ anh/chị phát ra không cần lời nói, nhưng khách hàng cảm nhận được trước cả khi anh/chị mở miệng.
+
+Thử một tuần này nhé: Trước mỗi cuộc gọi, dừng 30 giây và hỏi bản thân:
+
+"Tôi đang gọi vì tôi cần — hay vì tôi muốn giúp họ?"
+
+Gọi khi đã ở câu trả lời thứ 2. Xem tỷ lệ thay đổi không.
+
+#môigiớiBDS #kỹnăngbánhàng #tâmlýbánhàng</div>
+      <div class="post-note"><b>Ghi chú:</b> Kết bằng thách thức nhỏ thực hành được ngay. "Tôi đã thử rồi" trong comment = social proof tự nhiên → reply khen + hỏi thêm.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">3</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-tofu">TOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Tôi dừng quản lý thời gian — kết quả tốt hơn</div>
+          <div class="psub">Trụ Cột: Năng Lượng · Thứ 6 tuần đầu</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p3')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p3">Có một thời tôi obsess với việc quản lý thời gian.
+
+Lên lịch từng giờ. Dậy sớm hơn. Ngủ muộn hơn. App theo dõi thời gian.
+
+Kết quả: làm được nhiều hơn, nhưng thu nhập không tăng tương ứng.
+
+Cho đến khi tôi nhận ra: vấn đề không phải là thời gian.
+
+Vấn đề là năng lượng.
+
+24 giờ của tôi và 24 giờ của người làm tốt hơn là như nhau. Nhưng 1 giờ của họ lúc năng lượng cao = 3 giờ của tôi lúc kiệt sức.
+
+Giờ tôi không còn quản lý thời gian nữa. Tôi quản lý năng lượng:
+
+→ Công việc quan trọng nhất (gọi khách, viết content, gặp gỡ) = giờ năng lượng cao nhất
+→ Công việc cơ học (admin, báo cáo, reply) = chiều khi năng lượng xuống
+→ Tái tạo năng lượng = không phải phần thưởng mà là chiến lược
+
+Kết quả: làm ít giờ hơn nhưng đạt được nhiều hơn trong mỗi giờ đó.
+
+"Giờ vàng" của anh/chị thường là mấy giờ trong ngày?
+
+#năngsuất #quảnlýnănglượng #môigiớiBDS</div>
+      <div class="post-note"><b>Ghi chú:</b> Câu hỏi cuối rất dễ trả lời → nhiều comment → thuật toán đẩy bài. Ai comment "tôi cũng vậy" → reply riêng, kết nối sâu hơn.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">4</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-tofu">TOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Zero kỹ năng công nghệ — nhưng tôi build được điều này</div>
+          <div class="psub">Trụ Cột: AI · Thứ 2 tuần 2</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p4')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p4">Tôi muốn thật lòng với anh/chị về một thứ.
+
+3 tháng trước tôi không biết code. Không biết thiết kế. Không biết làm landing page. AI với tôi chỉ là ChatGPT hỏi vài câu cho vui.
+
+Vậy mà tôi đã tạo ra được:
+→ Dashboard quản lý toàn bộ hệ thống nội dung
+→ Bộ 20+ công cụ digital cho môi giới BDS
+→ Landing page bán sản phẩm tự động
+→ Hệ thống content, pitch, xử lý từ chối...
+
+Không thuê ai. Không bỏ một đồng cho developer.
+
+Điều duy nhất tôi làm: học cách đặt câu hỏi đúng cho AI.
+
+Bí mật không phải kỹ năng công nghệ. Bí mật là: biết mình muốn tạo ra cái gì — rồi để AI làm phần còn lại.
+
+Tôi nghĩ đây là lợi thế bằng phẳng nhất trong lịch sử kinh doanh. Người biết đặt câu hỏi đúng > người có nhiều tiền thuê team.
+
+Anh/chị đang dùng AI vào việc gì trong nghề môi giới? Hay vẫn chưa thử?
+
+#AI #môigiớiBDS #doanhnghiệp1người #thươnghiệucánhân</div>
+      <div class="post-note"><b>Ghi chú:</b> Câu hỏi cuối phân loại 2 nhóm: đã dùng (chia sẻ thêm) và chưa dùng (học viên tiềm năng). Reply cả hai nhóm → tăng reach tự nhiên.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">5</div>
+        <span class="tag tag-plat">Facebook</span>
+        <span class="tag tag-tofu">TOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Tin sai số 1 đang giữ 80% môi giới ở chỗ cũ</div>
+          <div class="psub">Trụ Cột: Vị Thế · Thứ 4 tuần 2</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p5')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p5">Tin sai số 1 mà tôi thấy phổ biến nhất trong nghề:
+
+"Tôi phải đủ giỏi, đủ nổi tiếng, đủ kinh nghiệm — rồi mới có thể xây thương hiệu cá nhân."
+
+Tin đó giữ hàng trăm môi giới ở trạng thái "chuẩn bị" mà không bao giờ bắt đầu.
+
+Sự thật là: khách hàng không trả tiền cho người giỏi nhất thị trường. Họ trả tiền cho người họ tin tưởng nhất, quen thuộc nhất, cảm thấy được hiểu nhất.
+
+Để làm được 3 điều đó — anh/chị không cần 10 năm kinh nghiệm. Chỉ cần:
+
+→ Chia sẻ đúng những gì mình đã đi qua (dù chỉ 6 tháng)
+→ Dẫn đường cho người đang ở chỗ mình từng đứng
+→ Thành thật về hành trình — kể cả những lần thất bại
+
+Người đang mắc kẹt không cần nghe từ chuyên gia số 1. Họ cần nghe từ người đã đi qua đúng chỗ đó và thoát ra được.
+
+Đó có thể là anh/chị — ngay bây giờ.
+
+Anh/chị đã đi qua giai đoạn khó nào trong nghề mà người mới vào cần biết?
+
+#thươnghiệucánhân #môigiớiBDS #pháttriểnbảnthân</div>
+      <div class="post-note"><b>Ghi chú:</b> Câu hỏi cuối mời chia sẻ → dễ trả lời, nhiều engagement. Ai chia sẻ trong comment = tự qualify mình có câu chuyện → tiềm năng học viên nhất.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">6</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-tofu">TOFU</span>
+        <div class="post-info">
+          <div class="ptitle">3 cấp độ môi giới — anh/chị đang ở đâu?</div>
+          <div class="psub">Trụ Cột: Tần Số · Thứ 6 tuần 2</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p6')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p6">Sau thời gian quan sát, tôi thấy có 3 nhóm môi giới với 3 cách tiếp cận hoàn toàn khác nhau:
+
+🔴 Nhóm 1 — Giao dịch để sống sót
+Gọi điện vì sợ hết tháng. Tiếp cận khách vì cần bán, không phải vì muốn giúp. Kiệt sức, kết quả thất thường.
+
+🟡 Nhóm 2 — Giao dịch theo quy trình
+Làm đúng các bước. Chuyên nghiệp nhưng cơ học. Thu nhập ổn định nhưng không có đột phá.
+
+🟢 Nhóm 3 — Xây dựng cộng đồng
+Mỗi cuộc gọi là cơ hội giúp đỡ. Mỗi bài đăng là chia sẻ giá trị thật. Khách hàng tự tìm đến và giới thiệu nhau. Thu nhập tăng dần theo thương hiệu, không phải theo số giờ làm việc.
+
+Sự khác biệt giữa 3 nhóm không phải kỹ năng hay sản phẩm. Là tâm thức — cách nhìn công việc và giá trị mình mang lại.
+
+Anh/chị đang ở nhóm nào?
+Comment 1, 2, hoặc 3 — tôi muốn biết thực tế. Không phán xét.
+
+#môigiớiBDS #thươnghiệucánhân #pháttriểnnghề</div>
+      <div class="post-note"><b>Ghi chú:</b> Poll "comment số" → easy engagement + data thực. Reply từng người → kết nối cá nhân. Bài seeding quan trọng nhất vì map audience trước khi thông báo lớp.</div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-label ph2-lbl" style="margin-top:40px">⬤ PHASE 2 · WARM-UP & THÔNG BÁO · Bài 7–10 · Tuần -1</div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">7</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-mofu">MOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Thông Báo Lớp — Nói Thật Trước Khi Đăng Ký</div>
+          <div class="psub">Launch Announcement · Thứ 2 tuần cuối</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p7')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p7">Tôi đang mở một lớp học nhỏ — và trước khi anh/chị đọc thêm, tôi cần nói thật một điều:
+
+Đây không phải lớp học của "chuyên gia BDS số 1 Việt Nam". Không có celebrity endorsement. Không có cam kết "đảm bảo thu nhập tháng này".
+
+Đây là lớp của một người môi giới 2 năm trong nghề, từng loay hoay không biết xây thương hiệu như thế nào — và đã tìm ra cách, bằng AI, không cần kỹ năng công nghệ.
+
+Tôi mở lớp vì đơn giản: tôi ước ai đó dạy mình điều này từ đầu.
+
+—
+
+"Brand From Zero" — Xây Thương Hiệu Cá Nhân Cho Môi Giới BDS
+
+📅 4 tuần · 8 buổi live 90 phút
+👥 Tối đa 20 người (phản hồi cá nhân thực sự)
+⚡ Buổi 0 miễn phí: Reset Tâm Thức trước khi học công cụ
+🎯 Ra khỏi lớp với hệ thống thật — không chỉ kiến thức
+💼 Có thể áp dụng ngay trong tuần đầu tiên
+
+Link đăng ký và toàn bộ chi tiết:
+👉 [thêm link bbb-class.html vào đây]
+
+Anh/chị có câu hỏi gì không? Comment hoặc nhắn tin tôi trực tiếp — tôi reply tất cả.
+
+#BrandFromZero #thươnghiệucánhân #môigiớiBDS #khaigiang</div>
+      <div class="post-note"><b>Ghi chú:</b> Thêm link sales page vào chỗ được đánh dấu. Không dùng ngôn ngữ hoa mỹ — tone thật, ngắn. Reply mọi comment trong 2 giờ đầu để thuật toán đẩy bài.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">8</div>
+        <span class="tag tag-plat">Facebook</span>
+        <span class="tag tag-mofu">MOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Behind The Scenes: Tôi đã build hệ thống này như thế nào</div>
+          <div class="psub">Social Proof · Thứ 3 tuần cuối</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p8')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p8">Tôi muốn chia sẻ thật về những gì tôi đã làm trong 3 tháng vừa qua — vì đây chính là bằng chứng thực cho những gì tôi sẽ dạy trong lớp.
+
+3 tháng trước tôi không có gì cả:
+- Không có system
+- Không có content calendar
+- Không biết làm landing page
+- Không biết đóng gói sản phẩm
+- Chưa bao giờ chạy lớp học online
+
+Giờ tôi có:
+✅ Dashboard quản lý 11 module hệ thống
+✅ 20+ công cụ digital hoàn chỉnh
+✅ Landing page thu tiền tự động
+✅ Hệ thống content 90 ngày
+✅ Bộ gift/lead magnet thu khách
+✅ Lớp học 4 tuần sắp khai giảng
+
+Tất cả được làm với: AI + sự rõ ràng về điều mình muốn tạo ra + không bỏ cuộc dù nhiều lần thấy khó.
+
+Không có nhà tài trợ. Không có team. Không có kỹ năng công nghệ ban đầu.
+
+Tôi chia sẻ điều này không phải để "flex" — mà để nói: Nếu tôi làm được, anh/chị cũng làm được. Và tôi muốn rút ngắn con đường đó cho anh/chị.
+
+Đó là lý do tôi mở lớp Brand From Zero.
+👉 [thêm link]
+
+#BrandFromZero #thươnghiệucánhân #AItools</div>
+      <div class="post-note"><b>Ghi chú:</b> Đính kèm ảnh chụp màn hình dashboard hoặc một số tool đã tạo (nếu có). Hình ảnh thực = social proof mạnh nhất. Tránh ảnh render đẹp — ảnh thật hơn.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">9</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-mofu">MOFU</span>
+        <div class="post-info">
+          <div class="ptitle">4 tuần — anh/chị sẽ có gì? (Cụ thể, không chung chung)</div>
+          <div class="psub">Curriculum Preview · Thứ 5 tuần cuối</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p9')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p9">Nhiều người hỏi tôi: "Học xong lớp Brand From Zero thì được gì cụ thể?"
+
+Tôi thích câu hỏi này. Vì nó cho thấy anh/chị nghiêm túc — không phải người chỉ đăng ký cho vui.
+
+Đây là câu trả lời thật, không hoa mỹ:
+
+⚡ BUỔI 0 (Trước khai giảng · Miễn phí):
+Reset tâm thức — tại sao công cụ tốt không đủ, và cần gì thật sự để bứt phá
+
+📌 TUẦN 1 — Foundation:
+→ Tìm ra giá trị cốt lõi mà chỉ anh/chị mới có
+→ Viết câu định vị 1 dòng — khách nghe xong nhớ ngay
+
+📝 TUẦN 2 — Content:
+→ Xây hệ thống content bán hàng mà không cần bán
+→ Workshop viết bài thực chiến — ra khỏi buổi đã có bài hoàn chỉnh
+
+🔧 TUẦN 3 — System:
+→ Bộ tài liệu bán hàng cá nhân (pitch, script, objection handling)
+→ Quy trình từ awareness đến close — không phụ thuộc may rủi
+
+🚀 TUẦN 4 — Launch:
+→ Launch cá nhân trong 72 giờ đầu tiên
+→ Scale từ 1 khách đến cộng đồng
+
+Tối đa 20 người. Đang còn chỗ.
+👉 [thêm link đăng ký]
+
+#BrandFromZero #khaigiang #thươnghiệucánhân #môigiớiBDS</div>
+      <div class="post-note"><b>Ghi chú:</b> Format rõ ràng, cụ thể → giảm lo ngại "mơ hồ không biết học gì". Bài này thường có conversion rate cao nhất vì giải quyết câu hỏi thực tế.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">10</div>
+        <span class="tag tag-plat">Facebook</span>
+        <span class="tag tag-mofu">MOFU</span>
+        <div class="post-info">
+          <div class="ptitle">3 lý do hay gặp nhất — và tôi muốn nói thẳng</div>
+          <div class="psub">Objection Handler · Thứ 7 tuần cuối</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p10')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p10">Kể từ khi thông báo lớp Brand From Zero, có 3 lý do tôi nghe nhiều nhất khi người ta chưa đăng ký. Tôi muốn nói thẳng về từng cái:
+
+❌ "Tôi bận quá, không có thời gian"
+→ Mỗi buổi 90 phút, 2 buổi/tuần. Có recording xem lại nếu bận.
+→ Nếu anh/chị không có 3 giờ/tuần để đầu tư vào thương hiệu cá nhân — thương hiệu đó sẽ không bao giờ được xây.
+
+❌ "Tôi sẽ học sau, bây giờ chưa đúng thời điểm"
+→ "Sau" thường không đến. Tôi biết vì tôi đã từng nói câu đó 6 lần trước khi bắt đầu.
+→ Thời điểm đúng nhất để bắt đầu là khi anh/chị còn có thể bắt đầu nhỏ.
+
+❌ "Đắt quá"
+→ Standard: 7,997k — tương đương 1/3 hoa hồng một giao dịch nhỏ.
+→ Câu hỏi không phải "đắt hay rẻ" — mà là "nếu xây được thương hiệu, ROI là bao nhiêu?"
+
+Tôi không cố bán. Tôi chỉ muốn nói thật.
+
+Nếu sau khi đọc anh/chị vẫn thấy chưa phù hợp → hoàn toàn ổn. Nhưng nếu có một phần nào đang do dự → nhắn tin tôi, mình nói chuyện trước.
+
+👉 [thêm link]
+
+#BrandFromZero #thươnghiệucánhân #môigiớiBDS</div>
+      <div class="post-note"><b>Ghi chú:</b> Đăng thứ 7 để người có thời gian đọc kỹ cuối tuần. Cuối bài mở cửa cho DM → reply mọi tin nhắn → convert trực tiếp.</div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-label ph3-lbl" style="margin-top:40px">⬤ PHASE 3 · CHỐT SLOT & ĐÓNG · Bài 11–12 · Tuần Launch</div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">11</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-bofu">BOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Cập nhật: Còn X chỗ trong lớp Brand From Zero</div>
+          <div class="psub">Urgency · Thứ 4 tuần launch</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p11')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p11">Cập nhật nhanh về lớp Brand From Zero:
+
+Hiện tại đã có [số] người đăng ký. Còn [số] chỗ.
+
+Tôi giới hạn 20 người không phải để tạo khan hiếm giả — mà vì trên 20 người, tôi không thể đọc từng bài tập và đưa phản hồi cá nhân được nữa. Đó là cam kết tôi không sẵn sàng phá vỡ.
+
+Nếu anh/chị đang do dự:
+
+Hỏi bản thân câu này: "6 tháng nữa, nếu tôi vẫn ở chỗ này, tôi có ổn không?"
+
+Nếu câu trả lời là không — thì có thể đây là thứ anh/chị cần làm khác đi.
+
+👉 Đăng ký: [link]
+Hoặc nhắn tin trực tiếp nếu còn thắc mắc — tôi reply trong ngày.
+
+Hạn cuối: [ngày cụ thể]
+
+#BrandFromZero #thươnghiệucánhân #môigiớiBDS</div>
+      <div class="post-note"><b>Ghi chú:</b> Thay [số] và [ngày] bằng thông tin thực. Câu hỏi "6 tháng nữa" là pattern interrupt hiệu quả — không cần hô hào. Honest urgency > fake urgency.</div>
+    </div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-hd">
+      <div class="post-meta">
+        <div class="post-num">12</div>
+        <span class="tag tag-plat">FB · Zalo</span>
+        <span class="tag tag-bofu">BOFU</span>
+        <div class="post-info">
+          <div class="ptitle">Ngày Cuối — Link Đăng Ký Đóng Sau 24 Giờ</div>
+          <div class="psub">Last Day · Thứ 7 launch week</div>
+        </div>
+      </div>
+      <button class="copy-btn" onclick="cp(this,'p12')">📋 Copy</button>
+    </div>
+    <div class="post-bd">
+      <div class="post-txt" id="p12">Hôm nay là ngày cuối đăng ký lớp Brand From Zero.
+
+Sáng mai link đăng ký sẽ đóng — không phải vì tôi muốn bán gấp, mà vì lớp khai giảng ngày [ngày] và tôi cần chuẩn bị tài liệu cho từng học viên.
+
+Nếu anh/chị đã theo dõi các bài tuần vừa rồi và đang ở đây — có lẽ đã có một phần nào đó đang cộng hưởng.
+
+Tôi không có script thuyết phục. Tôi chỉ có một câu hỏi thật:
+
+Anh/chị muốn đầu tư 4 tuần để xây thứ gì đó bền vững hơn — hay tiếp tục như hiện tại và thấy kết quả như hiện tại?
+
+Nếu muốn thay đổi: 👉 [link đăng ký]
+Nếu chưa chắc: Nhắn tin tôi ngay bây giờ — tôi online cả ngày hôm nay.
+
+Hẹn gặp trong lớp.
+
+#BrandFromZero #ngàycuối #thươnghiệucánhân #môigiớiBDS</div>
+      <div class="post-note"><b>Ghi chú:</b> Ngắn, không hoa mỹ, không aggressive. "Tôi online cả ngày hôm nay" = commitment thật → tạo tin tưởng cuối cùng. Đây là bài có tỷ lệ convert thực cao nhất.</div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-seeding -->
+
+<!-- ════════════════════════════════════════════ -->
+<!-- TAB 2: NỘI DUNG LỚP HỌC                     -->
+<!-- ════════════════════════════════════════════ -->
+<div id="tab-class" class="tab-panel">
+<div class="container">
+  <div class="sec-tag">Nội Dung Lớp Học</div>
+  <h1 class="sec-title">Tài Liệu 5 Buổi — Chia Sẻ Trong Lớp</h1>
+  <p class="sec-sub">Script mở buổi · Bài tập thực hành · Câu hỏi thảo luận · Slide concept · Buổi 0 → Tuần 4</p>
+
+  <!-- BUỔI 0 -->
+  <div class="sess-blk" style="border-color:rgba(201,168,76,.3)">
+    <div class="sess-hd" style="background:rgba(201,168,76,.05)">
+      <div class="sess-emoji">⚡</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk" style="color:var(--gold)">Buổi 0 · Khai Mạc · Miễn Phí</div>
+        <div class="sess-ttl">Reset Tâm Thức — Trước Khi Học Công Cụ</div>
+        <div class="sess-sub">"Tại Sao Công Cụ Tốt Không Đủ — Và Cần Gì Để Bứt Phá"</div>
+      </div>
+      <div class="sess-dur">90 phút</div>
+    </div>
+    <div class="sess-bd">
+      <h4>🎯 Mục Tiêu Buổi 0</h4>
+      <p>Học viên ra khỏi buổi này với: (1) Hiểu tại sao họ đang bị mắc kẹt dù đã cố gắng, (2) Có câu trả lời đầu tiên cho "Vị thế của tôi là gì?", (3) Hứng khởi đúng mức — không phải hyped mà là rõ ràng.</p>
+
+      <h4>📋 Script Mở Buổi (10 phút đầu)</h4>
+      <div class="script-box">
+        <div class="sc-lbl">🎙️ Script — Đọc hoặc paraphrase theo phong cách tự nhiên</div>
+        "Chào mừng anh/chị đến buổi 0 của Brand From Zero. Buổi này miễn phí và tôi không cần anh/chị phải cảm ơn hay 'phải thấy hay'. Tôi chỉ cần anh/chị ở đây với một tâm thế: sẵn sàng nhìn thật vào những gì đang xảy ra.
+
+Tôi sẽ nói thật ngay từ đầu: Tôi 2 năm trong nghề. Không có gì đặc biệt. Nhưng tôi đã đi qua đúng những gì anh/chị đang đối mặt — và tôi đã tìm ra cách.
+
+Buổi này không phải để tôi dạy anh/chị — mà để chúng ta cùng nhìn vào thứ đang thực sự cản trở kết quả. Và tôi đặt cược đó không phải kỹ năng. Không phải sản phẩm. Không phải thị trường."
+
+        <em>→ Dừng 3 giây. Nhìn vào camera. Tiếp tục:</em>
+
+        "Đó là tâm thức. Và chúng ta sẽ làm rõ điều đó ngay hôm nay."
+      </div>
+
+      <h4>🔦 Concept 1: Câu Chuyện Hang Động (15 phút)</h4>
+      <p>Kể câu chuyện Plato — nhưng áp dụng ngay vào thực tế của môi giới BDS. Câu hỏi để thảo luận:</p>
+      <div class="callout-purple">
+        💬 "Anh/chị đang nhìn vào thứ gì mỗi ngày và tin đó là thực tại của nghề này? Views, lead, tỷ lệ chốt theo tuần... Đó là những cái bóng. Thứ tạo ra những con số đó mới là thực tại."
+      </div>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Bài Tập · 5 phút · Viết cá nhân</div>
+        <h5>Hỏi học viên tự viết:</h5>
+        <ul>
+          <li>Tôi đang đổ lỗi cho điều gì khi kết quả không tốt? (thị trường, khách, may mắn...)</li>
+          <li>Nếu đó không phải nguyên nhân thật — thì nguyên nhân thật là gì?</li>
+        </ul>
+        <p style="margin-top:8px">→ Mời 2-3 người share. Không phán xét. Gật đầu và hỏi thêm.</p>
+      </div>
+
+      <h4>📡 Concept 2: Tần Số — Chiếc Radar Phát Sóng 24/7 (20 phút)</h4>
+      <div class="callout">
+        🔑 Key Message: "Khách hàng không mua sản phẩm trước — họ đọc anh/chị trước. Và họ đọc bằng cảm nhận, không phải bằng lý trí."
+      </div>
+      <p>Giải thích 3 cấp độ tần số (đã có trong slide concept):</p>
+      <ul>
+        <li><b>Cấp 1:</b> Gọi vì sợ → khách nghe thấy sự cấp bách → từ chối</li>
+        <li><b>Cấp 2:</b> Gọi theo quy trình → cơ học → không có kết nối</li>
+        <li><b>Cấp 3:</b> Gọi vì thực sự muốn giúp → khách cảm nhận được → tin tưởng</li>
+      </ul>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Bài Tập · Cá Nhân · 3 phút</div>
+        <h5>"Kiểm Tra Tần Số Cuộc Gọi Tuần Vừa Rồi"</h5>
+        <p>Nhớ lại 3 cuộc gọi gần nhất với khách. Với mỗi cuộc: Tôi đang ở tần số nào? Kết quả như thế nào? Có tương quan không?</p>
+      </div>
+
+      <h4>🔋 Concept 3: Quản Lý Năng Lượng, Không Phải Thời Gian (15 phút)</h4>
+      <p>Key insight: Bài toán không phải "làm thêm giờ" mà là "vận hành ở năng lượng cao hơn trong cùng số giờ".</p>
+      <div class="callout-teal">
+        🔋 "4 loại năng lượng: Trí lực (ý tưởng, chiến lược) · Thể lực (cơ thể, giấc ngủ) · Cảm xúc (kết nối, tin tưởng) · Ý nghĩa (biết mình làm vì điều gì lớn hơn). Người vận hành cả 4 đồng thời → kết quả nhân lên."
+      </div>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Bài Tập · Nhóm (2-3 người) · 7 phút</div>
+        <h5>Thiết Kế "Giờ Vàng" Của Tuần</h5>
+        <ul>
+          <li>Xác định 3 khung giờ trong tuần khi anh/chị năng lượng cao nhất</li>
+          <li>Ghi vào: công việc quan trọng nhất sẽ vào đây (gọi khách VIP, viết content, gặp gỡ)</li>
+          <li>Thiết kế "nghi thức kích hoạt" 10 phút trước giờ vàng</li>
+        </ul>
+      </div>
+
+      <h4>👑 Concept 4: Tìm Vị Thế Của Người Dẫn Đường (20 phút)</h4>
+      <div class="callout">
+        💡 "Anh/chị không cần là chuyên gia số 1. Chỉ cần đã đi qua đoạn đường mà người kia đang đứng — và đi trước họ vài bước. Vị thế đó được dệt từ 3 sợi chỉ: Lối sống của anh/chị · Câu chuyện của anh/chị · Trải nghiệm chuyển hoá của anh/chị."
+      </div>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Bài Tập Chính Buổi 0 · Cá Nhân · 10 phút</div>
+        <h5>Viết "Tuyên Ngôn Vị Thế" Phiên Bản Đầu Tiên</h5>
+        <p>Hoàn thành câu sau (viết thật, không viết đẹp):</p>
+        <div class="script-box" style="font-size:14px">
+          "Tôi là [tên] — môi giới BDS [X năm]. Tôi từng [nỗi đau/khó khăn cũ]. Giờ tôi [điều tôi đã làm khác đi]. Tôi có thể giúp [ai] [làm gì] bằng [cách gì]."
+        </div>
+        <p>→ Mời 3-4 người share. Nhận xét: "Phần nào nghe thật nhất? Phần nào còn gượng?"</p>
+      </div>
+
+      <h4>🔚 Đóng Buổi 0 (5 phút)</h4>
+      <div class="script-box">
+        <div class="sc-lbl">🎙️ Script Kết</div>
+        "Tuần 1 của lớp chúng ta sẽ bắt đầu ngày [ngày]. Bài tập về nhà trước Tuần 1:
+
+Đọc lại Tuyên Ngôn Vị Thế anh/chị vừa viết. Không chỉnh sửa gì. Chỉ đọc lại 3 lần với câu hỏi: 'Tôi có thực sự tin vào những gì mình vừa viết không?'
+
+Nếu câu trả lời là 'chưa hoàn toàn' — đó là bài tập quan trọng nhất trước khi học bất cứ công cụ nào.
+
+Hẹn gặp Tuần 1. Cảm ơn anh/chị đã có mặt hôm nay."
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TUẦN 1 -->
+  <div class="sess-blk">
+    <div class="sess-hd">
+      <div class="sess-emoji">🎯</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk" style="color:var(--blue)">Tuần 1 · Foundation · 2 Buổi</div>
+        <div class="sess-ttl">Tìm Ra Giá Trị Cốt Lõi — Điều Chỉ Anh/Chị Mới Có</div>
+        <div class="sess-sub">Buổi 1: Tại Sao 90% Người Bán Hàng Vô Hình · Buổi 2: Tìm USP Thật</div>
+      </div>
+      <div class="sess-dur">2 × 90 phút</div>
+    </div>
+    <div class="sess-bd">
+      <h4>Buổi 1 — Tại Sao 90% Người Bán Hàng Vô Hình</h4>
+      <div class="callout">🔑 Core Message: Vô hình không phải vì ít follow — mà vì không có gì đáng nhớ. Đáng nhớ không cần to, cần đặc trưng.</div>
+      <p>Nội dung chính:</p>
+      <ul>
+        <li><b>Phần 1 (20'):</b> Sự khác biệt giữa "bán hàng" và "có thương hiệu" — tại sao bán hàng cần nỗ lực liên tục còn thương hiệu tạo ra lực hút tự nhiên</li>
+        <li><b>Phần 2 (25'):</b> 3 lý do khách không nhớ tên anh/chị — giống nhau, không nhất quán, thiếu câu chuyện</li>
+        <li><b>Phần 3 (30'):</b> Case study: 2 profile môi giới — 1 vô hình, 1 đáng nhớ. Phân tích cụ thể từng điểm khác biệt</li>
+        <li><b>Bài tập (15'):</b> Phác thảo chân dung thương hiệu cá nhân — 3 từ mô tả, 1 câu định vị đầu tiên</li>
+      </ul>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Bài Tập Buổi 1 · Cá Nhân</div>
+        <h5>"Audit Thương Hiệu Cá Nhân Hiện Tại"</h5>
+        <ul>
+          <li>Google tên mình: Kết quả hiện ra là gì? Ai sẽ nhìn thấy gì?</li>
+          <li>Profile Facebook/Zalo hiện tại: Khách hàng mới nhìn vào sẽ hiểu anh/chị là ai trong 5 giây không?</li>
+          <li>10 bài đăng gần nhất: Có pattern gì không? Hay mỗi bài là một chủ đề khác nhau?</li>
+        </ul>
+        <p style="margin-top:8px">Chụp màn hình mang vào Buổi 2 để thảo luận nhóm.</p>
+      </div>
+
+      <h4 style="margin-top:24px">Buổi 2 — Tìm USP Thật</h4>
+      <div class="callout">🔑 Core Message: USP thật không phải "nhiệt tình, chuyên nghiệp, tận tâm" — đó là điều ai cũng nói. USP thật là thứ chỉ anh/chị có, từ chính hành trình của mình.</div>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Framework · 3 Câu Hỏi Tìm USP</div>
+        <h5>Áp Dụng Trực Tiếp Trong Buổi Học</h5>
+        <ol style="padding-left:16px">
+          <li style="margin-bottom:8px;font-size:13px;color:var(--muted)"><b style="color:var(--text)">Tôi đã trải qua giai đoạn khó nào</b> mà hầu hết người mới vào nghề cũng gặp? <em>(Đây là cầu nối cảm xúc với khách)</em></li>
+          <li style="margin-bottom:8px;font-size:13px;color:var(--muted)"><b style="color:var(--text)">Tôi đã vượt qua bằng cách nào</b> khác với cách thông thường? <em>(Đây là điểm khác biệt)</em></li>
+          <li style="margin-bottom:8px;font-size:13px;color:var(--muted)"><b style="color:var(--text)">Ai cụ thể được hưởng lợi</b> từ điều tôi đã học được? <em>(Đây là khách hàng lý tưởng)</em></li>
+        </ol>
+        <p>→ Kết quả: Câu định vị 1 dòng hoàn chỉnh. Mời từng người đọc to → nhận phản hồi từ nhóm.</p>
+      </div>
+      <div class="callout-teal">
+        📝 Bài Tập Về Nhà Tuần 1: Viết lại profile Facebook/Zalo dựa trên USP vừa tìm ra. Chụp màn hình before/after mang vào Tuần 2.
+      </div>
+    </div>
+  </div>
+
+  <!-- TUẦN 2 -->
+  <div class="sess-blk">
+    <div class="sess-hd">
+      <div class="sess-emoji">📝</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk" style="color:var(--purple)">Tuần 2 · Content · 2 Buổi</div>
+        <div class="sess-ttl">Xây Nội Dung Bán Hàng Mà Không Cần Bán</div>
+        <div class="sess-sub">Buổi 3: Content Architecture · Buổi 4: Workshop Viết Bài Thực Chiến</div>
+      </div>
+      <div class="sess-dur">2 × 90 phút</div>
+    </div>
+    <div class="sess-bd">
+      <h4>Buổi 3 — Content Architecture</h4>
+      <div class="callout">🔑 Nguyên tắc: 70% nội dung cho đi giá trị → 20% nội dung kết nối → 10% nội dung bán hàng. Ai đảo tỷ lệ này sẽ bị unfollow hoặc bị trust.</div>
+      <p>3 loại content mỗi môi giới cần:</p>
+      <ul>
+        <li><b>Content Vị Thế:</b> Câu chuyện, hành trình, bài học — xây trust dài hạn</li>
+        <li><b>Content Giáo Dục:</b> Kiến thức hữu ích về BDS, thị trường, quy trình mua — xây credibility</li>
+        <li><b>Content Chuyển Đổi:</b> Case study, testimonial, giao dịch thực — dẫn đến hành động</li>
+      </ul>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Bài Tập Buổi 3 · Nhóm · 20 phút</div>
+        <h5>Xây 5 "Cột Nội Dung" Cá Nhân</h5>
+        <p>Mỗi người xác định 5 chủ đề sẽ đăng đều xuyên suốt. Ví dụ: Câu chuyện nghề · Kiến thức pháp lý · Review dự án · Kinh nghiệm tư vấn · Hành trình cá nhân. Chia sẻ với nhóm — nhận phản hồi: "Nghe nhất quán không? Có hình dung được người đăng không?"</p>
+      </div>
+
+      <h4 style="margin-top:24px">Buổi 4 — Workshop Viết Bài Thực Chiến</h4>
+      <div class="callout">🎯 Mục tiêu: Ra khỏi buổi này với 3 bài đăng hoàn chỉnh, sẵn sàng đăng ngay.</div>
+      <p>Trong buổi: Mỗi học viên viết 3 bài theo 3 template:</p>
+      <ul>
+        <li><b>Bài 1:</b> Story format — "Tôi đã từng..." → bài học → relevance với khách</li>
+        <li><b>Bài 2:</b> Giáo dục format — "X điều về BDS mà [nhóm khách] cần biết"</li>
+        <li><b>Bài 3:</b> Kết nối format — Câu hỏi mở để tạo engagement</li>
+      </ul>
+      <div class="callout-teal">
+        📝 Bài Tập Về Nhà Tuần 2: Đăng 1 bài/ngày trong 7 ngày, theo content calendar đã thiết kế. Track: reach, comment, DM nhận được. Mang data vào Tuần 3.
+      </div>
+    </div>
+  </div>
+
+  <!-- TUẦN 3 -->
+  <div class="sess-blk">
+    <div class="sess-hd">
+      <div class="sess-emoji">🔧</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk" style="color:var(--teal)">Tuần 3 · System · 2 Buổi</div>
+        <div class="sess-ttl">Đóng Gói Thành Hệ Thống — Không Còn Phụ Thuộc May Rủi</div>
+        <div class="sess-sub">Buổi 5: Bộ Tài Liệu Bán Hàng · Buổi 6: Quy Trình Awareness → Close</div>
+      </div>
+      <div class="sess-dur">2 × 90 phút</div>
+    </div>
+    <div class="sess-bd">
+      <h4>Buổi 5 — Xây Bộ Tài Liệu Bán Hàng Cá Nhân</h4>
+      <div class="callout">🔑 Key: Tài liệu bán hàng không phải catalogue sản phẩm — là hệ thống trả lời câu hỏi và xử lý từ chối TRƯỚC khi khách hỏi.</div>
+      <p>5 tài liệu mỗi môi giới cần:</p>
+      <ul>
+        <li>Pitch cá nhân 30 giây (elevator pitch)</li>
+        <li>FAQ tài chính cơ bản cho khách mua lần đầu</li>
+        <li>Script xử lý 5 từ chối phổ biến nhất</li>
+        <li>Bộ câu hỏi khai thác nhu cầu (discovery questions)</li>
+        <li>Follow-up sequence sau buổi gặp khách</li>
+      </ul>
+      <div class="ex-box">
+        <div class="ex-tag">✏️ Workshop · Build Trong Buổi</div>
+        <h5>Mỗi Học Viên Build Pitch 30 Giây Cá Nhân</h5>
+        <p>Dùng AI hỗ trợ viết nháp → chỉnh theo giọng thật → tập nói to 3 lần → nhận phản hồi nhóm.</p>
+      </div>
+
+      <h4 style="margin-top:24px">Buổi 6 — Quy Trình Từ Awareness Đến Close</h4>
+      <div class="callout">🗺️ Mục tiêu: Mỗi học viên có bản đồ hành trình khách hàng CỦA RIÊNG MÌNH — từ điểm họ biết đến anh/chị đến điểm ký hợp đồng.</div>
+      <p>Vẽ "Customer Journey Map" cá nhân: 5 điểm chạm (touchpoints) quan trọng nhất. Với mỗi điểm: Khách đang nghĩ gì? Cảm xúc là gì? Anh/chị cần làm gì ở điểm này?</p>
+      <div class="callout-teal">
+        📝 Bài Tập Về Nhà Tuần 3: Dùng bộ tài liệu vừa tạo trong ít nhất 5 cuộc gặp/gọi thực. Ghi lại: Cái nào hoạt động tốt? Cái nào cần chỉnh? Mang vào Tuần 4.
+      </div>
+    </div>
+  </div>
+
+  <!-- TUẦN 4 -->
+  <div class="sess-blk">
+    <div class="sess-hd">
+      <div class="sess-emoji">🚀</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk" style="color:var(--green)">Tuần 4 · Launch · 2 Buổi</div>
+        <div class="sess-ttl">Ra Mắt & Có Khách — Không Cần Chạy Ads</div>
+        <div class="sess-sub">Buổi 7: Launch Cá Nhân 72 Giờ · Buổi 8: Scale Từ 1 Khách Đến Cộng Đồng</div>
+      </div>
+      <div class="sess-dur">2 × 90 phút</div>
+    </div>
+    <div class="sess-bd">
+      <h4>Buổi 7 — Launch Cá Nhân: 72 Giờ Đầu Tiên</h4>
+      <div class="callout">🚀 Nguyên tắc: Launch không cần hoàn hảo, cần thật. Bắt đầu với những người đã biết anh/chị — mở rộng dần từ đó.</div>
+      <p>Framework 72 giờ:</p>
+      <ul>
+        <li><b>Giờ 0-24:</b> Thông báo trực tiếp với 10-20 người trong network thân thiết — không phải post công khai, nhắn tin cá nhân</li>
+        <li><b>Giờ 24-48:</b> Bài post đầu tiên với Tuyên Ngôn Vị Thế mới. Respond mọi comment trong 1 giờ đầu.</li>
+        <li><b>Giờ 48-72:</b> Follow up với những người đã tương tác. Offer tư vấn miễn phí 30 phút cho 3-5 người</li>
+      </ul>
+
+      <h4 style="margin-top:24px">Buổi 8 — Scale: Từ 1 Khách Đến Cộng Đồng</h4>
+      <div class="callout">🌱 Key Insight: Cộng đồng không phải số lượng người follow — là số lượng người coi anh/chị là người đáng tin trong quyết định BDS của họ.</div>
+      <p>3 cơ chế scale bền vững:</p>
+      <ul>
+        <li><b>Referral System:</b> Làm sao để 1 khách dẫn 3 khách tiếp theo</li>
+        <li><b>Content Flywheel:</b> Hệ thống content tự nuôi chính nó</li>
+        <li><b>Network Effect:</b> Mỗi người trong mạng lưới kéo thêm người khác</li>
+      </ul>
+      <div class="callout-teal">
+        🎓 Kết Lớp: Mỗi học viên trình bày "30 Ngày Tiếp Theo" của mình — cam kết cụ thể, đo lường được. Nhóm làm witness cho nhau.
+      </div>
+
+      <div class="ex-box" style="margin-top:20px;border-color:rgba(201,168,76,.2)">
+        <div class="ex-tag" style="color:var(--gold)">🏆 Lễ Bế Giảng</div>
+        <h5>Trao Thành Quả — Không Phải Bằng Khen</h5>
+        <p>Mỗi học viên chia sẻ: (1) Điều lớn nhất thay đổi trong 4 tuần, (2) USP của mình trong 1 câu, (3) Cam kết 30 ngày tiếp theo. → Chụp ảnh màn hình/group nhớ khoảnh khắc này.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-class -->
+
+<!-- ════════════════════════════════════════════ -->
+<!-- TAB 3: HOOK & SCRIPT VIDEO                   -->
+<!-- ════════════════════════════════════════════ -->
+<div id="tab-hooks" class="tab-panel">
+<div class="container">
+  <div class="sec-tag">Hook Formulas & Video Scripts</div>
+  <h1 class="sec-title">Hook Seeding — Cho Video & Story</h1>
+  <p class="sec-sub">Dùng cho Facebook Live, Reels, TikTok, Story · Phù hợp cho seeding lớp học và nội dung Tâm Thức</p>
+
+  <div class="hook-grid">
+    <div class="hook-card">
+      <h4>Hook Công Thức 1: Sự Thật Không Dễ Nghe</h4>
+      <div class="formula">"[Thứ mà mọi người tin] thực ra đang [hại họ như thế nào]."</div>
+      <div class="example"><b>"Cố gắng quản lý thời gian tốt hơn thực ra đang giữ anh/chị ở kết quả cũ."</b><br>"Đăng nhiều bài hơn mà không có hệ thống chỉ đang làm anh/chị kiệt sức nhanh hơn."</div>
+    </div>
+    <div class="hook-card">
+      <h4>Hook Công Thức 2: Tôi Đã Nhầm</h4>
+      <div class="formula">"Tôi đã tốn [thời gian/tiền] làm [điều X] — rồi phát hiện điều này."</div>
+      <div class="example"><b>"Tôi đã tốn 1 năm cố trở thành 'chuyên gia số 1' — rồi nhận ra mình đang đánh sai trận."</b><br>"Tôi đã gọi 100 cuộc điện thoại/tháng mà không hiểu tại sao kết quả thất thường."</div>
+    </div>
+    <div class="hook-card">
+      <h4>Hook Công Thức 3: Câu Hỏi Pattern Interrupt</h4>
+      <div class="formula">"Anh/chị có bao giờ tự hỏi tại sao [điều X] dù anh/chị đã [làm Y]?"</div>
+      <div class="example"><b>"Anh/chị có bao giờ tự hỏi tại sao đồng nghiệp cùng dự án bán được nhiều hơn dù không làm gì khác biệt?"</b></div>
+    </div>
+    <div class="hook-card">
+      <h4>Hook Công Thức 4: Contrast Dramatic</h4>
+      <div class="formula">"[Người A] và [Người B] cùng [X]. Khác biệt duy nhất là [Y]."</div>
+      <div class="example"><b>"2 người cùng bán một dự án. Cùng script. Cùng giá. Một người chốt 5/10. Người kia 1/10. Khác biệt duy nhất không phải kỹ năng."</b></div>
+    </div>
+    <div class="hook-card">
+      <h4>Hook Công Thức 5: Số + Kết Quả Cụ Thể</h4>
+      <div class="formula">"[Số] [thứ] mà [nhóm người] không biết về [chủ đề]."</div>
+      <div class="example"><b>"3 lý do tại sao 90% môi giới vô hình với khách hàng — dù đăng bài hàng ngày."</b><br>"4 loại năng lượng mà người bán hàng giỏi nhất quản lý — không phải thời gian."</div>
+    </div>
+    <div class="hook-card">
+      <h4>Hook Công Thức 6: Thú Nhận Thật</h4>
+      <div class="formula">"Tôi cần thú nhận một thứ về [chủ đề]..."</div>
+      <div class="example"><b>"Tôi cần thú nhận: 3 tháng trước tôi không biết làm gì với AI ngoài hỏi vài câu cho vui. Giờ đây..."</b><br>"Tôi cần thú nhận: Tôi đã nói 'tôi bận' với nhiều cơ hội hơn tôi sẵn sàng thừa nhận."</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec-tag">Script Video Ngắn</div>
+  <h2 class="sec-title" style="font-size:26px">3 Video Script Sẵn Dùng</h2>
+  <p class="sec-sub">Facebook Reels · TikTok · YouTube Shorts · 30-60 giây · Record bằng điện thoại cũng được</p>
+
+  <div class="sess-blk">
+    <div class="sess-hd">
+      <div class="sess-emoji">🎬</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk">Video 1 · 45-60 giây</div>
+        <div class="sess-ttl">Tại sao tôi không cố giỏi nhất nữa</div>
+        <div class="sess-sub">Vị Thế · Phù hợp cho Reels/TikTok · Hook cực mạnh</div>
+      </div>
+    </div>
+    <div class="sess-bd">
+      <div class="script-box">
+        <div class="sc-lbl">🎬 Script — Nói Tự Nhiên, Không Cần Đọc Y Chang</div>
+        <b>[0:00 - 0:03] HOOK</b><br>
+        "Tôi đã ngừng cố trở thành chuyên gia số 1 — và kết quả tốt hơn hẳn."<br><br>
+        <b>[0:03 - 0:20] VẤN ĐỀ</b><br>
+        "Hầu hết chúng ta học, làm, cố — mà vẫn thấy như đang chạy tại chỗ. Lý do không phải vì chưa đủ giỏi."<br><br>
+        <b>[0:20 - 0:45] INSIGHT</b><br>
+        "Khách hàng không trả tiền cho người giỏi nhất thị trường. Họ trả tiền cho người họ tin tưởng nhất. Người gần họ nhất. Người đã đi qua đúng chỗ họ đang đứng.
+
+Và anh/chị không cần 10 năm kinh nghiệm để có điều đó. Chỉ cần đã đi trước họ vài bước và sẵn sàng chia sẻ thật."<br><br>
+        <b>[0:45 - 0:60] CTA</b><br>
+        "Save video này nếu điều này cộng hưởng với anh/chị. Và comment 'vị thế' — tôi sẽ gửi tài liệu về cách tìm ra vị thế thật của mình."
+      </div>
+      <div class="post-note"><b>Ghi chú quay:</b> Ngồi hay đứng tự nhiên. Nhìn thẳng camera. Background đơn giản. Không cần ánh sáng studio — ánh sáng tự nhiên gần cửa sổ là đủ. Nói chuyện như đang nói với 1 người, không phải đám đông.</div>
+    </div>
+  </div>
+
+  <div class="sess-blk">
+    <div class="sess-hd">
+      <div class="sess-emoji">🎬</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk">Video 2 · 30-45 giây</div>
+        <div class="sess-ttl">Cuộc gọi tần số cao vs tần số thấp</div>
+        <div class="sess-sub">Tần Số · Demo thực tế · Hook dạng contrast</div>
+      </div>
+    </div>
+    <div class="sess-bd">
+      <div class="script-box">
+        <div class="sc-lbl">🎬 Script</div>
+        <b>[0:00 - 0:04] HOOK</b><br>
+        "Tôi sẽ show cho anh/chị 2 cách gọi điện cho khách. Cùng 1 script. Kết quả khác hoàn toàn."<br><br>
+        <b>[0:04 - 0:20] DEMO CONTRAST</b><br>
+        "Cách 1: <em>[giọng lo lắng, vội vàng]</em> 'Dạ em là Yến bên HLX, không biết anh/chị có đang quan tâm đến dự án Hạ Long Xanh không ạ...'
+
+Cách 2: <em>[giọng bình tĩnh, quan tâm thật]</em> 'Dạ em Yến đây. Em gọi vì em nhớ anh/chị đang cân nhắc khu vực ven biển — tuần này có thêm thông tin về tài chính anh/chị cần mà em nghĩ hữu ích...'"<br><br>
+        <b>[0:20 - 0:40] INSIGHT</b><br>
+        "Sự khác biệt không phải ngôn từ. Là tần số phía sau ngôn từ đó. Khách hàng nghe được cả hai."<br><br>
+        <b>[0:40 - 0:45] CTA</b><br>
+        "Anh/chị đang gọi ở tần số nào? Comment bên dưới nhé."
+      </div>
+    </div>
+  </div>
+
+  <div class="sess-blk">
+    <div class="sess-hd">
+      <div class="sess-emoji">🎬</div>
+      <div class="sess-hd-info">
+        <div class="sess-wk">Video 3 · 60 giây</div>
+        <div class="sess-ttl">Zero kỹ năng công nghệ — tôi đã build điều này</div>
+        <div class="sess-sub">AI Pillar · Behind The Scenes · Proof of concept</div>
+      </div>
+    </div>
+    <div class="sess-bd">
+      <div class="script-box">
+        <div class="sc-lbl">🎬 Script (quay màn hình dashboard kết hợp talking head)</div>
+        <b>[0:00 - 0:03] HOOK</b><br>
+        "3 tháng trước tôi không biết làm gì hơn là gõ câu hỏi vào ChatGPT. Đây là những gì tôi đã tạo ra sau đó."<br><br>
+        <b>[0:03 - 0:35] SHOW (quay màn hình)</b><br>
+        "Dashboard quản lý toàn bộ hệ thống... [scroll qua các panel]. Bộ công cụ cho môi giới... [mở 1-2 tool]. Landing page thu tiền tự động... Hệ thống content 90 ngày...
+
+Tất cả được tạo ra với AI — không thuê developer, không có kỹ năng thiết kế."<br><br>
+        <b>[0:35 - 0:55] KEY MESSAGE</b><br>
+        "Điều duy nhất tôi học: cách đặt câu hỏi đúng cho AI. Biết mình muốn tạo ra cái gì — rồi để AI làm phần còn lại.
+
+Đây là lợi thế bằng phẳng nhất tôi từng thấy trong kinh doanh."<br><br>
+        <b>[0:55 - 1:00] CTA</b><br>
+        "Tôi đang dạy điều này trong lớp Brand From Zero. Link trong bio."
+      </div>
+      <div class="post-note"><b>Ghi chú:</b> Video này cần screen recording kết hợp talking head. Dùng bất kỳ app record màn hình nào (built-in trên điện thoại iOS/Android). Quality không cần cao — authenticity quan trọng hơn production value.</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:32px">
+    💡 <b>Nguyên tắc đăng video:</b> Đăng kèm caption ngắn (3-5 dòng) + 1 câu hỏi → reply tất cả comment trong 30 phút đầu → thuật toán sẽ đẩy thêm reach tự nhiên. Đừng mua views — engagement thật mới convert.
+  </div>
+</div><!-- /container -->
+</div><!-- /tab-hooks -->
+
+<script>
+function sw(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+function cp(btn, id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    btn.textContent = '✓ Đã copy';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = '📋 Copy'; btn.classList.remove('ok'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
