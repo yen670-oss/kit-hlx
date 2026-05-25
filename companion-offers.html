@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Gói Đồng Hành — Broker Brand Builder Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1628;--card:#0f1e30;--card2:#13243a;--gold:#C9A84C;--gl:#E2C06A;--text:#e8eaf0;--muted:#8fa3b8;--red:#e05555;--green:#4caf82;--blue:#4a90d9;--purple:#8b5cf6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.97);border-bottom:1px solid rgba(201,168,76,.2);padding:12px 24px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(8px);flex-wrap:wrap}
+.back-btn{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);padding:6px 14px;border-radius:8px;font-size:13px;cursor:pointer;text-decoration:none;transition:.2s}
+.back-btn:hover{background:rgba(201,168,76,.25)}
+.nav-title{font-family:'Playfair Display',serif;color:var(--gl);font-size:16px}
+.nav-links{margin-left:auto;display:flex;gap:8px}
+.nav-link{font-size:12px;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);transition:.15s}
+.nav-link:hover{background:rgba(255,255,255,.05);color:#fff}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060f1e,#0d1f35,#060f1e);padding:52px 24px 44px;text-align:center;border-bottom:1px solid rgba(201,168,76,.12)}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gl);padding:6px 20px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,44px);color:#fff;margin-bottom:12px;line-height:1.2}
+.hero h1 em{color:var(--gl);font-style:normal}
+.hero p{color:var(--muted);font-size:15px;max-width:580px;margin:0 auto 36px}
+
+/* PRICING COMPARE */
+.pricing-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;max-width:820px;margin:0 auto}
+@media(max-width:700px){.pricing-row{grid-template-columns:1fr}}
+.p-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:.2s;position:relative}
+.p-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-2px)}
+.p-card.active{border-color:var(--gold);background:rgba(201,168,76,.06)}
+.p-card.featured{border-color:var(--gold)}
+.p-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0a1628;font-size:10px;font-weight:800;padding:3px 14px;border-radius:50px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.p-emoji{font-size:28px;margin-bottom:10px}
+.p-tier{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.p-name{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:10px}
+.p-price{font-family:'Playfair Display',serif;font-size:26px;color:var(--gl);margin-bottom:4px}
+.p-price.free{color:var(--green)}
+.p-period{font-size:12px;color:var(--muted)}
+
+/* TABS */
+.tabs{display:flex;justify-content:center;gap:6px;padding:14px 24px;background:var(--card);border-bottom:1px solid rgba(255,255,255,.06)}
+.tab-btn{background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--muted);padding:8px 20px;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s}
+.tab-btn.active{background:rgba(201,168,76,.18);border-color:var(--gold);color:var(--gl);font-weight:600}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* MAIN */
+.main{max-width:880px;margin:0 auto;padding:36px 24px 100px}
+
+/* OFFER HERO CARD */
+.offer-hero{background:linear-gradient(135deg,var(--card2),var(--card));border-radius:20px;padding:32px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.offer-hero::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none}
+.oh-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
+.oh-emoji{font-size:40px}
+.oh-meta{flex:1}
+.oh-tier{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.oh-name{font-family:'Playfair Display',serif;font-size:26px;color:#fff;line-height:1.2;margin-bottom:8px}
+.oh-promise{font-size:15px;color:var(--muted);line-height:1.7;font-style:italic}
+.oh-promise strong{color:var(--gl);font-style:normal}
+.oh-price-block{text-align:right}
+.oh-price{font-family:'Playfair Display',serif;font-size:32px;color:var(--gl)}
+.oh-price.free-price{color:var(--green)}
+.oh-price-note{font-size:12px;color:var(--muted);text-align:right}
+.oh-divider{height:1px;background:rgba(255,255,255,.06);margin-bottom:16px}
+.oh-tags{display:flex;flex-wrap:wrap;gap:8px}
+.oh-tag{font-size:11px;padding:4px 12px;border-radius:50px;border:1px solid}
+.tag-green{background:rgba(76,175,130,.1);border-color:rgba(76,175,130,.3);color:var(--green)}
+.tag-gold{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.3);color:var(--gl)}
+.tag-blue{background:rgba(74,144,217,.1);border-color:rgba(74,144,217,.3);color:var(--blue)}
+.tag-purple{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.3);color:#a78bfa}
+
+/* INCLUDED */
+.section-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;margin-top:28px}
+.include-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:580px){.include-grid{grid-template-columns:1fr}}
+.inc-item{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start}
+.inc-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.inc-body{}
+.inc-title{font-size:13.5px;font-weight:600;color:#fff;margin-bottom:3px}
+.inc-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:4px}
+.tl-item{display:flex;gap:14px;padding:10px 0}
+.tl-item:not(:last-child){border-bottom:1px solid rgba(255,255,255,.04)}
+.tl-week{min-width:70px;font-size:11px;font-weight:700;color:var(--gold);padding-top:2px}
+.tl-content{}
+.tl-name{font-size:13.5px;font-weight:600;color:#fff;margin-bottom:2px}
+.tl-detail{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* WHO FOR */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:580px){.who-grid{grid-template-columns:1fr}}
+.who-yes{background:rgba(76,175,130,.06);border:1px solid rgba(76,175,130,.2);border-radius:12px;padding:14px 16px}
+.who-no{background:rgba(224,85,85,.06);border:1px solid rgba(224,85,85,.2);border-radius:12px;padding:14px 16px}
+.who-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.who-yes .who-label{color:var(--green)}
+.who-no .who-label{color:var(--red)}
+.who-list{list-style:none;padding:0}
+.who-list li{font-size:13px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.who-list li:last-child{border:none}
+.who-yes .who-list li::before{content:'✓ ';color:var(--green)}
+.who-no .who-list li::before{content:'✗ ';color:var(--red)}
+
+/* SALES COPY */
+.copy-box{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;margin-bottom:12px;position:relative}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2)}
+.cb-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.copy-btn{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gl);padding:4px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s}
+.copy-btn:hover{background:rgba(201,168,76,.25)}
+.copy-btn.copied{color:var(--green);border-color:var(--green);background:rgba(76,175,130,.1)}
+.cb-body{padding:16px;font-size:13.5px;color:var(--text);line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:8px}
+.faq-item{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;cursor:pointer;font-size:13.5px;color:#fff;font-weight:500}
+.faq-q span{color:var(--muted);transition:transform .3s;font-size:16px}
+.faq-item.open .faq-q span{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 16px 14px;font-size:13px;color:var(--muted);line-height:1.7}
+.faq-item.open .faq-a{display:block}
+.faq-a strong{color:var(--gl)}
+
+/* GUARANTEE */
+.guarantee-box{background:linear-gradient(135deg,rgba(76,175,130,.08),rgba(10,22,40,.5));border:1px solid rgba(76,175,130,.3);border-radius:14px;padding:20px 22px;margin-top:28px;display:flex;gap:14px;align-items:flex-start}
+.gb-icon{font-size:32px;flex-shrink:0}
+.gb-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--green);margin-bottom:6px}
+.gb-text{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* CTA */
+.cta-block{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(10,22,40,.8));border:1px solid rgba(201,168,76,.25);border-radius:16px;padding:28px 24px;text-align:center;margin-top:28px}
+.cta-title{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:8px}
+.cta-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+.btn-cta{display:inline-block;background:linear-gradient(135deg,var(--gold),#a86f2a);color:#0a1628;padding:14px 32px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:none;font-family:'Be Vietnam Pro',sans-serif;transition:.2s}
+.btn-cta:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-secondary{display:inline-block;background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gl);padding:12px 24px;border-radius:10px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s;margin-left:10px}
+.btn-secondary:hover{background:rgba(201,168,76,.1)}
+.cta-note{font-size:12px;color:var(--muted);margin-top:14px}
+
+/* FREE TIER SPECIAL */
+.free-highlight{background:linear-gradient(135deg,rgba(76,175,130,.06),rgba(10,22,40,.5));border:1px solid rgba(76,175,130,.2);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.fh-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.fh-text{font-size:13.5px;color:var(--text);line-height:1.7}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="MASTER-DASHBOARD.html" class="back-btn">← Dashboard</a>
+  <span class="nav-title">💼 3 Gói Đồng Hành — Broker Brand Builder</span>
+  <div class="nav-links">
+    <a href="companion-funnel.html" class="nav-link">🗺️ Xem Phễu</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">💼 Broker Brand Builder · Chương Trình Đồng Hành</div>
+  <h1>Không Phải Khóa Học —<br>Là <em>Hành Trình Có Người Đi Cùng</em></h1>
+  <p>3 cấp độ đồng hành, phù hợp với từng điểm xuất phát. Từ bước đặt nền tảng tâm thức đến khi có kết quả thật trên tay.</p>
+
+  <div class="pricing-row">
+    <div class="p-card" id="pc1" onclick="sw('t1')">
+      <div class="p-emoji">🌱</div>
+      <div class="p-tier">Tier 1</div>
+      <div class="p-name">Lớp Tâm Thức</div>
+      <div class="p-price free">Miễn Phí</div>
+      <div class="p-period">1 buổi live · 90 phút</div>
+    </div>
+    <div class="p-card featured" id="pc2" onclick="sw('t2')">
+      <div class="p-badge">PHỔ BIẾN NHẤT</div>
+      <div class="p-emoji">🚀</div>
+      <div class="p-tier">Tier 2</div>
+      <div class="p-name">Gói Đồng Hành Core</div>
+      <div class="p-price">2,990,000đ</div>
+      <div class="p-period">Kit + 4 tuần live · Cohort</div>
+    </div>
+    <div class="p-card" id="pc3" onclick="sw('t3')">
+      <div class="p-emoji">⭐</div>
+      <div class="p-tier">Tier 3</div>
+      <div class="p-name">Đồng Hành Premium</div>
+      <div class="p-price">9,990,000đ</div>
+      <div class="p-period">Kit + 1:1 · 8 tuần</div>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" id="btn-t1" onclick="sw('t1')">🌱 Tier 1 — Free</button>
+  <button class="tab-btn" id="btn-t2" onclick="sw('t2')">🚀 Tier 2 — Core</button>
+  <button class="tab-btn" id="btn-t3" onclick="sw('t3')">⭐ Tier 3 — Premium</button>
+</div>
+
+<main class="main">
+
+<!-- =========================================================== -->
+<!-- TIER 1: FREE CLASS -->
+<!-- =========================================================== -->
+<div class="tab-panel active" id="panel-t1">
+
+  <div class="offer-hero">
+    <div class="oh-top">
+      <div class="oh-emoji">🌱</div>
+      <div class="oh-meta">
+        <div class="oh-tier">Tier 1 · Cửa Vào</div>
+        <div class="oh-name">Lớp Tâm Thức<br>Broker Brand Builder</div>
+        <div class="oh-promise">Buổi học đầu tiên để hiểu <strong>vì sao bạn làm nhiều mà kết quả không xứng</strong> — và bước đột phá bắt đầu từ đâu.</div>
+      </div>
+      <div class="oh-price-block">
+        <div class="oh-price free-price">MIỄN PHÍ</div>
+        <div class="oh-price-note">Không có catch</div>
+      </div>
+    </div>
+    <div class="oh-divider"></div>
+    <div class="oh-tags">
+      <span class="oh-tag tag-green">✓ Không cần chuẩn bị gì</span>
+      <span class="oh-tag tag-green">✓ Live 90 phút qua Zoom</span>
+      <span class="oh-tag tag-blue">✓ Có ghi hình cho bạn xem lại</span>
+      <span class="oh-tag tag-gold">✓ Cửa vào chương trình đồng hành</span>
+    </div>
+  </div>
+
+  <div class="free-highlight">
+    <div class="fh-label">📌 Điều em cam kết trong buổi này</div>
+    <div class="fh-text">Em sẽ KHÔNG bán bất cứ thứ gì trong 60 phút đầu tiên. Mục tiêu duy nhất của em là anh/chị rời khỏi buổi học với ít nhất <strong>1 aha-moment thật sự</strong> — dù sau đó anh/chị không tham gia bất cứ gói nào.</div>
+  </div>
+
+  <div class="section-title">📚 NỘI DUNG 90 PHÚT</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-week">0–15'</div>
+      <div class="tl-content">
+        <div class="tl-name">Câu Chuyện Hang Động — Plato & Người Môi Giới</div>
+        <div class="tl-detail">Tại sao 90% môi giới đang sống trong "hang động" — và điều gì xảy ra khi bước ra ánh sáng</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">15–40'</div>
+      <div class="tl-content">
+        <div class="tl-name">4 Trụ Cột Tâm Thức Của Người Môi Giới Thành Công</div>
+        <div class="tl-detail">Vị Thế · Tần Số · Năng Lượng · AI — Framework cốt lõi và bài tập xác định level hiện tại của anh/chị</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">40–65'</div>
+      <div class="tl-content">
+        <div class="tl-name">Workshop: Xác Định Vị Thế Độc Nhất</div>
+        <div class="tl-detail">Bài tập thực hành ngay trong lớp: viết 3 dòng về mình mà không môi giới nào khác có thể copy</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">65–80'</div>
+      <div class="tl-content">
+        <div class="tl-name">Q&A + Chia Sẻ Từ Cohort Trước</div>
+        <div class="tl-detail">Học viên cũ chia sẻ 1 điều thay đổi nhất sau khi học — nghe thật từ người trong ngành</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">80–90'</div>
+      <div class="tl-content">
+        <div class="tl-name">Bước Tiếp Theo — Nếu Anh/Chị Muốn Đi Xa Hơn</div>
+        <div class="tl-detail">Giới thiệu ngắn gọn về Tier 2 + Tier 3 cho ai muốn có công cụ và đồng hành tiếp tục</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">👤 AI NÊN THAM GIA? AI KHÔNG PHẢI?</div>
+  <div class="who-grid">
+    <div class="who-yes">
+      <div class="who-label">✓ Phù hợp với anh/chị nếu</div>
+      <ul class="who-list">
+        <li>Đang làm môi giới BĐS bất kỳ giai đoạn nào</li>
+        <li>Cảm giác đang làm nhiều nhưng kết quả không tương xứng</li>
+        <li>Muốn tìm hiểu về personal brand trong BĐS</li>
+        <li>Tò mò về AI trong công việc môi giới</li>
+        <li>Đang cân nhắc xây đội nhóm hoặc lên cấp độ mới</li>
+      </ul>
+    </div>
+    <div class="who-no">
+      <div class="who-label">✗ Có thể không phù hợp nếu</div>
+      <ul class="who-list">
+        <li>Không làm trong ngành BĐS</li>
+        <li>Đang tìm khóa học kỹ thuật bán hàng</li>
+        <li>Không có 90 phút để tham dự live</li>
+        <li>Đã rất thành công và không cần thay đổi gì</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">📢 SALES COPY — POST ANNOUNCE LỚP HỌC</div>
+  <div class="copy-box">
+    <div class="cb-header"><div class="cb-label">FB / Zalo Post — Announce Lớp</div><button class="copy-btn" onclick="cp(this,'sc1')">Copy</button></div>
+    <div class="cb-body" id="sc1">---
+[HOOK — chọn 1 trong 3]
+
+❓ Bạn đang làm môi giới BĐS bao lâu rồi? Nếu câu trả lời là "đã lâu nhưng chưa đến đâu" — bài này dành cho bạn.
+
+hoặc:
+
+💡 Công cụ tốt nhất cũng vô dụng nếu người cầm vẫn ở tần số cũ.
+
+hoặc:
+
+🤔 Tại sao cùng một thị trường, cùng một sản phẩm — có người chốt đều đặn còn có người cứ bị từ chối?
+---
+
+Mình đã phỏng vấn hơn 20 môi giới trong 3 tháng qua.
+
+Câu trả lời nhất quán nhất không phải về kỹ năng. Không phải về thị trường. Không phải về may mắn.
+
+Nó là về TÂM THỨC — cách họ nhìn nhận bản thân trong ngành này.
+
+Những người thành công nhất đều đã giải quyết được 3 điều:
+① Biết rõ mình là ai và giá trị mình mang lại
+② Kiểm soát được năng lượng trong mỗi cuộc gặp
+③ Có hệ thống thay vì làm tất cả một mình
+
+Mình sắp mở 1 buổi học miễn phí về điều này — 90 phút, qua Zoom.
+
+Không bán hàng. Không pitch. Chỉ chia sẻ framework mình đang dùng.
+
+👉 Link đăng ký: [LINK]
+
+Chỉ còn [X] chỗ — mình giới hạn để có thể tương tác tốt hơn.
+
+Tag một người bạn đang làm môi giới mà bạn nghĩ họ cần nghe điều này nhé 🙏</div>
+  </div>
+
+  <div class="cta-block">
+    <div class="cta-title">Đăng Ký Lớp Tâm Thức</div>
+    <div class="cta-sub">Hoàn toàn miễn phí · [NGÀY] · [GIỜ] · Zoom</div>
+    <a href="#" class="btn-cta" onclick="return false">→ Đăng Ký Ngay (Miễn Phí)</a>
+    <div class="cta-note">Thay link "#" bằng Google Form đăng ký của bạn</div>
+  </div>
+
+</div><!-- /panel-t1 -->
+
+
+<!-- =========================================================== -->
+<!-- TIER 2: CORE -->
+<!-- =========================================================== -->
+<div class="tab-panel" id="panel-t2">
+
+  <div class="offer-hero" style="border-color:rgba(201,168,76,.25)">
+    <div class="oh-top">
+      <div class="oh-emoji">🚀</div>
+      <div class="oh-meta">
+        <div class="oh-tier">Tier 2 · Gói Phổ Biến Nhất</div>
+        <div class="oh-name">Đồng Hành Core<br>4 Tuần Có Kết Quả</div>
+        <div class="oh-promise"><strong>Kit đầy đủ + 4 buổi live class + group accountability</strong> — anh/chị không chỉ học lý thuyết mà thực hành ngay với công cụ thật, có người đi cùng từng bước.</div>
+      </div>
+      <div class="oh-price-block">
+        <div class="oh-price">2,990,000đ</div>
+        <div class="oh-price-note">Trị giá thực: 7,200,000đ</div>
+      </div>
+    </div>
+    <div class="oh-divider"></div>
+    <div class="oh-tags">
+      <span class="oh-tag tag-gold">✓ Broker Brand Builder Kit đầy đủ</span>
+      <span class="oh-tag tag-gold">✓ 4 buổi live class Thứ 7</span>
+      <span class="oh-tag tag-green">✓ Telegram group cohort 4 tuần</span>
+      <span class="oh-tag tag-blue">✓ Bot accountability hàng ngày</span>
+      <span class="oh-tag tag-purple">✓ 1 lần review cá nhân</span>
+    </div>
+  </div>
+
+  <div class="section-title">📦 TẤT CẢ NHỮNG GÌ ANH/CHỊ NHẬN ĐƯỢC</div>
+  <div class="include-grid">
+    <div class="inc-item">
+      <div class="inc-icon">🎯</div>
+      <div class="inc-body">
+        <div class="inc-title">Broker Brand Builder Kit</div>
+        <div class="inc-desc">Toàn bộ hệ thống: landing page · sale page · 10 gift cards · script xử lý từ chối · phân tích đối thủ · hợp đồng mẫu · sách chiến lược</div>
+      </div>
+    </div>
+    <div class="inc-item">
+      <div class="inc-icon">🎓</div>
+      <div class="inc-body">
+        <div class="inc-title">4 Buổi Live Class Thứ 7</div>
+        <div class="inc-desc">Mỗi tuần 90 phút — workshop thực hành, không phải nghe thụ động. Có ghi hình để xem lại.</div>
+      </div>
+    </div>
+    <div class="inc-item">
+      <div class="inc-icon">💬</div>
+      <div class="inc-body">
+        <div class="inc-title">Telegram Cohort Group (4 Tuần)</div>
+        <div class="inc-desc">Group riêng theo cohort — hỏi đáp, chia sẻ tiến độ, hỗ trợ nhau + bot nhắc task mỗi ngày.</div>
+      </div>
+    </div>
+    <div class="inc-item">
+      <div class="inc-icon">🤖</div>
+      <div class="inc-body">
+        <div class="inc-title">Accountability Bot Hàng Tuần</div>
+        <div class="inc-desc">Bot giao task Thứ 2, nhắc Thứ 4, nhận check-in Thứ 6. Không để ai "mất đà" giữa chừng.</div>
+      </div>
+    </div>
+    <div class="inc-item">
+      <div class="inc-icon">👁️</div>
+      <div class="inc-body">
+        <div class="inc-title">1 Lần Review Cá Nhân</div>
+        <div class="inc-desc">Yến đọc và feedback cá nhân cho FB profile/content/landing page của anh/chị — điểm yếu và cách cải thiện cụ thể.</div>
+      </div>
+    </div>
+    <div class="inc-item">
+      <div class="inc-icon">📹</div>
+      <div class="inc-body">
+        <div class="inc-title">Video Bài Giảng Pre-recorded</div>
+        <div class="inc-desc">4 module video — học theo pace, không bỏ lỡ kiến thức nào dù bận việc đột xuất.</div>
+      </div>
+    </div>
+    <div class="inc-item">
+      <div class="inc-icon">🎁</div>
+      <div class="inc-body">
+        <div class="inc-title">Bonus: Lớp Tâm Thức (Buổi 0)</div>
+        <div class="inc-desc">Buổi reset tâm thức trước khi vào học công cụ — thường tính riêng, gift cho Tier 2+.</div>
+      </div>
+    </div>
+    <div class="inc-item">
+      <div class="inc-icon">🔄</div>
+      <div class="inc-body">
+        <div class="inc-title">Update Kit Miễn Phí (6 Tháng)</div>
+        <div class="inc-desc">Kit liên tục được cập nhật — anh/chị nhận bản mới trong 6 tháng không cần mua thêm.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🗓️ LỊCH TRÌNH 5 TUẦN</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-week" style="color:var(--green)">Buổi 0</div>
+      <div class="tl-content">
+        <div class="tl-name" style="color:var(--green)">Tâm Thức Reset — Trước Khi Học Công Cụ</div>
+        <div class="tl-detail">4 trụ cột: Vị Thế · Tần Số · Năng Lượng · AI. Xác định điểm xuất phát thật của anh/chị.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Tuần 1</div>
+      <div class="tl-content">
+        <div class="tl-name">Vị Thế & Personal Brand</div>
+        <div class="tl-detail">Xây profile · Định vị độc nhất · Kích hoạt Kit phần 1: landing page + sale page cá nhân.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Tuần 2</div>
+      <div class="tl-content">
+        <div class="tl-name">Triển Khai Bộ Kit</div>
+        <div class="tl-detail">Bàn giao toàn bộ Kit · Hướng dẫn dùng từng tool · Phễu lead magnet đầu tiên.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Tuần 3</div>
+      <div class="tl-content">
+        <div class="tl-name">Thu Hút Khách Hàng</div>
+        <div class="tl-detail">Content strategy · Seeding posts · Gift cards vào phễu · Bắt đầu chạy thực.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Tuần 4</div>
+      <div class="tl-content">
+        <div class="tl-name">Chốt Đơn & Scale</div>
+        <div class="tl-detail">Script chốt sale · Role play · Xử lý từ chối · Kế hoạch 90 ngày tiếp theo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">👤 AI PHÙ HỢP?</div>
+  <div class="who-grid">
+    <div class="who-yes">
+      <div class="who-label">✓ Đây là gói cho anh/chị nếu</div>
+      <ul class="who-list">
+        <li>Muốn có kit + hướng dẫn triển khai thực tế</li>
+        <li>Học tốt hơn khi có người đi cùng + group</li>
+        <li>Có thể dành 2–3h/tuần trong 4 tuần</li>
+        <li>Đã nghe Buổi 0 và muốn đi tiếp</li>
+        <li>Budget hợp lý, muốn kết quả trong 30 ngày</li>
+      </ul>
+    </div>
+    <div class="who-no">
+      <div class="who-label">✗ Chưa phù hợp nếu</div>
+      <ul class="who-list">
+        <li>Cần hỗ trợ cá nhân 1:1 chuyên sâu</li>
+        <li>Lịch không cố định, không attend live được</li>
+        <li>Đang cần scaling đội nhóm (→ Tier 3 phù hợp hơn)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">📢 SALES COPY — POST BÁN GÓI CORE</div>
+  <div class="copy-box">
+    <div class="cb-header"><div class="cb-label">FB / Zalo — Offer Tier 2</div><button class="copy-btn" onclick="cp(this,'sc2')">Copy</button></div>
+    <div class="cb-body" id="sc2">---
+HOOK:
+83% học viên online bỏ cuộc không phải vì thiếu kiến thức — mà vì không có ai đi cùng.
+
+Đó là lý do mình không tạo ra khóa học.
+Mình tạo ra chương trình đồng hành.
+---
+
+Sau 4 tuần cùng Cohort #[N], đây là những gì xảy ra:
+
+✓ Tuần 1: Bạn biết rõ mình là ai trong thị trường này — không còn "tôi cũng bán BĐS như mọi người"
+✓ Tuần 2: Bạn có hệ thống công cụ hoàn chỉnh (landing page · sale page · lead magnets · scripts)
+✓ Tuần 3: Bạn có content funnel đầu tiên đang chạy, không cần nghĩ mỗi ngày đăng gì
+✓ Tuần 4: Bạn có script chốt sale và kế hoạch 90 ngày cụ thể để tiếp tục
+
+Gói đồng hành bao gồm:
+📦 Toàn bộ Broker Brand Builder Kit (trị giá 3,500,000đ)
+🎓 4 buổi live workshop Thứ 7 (trị giá 2,000,000đ)
+💬 Telegram cohort group 4 tuần (trị giá 800,000đ)
+🤖 Accountability bot hàng ngày
+👁️ 1 lần review cá nhân từ Yến
+🎁 Bonus Buổi 0 Tâm Thức miễn phí
+
+Tổng giá trị: 7,200,000đ
+Giá đồng hành: 2,990,000đ
+
+Cohort #[N] khai giảng [NGÀY] — còn [X] suất.
+
+Đặt chỗ tại đây: [LINK THANH TOÁN]
+
+---
+P.S. Mình chỉ nhận tối đa 20 người/cohort để đảm bảo chất lượng đồng hành. Không phải chiêu marketing — đây là giới hạn thật vì mình cần đọc được từng check-in cá nhân.</div>
+  </div>
+
+  <div class="guarantee-box">
+    <div class="gb-icon">🛡️</div>
+    <div>
+      <div class="gb-title">Cam Kết Của Em</div>
+      <div class="gb-text">Nếu sau Tuần 1 anh/chị cảm thấy chương trình không phù hợp — hoàn tiền 100%, không hỏi lý do. Em chỉ muốn làm việc với người thật sự muốn thay đổi — và nếu mình không match, hoàn tiền là đúng nhất.</div>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <div class="cta-title">Đặt Chỗ Cohort #[N]</div>
+    <div class="cta-sub">Còn [X] suất · Khai giảng [NGÀY] · 2,990,000đ</div>
+    <a href="#" class="btn-cta" onclick="return false">→ Đặt Chỗ Ngay</a>
+    <a href="#" class="btn-secondary" onclick="return false">Hỏi Thêm Qua Zalo</a>
+    <div class="cta-note">Sau khi thanh toán, link kit + group Telegram được gửi tự động trong 30 giây</div>
+  </div>
+
+  <div class="section-title">❓ CÂU HỎI THƯỜNG GẶP</div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Nếu tôi bận không attend live được thì sao?<span>▼</span></div>
+      <div class="faq-a">Tất cả buổi live đều được <strong>record và gửi trong 24h</strong>. Anh/chị có thể học theo pace — nhưng em khuyến khích attend live vì phần Q&A và workshop tương tác không thể replace bằng video.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Kit bao gồm những gì cụ thể?<span>▼</span></div>
+      <div class="faq-a">Broker Brand Builder Kit bao gồm: <strong>Landing page cá nhân + Sale page HLX + 10 gift cards + Script xử lý từ chối + Phân tích đối thủ + Hợp đồng hợp tác + Sách chiến lược BĐS + Tâm thức hub</strong>. Toàn bộ là file HTML sẵn dùng, deploy lên web trong 5 phút.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Tôi cần có kinh nghiệm gì trước không?<span>▼</span></div>
+      <div class="faq-a">Không cần. Chương trình thiết kế cho cả <strong>người mới vào nghề lẫn môi giới đã làm vài năm</strong> muốn lên cấp độ mới. Điều duy nhất cần là sự cam kết tham gia đủ 4 tuần.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Sau 4 tuần có được hỗ trợ tiếp không?<span>▼</span></div>
+      <div class="faq-a">Anh/chị được vào <strong>Alumni Group</strong> — nơi cập nhật tool mới và hỗ trợ ongoing. Tier 2 có <strong>6 tháng update kit miễn phí</strong>. Nếu muốn tiếp tục 1:1, Tier 3 available cho cohort tiếp theo.</div>
+    </div>
+  </div>
+
+</div><!-- /panel-t2 -->
+
+
+<!-- =========================================================== -->
+<!-- TIER 3: PREMIUM -->
+<!-- =========================================================== -->
+<div class="tab-panel" id="panel-t3">
+
+  <div class="offer-hero" style="border-color:rgba(139,92,246,.3);background:linear-gradient(135deg,rgba(139,92,246,.04),var(--card))">
+    <div class="oh-top">
+      <div class="oh-emoji">⭐</div>
+      <div class="oh-meta">
+        <div class="oh-tier">Tier 3 · Đồng Hành Chuyên Sâu</div>
+        <div class="oh-name">Đồng Hành Premium<br>8 Tuần 1:1</div>
+        <div class="oh-promise">Tất cả của Tier 2 <strong>cộng thêm sự đồng hành cá nhân</strong> — Yến đi cùng từng bước, review từng tài liệu, hỗ trợ trực tiếp qua Telegram trong 8 tuần.</div>
+      </div>
+      <div class="oh-price-block">
+        <div class="oh-price" style="color:#a78bfa">9,990,000đ</div>
+        <div class="oh-price-note">Tối đa 5 người/cohort</div>
+      </div>
+    </div>
+    <div class="oh-divider"></div>
+    <div class="oh-tags">
+      <span class="oh-tag tag-purple">✓ Tất cả Tier 2 +</span>
+      <span class="oh-tag tag-purple">✓ 4 buổi 1:1 call 30'</span>
+      <span class="oh-tag tag-gold">✓ Review mọi material cá nhân</span>
+      <span class="oh-tag tag-green">✓ Telegram direct (48h response)</span>
+      <span class="oh-tag tag-blue">✓ Lifetime Alumni</span>
+    </div>
+  </div>
+
+  <div style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:16px 20px;margin-bottom:4px">
+    <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#a78bfa;margin-bottom:8px">⭐ Tại Sao Tier 3 Tồn Tại</div>
+    <div style="font-size:13.5px;color:var(--text);line-height:1.7">Một số người không chỉ cần công cụ — họ cần người hiểu tình huống cụ thể của mình và đưa ra hướng dẫn đích danh. Tier 3 là gói cho những người đó: <strong style="color:#a78bfa">ít nhất, được nhiều nhất, không bỏ lại ai phía sau.</strong></div>
+  </div>
+
+  <div class="section-title">📦 TẤT CẢ NHỮNG GÌ INCLUDED</div>
+  <div class="include-grid">
+    <div class="inc-item" style="border-color:rgba(139,92,246,.2)">
+      <div class="inc-icon">🔵</div>
+      <div class="inc-body">
+        <div class="inc-title">Tất Cả Tier 2</div>
+        <div class="inc-desc">Kit đầy đủ · 4 buổi live class · Cohort group · Accountability bot · 1 review</div>
+      </div>
+    </div>
+    <div class="inc-item" style="border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.04)">
+      <div class="inc-icon">📞</div>
+      <div class="inc-body">
+        <div class="inc-title">4 Buổi 1:1 Call 30 Phút</div>
+        <div class="inc-desc">2 tuần/buổi × 8 tuần. Tập trung 100% vào tình huống cụ thể của anh/chị — không cần chia sẻ attention với ai.</div>
+      </div>
+    </div>
+    <div class="inc-item" style="border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.04)">
+      <div class="inc-icon">🔍</div>
+      <div class="inc-body">
+        <div class="inc-title">Review Toàn Bộ Material Cá Nhân</div>
+        <div class="inc-desc">FB profile · Landing page · Sale page · Content · Scripts. Yến đọc hết và feedback chi tiết bằng văn bản.</div>
+      </div>
+    </div>
+    <div class="inc-item" style="border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.04)">
+      <div class="inc-icon">💬</div>
+      <div class="inc-body">
+        <div class="inc-title">Direct Telegram Access (8 Tuần)</div>
+        <div class="inc-desc">Nhắn trực tiếp cho Yến — câu hỏi, situation cụ thể, cần tư vấn tức thì. Phản hồi trong 48h.</div>
+      </div>
+    </div>
+    <div class="inc-item" style="border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.04)">
+      <div class="inc-icon">♾️</div>
+      <div class="inc-body">
+        <div class="inc-title">Lifetime Alumni Group</div>
+        <div class="inc-desc">Không giới hạn thời gian — luôn trong group để cập nhật + hỏi đáp + support ongoing.</div>
+      </div>
+    </div>
+    <div class="inc-item" style="border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.04)">
+      <div class="inc-icon">🔄</div>
+      <div class="inc-body">
+        <div class="inc-title">Update Kit Vĩnh Viễn</div>
+        <div class="inc-desc">Kit được cập nhật theo thị trường — Tier 3 nhận tất cả bản mới mà không cần trả thêm.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🗓️ LỊCH 8 TUẦN CỤNG ANH/CHỊ</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-week" style="color:var(--green)">Buổi 0</div>
+      <div class="tl-content">
+        <div class="tl-name">1:1 Kick-off Call — Hiểu Rõ Điểm Xuất Phát</div>
+        <div class="tl-detail">30 phút: Yến nghe tình huống cụ thể · Xác định mục tiêu 8 tuần · Customise lộ trình</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">T1–2</div>
+      <div class="tl-content">
+        <div class="tl-name">Nền Tảng — Tâm Thức + Vị Thế</div>
+        <div class="tl-detail">Live class + bài tập + 1:1 review profile và định vị cá nhân. Yến feedback trực tiếp.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">T3–4</div>
+      <div class="tl-content">
+        <div class="tl-name">Công Cụ — Triển Khai Kit</div>
+        <div class="tl-detail">1:1 call: Review landing page + sale page đã setup. Điều chỉnh theo phong cách cá nhân.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">T5–6</div>
+      <div class="tl-content">
+        <div class="tl-name">Khách Hàng — Funnel Chạy Thật</div>
+        <div class="tl-detail">1:1 call: Yến xem funnel đang chạy · Identify điểm leak · Tối ưu từng step.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">T7–8</div>
+      <div class="tl-content">
+        <div class="tl-name">Kết Quả & Scale</div>
+        <div class="tl-detail">1:1 call: Review kết quả 8 tuần · Lập kế hoạch 6 tháng tiếp · Giới thiệu vào Alumni community.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">👤 AI PHÙ HỢP VỚI TIER 3?</div>
+  <div class="who-grid">
+    <div class="who-yes">
+      <div class="who-label">✓ Tier 3 dành cho anh/chị nếu</div>
+      <ul class="who-list">
+        <li>Muốn kết quả nhanh nhất có thể — không muốn thử sai một mình</li>
+        <li>Đang xây đội nhóm / F1 / lên cấp độ leader</li>
+        <li>Đã đầu tư vào bản thân trước và biết giá trị của đồng hành 1:1</li>
+        <li>Tình huống đặc thù cần tư vấn cá nhân hóa</li>
+        <li>Muốn Yến là "mentor" trong giai đoạn quan trọng này</li>
+      </ul>
+    </div>
+    <div class="who-no">
+      <div class="who-label">✗ Tier 2 đủ nếu</div>
+      <ul class="who-list">
+        <li>Budget ưu tiên, kết quả có thể chờ thêm một chút</li>
+        <li>Học tốt trong group, không cần 1:1 riêng</li>
+        <li>Đây là lần đầu đầu tư vào hệ thống, muốn thử trước</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">📢 SALES COPY — POST BÁN GÓI PREMIUM</div>
+  <div class="copy-box">
+    <div class="cb-header"><div class="cb-label">FB / Zalo — Offer Tier 3 (Exclusive)</div><button class="copy-btn" onclick="cp(this,'sc3')">Copy</button></div>
+    <div class="cb-body" id="sc3">---
+HOOK:
+Đây là gói mà mình chỉ nhận 5 người mỗi cohort — và đây là lý do tại sao.
+---
+
+Trong 3 năm làm việc trong ngành BĐS, mình nhận ra một điều:
+
+Kiến thức chung → học được từ bất kỳ đâu.
+Chiến lược cá nhân hóa cho tình huống của bạn → thứ đó cần người đã đi con đường đó và ngồi xuống với bạn.
+
+Gói Đồng Hành Premium là điều thứ hai.
+
+Trong 8 tuần:
+📞 4 buổi 1:1 call 30 phút — tập trung 100% vào tình huống của bạn
+🔍 Mình đọc và feedback toàn bộ: profile, landing page, content, scripts
+💬 Direct Telegram access — hỏi bất cứ lúc nào, phản hồi trong 48h
+♾️ Lifetime Alumni Group — không ai bị bỏ lại sau khi "hết khóa"
+
+Tổng bao gồm:
+✓ Toàn bộ Tier 2 (Kit + 4 live class + cohort group)
+✓ 4 buổi 1:1 call cá nhân
+✓ Review không giới hạn material
+✓ Telegram direct 8 tuần
+✓ Lifetime Alumni + Update kit vĩnh viễn
+
+Đầu tư: 9,990,000đ
+
+Cohort #[N] — chỉ còn [X]/5 suất.
+
+Để mình hiểu tình huống của bạn trước khi nhận vào chương trình này, vui lòng điền form ngắn:
+→ [LINK FORM APPLY]
+
+Mình sẽ liên hệ trong 24h để confirm.
+
+---
+Lưu ý: Gói này có form apply vì mình cần đảm bảo mình có thể thực sự hỗ trợ được bạn — không phải ai mình cũng phù hợp để đồng hành, và mình muốn nói thật điều đó từ đầu.</div>
+  </div>
+
+  <div class="copy-box">
+    <div class="cb-header"><div class="cb-label">Form Apply Tier 3 — Câu Hỏi (Dùng Google Forms)</div><button class="copy-btn" onclick="cp(this,'sc3b')">Copy</button></div>
+    <div class="cb-body" id="sc3b">TIÊU ĐỀ: Apply Gói Đồng Hành Premium — Broker Brand Builder
+
+MÔ TẢ: Mình sẽ đọc câu trả lời của anh/chị và liên hệ trong 24h để confirm.
+
+CÂU HỎI:
+
+1. Họ tên + SĐT + Zalo * (Short answer)
+
+2. Anh/chị đang làm môi giới được bao lâu? Dự án nào? * (Paragraph)
+
+3. Điều anh/chị muốn đạt được nhất trong 8 tuần này là gì? * (Paragraph)
+   [Hãy cụ thể: không phải "thành công hơn" mà là gì cụ thể]
+
+4. Điều gì đang cản trở anh/chị đạt được điều đó? * (Paragraph)
+
+5. Tại sao anh/chị nghĩ Tier 3 phù hợp hơn Tier 2 với tình huống của mình? * (Paragraph)
+
+6. Anh/chị sẵn sàng đầu tư 9,990,000đ và 2–3h/tuần trong 8 tuần không? * (Multiple choice)
+   - Có, mình đã cân nhắc kỹ
+   - Cần hỏi thêm trước khi quyết định</div>
+  </div>
+
+  <div class="guarantee-box">
+    <div class="gb-icon">🛡️</div>
+    <div>
+      <div class="gb-title">Cam Kết Cao Nhất</div>
+      <div class="gb-text">Nếu sau 2 tuần anh/chị cảm thấy không nhận được giá trị tương xứng — hoàn tiền 100% không điều kiện. Em chỉ làm việc với người mà em thật sự có thể giúp được. Nếu không phải — hoàn tiền là quyết định đúng nhất.</div>
+    </div>
+  </div>
+
+  <div class="cta-block" style="border-color:rgba(139,92,246,.3);background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(10,22,40,.8))">
+    <div class="cta-title">Apply Gói Đồng Hành Premium</div>
+    <div class="cta-sub">Còn [X]/5 suất · Cohort #[N] · 9,990,000đ · Yến xem và confirm trong 24h</div>
+    <a href="#" class="btn-cta" onclick="return false" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">→ Apply Ngay</a>
+    <a href="#" class="btn-secondary" onclick="return false">Hỏi Thêm Qua Zalo</a>
+    <div class="cta-note">Mình sẽ liên hệ confirm trong 24h — nếu không phù hợp mình sẽ nói thẳng và đề xuất gói khác phù hợp hơn.</div>
+  </div>
+
+  <div class="section-title">❓ CÂU HỎI THƯỜNG GẶP — TIER 3</div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Tại sao phải apply thay vì thanh toán thẳng?<span>▼</span></div>
+      <div class="faq-a">Vì mình chỉ nhận 5 người/cohort, mình muốn chắc chắn rằng <strong>mình thật sự có thể giúp được anh/chị</strong>. Không phải ai cũng phù hợp với mình và ngược lại — việc apply giúp mình cả hai hiểu nhau trước khi commit.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">1:1 call diễn ra như thế nào?<span>▼</span></div>
+      <div class="faq-a">Qua Zoom hoặc Google Meet · 30 phút · Anh/chị book lịch qua Calendly. <strong>Mình đọc check-in và material của anh/chị trước mỗi call</strong> — nên 30 phút được dùng tối đa, không mất thời gian re-brief.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Nếu tôi đang ở tỉnh khác, có được không?<span>▼</span></div>
+      <div class="faq-a"><strong>Hoàn toàn được</strong>. Mọi thứ online — live class Zoom, 1:1 call Zoom, group Telegram. Đây là lợi thế của chương trình: anh/chị ở đâu cũng tham gia được.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Lifetime alumni nghĩa là bao lâu?<span>▼</span></div>
+      <div class="faq-a"><strong>Nghĩa đen là vĩnh viễn</strong> — miễn là group còn hoạt động. Anh/chị không bao giờ bị kick ra chỉ vì "hết khóa". Đây là community dài hạn, không phải nhóm chat xài xong bỏ.</div>
+    </div>
+  </div>
+
+</div><!-- /panel-t3 -->
+
+</main>
+
+<script>
+function sw(id){
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('btn-'+id).classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+  // Pricing cards
+  document.querySelectorAll('.p-card').forEach(c=>c.classList.remove('active'));
+  const map={t1:'pc1',t2:'pc2',t3:'pc3'};
+  if(map[id])document.getElementById(map[id]).classList.add('active');
+}
+function cp(btn,id){
+  const t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(()=>{
+    btn.textContent='✓ Copied';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied')},2000);
+  });
+}
+// Init
+document.getElementById('pc2').classList.add('active');
+</script>
+</body>
+</html>

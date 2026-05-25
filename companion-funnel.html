@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phễu Đồng Hành Tự Động — Broker Brand Builder Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1628;--card:#0f1e30;--card2:#13243a;--gold:#C9A84C;--gl:#E2C06A;--text:#e8eaf0;--muted:#8fa3b8;--red:#e05555;--green:#4caf82;--blue:#4a90d9;--purple:#8b5cf6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh;line-height:1.6}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.97);border-bottom:1px solid rgba(201,168,76,.2);padding:12px 24px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(8px)}
+.back-btn{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);padding:6px 14px;border-radius:8px;font-size:13px;cursor:pointer;text-decoration:none;transition:.2s}
+.back-btn:hover{background:rgba(201,168,76,.25)}
+.nav-title{font-family:'Playfair Display',serif;color:var(--gl);font-size:16px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0a1628,#0d1f35,#0a1628);border-bottom:1px solid rgba(201,168,76,.15);padding:48px 24px 40px;text-align:center}
+.hero-badge{display:inline-block;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.35);color:#a78bfa;padding:6px 20px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,40px);color:#fff;margin-bottom:12px;line-height:1.25}
+.hero h1 span{color:var(--gl)}
+.hero p{color:var(--muted);font-size:15px;max-width:600px;margin:0 auto 28px}
+.stats-row{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:640px;margin:0 auto}
+.stat-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 20px;text-align:center;min-width:120px}
+.stat-num{font-family:'Playfair Display',serif;font-size:22px;color:var(--gl);display:block}
+.stat-label{font-size:11px;color:var(--muted)}
+
+/* TABS */
+.tabs{display:flex;gap:6px;padding:14px 24px;background:var(--card);border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;justify-content:center}
+.tab-btn{background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--muted);padding:8px 18px;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s;white-space:nowrap}
+.tab-btn.active{background:rgba(201,168,76,.18);border-color:var(--gold);color:var(--gl);font-weight:600}
+
+/* PANELS */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* MAIN LAYOUT */
+.main{max-width:1000px;margin:0 auto;padding:32px 24px 80px}
+
+/* FUNNEL STAGES */
+.stage-flow{display:flex;flex-direction:column;gap:0}
+.stage-connector{display:flex;justify-content:center;padding:4px 0;color:var(--muted);font-size:18px}
+
+.stage-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;transition:border-color .2s}
+.stage-card:hover{border-color:rgba(201,168,76,.2)}
+
+.sc-header{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;user-select:none}
+.sc-letter{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex-shrink:0;font-family:'Playfair Display',serif}
+.sc-letter.human{background:rgba(74,144,217,.2);color:#4a90d9;border:1px solid rgba(74,144,217,.3)}
+.sc-letter.bot{background:rgba(76,175,130,.2);color:var(--green);border:1px solid rgba(76,175,130,.3)}
+.sc-letter.mixed{background:rgba(201,168,76,.2);color:var(--gl);border:1px solid rgba(201,168,76,.3)}
+
+.sc-meta{flex:1}
+.sc-who{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.who-human{color:#4a90d9}
+.who-bot{color:var(--green)}
+.who-mixed{color:var(--gl)}
+.sc-title{font-family:'Playfair Display',serif;font-size:17px;color:#fff}
+.sc-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.sc-time{font-size:11px;background:rgba(255,255,255,.06);border-radius:8px;padding:3px 10px;color:var(--muted);flex-shrink:0}
+.sc-toggle{font-size:16px;color:var(--muted);transition:transform .3s;margin-left:8px}
+.stage-card.open .sc-toggle{transform:rotate(180deg)}
+
+.sc-body{display:none;border-top:1px solid rgba(255,255,255,.06)}
+.stage-card.open .sc-body{display:block}
+.sc-body-inner{padding:0 20px 20px}
+
+.step-list{padding:16px 0 8px}
+.step-item{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.step-item:last-child{border:none}
+.step-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:8px;flex-shrink:0}
+.step-text{font-size:13.5px;color:var(--text);line-height:1.6}
+.step-text strong{color:var(--gl)}
+.step-text code{background:rgba(255,255,255,.07);padding:1px 6px;border-radius:4px;font-size:12px;color:#a78bfa;font-family:monospace}
+
+.tool-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{font-size:11px;font-weight:600;padding:3px 10px;border-radius:50px;white-space:nowrap}
+.chip-blue{background:rgba(74,144,217,.15);border:1px solid rgba(74,144,217,.3);color:#4a90d9}
+.chip-green{background:rgba(76,175,130,.15);border:1px solid rgba(76,175,130,.3);color:var(--green)}
+.chip-gold{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gl)}
+.chip-purple{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);color:#a78bfa}
+
+/* AUTOMATION SCRIPTS */
+.scripts-section{margin-bottom:40px}
+.section-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.section-hd h3{font-family:'Playfair Display',serif;font-size:18px;color:#fff}
+.section-hd span{font-size:12px;color:var(--muted)}
+
+.script-group{display:flex;flex-direction:column;gap:12px}
+.script-item{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.si-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card2)}
+.si-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:rgba(201,168,76,.2);color:var(--gl);flex-shrink:0}
+.si-title{font-size:13px;font-weight:600;color:#fff;flex:1}
+.si-trigger{font-size:11px;color:var(--muted)}
+.copy-btn{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gl);padding:4px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:.2s;flex-shrink:0}
+.copy-btn:hover{background:rgba(201,168,76,.25)}
+.copy-btn.copied{color:var(--green);border-color:var(--green);background:rgba(76,175,130,.1)}
+.si-content{padding:14px 16px}
+.script-text{font-size:13.5px;color:var(--text);line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif}
+
+/* CHECKLIST */
+.check-section{margin-bottom:32px}
+.check-title{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:600px){.check-grid{grid-template-columns:1fr}}
+.check-item{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;transition:.15s}
+.check-item:hover{background:var(--card2)}
+.check-item.done{border-color:rgba(76,175,130,.3);background:rgba(76,175,130,.05)}
+.check-box{width:20px;height:20px;border-radius:6px;border:2px solid rgba(255,255,255,.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:.2s}
+.check-item.done .check-box{background:var(--green);border-color:var(--green);color:#fff;font-size:12px}
+.check-item-text{font-size:13px;color:var(--text);line-height:1.5}
+.check-item.done .check-item-text{color:var(--muted);text-decoration:line-through}
+.check-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* WEEKLY RHYTHM */
+.rhythm-table{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden}
+.rt-row{display:grid;grid-template-columns:100px 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)}
+.rt-row:last-child{border:none}
+.rt-row.header{background:var(--card2)}
+.rt-cell{padding:12px 14px;font-size:13px}
+.rt-cell:first-child{font-weight:700;color:var(--gl);font-size:12px}
+.rt-row.header .rt-cell{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.human-task{color:var(--blue)}
+.bot-task{color:var(--green)}
+.auto-badge{display:inline-block;background:rgba(76,175,130,.12);border:1px solid rgba(76,175,130,.25);color:var(--green);font-size:10px;font-weight:700;padding:1px 7px;border-radius:50px;margin-left:4px}
+.human-badge{display:inline-block;background:rgba(74,144,217,.12);border:1px solid rgba(74,144,217,.25);color:#4a90d9;font-size:10px;font-weight:700;padding:1px 7px;border-radius:50px;margin-left:4px}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="MASTER-DASHBOARD.html" class="back-btn">← Dashboard</a>
+  <span class="nav-title">🚀 Phễu Đồng Hành Tự Động</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">🤖 IPGA Model · Automation-First Design</div>
+  <h1>Workflow Đồng Hành <span>Tự Động Hóa</span><br>Từ Stranger Đến Alumni</h1>
+  <p>8 giai đoạn liên tục — 70% chạy tự động. Anh/chị chỉ cần xuất hiện 5–6h/tuần để làm những gì robot không thay được: kết nối người thật.</p>
+  <div class="stats-row">
+    <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">Giai đoạn</span></div>
+    <div class="stat-item"><span class="stat-num">70%</span><span class="stat-label">Tự động hóa</span></div>
+    <div class="stat-item"><span class="stat-num">5–6h</span><span class="stat-label">Công việc/tuần</span></div>
+    <div class="stat-item"><span class="stat-num">20</span><span class="stat-label">HV/cohort</span></div>
+    <div class="stat-item"><span class="stat-num">~95M</span><span class="stat-label">Doanh thu/cohort</span></div>
+  </div>
+</section>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="sw('funnel')">🗺️ Phễu 8 Giai Đoạn</button>
+  <button class="tab-btn" onclick="sw('scripts')">⚙️ Script Tự Động</button>
+  <button class="tab-btn" onclick="sw('rhythm')">📅 Lịch Vận Hành</button>
+  <button class="tab-btn" onclick="sw('setup')">✅ Checklist Setup</button>
+</div>
+
+<main class="main">
+
+<!-- ============================================================ -->
+<!-- TAB 1: FUNNEL -->
+<!-- ============================================================ -->
+<div class="tab-panel active" id="panel-funnel">
+  <div class="stage-flow">
+
+    <!-- STAGE A -->
+    <div class="stage-card" id="sA">
+      <div class="sc-header" onclick="tog('sA')">
+        <div class="sc-letter human">A</div>
+        <div class="sc-meta">
+          <div class="sc-who who-human">👤 Anh/chị làm · Liên tục</div>
+          <div class="sc-title">ATTRACT — Interview Flywheel</div>
+          <div class="sc-sub">Record phỏng vấn môi giới → Content machine không cần nghĩ chủ đề</div>
+        </div>
+        <span class="sc-time">2–3h/tuần</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>1 buổi phỏng vấn</strong> = 30 phút record → 5–8 reels + 3–5 bài viết FB + 1 thread dài. Dùng CapCut auto-subtitle.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text">Câu hỏi chuẩn hóa: <strong>Điều gì khó nhất trong 6 tháng đầu? Điều gì bạn ước mình biết sớm hơn? Bạn đang thiếu gì nhất?</strong></div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text">Mỗi clip kết thúc bằng CTA: <em>"Bạn muốn nghe giải pháp? → Link đăng ký lớp học tâm thức miễn phí"</em></div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>AI làm phần còn lại:</strong> Paste transcript vào Claude → nhận 5 bài post sẵn sàng đăng, lên lịch Buffer 1 post/ngày.</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-blue">CapCut (auto subtitle)</span>
+            <span class="chip chip-purple">Claude AI (content repurpose)</span>
+            <span class="chip chip-green">Buffer (lên lịch)</span>
+            <span class="chip chip-gold">Google Drive (lưu raw)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <!-- STAGE B -->
+    <div class="stage-card" id="sB">
+      <div class="sc-header" onclick="tog('sB')">
+        <div class="sc-letter bot">B</div>
+        <div class="sc-meta">
+          <div class="sc-who who-bot">🤖 Bot làm · Tự động 100%</div>
+          <div class="sc-title">CAPTURE — Landing Page + Form Đăng Ký</div>
+          <div class="sc-sub">Stranger click link → Điền form → Vào danh sách nuture → 0 công sức</div>
+        </div>
+        <span class="sc-time">Setup 1 lần</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text">Landing page (đã có) → CTA: <strong>"Đăng ký lớp Tâm Thức — Miễn Phí"</strong> → Google Form 5 câu.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text">Form hỏi: Họ tên · SĐT · Zalo · <em>"Bạn đang ở giai đoạn nào?"</em> (newbie/intermediate/leader) · <em>"Điều khó nhất hiện tại?"</em></div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text">Khi submit → <strong>Zapier/Make trigger ngay lập tức</strong>: SMS/Zalo confirm + thêm vào Google Sheet + kích hoạt email sequence.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text">Anh/chị nhận <strong>1 notification Telegram</strong> mỗi khi có đăng ký mới — không cần check form thủ công.</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-blue">Google Forms + Sheets</span>
+            <span class="chip chip-purple">Make.com (trigger)</span>
+            <span class="chip chip-green">Zalo/SMS confirm</span>
+            <span class="chip chip-gold">Telegram notify bạn</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <!-- STAGE C -->
+    <div class="stage-card" id="sC">
+      <div class="sc-header" onclick="tog('sC')">
+        <div class="sc-letter bot">C</div>
+        <div class="sc-meta">
+          <div class="sc-who who-bot">🤖 Bot làm · Tự động 100%</div>
+          <div class="sc-title">NURTURE — Email Sequence 7 Ngày</div>
+          <div class="sc-sub">5 email tự động trong 7 ngày → Build trust → Dẫn dắt đến class</div>
+        </div>
+        <span class="sc-time">Setup 1 lần</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Email 1 (D+0):</strong> "Cảm ơn [tên] — link xác nhận lớp + câu chuyện Yến 2 năm BĐS không có gì"</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Email 2 (D+1):</strong> "3 lý do 90% môi giới không scale được" + offer peek at kit (no hard sell)</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Email 3 (D+3):</strong> Chia sẻ 1 clip từ interview môi giới → họ thấy mình trong đó → trust spike</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Email 4 (D+5):</strong> "Học viên [X] đã thay đổi như thế này trong 4 tuần" — case study cụ thể</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Email 5 (D+7):</strong> "Lớp học Thứ [N] — Anh/chị còn muốn tham gia không?" + urgency thật (limited spots)</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-blue">Brevo / Mailchimp</span>
+            <span class="chip chip-green">Free đến 300–500 email/ngày</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <!-- STAGE D -->
+    <div class="stage-card" id="sD">
+      <div class="sc-header" onclick="tog('sD')">
+        <div class="sc-letter human">D</div>
+        <div class="sc-meta">
+          <div class="sc-who who-mixed">⚡ Anh/chị + Bot · 1 lần/cohort</div>
+          <div class="sc-title">CONVERT — Free Class + Tier Selection</div>
+          <div class="sc-sub">Lớp Tâm Thức 90 phút → Warm-up tự nhiên → Bot gửi offer ngay sau class</div>
+        </div>
+        <span class="sc-time">90 phút live</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Trong class:</strong> KHÔNG bán hàng — chỉ dạy, connect, tạo aha-moments. Kit được nhắc như "công cụ em đang dùng" tự nhiên.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Phút 80:</strong> "Ai muốn tiếp tục hành trình này có hỗ trợ? Em có 2 cách để mình đi cùng nhau..." → Brief 2 tiers.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Ngay sau class (bot):</strong> Gửi link Google Form chọn tier → sau 30 phút gửi link thanh toán theo tier đã chọn.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>D+1 (bot):</strong> Reminder "Còn 3 suất Tier 3" — scarcity thật, không phải fake. D+3: Last call email.</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-blue">Zoom / Google Meet</span>
+            <span class="chip chip-green">Google Form (tier chọn)</span>
+            <span class="chip chip-gold">SePay (thanh toán)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <!-- STAGE E -->
+    <div class="stage-card" id="sE">
+      <div class="sc-header" onclick="tog('sE')">
+        <div class="sc-letter bot">E</div>
+        <div class="sc-meta">
+          <div class="sc-who who-bot">🤖 Bot làm · Tự động 100%</div>
+          <div class="sc-title">DELIVER — Auto Kit + Group Access</div>
+          <div class="sc-sub">Thanh toán xong → Bot gửi kit + link group trong 30 giây. 0 thao tác thủ công.</div>
+        </div>
+        <span class="sc-time">0 phút</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>SePay webhook trigger:</strong> Phát hiện thanh toán đúng mã → kích hoạt chuỗi delivery.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Trong 30 giây:</strong> Telegram bot gửi: confirm thanh toán + link kit dashboard + link nhóm cohort + guide onboarding.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Tier 3 thêm:</strong> Bot gửi link Calendly để book buổi 1:1 đầu tiên. Tự động thêm vào spreadsheet tracking 1:1.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Anh/chị nhận:</strong> 1 Telegram thông báo "Có học viên mới: [tên] · Tier [X] · Cohort #[N]"</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-gold">SePay Webhook</span>
+            <span class="chip chip-green">Telegram Bot</span>
+            <span class="chip chip-blue">Make.com automation</span>
+            <span class="chip chip-purple">Calendly (Tier 3)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <!-- STAGE F -->
+    <div class="stage-card" id="sF">
+      <div class="sc-header" onclick="tog('sF')">
+        <div class="sc-letter bot">F</div>
+        <div class="sc-meta">
+          <div class="sc-who who-bot">🤖 Bot làm · Tự động 100%</div>
+          <div class="sc-title">ACTIVATE — Onboarding 72 Giờ Đầu</div>
+          <div class="sc-sub">72h đầu quyết định liệu học viên có "vào guồng" hay không. Bot dẫn dắt từng bước.</div>
+        </div>
+        <span class="sc-time">0 phút</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>H+0 (Vào group):</strong> Bot welcome cá nhân hóa + giao bài tập đầu tiên + deadline 48h.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>H+24 (Nếu chưa làm):</strong> Bot nhắc gentle "Em hiểu anh/chị bận, 15 phút thôi nhé → link bài tập"</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>H+48 (Deadline):</strong> Bot thông báo tổng số đã làm + "Buổi học đầu tiên Thứ [N] [giờ] — anh/chị đã sẵn sàng chưa?"</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>First win trigger:</strong> Khi học viên nộp bài tập đầu tiên → Bot chúc mừng ngay lập tức → tạo momentum.</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-green">Telegram Bot</span>
+            <span class="chip chip-blue">Google Forms (bài tập)</span>
+            <span class="chip chip-purple">Make.com (conditional trigger)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <!-- STAGE G -->
+    <div class="stage-card" id="sG">
+      <div class="sc-header" onclick="tog('sG')">
+        <div class="sc-letter mixed">G</div>
+        <div class="sc-meta">
+          <div class="sc-who who-mixed">⚡ 30% Anh/chị + 70% Bot · Mỗi tuần</div>
+          <div class="sc-title">ACCOMPANY — Vòng Lặp 4 Tuần</div>
+          <div class="sc-sub">Nhịp tuần cố định: anh/chị dạy live 90 phút, bot lo phần còn lại 6 ngày.</div>
+        </div>
+        <span class="sc-time">2–3h/tuần</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Thứ 2 (Bot):</strong> Giao task tuần mới vào group + motivation quote từ interview clips đã quay.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Thứ 4 (Bot):</strong> "Midweek check — anh/chị đang ở bước nào rồi? Cần hỗ trợ gì?" → micro-engagement.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Thứ 6 21h (Bot):</strong> Gửi form check-in 4 câu → tổng hợp vào Sheet → AI tóm tắt để anh/chị đọc buổi sáng Thứ 7.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Thứ 7 sáng (Anh/chị):</strong> Đọc tóm tắt AI (5 phút) → biết ai cần giúp → vào class 90 phút đã chuẩn bị.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Thứ 7 tối (Bot):</strong> Recap nhanh + nhắc nhở tuần tới + "Ai đã share kết quả tuần này? Tag @name 👏"</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-blue">Zoom (live class)</span>
+            <span class="chip chip-green">Telegram Bot (daily)</span>
+            <span class="chip chip-gold">Google Forms + Sheets</span>
+            <span class="chip chip-purple">Claude AI (tóm tắt)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <!-- STAGE H -->
+    <div class="stage-card" id="sH">
+      <div class="sc-header" onclick="tog('sH')">
+        <div class="sc-letter bot">H</div>
+        <div class="sc-meta">
+          <div class="sc-who who-bot">🤖 Bot làm · Tự động 95%</div>
+          <div class="sc-title">GRADUATE — Testimonial + Referral Engine</div>
+          <div class="sc-sub">Kết thúc 4 tuần → Bot kích hoạt flywheel: testimonial → referral → cohort tiếp theo tự fill.</div>
+        </div>
+        <span class="sc-time">15 phút/cohort</span>
+        <span class="sc-toggle">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-body-inner">
+          <div class="step-list">
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Day 28 (Bot):</strong> Gửi form testimonial 3 câu + request 1 clip ngắn (tuỳ chọn) → link tự upload.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Day 30 (Bot):</strong> Giới thiệu Alumni Group + invite link → community tự build.</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Day 35 (Bot):</strong> Referral offer: "Giới thiệu 1 người → anh/chị nhận 500K hoặc 1 tháng alumni free".</div></div>
+            <div class="step-item"><div class="step-dot"></div><div class="step-text"><strong>Anh/chị làm:</strong> Chọn 2–3 testimonial hay nhất → đưa vào landing page + email sequence → cohort tiếp theo có social proof mạnh hơn.</div></div>
+          </div>
+          <div class="tool-chips">
+            <span class="chip chip-green">Telegram Bot</span>
+            <span class="chip chip-blue">Google Forms (testimonial)</span>
+            <span class="chip chip-gold">Alumni Telegram Group</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /stage-flow -->
+</div><!-- /panel-funnel -->
+
+<!-- ============================================================ -->
+<!-- TAB 2: SCRIPTS -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-scripts">
+
+  <!-- TELEGRAM BOT SCRIPTS -->
+  <div class="scripts-section">
+    <div class="section-hd">
+      <h3>📱 Telegram Bot Messages</h3>
+      <span>8 messages · Copy & paste vào bot</span>
+    </div>
+    <div class="script-group">
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T1</div>
+          <div class="si-title">Welcome Message — Vào Group Mới</div>
+          <div class="si-trigger">Trigger: Học viên join group</div>
+          <button class="copy-btn" onclick="cp(this,'t1')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t1">🎉 Chào mừng [TÊN] vào Cohort #[N] — Broker Brand Builder!
+
+Em rất vui được đồng hành cùng anh/chị trong 4 tuần tới.
+
+📌 Bước đầu tiên — hoàn thành ngay hôm nay:
+→ Bài tập Vị Thế: [LINK GOOGLE FORM]
+⏰ Deadline: 48h từ bây giờ
+
+Khi anh/chị hoàn thành bài tập này, anh/chị sẽ có:
+✓ Rõ ràng mình đang ở đâu trong hành trình
+✓ Điểm xuất phát chính xác để mình đi đúng hướng
+✓ Nền tảng cho toàn bộ 4 tuần tiếp theo
+
+Anh/chị có câu hỏi gì — tag em @[USERNAME] nhé!
+Chúc anh/chị một hành trình đáng nhớ 🙌</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T2</div>
+          <div class="si-title">Day 1 Reminder — Chưa Làm Bài Tập</div>
+          <div class="si-trigger">Trigger: H+24, chưa submit form</div>
+          <button class="copy-btn" onclick="cp(this,'t2')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t2">Anh/chị [TÊN] ơi 👋
+
+Em biết anh/chị bận — nhưng bài tập Vị Thế này chỉ cần 15 phút thôi, và nó sẽ làm cho toàn bộ 4 tuần tiếp theo hiệu quả hơn rất nhiều.
+
+→ Làm ngay tại đây: [LINK]
+
+Còn 24h nữa là đến deadline nhé!
+Hiện tại đã có [X]/[TOTAL] bạn hoàn thành rồi 💪</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T3</div>
+          <div class="si-title">Monday Task Drop — Đầu Tuần Mới</div>
+          <div class="si-trigger">Trigger: Mỗi Thứ 2, 8:00 AM</div>
+          <button class="copy-btn" onclick="cp(this,'t3')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t3">🌅 Chào buổi sáng Cohort #[N]!
+
+📌 TUẦN [X]/4 — [TÊN TUẦN]
+
+Nhiệm vụ tuần này:
+① [Task 1 — cụ thể, 1 dòng]
+② [Task 2 — cụ thể, 1 dòng]
+③ [Task 3 — cụ thể, 1 dòng]
+
+📹 Video bài giảng: [LINK]
+📋 Template cần dùng: [LINK]
+
+⏰ Check-in cuối tuần: Thứ 6 trước 21h
+→ Form: [LINK CHECK-IN]
+
+Ai có câu hỏi — post vào group, cả cohort cùng học nhé!
+Good luck cả nhà 🚀</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T4</div>
+          <div class="si-title">Midweek Nudge — Thứ 4</div>
+          <div class="si-trigger">Trigger: Mỗi Thứ 4, 7:00 PM</div>
+          <button class="copy-btn" onclick="cp(this,'t4')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t4">⚡ Midweek check — Cohort #[N]
+
+Đã qua nửa tuần rồi!
+
+Anh/chị đang ở bước nào:
+A. Đã xong cả 3 task 💪
+B. Đang làm, cần thêm 2 ngày ⏳
+C. Bị stuck, cần hỗ trợ 🆘
+
+Reply A/B/C để em biết nha.
+Ai reply C — em sẽ nhắn tin riêng ngay 🙏</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T5</div>
+          <div class="si-title">Check-in Reminder — Thứ 6</div>
+          <div class="si-trigger">Trigger: Thứ 6, 6:00 PM</div>
+          <button class="copy-btn" onclick="cp(this,'t5')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t5">📋 Nhắc check-in cuối tuần — Cohort #[N]
+
+Còn 3 tiếng nữa là đến deadline 21h!
+
+Hiện tại [X]/[TOTAL] bạn đã check-in.
+
+→ Điền ngay (5 phút): [LINK CHECK-IN FORM]
+
+Anh/chị nào chưa điền — đây là cơ hội để share điểm stuck và nhận hỗ trợ trước buổi live Thứ 7 sáng nhé!</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T6</div>
+          <div class="si-title">First Win Celebration</div>
+          <div class="si-trigger">Trigger: Học viên nộp bài tập đầu tiên</div>
+          <button class="copy-btn" onclick="cp(this,'t6')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t6">🎉 [TÊN] vừa hoàn thành bài tập đầu tiên!
+
+Đây là bước quan trọng nhất — vì hầu hết mọi người dừng lại ở bước này.
+
+Anh/chị vừa chứng minh mình khác rồi 💪
+
+Cohort hãy cùng chào mừng @[TÊN] nào! 👏👏👏</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T7</div>
+          <div class="si-title">Graduation Message — Kết Thúc 4 Tuần</div>
+          <div class="si-trigger">Trigger: Ngày 28 của cohort</div>
+          <button class="copy-btn" onclick="cp(this,'t7')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t7">🎓 Cohort #[N] — Chính thức tốt nghiệp!
+
+4 tuần. [X] buổi live. [Y] bài tập. Vô số khoảnh khắc "aha".
+
+Cảm ơn tất cả anh/chị đã tin tưởng và đồng hành cùng em 🙏
+
+📝 Em xin 2 phút của anh/chị để ghi lại hành trình:
+→ Form chia sẻ cảm nhận: [LINK TESTIMONIAL]
+(Anh/chị chỉ cần trả lời 3 câu thôi)
+
+🏠 Invite Alumni Group — nơi mình tiếp tục đồng hành:
+→ [LINK ALUMNI GROUP]
+
+Còn ai muốn giới thiệu người thân/đồng nghiệp → em có chương trình hoa hồng nhé!
+
+Tự hào về cả nhà lắm 💛</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">T8</div>
+          <div class="si-title">Referral Ask — Day 35</div>
+          <div class="si-trigger">Trigger: 1 tuần sau graduation</div>
+          <button class="copy-btn" onclick="cp(this,'t8')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="t8">Anh/chị [TÊN] ơi,
+
+Đã 1 tuần kể từ khi tốt nghiệp — anh/chị đang áp dụng những gì đã học được không?
+
+Nếu anh/chị thấy chương trình có giá trị, em có 1 đề xuất nhỏ:
+
+Giới thiệu 1 đồng nghiệp/người quen vào cohort tiếp theo:
+→ Họ nhận: giá ưu đãi early-bird
+→ Anh/chị nhận: 500,000đ cash hoặc 1 tháng alumni group miễn phí
+
+Cohort #[N+1] khai giảng [NGÀY] — còn [X] suất.
+
+Anh/chị có ai trong mind không? 😊</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EMAIL SEQUENCE -->
+  <div class="scripts-section">
+    <div class="section-hd">
+      <h3>📧 Email Nurture Sequence</h3>
+      <span>5 emails · 7 ngày · Setup 1 lần trong Brevo/Mailchimp</span>
+    </div>
+    <div class="script-group">
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">E1</div>
+          <div class="si-title">Welcome + Câu Chuyện</div>
+          <div class="si-trigger">Trigger: Ngay sau đăng ký (D+0)</div>
+          <button class="copy-btn" onclick="cp(this,'e1')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="e1">Subject: Cảm ơn [TÊN] — và câu chuyện 2 năm của em
+
+[TÊN] ơi,
+
+Cảm ơn anh/chị đã đăng ký lớp Tâm Thức.
+
+Trước khi gửi thông tin buổi học, em muốn kể anh/chị nghe câu chuyện thật của em — vì nó liên quan đến lý do em tạo ra chương trình này.
+
+2 năm trước, em vào BĐS với hai bàn tay trắng. Không có network. Không có kinh nghiệm. Không biết bắt đầu từ đâu. Em đã từng nghĩ: "Mình không đủ giỏi để làm việc này."
+
+Điều thay đổi không phải là kỹ năng bán hàng. Không phải số lượng khách hàng. Mà là cách em nhìn nhận bản thân trong ngành này.
+
+Đó là điều em sẽ chia sẻ trong lớp học Thứ [N] tới.
+
+📅 Thông tin buổi học:
+Ngày: [NGÀY]
+Giờ: [GIỜ]
+Link: [ZOOM LINK]
+
+Hẹn gặp anh/chị nhé,
+[TÊN BẠN]</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">E2</div>
+          <div class="si-title">3 Lý Do 90% Môi Giới Không Scale</div>
+          <div class="si-trigger">D+1</div>
+          <button class="copy-btn" onclick="cp(this,'e2')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="e2">Subject: 3 lý do 90% môi giới BĐS không scale được (không phải thiếu khách)
+
+[TÊN] ơi,
+
+Sau khi phỏng vấn hơn 20 môi giới trong 3 tháng qua, em nhận ra 1 pattern rất rõ.
+
+Những người không scale không phải vì:
+✗ Thiếu khách hàng
+✗ Thiếu kỹ năng
+✗ Thiếu may mắn
+
+Họ không scale vì 3 điều này:
+
+① Không rõ mình là ai — bán hàng như robot, không có chất riêng
+② Năng lượng tiêu cực — mang nỗi sợ và áp lực vào mỗi cuộc gặp
+③ Không có hệ thống — mọi thứ trong đầu, không có quy trình
+
+Em đã thấy những môi giới xuất sắc nhất — họ không giỏi hơn về kỹ thuật. Họ chỉ giải quyết được 3 điều trên.
+
+Đây là điều em sẽ chia sẻ cụ thể trong lớp học.
+
+Hẹn gặp anh/chị Thứ [N] nhé!
+[TÊN BẠN]</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">E5</div>
+          <div class="si-title">Last Call — Reminder Class</div>
+          <div class="si-trigger">D+7 (ngày trước class)</div>
+          <button class="copy-btn" onclick="cp(this,'e5')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="e5">Subject: Ngày mai — lớp học bắt đầu lúc [GIỜ] (link zoom đây)
+
+[TÊN] ơi,
+
+Ngày mai là buổi học rồi!
+
+📅 Thứ [N], [NGÀY] · [GIỜ]
+🔗 Zoom: [LINK]
+⏱️ Thời gian: 90 phút
+
+Không cần chuẩn bị gì trước — chỉ cần đến với tinh thần cởi mở.
+
+Em sẽ chia sẻ framework giúp anh/chị:
+→ Xác định vị thế độc đáo của mình trong ngành
+→ Hiểu rõ năng lượng đang ảnh hưởng đến kết quả như thế nào
+→ Bước đầu tiên cụ thể để bắt đầu thay đổi
+
+Buổi học hoàn toàn miễn phí — và em sẽ không bán bất cứ thứ gì trong 60 phút đầu tiên 🙂
+
+Hẹn gặp ngày mai nhé!
+[TÊN BẠN]
+
+P.S. Nếu anh/chị không thể tham dự trực tiếp — em có recording nhưng chỉ gửi cho những bạn đã đăng ký. Chỗ đang gần đủ rồi, nên nếu anh/chị muốn mang thêm bạn bè thì giới thiệu ngay nhé!</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GOOGLE FORMS -->
+  <div class="scripts-section">
+    <div class="section-hd">
+      <h3>📋 Google Form Templates</h3>
+      <span>2 forms · Copy câu hỏi vào Google Forms</span>
+    </div>
+    <div class="script-group">
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">F1</div>
+          <div class="si-title">Form Đăng Ký Lớp Học</div>
+          <div class="si-trigger">Gắn link vào landing page + bio FB</div>
+          <button class="copy-btn" onclick="cp(this,'f1')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="f1">TIÊU ĐỀ FORM: Đăng Ký Lớp Tâm Thức Miễn Phí — Broker Brand Builder
+
+MÔ TẢ: Điền thông tin để nhận link Zoom + tài liệu trước buổi học
+
+CÁC CÂU HỎI:
+
+1. Họ và tên * (Short answer)
+2. Số điện thoại / Zalo * (Short answer)
+3. Email (Short answer)
+4. Bạn đang ở giai đoạn nào? * (Multiple choice)
+   - Mới vào ngành, chưa có giao dịch nào
+   - Đã có 1–5 giao dịch, đang tìm cách ổn định
+   - Đang làm ổn nhưng muốn scale lên cấp độ mới
+   - Đang quản lý team / F1 muốn phát triển đội
+5. Điều khó khăn nhất bạn đang đối mặt là gì? * (Paragraph)
+6. Bạn biết đến lớp học này qua đâu? (Multiple choice)
+   - Facebook / Instagram
+   - Bạn bè giới thiệu
+   - Zalo
+   - Khác</div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="si-header">
+          <div class="si-num">F2</div>
+          <div class="si-title">Form Check-in Cuối Tuần</div>
+          <div class="si-trigger">Gửi mỗi Thứ 6 qua Telegram Bot</div>
+          <button class="copy-btn" onclick="cp(this,'f2')">Copy</button>
+        </div>
+        <div class="si-content">
+          <div class="script-text" id="f2">TIÊU ĐỀ FORM: Check-in Tuần [X] — Cohort #[N]
+
+MÔ TẢ: 5 phút · Giúp em hỗ trợ anh/chị tốt hơn trong buổi live Thứ 7
+
+CÁC CÂU HỎI:
+
+1. Họ tên * (Short answer)
+
+2. Tuần này anh/chị đã làm được gì? * (Paragraph)
+   [Placeholder: Liệt kê cụ thể, dù nhỏ cũng được]
+
+3. Điều gì đang stuck / khó khăn nhất? * (Paragraph)
+   [Placeholder: Đây là thông tin quan trọng nhất để em chuẩn bị buổi Thứ 7]
+
+4. Mức năng lượng của anh/chị tuần này: * (Linear scale 1–5)
+   1 = Rất thấp, mệt mỏi
+   5 = Rất cao, sẵn sàng bứt phá
+
+5. Cam kết của anh/chị cho tuần tới: * (Short answer)
+   [Placeholder: 1 việc cụ thể, có thể đo lường được]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /panel-scripts -->
+
+<!-- ============================================================ -->
+<!-- TAB 3: WEEKLY RHYTHM -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-rhythm">
+  <div style="margin-bottom:24px">
+    <div class="section-hd"><h3>📅 Lịch Vận Hành Mỗi Tuần</h3><span>Mỗi cohort 20 người · Thứ 2 đến Chủ nhật</span></div>
+    <div class="rhythm-table">
+      <div class="rt-row header">
+        <div class="rt-cell">Ngày</div>
+        <div class="rt-cell">👤 Anh/chị làm</div>
+        <div class="rt-cell">🤖 Bot tự động</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-cell">Thứ 2</div>
+        <div class="rt-cell human-task">— (nghỉ)</div>
+        <div class="rt-cell bot-task">8:00 AM: Drop task tuần mới vào group <span class="auto-badge">AUTO</span></div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-cell">Thứ 3</div>
+        <div class="rt-cell human-task">— (nghỉ)</div>
+        <div class="rt-cell bot-task">Theo dõi ai chưa acknowledge task → nhắc nhở <span class="auto-badge">AUTO</span></div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-cell">Thứ 4</div>
+        <div class="rt-cell human-task">Check phản hồi group (10 phút) <span class="human-badge">HUMAN</span></div>
+        <div class="rt-cell bot-task">7 PM: Midweek check-in A/B/C message <span class="auto-badge">AUTO</span></div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-cell">Thứ 5</div>
+        <div class="rt-cell human-task">Reply những bạn reply C (stuck) <span class="human-badge">HUMAN</span></div>
+        <div class="rt-cell bot-task">— (không có trigger)</div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-cell">Thứ 6</div>
+        <div class="rt-cell human-task">— (nghỉ)</div>
+        <div class="rt-cell bot-task">6 PM: Reminder check-in form · 9 PM: Form đóng, tổng hợp Sheet <span class="auto-badge">AUTO</span></div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-cell">Thứ 7</div>
+        <div class="rt-cell human-task">8:30 AM: Đọc AI summary (5 phút) · 9:00 AM: Live class 90 phút <span class="human-badge">HUMAN · 2h</span></div>
+        <div class="rt-cell bot-task">Sau class: Recap + nhắc tuần tới <span class="auto-badge">AUTO</span></div>
+      </div>
+      <div class="rt-row">
+        <div class="rt-cell">Chủ nhật</div>
+        <div class="rt-cell human-task">Tier 3: 1–2 buổi 1:1 nếu có booking <span class="human-badge">HUMAN · 1h</span></div>
+        <div class="rt-cell bot-task">— (không có trigger)</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:20px 24px;margin-top:20px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gl);margin-bottom:12px">⏱️ TỔNG THỜI GIAN ANH/CHỊ MỖI TUẦN</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+      <div style="background:rgba(0,0,0,.2);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gl)">90'</div>
+        <div style="font-size:12px;color:var(--muted)">Live class Thứ 7</div>
+      </div>
+      <div style="background:rgba(0,0,0,.2);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:24px;color:#4a90d9">45'</div>
+        <div style="font-size:12px;color:var(--muted)">Reply stuck + check group</div>
+      </div>
+      <div style="background:rgba(0,0,0,.2);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:24px;color:#a78bfa">2.5h</div>
+        <div style="font-size:12px;color:var(--muted)">1:1 calls Tier 3 (5 người)</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;font-size:13px;color:var(--muted);line-height:1.7">Tổng: <strong style="color:#fff">~5 giờ/tuần</strong> cho 1 cohort 20 người. Mở 2 cohort song song (stagger 2 tuần): <strong style="color:#fff">~8–9 giờ/tuần</strong>. Bot làm tất cả phần còn lại của 7 ngày × 7 ngày.</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 4: SETUP CHECKLIST -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-setup">
+  <div style="background:rgba(74,144,217,.08);border:1px solid rgba(74,144,217,.2);border-radius:12px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:var(--muted)">
+    ⚡ Click vào từng item để đánh dấu hoàn thành. Progress được lưu trong session này.
+  </div>
+
+  <div class="check-section">
+    <div class="check-title">⚙️ TOOLS SETUP (1 lần)</div>
+    <div class="check-grid">
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Tạo tài khoản Make.com (free tier đủ dùng)</div><div class="check-sub">make.com → Sign up free</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Tạo tài khoản Brevo (email automation)</div><div class="check-sub">brevo.com → 300 email/ngày miễn phí</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Tạo Telegram Bot qua @BotFather</div><div class="check-sub">Lấy token API → dùng trong Make.com</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Tạo Calendly link cho 1:1 (Tier 3)</div><div class="check-sub">calendly.com → free tier đủ dùng</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Setup SePay + webhook vào Make.com</div><div class="check-sub">Theo hướng dẫn trong Dashboard → Payment Setup</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Tạo Google Sheet tracking học viên</div><div class="check-sub">Columns: Tên · SĐT · Tier · Cohort # · Ngày vào · Status</div></div></div>
+    </div>
+  </div>
+
+  <div class="check-section">
+    <div class="check-title">📝 CONTENT SETUP (1 lần)</div>
+    <div class="check-grid">
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Tạo 2 Google Forms (đăng ký + check-in)</div><div class="check-sub">Copy câu hỏi từ tab Script → paste vào Forms</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Setup 5-email sequence trong Brevo</div><div class="check-sub">Copy email templates từ tab Script</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Record 5 interview clips đầu tiên</div><div class="check-sub">2–3 người/tuần × 2 tuần</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Upload 4 video bài giảng pre-recorded</div><div class="check-sub">YouTube unlisted hoặc Google Drive link</div></div></div>
+    </div>
+  </div>
+
+  <div class="check-section">
+    <div class="check-title">🚀 LAUNCH CHECKLIST (mỗi cohort)</div>
+    <div class="check-grid">
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Tạo Telegram group mới cho cohort</div><div class="check-sub">Đặt tên: "BBB Cohort #[N] · [Tháng]"</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Announce lớp học miễn phí (5–7 ngày trước)</div><div class="check-sub">Post FB + Zalo + Story + DM danh sách warm leads</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Chạy lớp Tâm Thức miễn phí</div><div class="check-sub">Target: 20–30 người attend · Record lại</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Gửi offer sau class (trong 30 phút)</div><div class="check-sub">Form chọn tier → SePay link theo tier</div></div></div>
+      <div class="check-item" onclick="ck(this)"><div class="check-box"></div><div><div class="check-item-text">Onboard học viên mới vào Telegram group</div><div class="check-sub">Bot chạy tự động khi họ join</div></div></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function sw(id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  const map={'funnel':'panel-funnel','scripts':'panel-scripts','rhythm':'panel-rhythm','setup':'panel-setup'};
+  document.getElementById(map[id]).classList.add('active');
+  event.target.classList.add('active');
+}
+function tog(id){
+  document.getElementById(id).classList.toggle('open');
+}
+function cp(btn,id){
+  const t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(()=>{
+    btn.textContent='✓ Copied';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied')},2000);
+  });
+}
+function ck(el){
+  el.classList.toggle('done');
+  const box=el.querySelector('.check-box');
+  box.textContent=el.classList.contains('done')?'✓':'';
+}
+// Open first 2 stages by default
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{tog('sA');tog('sB')},100);
+});
+</script>
+</body>
+</html>
