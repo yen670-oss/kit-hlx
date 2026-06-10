@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broker Kit — Ad Copy Toolkit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a1628;--card:#0f1e30;--card2:#13243a;
+  --gold:#C9A84C;--gl:#E2C06A;--gd:#a07830;
+  --teal:#2dd4bf;--purple:#a78bfa;--rose:#fb7185;
+  --green:#4ade80;
+  --text:#e8eaf0;--muted:#8899aa;--border:#1e3048;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.97);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px)}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);font-weight:700}
+.topbar-badge{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.back-btn{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);font-size:12px;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:inherit;text-decoration:none;transition:all .2s}
+.back-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{padding:56px 24px 36px;text-align:center;max-width:720px;margin:0 auto}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2px;padding:5px 14px;border-radius:20px;margin-bottom:20px;text-transform:uppercase}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,42px);font-weight:900;line-height:1.15;margin-bottom:14px}
+.hero-title span{background:linear-gradient(135deg,var(--gold),var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--muted);font-size:15px;line-height:1.8;max-width:560px;margin:0 auto 28px}
+
+.stats-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.stat-chip{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 18px;text-align:center;min-width:110px}
+.stat-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);display:block}
+.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+/* TABS */
+.tabs-wrap{max-width:960px;margin:0 auto;padding:0 16px 80px}
+.tabs-nav{display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap}
+.tab-btn{background:var(--card2);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.tab-btn.active{background:rgba(201,168,76,.14);border-color:var(--gold);color:var(--gold)}
+.tab-btn:hover:not(.active){border-color:rgba(201,168,76,.3);color:var(--gl)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* SECTION */
+.sec-header{margin-bottom:20px}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,28px);font-weight:700;margin-bottom:6px}
+.sec-sub{color:var(--muted);font-size:13px;line-height:1.7}
+
+/* AD CARD */
+.ad-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px;transition:border-color .3s}
+.ad-card:hover{border-color:rgba(201,168,76,.2)}
+.ad-header{padding:16px 20px;background:var(--card2);border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.ad-meta{flex:1}
+.ad-num-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.ad-num{width:32px;height:32px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ad-name{font-size:15px;font-weight:700;color:var(--gl)}
+.ad-angle{font-size:12px;color:var(--muted);margin-bottom:8px}
+.ad-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:.3px}
+.tag-gold{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold)}
+.tag-teal{background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.25);color:var(--teal)}
+.tag-purple{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:var(--purple)}
+.tag-rose{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.25);color:var(--rose)}
+.tag-green{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:var(--green)}
+.ad-copy-btn{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);color:var(--gold);font-size:12px;font-weight:600;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;flex-shrink:0;align-self:flex-start}
+.ad-copy-btn:hover{background:rgba(201,168,76,.22)}
+.ad-copy-btn.copied{background:rgba(45,212,191,.12);border-color:var(--teal);color:var(--teal)}
+.ad-body{padding:22px 24px}
+.ad-text{font-size:14px;line-height:1.9;color:var(--text);white-space:pre-wrap}
+.ad-note{margin-top:16px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.12);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.7}
+.ad-note strong{color:var(--gl)}
+
+/* CAROUSEL SLIDES */
+.slide-list{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.slide-item{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;gap:14px;align-items:flex-start}
+.slide-num{width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,.12);color:var(--gold);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.slide-content{flex:1}
+.slide-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+.slide-text{font-size:14px;color:var(--text);font-weight:600;line-height:1.5}
+.slide-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.6}
+
+/* STRATEGY TABLE */
+.strat-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+.strat-table th{background:var(--card2);color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;text-align:left;font-weight:700;border-bottom:1px solid var(--border)}
+.strat-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.6}
+.strat-table td:first-child{color:var(--text);font-weight:600;white-space:nowrap}
+.strat-table tr:last-child td{border-bottom:none}
+.strat-table tr:hover td{background:rgba(255,255,255,.02)}
+
+/* TIPS BOX */
+.tips-box{background:rgba(45,212,191,.04);border:1px solid rgba(45,212,191,.18);border-radius:12px;padding:18px 22px;margin:20px 0}
+.tips-box h4{color:var(--teal);font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.tips-box ul{padding-left:16px}
+.tips-box li{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:4px}
+.tips-box li strong{color:var(--text)}
+
+.obj-box{background:rgba(251,113,133,.04);border:1px solid rgba(251,113,133,.15);border-radius:12px;padding:18px 22px;margin:20px 0}
+.obj-box h4{color:var(--rose);font-size:13px;font-weight:700;margin-bottom:10px}
+.obj-table{width:100%;border-collapse:collapse;font-size:12px}
+.obj-table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.obj-table td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--muted);line-height:1.6;vertical-align:top}
+.obj-table td:first-child{color:var(--text);font-style:italic}
+.obj-table tr:last-child td{border-bottom:none}
+
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:28px 0}
+
+/* WEEK PLAN */
+.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.week-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px}
+.week-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:6px}
+.week-title{font-size:14px;font-weight:700;color:var(--gl);margin-bottom:6px}
+.week-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+@media(max-width:600px){
+  .topbar{padding:0 16px}
+  .ad-header{flex-wrap:wrap}
+  .ad-body{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-logo">🎯 Broker Kit — Ad Copy</span>
+    <span class="topbar-badge">5 Phiên Bản</span>
+  </div>
+  <a href="MASTER-DASHBOARD.html" class="back-btn">← Dashboard</a>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">📢 Quảng Cáo · Broker Brand Builder Kit</div>
+  <h1 class="hero-title">5 Bài Viết Quảng Cáo<br><span>Bán Kit Cho Broker</span></h1>
+  <p class="hero-sub">5 angle khác nhau — từ long-form Facebook post đến ultra-short Reel. Mỗi bài có copy button, ghi chú triển khai, và lý do tâm lý hoạt động.</p>
+  <div class="stats-row">
+    <div class="stat-chip"><span class="stat-num">5</span><span class="stat-lbl">Phiên Bản</span></div>
+    <div class="stat-chip"><span class="stat-num">5</span><span class="stat-lbl">Angle</span></div>
+    <div class="stat-chip"><span class="stat-num">4</span><span class="stat-lbl">Platform</span></div>
+    <div class="stat-chip"><span class="stat-num">1</span><span class="stat-lbl">Kit</span></div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="sw('t1')">📝 5 Bài Viết</button>
+    <button class="tab-btn" onclick="sw('t2')">🎠 Carousel</button>
+    <button class="tab-btn" onclick="sw('t3')">🧠 Chiến Lược</button>
+  </div>
+
+  <!-- ══════════════════════════════
+       TAB 1 — 5 BÀI VIẾT
+  ══════════════════════════════ -->
+  <div id="t1" class="tab-panel active">
+    <div class="sec-header">
+      <div class="sec-tag">5 Phiên Bản · Copy Dùng Ngay</div>
+      <h2 class="sec-title">Bài Viết Bán Broker Brand Builder Kit</h2>
+      <p class="sec-sub">Target: Môi giới BĐS đang gặp khó khăn về thương hiệu cá nhân và thu nhập không ổn định. Mỗi bài nhắm vào 1 nỗi đau khác nhau.</p>
+    </div>
+
+    <!-- PB1 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-meta">
+          <div class="ad-num-row">
+            <div class="ad-num">1</div>
+            <div class="ad-name">Long-form — "Làm 2-5 Năm Còn Lại Gì?"</div>
+          </div>
+          <div class="ad-angle">Angle: Nỗi sợ không có tài sản sau nhiều năm làm nghề</div>
+          <div class="ad-tags">
+            <span class="tag tag-gold">★ Khuyến nghị</span>
+            <span class="tag tag-teal">Facebook Post</span>
+            <span class="tag tag-purple">Chạy Ads</span>
+            <span class="tag tag-green">Conversion Cao</span>
+          </div>
+        </div>
+        <button class="ad-copy-btn" onclick="cp(this,'pb1')">📋 Copy</button>
+      </div>
+      <div class="ad-body">
+        <div class="ad-text" id="pb1">Làm môi giới 2–5 năm, anh/chị đang sở hữu thứ gì?
+
+Không phải câu hỏi về thu nhập. Câu hỏi về tài sản.
+
+Sau 3 năm chạy khắp nơi, gọi điện hàng trăm cuộc, đóng được vài chục hợp đồng —
+
+Nếu ngày mai anh/chị nghỉ việc, chuyển sàn, hoặc thị trường đóng băng thêm 6 tháng nữa:
+
+Anh/chị còn lại gì?
+
+─────────────────────────
+
+Đây là sự thật mà phần lớn môi giới không dám nhìn thẳng:
+
+❌ Không có danh sách khách hàng riêng — toàn bộ data nằm ở CRM của sàn
+
+❌ Không có thương hiệu cá nhân — Facebook/Zalo đăng vài bài nhưng ai cũng post như nhau
+
+❌ Không có hệ thống — mỗi tháng lại bắt đầu lại từ đầu, săn khách mới từ đầu
+
+❌ Thu nhập phụ thuộc hoàn toàn vào thị trường — thị trường đứng, thu nhập đứng theo
+
+Tôi biết cảm giác đó. Cố gắng rất nhiều, nhưng sau mỗi giao dịch xong — mọi thứ về số không.
+
+─────────────────────────
+
+Môi giới giỏi nhất không phải người bán được nhiều nhất.
+
+Đó là người xây được thứ gì đó — ngay cả khi họ ngừng gọi điện.
+
+─────────────────────────
+
+Tôi đã mất 2 năm để học điều đó theo cách khó nhất.
+
+Rồi tôi tập hợp tất cả — framework, template, script, hệ thống AI — vào một bộ kit duy nhất:
+
+🏗️ Broker Brand Builder Kit
+
+Không phải khóa học lý thuyết. Không phải video dài 4 tiếng để nghe xong quên.
+
+Đây là bộ công cụ thực chiến để anh/chị triển khai ngay — kể cả khi không rành công nghệ:
+
+✅ Hệ thống xây thương hiệu cá nhân — từ con số 0 đến người được khách chủ động tìm
+
+✅ Kho 90 ngày content — không cần nghĩ mỗi sáng hôm nay đăng gì
+
+✅ Script xử lý từ chối — 15 kịch bản thực tế từ "đắt quá" đến "để tôi suy nghĩ thêm"
+
+✅ AI làm việc thay 4 tiếng/ngày — soạn bài, phân tích khách, theo dõi hợp đồng
+
+✅ Tâm thức người bán — phần mà không công cụ nào dạy nhưng quyết định tất cả
+
+─────────────────────────
+
+Người dùng kit này không chỉ bán được nhiều hơn.
+
+Họ trở thành thứ gì đó mà thị trường cần — ngay cả khi thị trường đang khó.
+
+─────────────────────────
+
+📌 Nếu anh/chị đang cảm thấy: làm nhiều nhưng không lớn được — bộ kit này được viết cho đúng anh/chị.
+
+👇 [Xem chi tiết Broker Brand Builder Kit]
+(Link trong bình luận đầu tiên)</div>
+        <div class="ad-note">
+          <strong>💡 Triển khai:</strong> Đăng kèm ảnh cá nhân nghiêm túc hoặc ảnh đang làm việc. Gắn link kit vào comment đầu tiên (giảm reach nếu để trong post). Chạy ads boost: objective Traffic → Landing page kit. Thời gian đăng tốt nhất: 7–9 tối.
+        </div>
+      </div>
+    </div>
+
+    <!-- PB2 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-meta">
+          <div class="ad-num-row">
+            <div class="ad-num">2</div>
+            <div class="ad-name">Số Liệu Gây Sốc — "87% Bỏ Nghề"</div>
+          </div>
+          <div class="ad-angle">Angle: Pattern interrupt bằng con số thống kê thật</div>
+          <div class="ad-tags">
+            <span class="tag tag-teal">Facebook Post</span>
+            <span class="tag tag-teal">Warm Audience</span>
+          </div>
+        </div>
+        <button class="ad-copy-btn" onclick="cp(this,'pb2')">📋 Copy</button>
+      </div>
+      <div class="ad-body">
+        <div class="ad-text" id="pb2">87% môi giới bỏ nghề trong 3 năm đầu.
+
+Không phải vì thị trường xấu. Không phải vì thiếu kỹ năng bán hàng.
+
+Mà vì họ không xây được thứ gì của riêng mình.
+
+Mỗi tháng reset từ đầu. Mỗi năm như năm đầu tiên. Cạn sức trước khi thị trường phục hồi.
+
+─────────────────────────
+
+Tôi là [Tên]. Môi giới BĐS [X] năm.
+
+Và tôi đã là con số thống kê đó — cho đến khi tôi thay đổi một thứ:
+
+Ngừng cố bán nhiều hơn. Bắt đầu xây thương hiệu.
+
+Kết quả: Khách tự tìm đến thay vì tôi chạy theo khách. Thu nhập ổn định hơn kể cả tháng thị trường thấp điểm. Và lần đầu tiên sau nhiều năm — tôi có thứ gì đó để lại dù ngừng làm việc một tuần.
+
+─────────────────────────
+
+Tôi đóng gói tất cả vào Broker Brand Builder Kit.
+
+Không lý thuyết. Toàn bộ là công cụ dùng được ngay.
+
+👇 [Tìm hiểu thêm]</div>
+        <div class="ad-note">
+          <strong>💡 Triển khai:</strong> Thay [Tên] và [X] năm bằng thông tin thật. Dùng cho warm audience (đã biết anh/chị). Đăng kèm ảnh cá nhân casual hoặc ảnh "trước và sau." Hook số liệu hoạt động mạnh nhất trên mobile feed.
+        </div>
+      </div>
+    </div>
+
+    <!-- PB3 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-meta">
+          <div class="ad-num-row">
+            <div class="ad-num">3</div>
+            <div class="ad-name">Đối Thoại Nội Tâm — "Tại Sao Chưa Lớn?"</div>
+          </div>
+          <div class="ad-angle">Angle: Nói thẳng câu hỏi họ đang tự hỏi trong đầu</div>
+          <div class="ad-tags">
+            <span class="tag tag-teal">Facebook Post</span>
+            <span class="tag tag-purple">Cold Traffic</span>
+            <span class="tag tag-green">Viral Tốt</span>
+          </div>
+        </div>
+        <button class="ad-copy-btn" onclick="cp(this,'pb3')">📋 Copy</button>
+      </div>
+      <div class="ad-body">
+        <div class="ad-text" id="pb3">Câu hỏi mà nhiều môi giới không dám hỏi to:
+
+"Mình làm nghề này đã mấy năm — tại sao vẫn chưa cảm thấy ổn định?"
+
+Tôi sẽ trả lời thẳng:
+
+Vì hầu hết môi giới đang làm nghề — chứ chưa xây sự nghiệp.
+
+Làm nghề: Có deal thì có tiền. Hết deal thì... hết tiền.
+
+Xây sự nghiệp: Có hệ thống tạo ra deal. Hệ thống chạy kể cả khi mình không chạy.
+
+─────────────────────────
+
+Sự khác biệt không nằm ở kỹ năng bán hàng.
+
+Nó nằm ở: thương hiệu, hệ thống, và tâm thức đúng.
+
+Ba thứ đó — tôi đóng gói vào một chỗ.
+
+🏗️ Broker Brand Builder Kit — bộ công cụ để anh/chị ngừng chạy theo thị trường và bắt đầu dẫn dắt khách hàng của mình.
+
+👇 [Xem trong link]
+
+(Đọc xong 3 phút. Dùng được ngay. Không cần kỹ thuật.)</div>
+        <div class="ad-note">
+          <strong>💡 Triển khai:</strong> Bài này viral tốt — người đọc hay tag bạn bè làm cùng nghề. Đăng vào nhóm môi giới BĐS Hạ Long / Quảng Ninh để tăng organic reach. Thêm 1-2 câu hỏi ở cuối để kéo comment: "Anh/chị đang ở giai đoạn nào?"
+        </div>
+      </div>
+    </div>
+
+    <!-- PB4 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-meta">
+          <div class="ad-num-row">
+            <div class="ad-num">4</div>
+            <div class="ad-name">Ultra-Short — Confession Ngắn</div>
+          </div>
+          <div class="ad-angle">Angle: Thú nhận cá nhân, ngược kỳ vọng, dừng scroll ngay</div>
+          <div class="ad-tags">
+            <span class="tag tag-rose">Reel · Story</span>
+            <span class="tag tag-teal">TikTok</span>
+            <span class="tag tag-purple">Zalo Story</span>
+          </div>
+        </div>
+        <button class="ad-copy-btn" onclick="cp(this,'pb4')">📋 Copy</button>
+      </div>
+      <div class="ad-body">
+        <div class="ad-text" id="pb4">Tôi từng là môi giới bán được — nhưng không lớn được.
+
+Hàng tháng cố gắng 100%. Hàng tháng bắt đầu lại từ 0%.
+
+Cho đến khi tôi hiểu ra: vấn đề không phải kỹ năng bán hàng.
+
+Vấn đề là tôi không có thương hiệu.
+
+─────────────
+
+Giờ thì khác rồi. Và tôi đóng gói tất cả những gì đã thay đổi vào một bộ kit.
+
+👇 Tìm hiểu thêm — link trong bio.</div>
+        <div class="ad-note">
+          <strong>💡 Triển khai:</strong> Dùng làm caption Reel/TikTok ngắn 15-30 giây — đọc to trực tiếp vào camera, không cần B-roll. Kết thúc video bằng "link trong bio" hoặc "comment KIT để nhận." Đây là bài entry funnel — không cần convert ngay, chỉ cần kéo follow và awareness.
+        </div>
+      </div>
+    </div>
+
+    <!-- PB5 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-meta">
+          <div class="ad-num-row">
+            <div class="ad-num">5</div>
+            <div class="ad-name">Social Proof — Tin Nhắn Khách Thật</div>
+          </div>
+          <div class="ad-angle">Angle: Testimonial thật → credibility cao nhất, ít bị nghi ngờ</div>
+          <div class="ad-tags">
+            <span class="tag tag-teal">Facebook Post</span>
+            <span class="tag tag-teal">Instagram</span>
+            <span class="tag tag-gold">Tuần 4</span>
+          </div>
+        </div>
+        <button class="ad-copy-btn" onclick="cp(this,'pb5')">📋 Copy</button>
+      </div>
+      <div class="ad-body">
+        <div class="ad-text" id="pb5">Tuần trước tôi nhận được tin nhắn này từ một môi giới dùng kit:
+
+"Anh ơi, em dùng bộ kit được 3 tuần. Tuần đầu em không tin lắm — cứ nghĩ thêm một thứ nữa để mua rồi không dùng. Nhưng hôm qua em có 2 khách chủ động nhắn hỏi thăm sau khi xem bài em đăng. Lần đầu tiên làm nghề 2 năm em có cảm giác khách tự tìm đến mình."
+
+─────────────────────────
+
+Đây là lý do tôi làm kit này.
+
+Không phải để bán thêm một sản phẩm. Mà để môi giới không còn cảm thấy đang chạy một mình trên đường mòn không có điểm đến.
+
+Nếu anh/chị đang ở giai đoạn đó — kit này được tạo ra cho đúng anh/chị.
+
+👇 [Xem Broker Brand Builder Kit]</div>
+        <div class="ad-note">
+          <strong>💡 Triển khai:</strong> Thay tin nhắn mẫu bằng tin nhắn thật (xin phép người gửi trước). Dùng screenshot tin nhắn thật làm ảnh kèm post — visual proof mạnh hơn text. Đăng vào Tuần 4 khi đã có warm audience từ 3 tuần trước.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       TAB 2 — CAROUSEL
+  ══════════════════════════════ -->
+  <div id="t2" class="tab-panel">
+    <div class="sec-header">
+      <div class="sec-tag">Carousel · 5 Slide</div>
+      <h2 class="sec-title">Facebook & Instagram Carousel</h2>
+      <p class="sec-sub">Format carousel tăng time-on-post và reach. Slide đầu là hook — người dùng phải vuốt để xem tiếp. Slide cuối là CTA.</p>
+    </div>
+
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-meta">
+          <div class="ad-num-row">
+            <div class="ad-num">🎠</div>
+            <div class="ad-name">Carousel: "5 Dấu Hiệu Làm Nghề Chứ Chưa Xây Sự Nghiệp"</div>
+          </div>
+          <div class="ad-tags">
+            <span class="tag tag-teal">Facebook Carousel</span>
+            <span class="tag tag-purple">Instagram Carousel</span>
+          </div>
+        </div>
+        <button class="ad-copy-btn" onclick="cp(this,'carousel-full')">📋 Copy All</button>
+      </div>
+      <div class="ad-body">
+        <div class="slide-list">
+          <div class="slide-item">
+            <div class="slide-num">1</div>
+            <div class="slide-content">
+              <div class="slide-label">Slide 1 — Cover (Hook)</div>
+              <div class="slide-text">5 dấu hiệu anh/chị đang làm môi giới — chứ chưa xây sự nghiệp</div>
+              <div class="slide-sub">Thiết kế: chữ lớn trên nền tối, không cần ảnh phức tạp</div>
+            </div>
+          </div>
+          <div class="slide-item">
+            <div class="slide-num">2</div>
+            <div class="slide-content">
+              <div class="slide-label">Slide 2 — Dấu hiệu 1</div>
+              <div class="slide-text">Dấu hiệu 1: Tháng nào cũng phải săn khách mới từ đầu</div>
+              <div class="slide-sub">Không có hệ thống tạo khách inbound. Mọi tháng đều như tháng đầu tiên — dù đã làm 3 năm.</div>
+            </div>
+          </div>
+          <div class="slide-item">
+            <div class="slide-num">3</div>
+            <div class="slide-content">
+              <div class="slide-label">Slide 3 — Dấu hiệu 2</div>
+              <div class="slide-text">Dấu hiệu 2: Không ai chủ động tìm đến anh/chị vì thương hiệu</div>
+              <div class="slide-sub">Khách gặp anh/chị qua giới thiệu hoặc quảng cáo — không phải vì tin tưởng thương hiệu cá nhân của anh/chị.</div>
+            </div>
+          </div>
+          <div class="slide-item">
+            <div class="slide-num">4</div>
+            <div class="slide-content">
+              <div class="slide-label">Slide 4 — Dấu hiệu 3</div>
+              <div class="slide-text">Dấu hiệu 3: Thu nhập lên xuống theo thị trường, anh/chị không kiểm soát được</div>
+              <div class="slide-sub">Tháng thị trường tốt: 30-50 triệu. Tháng thị trường chậm: 5-10 triệu. Không có hệ thống nào đệm lại sự biến động này.</div>
+            </div>
+          </div>
+          <div class="slide-item">
+            <div class="slide-num">5</div>
+            <div class="slide-content">
+              <div class="slide-label">Slide 5 — CTA</div>
+              <div class="slide-text">Nếu anh/chị thấy mình trong 3 dấu hiệu trên — Broker Brand Builder Kit được tạo ra cho đúng anh/chị.</div>
+              <div class="slide-sub">→ Nhấn "Tìm hiểu thêm" để xem chi tiết kit<br>→ Hoặc comment "KIT" để nhận link trực tiếp</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:none" id="carousel-full">SLIDE 1 (Cover):
+5 dấu hiệu anh/chị đang làm môi giới — chứ chưa xây sự nghiệp
+
+---
+
+SLIDE 2:
+Dấu hiệu 1: Tháng nào cũng phải săn khách mới từ đầu
+
+Không có hệ thống tạo khách inbound. Mọi tháng đều như tháng đầu tiên — dù đã làm 3 năm.
+
+---
+
+SLIDE 3:
+Dấu hiệu 2: Không ai chủ động tìm đến anh/chị vì thương hiệu
+
+Khách gặp anh/chị qua giới thiệu hoặc quảng cáo — không phải vì tin tưởng thương hiệu cá nhân của anh/chị.
+
+---
+
+SLIDE 4:
+Dấu hiệu 3: Thu nhập lên xuống theo thị trường, anh/chị không kiểm soát được
+
+Tháng thị trường tốt: 30-50 triệu. Tháng thị trường chậm: 5-10 triệu. Không có hệ thống nào đệm lại sự biến động này.
+
+---
+
+SLIDE 5 (CTA):
+Nếu anh/chị thấy mình trong 3 dấu hiệu trên — Broker Brand Builder Kit được tạo ra cho đúng anh/chị.
+
+→ Nhấn "Tìm hiểu thêm" để xem chi tiết kit
+→ Hoặc comment "KIT" để nhận link trực tiếp</div>
+
+        <div class="ad-note" style="margin-top:16px">
+          <strong>💡 Thiết kế carousel:</strong> Dùng Canva — tìm template "carousel quote." Nền tối (#0a1628) + chữ vàng (#C9A84C) + Be Vietnam Pro. Mỗi slide 1 dấu hiệu, chữ đủ lớn đọc được không cần phóng to. Slide 1 phải đủ mạnh để người ta vuốt tiếp.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       TAB 3 — CHIẾN LƯỢC
+  ══════════════════════════════ -->
+  <div id="t3" class="tab-panel">
+    <div class="sec-header">
+      <div class="sec-tag">Chiến Lược Triển Khai</div>
+      <h2 class="sec-title">Lịch 4 Tuần · Objections · Benchmark</h2>
+      <p class="sec-sub">Cách xoay vòng 5 phiên bản để tối đa reach và conversion qua 4 tuần liên tiếp.</p>
+    </div>
+
+    <!-- WEEK PLAN -->
+    <div class="sec-tag" style="margin-bottom:12px">📅 Lịch Triển Khai 4 Tuần</div>
+    <div class="week-grid">
+      <div class="week-card">
+        <div class="week-label">Tuần 1</div>
+        <div class="week-title">PB3 — Đối Thoại</div>
+        <div class="week-desc">Test organic reach. Đăng nhóm môi giới HLX. CTA: comment "KIT" để nhận link. Đo: số comment + share.</div>
+      </div>
+      <div class="week-card">
+        <div class="week-label">Tuần 2</div>
+        <div class="week-title">PB1 — Long-form</div>
+        <div class="week-desc">Đăng kèm ảnh cá nhân. Boost ads: Traffic → landing page kit. CTA "Tìm hiểu thêm." Đo: CTR + time on page.</div>
+      </div>
+      <div class="week-card">
+        <div class="week-label">Tuần 3</div>
+        <div class="week-title">Carousel + PB4</div>
+        <div class="week-desc">Carousel cho FB/IG. PB4 cho Reel/TikTok/Story. Remarketing audience tuần 1-2. Đo: reach mới vs remarketing.</div>
+      </div>
+      <div class="week-card">
+        <div class="week-label">Tuần 4</div>
+        <div class="week-title">PB2 + PB5</div>
+        <div class="week-desc">PB2 (số liệu) + PB5 (social proof thật nếu có). Soft deadline offer. Đo: conversion rate cuối phễu.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- STRATEGY TABLE -->
+    <div class="sec-tag" style="margin-bottom:12px">📊 Bảng So Sánh 5 Phiên Bản</div>
+    <table class="strat-table">
+      <tr>
+        <th>#</th>
+        <th>Angle</th>
+        <th>Độ Dài</th>
+        <th>Platform</th>
+        <th>Dùng Tốt Khi</th>
+      </tr>
+      <tr>
+        <td>PB1</td>
+        <td>"Còn lại gì?"</td>
+        <td>Dài</td>
+        <td>Facebook</td>
+        <td>Chạy ads, cold + warm traffic</td>
+      </tr>
+      <tr>
+        <td>PB2</td>
+        <td>"87% bỏ nghề"</td>
+        <td>Trung bình</td>
+        <td>Facebook</td>
+        <td>Warm audience đã follow</td>
+      </tr>
+      <tr>
+        <td>PB3</td>
+        <td>Đối thoại nội tâm</td>
+        <td>Trung bình</td>
+        <td>FB + nhóm</td>
+        <td>Cold traffic, viral trong nhóm nghề</td>
+      </tr>
+      <tr>
+        <td>PB4</td>
+        <td>Ultra-short confession</td>
+        <td>Ngắn</td>
+        <td>Reel/TikTok/Story</td>
+        <td>Video ngắn, awareness rộng</td>
+      </tr>
+      <tr>
+        <td>PB5</td>
+        <td>Social proof</td>
+        <td>Trung bình</td>
+        <td>FB + IG</td>
+        <td>Tuần 4, khi đã có warm audience</td>
+      </tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <!-- OBJECTION MAP -->
+    <div class="obj-box">
+      <h4>🛡️ Objection Map — Xử Lý Trước Khi Khách Hỏi</h4>
+      <table class="obj-table">
+        <tr>
+          <th>Objection</th>
+          <th>Xử lý ở</th>
+          <th>Cách xử lý</th>
+        </tr>
+        <tr>
+          <td>"Tôi bận, không có thời gian học"</td>
+          <td>PB1 + PB3</td>
+          <td>"Không cần kỹ thuật. Dùng được ngay" + "Không phải khóa học"</td>
+        </tr>
+        <tr>
+          <td>"Đắt, chưa biết hiệu quả"</td>
+          <td>PB2 + PB5</td>
+          <td>Story transformation thật + testimonial cụ thể</td>
+        </tr>
+        <tr>
+          <td>"Mua tool AI rồi không dùng"</td>
+          <td>PB1</td>
+          <td>"Không phải khóa học lý thuyết — là bộ công cụ thực chiến"</td>
+        </tr>
+        <tr>
+          <td>"Thị trường khó, chưa phải lúc"</td>
+          <td>PB1</td>
+          <td>"Kể cả khi thị trường đang khó — người có thương hiệu vẫn có khách"</td>
+        </tr>
+        <tr>
+          <td>"Làm lâu năm rồi, biết hết rồi"</td>
+          <td>PB3</td>
+          <td>"Không phải kỹ năng bán hàng — đó là hệ thống và thương hiệu"</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BENCHMARKS -->
+    <div class="tips-box">
+      <h4>📈 Benchmark Kỳ Vọng</h4>
+      <ul>
+        <li><strong>Facebook organic post:</strong> 2–4% engagement rate → comment "KIT"</li>
+        <li><strong>Facebook post boost (ads):</strong> CTR 1–3% → landing page kit</li>
+        <li><strong>Nhóm môi giới:</strong> 5–10% comment rate với PB3 (viral tốt)</li>
+        <li><strong>Reel/TikTok (PB4):</strong> 3–8% profile click → bio link</li>
+        <li><strong>Carousel:</strong> 2–3 lần engagement cao hơn single image</li>
+        <li><strong>Conversion rate từ landing page:</strong> 2–5% (BĐS kit cao hơn average)</li>
+      </ul>
+    </div>
+
+    <div class="tips-box" style="background:rgba(167,139,250,.04);border-color:rgba(167,139,250,.18)">
+      <h4 style="color:var(--purple)">⚡ Tips Tăng Hiệu Quả Nhanh</h4>
+      <ul>
+        <li><strong>Giờ vàng đăng bài:</strong> 7–9 tối (cao điểm môi giới online sau giờ làm)</li>
+        <li><strong>Comment ghim:</strong> Đặt link kit vào comment đầu tiên ngay sau khi đăng</li>
+        <li><strong>Comment "KIT":</strong> Setup trả lời tự động qua ManyChat hoặc tay — gửi link cho ai comment</li>
+        <li><strong>Hashtag (IG):</strong> #moigioidanang #bdsquangninhh #brokerlife #moigioidia + 3-4 hashtag local</li>
+        <li><strong>A/B test subject:</strong> Đăng cùng nội dung PB1 với 2 hook khác nhau, xem cái nào được share nhiều hơn</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function sw(id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+function cp(btn,id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const txt=(el.innerText||el.textContent).trim();
+  navigator.clipboard.writeText(txt).then(()=>{
+    const o=btn.textContent;
+    btn.textContent='✅ Đã copy!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('copied')},2000);
+  });
+}
+</script>
+</body>
+</html>
