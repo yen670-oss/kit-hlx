@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HLX Sales Toolkit — Lá Thư + Email Sequence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a1628;--card:#0f1e30;--card2:#13243a;
+  --gold:#C9A84C;--gl:#E2C06A;--gd:#a07830;
+  --teal:#2dd4bf;--purple:#a78bfa;--rose:#fb7185;
+  --text:#e8eaf0;--muted:#8899aa;--border:#1e3048;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.7}
+
+/* NAV */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.97);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px)}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);font-weight:700}
+.topbar-badge{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.back-btn{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);font-size:12px;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:inherit;text-decoration:none;transition:all .2s}
+.back-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{padding:60px 24px 40px;text-align:center;max-width:760px;margin:0 auto}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2px;padding:5px 14px;border-radius:20px;margin-bottom:20px;text-transform:uppercase}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.hero-title span{background:linear-gradient(135deg,var(--gold),var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--muted);font-size:16px;line-height:1.8;max-width:580px;margin:0 auto 32px}
+
+/* STATS ROW */
+.stats-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.stat-chip{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center;min-width:120px}
+.stat-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);display:block}
+.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+/* TABS */
+.tabs-wrap{max-width:960px;margin:0 auto;padding:0 16px 80px}
+.tabs-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap;padding:0 8px}
+.tab-btn{background:var(--card2);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;padding:9px 18px;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.tab-btn.active{background:rgba(201,168,76,.14);border-color:var(--gold);color:var(--gold)}
+.tab-btn:hover:not(.active){border-color:rgba(201,168,76,.3);color:var(--gl)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* SECTION HEADER */
+.sec-header{margin-bottom:24px}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,30px);font-weight:700;margin-bottom:8px}
+.sec-sub{color:var(--muted);font-size:14px;line-height:1.7}
+
+/* COPY BLOCK */
+.copy-block{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px}
+.copy-block-header{padding:16px 20px;background:var(--card2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.copy-block-title{font-size:14px;font-weight:700;color:var(--gl)}
+.copy-block-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:.3px}
+.tag-gold{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold)}
+.tag-teal{background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.25);color:var(--teal)}
+.tag-purple{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:var(--purple)}
+.tag-rose{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.25);color:var(--rose)}
+.copy-btn{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);color:var(--gold);font-size:12px;font-weight:600;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .2s;flex-shrink:0}
+.copy-btn:hover{background:rgba(201,168,76,.22);border-color:var(--gl)}
+.copy-btn.copied{background:rgba(45,212,191,.12);border-color:var(--teal);color:var(--teal)}
+.copy-content{padding:24px;white-space:pre-wrap;font-size:14px;line-height:1.85;color:var(--text);font-family:'Be Vietnam Pro',sans-serif}
+
+/* EMAIL CARD */
+.email-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:24px;transition:all .3s}
+.email-card:hover{border-color:rgba(201,168,76,.2)}
+.email-header{padding:18px 20px;background:var(--card2);border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;cursor:pointer}
+.email-num{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.email-info{flex:1}
+.email-day{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.email-subject{font-size:15px;font-weight:700;color:var(--gl);margin-bottom:4px}
+.email-purpose{font-size:12px;color:var(--muted)}
+.email-toggle{color:var(--muted);font-size:18px;transition:transform .3s;flex-shrink:0;margin-top:4px}
+.email-card.open .email-toggle{transform:rotate(180deg)}
+.email-body{display:none;padding:24px;border-top:1px solid var(--border)}
+.email-card.open .email-body{display:block}
+.email-section{margin-bottom:20px}
+.email-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:8px}
+.email-text{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;font-size:13px;line-height:1.85;white-space:pre-wrap;color:var(--text)}
+.email-copy-btn{margin-top:10px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:12px;font-weight:600;padding:7px 16px;border-radius:7px;cursor:pointer;font-family:inherit;transition:all .2s}
+.email-copy-btn:hover{background:rgba(201,168,76,.2)}
+.email-copy-btn.copied{background:rgba(45,212,191,.1);border-color:var(--teal);color:var(--teal)}
+.email-notes{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px}
+.email-notes strong{color:var(--gl)}
+
+/* TIMELINE */
+.timeline{display:flex;gap:0;margin:24px 0 32px;position:relative;overflow-x:auto;padding-bottom:4px}
+.timeline::before{content:'';position:absolute;top:20px;left:20px;right:20px;height:2px;background:linear-gradient(90deg,var(--gold),rgba(201,168,76,.2));z-index:0}
+.tl-item{flex:1;min-width:100px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1}
+.tl-dot{width:40px;height:40px;border-radius:50%;border:2px solid var(--gold);background:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--gold);flex-shrink:0}
+.tl-label{font-size:11px;color:var(--muted);text-align:center;line-height:1.4}
+.tl-title{font-size:11px;font-weight:700;color:var(--text);text-align:center}
+
+/* CAPTION VARIANTS */
+.variant-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:24px 0}
+.variant-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative}
+.variant-badge{position:absolute;top:14px;right:14px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.vb-rec{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3)}
+.vb-alt{background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.25)}
+.variant-angle{font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.variant-name{font-size:15px;font-weight:700;color:var(--gl);margin-bottom:10px}
+.variant-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.variant-btn{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:12px;font-weight:600;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .2s;width:100%}
+.variant-btn:hover{background:rgba(201,168,76,.18)}
+.variant-btn.copied{background:rgba(45,212,191,.1);border-color:var(--teal);color:var(--teal)}
+
+/* FRAMEWORK BOX */
+.framework-box{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:20px 24px;margin-bottom:20px}
+.framework-box h4{color:var(--gl);font-size:14px;font-weight:700;margin-bottom:10px}
+.framework-box p,.framework-box li{font-size:13px;color:var(--muted);line-height:1.7}
+.framework-box ul{padding-left:18px}
+.framework-box li{margin-bottom:4px}
+
+/* OBJECTION TABLE */
+.obj-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.obj-table th{background:var(--card2);color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;text-align:left;font-weight:700;border-bottom:1px solid var(--border)}
+.obj-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);line-height:1.6;vertical-align:top}
+.obj-table td:first-child{color:var(--text);font-weight:600}
+.obj-table tr:last-child td{border-bottom:none}
+.obj-table tr:hover td{background:rgba(255,255,255,.02)}
+
+/* DEPLOY TIP */
+.deploy-tip{background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.2);border-radius:12px;padding:16px 20px;margin-top:24px}
+.deploy-tip h4{color:var(--teal);font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.deploy-tip p,.deploy-tip li{font-size:12px;color:var(--muted);line-height:1.7}
+.deploy-tip ul{padding-left:16px}
+.deploy-tip li{margin-bottom:3px}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:32px 0}
+
+@media(max-width:600px){
+  .email-header{flex-wrap:wrap}
+  .topbar{padding:0 16px}
+  .copy-content{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-logo">✉️ HLX Sales Toolkit</span>
+    <span class="topbar-badge">Copy Ready</span>
+  </div>
+  <a href="MASTER-DASHBOARD.html" class="back-btn">← Dashboard</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">📋 Bộ Công Cụ Bán Hàng · Hạ Long Xanh</div>
+  <h1 class="hero-title">Lá Thư · Email Sequence<br><span>Sẵn Sàng Dùng Ngay</span></h1>
+  <p class="hero-sub">Toàn bộ copy đã viết sẵn — sales letter chạm nỗi đau, 5 email follow-up tự động, captions ảnh cá nhân. Copy một click, paste trực tiếp.</p>
+  <div class="stats-row">
+    <div class="stat-chip"><span class="stat-num">1</span><span class="stat-lbl">Sales Letter</span></div>
+    <div class="stat-chip"><span class="stat-num">5</span><span class="stat-lbl">Email Sequence</span></div>
+    <div class="stat-chip"><span class="stat-num">5</span><span class="stat-lbl">Caption Biến Thể</span></div>
+    <div class="stat-chip"><span class="stat-num">3</span><span class="stat-lbl">Framework</span></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="sw('t1')">✉️ Sales Letter</button>
+    <button class="tab-btn" onclick="sw('t2')">📧 5 Email Sequence</button>
+    <button class="tab-btn" onclick="sw('t3')">📸 Captions Ảnh</button>
+    <button class="tab-btn" onclick="sw('t4')">🧠 Phân Tích & Tips</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 1 — SALES LETTER
+  ═══════════════════════════════════════ -->
+  <div id="t1" class="tab-panel active">
+    <div class="sec-header">
+      <div class="sec-tag">Lá Thư Bán Hàng · Long-form</div>
+      <h2 class="sec-title">Người Muốn Mua HLX Nhưng Còn Do Dự</h2>
+      <p class="sec-sub">Framework: Storytelling Arc + PVEN · Dùng cho: Landing page, Zalo broadcast, Email, gặp trực tiếp · Warm audience đã biết dự án ≥ 1 lần</p>
+    </div>
+
+    <div class="framework-box">
+      <h4>🎯 Framework & Audience</h4>
+      <ul>
+        <li><strong>Target:</strong> Người đã xem HLX 2-3 lần, chưa quyết định vì sợ sai</li>
+        <li><strong>Tone:</strong> Thành thật, không áp lực, đảo ngược kỳ vọng môi giới</li>
+        <li><strong>CTA:</strong> 45 phút tư vấn thẳng thắn — không phải "mua ngay"</li>
+        <li><strong>Hook P.S.:</strong> Nhắn "PHÁP LÝ" để nhận tài liệu kiểm tra trước</li>
+      </ul>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <div>
+          <div class="copy-block-title">Sales Letter — Phiên Bản Đầy Đủ</div>
+          <div class="copy-block-meta">
+            <span class="tag tag-gold">Storytelling Arc</span>
+            <span class="tag tag-teal">PVEN</span>
+            <span class="tag tag-purple">Long-form</span>
+          </div>
+        </div>
+        <button class="copy-btn" onclick="cp(this,'sl-full')">📋 Copy</button>
+      </div>
+      <div class="copy-content" id="sl-full">📌 [PRE-HEADLINE]
+Dành cho người đã nghiên cứu Hạ Long Xanh ít nhất 3 tháng — và vẫn chưa ra quyết định.
+
+─────────────────────────────────────
+
+Có một khoảnh khắc mà anh/chị chắc đã trải qua.
+
+Đó là buổi tối ngồi lướt điện thoại, nhìn lại những tấm ảnh phối cảnh Hạ Long Xanh. Những căn hộ nhìn thẳng ra vịnh. Ánh đèn vàng hắt lên mặt nước. Cái cảm giác "Đây rồi — đây chính xác là thứ mình muốn."
+
+Rồi sáng hôm sau, con số 4–5 tỷ xuất hiện trong đầu. Và anh/chị lại bắt đầu hỏi:
+
+"Liệu mình có đang quyết định đúng không?"
+
+Tôi viết bức thư này không phải để ép anh/chị mua. Tôi viết vì sau hàng chục cuộc trò chuyện với người mua HLX — tôi hiểu rõ điều gì đang xảy ra trong đầu họ.
+
+─────────────────────────────────────
+PHẦN 1: ANH/CHỊ ĐANG SỢ ĐIỀU GÌ — TÔI BIẾT CHÍNH XÁC
+─────────────────────────────────────
+
+Không phải anh/chị thiếu tiền. Không phải anh/chị không thích dự án. Điều khiến anh/chị dừng lại là sợ mắc sai lầm không thể sửa được.
+
+Cụ thể hơn — đây là 4 nỗi sợ phổ biến nhất tôi nghe được:
+
+❌ SỢ 1: "Mua xong không bán được, tiền chết đứng mấy năm."
+Thị trường bất động sản từng có giai đoạn đóng băng. Anh/chị đã thấy. Có người mua condotel năm 2019, đến nay vẫn chưa ra hàng được. Bài học đó không dễ quên.
+
+❌ SỢ 2: "Thông tin nhiễu loạn quá — môi giới nào cũng nói tốt, biết tin ai?"
+Facebook hôm nay khen, mai chê. Có người bảo sắp tăng giá. Có người bảo nên chờ. Anh/chị không biết đâu là sự thật, đâu là marketing.
+
+❌ SỢ 3: "Pháp lý chưa rõ — sổ hồng, sổ đỏ, sở hữu lâu dài hay có thời hạn?"
+Một tờ giấy sai có thể khóa tài sản cả chục năm. Đây không phải lo lắng thái quá — đây là thực tế.
+
+❌ SỢ 4: "Gia đình chưa đồng thuận — nếu sai thì mình chịu một mình."
+Đây là nỗi sợ không ai nói ra nhưng nặng nề nhất. Quyết định 4–5 tỷ mà đi ngược lại ý kiến vợ/chồng/bố mẹ — nếu thất bại, áp lực đó không nhỏ.
+
+─────────────────────────────────────
+PHẦN 2: NHƯNG ĐÂY LÀ ĐIỀU ANH/CHỊ CŨNG BIẾT
+─────────────────────────────────────
+
+Hạ Long Xanh không phải dự án đầu tiên anh/chị xem. Anh/chị đã so sánh. Đã tính toán. Đã lý do tại sao quay lại đây nhiều lần.
+
+Vì anh/chị thấy điều mà người khác chưa thấy:
+
+✅ Vịnh Hạ Long là di sản thiên nhiên thế giới — không thể nhân bản.
+Quỹ đất ven vịnh đang cạn dần theo nghĩa đen. Những gì đang xây dựng hôm nay là phần cuối cùng của cơ hội sở hữu địa danh tầm cỡ quốc tế.
+
+✅ VARS ghi nhận 70–80% môi giới dự báo giá BĐS ven biển phía Bắc tiếp tục tăng 2–3 năm tới.
+Không phải dự báo lạc quan — đây là dữ liệu khảo sát từ người trong ngành.
+
+Câu hỏi không phải "Có nên mua không?"
+Câu hỏi là: MUA LÚC NÀO — VÀ MUA ĐÚNG SẢN PHẨM KHÔNG?
+
+─────────────────────────────────────
+PHẦN 3: HÌNH DUNG 3 NĂM TỪ BÂY GIỜ
+─────────────────────────────────────
+
+KỊCH BẢN A — Anh/chị quyết định hôm nay:
+Căn hộ ký hợp đồng ở mức giá hiện tại. Dự án bàn giao, anh/chị có tài sản nhìn thẳng ra Vịnh Hạ Long — thứ mà 98% người Việt không có. Mỗi mùa hè, đến nghỉ dưỡng không cần đặt khách sạn. Cuối năm, khai thác cho thuê thêm dòng tiền. Và giá trị tài sản — theo đúng xu hướng lịch sử — cao hơn lúc mua.
+
+KỊCH BẢN B — Anh/chị tiếp tục chờ:
+Ba năm nữa, anh/chị vẫn đang nghiên cứu. Giá đã tăng thêm 20–30%. Quỹ hàng tốt không còn. Và trong đầu vẫn có câu hỏi dai dẳng: "Giá mà lúc đó mình quyết định..."
+
+Không ai ép anh/chị chọn kịch bản nào. Nhưng anh/chị cần nhìn thẳng vào cả hai.
+
+─────────────────────────────────────
+PHẦN 4: BẰNG CHỨNG — KHÔNG PHẢI LỜI HỨA SUÔNG
+─────────────────────────────────────
+
+✔ PHÁP LÝ: Hạ Long Xanh thuộc nhóm dự án được cấp phép đầy đủ tại Quảng Ninh — tỉnh có hệ thống kiểm soát pháp lý BĐS thuộc loại chặt chẽ nhất miền Bắc.
+
+✔ CHỦ ĐẦU TƯ: Track record triển khai đúng tiến độ — điều anh/chị có thể tự xác minh bằng cách nói chuyện với người đã mua giai đoạn trước.
+
+✔ VỊ TRÍ: Tọa lạc ngay cạnh Vịnh Hạ Long — di sản UNESCO, điểm du lịch top 10 Đông Nam Á với 3–4 triệu lượt khách/năm.
+
+✔ THANH KHOẢN: Khác với condotel thứ sinh — căn hộ sở hữu lâu dài có cơ sở pháp lý cho phép chuyển nhượng theo thị trường.
+
+Những điều trên không phải tôi nói — đây là những gì anh/chị CẦN TỰ ĐI XÁC MINH với tôi, trực tiếp, bằng giấy tờ thực tế.
+
+─────────────────────────────────────
+PHẦN 5: TÔI KHÔNG MUỐN ANH/CHỊ QUYẾT ĐỊNH TRONG 24 GIỜ
+─────────────────────────────────────
+
+Đây là thứ khác biệt nhất trong cách tôi làm việc.
+
+Tôi không gọi điện thúc giục. Tôi không tạo áp lực "chỉ còn 2 căn cuối nếu đó không phải sự thật." Tôi không muốn anh/chị mua vì hoảng loạn — vì một quyết định như thế không bền.
+
+Tôi muốn anh/chị mua vì anh/chị HIỂU RÕ mình đang mua gì, mua ở đâu, và tại sao đây là lựa chọn đúng cho mình.
+
+Vì thế, thứ tôi đề xuất rất đơn giản:
+
+→ Hãy để tôi dành 45 phút, trả lời thẳng thắn từng câu hỏi của anh/chị — bao gồm cả những câu khó nhất về pháp lý, thanh khoản, và rủi ro thực sự.
+
+Không cần cam kết. Không cần quyết định. Chỉ cần một cuộc trò chuyện thật.
+
+─────────────────────────────────────
+ĐẢO NGƯỢC RỦI RO
+─────────────────────────────────────
+
+Nếu sau buổi gặp đó, anh/chị vẫn chưa thấy Hạ Long Xanh phù hợp — tôi sẽ tư vấn thẳng thắn dự án khác phù hợp hơn với profile đầu tư của anh/chị.
+
+Vì tôi không chỉ bán một dự án. Tôi xây dựng uy tín bằng cách giúp người mua đưa ra quyết định ĐÚNG — không phải quyết định NHANH.
+
+─────────────────────────────────────
+[CTA]
+─────────────────────────────────────
+
+Nếu anh/chị đang đọc đến đây — điều đó nói lên rất nhiều.
+
+Có một phần trong anh/chị đang tìm kiếm xác nhận cuối cùng. Hãy để cuộc trò chuyện đó xảy ra.
+
+📲 Nhắn tin cho tôi ngay hôm nay:
+"Tôi muốn tìm hiểu thêm về Hạ Long Xanh"
+
+Tôi sẽ phản hồi trong 2 giờ và đặt lịch buổi tư vấn phù hợp.
+
+[Tên môi giới] | Zalo: [số] | Facebook: [link]
+
+P.S. — Nếu anh/chị đang lo pháp lý là rào cản lớn nhất, hãy nhắn thêm từ "PHÁP LÝ" — tôi sẽ gửi trước bộ tài liệu kiểm tra dự án để anh/chị tự đọc trước khi gặp mặt.</div>
+    </div>
+
+    <div class="framework-box" style="margin-top:20px">
+      <h4>📌 Cách Dùng</h4>
+      <ul>
+        <li><strong>Zalo broadcast:</strong> Copy nguyên, gửi cho danh sách warm audience (đã hỏi thăm trước đó)</li>
+        <li><strong>Landing page:</strong> Dùng làm nội dung chính, thêm ảnh dự án và thông tin liên hệ</li>
+        <li><strong>Gặp trực tiếp:</strong> In ra, để lại với khách sau buổi xem nhà</li>
+        <li><strong>Email:</strong> Gửi sau khi khách để lại số điện thoại hoặc đã xem nhà 1 lần</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 2 — 5 EMAIL SEQUENCE
+  ═══════════════════════════════════════ -->
+  <div id="t2" class="tab-panel">
+    <div class="sec-header">
+      <div class="sec-tag">Email Follow-up · 10 Ngày</div>
+      <h2 class="sec-title">5 Email Sequence — Người Đã Đọc Sales Letter Nhưng Chưa Liên Hệ</h2>
+      <p class="sec-sub">Chuỗi email tự động chạy sau khi khách click "Tìm hiểu thêm" hoặc để lại email. Mỗi email có 1 mục tiêu duy nhất — tích lũy tin tưởng từng bước đến khi họ sẵn sàng.</p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-label">Ngay lập tức</div>
+        <div class="tl-title">Chào mừng</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-label">Ngày 2</div>
+        <div class="tl-title">Sự thật PL</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-label">Ngày 4</div>
+        <div class="tl-title">Câu chuyện</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-label">Ngày 7</div>
+        <div class="tl-title">Phá objection</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">5</div>
+        <div class="tl-label">Ngày 10</div>
+        <div class="tl-title">Chốt + CTA</div>
+      </div>
+    </div>
+
+    <!-- EMAIL 1 -->
+    <div class="email-card" id="em1">
+      <div class="email-header" onclick="tog('em1')">
+        <div class="email-num">1</div>
+        <div class="email-info">
+          <div class="email-day">📬 Gửi ngay lập tức sau khi khách để lại email</div>
+          <div class="email-subject">Cảm ơn anh/chị — và một điều tôi muốn nói thẳng</div>
+          <div class="email-purpose">Mục tiêu: Chào mừng · Phá vỡ kỳ vọng môi giới thông thường · Xây trust ban đầu</div>
+        </div>
+        <div class="email-toggle">▾</div>
+      </div>
+      <div class="email-body">
+        <div class="email-section">
+          <div class="email-section-label">Subject Line</div>
+          <div class="email-text">Cảm ơn anh/chị — và một điều tôi muốn nói thẳng</div>
+          <button class="email-copy-btn" onclick="cpText(this,'Cảm ơn anh/chị — và một điều tôi muốn nói thẳng')">📋 Copy Subject</button>
+        </div>
+        <div class="email-section">
+          <div class="email-section-label">Nội Dung Email</div>
+          <div class="email-text" id="e1-body">Anh/chị [Tên],
+
+Cảm ơn anh/chị đã dành thời gian đọc bức thư vừa rồi.
+
+Tôi biết có thể anh/chị đang nhận được rất nhiều email từ môi giới BĐS. Và phần lớn chúng đều có cùng một mục tiêu: thúc đẩy anh/chị quyết định nhanh hơn.
+
+Email này thì khác.
+
+Tôi muốn nói thẳng một điều: Tôi không cần anh/chị quyết định ngay. Tôi cần anh/chị quyết định ĐÚNG.
+
+Vì thế, trong 10 ngày tới, tôi sẽ gửi cho anh/chị những thứ mà hầu hết môi giới không bao giờ chia sẻ — bao gồm cả những rủi ro thực sự của dự án mà anh/chị cần biết trước khi ký hợp đồng.
+
+Không hoa mỹ. Không tô hồng. Chỉ là thông tin thật.
+
+Email đầu tiên sẽ đến vào ngày mai — về câu hỏi pháp lý mà 9/10 người mua HLX đang hỏi sai cách.
+
+Nếu bất cứ lúc nào anh/chị muốn nói chuyện trực tiếp — chỉ cần reply email này hoặc nhắn Zalo [số]. Tôi sẽ phản hồi trong 2 giờ.
+
+Trân trọng,
+[Tên môi giới]
+[Zalo/SĐT]
+
+P.S. — Nếu anh/chị đang có 1 câu hỏi cụ thể về HLX mà chưa ai trả lời thỏa đáng, hãy reply email này ngay bây giờ. Tôi sẽ trả lời cá nhân trong vòng 24 giờ.</div>
+          <button class="email-copy-btn" onclick="cp(this,'e1-body')">📋 Copy Nội Dung</button>
+        </div>
+        <div class="email-notes">
+          <strong>💡 Ghi chú triển khai:</strong> Email này quan trọng nhất — cài đặt gửi trong vòng 5 phút sau khi khách submit form. Subject line dùng tên thật nếu có ("Cảm ơn anh Minh"). Câu P.S. thường có reply rate cao nhất.
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL 2 -->
+    <div class="email-card" id="em2">
+      <div class="email-header" onclick="tog('em2')">
+        <div class="email-num">2</div>
+        <div class="email-info">
+          <div class="email-day">📬 Ngày 2 — Giáo dục · Phá vỡ nỗi sợ lớn nhất</div>
+          <div class="email-subject">Sự thật về pháp lý HLX mà không môi giới nào nói với anh/chị</div>
+          <div class="email-purpose">Mục tiêu: Giải quyết nỗi sợ pháp lý · Định vị là người tư vấn trung thực · Build authority</div>
+        </div>
+        <div class="email-toggle">▾</div>
+      </div>
+      <div class="email-body">
+        <div class="email-section">
+          <div class="email-section-label">Subject Line (chọn 1)</div>
+          <div class="email-text">A: Sự thật về pháp lý HLX mà không môi giới nào nói với anh/chị
+B: Tôi đã kiểm tra từng tờ giấy — đây là những gì tôi tìm ra
+C: 3 câu hỏi pháp lý anh/chị PHẢI hỏi trước khi ký HLX</div>
+          <button class="email-copy-btn" onclick="cpText(this,'Sự thật về pháp lý HLX mà không môi giới nào nói với anh/chị')">📋 Copy Subject A</button>
+        </div>
+        <div class="email-section">
+          <div class="email-section-label">Nội Dung Email</div>
+          <div class="email-text" id="e2-body">Anh/chị [Tên],
+
+Hôm qua tôi đã hứa sẽ chia sẻ những thứ mà hầu hết môi giới không nói.
+
+Hôm nay: Pháp lý.
+
+Đây là câu hỏi tôi nghe nhiều nhất: "Sổ hồng hay sổ đỏ? Sở hữu lâu dài hay có thời hạn?"
+
+Và đây là sự thật thẳng thắn:
+
+CÂU HỎI ĐÚNG không phải "sổ gì?" — mà là "loại tài sản này được giao dịch theo cơ chế nào?"
+
+Căn hộ du lịch (condotel) và căn hộ chung cư có pháp lý HOÀN TOÀN KHÁC NHAU. Nhiều người mua condotel giai đoạn 2017-2019 hiện không thể chuyển nhượng vì sở hữu có thời hạn và chưa có sổ riêng.
+
+Hạ Long Xanh thuộc phân khúc nào? Đây là câu hỏi anh/chị cần được trả lời bằng giấy tờ thực tế — không phải lời môi giới.
+
+3 TÀI LIỆU ANH/CHỊ NÊN YÊU CẦU XEM:
+① Giấy phép xây dựng (kiểm tra loại công trình)
+② Hợp đồng mua bán mẫu (kiểm tra điều khoản sở hữu)
+③ Quy hoạch sử dụng đất (kiểm tra mục đích đất)
+
+Tôi có thể ngồi cùng anh/chị xem qua 3 tài liệu này và giải thích từng điều khoản — hoàn toàn miễn phí, không có cam kết gì.
+
+Nếu anh/chị muốn làm điều đó trước khi quyết định bất cứ thứ gì — reply email này hoặc nhắn Zalo [số].
+
+[Tên môi giới]
+
+P.S. — Nếu anh/chị không muốn gặp mặt, tôi cũng có thể gửi giải thích chi tiết qua văn bản. Chỉ cần reply "GỬI TÀI LIỆU" và tôi sẽ gửi trong 24 giờ.</div>
+          <button class="email-copy-btn" onclick="cp(this,'e2-body')">📋 Copy Nội Dung</button>
+        </div>
+        <div class="email-notes">
+          <strong>💡 Ghi chú:</strong> Email này giải quyết nỗi sợ lớn nhất (pháp lý). Thêm 2 CTA mềm: gặp mặt HOẶC nhận tài liệu — giảm ngưỡng hành động. Tránh hứa hẹn quá mức về pháp lý.
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL 3 -->
+    <div class="email-card" id="em3">
+      <div class="email-header" onclick="tog('em3')">
+        <div class="email-num">3</div>
+        <div class="email-info">
+          <div class="email-day">📬 Ngày 4 — Social Proof · Câu chuyện người thật</div>
+          <div class="email-subject">Chị Lan đã hỏi tôi câu này 7 lần trước khi ký — rồi chị ký</div>
+          <div class="email-purpose">Mục tiêu: Social proof · Giải quyết nỗi sợ "mình không đủ thông tin" · Normalize quá trình do dự</div>
+        </div>
+        <div class="email-toggle">▾</div>
+      </div>
+      <div class="email-body">
+        <div class="email-section">
+          <div class="email-section-label">Subject Line (chọn 1)</div>
+          <div class="email-text">A: Chị Lan đã hỏi tôi câu này 7 lần trước khi ký — rồi chị ký
+B: Khách hàng của tôi do dự 4 tháng — đây là điều họ nói sau khi mua
+C: "Tôi sợ mua sai" — đây là câu chuyện của người cũng từng nói thế</div>
+          <button class="email-copy-btn" onclick="cpText(this,'Chị Lan đã hỏi tôi câu này 7 lần trước khi ký — rồi chị ký')">📋 Copy Subject A</button>
+        </div>
+        <div class="email-section">
+          <div class="email-section-label">Nội Dung Email</div>
+          <div class="email-text" id="e3-body">Anh/chị [Tên],
+
+Tôi muốn kể cho anh/chị nghe câu chuyện của chị Lan — một khách hàng tôi làm việc cùng năm ngoái.
+
+Chị Lan nghiên cứu HLX trong 4 tháng. Hỏi tôi cùng một câu 7 lần theo 7 cách khác nhau: "Có chắc không? Có an toàn không? Có thật sự đáng không?"
+
+Tôi không thúc giục. Tôi trả lời từng câu một, mỗi lần bằng bằng chứng cụ thể hơn lần trước.
+
+Tháng thứ 5, chị Lan ký.
+
+Tuần trước chị nhắn tôi: "Nhìn lại thì thấy mình lo nhiều thứ không cần lo. Nhưng em cũng không trách bản thân vì hồi đó em chưa có đủ thông tin. Cảm ơn anh đã kiên nhẫn."
+
+---
+
+Tôi chia sẻ câu chuyện này không phải để nói "hãy ký đi."
+
+Tôi chia sẻ vì anh/chị cần biết: DO DỰ LÀ BÌNH THƯỜNG.
+
+Với một quyết định 4-5 tỷ, bất kỳ người thông minh nào cũng nên do dự. Nên hỏi nhiều. Nên cần thời gian.
+
+Điều quan trọng không phải là quyết định nhanh — mà là có đủ thông tin đúng để quyết định tốt.
+
+---
+
+Anh/chị đang ở giai đoạn nào trong quá trình cân nhắc của mình?
+
+Reply email này và cho tôi biết — câu hỏi nào đang là rào cản lớn nhất với anh/chị lúc này? Tôi sẽ dành thời gian trả lời trực tiếp, cụ thể.
+
+[Tên môi giới]
+
+P.S. — Nếu anh/chị muốn nói chuyện với chị Lan hoặc những khách hàng khác đã mua HLX — tôi có thể kết nối. Đôi khi nghe từ người mua thật thuyết phục hơn nghe từ môi giới.</div>
+          <button class="email-copy-btn" onclick="cp(this,'e3-body')">📋 Copy Nội Dung</button>
+        </div>
+        <div class="email-notes">
+          <strong>💡 Ghi chú:</strong> Thay tên "chị Lan" bằng tên thật (với sự đồng ý của khách). Nếu chưa có social proof, dùng dạng ẩn danh "một khách hàng của tôi." Đề nghị kết nối với người mua thật = CTA rất mạnh.
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL 4 -->
+    <div class="email-card" id="em4">
+      <div class="email-header" onclick="tog('em4')">
+        <div class="email-num">4</div>
+        <div class="email-info">
+          <div class="email-day">📬 Ngày 7 — Phá Objection · Thanh khoản & Chi phí chờ</div>
+          <div class="email-subject">Chi phí của việc "chờ thêm" — con số anh/chị cần biết</div>
+          <div class="email-purpose">Mục tiêu: Phá objection thanh khoản · Tạo urgency thật (không giả tạo) · Nudge gần CTA</div>
+        </div>
+        <div class="email-toggle">▾</div>
+      </div>
+      <div class="email-body">
+        <div class="email-section">
+          <div class="email-section-label">Subject Line (chọn 1)</div>
+          <div class="email-text">A: Chi phí của việc "chờ thêm" — con số anh/chị cần biết
+B: Câu hỏi về thanh khoản HLX — tôi trả lời thẳng
+C: Nếu anh/chị vẫn đang chờ, email này dành cho anh/chị</div>
+          <button class="email-copy-btn" onclick="cpText(this,'Chi phí của việc "chờ thêm" — con số anh/chị cần biết')">📋 Copy Subject A</button>
+        </div>
+        <div class="email-section">
+          <div class="email-section-label">Nội Dung Email</div>
+          <div class="email-text" id="e4-body">Anh/chị [Tên],
+
+Hôm nay tôi muốn nói về điều mà ít người tính đến: chi phí của sự chờ đợi.
+
+Không phải chi phí vô hình. Là chi phí có thể tính được bằng số.
+
+---
+
+GIẢ SỬ: Căn anh/chị đang cân nhắc giá 4 tỷ hôm nay.
+
+Thị trường BĐS ven biển phía Bắc theo dữ liệu VARS đang tăng trung bình 8-12%/năm trong giai đoạn phục hồi hiện tại.
+
+Nếu anh/chị chờ thêm 12 tháng và giá tăng 10%:
+→ Căn đó giá 4.4 tỷ
+→ Anh/chị phải trả thêm 400 triệu cho cùng một sản phẩm
+→ 400 triệu = học phí 10 năm của con / 2 năm tiết kiệm / 1 chuyến du lịch châu Âu cho cả gia đình
+
+---
+
+VỀ THANH KHOẢN — câu hỏi thật sự cần hỏi:
+
+Không phải "BĐS này có bán được không?" (tất cả BĐS đều bán được nếu giá đúng)
+
+Mà là: "Nếu tôi cần tiền gấp, tôi có thể ra hàng trong bao lâu và ở mức giá nào?"
+
+Với căn hộ sở hữu lâu dài tại vị trí ven Vịnh UNESCO, lịch sử giao dịch cho thấy thời gian ra hàng trung bình 3-6 tháng — thấp hơn đáng kể so với condotel thứ sinh (12-24 tháng hoặc không ra được).
+
+---
+
+Tôi không muốn tạo áp lực. Tôi muốn anh/chị có đủ thông tin để quyết định với đôi mắt mở hoàn toàn.
+
+Nếu anh/chị sẵn sàng cho buổi nói chuyện 45 phút — tôi sẵn sàng bất kỳ lúc nào tuần này.
+
+Chỉ cần reply: "TUẦN NÀY" và cho tôi biết khung giờ phù hợp.
+
+[Tên môi giới]
+[Zalo/SĐT]
+
+P.S. — Nếu anh/chị vẫn chưa sẵn sàng — hoàn toàn ổn. Email tiếp theo và cuối cùng tôi sẽ gửi vào ngày 10. Sau đó tôi sẽ không làm phiền anh/chị nữa, trừ khi anh/chị chủ động liên hệ.</div>
+          <button class="email-copy-btn" onclick="cp(this,'e4-body')">📋 Copy Nội Dung</button>
+        </div>
+        <div class="email-notes">
+          <strong>💡 Ghi chú:</strong> Email này dùng con số cụ thể để tạo urgency có cơ sở — không phải "chỉ còn 2 căn." Câu P.S. tạo ra deadline tự nhiên cho email cuối. Điều chỉnh con số % theo thực tế thị trường tại thời điểm gửi.
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL 5 -->
+    <div class="email-card" id="em5">
+      <div class="email-header" onclick="tog('em5')">
+        <div class="email-num">5</div>
+        <div class="email-info">
+          <div class="email-day">📬 Ngày 10 — Final Push · Soft Close</div>
+          <div class="email-subject">Email cuối — và một đề nghị tôi chỉ dành cho anh/chị</div>
+          <div class="email-purpose">Mục tiêu: Soft close · Đề nghị cuối không áp lực · Mở cửa dài hạn nếu chưa sẵn sàng</div>
+        </div>
+        <div class="email-toggle">▾</div>
+      </div>
+      <div class="email-body">
+        <div class="email-section">
+          <div class="email-section-label">Subject Line (chọn 1)</div>
+          <div class="email-text">A: Email cuối — và một đề nghị tôi chỉ dành cho anh/chị
+B: Tôi sẽ không email anh/chị nữa sau hôm nay (trừ khi...)
+C: Câu trả lời cuối cùng trước khi tôi để anh/chị yên</div>
+          <button class="email-copy-btn" onclick="cpText(this,'Email cuối — và một đề nghị tôi chỉ dành cho anh/chị')">📋 Copy Subject A</button>
+        </div>
+        <div class="email-section">
+          <div class="email-section-label">Nội Dung Email</div>
+          <div class="email-text" id="e5-body">Anh/chị [Tên],
+
+Như tôi đã hứa — đây là email cuối cùng trong chuỗi này.
+
+Trong 10 ngày qua, tôi đã chia sẻ với anh/chị:
+✓ Sự thật thẳng thắn về pháp lý HLX
+✓ Câu chuyện người mua thật
+✓ Con số về chi phí của sự chờ đợi
+
+Tôi không biết anh/chị đang ở đâu trong quá trình cân nhắc. Có thể anh/chị đã sẵn sàng. Có thể chưa. Có thể không phải HLX là lựa chọn đúng cho anh/chị.
+
+Tất cả đều ổn.
+
+---
+
+Điều tôi biết chắc: nếu thời điểm đúng với anh/chị là 3 tháng nữa, 6 tháng nữa, hay 1 năm nữa — tôi vẫn ở đây.
+
+Tôi không làm việc theo kiểu "chốt xong là xong." Tôi làm việc theo kiểu "anh/chị mua đúng thứ, đúng lúc — dù mất bao lâu."
+
+---
+
+ĐỀ NGHỊ CUỐI — CHỈ DÀNH CHO ANH/CHỊ:
+
+Nếu anh/chị reply email này với 1 trong 3 từ dưới đây, tôi sẽ làm đúng điều đó:
+
+→ Reply "GẶP" — Tôi sắp xếp buổi tư vấn 45 phút trong tuần này.
+
+→ Reply "THÊM" — Tôi gửi thêm thông tin về bất kỳ khía cạnh nào anh/chị muốn tìm hiểu.
+
+→ Reply "CHƯA" — Tôi ghi nhận, không email nữa, và sẽ chủ động liên hệ lại sau 3 tháng để cập nhật thị trường.
+
+---
+
+Cảm ơn anh/chị đã đọc những email này. Dù kết quả là gì, tôi trân trọng sự tin tưởng khi anh/chị dành thời gian đọc.
+
+Chúc anh/chị đưa ra quyết định tốt nhất cho mình và gia đình.
+
+Trân trọng,
+[Tên môi giới]
+[Zalo/SĐT/Facebook]
+
+P.S. — Nếu anh/chị biết ai đang tìm hiểu HLX và cần người tư vấn trung thực — giới thiệu tôi nhé. Đây là cách tôi xây dựng sự nghiệp — một người tin tưởng giới thiệu một người, không phải chạy quảng cáo.</div>
+          <button class="email-copy-btn" onclick="cp(this,'e5-body')">📋 Copy Nội Dung</button>
+        </div>
+        <div class="email-notes">
+          <strong>💡 Ghi chú:</strong> Email này dùng kỹ thuật "3-word reply" — cực kỳ hiệu quả vì giảm ngưỡng hành động. P.S. cuối tạo referral pipeline tự nhiên. Sau email này: chỉ liên hệ lại nếu có tin tức thị trường thật sự quan trọng (không phải để bán).
+        </div>
+      </div>
+    </div>
+
+    <div class="deploy-tip">
+      <h4>⚙️ Cài Đặt Automation</h4>
+      <ul>
+        <li><strong>Tool gợi ý:</strong> Zalo OA (miễn phí, phù hợp VN) · Mailchimp · GetResponse · Brevo</li>
+        <li><strong>Trigger:</strong> Khách submit form "Tìm hiểu thêm" → tự động vào sequence</li>
+        <li><strong>Thời gian gửi:</strong> 7:30–8:30 sáng hoặc 8–9 tối (open rate cao nhất)</li>
+        <li><strong>Nếu khách reply bất kỳ email nào:</strong> Dừng sequence, chuyển sang tư vấn trực tiếp</li>
+        <li><strong>Nếu không có tool:</strong> Gửi thủ công qua Zalo/Messenger — hiệu quả không kém với warm audience</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 3 — CAPTIONS ẢNH CÁ NHÂN
+  ═══════════════════════════════════════ -->
+  <div id="t3" class="tab-panel">
+    <div class="sec-header">
+      <div class="sec-tag">Captions · Ảnh Cá Nhân</div>
+      <h2 class="sec-title">5 Biến Thể Caption — Quảng Cáo HLX</h2>
+      <p class="sec-sub">Dùng kèm ảnh cá nhân trên Facebook/Instagram. CTA "Tìm hiểu thêm" dẫn vào trang sales letter. Mỗi biến thể có angle khác nhau — chọn phù hợp với ảnh và phong cách của anh/chị.</p>
+    </div>
+
+    <div class="variant-grid">
+      <div class="variant-card">
+        <span class="variant-badge vb-rec">★ Khuyến nghị</span>
+        <div class="variant-angle">Angle 1</div>
+        <div class="variant-name">Honest Confession</div>
+        <div class="variant-desc">Môi giới thú nhận điều người khác không dám nói. Trust cao nhất. Dùng với ảnh chân dung nghiêm túc hoặc tự nhiên.</div>
+        <button class="variant-btn" onclick="cp(this,'cap1')">📋 Copy Caption</button>
+      </div>
+      <div class="variant-card">
+        <span class="variant-badge vb-alt">Alt</span>
+        <div class="variant-angle">Angle 2</div>
+        <div class="variant-name">Mirror — 3 Lần Xem</div>
+        <div class="variant-desc">Phản chiếu hành trình khách "lần đầu → lần hai → lần ba." Emotional resonance cao. Dùng với mọi loại ảnh.</div>
+        <button class="variant-btn" onclick="cp(this,'cap2')">📋 Copy Caption</button>
+      </div>
+      <div class="variant-card">
+        <span class="variant-badge vb-alt">Alt</span>
+        <div class="variant-angle">Angle 3</div>
+        <div class="variant-name">Future Moment</div>
+        <div class="variant-desc">Chiếu cảnh tương lai: ban công, ly cà phê, vịnh Hạ Long. Aspirational. Dùng với ảnh phong cảnh hoặc vui tươi.</div>
+        <button class="variant-btn" onclick="cp(this,'cap3')">📋 Copy Caption</button>
+      </div>
+      <div class="variant-card">
+        <span class="variant-badge vb-alt">Alt</span>
+        <div class="variant-angle">Angle 4</div>
+        <div class="variant-name">Pattern Interrupt</div>
+        <div class="variant-desc">Ngược kỳ vọng — "Tôi sẽ không nói mua ngay." Ultra-short, dùng cho Story/Reel/TikTok.</div>
+        <button class="variant-btn" onclick="cp(this,'cap4')">📋 Copy Caption</button>
+      </div>
+      <div class="variant-card">
+        <span class="variant-badge vb-alt">Alt</span>
+        <div class="variant-angle">Angle 5</div>
+        <div class="variant-name">Social Proof Thật</div>
+        <div class="variant-desc">Tin nhắn khách hàng thật. Credibility cao nhất. Dùng với ảnh đang gặp khách hoặc ảnh làm việc.</div>
+        <button class="variant-btn" onclick="cp(this,'cap5')">📋 Copy Caption</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Hidden content blocks for captions -->
+    <div style="display:none">
+      <div id="cap1">Tôi đã từng là người môi giới kiểu cũ.
+
+Gọi điện thúc giục. Tạo áp lực "còn 2 căn cuối." Nói những thứ khách muốn nghe thay vì thứ họ cần biết.
+
+Cho đến khi một khách hàng nhắn tôi:
+
+"Anh ơi, em hỏi thật — nếu em là anh, anh có mua căn này không?"
+
+Câu đó thay đổi cách tôi làm việc mãi mãi.
+
+Hôm nay tôi làm việc theo một nguyên tắc khác:
+
+Tôi sẽ không bao giờ bán cho anh/chị thứ mà tôi không sẵn sàng mua cho chính mình.
+
+Nếu anh/chị đang cân nhắc Hạ Long Xanh — và có những câu hỏi mà chưa môi giới nào trả lời thẳng thắn — tôi muốn là người đó.
+
+Không áp lực. Không deadline giả tạo. Chỉ là sự thật.
+
+👇 Nhấn Tìm hiểu thêm — tôi đã viết một bức thư dài, thật thà về tất cả những gì anh/chị cần biết trước khi quyết định.</div>
+      <div id="cap2">Anh/chị đã xem Hạ Long Xanh bao nhiêu lần rồi?
+
+Lần đầu — thấy đẹp, tim đập nhanh hơn.
+
+Lần hai — bắt đầu tính toán.
+
+Lần ba — vẫn chưa quyết định.
+
+Không phải vì thiếu tiền. Không phải vì không thích.
+
+Mà vì có một câu hỏi mà chưa ai trả lời đủ thuyết phục:
+
+"Nếu tôi mua — liệu tôi có hối hận không?"
+
+Tôi không có câu trả lời cho tất cả mọi người. Nhưng tôi có câu trả lời cho người đúng — người đang ở đúng hoàn cảnh để đưa ra quyết định này.
+
+Có thể đó là anh/chị. Có thể không.
+
+👇 Nhấn Tìm hiểu thêm để tôi kể cho anh/chị nghe — không hoa mỹ, không tô hồng — những gì tôi thật sự biết về dự án này.</div>
+      <div id="cap3">Tưởng tượng đây:
+
+5 năm nữa. Sáng sớm. Anh/chị ngồi ở ban công một căn hộ nhìn thẳng ra Vịnh Hạ Long.
+
+Ly cà phê trên tay. Sóng vỗ nhẹ phía xa. Không có cuộc họp, không có deadline, không có tiếng ồn của thành phố.
+
+Chỉ có cảm giác — mình đã quyết định đúng.
+
+Cảnh đó có thật không? Hoàn toàn có thật.
+
+Điều duy nhất những người đang sống kịch bản đó làm khác anh/chị — là họ đã dừng phân vân và bắt đầu hỏi đúng câu hỏi.
+
+Nếu anh/chị đang ở giai đoạn muốn hiểu rõ trước khi quyết định — tôi đã viết hết ra.
+
+👇 Nhấn Tìm hiểu thêm.</div>
+      <div id="cap4">Tôi sẽ không nói "mua ngay kẻo hết."
+
+Tôi sẽ không nói "đây là cơ hội ngàn năm có một."
+
+Tôi chỉ nói: nếu anh/chị đang cân nhắc Hạ Long Xanh và chưa có ai trả lời thẳng thắn những câu hỏi khó nhất —
+
+Tôi sẵn sàng làm điều đó.
+
+👇 Tìm hiểu thêm.</div>
+      <div id="cap5">Tuần trước tôi nhận được tin nhắn này:
+
+"Em cảm ơn anh. Lúc anh nói thẳng là căn đó không phù hợp với profile của em — em không tin. Giờ nhìn lại, nếu em mua hôm đó chắc em đã kẹt vốn đến giờ. Giờ em mua đúng căn, đúng thời điểm. Cảm ơn anh đã không chiều ý em."
+
+Đây là lý do tôi làm nghề này.
+
+Không phải để bán được nhiều nhất. Mà để người mua không hối hận.
+
+Nếu anh/chị đang cân nhắc Hạ Long Xanh — và muốn có người nói thật thay vì nói theo — tôi đây.
+
+👇 Tôi vừa viết một bức thư dài về tất cả những gì anh/chị cần biết. Nhấn Tìm hiểu thêm để đọc.</div>
+    </div>
+
+    <!-- Full caption blocks visible -->
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <div>
+          <div class="copy-block-title">Caption 1 — Honest Confession ★</div>
+          <div class="copy-block-meta"><span class="tag tag-gold">Khuyến nghị</span><span class="tag tag-teal">Ảnh chân dung</span></div>
+        </div>
+        <button class="copy-btn" onclick="cp(this,'cap1')">📋 Copy</button>
+      </div>
+      <div class="copy-content" id="cap1-show">Tôi đã từng là người môi giới kiểu cũ.
+
+Gọi điện thúc giục. Tạo áp lực "còn 2 căn cuối." Nói những thứ khách muốn nghe thay vì thứ họ cần biết.
+
+Cho đến khi một khách hàng nhắn tôi:
+
+"Anh ơi, em hỏi thật — nếu em là anh, anh có mua căn này không?"
+
+Câu đó thay đổi cách tôi làm việc mãi mãi.
+
+Hôm nay tôi làm việc theo một nguyên tắc: Tôi sẽ không bao giờ bán cho anh/chị thứ mà tôi không sẵn sàng mua cho chính mình.
+
+Nếu anh/chị đang cân nhắc Hạ Long Xanh — và có những câu hỏi mà chưa môi giới nào trả lời thẳng thắn — tôi muốn là người đó.
+
+Không áp lực. Không deadline giả tạo. Chỉ là sự thật.
+
+👇 Nhấn Tìm hiểu thêm — tôi đã viết một bức thư dài, thật thà về tất cả những gì anh/chị cần biết trước khi quyết định.</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <div>
+          <div class="copy-block-title">Caption 2 — Mirror (3 Lần Xem)</div>
+          <div class="copy-block-meta"><span class="tag tag-teal">Mọi loại ảnh</span></div>
+        </div>
+        <button class="copy-btn" onclick="cp(this,'cap2')">📋 Copy</button>
+      </div>
+      <div class="copy-content" id="cap2-show">Anh/chị đã xem Hạ Long Xanh bao nhiêu lần rồi?
+
+Lần đầu — thấy đẹp, tim đập nhanh hơn.
+Lần hai — bắt đầu tính toán.
+Lần ba — vẫn chưa quyết định.
+
+Không phải vì thiếu tiền. Không phải vì không thích.
+
+Mà vì có một câu hỏi mà chưa ai trả lời đủ thuyết phục:
+"Nếu tôi mua — liệu tôi có hối hận không?"
+
+Tôi không có câu trả lời cho tất cả mọi người. Nhưng tôi có câu trả lời cho người đang ở đúng hoàn cảnh để quyết định.
+
+👇 Nhấn Tìm hiểu thêm để tôi kể cho anh/chị nghe — không hoa mỹ, không tô hồng — những gì tôi thật sự biết về dự án này.</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <div>
+          <div class="copy-block-title">Caption 3 — Future Moment</div>
+          <div class="copy-block-meta"><span class="tag tag-purple">Ảnh phong cảnh / vui tươi</span></div>
+        </div>
+        <button class="copy-btn" onclick="cp(this,'cap3')">📋 Copy</button>
+      </div>
+      <div class="copy-content" id="cap3-show">Tưởng tượng đây:
+
+5 năm nữa. Sáng sớm. Anh/chị ngồi ở ban công một căn hộ nhìn thẳng ra Vịnh Hạ Long.
+
+Ly cà phê trên tay. Sóng vỗ nhẹ phía xa. Không có cuộc họp, không có deadline, không có tiếng ồn của thành phố.
+
+Chỉ có cảm giác — mình đã quyết định đúng.
+
+Cảnh đó có thật không? Hoàn toàn có thật. Tôi đã gặp những người đang sống đúng kịch bản đó.
+
+Điều duy nhất họ làm khác anh/chị — là họ đã dừng phân vân và bắt đầu hỏi đúng câu hỏi.
+
+👇 Nhấn Tìm hiểu thêm.</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <div>
+          <div class="copy-block-title">Caption 4 — Pattern Interrupt (Ultra-short)</div>
+          <div class="copy-block-meta"><span class="tag tag-rose">Story · Reel · TikTok</span></div>
+        </div>
+        <button class="copy-btn" onclick="cp(this,'cap4')">📋 Copy</button>
+      </div>
+      <div class="copy-content" id="cap4-show">Tôi sẽ không nói "mua ngay kẻo hết."
+Tôi sẽ không nói "đây là cơ hội ngàn năm có một."
+
+Tôi chỉ nói: nếu anh/chị đang cân nhắc Hạ Long Xanh và chưa có ai trả lời thẳng thắn những câu hỏi khó nhất —
+
+Tôi sẵn sàng làm điều đó.
+
+👇 Tìm hiểu thêm.</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <div>
+          <div class="copy-block-title">Caption 5 — Social Proof Thật</div>
+          <div class="copy-block-meta"><span class="tag tag-teal">Ảnh làm việc / gặp khách</span></div>
+        </div>
+        <button class="copy-btn" onclick="cp(this,'cap5')">📋 Copy</button>
+      </div>
+      <div class="copy-content" id="cap5-show">Tuần trước tôi nhận được tin nhắn này:
+
+"Em cảm ơn anh. Lúc anh nói thẳng là căn đó không phù hợp với profile của em — em không tin. Giờ nhìn lại, nếu em mua hôm đó chắc em đã kẹt vốn đến giờ. Giờ em mua đúng căn, đúng thời điểm."
+
+Đây là lý do tôi làm nghề này. Không phải để bán được nhiều nhất. Mà để người mua không hối hận.
+
+Nếu anh/chị đang cân nhắc Hạ Long Xanh — và muốn có người nói thật — tôi đây.
+
+👇 Nhấn Tìm hiểu thêm để đọc bức thư tôi viết dành riêng cho anh/chị.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 4 — PHÂN TÍCH & TIPS
+  ═══════════════════════════════════════ -->
+  <div id="t4" class="tab-panel">
+    <div class="sec-header">
+      <div class="sec-tag">Phân Tích & Chiến Lược</div>
+      <h2 class="sec-title">Framework · Objections · Lịch Triển Khai</h2>
+      <p class="sec-sub">Tại sao copy này hoạt động, objections đã xử lý sẵn, và lịch triển khai 4 tuần.</p>
+    </div>
+
+    <div class="framework-box">
+      <h4>🎯 Frameworks Đã Dùng</h4>
+      <ul>
+        <li><strong>Sales Letter:</strong> Storytelling Arc (mirror → conflict → resolution → invitation) + PVEN (Promise → Vision → Evidence → Nudge)</li>
+        <li><strong>Email 1:</strong> Expectation reversal — phá kỳ vọng "email thúc giục" → build trust ngay từ đầu</li>
+        <li><strong>Email 2:</strong> ACCA (Awareness → Comprehension → Conviction → Action) — giáo dục trước, bán sau</li>
+        <li><strong>Email 3:</strong> Storytelling Arc ngắn — normalize sự do dự, social proof thật</li>
+        <li><strong>Email 4:</strong> PAR (Problem-Amplify-Resolve) — amplify chi phí chờ bằng con số thật</li>
+        <li><strong>Email 5:</strong> Soft close + 3-word reply — giảm ngưỡng hành động tối đa</li>
+        <li><strong>Captions:</strong> 5 angles: Honest confession / Mirror / Future pacing / Pattern interrupt / Social proof</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sec-tag" style="margin-bottom:12px">Objection Handling Map</div>
+    <table class="obj-table">
+      <tr>
+        <th>Objection</th>
+        <th>Nỗi Sợ Gốc</th>
+        <th>Xử Lý Ở Đâu</th>
+      </tr>
+      <tr>
+        <td>"Mua xong không bán được"</td>
+        <td>Mất thanh khoản, kẹt vốn</td>
+        <td>Sales letter Phần 4 + Email 4</td>
+      </tr>
+      <tr>
+        <td>"Pháp lý chưa rõ"</td>
+        <td>Mất tài sản vì giấy tờ sai</td>
+        <td>Sales letter Phần 4 + Email 2 toàn bộ</td>
+      </tr>
+      <tr>
+        <td>"Không tin môi giới"</td>
+        <td>Bị lừa, tư vấn không trung thực</td>
+        <td>Sales letter Phần 5 + Caption 1 + Email 1</td>
+      </tr>
+      <tr>
+        <td>"Gia đình chưa đồng ý"</td>
+        <td>Áp lực nếu quyết định sai</td>
+        <td>Sales letter Phần 1 thừa nhận trực tiếp</td>
+      </tr>
+      <tr>
+        <td>"Giá có thể còn giảm"</td>
+        <td>Mua đỉnh, lỗ</td>
+        <td>Sales letter Phần 2-3 + Email 4 (cost of waiting)</td>
+      </tr>
+      <tr>
+        <td>"Đang bận, cần thời gian"</td>
+        <td>Cam kết quá sớm</td>
+        <td>Email 5 (soft close, không áp lực)</td>
+      </tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <div class="sec-tag" style="margin-bottom:12px">Lịch Triển Khai 4 Tuần</div>
+    <div class="framework-box">
+      <h4>📅 Chiến Lược Xoay Vòng</h4>
+      <ul>
+        <li><strong>Tuần 1:</strong> Đăng Caption 2 (Mirror) — test organic reach. CTA: comment "HLX" hoặc "TÌM HIỂU"</li>
+        <li><strong>Tuần 2:</strong> Đăng Caption 1 (Honest Confession) kèm ảnh cá nhân — chạy ads boost → CTA "Tìm hiểu thêm" → sales letter</li>
+        <li><strong>Tuần 3:</strong> Đăng Caption 3 (Future Moment) — remarketing audience đã xem post tuần 1-2. Chạy email sequence 5 bước song song</li>
+        <li><strong>Tuần 4:</strong> Đăng Caption 5 (Social Proof) kèm testimonial thật — social proof + soft deadline. Theo dõi reply rate email sequence</li>
+      </ul>
+    </div>
+
+    <div class="framework-box" style="background:rgba(45,212,191,.04);border-color:rgba(45,212,191,.2)">
+      <h4 style="color:var(--teal)">📊 Benchmark Kỳ Vọng</h4>
+      <ul>
+        <li><strong>Zalo broadcast:</strong> Reply rate 8–15% (tốt cho BĐS cao cấp warm audience)</li>
+        <li><strong>Facebook post organic:</strong> 2–4% engagement → comment "HLX"</li>
+        <li><strong>Email open rate:</strong> 25–35% với subject line angle "Honest/Thật thà"</li>
+        <li><strong>Email click rate:</strong> 8–12% (nếu warm audience đã biết anh/chị)</li>
+        <li><strong>Email 5 reply rate:</strong> 15–25% (3-word reply giảm ngưỡng hành động)</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function sw(id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function tog(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+function cp(btn,id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const txt=el.innerText||el.textContent;
+  navigator.clipboard.writeText(txt.trim()).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✅ Đã copy!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000);
+  });
+}
+
+function cpText(btn,txt){
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✅ Đã copy!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000);
+  });
+}
+</script>
+</body>
+</html>
