@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OG Image — 4 Gói Đồng Hành Broker Brand Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#0d1b2a;font-family:'Be Vietnam Pro',sans-serif}
+
+.card{
+  width:1200px;height:630px;
+  background:linear-gradient(145deg,#040d18 0%,#0d1b2a 50%,#071828 100%);
+  display:flex;align-items:stretch;position:relative;overflow:hidden;
+}
+
+/* BG GLOW */
+.card::before{
+  content:'';position:absolute;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,.10) 0%,transparent 65%);
+  top:-300px;left:-200px;pointer-events:none;
+}
+.card::after{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(27,58,107,.3) 0%,transparent 65%);
+  bottom:-200px;right:0;pointer-events:none;
+}
+
+/* GOLD ACCENT LINE */
+.accent-left{width:8px;background:linear-gradient(180deg,#C9A84C,#E2C06A 40%,#8b6914);flex-shrink:0;position:relative;z-index:2}
+
+/* LEFT CONTENT */
+.left{flex:1;padding:48px 44px 44px 44px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:2}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:6px 16px;margin-bottom:18px;width:fit-content}
+.eyebrow-dot{width:7px;height:7px;background:#C9A84C;border-radius:50%}
+.eyebrow-text{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#E2C06A}
+
+h1{font-family:'Playfair Display',serif;font-size:40px;font-weight:900;line-height:1.18;color:#fff;margin-bottom:16px;max-width:540px}
+h1 .gold{background:linear-gradient(135deg,#E2C06A,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+.subtitle{font-size:14.5px;color:rgba(232,223,200,.6);line-height:1.6;max-width:500px;margin-bottom:24px}
+
+/* TIER ROW */
+.tier-row{display:flex;gap:10px;margin-bottom:0}
+.tier{border-radius:10px;padding:10px 14px;text-align:center;min-width:100px}
+.tier-free{background:rgba(76,175,130,.1);border:1px solid rgba(76,175,130,.3)}
+.tier-dong{background:rgba(205,127,50,.1);border:1px solid rgba(205,127,50,.3)}
+.tier-bac{background:rgba(176,192,204,.12);border:1px solid rgba(176,192,204,.35)}
+.tier-vang{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35)}
+.tier-icon{font-size:18px;margin-bottom:3px}
+.tier-label{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.tier-free .tier-label{color:#4caf82}
+.tier-dong .tier-label{color:#cd7f32}
+.tier-bac .tier-label{color:#b0c0cc}
+.tier-vang .tier-label{color:#E2C06A}
+.tier-price{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;line-height:1.1}
+.tier-free .tier-price{color:#4caf82}
+.tier-dong .tier-price{color:#cd7f32}
+.tier-bac .tier-price{color:#b0c0cc}
+.tier-vang .tier-price{color:#E2C06A}
+.tier-desc{font-size:9.5px;color:rgba(232,223,200,.4);margin-top:2px}
+
+/* BOTTOM */
+.bottom-row{display:flex;align-items:center;gap:20px}
+.guarantee-tag{background:rgba(76,175,130,.08);border:1px solid rgba(76,175,130,.25);border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px}
+.gt-icon{font-size:18px}
+.gt-text{font-size:12px;font-weight:700;color:#4caf82;line-height:1.4}
+.gt-sub{font-size:10px;color:rgba(232,223,200,.4);font-weight:400}
+
+.upgrade-arrow{font-size:12px;color:rgba(201,168,76,.5);letter-spacing:2px;font-weight:700}
+
+/* RIGHT PANEL */
+.right{width:270px;flex-shrink:0;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 28px;background:rgba(0,0,0,.25);border-left:1px solid rgba(201,168,76,.1)}
+
+.right-icon{font-size:52px;margin-bottom:14px;filter:drop-shadow(0 4px 16px rgba(201,168,76,.5))}
+
+.features{display:flex;flex-direction:column;gap:8px;width:100%}
+.feat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:9px}
+.feat-check{color:#4caf82;font-size:13px;font-weight:800;flex-shrink:0}
+.feat-text{font-size:11.5px;color:rgba(232,223,200,.75);font-weight:600}
+
+.brand-url{margin-top:16px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(232,223,200,.25);text-align:center}
+
+/* BOTTOM BAR */
+.bottom-bar{position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#C9A84C,#E2C06A 50%,#C9A84C)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="accent-left"></div>
+
+  <div class="left">
+    <div>
+      <div class="eyebrow">
+        <div class="eyebrow-dot"></div>
+        <span class="eyebrow-text">💼 Broker Brand Builder · Chương Trình Đồng Hành 2026</span>
+      </div>
+
+      <h1>4 Gói Đồng Hành<br>Dành Riêng Cho<br>Broker <span class="gold">Hạ Long Xanh</span></h1>
+
+      <p class="subtitle">Từ công cụ self-serve đến coaching 1:1 cá nhân — mỗi cấp độ phù hợp một điểm xuất phát và ngân sách khác nhau.</p>
+
+      <div class="tier-row">
+        <div class="tier tier-free">
+          <div class="tier-icon">🌱</div>
+          <div class="tier-label">Free</div>
+          <div class="tier-price">0đ</div>
+          <div class="tier-desc">Lớp Tâm Thức</div>
+        </div>
+        <div class="tier tier-dong">
+          <div class="tier-icon">🥉</div>
+          <div class="tier-label">Đồng</div>
+          <div class="tier-price">790k</div>
+          <div class="tier-desc">Starter Kit</div>
+        </div>
+        <div class="tier tier-bac">
+          <div class="tier-icon">🥈</div>
+          <div class="tier-label">Bạc ⭐</div>
+          <div class="tier-price">1,990k</div>
+          <div class="tier-desc">Pro + Hỗ Trợ</div>
+        </div>
+        <div class="tier tier-vang">
+          <div class="tier-icon">🥇</div>
+          <div class="tier-label">Vàng</div>
+          <div class="tier-price">3,990k</div>
+          <div class="tier-desc">Elite + Cohort</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <div class="guarantee-tag">
+        <div class="gt-icon">🛡️</div>
+        <div>
+          <div class="gt-text">Đảm Bảo Kết Quả</div>
+          <div class="gt-sub">Hoàn tiền 7–30 ngày nếu không hiệu quả</div>
+        </div>
+      </div>
+      <div class="upgrade-arrow">Nâng cấp bất cứ lúc nào →</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="right-icon">💼</div>
+    <div class="features">
+      <div class="feat"><span class="feat-check">✓</span><span class="feat-text">30+ content template</span></div>
+      <div class="feat"><span class="feat-check">✓</span><span class="feat-text">15 script xử lý từ chối</span></div>
+      <div class="feat"><span class="feat-check">✓</span><span class="feat-text">AI Workflow Guide</span></div>
+      <div class="feat"><span class="feat-check">✓</span><span class="feat-text">Zoom Onboarding 1:1</span></div>
+      <div class="feat"><span class="feat-check">✓</span><span class="feat-text">Cohort 4 tuần live</span></div>
+      <div class="feat"><span class="feat-check">✓</span><span class="feat-text">Lifetime Community</span></div>
+    </div>
+    <div class="brand-url">yen670-oss.github.io/kit-hlx</div>
+  </div>
+
+  <div class="bottom-bar"></div>
+</div>
+</body>
+</html>
