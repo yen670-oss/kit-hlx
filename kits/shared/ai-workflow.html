@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 AI Workflow Guide — Broker HLX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1628;--card:#0f1e30;--card2:#13243a;--gold:#C9A84C;--gl:#E2C06A;--text:#e8eaf0;--muted:#8899aa;--green:#4caf82;--blue:#4FC3F7;--border:#1e3048}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+.top-nav{background:rgba(10,22,40,.97);border-bottom:1px solid rgba(201,168,76,.2);padding:12px 24px;display:flex;align-items:center;gap:12px}
+.back-btn{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);padding:6px 14px;border-radius:8px;font-size:13px;cursor:pointer;text-decoration:none}
+.nav-title{font-family:'Playfair Display',serif;color:var(--gl);font-size:16px}
+.hero{background:linear-gradient(135deg,#060f1e,#0d1f35);padding:40px 24px 36px;text-align:center;border-bottom:1px solid rgba(201,168,76,.12)}
+.hero-badge{display:inline-block;background:rgba(79,195,247,.1);border:1px solid rgba(79,195,247,.3);color:var(--blue);padding:5px 18px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,36px);color:#fff;margin-bottom:10px}
+.hero h1 em{color:var(--gl);font-style:normal}
+.hero p{color:var(--muted);font-size:14px;max-width:520px;margin:0 auto}
+.main{max-width:820px;margin:0 auto;padding:32px 20px 80px}
+.quick-guide{background:var(--card2);border:1px solid rgba(79,195,247,.2);border-radius:12px;padding:16px 20px;margin-bottom:32px}
+.quick-guide h3{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.quick-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.qs{background:var(--card);border-radius:8px;padding:10px 12px;text-align:center}
+.qs-num{font-size:20px;margin-bottom:4px}
+.qs-text{font-size:11px;color:var(--muted);line-height:1.4}
+.section-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:28px 0 14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.prompt-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.prompt-header{background:var(--card2);padding:14px 18px;display:flex;align-items:center;gap:12px}
+.prompt-num{width:28px;height:28px;background:linear-gradient(135deg,var(--gold),#a86f2a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#0a1628;flex-shrink:0}
+.prompt-title{font-size:14px;font-weight:700;color:#fff}
+.prompt-use{font-size:11px;color:var(--muted);margin-top:2px}
+.prompt-body{padding:16px 18px}
+.prompt-text{background:#060e1a;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 16px;font-size:12.5px;color:rgba(232,234,240,.8);line-height:1.8;white-space:pre-wrap;font-family:'Be Vietnam Pro',sans-serif;position:relative}
+.copy-btn{position:absolute;top:8px;right:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gl);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+.copy-btn:hover{background:rgba(201,168,76,.25)}
+.copy-btn.copied{color:var(--green);border-color:var(--green);background:rgba(76,175,130,.1)}
+.prompt-tip{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:8px}
+.prompt-tip strong{color:var(--gl)}
+.workflow-box{background:linear-gradient(135deg,rgba(76,175,130,.06),rgba(76,175,130,.02));border:1px solid rgba(76,175,130,.2);border-radius:14px;padding:20px 22px;margin-top:28px}
+.workflow-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.wf-steps{display:flex;flex-direction:column;gap:10px}
+.wf-step{display:flex;gap:14px;align-items:flex-start}
+.wf-arrow{color:var(--muted);font-size:18px;flex-shrink:0;margin-top:2px}
+.wf-content{}
+.wf-label{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.wf-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.tool-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+@media(max-width:600px){.tool-row{grid-template-columns:1fr}}
+.tool-card{background:var(--card2);border-radius:10px;padding:14px 16px}
+.tool-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+.tool-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.tool-link{display:inline-block;margin-top:8px;font-size:11px;color:var(--gl);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="javascript:history.back()" class="back-btn">← Quay Lại</a>
+  <span class="nav-title">🤖 AI Workflow Guide — Broker HLX</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">🤖 AI Workflow · Gói Bạc Exclusive</div>
+  <h1>Dùng AI Để Làm Việc<br><em>Nhanh Gấp 5 Lần</em></h1>
+  <p>5 prompt sẵn sàng copy-paste — viết caption, xử lý từ chối, phân tích khách, batch content 30 bài trong 90 phút.</p>
+</section>
+
+<main class="main">
+
+<div class="quick-guide">
+  <h3>Quy Trình 4 Bước Mỗi Tuần</h3>
+  <div class="quick-steps">
+    <div class="qs"><div class="qs-num">📋</div><div class="qs-text">Lấy 2-3 topic từ lịch 90 ngày</div></div>
+    <div class="qs"><div class="qs-num">🤖</div><div class="qs-text">Chạy prompt → AI viết nháp</div></div>
+    <div class="qs"><div class="qs-num">✏️</div><div class="qs-text">Chỉnh giọng điệu cá nhân</div></div>
+    <div class="qs"><div class="qs-num">📱</div><div class="qs-text">Đăng lên FB/Zalo</div></div>
+  </div>
+</div>
+
+<div class="section-label">Prompt 1 — Viết Caption FB/Zalo Từ Số Liệu</div>
+
+<div class="prompt-card">
+  <div class="prompt-header">
+    <div class="prompt-num">1</div>
+    <div>
+      <div class="prompt-title">Caption Giáo Dục (Edu Post)</div>
+      <div class="prompt-use">Dùng khi: muốn chia sẻ thông tin thị trường, thu hút lead chất lượng</div>
+    </div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="pt1">Bạn là copywriter bất động sản chuyên nghề, viết cho môi giới Hạ Long Xanh (HLX) tại Quảng Ninh.
+
+Viết 1 caption Facebook dạng "Edu Post" (bài giáo dục) với:
+- Topic: [ĐIỀN VÀO ĐÂY — VD: "Tại sao shophouse HLX cho thuê được ngay?"]
+- Giọng điệu: trung thực, dựa vào số liệu, không hype, không phóng đại
+- Độ dài: 150-200 chữ
+- Cấu trúc: Hook → 3 điểm dữ liệu cụ thể → CTA nhẹ (mời hỏi thêm)
+- Kết bằng câu hỏi mở để tăng tương tác
+
+KHÔNG dùng các từ: "siêu đẹp", "cơ hội vàng", "đừng bỏ lỡ", "hot nhất"
+CHỈ dùng số liệu và thông tin có thật về HLX mà tôi sẽ cung cấp: [ĐIỀN SỐ LIỆU VÀO ĐÂY]<button class="copy-btn" onclick="cp(this,'pt1')">Copy</button></div>
+    <div class="prompt-tip"><strong>Điền vào 2 chỗ trống:</strong> Topic bài viết và 1-2 số liệu thật (VD: "giá từ 8 tỷ, công suất thuê 65%, lợi suất kỳ vọng 7%/năm"). AI sẽ viết bài dựa trên dữ liệu thật của anh/chị.</div>
+  </div>
+</div>
+
+<div class="section-label">Prompt 2 — Reply Khi Khách Từ Chối / Phản Đối</div>
+
+<div class="prompt-card">
+  <div class="prompt-header">
+    <div class="prompt-num">2</div>
+    <div>
+      <div class="prompt-title">Script Xử Lý Từ Chối Tức Thì</div>
+      <div class="prompt-use">Dùng khi: khách nhắn tin phản đối hoặc ngập ngừng không chốt</div>
+    </div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="pt2">Bạn là chuyên gia tâm lý bán hàng bất động sản cao cấp. Tôi là môi giới HLX đang gặp tình huống sau:
+
+TÌNH HUỐNG: Khách vừa nhắn: "[DÁN TIN NHẮN THẬT CỦA KHÁCH VÀO ĐÂY]"
+
+Thông tin về khách (nếu biết): [Giới tính, nghề nghiệp, ngân sách, giai đoạn quan tâm]
+
+Hãy viết cho tôi 2 phương án reply:
+1. Phương án ngắn (3-4 câu): thừa nhận lo ngại → đặt câu hỏi mở → không thúc ép
+2. Phương án dài hơn (6-8 câu): empathy → số liệu thật → offer giải pháp cụ thể
+
+Giọng điệu: không phán xét, không chốt ép, như một người bạn hiểu nghề tư vấn thật.<button class="copy-btn" onclick="cp(this,'pt2')">Copy</button></div>
+    <div class="prompt-tip"><strong>Cách dùng:</strong> Copy nguyên tin nhắn của khách vào chỗ trống. AI sẽ giúp anh/chị trả lời thông minh theo tâm lý của từng loại phản đối cụ thể.</div>
+  </div>
+</div>
+
+<div class="section-label">Prompt 3 — Phân Tích Lead Từ Tin Nhắn</div>
+
+<div class="prompt-card">
+  <div class="prompt-header">
+    <div class="prompt-num">3</div>
+    <div>
+      <div class="prompt-title">Đọc Vị Khách Qua Tin Nhắn</div>
+      <div class="prompt-use">Dùng khi: nhận được lead mới, cần hiểu tâm lý và mức độ sẵn sàng mua</div>
+    </div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="pt3">Bạn là chuyên gia phân tích hành vi mua bất động sản. Đọc đoạn hội thoại sau giữa tôi (môi giới) và khách hàng tiềm năng:
+
+[DÁN TOÀN BỘ CUỘC HỘI THOẠI VÀO ĐÂY]
+
+Hãy phân tích và cho tôi biết:
+1. Mức độ quan tâm thật sự (thang 1-10, giải thích tại sao)
+2. Nỗi đau chính của khách là gì?
+3. Rào cản lớn nhất để họ chốt là gì?
+4. Họ thuộc nhóm nào: "thông tin thêm" / "cân nhắc" / "sắp sẵn sàng" / "cần thúc đẩy"?
+5. Bước tiếp theo tôi nên làm là gì? (cụ thể, có script gợi ý)<button class="copy-btn" onclick="cp(this,'pt3')">Copy</button></div>
+    <div class="prompt-tip"><strong>Siêu hữu ích khi:</strong> Cuộc hội thoại đã kéo dài 2-3 ngày mà khách vẫn chưa chốt. AI giúp anh/chị nhìn ra pattern mà mình bỏ qua.</div>
+  </div>
+</div>
+
+<div class="section-label">Prompt 4 — Batch 30 Bài Content Trong 90 Phút</div>
+
+<div class="prompt-card">
+  <div class="prompt-header">
+    <div class="prompt-num">4</div>
+    <div>
+      <div class="prompt-title">Tạo Content Plan 1 Tháng</div>
+      <div class="prompt-use">Dùng khi: muốn plan nội dung cả tháng trong 1 buổi ngồi làm việc</div>
+    </div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="pt4">Bạn là content strategist cho môi giới bất động sản cao cấp. Giúp tôi tạo content plan 30 bài cho tháng [THÁNG] với thông tin sau:
+
+Đặc điểm của tôi:
+- Chuyên phân khúc: [VD: shophouse / biệt thự / condotel HLX]
+- Điểm mạnh: [VD: am hiểu pháp lý, thực địa nhiều, honest với khách]
+- Khách hàng mục tiêu: [VD: nhà đầu tư 35-50 tuổi, có 3-8 tỷ nhàn rỗi]
+
+Tạo cho tôi:
+- 10 bài Edu (giáo dục thị trường / số liệu / phân tích)
+- 8 bài Story (câu chuyện thật của khách, của bản thân, behind-the-scenes)
+- 7 bài Proof (bằng chứng thực tế, chứng nhận, kết quả khách)
+- 5 bài CTA (kêu gọi hành động nhẹ nhàng)
+
+Với mỗi bài: tiêu đề gợi ý + 2 câu mô tả nội dung + platform phù hợp (FB/Zalo/TikTok)<button class="copy-btn" onclick="cp(this,'pt4')">Copy</button></div>
+    <div class="prompt-tip"><strong>Cách dùng hiệu quả:</strong> Sau khi có plan 30 bài, chọn 6-8 bài quan trọng nhất → dùng Prompt 1 để viết chi tiết từng bài. Kết hợp với lịch 90 ngày để không bị trùng topic.</div>
+  </div>
+</div>
+
+<div class="section-label">Prompt 5 — Soạn Zalo/Email Follow-Up</div>
+
+<div class="prompt-card">
+  <div class="prompt-header">
+    <div class="prompt-num">5</div>
+    <div>
+      <div class="prompt-title">Tin Nhắn Follow-Up Không Bị Khách Ignore</div>
+      <div class="prompt-use">Dùng khi: khách đã xem thông tin 5-7 ngày trước nhưng chưa phản hồi</div>
+    </div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="pt5">Viết tin nhắn Zalo follow-up cho tôi với bối cảnh:
+
+Thông tin đã trao đổi trước đó: [TÓM TẮT 2-3 câu những gì khách hỏi và tôi đã trả lời]
+
+Số ngày kể từ lần nhắn cuối: [VD: 5 ngày]
+
+Lý do tôi follow-up lúc này: [VD: có thông tin mới về dự án / giá vừa điều chỉnh / có căn đẹp vừa ra]
+
+Yêu cầu:
+- Độ dài: 3-5 câu, không dài hơn
+- Không bắt đầu bằng "Chào anh/chị" hoặc "Như đã trao đổi"
+- Mang lại giá trị mới cho khách, không phải chỉ hỏi thăm
+- Kết bằng câu hỏi Yes/No đơn giản để dễ reply
+- Giọng điệu: tự nhiên như nhắn bạn bè, không cứng nhắc<button class="copy-btn" onclick="cp(this,'pt5')">Copy</button></div>
+    <div class="prompt-tip"><strong>Bí quyết:</strong> Câu "lý do follow-up lúc này" là quan trọng nhất — phải có trigger thật (thông tin mới, deadline, căn mới ra). Đừng follow-up chỉ vì đã lâu không nhắn.</div>
+  </div>
+</div>
+
+<div class="workflow-box">
+  <div class="workflow-title">⚡ Quy Trình Batch 90 Phút — 30 Bài/Tháng</div>
+  <div class="wf-steps">
+    <div class="wf-step"><div class="wf-arrow">①</div><div class="wf-content"><div class="wf-label">Phút 0-10: Plan</div><div class="wf-desc">Mở lịch 90 ngày → chọn 8-10 topic tuần này → ghi ra notepad</div></div></div>
+    <div class="wf-step"><div class="wf-arrow">②</div><div class="wf-content"><div class="wf-label">Phút 10-50: Batch viết (AI)</div><div class="wf-desc">Chạy Prompt 4 → lấy plan 30 bài → Chọn 6 bài quan trọng → Chạy Prompt 1 cho từng bài → có 6 bài nháp</div></div></div>
+    <div class="wf-step"><div class="wf-arrow">③</div><div class="wf-content"><div class="wf-label">Phút 50-75: Chỉnh giọng điệu</div><div class="wf-desc">Đọc từng bài, thay từ ngữ AI bằng từ ngữ anh/chị hay dùng. Thêm 1-2 chi tiết thật từ trải nghiệm thực tế.</div></div></div>
+    <div class="wf-step"><div class="wf-arrow">④</div><div class="wf-content"><div class="wf-label">Phút 75-90: Lên lịch</div><div class="wf-desc">Dùng Facebook Creator Studio hoặc viết vào Google Calendar → đặt lịch đăng 6 bài trong tuần</div></div></div>
+  </div>
+</div>
+
+<div style="margin-top:24px">
+  <div class="section-label">AI Tools Gợi Ý</div>
+  <div class="tool-row">
+    <div class="tool-card">
+      <div class="tool-name">🤖 ChatGPT (chat.openai.com)</div>
+      <div class="tool-desc">Miễn phí · tốt cho viết content · GPT-4o nếu có tài khoản trả phí</div>
+      <a href="https://chat.openai.com" target="_blank" class="tool-link">Mở ChatGPT →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">🔮 Claude (claude.ai)</div>
+      <div class="tool-desc">Miễn phí · giỏi phân tích · tốt cho prompt phức tạp và dài</div>
+      <a href="https://claude.ai" target="_blank" class="tool-link">Mở Claude →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">✍️ Gemini (gemini.google.com)</div>
+      <div class="tool-desc">Miễn phí · kết nối Google Docs trực tiếp · tiếng Việt tốt</div>
+      <a href="https://gemini.google.com" target="_blank" class="tool-link">Mở Gemini →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">📱 Meta AI (Messenger/WhatsApp)</div>
+      <div class="tool-desc">Ngay trong Messenger FB · hỏi nhanh không cần mở tab mới</div>
+      <div class="tool-desc" style="margin-top:6px;font-size:11px;color:#5a7a6a">Gõ "@Meta AI" trong Messenger</div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function cp(btn, id) {
+  const text = document.getElementById(id).innerText.replace(/Copy$/, '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

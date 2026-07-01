@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎨 Brand Canvas — Xác Định Vị Thế Cá Nhân</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1628;--card:#0f1e30;--card2:#13243a;--gold:#C9A84C;--gl:#E2C06A;--text:#e8eaf0;--muted:#8899aa;--green:#4caf82;--border:#1e3048}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;min-height:100vh}
+.top-nav{background:rgba(10,22,40,.97);border-bottom:1px solid rgba(201,168,76,.2);padding:12px 24px;display:flex;align-items:center;gap:12px}
+.back-btn{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gl);padding:6px 14px;border-radius:8px;font-size:13px;cursor:pointer;text-decoration:none}
+.nav-title{font-family:'Playfair Display',serif;color:var(--gl);font-size:16px}
+.hero{background:linear-gradient(135deg,#060f1e,#0d1f35);padding:40px 24px 36px;text-align:center;border-bottom:1px solid rgba(201,168,76,.12)}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gl);padding:5px 18px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,38px);color:#fff;margin-bottom:10px}
+.hero h1 em{color:var(--gl);font-style:normal}
+.hero p{color:var(--muted);font-size:14px;max-width:500px;margin:0 auto}
+.main{max-width:780px;margin:0 auto;padding:32px 20px 80px}
+.instruction{background:var(--card2);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:16px 20px;margin-bottom:28px;font-size:13px;color:var(--muted);line-height:1.7}
+.instruction strong{color:var(--gl)}
+.canvas-block{margin-bottom:20px}
+.canvas-label{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.canvas-hint{font-size:12px;color:var(--muted);margin-bottom:8px;font-style:italic}
+.canvas-input{width:100%;background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 16px;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:14px;resize:vertical;min-height:80px;outline:none;transition:.2s;line-height:1.6}
+.canvas-input:focus{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.03)}
+.canvas-input::placeholder{color:rgba(136,153,170,.5)}
+.canvas-input.short{min-height:50px;resize:none}
+.divider{height:1px;background:rgba(255,255,255,.06);margin:28px 0}
+.section-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr}}
+.preview-box{background:var(--card2);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:24px;margin-top:32px}
+.preview-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.preview-output{font-size:14px;color:var(--text);line-height:1.9;white-space:pre-wrap;min-height:100px}
+.btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{padding:10px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:'Be Vietnam Pro',sans-serif;transition:.2s}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#a86f2a);color:#0a1628}
+.btn-gold:hover{filter:brightness(1.1)}
+.btn-outline{background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gl)}
+.btn-outline:hover{background:rgba(201,168,76,.1)}
+.btn.copied{color:var(--green);border-color:var(--green);background:rgba(76,175,130,.1)}
+.tip-box{background:rgba(76,175,130,.06);border:1px solid rgba(76,175,130,.2);border-radius:10px;padding:14px 18px;margin-top:20px}
+.tip-box p{font-size:13px;color:var(--muted);line-height:1.7}
+.tip-box strong{color:var(--green)}
+.example-box{background:var(--card);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:6px;font-size:12.5px;color:var(--muted);line-height:1.6;font-style:italic}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="javascript:history.back()" class="back-btn">← Quay Lại</a>
+  <span class="nav-title">🎨 Brand Canvas — Vị Thế Cá Nhân</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">🎨 Brand Canvas Template · Broker HLX</div>
+  <h1>Xác Định <em>Vị Thế Độc Nhất</em><br>Của Anh/Chị</h1>
+  <p>Điền vào 6 ô — có ngay định vị cá nhân không ai copy được. Dùng cho bio FB, intro Zalo, và mọi nội dung quảng bá.</p>
+</section>
+
+<main class="main">
+
+<div class="instruction">
+  <strong>Cách dùng:</strong> Điền thành thật vào từng ô bên dưới. Không cần hoàn hảo — điền xong rồi chỉnh. Sau khi điền, bấm <strong>"Tạo Bio Tự Động"</strong> để có đoạn giới thiệu sẵn dùng cho FB/Zalo.
+</div>
+
+<div class="section-label">Phần 1 — Bạn Là Ai</div>
+
+<div class="canvas-block">
+  <div class="canvas-label">① Tôi Là Ai Trong Nghề Này</div>
+  <div class="canvas-hint">Kinh nghiệm, chuyên môn, điều gì làm anh/chị khác biệt với 90% môi giới còn lại</div>
+  <textarea class="canvas-input" id="f1" placeholder="VD: Tôi làm môi giới HLX 2 năm, chuyên phân khúc shophouse mặt tiền kênh đào. Tôi là người duy nhất trong team thường xuyên cập nhật quy hoạch và đi thực địa hàng tuần..."></textarea>
+  <div class="example-box">Ví dụ tốt: "Tôi là broker HLX 3 năm, đã tư vấn thành công 47 căn. Tôi đặc biệt ở chỗ: không bao giờ thúc khách — tôi giúp họ tự ra quyết định bằng số liệu thật."</div>
+</div>
+
+<div class="canvas-block">
+  <div class="canvas-label">② Tôi Phục Vụ Ai Tốt Nhất</div>
+  <div class="canvas-hint">Khách hàng lý tưởng: nghề nghiệp, thu nhập, nhu cầu, tâm lý cụ thể</div>
+  <textarea class="canvas-input" id="f2" placeholder="VD: Khách hàng của tôi thường là doanh nhân 35-50 tuổi, có 3-5 tỷ nhàn rỗi, muốn đầu tư vào bất động sản nghỉ dưỡng biển nhưng chưa biết HLX. Họ cần thông tin thật, không cần bị thuyết phục..."></textarea>
+</div>
+
+<div class="divider"></div>
+<div class="section-label">Phần 2 — Điều Bạn Mang Lại</div>
+
+<div class="grid-2">
+  <div class="canvas-block">
+    <div class="canvas-label">③ Tôi Giải Quyết Vấn Đề Gì</div>
+    <div class="canvas-hint">Nỗi đau cụ thể của khách mà anh/chị xử lý tốt nhất</div>
+    <textarea class="canvas-input" id="f3" placeholder="VD: Khách sợ pháp lý không rõ, sợ mua xong không bán được, sợ thông tin nhiễu loạn. Tôi giúp họ có đủ thông tin thật để ra quyết định tự tin..."></textarea>
+  </div>
+  <div class="canvas-block">
+    <div class="canvas-label">④ Kết Quả Tôi Tạo Ra Cho Khách</div>
+    <div class="canvas-hint">Kết quả cụ thể: ROI, sự yên tâm, quyết định đúng...</div>
+    <textarea class="canvas-input" id="f4" placeholder="VD: Khách của tôi ra quyết định tự tin, không bị hối hận sau khi mua. Nhiều khách giới thiệu thêm người thân vì họ cảm thấy được tôn trọng..."></textarea>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="section-label">Phần 3 — Lý Do Họ Nên Chọn Bạn</div>
+
+<div class="canvas-block">
+  <div class="canvas-label">⑤ Bằng Chứng Uy Tín Của Tôi</div>
+  <div class="canvas-hint">Số liệu, kết quả thực, câu chuyện khách hàng — không cần khoe, chỉ cần thật</div>
+  <textarea class="canvas-input" id="f5" placeholder="VD: 47 giao dịch thành công trong 2 năm. 3 khách quay lại mua lần 2. Đã tư vấn cho gia đình với ngân sách từ 1.5 tỷ đến 15 tỷ. Tôi không có nhiều khách nhưng khách nào cũng giới thiệu thêm người..."></textarea>
+</div>
+
+<div class="canvas-block">
+  <div class="canvas-label">⑥ Cam Kết Cá Nhân Của Tôi</div>
+  <div class="canvas-hint">1-2 câu ngắn gọn — điều anh/chị đảm bảo với mỗi khách hàng</div>
+  <textarea class="canvas-input short" id="f6" placeholder="VD: Tôi cam kết chỉ nói thật — dù sự thật đó là 'chưa phải thời điểm tốt để mua'. Khách của tôi luôn có đủ thông tin để tự quyết định."></textarea>
+</div>
+
+<div class="preview-box">
+  <div class="preview-title">✨ Bio Tự Động — Copy-Paste Vào FB / Zalo</div>
+  <div class="preview-output" id="bio-output">← Điền đầy đủ 6 ô rồi bấm "Tạo Bio" để xem kết quả...</div>
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="generateBio()">✨ Tạo Bio Tự Động</button>
+    <button class="btn btn-outline" id="copy-btn" onclick="copyBio()">📋 Copy Bio</button>
+    <button class="btn btn-outline" onclick="clearAll()">🗑️ Xóa Hết</button>
+  </div>
+</div>
+
+<div class="tip-box">
+  <p><strong>Dùng Brand Canvas để làm gì:</strong><br>
+  ① Viết bio Facebook — thay bio "Môi giới BĐS" thành bio có vị thế rõ<br>
+  ② Viết caption đầu tiên — dùng ô ① + ④ làm nội dung bài giới thiệu bản thân<br>
+  ③ Trả lời "Bạn làm gì?" — dùng ô ① + ③ làm câu trả lời 30 giây<br>
+  ④ Update Zalo status — dùng ô ⑥ làm câu cam kết trong Zalo name/status</p>
+</div>
+
+</main>
+
+<script>
+function generateBio() {
+  const f1 = document.getElementById('f1').value.trim();
+  const f2 = document.getElementById('f2').value.trim();
+  const f3 = document.getElementById('f3').value.trim();
+  const f4 = document.getElementById('f4').value.trim();
+  const f5 = document.getElementById('f5').value.trim();
+  const f6 = document.getElementById('f6').value.trim();
+
+  if (!f1 && !f2) {
+    document.getElementById('bio-output').textContent = '⚠️ Vui lòng điền ít nhất ô ① và ② để tạo bio.';
+    return;
+  }
+
+  let bio = '';
+
+  if (f1) bio += f1 + '\n\n';
+  if (f2) bio += '🎯 Khách hàng tôi phục vụ tốt nhất:\n' + f2 + '\n\n';
+  if (f3) bio += '💡 Tôi giúp anh/chị:\n' + f3 + '\n\n';
+  if (f4) bio += '✅ Kết quả:\n' + f4 + '\n\n';
+  if (f5) bio += '📊 ' + f5 + '\n\n';
+  if (f6) bio += '🤝 Cam kết: ' + f6;
+
+  document.getElementById('bio-output').textContent = bio.trim();
+}
+
+function copyBio() {
+  const text = document.getElementById('bio-output').textContent;
+  if (!text || text.startsWith('←')) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Đã Copy!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Bio'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function clearAll() {
+  ['f1','f2','f3','f4','f5','f6'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('bio-output').textContent = '← Điền đầy đủ 6 ô rồi bấm "Tạo Bio" để xem kết quả...';
+}
+</script>
+</body>
+</html>
